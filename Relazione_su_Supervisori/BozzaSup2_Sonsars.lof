@@ -1,0 +1,13 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Disposizione dei sensori sulla Board 2.}}{3}{}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Segnale generato dal sensore HC-SR04 in presenza di un ostacolo a 3 metri di distanza.}}{3}{}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Configurazione del DMA per la lettura dei segnali dai sensori.}}{4}{}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Callback eseguita al termine della rilevazione dei fronti.}}{5}{}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Chart di gestione ostacoli in stato non degradato.}}{6}{}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Stati paralleli del chart in stato non degradato.}}{6}{}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Stato parallelo per la gestione di un ostacolo a distanza $\le $ 70 cm.}}{7}{}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Stato parallelo per la gestione di un ostacolo in movimento a distanza $>$ 70 cm.}}{8}{}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Chart di gestione ostacoli in stato degradato.}}{9}{}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Schema a blocchi del modulo SupervisorB1.}}{9}{}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Comandi in uscita dal supervisore della Board2.}}{10}{}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Struttura dati Board\_Health.}}{11}{}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Struttura dati Encoder.}}{11}{}%

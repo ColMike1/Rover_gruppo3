@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Acquisizione segnali Board 2}{3}{}%
+\contentsline {subsection}{\numberline {1.1}\textbf {HC-SR04} - Sensore ad ultrasuoni}{3}{}%
+\contentsline {section}{\numberline {2}Supervisore Board 2}{5}{}%
+\contentsline {subsection}{\numberline {2.1}Rilevamento ostacoli}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Gestione ostacoli con sistema in stato $non degradato$}{6}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}Gestione ostacoli con sistema in stato $degradato$}{9}{}%
+\contentsline {section}{\numberline {3}Supervisore Board 1}{9}{}%
+\contentsline {subsection}{\numberline {3.1}Panoramica generale -- Input e Output}{9}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Input}{10}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Output}{11}{}%
+\contentsline {subsection}{\numberline {3.2}Nuova subsection}{12}{}%

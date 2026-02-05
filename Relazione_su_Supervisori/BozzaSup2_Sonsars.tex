@@ -66,13 +66,7 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 
 
 
-
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Supervisore Board 2}
@@ -195,6 +189,81 @@ In questo caso, la logica di gestione degli ostacoli è semplificata rispetto al
 Infatti, l'unica condizione considerata è la presenza di un ostacolo a una distanza inferiore o uguale a $300$ cm.
 Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una transizione che porta l'uscita del supervisore all'arresto immediato del rover.
 
+
+\section{Supervisore Board 1}
+\subsection{Panoramica generale -- Input e Output}
+Il supervisore della Board 1 è implementato come un modulo Simulink denominato \textbf{SupervisorB1}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB1_block}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/SupervisoreB1_simulink}
+    \caption{Schema a blocchi del modulo SupervisorB1.}
+    \label{fig:supervisorB1_block} 
+\end{figure}
+Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
+
+\subsubsection{Input}
+I segnali in input che riceve sono:
+\begin{itemize}
+    \item \textbf{Board2\_Data}: rappresenta i dati provenienti dalla Board2. Quelli utilizzati dal supervisore sono:
+    \begin{itemize}
+        \item \textit{command}: rappresenta il comando in uscita dal supervisore della Board2, che può assumere i seguenti valori:
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.3\textwidth]{images/SupervisoreB1/CMD\_BOARD2}
+                \caption{Comandi in uscita dal supervisore della Board2.}
+                \label{fig:comandi_b2}
+            \end{figure}
+        \item \textit{x\_norm \emph{\&} y\_norm}: rappresenta il comando utente proveniente dal joistick.
+        \item \textit{yaw}: rappresenta l'angolo di orientamento del rover, calcolato a partire dai dati provenienti dalla Board2.
+        \item \textit{imu\_cohearence\_status}: rappresenta la coerenza dei dati ricevuti dal sensore IMU, utile a rilevare motor fault.
+        \item \textit{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit, in cui ogni bit indica la presenza 
+                    di un'anomalia \textit{critica} (da cui critical\_mask) o \textit{degradata} (da cui degraded\_mask) specifica.
+    \end{itemize}
+    \item \textbf{Board\_Health}: rappresenta lo stato della Board1. La struttura dati è la seguente:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{images/SupervisoreB1/BoardHealthSnapshot}
+            \caption{Struttura dati Board\_Health.}
+            \label{fig:board_health_struct}
+        \end{figure}
+    \item \textbf{Encoder}: rappresenta i dati provenienti dagli encoder delle ruote del rover. La struttura dati è la seguente:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{images/SupervisoreB1/Encoder\_snapshot}
+            \caption{Struttura dati Encoder.}
+            \label{fig:encoder_struct}
+        \end{figure}
+    \item \textbf{Now}: Rappresenta il tempo corrente in millisecondi.
+    \item \textbf{Last\_valid\_b2\_ms}: Rappresenta il tempo in millisecondi dell'ultimo dato valido ricevuto dalla Board2.
+\end{itemize}
+
+
+\subsubsection{Output}
+I segnali in output che fornisce sono:
+\begin{itemize}
+    \item \textbf{v\_ref}: rappresenta il riferimento di velocità lineare del rover, in m/s.
+    \item \textbf{omega\_ref}: rappresenta il riferimento di velocità angolare del rover, in rad/s.
+    
+    \item \textbf{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit, in cui ogni bit indica la presenza 
+    di un'anomalia \textit{critica} (da cui critical\_mask) o \textit{degradata} (da cui degraded\_mask) specifica, come descritto 
+    nella Tabella~\ref{tab:fault_mapping}.
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{lll}
+            \hline
+            \textbf{Bit} & \textbf{ID Segnale} & \textbf{Descrizione dell'Anomalia} \\ \hline
+            0 & TEMP\_CRI/DEG & Errore termico (Logica predittiva) \\
+            1 & BATT\_CRI/DEG & Tensione batteria sotto soglia minima \\
+            2 & COMM\_CRI/DEG & Errore ricezione Board-to-Board \\
+            3-6 & WHEEL\_CRI/DEG & Guasti attuatori (FL, FR, RL, RR) \\
+            7 & SUP\_CRI/DEG  & Timeout comunicazione Supervisore B2 \\ \hline
+            \end{tabular}
+            \caption{Mappatura della maschera di errore a 8 bit}
+            \label{tab:fault_mapping}
+        \end{table}
+\end{itemize}
+
+\subsection{Nuova subsection}
 
 
 
