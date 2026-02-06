@@ -2,12 +2,6 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{subcaption}
-\usepackage{makecell}
-\usepackage{enumitem} 
-\usepackage{array} % Per definire meglio le colonne
-\usepackage{longtable} % Per tabelle che si estendono su più pagine
-\usepackage{tabularx} % Per colonne auto-adattanti
-\usepackage{multirow}
 \graphicspath{ {./images/} }
 
 \title{Supervisori}
@@ -29,7 +23,7 @@
 La Board 2 è equipaggiata con tre sensori ad ultrasuoni \textbf{HC-SR04} per il rilevamento di ostacoli. 
 Questi sono disposti a 45° l'uno dall'altro, come mostrato in Figura~\ref{fig:sensori}.
 
-% Esempio di come aggiungere l'immagine che mancava
+
 
 
 \begin{figure}[ht]
@@ -197,7 +191,7 @@ Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una t
 
 
 \section{Supervisore Board 1}
-\subsection{Panoramica generale}
+\subsection{Panoramica generale -- Input e Output}
 Il supervisore della Board 1 è implementato come un modulo Simulink denominato \textbf{SupervisorB1}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB1_block}.
 \begin{figure}[H]
     \centering
@@ -206,17 +200,8 @@ Il supervisore della Board 1 è implementato come un modulo Simulink denominato 
     \label{fig:supervisorB1_block} 
 \end{figure}
 Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
-In particolare, esso è composto da 3 parti principali:
-\begin{itemize}
-    \item \textbf{Gestione Faults}: si occupa di rilevare e gestire eventuali anomalie nei dati ricevuti dalla Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
-    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di gestione faults e le codifica in due maschere di errore (critica e degradata).
-    \item \textbf{Calcolo Riferimenti}: calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
-\end{itemize}
-Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le tre parti principali del supervisore descritte sopra.
 
-
-
-\subsection{Input}
+\subsubsection{Input}
 I segnali in input che riceve sono:
 \begin{itemize}
     \item \textbf{Board2\_Data}: rappresenta i dati provenienti dalla Board2. Quelli utilizzati dal supervisore sono:
@@ -253,7 +238,7 @@ I segnali in input che riceve sono:
 \end{itemize}
 
 
-\subsection{Output}
+\subsubsection{Output}
 I segnali in output che fornisce sono:
 \begin{itemize}
     \item \textbf{v\_ref}: rappresenta il riferimento di velocità lineare del rover, in m/s.
@@ -278,73 +263,8 @@ I segnali in output che fornisce sono:
         \end{table}
 \end{itemize}
 
-\subsection{Gestione Faults}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/Gestione\_Faults}
-    \caption{Chart di gestione dei faults.}
-    \label{fig:gestione_faults}
-\end{figure}
+\subsection{Nuova subsection}
 
-L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} 
-\textit{degradata} specifica proveniente dalla lettura degli encoder, batteria, temperatura e comunicazione con la Board2.
-
-
-% Rimuovi \begin{table} e \centering
-
-\begin{longtable}{ll p{5cm}} 
-    \caption{Mappatura della maschera di errore a 8 bit} \label{tab:fault_mapping_table} \\
-    \hline
-    \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
-    \hline
-    \endfirsthead % Cosa appare nella prima pagina
-
-    \hline
-    \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
-    \hline
-    \endhead % Cosa appare in cima alle pagine successive (opzionale)
-
-    
-    \endfoot % Cosa appare in fondo a ogni pagina (opzionale)
-
-    % --- Inizio dati tabella ---
-    \textbf{temp\_status} & TEMP\_HEALTH\_DEGRADED & Quando la temperatura è nel range \newline $ ]-15; -5] \cup [55; +60[ $ \\
-
-    & TEMP\_HEALTH\_CRITICAL & 
-    \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
-        \item Quando la temperatura è per almeno $4$s nel range $ ]-\infty; -15] \cup [60; +\infty[ $
-        \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della temperatura è di $0.5$s, si ipotizza che la temperatura aumenti di $1\,^\circ\mathrm{C}/\mathrm{s}$. Se questa sale raggiungendo un valore superiore a $65\,^\circ\mathrm{C}/\mathrm{s}$ si ha questo valore.
-    \end{itemize} \\\\\\
-
-    & TEMP\_HEALTH\_OK & quando la temperatura è nel range $ ]-5; 55[ $ \\ \hline 
-
-
-    \textbf{batt\_status} & BATT\_HEALTH\_DEGRADED & Quando la percentuale di batteria è minore del $23$\% \\ 
-    & BATT\_HEALTH\_CRITICAL &     
-    \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
-        \item Quando la temperatura è per almeno $5$s nel range $ [0\mathrm{\%}; 15\mathrm{\%}] $
-        \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della percentuale batteria è di $0.5$s, si ipotizza che la percentuale diminuisca di $0.42\,\%/\mathrm{s}$. Se questa diminuisce raggiungendo un valore minore a $15\,\%$ si ha questo valore.
-    \end{itemize} \\\\\\
-    & BATT\_HEALTH\_OK & Quando la percentuale è $> 25\%$  \\ \hline 
-    
-    \textbf{wheel\_status(i)}  & WHEEL\_DEGRADED\_ENCODER & Quando viene dato un riferimento di velocità ma gli rpm sono nulli per un periodo di tempo, considerando l'inerzia delle ruote. Questa condizione è rilevata $has\_no\_feedback(i)$. \\
-       \\ & WHEEL\_CRITICAL\_MOTOR & Quando alla condizione degradata si agigunge un'incoerenza del sensore IMU.\\
-       \\ & WHEEL\_OK & Quando non ci sono ne condizioni critiche ne degradate\\ \hline
-    
-    \textbf{b2\_sup\_status} & SUP\_DEGRADED & Description for degraded status \\ 
-    & SUP\_CRITICAL & Description for critical status \\ \hline
-
-\end{longtable}
-
-\newpage
-\subsection{Costruzione maschere degradate e critiche}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/costruzione\_maschere}
-    \caption{Chart per la costruzione delle maschere di errore critiche e degradate.}
-    \label{fig:costruzione_maschere}
-\end{figure}
 
 
 \end{document}
