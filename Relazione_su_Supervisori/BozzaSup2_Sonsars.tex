@@ -8,6 +8,7 @@
 \usepackage{longtable} % Per tabelle che si estendono su più pagine
 \usepackage{tabularx} % Per colonne auto-adattanti
 \usepackage{multirow}
+\usepackage{amsmath}
 \graphicspath{ {./images/} }
 
 \title{Supervisori}
@@ -195,6 +196,7 @@ In questo caso, la logica di gestione degli ostacoli è semplificata rispetto al
 Infatti, l'unica condizione considerata è la presenza di un ostacolo a una distanza inferiore o uguale a $300$ cm.
 Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una transizione che porta l'uscita del supervisore all'arresto immediato del rover.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Supervisore Board 1}
 \subsection{Panoramica generale}
@@ -209,12 +211,13 @@ Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}
 In particolare, esso è composto da 3 parti principali:
 \begin{itemize}
     \item \textbf{Gestione Faults}: si occupa di rilevare e gestire eventuali anomalie nei dati ricevuti dalla Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
+    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover, in base alle condizioni di fault rilevate.
     \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di gestione faults e le codifica in due maschere di errore (critica e degradata).
     \item \textbf{Calcolo Riferimenti}: calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
 \end{itemize}
 Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le tre parti principali del supervisore descritte sopra.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Input}
 I segnali in input che riceve sono:
@@ -252,6 +255,7 @@ I segnali in input che riceve sono:
     \item \textbf{Last\_valid\_b2\_ms}: Rappresenta il tempo in millisecondi dell'ultimo dato valido ricevuto dalla Board2.
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Output}
 I segnali in output che fornisce sono:
@@ -279,6 +283,9 @@ I segnali in output che fornisce sono:
     \item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se la Board2 deve essere autorizzata a muovere il rover.
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \subsection{Gestione Faults}
 \begin{figure}[H]
     \centering
@@ -293,7 +300,7 @@ L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica 
 
 
 \begin{longtable}{ll p{5cm}} 
-    \caption{Mappatura della maschera di errore a 8 bit} \label{tab:fault_mapping_table} \\
+    \caption{Stati degradato e critico per Board 1} \label{tab:fault_table} \\
     \hline
     \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
     \hline
@@ -329,22 +336,120 @@ L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica 
     
     \textbf{wheel\_status(i)}  & WHEEL\_DEGRADED\_ENCODER & Quando viene dato un riferimento di velocità ma gli rpm sono nulli per un periodo di tempo, considerando l'inerzia delle ruote. Questa condizione è rilevata da $has\_no\_feedback(i)$. \\
        \\ & WHEEL\_CRITICAL\_MOTOR & Quando alla condizione degradata si agigunge un'incoerenza del sensore IMU.\\
-       \\ & WHEEL\_OK & Quando non ci sono ne condizioni critiche ne degradate\\ \hline
+       \\ & WHEEL\_OK & Quando non ci sono ne condizioni critiche ne degradate, imposta questo stato.\\ \hline
     
-    \textbf{b2\_sup\_status} & SUP\_DEGRADED & Description for degraded status \\ 
-    & SUP\_CRITICAL & Description for critical status \\ \hline
+    \textbf{b2\_sup\_status} & SUP\_DEGRADED & Se la media degli ultimi 10 intervalli in cui si prevede che Board2 sia viva supera i $40$ ms, imposta questo stato.\\\\
+    & SUP\_CRITICAL & Se l'intervallo di tempo dall'ultima comunicazione con Board2 supera i $120$ ms, imposta questo stato. \\\\
+    & SUP\_OK & Quando non ci sono ne condizioni critiche ne degradate imposta questo stato. \\ \hline
+    
+    \textbf{rx\_status} & RX\_DEGRADED & Se la media degli ultimi 10 intervalli tra nuovi dati ricevuti supera i $40$ ms, imposta lo stato degradato.
+    In altre parole, se la comunicazione rallenta e i dati iniziano ad arrivare, in media, oltre i $40$ ms, impostato lo stato degradato. \\\\
+    & RX\_CRITICAL & Se l'intervallo di tempo dall'ultima ricezione corretta supera i $120$ ms, imposta questo stato.\\\\
+    & RX\_OK & Quando non ci sono ne condizioni critiche ne degradate imposta questo stato. \\ \hline
+
 
 \end{longtable}
 
-\newpage
+\subsection{Decidere di far comandare la Board2}
+Il chart per decidere se autorizzare o meno la Board2 a muovere il rover è mostrato in Figura~\ref{fig:decidere_b2}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/B1\_to\_B2\_command}
+    \caption{\small{Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}
+    \label{fig:decidere_b2}
+\end{figure}
+In questo chart, la variabile di output $give\_b2\_actuation$ viene impostata a $1$ solo se non sono presenti anomalie $critiche$ rilevate nella parte di gestione faults.
+In particolare, se sono presenti anomalie critiche, il supervisore autorizza la Board2 a muovere il rover, altrimenti, se è presente anche solo un'anomalia critica,
+il supervisore non autorizza la Board2 a muovere il rover, impostando $give\_b2\_actuation$ a $0$. Il bit serve soltanto a comandare un relè che, se chiuso, 
+non permette alla Board2 di muovere il rover, altrimenti, se aperto, permette alla Board2 di muovere il rover, come mostrato in Figura~\ref{fig:relè_b2}.
+\begin{figure}[H]
+    \includegraphics[width=0.5\linewidth]{images/SupervisoreB1/rele_board1}
+    \label{fig:relè_b2}
+    \hfill
+    \includegraphics[width=0.5\linewidth]{images/SupervisoreB1/rele_board2}
+    \label{fig:relè_b2}
+    \caption{\small{A sinistra, il comando di B1 impedisce a Board2 di muovere il rover. A destra Board1 permette alla Board2 di muovere il rover.}}
+\end{figure}
+
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Costruzione maschere degradate e critiche}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/costruzione\_maschere}
-    \caption{Chart per la costruzione delle maschere di errore critiche e degradate.}
+    \caption{\small Chart per la costruzione delle maschere di errore critiche e degradate.}
     \label{fig:costruzione_maschere}
 \end{figure}
+
+Dagli stati critici e degradati rilevati nella parte di gestione faults, si costruiscono due maschere di errore a 8 bit, una per le anomalie critiche e una per quelle degradate.
+
+Il bit di ogni maschera rappresenta un'anomalia specifica, come descritto nella Tabella~\ref{tab:fault_mapping}.
+
+\begin{table}[H]
+    \centering
+    
+    \begin{tabular}{|c|l|l|}
+        \hline
+        \textbf{Bit} & \textbf{Componente} & \textbf{Descrizione} \\
+        \hline
+        0 & Temperatura & Sensori termici Board 1 \\
+        \hline
+        1 & Batteria & Stato carica/salute pacco batterie \\
+        \hline
+        2 & Ricevitore (RX) & Link di comunicazione \\
+        \hline
+        3 & Ruota FL & Motore/Encoder Front-Left \\
+        \hline
+        4 & Ruota FR & Motore/Encoder Front-Right \\
+        \hline
+        5 & Ruota RL & Motore/Encoder Rear-Left \\
+        \hline
+        6 & Ruota RR & Motore/Encoder Rear-Right \\
+        \hline
+        7 & B2 Supervisor & Stato del supervisore secondario \\
+        \hline
+    \end{tabular}
+    \caption{\small{Mappatura dei Bit nelle Fault Masks}}
+\end{table}
+
+
+\subsection{Calcolo riferimenti}
+Il chart per il calcolo dei riferimenti di velocità lineare e angolare del rover è mostrato in Figura~\ref{fig:calcolo_riferimenti}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/SupervisoreB1/decisione\_vel\_rot}
+    \caption{\small Chart per il calcolo dei riferimenti di velocità lineare e angolare del rover.}
+    \label{fig:calcolo_riferimenti}
+\end{figure}
+In questo chart, i riferimenti di velocità lineare ($v\_ref$) e angolare ($omega\_ref$) del rover vengono calcolati in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
+In particolare, se non sono presenti anomalie critiche, incluse quelle della Board 2, i riferimenti vengono calcolati in base ai comandi ricevuti dalla Board2, con una logica di scaling che tiene conto della posizione del 
+joystick e dell'angolo di orientamento del rover.
+Se invece sono presenti anomalie critiche, i riferimenti vengono impostati a $0$, fermando il rover, indipendentemente dai comandi ricevuti dalla Board2.
+\\\\
+La funzione \texttt{update\_user\_command} implementa un'arbitrazione dei comandi basata su livelli di priorità. Il modello cinematico segue una logica differenziale dove i riferimenti $(\vec{v}, \vec{\omega})$ sono definiti come:
+
+\begin{equation}
+\begin{cases} 
+    v_{ref} = y_{norm} \cdot V_{max} \cdot K_{safety} \\
+    \omega_{ref} = x_{norm} \cdot \Omega_{max} \cdot K_{safety}
+\end{cases}
+\end{equation}
+
+dove $K_{safety} \in \{0, 0.5, 1\}$ è il coefficiente di riduzione derivante dallo stato di sicurezza. 
+
+\subsubsection{Manovra di Inversione Automatica}
+Il sistema rileva un'intenzione di inversione quando $y_{norm} < -0.6$. In questa fase, il controllo passa da \textit{User-in-the-loop} a \textit{Automatic Heading Control}, dove la velocità angolare è regolata dall'errore di puntamento $\theta_{\epsilon}$:
+\begin{equation}
+\omega_{ref} = f(\theta_{yaw} - \theta_{target})
+\end{equation}
+Il controllo termina quando $|\theta_{\epsilon}| < 12^{\circ}$.
+
+
+
+
+
 
 
 \end{document}
