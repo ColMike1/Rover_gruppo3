@@ -276,6 +276,7 @@ I segnali in output che fornisce sono:
             \caption{Mappatura della maschera di errore a 8 bit}
             \label{tab:fault_mapping}
         \end{table}
+    \item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se la Board2 deve essere autorizzata a muovere il rover.
 \end{itemize}
 
 \subsection{Gestione Faults}
@@ -286,11 +287,10 @@ I segnali in output che fornisce sono:
     \label{fig:gestione_faults}
 \end{figure}
 
-L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} 
-\textit{degradata} specifica proveniente dalla lettura degli encoder, batteria, temperatura e comunicazione con la Board2.
+L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} o
+\textit{degradata} specifica proveniente dalla lettura degli encoder, batteria, temperatura e comunicazione con la Board2. Di seguito si
+ descrivono i valori che questi segnali possono assumere e le condizioni che portano a tali valori.
 
-
-% Rimuovi \begin{table} e \centering
 
 \begin{longtable}{ll p{5cm}} 
     \caption{Mappatura della maschera di errore a 8 bit} \label{tab:fault_mapping_table} \\
@@ -325,9 +325,9 @@ L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica 
         \item Quando la temperatura è per almeno $5$s nel range $ [0\mathrm{\%}; 15\mathrm{\%}] $
         \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della percentuale batteria è di $0.5$s, si ipotizza che la percentuale diminuisca di $0.42\,\%/\mathrm{s}$. Se questa diminuisce raggiungendo un valore minore a $15\,\%$ si ha questo valore.
     \end{itemize} \\\\\\
-    & BATT\_HEALTH\_OK & Quando la percentuale è $> 25\%$  \\ \hline 
+    & BATT\_HEALTH\_OK & Quando la percentuale è $> 25\%$  \\  
     
-    \textbf{wheel\_status(i)}  & WHEEL\_DEGRADED\_ENCODER & Quando viene dato un riferimento di velocità ma gli rpm sono nulli per un periodo di tempo, considerando l'inerzia delle ruote. Questa condizione è rilevata $has\_no\_feedback(i)$. \\
+    \textbf{wheel\_status(i)}  & WHEEL\_DEGRADED\_ENCODER & Quando viene dato un riferimento di velocità ma gli rpm sono nulli per un periodo di tempo, considerando l'inerzia delle ruote. Questa condizione è rilevata da $has\_no\_feedback(i)$. \\
        \\ & WHEEL\_CRITICAL\_MOTOR & Quando alla condizione degradata si agigunge un'incoerenza del sensore IMU.\\
        \\ & WHEEL\_OK & Quando non ci sono ne condizioni critiche ne degradate\\ \hline
     

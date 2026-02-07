@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  6 FEB 2026 17:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  7 FEB 2026 16:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -279,11 +279,11 @@ Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/Gestio
 
 
 [8 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png>]
-<images/SupervisoreB1/SupervisoreB1_simulink.png, id=56, 947.03813pt x 529.22719pt>
+<images/SupervisoreB1/SupervisoreB1_simulink.png, id=56, 1047.16219pt x 438.13687pt>
 File: images/SupervisoreB1/SupervisoreB1_simulink.png Graphic file (type png)
 <use images/SupervisoreB1/SupervisoreB1_simulink.png>
 Package pdftex.def Info: images/SupervisoreB1/SupervisoreB1_simulink.png  used on input line 204.
-(pdftex.def)             Requested size: 312.00119pt x 174.34671pt.
+(pdftex.def)             Requested size: 312.00119pt x 130.53954pt.
 
 
 [9 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png> <./images/SupervisoreB1/SupervisoreB1_simulink.png>]
@@ -308,11 +308,11 @@ Package pdftex.def Info: images/SupervisoreB1/Encoder_snapshot.png  used on inpu
 
 
 [11 <./images/SupervisoreB1/BoardHealthSnapshot.png> <./images/SupervisoreB1/Encoder_snapshot.png>]
-<images/SupervisoreB1/Gestione_Faults.png, id=74, 934.24031pt x 415.5525pt>
+<images/SupervisoreB1/Gestione_Faults.png, id=74, 1029.09468pt x 536.75531pt>
 File: images/SupervisoreB1/Gestione_Faults.png Graphic file (type png)
 <use images/SupervisoreB1/Gestione_Faults.png>
-Package pdftex.def Info: images/SupervisoreB1/Gestione_Faults.png  used on input line 284.
-(pdftex.def)             Requested size: 312.00119pt x 138.78136pt.
+Package pdftex.def Info: images/SupervisoreB1/Gestione_Faults.png  used on input line 285.
+(pdftex.def)             Requested size: 312.00119pt x 162.73138pt.
 
 Overfull \hbox (58.20287pt too wide) in alignment at lines 295--300
  [] [] [] 
@@ -364,8 +364,8 @@ Underfull \hbox (badness 5681) in paragraph at lines 326--327
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 330--331
-\OT1/cmr/m/n/12 con-dizione ^^Re ril-e-vata
+Underfull \hbox (badness 4673) in paragraph at lines 330--331
+\OT1/cmr/m/n/12 con-dizione ^^Re ril-e-vata da
  []
 
 
@@ -420,7 +420,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  67i,10n,77p,411b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\miche\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on BozzaSup2_Sonsars.pdf (15 pages, 1316391 bytes).
+Output written on BozzaSup2_Sonsars.pdf (15 pages, 1318337 bytes).
 PDF statistics:
  135 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
