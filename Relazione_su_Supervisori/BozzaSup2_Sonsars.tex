@@ -315,37 +315,53 @@ L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica 
     \endfoot % Cosa appare in fondo a ogni pagina (opzionale)
 
     % --- Inizio dati tabella ---
-    \textbf{temp\_status} & TEMP\_HEALTH\_DEGRADED & Quando la temperatura è nel range \newline $ ]-15; -5] \cup [55; +60[ $ \\
-
-    & TEMP\_HEALTH\_CRITICAL & 
-    \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
-        \item Quando la temperatura è per almeno $4$s nel range $ ]-\infty; -15] \cup [60; +\infty[ $
-        \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della temperatura è di $0.5$s, si ipotizza che la temperatura aumenti di $1\,^\circ\mathrm{C}/\mathrm{s}$. Se questa sale raggiungendo un valore superiore a $65\,^\circ\mathrm{C}/\mathrm{s}$ si ha questo valore.
-    \end{itemize} \\\\\\
-
-    & TEMP\_HEALTH\_OK & quando la temperatura è nel range $ ]-5; 55[ $ \\ \hline 
+    \textbf{temp\_status}       & TEMP\_HEALTH\_DEGRADED    & Quando la temperatura è nel range \newline $ ]-15; -5] \cup [55; +60[ $ \\
+                                & TEMP\_HEALTH\_CRITICAL    & \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
+                                                                \item Quando la temperatura è per almeno $4$s nel range $ ]-\infty; -15] \cup [60; +\infty[ $
+                                                                \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della temperatura è di $0.5$s, si ipotizza che la temperatura aumenti di
+                                                                $1\,^\circ\mathrm{C}/\mathrm{s}$. Se questa sale raggiungendo un valore superiore a $65\,^\circ\mathrm{C}/\mathrm{s}$ si ha questo valore.
+                                                                \end{itemize} \\\\\\
+                                & TEMP\_HEALTH\_OK          & Quando la temperatura è nel range $ ]-5; 55[ $ \\ \hline 
 
 
-    \textbf{batt\_status} & BATT\_HEALTH\_DEGRADED & Quando la percentuale di batteria è minore del $23$\% \\ 
-    & BATT\_HEALTH\_CRITICAL &     
-    \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
-        \item Quando la temperatura è per almeno $5$s nel range $ [0\mathrm{\%}; 15\mathrm{\%}] $
-        \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della percentuale batteria è di $0.5$s, si ipotizza che la percentuale diminuisca di $0.42\,\%/\mathrm{s}$. Se questa diminuisce raggiungendo un valore minore a $15\,\%$ si ha questo valore.
-    \end{itemize} \\\\\\
-    & BATT\_HEALTH\_OK & Quando la percentuale è $> 25\%$  \\  
+
+
+    \textbf{batt\_status}       & BATT\_HEALTH\_DEGRADED    & Quando la percentuale di batteria è minore del $23\%$ \\\\
+                                & BATT\_HEALTH\_CRITICAL    & \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
+                                                                \item Quando la temperatura è per almeno $5\,\mathrm{s}$ nel range $ [0\%; 15\%] $
+                                                                \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della percentuale batteria è di $0.5\,\mathrm{s}$,
+                                                                        si ipotizza che la percentuale diminuisca di $0.42\%/\mathrm{s}$. Se questa diminuisce raggiungendo un valore minore a $15\%$ si ha questo valore.
+                                                                        \end{itemize} \\\\
+                                & BATT\_HEALTH\_OK          & Quando la percentuale è $> 25\%$ \\ \hline
     
-    \textbf{wheel\_status(i)}  & WHEEL\_DEGRADED\_ENCODER & Quando viene dato un riferimento di velocità ma gli rpm sono nulli per un periodo di tempo, considerando l'inerzia delle ruote. Questa condizione è rilevata da $has\_no\_feedback(i)$. \\
-       \\ & WHEEL\_CRITICAL\_MOTOR & Quando alla condizione degradata si agigunge un'incoerenza del sensore IMU.\\
-       \\ & WHEEL\_OK & Quando non ci sono ne condizioni critiche ne degradate, imposta questo stato.\\ \hline
+
+
+
+    \textbf{wheel\_status(i)}   & WHEEL\_DEGRADED\_ENCODER  & Quando viene dato un riferimento di velocità ma gli rpm sono nulli per un certo periodo di tempo,
+                                                            infatti per impostare questo valore si considera anche l'inerzia delle ruote. Questa condizione è 
+                                                            rilevata da $has\_no\_feedback(i)$. \\\\
+
+                                & WHEEL\_CRITICAL\_MOTOR    & Quando alla condizione degradata si aggiunge un'incoerenza del sensore IMU. \\\\
+                                & WHEEL\_OK                 & Quando non ci sono ne condizioni critiche ne degradate, imposta questo valore. \\ \hline
     
-    \textbf{b2\_sup\_status} & SUP\_DEGRADED & Se la media degli ultimi 10 intervalli in cui si prevede che Board2 sia viva supera i $40$ ms, imposta questo stato.\\\\
-    & SUP\_CRITICAL & Se l'intervallo di tempo dall'ultima comunicazione con Board2 supera i $120$ ms, imposta questo stato. \\\\
-    & SUP\_OK & Quando non ci sono ne condizioni critiche ne degradate imposta questo stato. \\ \hline
+
+
+
+    \textbf{b2\_sup\_status}    & SUP\_DEGRADED             & Questo valore indica che la Board 2 non sta operando con continuità. Il sistema
+                                                              monitora l'effettivo 'battito cardiaco' (heartbeat) del supervisore remoto. Se la media degli ultimi 10 intervalli di comunicazione supera i 40 ms, 
+                                                              il sistema rileva un timeout o un'assenza di risposta, segnalando lo stato di degrado del supervisore. \\\\
+                                & SUP\_CRITICAL             & Se l'intervallo di tempo dall'ultima comunicazione con Board2 supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
+                                & SUP\_OK                   & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\\\ \hline
     
-    \textbf{rx\_status} & RX\_DEGRADED & Se la media degli ultimi 10 intervalli tra nuovi dati ricevuti supera i $40$ ms, imposta lo stato degradato.
-    In altre parole, se la comunicazione rallenta e i dati iniziano ad arrivare, in media, oltre i $40$ ms, impostato lo stato degradato. \\\\
-    & RX\_CRITICAL & Se l'intervallo di tempo dall'ultima ricezione corretta supera i $120$ ms, imposta questo stato.\\\\
-    & RX\_OK & Quando non ci sono ne condizioni critiche ne degradate imposta questo stato. \\ \hline
+
+
+
+    \textbf{rx\_status}         & RX\_DEGRADED              & Questo valore identifica una comunicazione instabile. Sebbene il collegamento fisico sia attivo, fattori quali errori di checksum (CRC) 
+                                                                o anomalie nella lunghezza dei pacchetti impediscono l'aggiornamento della variabile data\_last\_valid\_ms. Il sistema monitora la qualità del link calcolando la media mobile 
+                                                                degli ultimi 10 intervalli di ricezione valida; se tale media supera la soglia critica di $40$ ms, viene segnalato il degrado della ricezione.\\\\
+                                & RX\_CRITICAL              & Se l'intervallo di tempo dall'ultima ricezione corretta supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
+                                & RX\_OK                    & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\ \hline
+
 
 
 \end{longtable}
@@ -358,16 +374,18 @@ Il chart per decidere se autorizzare o meno la Board2 a muovere il rover è most
     \caption{\small{Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}
     \label{fig:decidere_b2}
 \end{figure}
-In questo chart, la variabile di output $give\_b2\_actuation$ viene impostata a $1$ solo se non sono presenti anomalie $critiche$ rilevate nella parte di gestione faults.
-In particolare, se sono presenti anomalie critiche, il supervisore autorizza la Board2 a muovere il rover, altrimenti, se è presente anche solo un'anomalia critica,
-il supervisore non autorizza la Board2 a muovere il rover, impostando $give\_b2\_actuation$ a $0$. Il bit serve soltanto a comandare un relè che, se chiuso, 
-non permette alla Board2 di muovere il rover, altrimenti, se aperto, permette alla Board2 di muovere il rover, come mostrato in Figura~\ref{fig:relè_b2}.
+L'autorizzazione a Board 2 per il controllo del rover è regolato dalla variabile $give\_b2\_actuation$ secondo la seguente logica:
+\begin{itemize}
+\item \textbf{Stato Critico:} $give\_b2\_actuation = 0$. Il relè è aperto e il movimento viene gestito da Board 2.
+\item \textbf{Stato Nominale:} $give\_b2\_actuation = 1$. Il relè è chiuso e il movimento viene gestito da Board 1.
+\end{itemize}
+Tale meccanismo agisce come un dispositivo di sicurezza hardware (interlock) basato sullo stato del supervisore. come mostrato in Figura~\ref{fig:rele_b2}.
 \begin{figure}[H]
     \includegraphics[width=0.5\linewidth]{images/SupervisoreB1/rele_board1}
     \label{fig:relè_b2}
     \hfill
     \includegraphics[width=0.5\linewidth]{images/SupervisoreB1/rele_board2}
-    \label{fig:relè_b2}
+    \label{fig:rele_b2}
     \caption{\small{A sinistra, il comando di B1 impedisce a Board2 di muovere il rover. A destra Board1 permette alla Board2 di muovere il rover.}}
 \end{figure}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  7 FEB 2026 20:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  8 FEB 2026 13:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -195,11 +195,7 @@ LaTeX Info: Redefining \] on input line 2950.
 ) (C:\Users\miche\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count310
-) (BozzaSup2_Sonsars.aux
-
-LaTeX Warning: Label `fig:relè_b2' multiply defined.
-
-)
+) (BozzaSup2_Sonsars.aux)
 \openout1 = `BozzaSup2_Sonsars.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
@@ -412,97 +408,122 @@ Overfull \hbox (58.20287pt too wide) in alignment at lines 312--315
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 323--324
+Underfull \hbox (badness 2452) in paragraph at lines 321--323
 \OT1/cmr/m/n/12 gior-na-mento della tem-
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 323--324
+Underfull \hbox (badness 2689) in paragraph at lines 321--323
 \OT1/cmr/m/n/12 per-atura ^^Re di $0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 5$s, si
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 323--324
+Underfull \hbox (badness 1005) in paragraph at lines 321--323
 \OT1/cmr/m/n/12 ipo-tizza che la tem-per-
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 333--334
+Underfull \hbox (badness 4886) in paragraph at lines 332--334
 \OT1/cmr/m/n/12 gior-na-mento della per-
  []
 
 
-Underfull \hbox (badness 4673) in paragraph at lines 333--334
+Underfull \hbox (badness 4673) in paragraph at lines 332--334
 \OT1/cmr/m/n/12 centuale bat-te-ria ^^Re di
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 333--334
-\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 5$s, si ipo-tizza che la
+Underfull \hbox (badness 6893) in paragraph at lines 332--334
+\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 42%\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 s$. Se questa
  []
 
 
-Underfull \hbox (badness 5681) in paragraph at lines 333--334
-\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 42 %\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 s$. Se questa
+Underfull \hbox (badness 5939) in paragraph at lines 340--342
+\OT1/cmr/m/n/12 rpm sono nulli per un
  []
 
 
-Underfull \hbox (badness 4673) in paragraph at lines 337--338
+Underfull \hbox (badness 1831) in paragraph at lines 340--342
+\OT1/cmr/m/n/12 val-ore si con-sid-era an-che
+ []
+
+
+Underfull \hbox (badness 4673) in paragraph at lines 340--342
 \OT1/cmr/m/n/12 con-dizione ^^Re ril-e-vata da
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 344--344
 []|\OT1/cmr/m/n/12 Quando alla con-dizione
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
-\OT1/cmr/m/n/12 degra-data si agi-gunge
+Underfull \hbox (badness 10000) in paragraph at lines 344--344
+\OT1/cmr/m/n/12 degra-data si ag-giunge
  []
 
 
-Underfull \hbox (badness 3291) in paragraph at lines 338--339
+Underfull \hbox (badness 3291) in paragraph at lines 344--344
 \OT1/cmr/m/n/12 un'incoerenza del sen-sore
  []
 
 
-Underfull \hbox (badness 1762) in paragraph at lines 339--339
+Underfull \hbox (badness 1762) in paragraph at lines 345--345
 \OT1/cmr/m/n/12 dizioni critiche ne degra-
  []
 
 
-Underfull \hbox (badness 1383) in paragraph at lines 341--341
-\OT1/cmr/m/n/12 i $40$ ms, im-posta questo
- []
-
-
-Underfull \hbox (badness 5592) in paragraph at lines 342--342
+Underfull \hbox (badness 5592) in paragraph at lines 353--353
 []|\OT1/cmr/m/n/12 Se l'intervallo di tempo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 342--342
+Underfull \hbox (badness 10000) in paragraph at lines 353--353
 \OT1/cmr/m/n/12 dall'ultima co-mu-ni-cazione
  []
 
 
-Underfull \hbox (badness 1087) in paragraph at lines 342--342
-\OT1/cmr/m/n/12 con Board2 su-pera i $120$
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
+\OT1/cmr/m/n/12 co-mu-ni-cazione in-sta-bile.
  []
 
 
-Underfull \hbox (badness 5592) in paragraph at lines 347--347
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
+\OT1/cmr/m/n/12 Sebbene il col-lega-mento
+ []
+
+
+Underfull \hbox (badness 1509) in paragraph at lines 359--361
+\OT1/cmr/m/n/12 dei pac-chetti im-pedis-cono
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
+\OT1/cmr/m/n/12 abile data[]last[]valid[]ms.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
+\OT1/cmr/m/n/12 Il sis-tema mon-i-tora la
+ []
+
+
+Underfull \hbox (badness 3668) in paragraph at lines 359--361
+\OT1/cmr/m/n/12 10 in-ter-valli di ricezione
+ []
+
+
+Underfull \hbox (badness 5592) in paragraph at lines 362--362
 []|\OT1/cmr/m/n/12 Se l'intervallo di tempo
  []
 
 
-Underfull \hbox (badness 5578) in paragraph at lines 347--347
+Underfull \hbox (badness 5578) in paragraph at lines 362--362
 \OT1/cmr/m/n/12 dall'ultima ricezione cor-
  []
 
 
-Overfull \hbox (58.20287pt too wide) in alignment at lines 315--351
+Overfull \hbox (58.20287pt too wide) in alignment at lines 315--367
  [] [] [] 
  []
 
@@ -512,56 +533,55 @@ Overfull \hbox (58.20287pt too wide) in alignment at lines 315--351
 <images/SupervisoreB1/B1_to_B2_command.png, id=90, 740.7675pt x 486.31688pt>
 File: images/SupervisoreB1/B1_to_B2_command.png Graphic file (type png)
 <use images/SupervisoreB1/B1_to_B2_command.png>
-Package pdftex.def Info: images/SupervisoreB1/B1_to_B2_command.png  used on input line 357.
+Package pdftex.def Info: images/SupervisoreB1/B1_to_B2_command.png  used on input line 373.
 (pdftex.def)             Requested size: 312.00119pt x 204.83049pt.
 
 
-Package caption Warning: \label without proper reference on input line 370.
+[16]
+
+Package caption Warning: \label without proper reference on input line 388.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:relè_b2' on page 16 undefined on input line 364.
+LaTeX Warning: Reference `fig:rele_b2' on page 17 undefined on input line 382.
 
-<images/SupervisoreB1/rele_board1.jpeg, id=91, 1606.0pt x 1003.75pt>
+<images/SupervisoreB1/rele_board1.jpeg, id=94, 1606.0pt x 1003.75pt>
 File: images/SupervisoreB1/rele_board1.jpeg Graphic file (type jpg)
 <use images/SupervisoreB1/rele_board1.jpeg>
-Package pdftex.def Info: images/SupervisoreB1/rele_board1.jpeg  used on input line 366.
+Package pdftex.def Info: images/SupervisoreB1/rele_board1.jpeg  used on input line 384.
 (pdftex.def)             Requested size: 195.0pt x 121.86919pt.
-<images/SupervisoreB1/rele_board2.jpeg, id=92, 1606.0pt x 1003.75pt>
+<images/SupervisoreB1/rele_board2.jpeg, id=95, 1606.0pt x 1003.75pt>
 File: images/SupervisoreB1/rele_board2.jpeg Graphic file (type jpg)
 <use images/SupervisoreB1/rele_board2.jpeg>
-Package pdftex.def Info: images/SupervisoreB1/rele_board2.jpeg  used on input line 369.
+Package pdftex.def Info: images/SupervisoreB1/rele_board2.jpeg  used on input line 387.
 (pdftex.def)             Requested size: 195.0pt x 121.86919pt.
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 366--371
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 384--389
 [][] [] []
  []
 
-
-
-[16 <./images/SupervisoreB1/B1_to_B2_command.png>]
-<images/SupervisoreB1/costruzione_maschere.png, id=97, 496.10344pt x 399.74344pt>
+<images/SupervisoreB1/costruzione_maschere.png, id=96, 496.10344pt x 399.74344pt>
 File: images/SupervisoreB1/costruzione_maschere.png Graphic file (type png)
 <use images/SupervisoreB1/costruzione_maschere.png>
-Package pdftex.def Info: images/SupervisoreB1/costruzione_maschere.png  used on input line 381.
+Package pdftex.def Info: images/SupervisoreB1/costruzione_maschere.png  used on input line 399.
 (pdftex.def)             Requested size: 312.00119pt x 251.40051pt.
 
 
-[17 <./images/SupervisoreB1/rele_board1.jpeg> <./images/SupervisoreB1/rele_board2.jpeg>]
+[17 <./images/SupervisoreB1/B1_to_B2_command.png> <./images/SupervisoreB1/rele_board1.jpeg> <./images/SupervisoreB1/rele_board2.jpeg>]
 <images/SupervisoreB1/decisione_vel_rot.png, id=101, 1295.59032pt x 503.63156pt>
 File: images/SupervisoreB1/decisione_vel_rot.png Graphic file (type png)
 <use images/SupervisoreB1/decisione_vel_rot.png>
-Package pdftex.def Info: images/SupervisoreB1/decisione_vel_rot.png  used on input line 422.
+Package pdftex.def Info: images/SupervisoreB1/decisione_vel_rot.png  used on input line 440.
 (pdftex.def)             Requested size: 390.0pt x 151.60551pt.
 
 
 [18 <./images/SupervisoreB1/costruzione_maschere.png>]
-Overfull \hbox (21.15575pt too wide) in paragraph at lines 426--432
+Overfull \hbox (21.15575pt too wide) in paragraph at lines 444--450
 []\OT1/cmr/m/n/12 In questo chart, i rifer-i-menti di ve-locit^^Ra lin-eare ($\OML/cmm/m/it/12 v[]ref$\OT1/cmr/m/n/12 ) e an-go-lare ($\OML/cmm/m/it/12 omega[]ref$\OT1/cmr/m/n/12 )
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 426--432
+Underfull \hbox (badness 10000) in paragraph at lines 444--450
 
  []
 
@@ -578,20 +598,17 @@ L3 programming layer <2025-07-11>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 5268 strings out of 468149
- 99572 string characters out of 5431082
- 499653 words of memory out of 5000000
- 33809 multiletter control sequences out of 15000+600000
+ 5269 strings out of 468149
+ 99585 string characters out of 5431082
+ 501671 words of memory out of 5000000
+ 33810 multiletter control sequences out of 15000+600000
  634630 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,10n,77p,411b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,10n,77p,392b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\miche\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on BozzaSup2_Sonsars.pdf (20 pages, 1583374 bytes).
+Output written on BozzaSup2_Sonsars.pdf (20 pages, 1584208 bytes).
 PDF statistics:
  172 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
