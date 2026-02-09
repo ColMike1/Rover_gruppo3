@@ -366,27 +366,49 @@ L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica 
 
 \end{longtable}
 
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Decidere di far comandare la Board2}
+
 Il chart per decidere se autorizzare o meno la Board2 a muovere il rover è mostrato in Figura~\ref{fig:decidere_b2}.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/B1\_to\_B2\_command}
     \caption{\small{Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}
     \label{fig:decidere_b2}
 \end{figure}
-L'autorizzazione a Board 2 per il controllo del rover è regolato dalla variabile $give\_b2\_actuation$ secondo la seguente logica:
+
+L'autorizzazione a Board 2 per il controllo del rover è regolata dalla variabile $give\_b2\_actuation$ secondo la seguente logica:
+
 \begin{itemize}
-\item \textbf{Stato Critico:} $give\_b2\_actuation = 0$. Il relè è aperto e il movimento viene gestito da Board 2.
-\item \textbf{Stato Nominale:} $give\_b2\_actuation = 1$. Il relè è chiuso e il movimento viene gestito da Board 1.
+    \item \textbf{give\_b2\_actuation = 1}:  Il relè è aperto e il movimento viene gestito da Board 2. Questa condizione si ha quando sono riscontrate anomalie $critiche$ in
+                                                ricezione (textt\it{rx\_status = RX\_CRITICAL}), supervisore (textit{b2\_sup\_status = SUP\_CRITICAL}).
+    \item \textbf{give\_b2\_actuation = 0}:  Il relè è chiuso e il movimento viene gestito da Board 1. Questa condizione si ha quando non sono riscontrate anomalie $critiche$ in
+                                                ricezione (textit{rx\_status = RX\_OK}), supervisore (textit{b2\_sup\_status = SUP\_OK}).
 \end{itemize}
-Tale meccanismo agisce come un dispositivo di sicurezza hardware (interlock) basato sullo stato del supervisore. come mostrato in Figura~\ref{fig:rele_b2}.
+
+Tale meccanismo agisce come un dispositivo di sicurezza hardware basato sullo stato del supervisore, come mostrato nelle Figure~\ref{fig:rele_b2} e ~\ref{fig:rele_b1}.
+
 \begin{figure}[H]
-    \includegraphics[width=0.5\linewidth]{images/SupervisoreB1/rele_board1}
-    \label{fig:relè_b2}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board1}
+        \caption{\small{Il comando di Board1 impedisce a Board2 di muovere il rover.}}
+        \label{fig:rele_b1}
+    \end{subfigure}
     \hfill
-    \includegraphics[width=0.5\linewidth]{images/SupervisoreB1/rele_board2}
-    \label{fig:rele_b2}
-    \caption{\small{A sinistra, il comando di B1 impedisce a Board2 di muovere il rover. A destra Board1 permette alla Board2 di muovere il rover.}}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board2}
+        \caption{\small{Board1 permette alla Board2 di muovere il rover.}}
+        \label{fig:rele_b2}
+    \end{subfigure}
 \end{figure}
 
 %\newpage
@@ -408,25 +430,25 @@ Il bit di ogni maschera rappresenta un'anomalia specifica, come descritto nella 
 \begin{table}[H]
     \centering
     
-    \begin{tabular}{|c|l|l|}
+    \begin{tabular}{|c|l|l|l|}
         \hline
-        \textbf{Bit} & \textbf{Componente} & \textbf{Descrizione} \\
+        \textbf{Bit} & \textbf{Componente} & \textbf{critical\_mask} & \textbf{degraded\_mask} \\
         \hline
-        0 & Temperatura & Sensori termici Board 1 \\
+        0 & Temperatura & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
         \hline
-        1 & Batteria & Stato carica/salute pacco batterie \\
+        1 & Batteria    & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
         \hline
-        2 & Ricevitore (RX) & Link di comunicazione \\
+        2 & Ricevitore (RX) & \textbf{1} se \textbf{RX\_CRITICAL} & \textbf{1} se \textbf{RX\_DEGRADED}\\
         \hline
-        3 & Ruota FL & Motore/Encoder Front-Left \\
+        3 & Ruota FL & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
         \hline
-        4 & Ruota FR & Motore/Encoder Front-Right \\
+        4 & Ruota FR & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
         \hline
-        5 & Ruota RL & Motore/Encoder Rear-Left \\
+        5 & Ruota RL & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG} \\
         \hline
-        6 & Ruota RR & Motore/Encoder Rear-Right \\
+        6 & Ruota RR & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG} \\
         \hline
-        7 & B2 Supervisor & Stato del supervisore secondario \\
+        7 & B2 Supervisor & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG} \\
         \hline
     \end{tabular}
     \caption{\small{Mappatura dei Bit nelle Fault Masks}}

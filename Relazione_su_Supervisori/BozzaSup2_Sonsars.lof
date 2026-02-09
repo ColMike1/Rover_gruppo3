@@ -13,6 +13,5 @@
 \contentsline {figure}{\numberline {13}{\ignorespaces Struttura dati Encoder.}}{12}{}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Chart di gestione dei faults.}}{13}{}%
 \contentsline {figure}{\numberline {15}{\ignorespaces \small {Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}}{17}{}%
-\contentsline {figure}{\numberline {16}{\ignorespaces \small {A sinistra, il comando di B1 impedisce a Board2 di muovere il rover. A destra Board1 permette alla Board2 di muovere il rover.}}}{17}{}%
 \contentsline {figure}{\numberline {17}{\ignorespaces \small Chart per la costruzione delle maschere di errore critiche e degradate.}}{18}{}%
 \contentsline {figure}{\numberline {18}{\ignorespaces \small Chart per il calcolo dei riferimenti di velocità lineare e angolare del rover.}}{19}{}%
