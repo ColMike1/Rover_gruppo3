@@ -22,7 +22,7 @@
 \maketitle
 \newpage
 \tableofcontents
-\listoffigures
+% \listoffigures
 \newpage
 
 \section{Acquisizione segnali Board 2} 
@@ -30,7 +30,6 @@
 La Board 2 è equipaggiata con tre sensori ad ultrasuoni \textbf{HC-SR04} per il rilevamento di ostacoli. 
 Questi sono disposti a 45° l'uno dall'altro, come mostrato in Figura~\ref{fig:sensori}.
 
-% Esempio di come aggiungere l'immagine che mancava
 
 
 \begin{figure}[ht]
@@ -73,12 +72,67 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \section{Supervisore Board 2}
+
+
+
+
+
+\subsection{Panoramica generale}
+Il supervisore della Board 2 è implementato come un modulo Simulink denominato \textbf{SupervisorB2}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB2_block}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/SupervisoreBoard2_InputOutput}
+    \caption{Schema a blocchi del modulo SupervisorB2.}
+    \label{fig:supervisorB2_block} 
+\end{figure}
+Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
+In particolare, esso è composto da 3 parti principali:
+\begin{itemize}
+    \item \textbf{Gestione Faults}: si occupa di rilevare e gestire eventuali anomalie nei dati ricevuti dalla Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
+    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover, in base alle condizioni di fault rilevate.
+    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di gestione faults e le codifica in due maschere di errore (critica e degradata).
+    \item \textbf{Calcolo Riferimenti}: calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
+\end{itemize}
+Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le tre parti principali del supervisore descritte sopra.
+
+
 \subsection{Rilevamento ostacoli}
-Come da specifiche, il comportamento del rover, in presenza di ostacoli, deve essere funzione di due condizioni principali in cui il sistema può trovarsi:
+Come da specifiche, il comportamento del rover in presenza di ostacoli, deve essere regolato sulla base delle condizioni in cui può trovarsi:
 \begin{enumerate}
     \item \textit{Stato non degradato}
     \begin{itemize}
@@ -93,7 +147,18 @@ Come da specifiche, il comportamento del rover, in presenza di ostacoli, deve es
 \end{enumerate}
 
 In seguito verranno mostrati i chart realizzati per la gestione delle due casistiche.
-\subsubsection{Gestione ostacoli con sistema in stato $non degradato$}
+
+
+
+
+\subsubsection{Gestione ostacoli con sistema in stato \textit{non degradato}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2}
+    \caption{Logica di gestione degli ostacoli in stato non degradato.}
+    \label{fig:logica_gestione_ostacoli}
+\end{figure}
 
 Il chart per la gestione degli ostacoli in stato non degradato è mostrato in Figura~\ref{fig:chart_non_degradato}.
 
@@ -195,6 +260,51 @@ Il chart per la gestione degli ostacoli in stato degradato è mostrato in Figura
 In questo caso, la logica di gestione degli ostacoli è semplificata rispetto allo stato non degradato.
 Infatti, l'unica condizione considerata è la presenza di un ostacolo a una distanza inferiore o uguale a $300$ cm.
 Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una transizione che porta l'uscita del supervisore all'arresto immediato del rover.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -347,18 +457,19 @@ L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica 
 
 
 
-    \textbf{b2\_sup\_status}    & SUP\_DEGRADED             & Questo valore indica che la Board 2 non sta operando con continuità. Il sistema
-                                                              monitora l'effettivo 'battito cardiaco' (heartbeat) del supervisore remoto. Se la media degli ultimi 10 intervalli di comunicazione supera i 40 ms, 
-                                                              il sistema rileva un timeout o un'assenza di risposta, segnalando lo stato di degrado del supervisore. \\\\
-                                & SUP\_CRITICAL             & Se l'intervallo di tempo dall'ultima comunicazione con Board2 supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
+    \textbf{b2\_sup\_status}    & SUP\_DEGRADED             & Questo valore indica una discontinuità operativa della Board 2. Il supervisore della Board 1 monitora l'heartbeat del supervisore remoto, 
+                                                              il quale incrementa il valore ogni volta che viene eseguito. Se la media degli ultimi 10 intervalli di aggiornamento superi i 40 ms, il sistema
+                                                              segnala uno stato di degrado del supervisore di Board 2. \\\\
+                                & SUP\_CRITICAL             & Se l'intervallo di tempo dall'ultimo aggiornamento dell'heartbeat del supervisore di Board2 supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
                                 & SUP\_OK                   & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\\\ \hline
     
 
 
 
     \textbf{rx\_status}         & RX\_DEGRADED              & Questo valore identifica una comunicazione instabile. Sebbene il collegamento fisico sia attivo, fattori quali errori di checksum (CRC) 
-                                                                o anomalie nella lunghezza dei pacchetti impediscono l'aggiornamento della variabile data\_last\_valid\_ms. Il sistema monitora la qualità del link calcolando la media mobile 
-                                                                degli ultimi 10 intervalli di ricezione valida; se tale media supera la soglia critica di $40$ ms, viene segnalato il degrado della ricezione.\\\\
+                                                                o anomalie nella lunghezza dei pacchetti impediscono l'aggiornamento della variabile data\_last\_valid\_ms. Il sistema monitora la qualità
+                                                                del link calcolando la media mobile degli ultimi 10 intervalli di ricezione valida; se tale media supera la soglia critica di $40$ ms, viene
+                                                                segnalato il degrado della ricezione.\\\\
                                 & RX\_CRITICAL              & Se l'intervallo di tempo dall'ultima ricezione corretta supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
                                 & RX\_OK                    & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\ \hline
 
