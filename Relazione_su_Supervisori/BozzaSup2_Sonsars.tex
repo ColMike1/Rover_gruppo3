@@ -73,6 +73,27 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 
 
 
+\section{Funzionamento generale di ciascuna board}
+\subsection{Interazione tra Task e Meccanismo di Snapshot}
+Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
+variabili globali condivise. Nello specifico, la Figura~\ref{fig:funzionamento_generale} illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit}. 
+Al termine della propria esecuzione, ogni task può aggiornare tali snapshot, rendendo i nuovi dati disponibili agli altri processi. Ad esempio, il task \textit{SupervisorB1} 
+aggiorna lo snapshot \textbf{supervisor\_snapshot}, che viene poi utilizzato dal task \textit{Transmit} per l'invio dei dati verso la Board2.
+
+Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio temporale:
+
+\begin{itemize} 
+    \item \textit{data\_last\_valid\_ms}: indica l'istante temporale dell'ultimo aggiornamento dei dati ritenuto valido (ad esempio, l'ultima lettura coerente ricevuta dagli encoder). 
+    \item \textit{task\_last\_run\_ms}: riporta l'ultimo istante in cui il task responsabile dell'aggiornamento è stato effettivamente eseguito. 
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/funzGener_B1}
+    \caption{Funzionamento generale del software di Board 1.}
+    \label{fig:funzionamento_generale}
+\end{figure}
 
 
 
@@ -108,10 +129,6 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 
 \section{Supervisore Board 2}
 
-
-
-
-
 \subsection{Panoramica generale}
 Il supervisore della Board 2 è implementato come un modulo Simulink denominato \textbf{SupervisorB2}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB2_block}.
 \begin{figure}[H]
@@ -135,6 +152,10 @@ Nel seguito verranno descritti i segnali di input e output del supervisore, succ
 
 \subsection{Input}
 I segnali in input che riceve sono:
+
+
+
+
 
 
 
@@ -592,28 +613,9 @@ Il chart per il calcolo dei riferimenti di velocità lineare e angolare del rove
     \caption{\small Chart per il calcolo dei riferimenti di velocità lineare e angolare del rover.}
     \label{fig:calcolo_riferimenti}
 \end{figure}
-In questo chart, i riferimenti di velocità lineare ($v\_ref$) e angolare ($omega\_ref$) del rover vengono calcolati in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
-In particolare, se non sono presenti anomalie critiche, incluse quelle della Board 2, i riferimenti vengono calcolati in base ai comandi ricevuti dalla Board2, con una logica di scaling che tiene conto della posizione del 
-joystick e dell'angolo di orientamento del rover.
-Se invece sono presenti anomalie critiche, i riferimenti vengono impostati a $0$, fermando il rover, indipendentemente dai comandi ricevuti dalla Board2.
-\\\\
-La funzione \texttt{update\_user\_command} implementa un'arbitrazione dei comandi basata su livelli di priorità. Il modello cinematico segue una logica differenziale dove i riferimenti $(\vec{v}, \vec{\omega})$ sono definiti come:
 
-\begin{equation}
-\begin{cases} 
-    v_{ref} = y_{norm} \cdot V_{max} \cdot K_{safety} \\
-    \omega_{ref} = x_{norm} \cdot \Omega_{max} \cdot K_{safety}
-\end{cases}
-\end{equation}
 
-dove $K_{safety} \in \{0, 0.5, 1\}$ è il coefficiente di riduzione derivante dallo stato di sicurezza. 
-
-\subsubsection{Manovra di Inversione Automatica}
-Il sistema rileva un'intenzione di inversione quando $y_{norm} < -0.6$. In questa fase, il controllo passa da \textit{User-in-the-loop} a \textit{Automatic Heading Control}, dove la velocità angolare è regolata dall'errore di puntamento $\theta_{\epsilon}$:
-\begin{equation}
-\omega_{ref} = f(\theta_{yaw} - \theta_{target})
-\end{equation}
-Il controllo termina quando $|\theta_{\epsilon}| < 12^{\circ}$.
+DESCRIZIONE DA AGGIORNARE PERCHE' IL SUPERVSORE E' CAMBIATO
 
 
 
