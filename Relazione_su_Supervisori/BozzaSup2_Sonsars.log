@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  11 FEB 2026 18:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  11 FEB 2026 18:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -315,309 +315,311 @@ Package pdftex.def Info: images/SupervisoreB2/SupervisoreBoard2_InputOutput.png 
 <images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png, id=37, 941.01563pt x 548.0475pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png  used on input line 158.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png  used on input line 176.
 (pdftex.def)             Requested size: 350.99762pt x 204.42181pt.
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png, id=38, 1321.93875pt x 661.72218pt>
+
+
+[7]
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png, id=43, 1321.93875pt x 661.72218pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png  used on input line 167.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png  used on input line 185.
 (pdftex.def)             Requested size: 350.99762pt x 175.69884pt.
 
-
-[7 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png>]
-Overfull \hbox (7.88676pt too wide) in paragraph at lines 172--173
+Overfull \hbox (7.88676pt too wide) in paragraph at lines 190--191
 []\OT1/cmr/m/n/12 In par-ti-co-lare, il chart ^^Re com-posto da 2 stati par-al-leli: \OT1/cmr/m/it/12 Sonars \OT1/cmr/m/n/12 e \OT1/cmr/m/it/12 B2Decisione 
  []
 
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png, id=46, 879.285pt x 617.30624pt>
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png, id=44, 879.285pt x 617.30624pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png  used on input line 177.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png  used on input line 195.
 (pdftex.def)             Requested size: 175.49881pt x 123.20473pt.
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png, id=47, 426.84468pt x 374.14781pt>
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png, id=45, 426.84468pt x 374.14781pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png  used on input line 183.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png  used on input line 201.
 (pdftex.def)             Requested size: 175.49881pt x 153.83546pt.
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png>]
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png, id=55, 1147.28625pt x 208.52907pt>
+
+
+[8 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato.png>]
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png, id=52, 1147.28625pt x 208.52907pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png  used on input line 206.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png  used on input line 224.
 (pdftex.def)             Requested size: 350.99762pt x 63.79376pt.
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png, id=56, 1205.2528pt x 654.19406pt>
+
+
+[9 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png>]
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png, id=60, 1205.2528pt x 654.19406pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png  used on input line 226.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png  used on input line 244.
 (pdftex.def)             Requested size: 350.99762pt x 190.51997pt.
 
 
-[9 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png>]
-Overfull \hbox (5.99728pt too wide) in paragraph at lines 249--250
+[10 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png>]
+Overfull \hbox (5.99728pt too wide) in paragraph at lines 267--268
 \OT1/cmr/m/n/12 Il chart per la ges-tione degli os-ta-coli in stato degradato ^^Re mostrato in Figura 11[]. 
  []
 
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png, id=61, 1373.88281pt x 382.42876pt>
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png, id=65, 1373.88281pt x 382.42876pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png  used on input line 253.
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png  used on input line 271.
 (pdftex.def)             Requested size: 350.99762pt x 97.70184pt.
-
-
-[10 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png>]
 <images/SupervisoreB1/SupervisoreB1_simulink.png, id=66, 1047.16219pt x 438.13687pt>
 File: images/SupervisoreB1/SupervisoreB1_simulink.png Graphic file (type png)
 <use images/SupervisoreB1/SupervisoreB1_simulink.png>
-Package pdftex.def Info: images/SupervisoreB1/SupervisoreB1_simulink.png  used on input line 316.
+Package pdftex.def Info: images/SupervisoreB1/SupervisoreB1_simulink.png  used on input line 334.
 (pdftex.def)             Requested size: 312.00119pt x 130.53954pt.
 
 
-[11 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png> <./images/SupervisoreB1/SupervisoreB1_simulink.png>]
-<images/SupervisoreB1/CMD_BOARD2.png, id=72, 171.64125pt x 179.92218pt>
+[11 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato.png>]
+<images/SupervisoreB1/CMD_BOARD2.png, id=71, 171.64125pt x 179.92218pt>
 File: images/SupervisoreB1/CMD_BOARD2.png Graphic file (type png)
 <use images/SupervisoreB1/CMD_BOARD2.png>
-Package pdftex.def Info: images/SupervisoreB1/CMD_BOARD2.png  used on input line 340.
+Package pdftex.def Info: images/SupervisoreB1/CMD_BOARD2.png  used on input line 358.
 (pdftex.def)             Requested size: 117.00119pt x 122.6447pt.
 
 
-[12 <./images/SupervisoreB1/CMD_BOARD2.png>]
-<images/SupervisoreB1/BoardHealthSnapshot.png, id=77, 451.6875pt x 158.84344pt>
+[12 <./images/SupervisoreB1/SupervisoreB1_simulink.png>]
+<images/SupervisoreB1/BoardHealthSnapshot.png, id=76, 451.6875pt x 158.84344pt>
 File: images/SupervisoreB1/BoardHealthSnapshot.png Graphic file (type png)
 <use images/SupervisoreB1/BoardHealthSnapshot.png>
-Package pdftex.def Info: images/SupervisoreB1/BoardHealthSnapshot.png  used on input line 353.
+Package pdftex.def Info: images/SupervisoreB1/BoardHealthSnapshot.png  used on input line 371.
 (pdftex.def)             Requested size: 272.99881pt x 96.00967pt.
-<images/SupervisoreB1/Encoder_snapshot.png, id=78, 678.28406pt x 182.18062pt>
+<images/SupervisoreB1/Encoder_snapshot.png, id=77, 678.28406pt x 182.18062pt>
 File: images/SupervisoreB1/Encoder_snapshot.png Graphic file (type png)
 <use images/SupervisoreB1/Encoder_snapshot.png>
-Package pdftex.def Info: images/SupervisoreB1/Encoder_snapshot.png  used on input line 360.
+Package pdftex.def Info: images/SupervisoreB1/Encoder_snapshot.png  used on input line 378.
 (pdftex.def)             Requested size: 272.99881pt x 73.32407pt.
 
 
-[13 <./images/SupervisoreB1/BoardHealthSnapshot.png> <./images/SupervisoreB1/Encoder_snapshot.png>]
-<images/SupervisoreB1/Gestione_Faults.png, id=85, 1029.09468pt x 536.75531pt>
+[13 <./images/SupervisoreB1/CMD_BOARD2.png> <./images/SupervisoreB1/BoardHealthSnapshot.png>]
+<images/SupervisoreB1/Gestione_Faults.png, id=84, 1029.09468pt x 536.75531pt>
 File: images/SupervisoreB1/Gestione_Faults.png Graphic file (type png)
 <use images/SupervisoreB1/Gestione_Faults.png>
-Package pdftex.def Info: images/SupervisoreB1/Gestione_Faults.png  used on input line 402.
+Package pdftex.def Info: images/SupervisoreB1/Gestione_Faults.png  used on input line 420.
 (pdftex.def)             Requested size: 312.00119pt x 162.73138pt.
 
-Overfull \hbox (58.20287pt too wide) in alignment at lines 412--417
+
+[14 <./images/SupervisoreB1/Encoder_snapshot.png>]
+Overfull \hbox (58.20287pt too wide) in alignment at lines 430--435
  [] [] [] 
  []
 
 
-Overfull \hbox (58.20287pt too wide) in alignment at lines 417--422
+Overfull \hbox (58.20287pt too wide) in alignment at lines 435--440
  [] [] [] 
  []
 
 
-Overfull \hbox (58.20287pt too wide) in alignment at lines 422--425
+Overfull \hbox (58.20287pt too wide) in alignment at lines 440--443
  [] [] [] 
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 431--433
+Underfull \hbox (badness 2452) in paragraph at lines 449--451
 \OT1/cmr/m/n/12 gior-na-mento della tem-
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 431--433
+Underfull \hbox (badness 2689) in paragraph at lines 449--451
 \OT1/cmr/m/n/12 per-atura ^^Re di $0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 5$s, si
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 431--433
+Underfull \hbox (badness 1005) in paragraph at lines 449--451
 \OT1/cmr/m/n/12 ipo-tizza che la tem-per-
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 442--444
+Underfull \hbox (badness 4886) in paragraph at lines 460--462
 \OT1/cmr/m/n/12 gior-na-mento della per-
  []
 
 
-Underfull \hbox (badness 4673) in paragraph at lines 442--444
+Underfull \hbox (badness 4673) in paragraph at lines 460--462
 \OT1/cmr/m/n/12 centuale bat-te-ria ^^Re di
  []
 
 
-Underfull \hbox (badness 6893) in paragraph at lines 442--444
+Underfull \hbox (badness 6893) in paragraph at lines 460--462
 \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 42%\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 s$. Se questa
  []
 
 
-Underfull \hbox (badness 5939) in paragraph at lines 450--452
+Underfull \hbox (badness 5939) in paragraph at lines 468--470
 \OT1/cmr/m/n/12 rpm sono nulli per un
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 450--452
+Underfull \hbox (badness 1831) in paragraph at lines 468--470
 \OT1/cmr/m/n/12 val-ore si con-sid-era an-che
  []
 
 
-Underfull \hbox (badness 4673) in paragraph at lines 450--452
+Underfull \hbox (badness 4673) in paragraph at lines 468--470
 \OT1/cmr/m/n/12 con-dizione ^^Re ril-e-vata da
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--454
+Underfull \hbox (badness 10000) in paragraph at lines 472--472
 []|\OT1/cmr/m/n/12 Quando alla con-dizione
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--454
+Underfull \hbox (badness 10000) in paragraph at lines 472--472
 \OT1/cmr/m/n/12 degra-data si ag-giunge
  []
 
 
-Underfull \hbox (badness 3291) in paragraph at lines 454--454
+Underfull \hbox (badness 3291) in paragraph at lines 472--472
 \OT1/cmr/m/n/12 un'incoerenza del sen-sore
  []
 
 
-Underfull \hbox (badness 1762) in paragraph at lines 455--455
+Underfull \hbox (badness 1762) in paragraph at lines 473--473
 \OT1/cmr/m/n/12 dizioni critiche ne degra-
  []
 
 
-Underfull \hbox (badness 1527) in paragraph at lines 460--462
+Underfull \hbox (badness 1527) in paragraph at lines 478--480
 []|\OT1/cmr/m/n/12 Questo val-ore in-dica una
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--462
+Underfull \hbox (badness 10000) in paragraph at lines 478--480
 \OT1/cmr/m/n/12 dis-con-ti-nuit^^Ra op-er-a-tiva
  []
 
 
-Underfull \hbox (badness 3679) in paragraph at lines 460--462
+Underfull \hbox (badness 3679) in paragraph at lines 478--480
 \OT1/cmr/m/n/12 il val-ore ogni volta che
  []
 
 
-Underfull \hbox (badness 3312) in paragraph at lines 460--462
+Underfull \hbox (badness 3312) in paragraph at lines 478--480
 \OT1/cmr/m/n/12 degli ul-timi 10 in-ter-valli
  []
 
 
-Underfull \hbox (badness 5592) in paragraph at lines 463--463
+Underfull \hbox (badness 5592) in paragraph at lines 481--481
 []|\OT1/cmr/m/n/12 Se l'intervallo di tempo
  []
 
 
-Underfull \hbox (badness 5533) in paragraph at lines 463--463
+Underfull \hbox (badness 5533) in paragraph at lines 481--481
 \OT1/cmr/m/n/12 dall'ultimo ag-gior-na-mento
  []
 
 
-Underfull \hbox (badness 2368) in paragraph at lines 463--463
+Underfull \hbox (badness 2368) in paragraph at lines 481--481
 \OT1/cmr/m/n/12 sore di Board2 su-pera i
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--472
+Underfull \hbox (badness 10000) in paragraph at lines 487--490
 \OT1/cmr/m/n/12 co-mu-ni-cazione in-sta-bile.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--472
+Underfull \hbox (badness 10000) in paragraph at lines 487--490
 \OT1/cmr/m/n/12 Sebbene il col-lega-mento
  []
 
 
-Underfull \hbox (badness 1509) in paragraph at lines 469--472
+Underfull \hbox (badness 1509) in paragraph at lines 487--490
 \OT1/cmr/m/n/12 dei pac-chetti im-pedis-cono
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--472
+Underfull \hbox (badness 10000) in paragraph at lines 487--490
 \OT1/cmr/m/n/12 abile data[]last[]valid[]ms.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--472
+Underfull \hbox (badness 10000) in paragraph at lines 487--490
 \OT1/cmr/m/n/12 Il sis-tema mon-i-tora la
  []
 
 
-Underfull \hbox (badness 3668) in paragraph at lines 469--472
+Underfull \hbox (badness 3668) in paragraph at lines 487--490
 \OT1/cmr/m/n/12 10 in-ter-valli di ricezione
  []
 
 
-Underfull \hbox (badness 5592) in paragraph at lines 473--473
+Underfull \hbox (badness 5592) in paragraph at lines 491--491
 []|\OT1/cmr/m/n/12 Se l'intervallo di tempo
  []
 
 
-Underfull \hbox (badness 5578) in paragraph at lines 473--473
+Underfull \hbox (badness 5578) in paragraph at lines 491--491
 \OT1/cmr/m/n/12 dall'ultima ricezione cor-
  []
 
 
-Overfull \hbox (58.20287pt too wide) in alignment at lines 425--478
+Overfull \hbox (58.20287pt too wide) in alignment at lines 443--496
  [] [] [] 
  []
 
-
-
-[14 <./images/SupervisoreB1/Gestione_Faults.png>] [15] [16]
-<images/SupervisoreB1/B1_to_B2_command.png, id=97, 740.7675pt x 486.31688pt>
+[15 <./images/SupervisoreB1/Gestione_Faults.png>] [16] [17]
+<images/SupervisoreB1/B1_to_B2_command.png, id=100, 740.7675pt x 486.31688pt>
 File: images/SupervisoreB1/B1_to_B2_command.png Graphic file (type png)
 <use images/SupervisoreB1/B1_to_B2_command.png>
-Package pdftex.def Info: images/SupervisoreB1/B1_to_B2_command.png  used on input line 495.
+Package pdftex.def Info: images/SupervisoreB1/B1_to_B2_command.png  used on input line 513.
 (pdftex.def)             Requested size: 312.00119pt x 204.83049pt.
 
 
-[17]
-<images/SupervisoreB1/rele_board1.jpeg, id=101, 1606.0pt x 1003.75pt>
+[18]
+<images/SupervisoreB1/rele_board1.jpeg, id=104, 1606.0pt x 1003.75pt>
 File: images/SupervisoreB1/rele_board1.jpeg Graphic file (type jpg)
 <use images/SupervisoreB1/rele_board1.jpeg>
-Package pdftex.def Info: images/SupervisoreB1/rele_board1.jpeg  used on input line 513.
+Package pdftex.def Info: images/SupervisoreB1/rele_board1.jpeg  used on input line 531.
 (pdftex.def)             Requested size: 175.49881pt x 109.67767pt.
-<images/SupervisoreB1/rele_board2.jpeg, id=102, 1606.0pt x 1003.75pt>
+<images/SupervisoreB1/rele_board2.jpeg, id=105, 1606.0pt x 1003.75pt>
 File: images/SupervisoreB1/rele_board2.jpeg Graphic file (type jpg)
 <use images/SupervisoreB1/rele_board2.jpeg>
-Package pdftex.def Info: images/SupervisoreB1/rele_board2.jpeg  used on input line 519.
+Package pdftex.def Info: images/SupervisoreB1/rele_board2.jpeg  used on input line 537.
 (pdftex.def)             Requested size: 175.49881pt x 109.67767pt.
-
-
-[18 <./images/SupervisoreB1/B1_to_B2_command.png>]
-<images/SupervisoreB1/costruzione_maschere.png, id=107, 496.10344pt x 399.74344pt>
+<images/SupervisoreB1/costruzione_maschere.png, id=106, 496.10344pt x 399.74344pt>
 File: images/SupervisoreB1/costruzione_maschere.png Graphic file (type png)
 <use images/SupervisoreB1/costruzione_maschere.png>
-Package pdftex.def Info: images/SupervisoreB1/costruzione_maschere.png  used on input line 532.
+Package pdftex.def Info: images/SupervisoreB1/costruzione_maschere.png  used on input line 550.
 (pdftex.def)             Requested size: 312.00119pt x 251.40051pt.
 
-Overfull \hbox (80.84581pt too wide) in paragraph at lines 544--565
+
+[19 <./images/SupervisoreB1/B1_to_B2_command.png> <./images/SupervisoreB1/rele_board1.jpeg> <./images/SupervisoreB1/rele_board2.jpeg>]
+Overfull \hbox (80.84581pt too wide) in paragraph at lines 562--583
  [][] 
  []
 
-
-
-[19 <./images/SupervisoreB1/rele_board1.jpeg> <./images/SupervisoreB1/rele_board2.jpeg> <./images/SupervisoreB1/costruzione_maschere.png>]
-<images/SupervisoreB1/decisione_vel_rot.png, id=113, 1295.59032pt x 503.63156pt>
+<images/SupervisoreB1/decisione_vel_rot.png, id=112, 1295.59032pt x 503.63156pt>
 File: images/SupervisoreB1/decisione_vel_rot.png Graphic file (type png)
 <use images/SupervisoreB1/decisione_vel_rot.png>
-Package pdftex.def Info: images/SupervisoreB1/decisione_vel_rot.png  used on input line 573.
+Package pdftex.def Info: images/SupervisoreB1/decisione_vel_rot.png  used on input line 591.
 (pdftex.def)             Requested size: 390.0pt x 151.60551pt.
 
-Overfull \hbox (21.15575pt too wide) in paragraph at lines 577--583
+
+[20 <./images/SupervisoreB1/costruzione_maschere.png>]
+Overfull \hbox (21.15575pt too wide) in paragraph at lines 595--601
 []\OT1/cmr/m/n/12 In questo chart, i rifer-i-menti di ve-locit^^Ra lin-eare ($\OML/cmm/m/it/12 v[]ref$\OT1/cmr/m/n/12 ) e an-go-lare ($\OML/cmm/m/it/12 omega[]ref$\OT1/cmr/m/n/12 )
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--583
+Underfull \hbox (badness 10000) in paragraph at lines 595--601
 
  []
 
 
 
-[20 <./images/SupervisoreB1/decisione_vel_rot.png>]
+[21 <./images/SupervisoreB1/decisione_vel_rot.png>]
 
-[21] (BozzaSup2_Sonsars.aux)
+[22] (BozzaSup2_Sonsars.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-11>
@@ -632,9 +634,9 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  67i,10n,77p,392b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\miche\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on BozzaSup2_Sonsars.pdf (21 pages, 1738191 bytes).
+Output written on BozzaSup2_Sonsars.pdf (22 pages, 1739249 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
+ 182 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

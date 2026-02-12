@@ -2,15 +2,17 @@
 \contentsline {subsection}{\numberline {1.1}\textbf {HC-SR04} - Sensore ad ultrasuoni}{3}{}%
 \contentsline {section}{\numberline {2}Supervisore Board 2}{5}{}%
 \contentsline {subsection}{\numberline {2.1}Panoramica generale}{5}{}%
-\contentsline {subsection}{\numberline {2.2}Rilevamento ostacoli}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Gestione ostacoli con sistema in stato $degradato$}{11}{}%
+\contentsline {subsection}{\numberline {2.2}Input}{7}{}%
+\contentsline {subsection}{\numberline {2.3}Output}{7}{}%
+\contentsline {subsection}{\numberline {2.4}Rilevamento ostacoli}{7}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{8}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}Gestione ostacoli con sistema in stato $degradato$}{11}{}%
 \contentsline {section}{\numberline {3}Supervisore Board 1}{11}{}%
 \contentsline {subsection}{\numberline {3.1}Panoramica generale}{11}{}%
 \contentsline {subsection}{\numberline {3.2}Input}{12}{}%
-\contentsline {subsection}{\numberline {3.3}Output}{13}{}%
-\contentsline {subsection}{\numberline {3.4}Gestione Faults}{14}{}%
+\contentsline {subsection}{\numberline {3.3}Output}{14}{}%
+\contentsline {subsection}{\numberline {3.4}Gestione Faults}{15}{}%
 \contentsline {subsection}{\numberline {3.5}Decidere di far comandare la Board2}{18}{}%
-\contentsline {subsection}{\numberline {3.6}Costruzione maschere degradate e critiche}{19}{}%
-\contentsline {subsection}{\numberline {3.7}Calcolo riferimenti}{20}{}%
+\contentsline {subsection}{\numberline {3.6}Costruzione maschere degradate e critiche}{20}{}%
+\contentsline {subsection}{\numberline {3.7}Calcolo riferimenti}{21}{}%
 \contentsline {subsubsection}{\numberline {3.7.1}Manovra di Inversione Automatica}{21}{}%
