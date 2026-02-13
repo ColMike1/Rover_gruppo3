@@ -1,0 +1,3 @@
+../Core/Src/snapshot/board_health_snapshot.c:19:6:BoardHealthSnapshot_MutexInit	2
+../Core/Src/snapshot/board_health_snapshot.c:25:6:BoardHealthSnapshot_Write	2
+../Core/Src/snapshot/board_health_snapshot.c:34:6:BoardHealthSnapshot_Read	2

@@ -1,0 +1,3 @@
+../Core/Src/snapshot/control_snapshot.c:20:13:CommandSnapshot_Init	2
+../Core/Src/snapshot/control_snapshot.c:36:6:CommandSnapshot_Write	2
+../Core/Src/snapshot/control_snapshot.c:49:6:CommandSnapshot_Read	2

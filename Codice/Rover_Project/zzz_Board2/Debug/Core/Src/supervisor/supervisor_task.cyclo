@@ -1,0 +1,2 @@
+../Core/Src/supervisor/supervisor_task.c:25:6:Supervisor_TaskInit	1
+../Core/Src/supervisor/supervisor_task.c:29:6:Supervisor_TaskStep	4

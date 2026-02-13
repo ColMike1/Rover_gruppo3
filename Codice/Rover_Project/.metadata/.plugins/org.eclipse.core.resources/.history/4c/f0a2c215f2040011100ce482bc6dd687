@@ -1,0 +1,45 @@
+/*
+ * ble_controller_snapshot.h
+ *
+ *  Created on: Jan 14, 2026
+ *      Author: Sterm
+ */
+
+#ifndef INC_SNAPSHOT_BLE_CONTROLLER_SNAPSHOT_H_
+#define INC_SNAPSHOT_BLE_CONTROLLER_SNAPSHOT_H_
+
+#include <stdint.h>
+#include "ble_controller/ble_controller_i2c.h"
+
+#include "cmsis_os.h"
+/* ================= SNAPSHOT ================= */
+
+typedef struct
+{
+    uint32_t task_last_run_ms;     /* ultima esecuzione del task */
+    uint32_t data_last_valid_ms;  /* ultimo istante in cui i dati sono validi */
+
+
+    /* Stick A normalizzato */
+    float ax_norm;
+    float ay_norm;
+
+    /* Stick B normalizzato */
+    float bx_norm;
+    float by_norm;
+
+    /* Pulsanti */
+    uint8_t a_btn;
+    uint8_t b_btn;
+    uint8_t btn1;
+    uint8_t btn2;
+
+} BleControllerSnapshot_t;
+
+
+/* ================= API ================= */
+void BleControllerSnapshot_MutexInit(void);
+void BleControllerSnapshot_Write(const BleControllerSnapshot_t *snap);
+void BleControllerSnapshot_Read(BleControllerSnapshot_t *snap);
+
+#endif /* INC_SNAPSHOT_BLE_CONTROLLER_SNAPSHOT_H_ */

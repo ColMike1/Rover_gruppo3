@@ -1,0 +1,4 @@
+../Core/Src/log/log_format.c:18:20:CommUnpackStatusToStr	16	static
+../Core/Src/log/log_format.c:30:6:B1FaultFlagsToStr	32	static
+../Core/Src/log/log_format.c:54:6:B2FaultFlagsToStr	32	static
+../Core/Src/log/log_format.c:75:6:Log_FormatSnapshot	672	static

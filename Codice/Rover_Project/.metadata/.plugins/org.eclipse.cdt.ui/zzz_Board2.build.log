@@ -1,0 +1,33 @@
+13:40:48 **** Incremental Build of configuration Debug for project zzz_Board2 ****
+make -j8 all 
+arm-none-eabi-gcc "../Drivers/SupervisorB2/SupervisorB2.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Desktop/STM32/workspace/Rover_Project_Fake/zzz_Board2" -I"C:/Users/Sterm/Desktop/STM32/workspace/Rover_Project_Fake" -I"C:/Users/Sterm/Desktop/STM32/workspace/Rover_Project_Fake/shared_header/shared_resources" -I"C:/Users/Sterm/Desktop/STM32/workspace/Rover_Project_Fake/shared_header" -I"C:/Users/Sterm/Desktop/STM32/workspace/Rover_Project_Fake/zzz_Board2/Drivers/SupervisorB2" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/SupervisorB2/SupervisorB2.d" -MT"Drivers/SupervisorB2/SupervisorB2.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/SupervisorB2/SupervisorB2.o"
+../Drivers/SupervisorB2/SupervisorB2.c: In function 'SupervisorB2_step':
+../Drivers/SupervisorB2/SupervisorB2.c:1215:3: warning: enumeration value 'ESP_I2C_OK' not handled in switch [-Wswitch]
+ 1215 |   switch (esp_status) {
+      |   ^~~~~~
+../Drivers/SupervisorB2/SupervisorB2.c:1225:3: warning: enumeration value 'IMU_I2C_OK' not handled in switch [-Wswitch]
+ 1225 |   switch (imu_status) {
+      |   ^~~~~~
+../Drivers/SupervisorB2/SupervisorB2.c:1235:3: warning: enumeration value 'RX_OK' not handled in switch [-Wswitch]
+ 1235 |   switch (rx_status) {
+      |   ^~~~~~
+../Drivers/SupervisorB2/SupervisorB2.c:1245:3: warning: enumeration value 'SUPERVISOR_OK' not handled in switch [-Wswitch]
+ 1245 |   switch (b1_sup_status) {
+      |   ^~~~~~
+../Drivers/SupervisorB2/SupervisorB2.c:1482:50: warning: taking address of packed member of 'struct <anonymous>' may result in an unaligned pointer value [-Waddress-of-packed-member]
+ 1482 |               (SupervisorB2_U.Board1_Data.payload.wheel_speed_rpm);
+      |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "zzz_Board2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sterm\Desktop\STM32\workspace\Rover_Project_Fake\zzz_Board2\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="zzz_Board2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: zzz_Board2.elf
+ 
+arm-none-eabi-size  zzz_Board2.elf 
+arm-none-eabi-objdump -h -S zzz_Board2.elf  > "zzz_Board2.list"
+   text	   data	    bss	    dec	    hex	filename
+  95176	    476	  21168	 116820	  1c854	zzz_Board2.elf
+Finished building: default.size.stdout
+ 
+Finished building: zzz_Board2.list
+ 
+
+13:40:51 Build Finished. 0 errors, 5 warnings. (took 2s.970ms)
+

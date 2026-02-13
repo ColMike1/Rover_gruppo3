@@ -1,0 +1,31 @@
+/*
+ * encoder_snapshot.h
+ *
+ *  Created on: Jan 8, 2026
+ *      Author: Sterm
+ */
+
+#ifndef INC_SNAPSHOT_CONTROL_CYCLE_SNAPSHOT_H_
+#define INC_SNAPSHOT_CONTROL_CYCLE_SNAPSHOT_H_
+
+#include <stdint.h>
+#include <stdbool.h>
+#include "cmsis_os.h"
+
+
+typedef struct
+{
+  float wheel_speed_rpm[4];
+  bool hasNoFeedback[4];		//indica se c'è corrispondenza tra comando e lettura encoder.
+  	  	  	  	  	  	  	  	//(è Vero se la lettura encoder restituisce 0 rpm in presenza di un comando di velocità valido)
+
+  uint32_t task_last_run_ms;     /* ultima esecuzione del task */
+  uint32_t data_last_valid_ms[4];  /* ultimo istante in cui i dati acquisiti sono validi (uno per ogni encoder) */
+} EncoderSnapshot_t;
+
+void EncoderSnapshot_MutexInit(osMutexId_t mutex_handle);
+
+void EncoderSnapshot_Write(const EncoderSnapshot_t *src);
+void EncoderSnapshot_Read(EncoderSnapshot_t *dst);
+
+#endif /* INC_SNAPSHOT_CONTROL_CYCLE_SNAPSHOT_H_ */

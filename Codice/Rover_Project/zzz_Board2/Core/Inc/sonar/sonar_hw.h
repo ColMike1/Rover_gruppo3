@@ -1,0 +1,42 @@
+/*
+ * sonars.h
+ *
+ *  Created on: Jan 11, 2026
+ *      Author: miche
+ */
+
+#ifndef INC_SONARS_H_
+#define INC_SONARS_H_
+
+#include "main.h"
+#include "string.h"
+#include "stdio.h"
+#include "usart.h"
+#include "cmsis_os2.h"
+
+
+
+typedef struct{
+	uint16_t buf_ch1[2], buf_ch2[2], buf_ch3[2]; // buffers (che verranno riempiti dal dma) che conterranno i valori CCR di ciscun timer.
+												 // In base a questi valori si calcolerà la distanza
+} buffer_sonars_t;
+
+
+typedef struct{
+	uint16_t distance1;
+	uint16_t distance2;
+	uint16_t distance3;
+}distances_t;
+
+typedef struct{
+	uint8_t sonar1_ok;
+	uint8_t sonar2_ok;
+	uint8_t sonar3_ok;
+}sonars_flag_t;
+
+
+void SonarHW_GetDistances(uint16_t *d1, uint16_t *d2, uint16_t *d3);
+void scan();
+uint32_t read_distance(uint16_t* buf);
+
+#endif /* INC_SONARS_H_ */
