@@ -1,0 +1,3 @@
+../Core/Src/snapshot/supervisor_snapshot.c:20:6:SupervisorSnapshot_MutexInit	16	static
+../Core/Src/snapshot/supervisor_snapshot.c:27:6:SupervisorSnapshot_Write	24	static
+../Core/Src/snapshot/supervisor_snapshot.c:40:6:SupervisorSnapshot_Read	24	static

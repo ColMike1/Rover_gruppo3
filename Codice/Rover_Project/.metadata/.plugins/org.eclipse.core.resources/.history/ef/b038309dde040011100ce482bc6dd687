@@ -1,0 +1,64 @@
+/*
+ * board_health_snapshot.c
+ *
+ *  Created on: Jan 8, 2026
+ *      Author: Sterm
+ */
+
+#include "log/wcet_monitor.h"
+#include "snapshot/board_health_snapshot.h"
+#include "cmsis_os2.h"
+#include "cmsis_os.h"
+#include "main.h"
+#define MUTEX_TIMEOUT 1
+typedef StaticSemaphore_t osStaticMutexDef_t;
+
+/* Snapshot storage */
+static BoardHealthSnapshot_t snapshot;
+
+/* Mutex */
+osStaticMutexDef_t bh_snap_mutex_cb;
+
+static const osMutexAttr_t snapshot_mutex_attr = {
+    .name = "BoardHealthSnapshotMutex",
+    .cb_mem = &bh_snap_mutex_cb,
+    .cb_size = sizeof(bh_snap_mutex_cb),
+	.attr_bits = osMutexPrioInherit | osMutexRobust
+};
+
+static osMutexId_t snapshot_mutex;
+
+
+void BoardHealthSnapshot_MutexInit(void)
+{
+	if (snapshot_mutex == NULL){
+		snapshot_mutex = osMutexNew(&snapshot_mutex_attr);
+	}
+}
+
+
+void BoardHealthSnapshot_Write(const BoardHealthSnapshot_t *src)
+{
+    if (src == NULL)
+        return;
+
+
+    if( osMutexAcquire(snapshot_mutex, MUTEX_TIMEOUT) == osOK){
+    	snapshot = *src;    /* struct copy */
+    	osMutexRelease(snapshot_mutex);
+    }
+}
+
+void BoardHealthSnapshot_Read(BoardHealthSnapshot_t *dst)
+{
+    if (dst == NULL)
+        return;
+
+
+    if (osMutexAcquire(snapshot_mutex, MUTEX_TIMEOUT) == osOK){
+		uint32_t s = DWT->CYCCNT;
+    	*dst = snapshot;    /* struct copy */
+    	WCET_Update(WCET_MUTEX, DWT->CYCCNT - s);
+    	osMutexRelease(snapshot_mutex);
+    }
+}

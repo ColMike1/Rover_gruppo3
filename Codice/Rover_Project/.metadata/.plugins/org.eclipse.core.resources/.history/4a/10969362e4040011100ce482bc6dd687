@@ -1,0 +1,57 @@
+/*
+ * supervisor_snapshot.c
+ *
+ *  Created on: Jan 11, 2026
+ *      Author: Sterm
+ */
+
+#include "snapshot/supervisor_snapshot.h"
+
+
+
+/* Snapshot storage */
+static SupervisorSnapshot_t snapshot;
+
+static osMutexId_t snapshot_mutex;
+
+
+
+void SupervisorSnapshot_MutexInit(osMutexId_t mutex_handle)
+{
+	if(snapshot_mutex == NULL)
+		snapshot_mutex = mutex_handle;
+}
+
+/* ===== Writer API ===== */
+void SupervisorSnapshot_Write(const SupervisorSnapshot_t *src)
+{
+    if (src == NULL)
+        return;
+
+
+    osMutexAcquire(snapshot_mutex,osWaitForever);
+	__disable_irq();
+	uint32_t s = DWT->CYCCNT;
+    snapshot = *src;    /* struct copy */
+    WCET_Update(WCET_MUTEX, DWT->CYCCNT - s);
+    __enable_irq();
+    osMutexRelease(snapshot_mutex);
+
+}
+
+/* ===== Reader API ===== */
+void SupervisorSnapshot_Read(SupervisorSnapshot_t *dst)
+{
+    if (dst == NULL)
+        return;
+
+
+    osMutexAcquire(snapshot_mutex,osWaitForever);
+	__disable_irq();
+	uint32_t s = DWT->CYCCNT;
+    *dst = snapshot;    /* struct copy */
+    WCET_Update(WCET_MUTEX, DWT->CYCCNT - s);
+    __enable_irq();
+    osMutexRelease(snapshot_mutex);
+
+}

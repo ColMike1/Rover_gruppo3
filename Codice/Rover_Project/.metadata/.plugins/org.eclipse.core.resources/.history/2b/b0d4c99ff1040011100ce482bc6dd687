@@ -1,0 +1,58 @@
+/*
+ * ble_controller_snapshot.c
+ *
+ *  Created on: Jan 14, 2026
+ *      Author: Sterm
+ */
+
+
+#include "snapshot/ble_controller_snapshot.h"
+#include "cmsis_os2.h"
+
+#define MUTEX_TIMEOUT 1
+/* Snapshot storage */
+static BleControllerSnapshot_t snapshot;
+
+/* Mutex */
+static uint8_t snapshot_mutex_cb[osMutexCbSize];
+
+static const osMutexAttr_t snapshot_mutex_attr = {
+    .name = "BleControllerSnapshotMutex",
+    .cb_mem = snapshot_mutex_cb,
+    .cb_size = sizeof(snapshot_mutex_cb),
+	.attr_bits = osMutexPrioInherit | osMutexRobust
+};
+
+static osMutexId_t snapshot_mutex;
+
+
+static void BleControllerSnapshot_MutexInit(void)
+{
+	if (snapshot_mutex == NULL){
+		snapshot_mutex = osMutexNew(&snapshot_mutex_attr);
+	}
+}
+
+
+void BleControllerSnapshot_Write(const BleControllerSnapshot_t *src)
+{
+    if (src == NULL)
+        return;
+
+    if( osMutexAcquire(snapshot_mutex, MUTEX_TIMEOUT) == osOK){
+    	snapshot = *src;    /* struct copy */
+    	osMutexRelease(snapshot_mutex);
+    }
+}
+
+void BleControllerSnapshot_Read(BleControllerSnapshot_t *dst)
+{
+    if (dst == NULL)
+        return;
+
+
+    if (osMutexAcquire(snapshot_mutex, MUTEX_TIMEOUT) == osOK){
+    	*dst = snapshot;    /* struct copy */
+    	osMutexRelease(snapshot_mutex);
+    }
+}

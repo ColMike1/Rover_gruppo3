@@ -1,0 +1,108 @@
+/*
+ * wcet_monitor.c
+ *
+ *  Created on: Jan 21, 2026
+ *      Author: Sterm
+ */
+
+#include "stm32g4xx.h"
+#include "log/wcet_monitor.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <math.h>
+
+
+#define WCET_MAX(a,b)  (((a) > (b)) ? (a) : (b))
+
+static uint32_t wcet_max[WCET_ID_MAX];
+
+void WCET_Update(wcet_id_t id, uint32_t cycles)
+{
+    if (cycles > wcet_max[id])
+        wcet_max[id] = cycles;
+}
+
+//DMA 1: ADC
+//DMA 2: RX
+//DMA 3: TX
+
+//interrupt per uart4
+//interrupt per uart5
+void WCET_Print(void)
+{
+    const double cyc2us = 1e6 / (double)SystemCoreClock;
+
+    /* ================= TASK ================= */
+    printf(
+        "WCET TASK |"
+        "ENCODER=%lu (%.2fus) "
+        "BOARD_HEALTH=%lu (%.2fus) "
+    	"CONTROL=%lu (%.2fus) "
+    	"ACTUATION=%lu (%.2fus) "
+    	"TX=%lu (%.2fus)\r\n ",
+
+        wcet_max[WCET_TASK_ENCODER],
+        wcet_max[WCET_TASK_ENCODER] * cyc2us,
+        wcet_max[WCET_TASK_BOARD_HEALTH],
+        wcet_max[WCET_TASK_BOARD_HEALTH] * cyc2us,
+        wcet_max[WCET_TASK_CONTROL],
+        wcet_max[WCET_TASK_CONTROL] * cyc2us,
+        wcet_max[WCET_TASK_ACTUATION],
+        wcet_max[WCET_TASK_ACTUATION] * cyc2us,
+        wcet_max[WCET_TASK_TX],
+        (wcet_max[WCET_TASK_TX]) * cyc2us
+    );
+
+    /* ================= I2C ISR ================= */
+    printf(
+        "WCET ISR I2C |"
+        "UART4_IRQ=%lu (%.2fus) "
+        "UART5_IRQ=%lu (%.2fus)\r\n",
+        wcet_max[WCET_ISR_UART_4],
+        wcet_max[WCET_ISR_UART_4] * cyc2us,
+        wcet_max[WCET_ISR_UART_5],
+        wcet_max[WCET_ISR_UART_5] * cyc2us
+    );
+
+    /* ================= DMA ISR ================= */
+    printf(
+        "WCET ISR DMA |"
+        "DMA1=%lu (%.2fus) "
+        "DMA2=%lu (%.2fus) "
+        "DMA3=%lu (%.2fus)\r\n",
+        wcet_max[WCET_ISR_DMA_1],
+        wcet_max[WCET_ISR_DMA_1] * cyc2us,
+        wcet_max[WCET_ISR_DMA_2],
+        wcet_max[WCET_ISR_DMA_2] * cyc2us,
+        wcet_max[WCET_ISR_DMA_3],
+        wcet_max[WCET_ISR_DMA_3] * cyc2us
+    );
+
+    /* ================= FEATURE CPU COST (informativo) ================= */
+    printf(
+        "WCET FEATURE CPU |"
+    	"ENCODER=%lu (%.2fus) "
+		"BOARD HEALTHU=%lu (%.2fus) "
+    	"RX =%lu (%.2fus) "
+    	"TX =%lu (%.2fus)\r\n\n\n",
+
+        wcet_max[WCET_TASK_ENCODER],
+        wcet_max[WCET_TASK_ENCODER] * cyc2us,
+
+        wcet_max[WCET_TASK_BOARD_HEALTH] + wcet_max[WCET_ISR_DMA_1],
+        (wcet_max[WCET_TASK_BOARD_HEALTH] + wcet_max[WCET_ISR_DMA_1]) * cyc2us,
+
+        wcet_max[WCET_TASK_CONTROL],
+        (wcet_max[WCET_TASK_CONTROL]) * cyc2us,
+
+        wcet_max[WCET_TASK_ACTUATION] + wcet_max[WCET_ISR_UART_5],
+        (wcet_max[WCET_TASK_ACTUATION] + wcet_max[WCET_ISR_UART_5]) * cyc2us,
+
+        wcet_max[WCET_TASK_RX] + wcet_max[WCET_ISR_DMA_2] + wcet_max[WCET_ISR_UART_4],
+        (wcet_max[WCET_TASK_RX] + wcet_max[WCET_ISR_DMA_2] + wcet_max[WCET_ISR_UART_4]) * cyc2us,
+
+        wcet_max[WCET_TASK_TX],
+        (wcet_max[WCET_TASK_TX]) * cyc2us
+    );
+}
+

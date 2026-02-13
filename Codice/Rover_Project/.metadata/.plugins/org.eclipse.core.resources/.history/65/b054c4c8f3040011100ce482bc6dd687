@@ -1,0 +1,31 @@
+/*
+ * sonar_snapshot.h
+ *
+ *  Created on: Jan 14, 2026
+ *      Author: Sterm
+ */
+
+#ifndef INC_SNAPSHOT_SONAR_SNAPSHOT_H_
+#define INC_SNAPSHOT_SONAR_SNAPSHOT_H_
+
+#include <stdint.h>
+#include "cmsis_os.h"
+
+
+typedef struct
+{
+  uint16_t dist_cm[3];
+
+
+  uint32_t task_last_run_ms;     /* ultima esecuzione del task */
+  uint32_t data_last_valid_ms[3];  /* ultimo istante in cui i dati sono validi */
+} SonarSnapshot_t;
+
+void SonarSnapshot_MutexInit(osMutexId_t mutex_handle);
+void SonarSnapshot_Write(const SonarSnapshot_t *src);
+void SonarSnapshot_Read(SonarSnapshot_t *dst);
+
+
+
+
+#endif /* INC_SNAPSHOT_SONAR_SNAPSHOT_H_ */

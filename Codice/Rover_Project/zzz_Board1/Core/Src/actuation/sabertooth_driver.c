@@ -1,0 +1,83 @@
+/*
+ * sabertooth_driver.c
+ *
+ *  Created on: Jan 12, 2026
+ *      Author: Sterm
+ */
+
+
+#include "actuation/sabertooth_driver.h"
+#include "stm32g4xx_hal.h"
+#include <math.h>
+#include <string.h>
+
+/* UART generata da CubeMX */
+extern UART_HandleTypeDef huart5;
+
+
+static uint8_t saber_tx[16];
+static volatile uint8_t tx_busy = 0;
+
+
+/* === Checksum Sabertooth === */
+static inline uint8_t Saber_Checksum(uint8_t a, uint8_t b, uint8_t c)
+{
+    return (a + b + c) & 0x7F;
+}
+
+/* === Prepara pacchetto singolo === */
+static void Prepare_Saber_Packet(uint8_t *dest,
+                                 uint8_t addr,
+                                 uint8_t cmd,
+                                 float value)
+{
+    int speed = (int)lroundf(value);
+
+    if (speed > SABER_MAX_SPEED) speed = SABER_MAX_SPEED;
+    if (speed < 0)               speed = 0;
+
+    dest[0] = addr;
+    dest[1] = cmd;
+    dest[2] = (uint8_t)speed;
+    dest[3] = Saber_Checksum(dest[0], dest[1], dest[2]);
+}
+
+void Sabertooth_Init(void)
+{
+	uint8_t saber_timeout_pkt[4];
+
+    Prepare_Saber_Packet(saber_timeout_pkt, SABER_BACK_ADDR, 14, 3);
+    HAL_UART_Transmit(&huart5, saber_timeout_pkt, 4, HAL_MAX_DELAY);
+
+    Prepare_Saber_Packet(saber_timeout_pkt, SABER_FRONT_ADDR, 14, 3);
+    HAL_UART_Transmit(&huart5, saber_timeout_pkt, 4, HAL_MAX_DELAY);
+}
+
+
+void Sabertooth_ApplyOutputs(float usx_a, float udx_a, float usx_p, float udx_p)
+{
+    if (tx_busy)
+        return;
+
+    float s_sx_p = (fabsf(usx_p) / 12) * 127.0f;
+    float s_dx_p = (fabsf(udx_p) / 12) * 127.0f;
+    float s_sx_a = (fabsf(usx_a) / 12) * 127.0f;
+    float s_dx_a = (fabsf(udx_a) / 12) * 127.0f;
+
+    Prepare_Saber_Packet(&saber_tx[0],  SABER_BACK_ADDR,  (usx_p >= 0.0f ? 0 : 1), s_sx_p);
+    Prepare_Saber_Packet(&saber_tx[4],  SABER_BACK_ADDR,  (udx_p >= 0.0f ? 4 : 5), s_dx_p);
+    Prepare_Saber_Packet(&saber_tx[8],  SABER_FRONT_ADDR, (usx_a >= 0.0f ? 0 : 1), s_sx_a);
+    Prepare_Saber_Packet(&saber_tx[12], SABER_FRONT_ADDR, (udx_a >= 0.0f ? 4 : 5), s_dx_a);
+
+    tx_busy = 1;
+    if (HAL_UART_Transmit_IT(&huart5, saber_tx, sizeof(saber_tx)) != HAL_OK)
+        tx_busy = 0;
+}
+
+
+void SabertoothCallback()
+{
+    tx_busy = 0;
+}
+
+

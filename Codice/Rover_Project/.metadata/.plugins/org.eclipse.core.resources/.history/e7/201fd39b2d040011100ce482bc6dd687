@@ -1,0 +1,57 @@
+/*
+ * rx_snapshot.c
+ *
+ *  Created on: Jan 18, 2026
+ *      Author: Sterm
+ */
+
+#include "snapshot/rx_snapshot.h"
+#include "cmsis_os2.h"
+
+/* Snapshot storage */
+static RxSnapshot_t snapshot;
+
+/* Mutex */
+static uint8_t snapshot_mutex_cb[osMutexCbSize];
+
+static const osMutexAttr_t snapshot_mutex_attr = {
+    .name = "RxSnapshotMutex",
+    .cb_mem = snapshot_mutex_cb,
+    .cb_size = sizeof(snapshot_mutex_cb),
+	.attr_bits = osMutexPrioInherit | osMutexRobust
+};
+
+static osMutexId_t snapshot_mutex;
+
+
+
+static void RxSnapshot_MutexInit(void)
+{
+	if (snapshot_mutex == NULL){
+		snapshot_mutex = osMutexNew(&snapshot_mutex_attr);
+	}
+}
+
+/* ===== Writer ===== */
+void RxSnapshot_Write(const RxSnapshot_t *src)
+{
+    if (src == NULL)
+        return;
+
+
+    osMutexAcquire(snapshot_mutex, osWaitForever);
+    snapshot = *src;    /* struct copy */
+    osMutexRelease(snapshot_mutex);
+}
+
+/* ===== Reader ===== */
+void RxSnapshot_Read(RxSnapshot_t *dst)
+{
+    if (dst == NULL)
+        return;
+
+
+    osMutexAcquire(snapshot_mutex, osWaitForever);
+    *dst = snapshot;    /* struct copy */
+    osMutexRelease(snapshot_mutex);
+}

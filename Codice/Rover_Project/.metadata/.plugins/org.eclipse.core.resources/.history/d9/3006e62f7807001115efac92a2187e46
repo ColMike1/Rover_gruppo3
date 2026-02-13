@@ -1,0 +1,57 @@
+/*
+ * imu_task.c
+ *
+ *  Created on: Jan 14, 2026
+ *      Author: Sterm
+ */
+
+#define IMU_I2C_TIMEOUT_MS   10
+#include "IMU/imu.h"
+#include "snapshot/imu_snapshot.h"
+
+#include "cmsis_os2.h"
+
+
+/* ===== API ===== */
+
+void IMU_TaskInit(void)
+{
+    /* Init driver IMU */
+	//osDelay(100);
+	IMU_I2C_Init();
+}
+
+void IMU_TaskStep(void)
+{
+    static IMUSnapshot_t snap;
+
+    /* Di default: nessun dato nuovo utilizzabile in questo ciclo */
+    uint32_t now = osKernelGetTickCount();
+
+    snap.task_last_run_ms = now;
+
+    /* ===== Update MPU ===== */
+    IMUI2CStatus_t st = IMU_I2C_ReadBlocking();
+
+    if (st == IMU_I2C_COMPLETE)
+    {
+
+        /* Timestamp = momento di PRODUZIONE del dato */
+        snap.data_last_valid_ms = now;
+        /* ===== Accelerometer (non usato) ===== */
+        IMU_I2C_GetAccel(&snap.ax_g, &snap.ay_g, &snap.az_g);
+
+        /* ===== Gyroscope ===== */
+        IMU_I2C_GetGyro(&snap.gx_dps,
+                        &snap.gy_dps,
+                        &snap.gz_dps);
+
+        snap.yaw = IMU_I2C_GetYaw();
+
+        /* ===== Temperature (non usata) ===== */
+        snap.temperature_degC = IMU_I2C_GetTemperature();
+    }
+
+    /* ===== Publish snapshot ===== */
+    IMUSnapshot_Write(&snap);
+}

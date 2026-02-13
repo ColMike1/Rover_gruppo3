@@ -1,0 +1,84 @@
+/*
+ * supervisor_task.c
+ *
+ *  Created on: Feb 1, 2026
+ *      Author: Sterm
+ */
+
+
+#include "supervisor/supervisor_task.h"
+
+#include "snapshot/board_health_snapshot.h"
+#include "snapshot/encoder_snapshot.h"
+#include "snapshot/rx_snapshot.h"
+#include "snapshot/supervisor_snapshot.h"
+
+#include "shared_resources/supervisor_command.h"
+#include "shared_resources/imu_coherence_status.h"
+
+#include "supervisorB1.h"
+#include "rtwtypes.h"
+#include <stdbool.h>
+#include "cmsis_os2.h"
+
+void Supervisor_TaskInit(void){
+	SupervisorB1_initialize();
+}
+
+void Supervisor_TaskStep(void)
+{
+	static BoardHealthSnapshot_t bh;
+	static EncoderSnapshot_t enc;
+	static RxSnapshot_t rx;
+	static SupervisorSnapshot_t sup;
+	static uint8_t last_sup_counter ;
+	static uint32_t last_sup_update_ms;
+
+		BoardHealthSnapshot_Read(&bh);
+		EncoderSnapshot_Read(&enc);
+		RxSnapshot_Read(&rx);
+
+	uint32_t now = osKernelGetTickCount();
+
+	CommPayloadB2_t payload = rx.payload;
+	//printf("%.2f\r\n",rx.payload.yaw);
+
+	if (payload.alive_counter != last_sup_counter) {
+	    last_sup_counter = payload.alive_counter;
+	    last_sup_update_ms = now;
+	}
+
+
+
+	SupervisorB1_U.Board2_Data = rx;
+	SupervisorB1_U.Board_Health = bh;
+	SupervisorB1_U.Encoder = enc;
+	SupervisorB1_U.last_valid_b2_ms = last_sup_update_ms;
+	SupervisorB1_U.now_ms = now;
+
+	SupervisorB1_step();
+
+	sup.critical_mask = SupervisorB1_Y.critical_mask;
+	sup.degraded_mask = SupervisorB1_Y.degraded_mask;
+	sup.speed_ref_rpm = SupervisorB1_Y.v_ref;
+	sup.steering_cmd = SupervisorB1_Y.omega_ref;
+
+	sup.current_action = SupervisorB1_Y.current_action;
+	if(SupervisorB1_Y.actuate_emergency_stop){
+		//abbassa s2
+	}
+
+	if (SupervisorB1_Y.give_b2_actuation){
+		//write pin basso del relè
+	}
+	else{
+		//write pin alto del relè
+	}
+
+	printf("current yaw: %.2f  |  target yaw: %.2f\r\n\r\n", SupervisorB1_Y.current_yaw_seen, SupervisorB1_Y.target_angle);
+	sup.alive_counter ++;
+	sup.task_last_run_ms = now;
+
+	SupervisorSnapshot_Write(&sup);
+
+}

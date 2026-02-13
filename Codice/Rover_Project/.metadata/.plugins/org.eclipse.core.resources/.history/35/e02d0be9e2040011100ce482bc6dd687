@@ -1,0 +1,62 @@
+/*
+ * encoder_snapshot.c
+ *
+ *  Created on: Jan 8, 2026
+ *      Author: Sterm
+ */
+
+
+#include "snapshot/encoder_snapshot.h"
+#include "cmsis_os2.h"
+#include "cmsis_os.h"
+#define MUTEX_TIMEOUT 1
+typedef StaticSemaphore_t osStaticMutexDef_t;
+
+/* Snapshot storage */
+static EncoderSnapshot_t snapshot;
+
+/* Mutex */
+osStaticMutexDef_t enc_snap_mutex_cb;
+
+static const osMutexAttr_t snapshot_mutex_attr = {
+    .name = "EncoderSnapshotMutex",
+    .cb_mem = &enc_snap_mutex_cb,
+    .cb_size = sizeof(enc_snap_mutex_cb),
+	.attr_bits = osMutexPrioInherit | osMutexRobust
+};
+
+static osMutexId_t snapshot_mutex;
+
+
+void EncoderSnapshot_MutexInit(void)
+{
+	if (snapshot_mutex == NULL){
+		snapshot_mutex = osMutexNew(&snapshot_mutex_attr);
+	}
+}
+
+/* ===== Writer API ===== */
+void EncoderSnapshot_Write(const EncoderSnapshot_t *src)
+{
+    if (src == NULL)
+        return;
+
+
+    if( osMutexAcquire(snapshot_mutex, MUTEX_TIMEOUT) == osOK){
+    	snapshot = *src;    /* struct copy */
+    	osMutexRelease(snapshot_mutex);
+    }
+}
+
+/* ===== Reader API ===== */
+void EncoderSnapshot_Read(EncoderSnapshot_t *dst)
+{
+    if (dst == NULL)
+        return;
+
+
+    if (osMutexAcquire(snapshot_mutex, MUTEX_TIMEOUT) == osOK){
+    	*dst = snapshot;    /* struct copy */
+    	osMutexRelease(snapshot_mutex);
+    }
+}
