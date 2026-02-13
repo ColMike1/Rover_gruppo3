@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  13 FEB 2026 15:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.22)  13 FEB 2026 16:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -609,33 +609,41 @@ Overfull \hbox (80.84581pt too wide) in paragraph at lines 587--608
  [][] 
  []
 
-<images/SupervisoreB1/decisione_vel_rot.png, id=117, 1244.39906pt x 382.42876pt>
+<images/SupervisoreB1/decisione_vel_rot.png, id=117, 1374.63562pt x 623.32875pt>
 File: images/SupervisoreB1/decisione_vel_rot.png Graphic file (type png)
 <use images/SupervisoreB1/decisione_vel_rot.png>
 Package pdftex.def Info: images/SupervisoreB1/decisione_vel_rot.png  used on input line 616.
-(pdftex.def)             Requested size: 390.0pt x 119.85297pt.
+(pdftex.def)             Requested size: 390.0pt x 176.84209pt.
 
 
 [21 <./images/SupervisoreB1/costruzione_maschere.png>]
+<images/SupervisoreB1/scaling_Riferimenti.png, id=122, 571.38469pt x 485.56406pt>
+File: images/SupervisoreB1/scaling_Riferimenti.png Graphic file (type png)
+<use images/SupervisoreB1/scaling_Riferimenti.png>
+Package pdftex.def Info: images/SupervisoreB1/scaling_Riferimenti.png  used on input line 627.
+(pdftex.def)             Requested size: 312.00119pt x 265.14209pt.
 
-[22 <./images/SupervisoreB1/decisione_vel_rot.png>] (BozzaSup2_Sonsars.aux)
+
+[22 <./images/SupervisoreB1/decisione_vel_rot.png>]
+
+[23 <./images/SupervisoreB1/scaling_Riferimenti.png>] (BozzaSup2_Sonsars.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-11>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5293 strings out of 468149
- 101411 string characters out of 5431082
- 502751 words of memory out of 5000000
- 33838 multiletter control sequences out of 15000+600000
+ 5305 strings out of 468149
+ 101984 string characters out of 5431082
+ 502776 words of memory out of 5000000
+ 33850 multiletter control sequences out of 15000+600000
  634461 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  67i,10n,77p,392b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\miche\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on BozzaSup2_Sonsars.pdf (22 pages, 1789366 bytes).
+Output written on BozzaSup2_Sonsars.pdf (23 pages, 1855761 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
+ 174 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 116 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

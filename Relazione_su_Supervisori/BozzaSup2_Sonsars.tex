@@ -447,7 +447,7 @@ I segnali in output che fornisce sono:
     \label{fig:gestione_faults}
 \end{figure}
 
-L'output di questo chart è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} o
+L'output di questo sottosistema è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} o
 \textit{degradata} specifica proveniente dalla lettura degli encoder, batteria, temperatura e comunicazione con la Board2. Di seguito si
  descrivono i valori che questi segnali possono assumere e le condizioni che portano a tali valori.
 
@@ -610,7 +610,7 @@ Il bit di ogni maschera rappresenta un'anomalia specifica, come descritto nella 
 
 
 \subsection{Calcolo riferimenti}
-Il chart per il calcolo dei riferimenti di velocità lineare e angolare del rover è mostrato in Figura~\ref{fig:calcolo_riferimenti}.
+Il sottomodello per il calcolo dei riferimenti di velocità lineare e angolare del rover è mostrato in Figura~\ref{fig:calcolo_riferimenti}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/SupervisoreB1/decisione\_vel\_rot}
@@ -618,9 +618,16 @@ Il chart per il calcolo dei riferimenti di velocità lineare e angolare del rove
     \label{fig:calcolo_riferimenti}
 \end{figure}
 
-
-DESCRIZIONE  DA AGGIORNARE PERCHE' IL SUPERVSORE E' CAMBIATO
-
+In particolare i riferimenti di velocità lineare e angolare del rover vengono calcolati in funzione dei comandi ricevuti dalla Board2 e delle condizioni di fault rilevate.
+In assenza di anomalie, i riferimenti vengono calcolati direttamente a partire dai comandi ricevuti dalla Board2, in particolare, il riferimento di velocità lineare è calcolato 
+a partire dal comando $y\_norm$ e il riferimento di velocità angolare è calcolato a partire dal comando $x\_norm$. Nel caso in cui siano rilevate anomalie, i riferimenti vengono
+calcolati in modo da ridurre la velocità del rover o addirittura fermarlo, a seconda della gravità dell'anomalia rilevata. I riferimenti venogno scalati come mostrato in Figura~\ref{fig:scaling_riferimenti}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/scaling\_Riferimenti}
+    \caption{\small Scaling dei riferimenti in base alla gravità dell'anomalia rilevata.}
+    \label{fig:scaling_riferimenti}
+\end{figure}
 
 
 
