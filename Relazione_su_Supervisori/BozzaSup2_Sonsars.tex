@@ -370,11 +370,11 @@ Nel seguito verranno descritti i segnali di input e output del supervisore, succ
 
 \subsection{Input}
 I segnali in input che riceve sono:
-\begin{itemize}
+\begin{itemize}  
     \item \textbf{Board2\_Data}: rappresenta i dati provenienti dalla Board2. Quelli utilizzati dal supervisore sono:
     \begin{itemize}
         \item \textit{command}: rappresenta il comando in uscita dal supervisore della Board2, che può assumere i seguenti valori:
-            \begin{figure}[H]
+            \begin{figure}[H] 
                 \centering
                 \includegraphics[width=0.3\textwidth]{images/SupervisoreB1/CMD\_BOARD2}
                 \caption{Comandi in uscita dal supervisore della Board2.}
@@ -400,8 +400,8 @@ I segnali in input che riceve sono:
             \caption{Struttura dati Encoder.}
             \label{fig:encoder_struct}
         \end{figure}
-    \item \textbf{Now}: Rappresenta il tempo corrente in millisecondi.
-    \item \textbf{Last\_valid\_b2\_ms}: Rappresenta il tempo in millisecondi dell'ultimo dato valido ricevuto dalla Board2.
+    \item \textbf{now\_ms}: Rappresenta il tempo corrente in millisecondi.
+    \item \textbf{last\_valid\_b2\_ms}: Rappresenta il tempo in millisecondi dell'ultimo dato valido ricevuto dalla Board2.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -430,6 +430,10 @@ I segnali in output che fornisce sono:
             \label{tab:fault_mapping}
         \end{table}
     \item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se la Board2 deve essere autorizzata a muovere il rover.
+    \item \textbf{actuate\_emergency\_stop}: rappresenta un segnale booleano che indica se il rover deve essere fermato immediatamente per evitare collisioni.
+    \item \textbf{current\_action}: rappresenta un segnale che indica l'azione attualmente intrapresa dal supervisore.
+        
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -615,7 +619,7 @@ Il chart per il calcolo dei riferimenti di velocità lineare e angolare del rove
 \end{figure}
 
 
-DESCRIZIONE DA AGGIORNARE PERCHE' IL SUPERVSORE E' CAMBIATO
+DESCRIZIONE  DA AGGIORNARE PERCHE' IL SUPERVSORE E' CAMBIATO
 
 
 
