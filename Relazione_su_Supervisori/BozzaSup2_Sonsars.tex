@@ -73,12 +73,37 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Funzionamento generale di ciascuna board}
 \subsection{Interazione tra Task e Meccanismo di Snapshot}
 Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
-variabili globali condivise. Nello specifico, la Figura~\ref{fig:funzionamento_generale} illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit}. 
-Al termine della propria esecuzione, ogni task può aggiornare tali snapshot, rendendo i nuovi dati disponibili agli altri processi. Ad esempio, il task \textit{SupervisorB1} 
-aggiorna lo snapshot \textbf{supervisor\_snapshot}, che viene poi utilizzato dal task \textit{Transmit} per l'invio dei dati verso la Board2.
+variabili globali condivise. Si consideri, ad esempio, la Figura~\ref{fig:funzionamento_generale} che illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit}. 
+Al termine della propria esecuzione, ogni task può aggiornare tali snapshot, rendendo i nuovi dati disponibili agli altri task. Nell'esempio, il task \textit{SupervisorB1} 
+aggiorna lo snapshot \textbf{supervisor\_snapshot}, che viene poi utilizzato dal task \textit{Transmit} per l'invio dei dati verso la Board2. Allo stesso modo, la Board 2 tiene legge
+i scrive i propri snapshot, come illustrato nella Figura~\ref{fig:funzionamento_generale_b2}.
 
 Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio temporale:
 
@@ -95,204 +120,42 @@ Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio te
     \label{fig:funzionamento_generale}
 \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Supervisore Board 2}
-
-\subsection{Panoramica generale}
-Il supervisore della Board 2 è implementato come un modulo Simulink denominato \textbf{SupervisorB2}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB2_block}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/SupervisoreBoard2_InputOutput}
-    \caption{Schema a blocchi del modulo SupervisorB2.}
-    \label{fig:supervisorB2_block} 
-\end{figure}
-Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
-In particolare, esso è composto da 3 parti principali:
-\begin{itemize}
-    \item \textbf{Gestione Faults}: si occupa di rilevare e gestire eventuali anomalie nei dati ricevuti dalla Board1, dagli encoder delle ruote, dai sensori di temperatura e batteria.
-    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover, in base alle condizioni di fault rilevate.
-    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di gestione faults e le codifica in due maschere di errore (critica e degradata).
-    \item \textbf{Calcolo Riferimenti}: calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
-\end{itemize}
-Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le tre parti principali del supervisore descritte sopra.
-
-
-
-
-\subsection{Input}
-I segnali in input che riceve sono:
-
-
-
-
-
-
-
-
-
-\subsection{Output}
-I segnali in output che fornisce sono:
-
-
-
-\subsection{Rilevamento ostacoli}
-Come da specifiche, il comportamento del rover in presenza di ostacoli, deve essere regolato sulla base delle condizioni in cui può trovarsi:
-\begin{enumerate}
-    \item \textit{Stato non degradato}
-    \begin{itemize}
-        \item \textbf{Distanza dell'ostacolo $\le$ 70 cm:} il rover deve fermarsi immediatamente per evitare collisioni.
-        \item \textbf{Ostacolo a distanza $>$ 100 cm in movimento tra due sonar:} il rover deve determinare la direzione dell'ostacolo e deve deviare il 
-        percorso di conseguenza in direzione del sonar che per prima ha rilveato l'ostacolo.
-    \end{itemize}
-    \item \textit{Stato degradato}
-    \begin{itemize}
-        \item \textbf{Distanza dell'ostacolo $\le$ 300 cm:} il rover deve fermarsi immediatamente per evitare collisioni.
-    \end{itemize}
-\end{enumerate}
-
-In seguito verranno mostrati i chart realizzati per la gestione delle due casistiche.
-
-
-\subsubsection{Gestione ostacoli con sistema in stato \textit{non degradato}}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2}
-    \caption{Logica di gestione degli ostacoli in stato non degradato.}
-    \label{fig:logica_gestione_ostacoli}
-\end{figure}
-
-Il chart per la gestione degli ostacoli in stato non degradato è mostrato in Figura~\ref{fig:chart_non_degradato}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato}
-    \caption{Chart di gestione ostacoli in stato non degradato.}
-    \label{fig:chart_non_degradato}
-\end{figure}
-
-In particolare, il chart è composto da 2 stati paralleli: \textit{Sonars} e \textit{B2Decisione}
-
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState}
-        \caption{Stato parallelo Sonars}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{0.45\textwidth}
-        
-        \includegraphics[width=\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState}
-        \caption{Stato parallelo B2Decisione}
-    \end{subfigure}
-    
-    \caption{Stati paralleli del chart in stato non degradato.}
-    \label{fig:stati_paralleli}
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/funzGener_B2}
+    \caption{Funzionamento generale del software di Board 2.}
+    \label{fig:funzionamento_generale_b2}
 \end{figure}
 
 
 
-\begin{enumerate}
-    \item \textbf{\textit{B2Decisions}}: 
-        Lo stato parallelo \textit{B2Decisione} è dipendente dallo stato $Sonars$ in quanto le sue transizioni vengono attivate da segnali provenienti da $Sonars$. In base ai segnali
-        ricevuti, è capace di settare la variabile di output del chart, variabile che indica la decisione presa dal supervisore.
-        Quindi, in questo stato si determina l'output del chart, che è un numero che varia da $0$ a $4$.
-        Le azioni possibili includono l'arresto immediato del rover o la deviazione del percorso in base alla posizione dell'ostacolo. In quest'ultimo caso, la deviazione dura fintanto che il rover non ruota
-        di 45° rispetto alla direzione iniziale, verso la direzione del sonar che per primo ha rilevato l'ostacolo.
-    \item \textbf{\textit{Sonars}}: 
-        All'interno di questo stato parallelo sono presenti altri \textit{3} stati paralleli.
-        \begin{enumerate}
-            \item \textbf{\textit{distance\_70}}: Rappresenta la condizione in cui uno dei sonar rileva un ostacolo a una distanza $\leq 70$ cm.
-                \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70}
-                \caption{Stato parallelo per la gestione di un ostacolo a distanza $\le$ 70 cm.}
-                \label{fig:sonars_non_degradato}
-                \end{figure}
-        
-        In questo stato quando uno dei sonar rileva un ostacolo a una distanza inferiore o uguale a 70 cm, viene attivata una transizione che porta allo stato di arresto immediato del rover.
-        In particolare, quando un sonar rileva la presenza di un ostacolo a distanza $\leq 70$ cm, viene inviato un segnale \textbf{Emergency} allo stato parallelo \textit{B2Decisione} per fermare il rover. 
-        B2Decision utilizza questo segnale per portarsi nello stato in cui l'output del chart prevede lo stop.
-            
-            \item \textbf{\textit{distance\_gt70 ---- timers}}: 
-                Questi due stati insieme permettono il rilevamento di un ostacolo in movimento tra le coppie di sonar 
-                \begin{itemize}
-                    \item \textit{S1-S2} (tra sonar di sinistra e sonar centrale)
-                    \item \textit{S2-S1} (tra sonar centrale e sonar di sinistra)
-                    \item \textit{S2-S3} (tra sonar centrale e sonar di destra)
-                    \item \textit{S3-S2} (tra sonar di destra e sonar centrale)  
-                \end{itemize}
-                
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers}
-                    \caption{Stato parallelo per la gestione di un ostacolo in movimento a distanza $>$ 70 cm.}
-                    \label{fig:stati_gestione_timers}
-                \end{figure}
-                Nello stato \textit{distance\_gt70} sono presenti $3$ stati paralleli, \textit{Waiting\_S1}, \textit{Waiting\_S2}, \textit{Waiting\_S3}, uno per ogni sonar.
-                
-                Di seguito si analizza la dinamica di rilevamento di un ostacolo che si sposta dal sonar $S1$ verso il sonar $S2$.
-                Tale logica è da considerarsi valida per ogni coppia di sensori precedentemente elencata. 
-                
-                Si assume, come condizione necessaria, l'assenza di ostacoli a una distanza inferiore a $70$ cm; in caso contrario, il sistema non procederebbe al rilevamento di oggetti in movimento.
-                
-                \begin{enumerate}
-                    \item \textbf{Attivazione ($S1$)}: Quando il sonar $S1$ rileva un oggetto entro il range $100$–$300$ cm, la variabile $obj1Detected$ viene impostata a $1$ \textbf{(fronte di salita)}.
-                    \item \textbf{Transizione e Timing}: Nel momento in cui l'oggetto esce dal campo d'azione di $S1$, la variabile $obj1Detected$ torna a $0$ \textbf{(fronte di discesa)}.
-                    Contestualmente, lo stato timerSonar12 del modulo timers avvia un conteggio di $3$ secondi.
-                    \item \textbf{Verifica ($S2$)}: Se il sonar $S2$ rileva l'ostacolo (sempre tra $100$ e $300$ cm) entro la finestra temporale dei $3$ secondi, viene inviato il segnale $moveToS1$ allo 
-                    stato parallelo $B2Decision$. Qualora il timer scada senza alcun rilevamento da parte di $S2$, non viene trasmesso alcun segnale.
-                \end{enumerate}
-            \end{enumerate}
-\end{enumerate}
-
-\subsubsection{Gestione ostacoli con sistema in stato $degradato$}
-
-Il chart per la gestione degli ostacoli in stato degradato è mostrato in Figura~\ref{fig:chart_degradato}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato}
-    \caption{Chart di gestione ostacoli in stato degradato.}
-    \label{fig:chart_degradato}
-\end{figure}
 
 
 
-In questo caso, la logica di gestione degli ostacoli è semplificata rispetto allo stato non degradato.
-Infatti, l'unica condizione considerata è la presenza di un ostacolo a una distanza inferiore o uguale a $300$ cm.
-Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una transizione che porta l'uscita del supervisore all'arresto immediato del rover.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -556,7 +419,7 @@ Tale meccanismo agisce come un dispositivo di sicurezza hardware basato sullo st
 \begin{figure}[H]
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board1}
-        \caption{\small{Il comando di Board1 impedisce a Board2 di muovere il rover.}}
+        \caption{\small{Il comando di Board1 chiude il rele impedendo a Board2 di muovere il rover.}}
         \label{fig:rele_b1}
     \end{subfigure}
     \hfill
@@ -639,6 +502,214 @@ particolare utilizzando la variabile $safety\_status$ che viene calcolata a part
     \caption{\small Calcolo della variabile safety\_status a partire dalle maschere di errore critiche e degradate di entrambe le Board.}
     \label{fig:calcolo_safety_status}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Supervisore Board 2}
+
+\subsection{Panoramica generale}
+Il supervisore della Board 2 è implementato come un modulo Simulink denominato \textbf{SupervisorB2}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB2_block}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/SupervisoreBoard2_InputOutput}
+    \caption{Schema a blocchi del modulo SupervisorB2.}
+    \label{fig:supervisorB2_block} 
+\end{figure}
+Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
+In particolare, esso è composto da 3 parti principali:
+\begin{itemize}
+    \item \textbf{Gestione Faults}: si occupa di rilevare e gestire eventuali anomalie nei dati ricevuti dalla Board1, dagli encoder delle ruote, dai sensori di temperatura e batteria.
+    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover, in base alle condizioni di fault rilevate.
+    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di gestione faults e le codifica in due maschere di errore (critica e degradata).
+    \item \textbf{Calcolo Riferimenti}: calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
+\end{itemize}
+Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le tre parti principali del supervisore descritte sopra.
+
+
+
+
+\subsection{Input}
+I segnali in input che riceve sono:
+
+
+
+
+
+
+
+
+
+\subsection{Output}
+I segnali in output che fornisce sono:
+
+
+
+\subsection{Rilevamento ostacoli}
+Come da specifiche, il comportamento del rover in presenza di ostacoli, deve essere regolato sulla base delle condizioni in cui può trovarsi:
+\begin{enumerate}
+    \item \textit{Stato non degradato}
+    \begin{itemize}
+        \item \textbf{Distanza dell'ostacolo $\le$ 70 cm:} il rover deve fermarsi immediatamente per evitare collisioni.
+        \item \textbf{Ostacolo a distanza $>$ 100 cm in movimento tra due sonar:} il rover deve determinare la direzione dell'ostacolo e deve deviare il 
+        percorso di conseguenza in direzione del sonar che per prima ha rilveato l'ostacolo.
+    \end{itemize}
+    \item \textit{Stato degradato}
+    \begin{itemize}
+        \item \textbf{Distanza dell'ostacolo $\le$ 300 cm:} il rover deve fermarsi immediatamente per evitare collisioni.
+    \end{itemize}
+\end{enumerate}
+
+In seguito verranno mostrati i chart realizzati per la gestione delle due casistiche.
+
+
+\subsubsection{Gestione ostacoli con sistema in stato \textit{non degradato}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2}
+    \caption{Logica di gestione degli ostacoli in stato non degradato.}
+    \label{fig:logica_gestione_ostacoli}
+\end{figure}
+
+Il chart per la gestione degli ostacoli in stato non degradato è mostrato in Figura~\ref{fig:chart_non_degradato}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato}
+    \caption{Chart di gestione ostacoli in stato non degradato.}
+    \label{fig:chart_non_degradato}
+\end{figure}
+
+In particolare, il chart è composto da 2 stati paralleli: \textit{Sonars} e \textit{B2Decisione}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState}
+        \caption{Stato parallelo Sonars}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        
+        \includegraphics[width=\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState}
+        \caption{Stato parallelo B2Decisione}
+    \end{subfigure}
+    
+    \caption{Stati paralleli del chart in stato non degradato.}
+    \label{fig:stati_paralleli}
+\end{figure}
+
+
+
+\begin{enumerate}
+    \item \textbf{\textit{B2Decisions}}: 
+        Lo stato parallelo \textit{B2Decisione} è dipendente dallo stato $Sonars$ in quanto le sue transizioni vengono attivate da segnali provenienti da $Sonars$. In base ai segnali
+        ricevuti, è capace di settare la variabile di output del chart, variabile che indica la decisione presa dal supervisore.
+        Quindi, in questo stato si determina l'output del chart, che è un numero che varia da $0$ a $4$.
+        Le azioni possibili includono l'arresto immediato del rover o la deviazione del percorso in base alla posizione dell'ostacolo. In quest'ultimo caso, la deviazione dura fintanto che il rover non ruota
+        di 45° rispetto alla direzione iniziale, verso la direzione del sonar che per primo ha rilevato l'ostacolo.
+    \item \textbf{\textit{Sonars}}: 
+        All'interno di questo stato parallelo sono presenti altri \textit{3} stati paralleli.
+        \begin{enumerate}
+            \item \textbf{\textit{distance\_70}}: Rappresenta la condizione in cui uno dei sonar rileva un ostacolo a una distanza $\leq 70$ cm.
+                \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70}
+                \caption{Stato parallelo per la gestione di un ostacolo a distanza $\le$ 70 cm.}
+                \label{fig:sonars_non_degradato}
+                \end{figure}
+        
+        In questo stato quando uno dei sonar rileva un ostacolo a una distanza inferiore o uguale a 70 cm, viene attivata una transizione che porta allo stato di arresto immediato del rover.
+        In particolare, quando un sonar rileva la presenza di un ostacolo a distanza $\leq 70$ cm, viene inviato un segnale \textbf{Emergency} allo stato parallelo \textit{B2Decisione} per fermare il rover. 
+        B2Decision utilizza questo segnale per portarsi nello stato in cui l'output del chart prevede lo stop.
+            
+            \item \textbf{\textit{distance\_gt70 ---- timers}}: 
+                Questi due stati insieme permettono il rilevamento di un ostacolo in movimento tra le coppie di sonar 
+                \begin{itemize}
+                    \item \textit{S1-S2} (tra sonar di sinistra e sonar centrale)
+                    \item \textit{S2-S1} (tra sonar centrale e sonar di sinistra)
+                    \item \textit{S2-S3} (tra sonar centrale e sonar di destra)
+                    \item \textit{S3-S2} (tra sonar di destra e sonar centrale)  
+                \end{itemize}
+                
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers}
+                    \caption{Stato parallelo per la gestione di un ostacolo in movimento a distanza $>$ 70 cm.}
+                    \label{fig:stati_gestione_timers}
+                \end{figure}
+                Nello stato \textit{distance\_gt70} sono presenti $3$ stati paralleli, \textit{Waiting\_S1}, \textit{Waiting\_S2}, \textit{Waiting\_S3}, uno per ogni sonar.
+                
+                Di seguito si analizza la dinamica di rilevamento di un ostacolo che si sposta dal sonar $S1$ verso il sonar $S2$.
+                Tale logica è da considerarsi valida per ogni coppia di sensori precedentemente elencata. 
+                
+                Si assume, come condizione necessaria, l'assenza di ostacoli a una distanza inferiore a $70$ cm; in caso contrario, il sistema non procederebbe al rilevamento di oggetti in movimento.
+                
+                \begin{enumerate}
+                    \item \textbf{Attivazione ($S1$)}: Quando il sonar $S1$ rileva un oggetto entro il range $100$–$300$ cm, la variabile $obj1Detected$ viene impostata a $1$ \textbf{(fronte di salita)}.
+                    \item \textbf{Transizione e Timing}: Nel momento in cui l'oggetto esce dal campo d'azione di $S1$, la variabile $obj1Detected$ torna a $0$ \textbf{(fronte di discesa)}.
+                    Contestualmente, lo stato timerSonar12 del modulo timers avvia un conteggio di $3$ secondi.
+                    \item \textbf{Verifica ($S2$)}: Se il sonar $S2$ rileva l'ostacolo (sempre tra $100$ e $300$ cm) entro la finestra temporale dei $3$ secondi, viene inviato il segnale $moveToS1$ allo 
+                    stato parallelo $B2Decision$. Qualora il timer scada senza alcun rilevamento da parte di $S2$, non viene trasmesso alcun segnale.
+                \end{enumerate}
+            \end{enumerate}
+\end{enumerate}
+
+\subsubsection{Gestione ostacoli con sistema in stato $degradato$}
+
+Il chart per la gestione degli ostacoli in stato degradato è mostrato in Figura~\ref{fig:chart_degradato}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato}
+    \caption{Chart di gestione ostacoli in stato degradato.}
+    \label{fig:chart_degradato}
+\end{figure}
+
+
+
+In questo caso, la logica di gestione degli ostacoli è semplificata rispetto allo stato non degradato.
+Infatti, l'unica condizione considerata è la presenza di un ostacolo a una distanza inferiore o uguale a $300$ cm.
+Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una transizione che porta l'uscita del supervisore all'arresto immediato del rover.
+
 
 
 
