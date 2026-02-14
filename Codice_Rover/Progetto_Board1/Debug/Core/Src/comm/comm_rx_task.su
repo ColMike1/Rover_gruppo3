@@ -1,0 +1,3 @@
+../Core/Src/comm/comm_rx_task.c:25:6:Rx_TaskInit	8	static
+../Core/Src/comm/comm_rx_task.c:31:6:Debug_DumpAccBuf	24	static
+../Core/Src/comm/comm_rx_task.c:43:6:Rx_TaskStep	72	static

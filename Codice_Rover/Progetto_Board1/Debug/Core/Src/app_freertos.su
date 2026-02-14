@@ -1,0 +1,10 @@
+../Core/Src/app_freertos.c:234:6:vApplicationStackOverflowHook	24	static,ignoring_inline_asm
+../Core/Src/app_freertos.c:252:6:MX_FREERTOS_Init	8	static
+../Core/Src/app_freertos.c:330:6:StartDefaultTask	16	static
+../Core/Src/app_freertos.c:348:6:StartTask_BattTemp	32	static
+../Core/Src/app_freertos.c:386:6:StartTask_TX	24	static
+../Core/Src/app_freertos.c:415:6:StartTask_RX	16	static
+../Core/Src/app_freertos.c:435:6:StartTask_Supervisor	24	static
+../Core/Src/app_freertos.c:460:6:StartTask_Control	48	static
+../Core/Src/app_freertos.c:525:6:StartTask_Debug	24	static
+../Core/Src/app_freertos.c:547:6:StartTask_Led	24	static

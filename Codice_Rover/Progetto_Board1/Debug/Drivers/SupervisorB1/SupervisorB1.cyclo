@@ -1,0 +1,16 @@
+../Drivers/SupervisorB1/SupervisorB1.c:131:8:rt_roundd_snf	4
+../Drivers/SupervisorB1/SupervisorB1.c:150:18:SupervisorB1_checkTempTimeout	4
+../Drivers/SupervisorB1/SupervisorB1.c:166:13:SupervisorB1_MonitorTemperature	22
+../Drivers/SupervisorB1/SupervisorB1.c:254:18:SupervisorB_checkBatteryTimeout	3
+../Drivers/SupervisorB1/SupervisorB1.c:278:13:SupervisorB1_MonitorBattery	17
+../Drivers/SupervisorB1/SupervisorB1.c:361:13:SupervisorB1_MonitorWheels	25
+../Drivers/SupervisorB1/SupervisorB1.c:477:18:Supe_isCommDegradedByMeanPeriod	12
+../Drivers/SupervisorB1/SupervisorB1.c:548:13:SupervisorB1_updateSafetyLimits	3
+../Drivers/SupervisorB1/SupervisorB1.c:577:17:SupervisorB1_angleCalculator180	2
+../Drivers/SupervisorB1/SupervisorB1.c:590:17:SupervisorB1_angleError	6
+../Drivers/SupervisorB1/SupervisorB1.c:614:18:SupervisorB1_checkStop	4
+../Drivers/SupervisorB1/SupervisorB1.c:640:13:enter_atomic_Stato_marcia_rover	3
+../Drivers/SupervisorB1/SupervisorB1.c:664:13:SupervisorB1_Motion_Supervision	47
+../Drivers/SupervisorB1/SupervisorB1.c:939:6:SupervisorB1_step	106
+../Drivers/SupervisorB1/SupervisorB1.c:1524:6:SupervisorB1_initialize	1
+../Drivers/SupervisorB1/SupervisorB1.c:1542:6:SupervisorB1_terminate	1

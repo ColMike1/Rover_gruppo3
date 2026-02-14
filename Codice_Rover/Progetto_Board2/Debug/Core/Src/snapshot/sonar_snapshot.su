@@ -1,0 +1,3 @@
+../Core/Src/snapshot/sonar_snapshot.c:21:6:SonarSnapshot_MutexInit	16	static
+../Core/Src/snapshot/sonar_snapshot.c:28:6:SonarSnapshot_Write	24	static
+../Core/Src/snapshot/sonar_snapshot.c:38:6:SonarSnapshot_Read	24	static

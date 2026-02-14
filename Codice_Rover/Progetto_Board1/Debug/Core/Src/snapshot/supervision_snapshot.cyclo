@@ -1,0 +1,3 @@
+../Core/Src/snapshot/supervision_snapshot.c:19:13:SupervisionSnapshot_Init	2
+../Core/Src/snapshot/supervision_snapshot.c:34:6:SupervisionSnapshot_Write	2
+../Core/Src/snapshot/supervision_snapshot.c:47:6:SupervisionSnapshot_Read	2

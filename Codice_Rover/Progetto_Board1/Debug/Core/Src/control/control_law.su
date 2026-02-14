@@ -1,0 +1,3 @@
+../Core/Src/control/control_law.c:43:14:PI_Compute	32	static
+../Core/Src/control/control_law.c:61:6:ControlLaw_Init	4	static
+../Core/Src/control/control_law.c:77:6:ControlLaw_Step	64	static

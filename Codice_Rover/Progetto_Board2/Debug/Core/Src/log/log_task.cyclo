@@ -1,0 +1,2 @@
+../Core/Src/log/log_task.c:24:5:_write	1
+../Core/Src/log/log_task.c:31:6:Log_TaskStep	1
