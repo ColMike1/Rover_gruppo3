@@ -97,6 +97,14 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 
 
 
+
+
+
+
+
+
+
+
 \section{Funzionamento generale di ciascuna board}
 \subsection{Interazione tra Task e Meccanismo di Snapshot}
 Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
@@ -218,7 +226,7 @@ In particolare, esso è composto da quattro parti principali:
 \begin{itemize}
     \item \textbf{Rilevazione Faults}: si occupa di rilevare anomalie nella ricezione dei dati da Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
     \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di $rilevazione faults$ e le codifica in due maschere di errore (critica e degradata).
-    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover, in base alle condizioni di fault rilevate.
+    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover in base alle condizioni di fault rilevate.
     \item \textbf{Calcolo Riferimenti}: se Board1 attua, calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
 \end{itemize}
 Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le quattro parti principali del supervisore descritte sopra.
