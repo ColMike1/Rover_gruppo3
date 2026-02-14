@@ -1,0 +1,9 @@
+../Core/Src/IMU/imu_i2c.c:40:13:MPU6050_CalcGyroBias	3
+../Core/Src/IMU/imu_i2c.c:63:13:MPU6050_UpdateYaw	4
+../Core/Src/IMU/imu_i2c.c:79:13:IMU_I2C_Parse	1
+../Core/Src/IMU/imu_i2c.c:106:16:IMU_I2C_ReadBlocking	2
+../Core/Src/IMU/imu_i2c.c:129:16:IMU_I2C_Init	3
+../Core/Src/IMU/imu_i2c.c:184:6:IMU_I2C_GetAccel	4
+../Core/Src/IMU/imu_i2c.c:191:6:IMU_I2C_GetGyro	4
+../Core/Src/IMU/imu_i2c.c:198:7:IMU_I2C_GetTemperature	1
+../Core/Src/IMU/imu_i2c.c:203:7:IMU_I2C_GetYaw	1

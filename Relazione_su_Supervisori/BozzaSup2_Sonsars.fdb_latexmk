@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1770998286.91048 "c:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Relazione_su_Supervisori/BozzaSup2_Sonsars.tex" "BozzaSup2_Sonsars.pdf" "BozzaSup2_Sonsars" 1770998295.35281 0
-  "BozzaSup2_Sonsars.aux" 1770998294 7763 0f3a034f32ae671da41c08dfef9664fc "pdflatex"
-  "BozzaSup2_Sonsars.tex" 1770998276 32192 911653317d6ecc7a4722cbb96a440958 ""
-  "BozzaSup2_Sonsars.toc" 1770998294 1481 cb01537d3715dad40c51448a73f33a09 "pdflatex"
+["pdflatex"] 1771004136.05583 "c:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Relazione_su_Supervisori/BozzaSup2_Sonsars.tex" "BozzaSup2_Sonsars.pdf" "BozzaSup2_Sonsars" 1771004139.11219 0
+  "BozzaSup2_Sonsars.aux" 1771004138 8054 0894aa6223d46bacc73bd56edc58b5d4 "pdflatex"
+  "BozzaSup2_Sonsars.tex" 1771004131 34172 4050eee37c65ccbb33992c3e71cb1d46 ""
+  "BozzaSup2_Sonsars.toc" 1771004138 1481 b6b50a0daa8b4a36465d79b42c41e082 "pdflatex"
   "C:/Users/miche/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1770491073 81088 29d6fa367ac022d1b69251d68c0742e6 ""
   "C:/Users/miche/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1770033035 14064 0dd1e18056a1b81f55877a7c38fe3cb1 ""
   "C:/Users/miche/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1753184015 13254313 20de4965e52643c18ebfdb1ea2b1ec91 ""
@@ -69,7 +69,7 @@
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1749468414 15698 f5f20b24886bb50156054c53e19b13fd ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/tools/longtable.sty" 1749468414 15912 618223a798a4d829f4d8e1ccf24e518f ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1749468414 7243 a2c17f18e2c9b702b84fad03d5f9c78b ""
-  "c:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Relazione_su_Supervisori/BozzaSup2_Sonsars.tex" 1770998276 32192 911653317d6ecc7a4722cbb96a440958 ""
+  "c:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Relazione_su_Supervisori/BozzaSup2_Sonsars.tex" 1771004131 34172 4050eee37c65ccbb33992c3e71cb1d46 ""
   "images/Sonars/callback_sonar.png" 1770202132 45797 1785c7d30dffab18b4fb099a372c8b4d ""
   "images/Sonars/configurazione_timIC_sonar.png" 1770283619 42716 0d8427edc984c0addf3e6ef9f17d5a37 ""
   "images/Sonars/disposizioneSonar.png" 1770200788 51018 9ed1dfc5341e457ad4509c40115c92b0 ""
@@ -80,6 +80,7 @@
   "images/SupervisoreB1/Encoder_snapshot.png" 1770308882 22439 fda9bd4d2eceb43ba5da0a4b24eec0cb ""
   "images/SupervisoreB1/Gestione_Faults.png" 1770992197 121667 fdc811566efca56ddd4dbc3dcf232fbd ""
   "images/SupervisoreB1/SupervisoreB1_simulink.png" 1770989925 105088 83cdae497878e56dbdb0140a5b023ce9 ""
+  "images/SupervisoreB1/calcolo_safety_status.png" 1771004096 113720 89f97f66bc8b5886df3d8b6991ce7a29 ""
   "images/SupervisoreB1/costruzione_maschere.png" 1770394474 25703 9357b7aaea42bc5519c4f2e68c9dae1c ""
   "images/SupervisoreB1/decisione_vel_rot.png" 1770997224 111876 c8599f64065a70f20bbbd6cd8188b0bc ""
   "images/SupervisoreB1/rele_board1.jpeg" 1770488851 70971 c3676eb2cea20d0d952174d000c1baec ""

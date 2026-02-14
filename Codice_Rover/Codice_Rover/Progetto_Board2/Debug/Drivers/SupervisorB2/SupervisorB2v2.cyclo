@@ -1,0 +1,14 @@
+../Drivers/SupervisorB2/SupervisorB2v2.c:99:8:rt_roundd_snf	4
+../Drivers/SupervisorB2/SupervisorB2v2.c:118:18:Supe_isCommDegradedByMeanPeriod	12
+../Drivers/SupervisorB2/SupervisorB2v2.c:190:13:SupervisorB2v2_MonitorIMU	15
+../Drivers/SupervisorB2/SupervisorB2v2.c:299:18:SupervisorB2v2_gyroTargetDiff	6
+../Drivers/SupervisorB2/SupervisorB2v2.c:323:17:SupervisorB2v2_angleCalculator	4
+../Drivers/SupervisorB2/SupervisorB2v2.c:343:13:SupervisorB2v2_B2Decisions	25
+../Drivers/SupervisorB2/SupervisorB2v2.c:436:16:Supervis_check_emergency_stop_k	3
+../Drivers/SupervisorB2/SupervisorB2v2.c:451:16:SupervisorB2v2_closeRange	3
+../Drivers/SupervisorB2/SupervisorB2v2.c:457:13:SupervisorB2v2_timers	29
+../Drivers/SupervisorB2/SupervisorB2v2.c:567:16:Supervisor_check_emergency_stop	2
+../Drivers/SupervisorB2/SupervisorB2v2.c:579:8:rt_atan2d_snf	10
+../Drivers/SupervisorB2/SupervisorB2v2.c:616:6:SupervisorB2v2_step	91
+../Drivers/SupervisorB2/SupervisorB2v2.c:1256:6:SupervisorB2v2_initialize	1
+../Drivers/SupervisorB2/SupervisorB2v2.c:1266:6:SupervisorB2v2_terminate	1

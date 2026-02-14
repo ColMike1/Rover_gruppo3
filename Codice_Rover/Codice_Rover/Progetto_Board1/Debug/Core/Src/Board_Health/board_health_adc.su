@@ -1,0 +1,6 @@
+../Core/Src/Board_Health/board_health_adc.c:60:13:BoardHealthADC_LoadCal	4	static
+../Core/Src/Board_Health/board_health_adc.c:68:6:BoardHealthADC_Init	8	static
+../Core/Src/Board_Health/board_health_adc.c:77:14:MovingAverage_Update	40	static
+../Core/Src/Board_Health/board_health_adc.c:95:14:Battery_VoltageToPercent	56	static
+../Core/Src/Board_Health/board_health_adc.c:135:21:BoardHealth_ReadTemperature	48	static,ignoring_inline_asm
+../Core/Src/Board_Health/board_health_adc.c:180:21:BoardHealth_ReadBattery	48	static,ignoring_inline_asm
