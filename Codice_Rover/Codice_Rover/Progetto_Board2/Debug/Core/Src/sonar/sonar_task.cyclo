@@ -1,3 +1,0 @@
-../Core/Src/sonar/sonar_task.c:29:6:Sonar_TaskInit	1
-../Core/Src/sonar/sonar_task.c:34:6:Sonar_TaskStep	1
-../Core/Src/sonar/sonar_task.c:48:6:HAL_TIM_IC_CaptureCallback	11

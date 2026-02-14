@@ -1,2 +1,0 @@
-../Core/Src/log/wcet_monitor.c:19:6:WCET_Update	16	static
-../Core/Src/log/wcet_monitor.c:25:6:WCET_Print	136	static

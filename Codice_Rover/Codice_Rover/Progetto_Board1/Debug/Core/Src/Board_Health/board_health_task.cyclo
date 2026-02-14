@@ -1,2 +1,0 @@
-../Core/Src/Board_Health/board_health_task.c:17:6:BoardHealth_TaskInit	1
-../Core/Src/Board_Health/board_health_task.c:22:6:BoardHealth_TaskStep	3
