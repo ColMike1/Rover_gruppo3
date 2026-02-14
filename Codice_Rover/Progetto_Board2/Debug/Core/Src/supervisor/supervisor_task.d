@@ -47,19 +47,19 @@ Core/Src/supervisor/supervisor_task.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/snapshot/imu_snapshot.h ../Core/Inc/IMU/imu_i2c.h \
  ../Core/Inc/snapshot/sonar_snapshot.h ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_status.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_message_structures.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/supervisor_command.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h \
  ../Core/Inc/snapshot/supervisor_snapshot.h \
  ../Core/Inc/actuation/actuation_step.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_nonfinite.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2_types.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_zcfcn.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/zero_crossing_types.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtGetNaN.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_nonfinite.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2_types.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_zcfcn.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/zero_crossing_types.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtGetNaN.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 ../Core/Inc/supervisor/supervisor_task.h:
 ../Core/Inc/snapshot/ble_controller_snapshot.h:
@@ -112,17 +112,17 @@ Core/Src/supervisor/supervisor_task.o: \
 ../Core/Inc/IMU/imu_i2c.h:
 ../Core/Inc/snapshot/sonar_snapshot.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_status.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_message_structures.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/supervisor_command.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
 ../Core/Inc/actuation/actuation_step.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_nonfinite.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2_types.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_zcfcn.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/zero_crossing_types.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtGetNaN.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_nonfinite.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/SupervisorB2_types.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rt_zcfcn.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/zero_crossing_types.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtGetNaN.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2/rtwtypes.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:

@@ -1,8 +1,8 @@
 Core/Src/comm/comm_rx_task.o: ../Core/Src/comm/comm_rx_task.c \
  ../Core/Inc/comm/comm_rx_task.h ../Core/Inc/comm/comm_unpack.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
  ../Core/Inc/comm/comm_uart.h ../Core/Inc/snapshot/rx_snapshot.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
@@ -51,9 +51,9 @@ Core/Src/comm/comm_rx_task.o: ../Core/Src/comm/comm_rx_task.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 ../Core/Inc/comm/comm_rx_task.h:
 ../Core/Inc/comm/comm_unpack.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
 ../Core/Inc/comm/comm_uart.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:

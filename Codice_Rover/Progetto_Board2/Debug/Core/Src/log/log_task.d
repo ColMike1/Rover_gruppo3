@@ -46,9 +46,9 @@ Core/Src/log/log_task.o: ../Core/Src/log/log_task.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/snapshot/imu_snapshot.h ../Core/Inc/IMU/imu_i2c.h \
  ../Core/Inc/snapshot/sonar_snapshot.h ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_status.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_message_structures.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/supervisor_command.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/usart.h ../Core/Inc/log/wcet_monitor.h
 ../Core/Inc/log/log_task.h:
@@ -103,9 +103,9 @@ Core/Src/log/log_task.o: ../Core/Src/log/log_task.c \
 ../Core/Inc/IMU/imu_i2c.h:
 ../Core/Inc/snapshot/sonar_snapshot.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_status.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_message_structures.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/supervisor_command.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/log/wcet_monitor.h:

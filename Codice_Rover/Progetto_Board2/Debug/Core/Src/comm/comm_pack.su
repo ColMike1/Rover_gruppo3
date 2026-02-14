@@ -1,2 +1,2 @@
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_crc.h:13:24:crc16_ccitt	24	static
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_crc.h:13:24:crc16_ccitt	24	static
 ../Core/Src/comm/comm_pack.c:14:10:CommPack_BuildB2Tx	80	static

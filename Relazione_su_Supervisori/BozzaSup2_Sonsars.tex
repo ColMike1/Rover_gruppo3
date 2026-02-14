@@ -351,21 +351,21 @@ Il supervisore della Board 1 è implementato come un modulo Simulink denominato 
     \label{fig:supervisorB1_block} 
 \end{figure}
 Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
-In particolare, esso è composto da 3 parti principali:
+In particolare, esso è composto da quattro parti principali:
 \begin{itemize}
-    \item \textbf{Gestione Faults}: si occupa di rilevare e gestire eventuali anomalie nei dati ricevuti dalla Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
+    \item \textbf{Rilevazione Faults}: si occupa di rilevare anomalie nella ricezione dei dati da Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
+    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di $rilevazione faults$ e le codifica in due maschere di errore (critica e degradata).
     \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover, in base alle condizioni di fault rilevate.
-    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di gestione faults e le codifica in due maschere di errore (critica e degradata).
-    \item \textbf{Calcolo Riferimenti}: calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
+    \item \textbf{Calcolo Riferimenti}: se Board1 attua, calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
 \end{itemize}
-Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le tre parti principali del supervisore descritte sopra.
+Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le quattro parti principali del supervisore descritte sopra.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Input}
 I segnali in input che riceve sono:
 \begin{itemize}  
-    \item \textbf{Board2\_Data}: rappresenta i dati provenienti dalla Board2. Quelli utilizzati dal supervisore sono:
+    \item \textbf{Board2\_Data}: è l'ultimo snapshot di ricezione ($RxSnapshot$) aggiornato dal task di ricezione di Board1. Alcuni dei segnali utilizzati dal supervisore di Board 1 sono:
     \begin{itemize}
         \item \textit{command}: rappresenta il comando in uscita dal supervisore della Board2, che può assumere i seguenti valori:
             \begin{figure}[H] 
@@ -374,20 +374,22 @@ I segnali in input che riceve sono:
                 \caption{Comandi in uscita dal supervisore della Board2.}
                 \label{fig:comandi_b2}
             \end{figure}
-        \item \textit{x\_norm \emph{\&} y\_norm}: rappresenta il comando utente proveniente dal joistick.
+        \item \textit{x\_norm \emph{\&} y\_norm}: rappresenta il comando utente proveniente dal joistick. Così se il comando $command$ proveniente da Board 2 è $CMD\_NORMAL$ e la il supervisore di Board 1 non 
+                                                  non rileva anomalie, i riferimenti di velocità lineare e angolare del rover vengono rispettivamente utilizzando 
+                                                  $x\_norm$ e $y\_norm$ ($ speed\_ref = y\_norm \cdot MAX\_SPEED$ e $steering\_cmd = x\_norm \cdot MAX\_TURN$).
         \item \textit{yaw}: rappresenta l'angolo di orientamento del rover, calcolato a partire dai dati provenienti dalla Board2.
-        \item \textit{imu\_cohearence\_status}: rappresenta la coerenza dei dati ricevuti dal sensore IMU, utile a rilevare motor fault.
-        \item \textit{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit, in cui ogni bit indica la presenza 
+        \item \textit{isMotionConsistent}: Verifica la coerenza tra la rotazione misurata dalla IMU e quella stimata dai motori, per rilevare guasti meccanici o slittamenti .
+        \item \textit{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit calcolate da Board 2, in cui ogni bit indica la presenza 
                     di un'anomalia \textit{critica} (da cui critical\_mask) o \textit{degradata} (da cui degraded\_mask) specifica.
     \end{itemize}
-    \item \textbf{Board\_Health}: rappresenta lo stato della Board1. La struttura dati è la seguente:
+    \item \textbf{Board\_Health}: è l'ultimo snapshot di salute del sistema ($BoardHealthSnapshot$), in cui sono presenti i valori di temperatura e batteria. La struttura dati è la seguente:
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{images/SupervisoreB1/BoardHealthSnapshot}
             \caption{Struttura dati Board\_Health.}
             \label{fig:board_health_struct}
         \end{figure}
-    \item \textbf{Encoder}: rappresenta i dati provenienti dagli encoder delle ruote del rover. La struttura dati è la seguente:
+    \item \textbf{Encoder}: è l'ultimo snapshot delle velocità delle ruote ($wheel\_speed\_rpm$) e di eventuali anomalie riscontrate in uno dei motori ($has\_no\_feedback$). La struttura dati è la seguente:
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{images/SupervisoreB1/Encoder\_snapshot}
@@ -414,11 +416,11 @@ I segnali in output che fornisce sono:
             \begin{tabular}{lll}
             \hline
             \textbf{Bit} & \textbf{ID Segnale} & \textbf{Descrizione dell'Anomalia} \\ \hline
-            0 & TEMP\_CRI/DEG & Errore termico (Logica predittiva) \\
-            1 & BATT\_CRI/DEG & Tensione batteria sotto soglia minima \\
-            2 & COMM\_CRI/DEG & Errore ricezione Board-to-Board \\
+            0 & TEMP\_CRI/DEG & Temperatura fuori range o monitoraggio temperatura assente\\
+            1 & BATT\_CRI/DEG & Tensione batteria fuori range o monitoraggio tensione assente\\
+            2 & COMM\_CRI/DEG & Comunicazione lenta o assente  \\
             3-6 & WHEEL\_CRI/DEG & Guasti attuatori (FL, FR, RL, RR) \\
-            7 & SUP\_CRI/DEG  & Timeout comunicazione Supervisore B2 \\ \hline
+            7 & SUP\_CRI/DEG  & Supervisore B2 lento o assente \\ \hline
             \end{tabular}
             \caption{Mappatura della maschera di errore a 8 bit}
             \label{tab:fault_mapping}
@@ -433,7 +435,7 @@ I segnali in output che fornisce sono:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Gestione Faults}
+\subsection{Rilevazione Faults}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/Gestione\_Faults}
@@ -442,7 +444,7 @@ I segnali in output che fornisce sono:
 \end{figure}
 
 L'output di questo sottosistema è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} o
-\textit{degradata} specifica proveniente dalla lettura degli encoder, batteria, temperatura e comunicazione con la Board2. Di seguito si
+\textit{degradata} specifica proveniente dalla lettura dei segnali degli encoder, batteria, temperatura e comunicazione con la Board2. Di seguito si
  descrivono i valori che questi segnali possono assumere e le condizioni che portano a tali valori.
 
 
@@ -485,8 +487,8 @@ L'output di questo sottosistema è rappresentato da 5 segnali, ognuno dei quali 
 
 
     \textbf{wheel\_status(i)}   & WHEEL\_DEGRADED\_ENCODER  & Viene attivato dalla funzione $has\_no\_feedback(i)$ quando si rileva un'assenza di impulsi dall'encoder nonostante
-                                                              il motore sia alimentato oltre una soglia di sicurezza.  Questa condizione indica un guasto al sensore o un blocco 
-                                                              meccanico parziale. Contemporaneamente, attiva una logica di recupero (\textit{fallback}) che ricostruisce
+                                                              il motore sia alimentato. Questa condizione indica un guasto al sensore o un blocco 
+                                                              meccanico parziale. Questa condizione permette l'attivazione di una logica di recupero (\textit{fallback}) che ricostruisce
                                                               la velocità della ruota guasta basandosi sulla lettura dei sensori integri degli altri motori.\\\\
                                 & WHEEL\_CRITICAL\_MOTOR    & Questo stato viene attivato quando alla perdita del feedback dell'encoder si somma un'incoerenza tra il dato del
                                                               sensore IMU e la rotazione stimata tramite l'odometria delle ruote.

@@ -15,11 +15,11 @@ Core/Src/control/control_step.o: ../Core/Src/control/control_step.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/snapshot/supervisor_snapshot.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
  ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
  ../Core/Inc/log/wcet_monitor.h ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
@@ -72,11 +72,11 @@ Core/Src/control/control_step.o: ../Core/Src/control/control_step.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
 ../Core/Inc/log/wcet_monitor.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:

@@ -48,9 +48,9 @@ Drivers/SupervisorB2/SupervisorB2.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_message_structures.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/supervisor_command.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_status.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h \
  ../Core/Inc/snapshot/rx_snapshot.h ../Core/Inc/snapshot/sonar_snapshot.h \
  ../Core/Inc/snapshot/ble_controller_snapshot.h \
  ../Core/Inc/ble_controller/ble_controller_i2c.h \
@@ -108,9 +108,9 @@ Drivers/SupervisorB2/SupervisorB2.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_message_structures.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/supervisor_command.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/shared_headers/comm_status.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
 ../Core/Inc/snapshot/sonar_snapshot.h:
 ../Core/Inc/snapshot/ble_controller_snapshot.h:

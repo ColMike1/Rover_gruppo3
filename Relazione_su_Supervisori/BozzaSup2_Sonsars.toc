@@ -13,7 +13,7 @@
 \contentsline {subsection}{\numberline {4.1}Panoramica generale}{12}{}%
 \contentsline {subsection}{\numberline {4.2}Input}{13}{}%
 \contentsline {subsection}{\numberline {4.3}Output}{15}{}%
-\contentsline {subsection}{\numberline {4.4}Gestione Faults}{16}{}%
+\contentsline {subsection}{\numberline {4.4}Rilevazione Faults}{16}{}%
 \contentsline {subsection}{\numberline {4.5}Decidere di far comandare la Board2}{20}{}%
 \contentsline {subsection}{\numberline {4.6}Costruzione maschere degradate e critiche}{22}{}%
 \contentsline {subsection}{\numberline {4.7}Calcolo riferimenti}{23}{}%

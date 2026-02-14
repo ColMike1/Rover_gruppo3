@@ -13,9 +13,9 @@ Core/Src/log/log_format.o: ../Core/Src/log/log_format.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/snapshot/board_health_snapshot.h \
  ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
  ../Core/Inc/log/wcet_monitor.h ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
@@ -50,8 +50,8 @@ Core/Src/log/log_format.o: ../Core/Src/log/log_format.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/snapshot/supervisor_snapshot.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
- C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/board2_faults.h
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
+ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board2_faults.h
 ../Core/Inc/log/log_format.h:
 ../Core/Inc/snapshot/encoder_snapshot.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
@@ -67,9 +67,9 @@ Core/Src/log/log_format.o: ../Core/Src/log/log_format.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../Core/Inc/snapshot/board_health_snapshot.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
 ../Core/Inc/log/wcet_monitor.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
@@ -105,5 +105,5 @@ C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_he
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
-C:/Users/Sterm/Desktop/STM32/workspace/Codice_Rover/Progetto_Board1/../shared_headers/board2_faults.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
+C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board2_faults.h:
