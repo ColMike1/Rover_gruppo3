@@ -1,8 +1,6 @@
-/*
- * ble_controller_i2c.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file ble_controller_i2c.h
+ * @brief Interfaccia I2C per lettura frame dal controller BLE.
  */
 
 #ifndef INC_BLE_CONTROLLER_BLE_CONTROLLER_I2C_H_
@@ -14,6 +12,7 @@
 
 /* ================= STATUS ================= */
 
+/** @brief Esito delle operazioni I2C del modulo BLE. */
 typedef enum
 {
     BLE_I2C_COMPLETE = 0,
@@ -23,9 +22,7 @@ typedef enum
 } BleI2CStatus_t;
 
 
-/* ================= FRAME ================= */
-
-/* Frame ricevuto via BLE (protocollo fisso) */
+/** @brief Frame raw ricevuto dal controller BLE. */
 typedef struct __attribute__((packed))
 {
     uint16_t ax;
@@ -43,14 +40,11 @@ typedef struct __attribute__((packed))
 
 
 
-void BleController_I2C_OnRxComplete(void);
-void BleController_I2C_OnError(void);
-
-/* ================= API ================= */
-
-
-
-/* Ricezione frame completo */
+/**
+ * @brief Legge un frame completo dal controller BLE.
+ * @param frame Puntatore alla struttura di output.
+ * @return Stato dell'operazione I2C.
+ */
 BleI2CStatus_t BleController_I2C_ReadFrame(BleRawFrame_t *frame);
 
 

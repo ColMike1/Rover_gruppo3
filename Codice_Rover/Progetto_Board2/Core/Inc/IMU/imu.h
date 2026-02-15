@@ -1,8 +1,6 @@
-/*
- * imu.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file imu.h
+ * @brief Header di aggregazione del modulo IMU.
  */
 
 #ifndef INC_IMU_IMU_H_

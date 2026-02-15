@@ -34,7 +34,6 @@
 #include "supervisor/supervisor_task.h"
 #include "log/wcet_monitor.h"
 #include "snapshot/snapshot.h"
-#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +46,18 @@ typedef StaticSemaphore_t osStaticMutexDef_t;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+/** @brief Periodo task BLE [ms]. */
+#define TASK_BLE_PERIOD_MS         20U
+/** @brief Periodo task IMU [ms]. */
+#define TASK_IMU_PERIOD_MS         20U
+/** @brief Periodo task sonar [ms]. */
+#define TASK_SONAR_PERIOD_MS       60U
+/** @brief Periodo task TX [ms]. */
+#define TASK_TX_PERIOD_MS          20U
+/** @brief Periodo task supervisore [ms]. */
+#define TASK_SUPERVISOR_PERIOD_MS  20U
+/** @brief Periodo task log [ms]. */
+#define TASK_LOG_PERIOD_MS       1000U
 
 /* USER CODE END PD */
 
@@ -234,6 +245,8 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
 /* USER CODE BEGIN 4 */
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
 {
+   (void)xTask;
+   (void)pcTaskName;
    /* Run time stack overflow checking is performed if
    configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
    called if a stack overflow is detected. */
@@ -348,8 +361,8 @@ void StartDefaultTask(void *argument)
 void StartTask_ReadBLE(void *argument)
 {
   /* USER CODE BEGIN StartTask_ReadBLE */
-    
-    //BleController_TaskInit();
+    (void)argument;
+
     TickType_t lastWakeTime = xTaskGetTickCount();
 
     for (;;)
@@ -363,7 +376,7 @@ void StartTask_ReadBLE(void *argument)
 
 	    free_words_ble = uxTaskGetStackHighWaterMark(NULL);
 
-        lastWakeTime += 20;
+        lastWakeTime += TASK_BLE_PERIOD_MS;
         osDelayUntil(lastWakeTime);
     }
   /* USER CODE END StartTask_ReadBLE */
@@ -379,8 +392,8 @@ void StartTask_ReadBLE(void *argument)
 void StartTask_ReadIMU(void *argument)
 {
   /* USER CODE BEGIN StartTask_ReadIMU */
-    
-    IMU_TaskInit();  
+    (void)argument;
+    IMU_TaskInit();
     TickType_t lastWakeTime = xTaskGetTickCount();
 
     
@@ -397,7 +410,7 @@ void StartTask_ReadIMU(void *argument)
 
 	    free_words_imu = uxTaskGetStackHighWaterMark(NULL);
 
-        lastWakeTime += 20;
+        lastWakeTime += TASK_IMU_PERIOD_MS;
         osDelayUntil(lastWakeTime);
     }
   /* USER CODE END StartTask_ReadIMU */
@@ -413,6 +426,7 @@ void StartTask_ReadIMU(void *argument)
 void StartTask_ReadSonars(void *argument)
 {
   /* USER CODE BEGIN StartTask_ReadSonars */
+    (void)argument;
     Sonar_TaskInit();
     TickType_t lastWakeTime = xTaskGetTickCount();
     
@@ -424,7 +438,7 @@ void StartTask_ReadSonars(void *argument)
 
 	    free_words_sonar = uxTaskGetStackHighWaterMark(NULL);
 
-        lastWakeTime += 60;
+        lastWakeTime += TASK_SONAR_PERIOD_MS;
         osDelayUntil(lastWakeTime);
     }
   /* USER CODE END StartTask_ReadSonars */
@@ -440,6 +454,7 @@ void StartTask_ReadSonars(void *argument)
 void StartTask_Rx(void *argument)
 {
   /* USER CODE BEGIN StartTask_Rx */
+  (void)argument;
 	Rx_TaskInit();
 
   /* Infinite loop */
@@ -465,6 +480,7 @@ void StartTask_Rx(void *argument)
 void StartTask_Tx(void *argument)
 {
   /* USER CODE BEGIN StartTask_Tx */
+    (void)argument;
     TickType_t lastWakeTime = xTaskGetTickCount();
 
 
@@ -478,7 +494,7 @@ void StartTask_Tx(void *argument)
         WCET_Update(WCET_TASK_TX, DWT->CYCCNT - s);
 	    free_words_tx = uxTaskGetStackHighWaterMark(NULL);
 
-        lastWakeTime += 20;
+        lastWakeTime += TASK_TX_PERIOD_MS;
         osDelayUntil(lastWakeTime);
     }
   /* USER CODE END StartTask_Tx */
@@ -494,6 +510,7 @@ void StartTask_Tx(void *argument)
 void StartTask_Supervisor(void *argument)
 {
   /* USER CODE BEGIN StartTask_Supervisor */
+	(void)argument;
 	Supervisor_TaskInit();
 	TickType_t lastWakeTime = osKernelGetTickCount();
 
@@ -507,7 +524,7 @@ void StartTask_Supervisor(void *argument)
 	  WCET_Update(WCET_TASK_SUPERVISOR, DWT->CYCCNT - s);
 
 
-	  lastWakeTime += 20;
+	  lastWakeTime += TASK_SUPERVISOR_PERIOD_MS;
 	  osDelayUntil(lastWakeTime);
   }
   /* USER CODE END StartTask_Supervisor */
@@ -523,6 +540,7 @@ void StartTask_Supervisor(void *argument)
 void StartTask_Log(void *argument)
 {
   /* USER CODE BEGIN StartTask_Log */
+    (void)argument;
   /* Infinite loop */
     TickType_t lastWakeTime = xTaskGetTickCount();
 
@@ -530,9 +548,8 @@ void StartTask_Log(void *argument)
     for (;;)
     {
     	  Log_TaskStep();
-    	  WCET_Print();
 
-        lastWakeTime += 1000;
+        lastWakeTime += TASK_LOG_PERIOD_MS;
         osDelayUntil(lastWakeTime);
     }
   /* USER CODE END StartTask_Log */

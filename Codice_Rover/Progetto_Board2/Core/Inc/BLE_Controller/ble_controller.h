@@ -1,8 +1,6 @@
-/*
- * ble_controller.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file ble_controller.h
+ * @brief Header di aggregazione del modulo BLE controller.
  */
 
 #ifndef INC_BLE_CONTROLLER_BLE_CONTROLLER_H_

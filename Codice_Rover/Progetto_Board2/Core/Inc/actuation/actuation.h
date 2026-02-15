@@ -1,8 +1,6 @@
-/*
- * actuation.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file actuation.h
+ * @brief Header di aggregazione del modulo attuazione.
  */
 
 #ifndef INC_ACTUATION_ACTUATION_H_
