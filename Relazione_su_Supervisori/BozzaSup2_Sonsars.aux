@@ -1,81 +1,92 @@
 \relax 
-\@writefile{toc}{\contentsline {section}{\numberline {1}Acquisizione segnali Board 2}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}\textbf  {HC-SR04} - Sensore ad ultrasuoni}{3}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Disposizione dei sensori sulla Board 2.}}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Funzionamento generale di ciascuna board}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Interazione tra Task e Meccanismo di Snapshot}{3}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Funzionamento generale del software di Board 1.}}{4}{}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:sensori}{{1}{3}{}{figure.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Segnale generato dal sensore HC-SR04 in presenza di un ostacolo a 3 metri di distanza.}}{3}{}\protected@file@percent }
-\newlabel{fig:segnale_sonar}{{2}{3}{}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Configurazione del DMA per la lettura dei segnali dai sensori.}}{4}{}\protected@file@percent }
-\newlabel{fig:dma_sonar}{{3}{4}{}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Callback eseguita al termine della rilevazione dei fronti.}}{5}{}\protected@file@percent }
-\newlabel{fig:callback_sonar}{{4}{5}{}{figure.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Funzionamento generale di ciascuna board}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Interazione tra Task e Meccanismo di Snapshot}{5}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Funzionamento generale del software di Board 1.}}{6}{}\protected@file@percent }
-\newlabel{fig:funzionamento_generale}{{5}{6}{}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Funzionamento generale del software di Board 2.}}{7}{}\protected@file@percent }
-\newlabel{fig:funzionamento_generale_b2}{{6}{7}{}{figure.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Supervisore Board 1}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Panoramica generale}{7}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Schema a blocchi del modulo SupervisorB1.}}{8}{}\protected@file@percent }
-\newlabel{fig:supervisorB1_block}{{7}{8}{}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Input}{8}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Comandi in uscita dal supervisore della Board2.}}{9}{}\protected@file@percent }
-\newlabel{fig:comandi_b2}{{8}{9}{}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Struttura dati Board\_Health.}}{10}{}\protected@file@percent }
-\newlabel{fig:board_health_struct}{{9}{10}{}{figure.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Struttura dati Encoder.}}{10}{}\protected@file@percent }
-\newlabel{fig:encoder_struct}{{10}{10}{}{figure.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Output}{10}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Mappatura della maschera di errore a 8 bit}}{11}{}\protected@file@percent }
-\newlabel{tab:fault_mapping}{{1}{11}{}{table.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Rilevazione Faults}{11}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Chart di gestione dei faults.}}{11}{}\protected@file@percent }
-\newlabel{fig:gestione_faults}{{11}{11}{}{figure.11}{}}
+\newlabel{fig:funzionamento_generale}{{1}{4}{}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Funzionamento generale del software di Board 2.}}{5}{}\protected@file@percent }
+\newlabel{fig:funzionamento_generale_b2}{{2}{5}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Interazione tra le due Board}{5}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Interazione tra i task di trasmissione della Board 2 e ricezione della Board 1.}}{6}{}\protected@file@percent }
+\newlabel{fig:comunicazione_board}{{3}{6}{}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.}}{6}{}\protected@file@percent }
+\newlabel{fig:comunicazione_board12}{{4}{6}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Funzionamento task di Board 2}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.1}Acquisizione distanza ostacoli}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Disposizione dei sensori sulla Board 2.}}{7}{}\protected@file@percent }
+\newlabel{fig:sensori}{{5}{7}{}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Segnale generato dal sensore HC-SR04 in presenza di un ostacolo a 3 metri di distanza.}}{7}{}\protected@file@percent }
+\newlabel{fig:segnale_sonar}{{6}{7}{}{figure.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Utilizzo DMA per la lettura dei segnali}{7}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Configurazione del DMA per la lettura dei segnali dai sensori.}}{8}{}\protected@file@percent }
+\newlabel{fig:dma_sonar}{{7}{8}{}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Callback eseguita al termine della rilevazione dei fronti.}}{9}{}\protected@file@percent }
+\newlabel{fig:callback_sonar}{{8}{9}{}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.2}Lettura comandi utente}{9}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Step del task dedicato alla ricezione dei comandi utente.}}{10}{}\protected@file@percent }
+\newlabel{task_step_BLE}{{9}{10}{}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Struttura dati dello snapshot BleControllerSnapshot.}}{11}{}\protected@file@percent }
+\newlabel{fig:ble_snapshot}{{10}{11}{}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Supervisore Board 1}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Panoramica generale}{11}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Schema a blocchi del modulo SupervisorB1.}}{11}{}\protected@file@percent }
+\newlabel{fig:supervisorB1_block}{{11}{11}{}{figure.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Input}{12}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Comandi in uscita dal supervisore della Board2.}}{12}{}\protected@file@percent }
+\newlabel{fig:comandi_b2}{{12}{12}{}{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Struttura dati Board\_Health.}}{13}{}\protected@file@percent }
+\newlabel{fig:board_health_struct}{{13}{13}{}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Struttura dati Encoder.}}{13}{}\protected@file@percent }
+\newlabel{fig:encoder_struct}{{14}{13}{}{figure.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Output}{14}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Mappatura della maschera di errore a 8 bit}}{14}{}\protected@file@percent }
+\newlabel{tab:fault_mapping}{{1}{14}{}{table.1}{}}
 \gdef \LT@i {\LT@entry 
     {4}{99.64197pt}\LT@entry 
     {4}{194.29712pt}\LT@entry 
     {1}{154.26378pt}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Stati degradato e critico per Board 1}}{12}{}\protected@file@percent }
-\newlabel{tab:fault_table}{{2}{12}{}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Decidere di far comandare la Board2}{15}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces \small  {Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}}{16}{}\protected@file@percent }
-\newlabel{fig:decidere_b2}{{12}{16}{}{figure.12}{}}
-\newlabel{fig:rele_b1}{{13a}{17}{}{subfigure.13.1}{}}
-\newlabel{sub@fig:rele_b1}{{a}{17}{}{subfigure.13.1}{}}
-\newlabel{fig:rele_b2}{{13b}{17}{}{subfigure.13.2}{}}
-\newlabel{sub@fig:rele_b2}{{b}{17}{}{subfigure.13.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Costruzione maschere degradate e critiche}{17}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces \small  Chart per la costruzione delle maschere di errore critiche e degradate.}}{17}{}\protected@file@percent }
-\newlabel{fig:costruzione_maschere}{{14}{17}{}{figure.14}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces \small  {Mappatura dei Bit nelle Fault Masks}}}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Calcolo riferimenti}{18}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces \small  Chart per il calcolo dei riferimenti di velocità lineare e angolare del rover.}}{18}{}\protected@file@percent }
-\newlabel{fig:calcolo_riferimenti}{{15}{18}{}{figure.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \small  Scaling dei riferimenti in base alla gravità dell'anomalia rilevata.}}{19}{}\protected@file@percent }
-\newlabel{fig:scaling_riferimenti}{{16}{19}{}{figure.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces \small  Calcolo della variabile safety\_status a partire dalle maschere di errore critiche e degradate di entrambe le Board.}}{20}{}\protected@file@percent }
-\newlabel{fig:calcolo_safety_status}{{17}{20}{}{figure.17}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Supervisore Board 2}{20}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Panoramica generale}{20}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Schema a blocchi del modulo SupervisorB2.}}{20}{}\protected@file@percent }
-\newlabel{fig:supervisorB2_block}{{18}{20}{}{figure.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Input}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Output}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Rilevamento ostacoli}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Gestione ostacoli con sistema in stato \textit  {non degradato}}{22}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Logica di gestione degli ostacoli in stato non degradato.}}{22}{}\protected@file@percent }
-\newlabel{fig:logica_gestione_ostacoli}{{19}{22}{}{figure.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Chart di gestione ostacoli in stato non degradato.}}{23}{}\protected@file@percent }
-\newlabel{fig:chart_non_degradato}{{20}{23}{}{figure.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Stati paralleli del chart in stato non degradato.}}{23}{}\protected@file@percent }
-\newlabel{fig:stati_paralleli}{{21}{23}{}{figure.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Stato parallelo per la gestione di un ostacolo a distanza $\le $ 70 cm.}}{24}{}\protected@file@percent }
-\newlabel{fig:sonars_non_degradato}{{22}{24}{}{figure.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Stato parallelo per la gestione di un ostacolo in movimento a distanza $>$ 70 cm.}}{25}{}\protected@file@percent }
-\newlabel{fig:stati_gestione_timers}{{23}{25}{}{figure.23}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Gestione ostacoli con sistema in stato $degradato$}{26}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Chart di gestione ostacoli in stato degradato.}}{26}{}\protected@file@percent }
-\newlabel{fig:chart_degradato}{{24}{26}{}{figure.24}{}}
-\gdef \@abspage@last{26}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Rilevazione Faults}{15}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Chart di gestione dei faults.}}{15}{}\protected@file@percent }
+\newlabel{fig:gestione_faults}{{15}{15}{}{figure.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Stati degradato e critico per Board 1}}{15}{}\protected@file@percent }
+\newlabel{tab:fault_table}{{2}{15}{}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Decidere di far comandare la Board2}{19}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \small  {Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}}{20}{}\protected@file@percent }
+\newlabel{fig:decidere_b2}{{16}{20}{}{figure.16}{}}
+\newlabel{fig:rele_b1}{{17a}{21}{}{subfigure.17.1}{}}
+\newlabel{sub@fig:rele_b1}{{a}{21}{}{subfigure.17.1}{}}
+\newlabel{fig:rele_b2}{{17b}{21}{}{subfigure.17.2}{}}
+\newlabel{sub@fig:rele_b2}{{b}{21}{}{subfigure.17.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Costruzione maschere degradate e critiche}{21}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces \small  Chart per la costruzione delle maschere di errore critiche e degradate.}}{21}{}\protected@file@percent }
+\newlabel{fig:costruzione_maschere}{{18}{21}{}{figure.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces \small  {Mappatura dei Bit nelle Fault Masks}}}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Calcolo riferimenti}{22}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces \small  Chart per il calcolo dei riferimenti di velocità lineare e angolare del rover.}}{22}{}\protected@file@percent }
+\newlabel{fig:calcolo_riferimenti}{{19}{22}{}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces \small  Scaling dei riferimenti in base alla gravità dell'anomalia rilevata.}}{23}{}\protected@file@percent }
+\newlabel{fig:scaling_riferimenti}{{20}{23}{}{figure.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces \small  Calcolo della variabile safety\_status a partire dalle maschere di errore critiche e degradate di entrambe le Board.}}{24}{}\protected@file@percent }
+\newlabel{fig:calcolo_safety_status}{{21}{24}{}{figure.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Supervisore Board 2}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Panoramica generale}{24}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Schema a blocchi del modulo SupervisorB2.}}{24}{}\protected@file@percent }
+\newlabel{fig:supervisorB2_block}{{22}{24}{}{figure.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Input}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Output}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Rilevamento ostacoli}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Gestione ostacoli con sistema in stato \textit  {non degradato}}{26}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Logica di gestione degli ostacoli in stato non degradato.}}{26}{}\protected@file@percent }
+\newlabel{fig:logica_gestione_ostacoli}{{23}{26}{}{figure.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Chart di gestione ostacoli in stato non degradato.}}{27}{}\protected@file@percent }
+\newlabel{fig:chart_non_degradato}{{24}{27}{}{figure.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Stati paralleli del chart in stato non degradato.}}{27}{}\protected@file@percent }
+\newlabel{fig:stati_paralleli}{{25}{27}{}{figure.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Stato parallelo per la gestione di un ostacolo a distanza $\le $ 70 cm.}}{28}{}\protected@file@percent }
+\newlabel{fig:sonars_non_degradato}{{26}{28}{}{figure.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Stato parallelo per la gestione di un ostacolo in movimento a distanza $>$ 70 cm.}}{29}{}\protected@file@percent }
+\newlabel{fig:stati_gestione_timers}{{27}{29}{}{figure.27}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Gestione ostacoli con sistema in stato $degradato$}{30}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Chart di gestione ostacoli in stato degradato.}}{30}{}\protected@file@percent }
+\newlabel{fig:chart_degradato}{{28}{30}{}{figure.28}{}}
+\gdef \@abspage@last{30}

@@ -1,19 +1,22 @@
-\contentsline {section}{\numberline {1}Acquisizione segnali Board 2}{3}{}%
-\contentsline {subsection}{\numberline {1.1}\textbf {HC-SR04} - Sensore ad ultrasuoni}{3}{}%
-\contentsline {section}{\numberline {2}Funzionamento generale di ciascuna board}{5}{}%
-\contentsline {subsection}{\numberline {2.1}Interazione tra Task e Meccanismo di Snapshot}{5}{}%
-\contentsline {section}{\numberline {3}Supervisore Board 1}{7}{}%
-\contentsline {subsection}{\numberline {3.1}Panoramica generale}{7}{}%
-\contentsline {subsection}{\numberline {3.2}Input}{8}{}%
-\contentsline {subsection}{\numberline {3.3}Output}{10}{}%
-\contentsline {subsection}{\numberline {3.4}Rilevazione Faults}{11}{}%
-\contentsline {subsection}{\numberline {3.5}Decidere di far comandare la Board2}{15}{}%
-\contentsline {subsection}{\numberline {3.6}Costruzione maschere degradate e critiche}{17}{}%
-\contentsline {subsection}{\numberline {3.7}Calcolo riferimenti}{18}{}%
-\contentsline {section}{\numberline {4}Supervisore Board 2}{20}{}%
-\contentsline {subsection}{\numberline {4.1}Panoramica generale}{20}{}%
-\contentsline {subsection}{\numberline {4.2}Input}{21}{}%
-\contentsline {subsection}{\numberline {4.3}Output}{21}{}%
-\contentsline {subsection}{\numberline {4.4}Rilevamento ostacoli}{21}{}%
-\contentsline {subsubsection}{\numberline {4.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{22}{}%
-\contentsline {subsubsection}{\numberline {4.4.2}Gestione ostacoli con sistema in stato $degradato$}{26}{}%
+\contentsline {section}{\numberline {1}Funzionamento generale di ciascuna board}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Interazione tra Task e Meccanismo di Snapshot}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Interazione tra le due Board}{5}{}%
+\contentsline {subsection}{\numberline {1.3}Funzionamento task di Board 2}{6}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}Acquisizione distanza ostacoli}{6}{}%
+\contentsline {paragraph}{Utilizzo DMA per la lettura dei segnali}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}Lettura comandi utente}{9}{}%
+\contentsline {section}{\numberline {2}Supervisore Board 1}{11}{}%
+\contentsline {subsection}{\numberline {2.1}Panoramica generale}{11}{}%
+\contentsline {subsection}{\numberline {2.2}Input}{12}{}%
+\contentsline {subsection}{\numberline {2.3}Output}{14}{}%
+\contentsline {subsection}{\numberline {2.4}Rilevazione Faults}{15}{}%
+\contentsline {subsection}{\numberline {2.5}Decidere di far comandare la Board2}{19}{}%
+\contentsline {subsection}{\numberline {2.6}Costruzione maschere degradate e critiche}{21}{}%
+\contentsline {subsection}{\numberline {2.7}Calcolo riferimenti}{22}{}%
+\contentsline {section}{\numberline {3}Supervisore Board 2}{24}{}%
+\contentsline {subsection}{\numberline {3.1}Panoramica generale}{24}{}%
+\contentsline {subsection}{\numberline {3.2}Input}{25}{}%
+\contentsline {subsection}{\numberline {3.3}Output}{25}{}%
+\contentsline {subsection}{\numberline {3.4}Rilevamento ostacoli}{25}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{26}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Gestione ostacoli con sistema in stato $degradato$}{30}{}%
