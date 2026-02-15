@@ -277,11 +277,54 @@ Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono eviden
 
 
 
+\subsection{Funzionamento task di Board 1}
+\subsubsection{Task: lettura batteria e temperatura}
+La Board 1 è equipaggiata con sensori per il monitoraggio della temperatura e della batteria. Un task dedicato esegue ciclicamente la lettura di questi sensori, aggiornando lo snapshot \textbf{BoardHealthSnapshot} con i valori rilevati.
+
+In Figura~\ref{fig:health_task} è mostrato lo step del task dedicato alla lettura della batteria e temperatura, in cui vengono evidenziati i dati acquisiti e aggiornati nello snapshot \textbf{BoardHealthSnapshot}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/BatTemp/BoardHelathTask}
+    \caption{Step del task dedicato alla lettura della batteria e temperatura.}
+    \label{fig:health_task}
+\end{figure}
+
+Per garantire l'affidabilità a lungo termine, il sistema integra un modulo di diagnostica basato su convertitori Analogico-Digitali (ADC) che monitorano costantemente i parametri vitali della scheda. Questo modulo si occupa di due aspetti critici:
+
+\begin{itemize}
+\item \textbf{Gestione della Batteria:} Il sistema legge la tensione della batteria attraverso un partitore resistivo. Poiché la scarica di una batteria non è lineare, il software utilizza una \textit{Look-Up Table} (LUT) e un'interpolazione
+                                        lineare per convertire i Volt in una percentuale di carica residua (0-100\%). Ciò fornisce all'utente un'indicazione realistica dell'autonomia residua.
+\item \textbf{Monitoraggio Termico:}    Utilizzando il sensore di temperatura interno al microcontrollore STM32G4, il sistema calcola la temperatura operativa della logica di controllo. Il calcolo sfrutta i dati di calibrazione salvati in fabbrica
+                                        dal produttore per garantire la massima precisione.
+\end{itemize}
+
+Per evitare letture errate dovute a disturbi elettrici o picchi temporanei, i dati non vengono usati così come sono, ma vengono processati attraverso una media mobile. 
+Questo filtro "ammorbidisce" le letture su una finestra di 10 campioni, garantendo che i valori visualizzati siano stabili e puliti. 
+Infine, il modulo verifica che i valori rientrino in range di sicurezza (es. 7V - 15V per la batteria), segnalando errori di sistema qualora i parametri diventino critici
+
+\subsubsection{Task: supervisore Board 1}
+Il supervisore della Board 1 è implementato anch'esso tramite una macchina a stati sviluppata in Simulink Stateflow. Questo task ha il compito di supervisionare l'integrità dell'hardware e di orchestrare le logiche di movimento avanzate.
+
+In Figura~\ref{fig:supervisorB1_task} è illustrato lo step del task del supervisore della Board 1, con il dettaglio delle interfacce di input e output.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB1/task_step_supervisorB1}
+\caption{Step del task del supervisore della Board 1.}
+\label{fig:supervisorB1_task}
+
+\end{figure}
+
+Il task elabora in tempo reale i dati provenienti dalla \textbf{Board Health} (stato di batteria e temperatura), i feedback degli \textbf{Encoder} motori e i pacchetti dati ricevuti dalla Board 2.
 
 
-
-
-
+La logica di controllo è strutturata su tre pilastri fondamentali:
+\begin{itemize}
+\item \textbf{Diagnostica e Fault Masking:} Il sistema aggrega i guasti rilevati in maschere di errore (\textit{Critical} e \textit{Degraded}). Queste maschere permettono al supervisore di inibire determinate manovre o di limitare la potenza del sistema in caso di anomalie termiche o di tensione, garantendo la protezione della componentistica meccanica ed elettronica.
+\item \textbf{Gestione delle Manovre Complesse:} A differenza della Board 2, focalizzata sull'evitamento ostacoli, la Board 1 gestisce comandi di alto livello come la \textit{Rotazione a 180 gradi} assistita e la procedura di \textit{Emergency Stop}, monitorando l'arresto effettivo delle ruote tramite i sensori di velocità.
+\item \textbf{Arbitraggio dell'Attuazione:} Il supervisore valuta costantemente l'affidabilità della comunicazione inter-board. Qualora rilevi un'instabilità critica nel proprio sottosistema di controllo ma una comunicazione valida con l'altra scheda, è in grado di cedere i privilegi di attuazione alla Board 2, realizzando una strategia di ridonanza funzionale che aumenta la resilienza del rover.
+\end{itemize}
 
 
 

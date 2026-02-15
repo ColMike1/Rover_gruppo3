@@ -8,18 +8,21 @@
 \contentsline {subsubsection}{\numberline {1.3.3}Task: lettura giroscopio}{11}{}%
 \contentsline {subsubsection}{\numberline {1.3.4}Task: supervisore Board 2}{12}{}%
 \contentsline {subsubsection}{\numberline {1.3.5}Task: log dei dati per il debug}{15}{}%
-\contentsline {section}{\numberline {2}Supervisore Board 1}{16}{}%
-\contentsline {subsection}{\numberline {2.1}Panoramica generale}{16}{}%
-\contentsline {subsection}{\numberline {2.2}Input}{17}{}%
-\contentsline {subsection}{\numberline {2.3}Output}{19}{}%
-\contentsline {subsection}{\numberline {2.4}Rilevazione Faults}{20}{}%
-\contentsline {subsection}{\numberline {2.5}Decidere di far comandare la Board2}{24}{}%
-\contentsline {subsection}{\numberline {2.6}Costruzione maschere degradate e critiche}{26}{}%
-\contentsline {subsection}{\numberline {2.7}Calcolo riferimenti}{27}{}%
-\contentsline {section}{\numberline {3}Supervisore Board 2}{29}{}%
-\contentsline {subsection}{\numberline {3.1}Panoramica generale}{29}{}%
-\contentsline {subsection}{\numberline {3.2}Input}{30}{}%
-\contentsline {subsection}{\numberline {3.3}Output}{30}{}%
-\contentsline {subsection}{\numberline {3.4}Rilevamento ostacoli}{30}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{31}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Gestione ostacoli con sistema in stato $degradato$}{35}{}%
+\contentsline {subsection}{\numberline {1.4}Funzionamento task di Board 1}{16}{}%
+\contentsline {subsubsection}{\numberline {1.4.1}Task: lettura batteria e temperatura}{16}{}%
+\contentsline {subsubsection}{\numberline {1.4.2}Task: supervisore Board 1}{18}{}%
+\contentsline {section}{\numberline {2}Supervisore Board 1}{20}{}%
+\contentsline {subsection}{\numberline {2.1}Panoramica generale}{20}{}%
+\contentsline {subsection}{\numberline {2.2}Input}{21}{}%
+\contentsline {subsection}{\numberline {2.3}Output}{23}{}%
+\contentsline {subsection}{\numberline {2.4}Rilevazione Faults}{24}{}%
+\contentsline {subsection}{\numberline {2.5}Decidere di far comandare la Board2}{28}{}%
+\contentsline {subsection}{\numberline {2.6}Costruzione maschere degradate e critiche}{30}{}%
+\contentsline {subsection}{\numberline {2.7}Calcolo riferimenti}{31}{}%
+\contentsline {section}{\numberline {3}Supervisore Board 2}{33}{}%
+\contentsline {subsection}{\numberline {3.1}Panoramica generale}{33}{}%
+\contentsline {subsection}{\numberline {3.2}Input}{34}{}%
+\contentsline {subsection}{\numberline {3.3}Output}{34}{}%
+\contentsline {subsection}{\numberline {3.4}Rilevamento ostacoli}{34}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{35}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Gestione ostacoli con sistema in stato $degradato$}{39}{}%
