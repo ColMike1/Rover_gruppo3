@@ -25,7 +25,45 @@
 \newpage
 \tableofcontents
 % \listoffigures
-\newpage
+
+
+
+
+
+
+\section{Specifiche}
+
+Il rover è dotato di due schede di controllo, denominate Board 1 e Board 2, che collaborano per garantire il funzionamento del sistema. In Figura~\ref{fig:architettura} è mostrata l'architettura generale del sistema.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/architettura}
+    \caption{Architettura generale del sistema.}
+    \label{fig:architettura}
+\end{figure}
+
+\subsection{Condizioni di funzionamento nominale}
+In condizioni di funzionamento nominale la Board 1 si occupa di gestire l'attuazione dei motori, inviando tramite UART l'ingresso di controllo ai motori. Questi possono raggiungere una velocità massima di $160 RPM$.
+Il riferimento di velocità lineare o di rotazione è calcolato in base ai comandi utente inviati attraverso un joistick tramite protocollo \textit{Bluethooth} ad un $ESP32$ e ricevuti dalla Board 2 tramite protocollo $I2C$.
+Questi riferimenti sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento o anomalie rilevate dai supervisori.
+Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $75$ e $150$ cm, il supervisore di Board 2 attiva delle procedure 
+di deviazione o di aggiramento. Questi comandi vengono inviati alla Board 1 tramite la comunicazione UART, che si occupa di eseguirli se non sono presenti fault critici o degradati.
+
+In seguito si mostrranno le condizioni di funzionamento in presenza di fault.
+
+\subsection{Encoder non funzionanti}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Encoder_faults}
+    \caption{Logica di sostituzione in presenza di encoder non funzionanti.}
+    \label{fig:encoder_fault}
+\end{figure}
+Il rover è progettato per continuare a funzionare anche in presenza di guasti agli encoder delle ruote. Se uno o più encoder si rompono, il sistema stima la velocità mancante usando quella delle ruote sane. La logica di sostituzione è la seguente:
+\begin{itemize}
+    \item \textit{1 Fallimento}: Se si rompe l'encoder anteriore sinistro, il sistema "copia" il valore di quello posteriore sinistro.
+    \item \textit{2 Fallimenti}: Se si rompe un intero lato, copia i valori dall'altro lato.
+    \item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
+\end{itemize}
 
 
 
@@ -56,13 +94,7 @@
 
 
 
-
-
-
-
-
-
-\section{Funzionamento generale di ciascuna board}
+\section{Funzionamento generale del software di ciascuna board}
 \subsection{Interazione tra Task e Meccanismo di Snapshot}
 Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
 variabili globali condivise. Si consideri, ad esempio, la Figura~\ref{fig:funzionamento_generale} che illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit} che vengono eseguiti sulla Board 1. 
@@ -92,26 +124,7 @@ Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio te
     \label{fig:funzionamento_generale_b2}
 \end{figure}
 
-\subsection{Interazione tra le due Board}
-Le due board comunicano tra loro tramite un collegamento seriale, con presenza di task di trasmissione e ricezione su entrambe le board. Il task di trasmissione su entrambe le board ha periodo di 20 ms,
-mentre il task di ricezione è di tipo event-driven, attivato dall'arrivo di nuovi dati sulla seriale. In Figura~\ref{fig:comunicazione_board21} è mostrata l'interazione tra i task di trasmissione della 
-Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono trasmessi e ricevuti tra le due board.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b2b1}
-    \caption{Interazione tra i task di trasmissione della Board 2 e ricezione della Board 1.}
-    \label{fig:comunicazione_board}
-\end{figure}
-
- Allo stesso modo, nella Figura~\ref{fig:comunicazione_board12} è mostrata l'interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b1b2}
-    \caption{Interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.}
-    \label{fig:comunicazione_board12}
-\end{figure}
 
 
 \subsection{Funzionamento task di Board 2}
@@ -240,7 +253,7 @@ Infine, in condizioni nominali, la Board 2 non invia comandi di attuazione ai mo
     \item Il supervisore della Board 1 funziona in maniera discontinua.
 \end{itemize}
 
-La descrizione di come il comando possa essere dato da Board 2 in caso di anomalie sarà descritto in seguito.
+La descrizione di come l'attuazione possa essere effettuata da Board 2 in caso di anomalie nella comunicazione tra le due Board sarà descritto in seguito.
 
 In Figura~\ref{fig:b2_actuation} è mostrata la $actuation\_step$ di Board 2 in funzione della variabile $autorized\_to\_send\_command$ in uscita dal supervisore.
 
@@ -254,6 +267,17 @@ In Figura~\ref{fig:b2_actuation} è mostrata la $actuation\_step$ di Board 2 in 
 Data l'assenza degli encoder, l'attuazione di Board 2 dovrà essere in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
 La funzione di attuazione trasforma i riferimenti di velocità del supervisore in segnali di potenza per i motori. Il sistema opera in anello aperto (open-loop), convertendo i giri al minuto (RPM) desiderati in tensione elettrica
 Infine, i comandi vengono inviati al driver di potenza Sabertooth tramite una scalatura lineare del voltaggio in uscita, con un range di $[-12V; +12V]$ corrispondente a $[-MAX\_RPM; +MAX\_RPM]$.
+
+Lo snapshot del supervisore di Board 2 è mostrato in Figura~\ref{fig:b2_snapshot}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/snapshot_supervisoreB2}
+    \caption{Snapshot del supervisore di Board 2}
+    \label{fig:b2_snapshot}
+\end{figure}
+
+
 
 
 \subsubsection{Task: log dei dati per il debug}
@@ -276,6 +300,18 @@ Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono eviden
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Funzionamento task di Board 1}
 \subsubsection{Task: lettura batteria e temperatura}
@@ -304,7 +340,7 @@ Questo filtro "ammorbidisce" le letture su una finestra di 10 campioni, garanten
 Infine, il modulo verifica che i valori rientrino in range di sicurezza (es. 7V - 15V per la batteria), segnalando errori di sistema qualora i parametri diventino critici
 
 \subsubsection{Task: supervisore Board 1}
-Il supervisore della Board 1 è implementato anch'esso tramite una macchina a stati sviluppata in Simulink Stateflow. Questo task ha il compito di supervisionare l'integrità dell'hardware e di orchestrare le logiche di movimento avanzate.
+Il supervisore della Board 1 è implementato tramite una macchina a stati sviluppata in Simulink Stateflow. Questo task ha il compito di supervisionare l'integrità dell'hardware e di assegnare i riferimenti di velocità lineare e di rotazione.
 
 In Figura~\ref{fig:supervisorB1_task} è illustrato lo step del task del supervisore della Board 1, con il dettaglio delle interfacce di input e output.
 
@@ -321,11 +357,112 @@ Il task elabora in tempo reale i dati provenienti dalla \textbf{Board Health} (s
 
 La logica di controllo è strutturata su tre pilastri fondamentali:
 \begin{itemize}
-\item \textbf{Diagnostica e Fault Masking:} Il sistema aggrega i guasti rilevati in maschere di errore (\textit{Critical} e \textit{Degraded}). Queste maschere permettono al supervisore di inibire determinate manovre o di limitare la potenza del sistema in caso di anomalie termiche o di tensione, garantendo la protezione della componentistica meccanica ed elettronica.
-\item \textbf{Gestione delle Manovre Complesse:} A differenza della Board 2, focalizzata sull'evitamento ostacoli, la Board 1 gestisce comandi di alto livello come la \textit{Rotazione a 180 gradi} assistita e la procedura di \textit{Emergency Stop}, monitorando l'arresto effettivo delle ruote tramite i sensori di velocità.
-\item \textbf{Arbitraggio dell'Attuazione:} Il supervisore valuta costantemente l'affidabilità della comunicazione inter-board. Qualora rilevi un'instabilità critica nel proprio sottosistema di controllo ma una comunicazione valida con l'altra scheda, è in grado di cedere i privilegi di attuazione alla Board 2, realizzando una strategia di ridonanza funzionale che aumenta la resilienza del rover.
+\item \textbf{Diagnostica e Fault Masking:} il sistema valuta l'integrità dei dati e la persistenza della comunicazione con la Board 2. In base alla latenza dei messaggi e alla coerenza dei sensori, può
+                                            far transitare il rover in stati di operatività $Degraded$ o $Critical$. Questi stati permettono al supervisore di inibire manore o di limitare la potenza alle ruote
+                                            in caso di anomalie, garantendo maggiore protezione. 
+
+\item \textbf{Gestione delle Manovre Complesse:} A differenza della Board 2, focalizzata sull'evitamento ostacoli, la Board 1 gestisce comandi di alto livello come la \textit{Rotazione a 180 gradi} assistita e la procedura di \textit{Emergency Stop}, 
+                                            monitorando l'arresto effettivo delle ruote tramite i sensori di velocità.
+\item \textbf{Arbitraggio dell'Attuazione:} Il supervisore valuta costantemente l'affidabilità della comunicazione inter-board. Qualora rilevi un'instabilità nella comunicazione con l'altra scheda, è in grado di cedere i privilegi di attuazione alla Board 2,
+                                            realizzando una strategia di ridonanza funzionale che aumenta la resilienza del rover. I motivi per cui la Board 1 può decidere di cedere il controllo alla Board 2 quando la comunicazione con quest'ultima si interrompe o si degrada
+                                            derivano dal fatto che Board 2 ha a disposizione i sonar e sopratutto il comando utente, fondamentali per decider dove andare e se deviare il percorso o addirittura fermarsi.
 \end{itemize}
 
+Lo snapshot del supervisore di Board 1 è mostrato in Figura~\ref{fig:b1_snapshot}.
+
+\begin{figure}[H]
+    
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB1/snapshot_supervisoreB1}
+    \caption{Step del task del supervisore della Board 1.}
+    \label{fig:b1_snapshot}
+
+\end{figure}
+
+\subsubsection{Task: controllo motori}
+Il task di controllo presente nella Board 1 è responsabile dell'attuazione dei comandi di movimento del rover, basandosi sui riferimenti di velocità lineare e angolare forniti dal supervisore.
+Il task quindi:
+\begin{itemize}
+    \item legge i riferimenti di velocità lineare ($v\_ref$) e angolare ($omega\_ref$) calcolati dal supervisore.
+    \item legge le velocità delle ruote attraverso gli encode.
+    \item applica un controllo PID per regolare la potenza erogata ai motori, al fine di raggiungere i riferimenti di velocità desiderati.
+\end{itemize}
+Alla lettura degli encoder per stimare la velocità delle ruote è accompagnata una logica che permette il rilevamento di un'anomalia derivante dal fatto che si sta alimentando il motore ma 
+gli encoder non rilvano movimenti, quindi la velocità calcolata è nulla. In particolare, se si rileva quest'anomalia per $20$ cicli di esecuzione, si imposta la variabile $has\_no\_feedback(i)$ 
+associata al motore di riferimento a $1$.
+
+Se uno o più encoder si rompono, il rover non deve smettere di funzionare, ma deve "stimare" la velocità mancante usando quella delle ruote sane.
+Il codice applica una sostituzione simmetrica:
+
+\begin{itemize}
+    \item \textit{1 Fallimento}:Se si rompe l'encoder anteriore sinistro, il sistema "copia" il valore di quello posteriore sinistro.
+    \item \textit{2 Fallimenti}: Se si rompe un intero lato, copia i valori dall'altro lato.
+    \item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
+\end{itemize}
+
+
+\subsubsection{Task: log dei dati per il debug}
+La Board 1 integra un task dedicato alla stampa dei dati per scopi di debug. Questo task, eseguito a cadenza regolare,
+acquisisce gli snapshot:
+\begin{itemize}
+    \item \textbf{RxSnapshot}
+    \item \textbf{EncoderSnapshot}
+    \item \textbf{BoardHealthSnapshot}
+\end{itemize}
+e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
+Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
+    \caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
+    \label{fig:log_task}
+\end{figure}
+
+
+\subsubsection{Task: led}
+Per fornire un feedback immediato sullo stato operativo del sistema senza l'ausilio di terminali esterni, è stato implementato un task dedicato alla gestione della diagnostica visiva tramite LED. Il modulo \texttt{led\_task.c}
+monitora le maschere di errore e le azioni correnti decise dai supervisori di entrambe le board, traducendole nel seguente protocollo di segnalazione:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Colore LED} & \textbf{Comportamento} & \textbf{Significato Operativo} \\ \hline
+Rosso & Fisso & Guasto Critico (Sistema bloccato) \\ \hline
+Rosso & Lampeggiante & Guasto Degraded (Prestazioni ridotte) \\ \hline
+Giallo (L/R) & Fisso & Manovra di schivata o sterzata in corso \\ \hline
+Blu & Fisso & Emergency Stop attivo (Frenata di emergenza) \\ \hline
+\end{tabular}
+\caption{Protocollo di segnalazione visiva del rover.}
+\label{tab:led_protocol}
+\end{table}
+
+Questa implementazione risulta fondamentale durante i test sul campo, poiché permette di distinguere istantaneamente tra un normale comportamento di evitamento ostacoli (LED Giallo) e un arresto dovuto a un'anomalia hardware o software (LED Rosso).
+
+
+\subsection{Task di trasmissione e ricezione tra le due Board}
+Le due board comunicano tra loro tramite un collegamento seriale, con presenza di task di trasmissione e ricezione su entrambe le board. Il task di trasmissione su entrambe le board ha periodo di 20 ms,
+mentre il task di ricezione è di tipo event-driven, attivato dall'arrivo di nuovi dati sulla seriale. In Figura~\ref{fig:comunicazione_board21} è mostrata l'interazione tra i task di trasmissione della 
+Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono trasmessi e ricevuti tra le due board. In particolare vengono inviati gli snapshot \textbf{SupervisorSnapshot}, 
+\textbf{BleControllerSnapshot} e \textbf{IMUSnapshot}. Il contenuto di questi snapshot è descritto in dettaglio nelle sezioni dedicate ai task di Board 2.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b2b1}
+    \caption{Interazione tra i task di trasmissione della Board 2 e ricezione della Board 1.}
+    \label{fig:comunicazione_board21}
+\end{figure}
+
+ Allo stesso modo, nella Figura~\ref{fig:comunicazione_board12} è mostrata l'interazione tra i task di trasmissione della Board 1 e ricezione della Board 2. In particolare, la Board 1 invia alla Board 2 lo
+ snapshot \textbf{EncoderSnapshot} e \textbf{SupervisorSnapshot}. Il contenuto di questi snapshot è descritto in dettaglio nelle sezioni dedicate ai task di Board 1.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b1b2}
+    \caption{Interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.}
+    \label{fig:comunicazione_board12}
+\end{figure}
 
 
 
@@ -380,7 +517,7 @@ La logica di controllo è strutturata su tre pilastri fondamentali:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
 \section{Supervisore Board 1}
 \subsection{Panoramica generale}
 Il supervisore della Board 1 è implementato come un modulo Simulink denominato \textbf{SupervisorB1}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB1_block}.
@@ -719,7 +856,7 @@ particolare utilizzando la variabile $safety\_status$ che viene calcolata a part
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
 \section{Supervisore Board 2}
 
 \subsection{Panoramica generale}
