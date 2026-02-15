@@ -1,8 +1,6 @@
-/*
- * control.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file control.h
+ * @brief Header aggregatore del modulo di controllo.
  */
 
 #ifndef INC_CONTROL_CONTROL_H_

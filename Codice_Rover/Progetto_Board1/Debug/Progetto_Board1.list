@@ -35,17 +35,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_rnglists 00001b1b  00000000  00000000  00051478  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000317bd  00000000  00000000  00052f93  2**0
+ 16 .debug_macro  000317ff  00000000  00000000  00052f93  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0003537e  00000000  00000000  00084750  2**0
+ 17 .debug_line   000367b2  00000000  00000000  00084792  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    001239b5  00000000  00000000  000b9ace  2**0
+ 18 .debug_str    00123946  00000000  00000000  000baf44  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001dd483  2**0
+ 19 .comment      00000043  00000000  00000000  001de88a  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000a79c  00000000  00000000  001dd4c8  2**2
+ 20 .debug_frame  0000a79c  00000000  00000000  001de8d0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000090  00000000  00000000  001e7c64  2**0
+ 21 .debug_line_str 00000079  00000000  00000000  001e906c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -6455,11 +6455,11 @@ static inline uint16_t crc16_ccitt(const uint8_t *data, uint16_t len)
 
 08003060 <CommPack_BuildB1Tx>:
 
-uint16_t CommPack_BuildB1Tx(uint8_t *buf,
-                                uint16_t max_len,
-                                const EncoderSnapshot_t *enc,
-                                const SupervisorSnapshot_t *sup)
-{
+/**
+ * @brief Costruisce il pacchetto di telemetria B1 (Trasmissione verso PC/Base).
+ * @details Include dati degli encoder e stato del supervisore, aggiungendo header e CRC16-CCITT.
+ * @param[out] buf Buffer di destinazione per il pacchetto serializzato.
+ * @param[in] max_len Lunghezza massima del buffer fornito.
  8003060:	b580      	push	{r7, lr}
  8003062:	b092      	sub	sp, #72	@ 0x48
  8003064:	af00      	add	r7, sp, #0
@@ -6468,7 +6468,7 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  800306a:	603b      	str	r3, [r7, #0]
  800306c:	460b      	mov	r3, r1
  800306e:	817b      	strh	r3, [r7, #10]
-  if (!buf || !enc || !sup)
+ * @param[in] enc Snapshot degli encoder da includere nel payload.
  8003070:	68fb      	ldr	r3, [r7, #12]
  8003072:	2b00      	cmp	r3, #0
  8003074:	d005      	beq.n	8003082 <CommPack_BuildB1Tx+0x22>
@@ -6478,47 +6478,47 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  800307c:	683b      	ldr	r3, [r7, #0]
  800307e:	2b00      	cmp	r3, #0
  8003080:	d101      	bne.n	8003086 <CommPack_BuildB1Tx+0x26>
-    return 0;
+ * @param[in] sup Snapshot del supervisore da includere nel payload.
  8003082:	2300      	movs	r3, #0
  8003084:	e074      	b.n	8003170 <CommPack_BuildB1Tx+0x110>
-
-  /* frame sizes */
-  const uint16_t HEADER_LEN = sizeof(CommFrameHeader_t);
+ * @return uint16_t Numero di byte scritti nel buffer (0 in caso di errore).
+ */
+uint16_t CommPack_BuildB1Tx(uint8_t *buf, uint16_t max_len, const EncoderSnapshot_t *enc, const SupervisorSnapshot_t *sup)
  8003086:	230a      	movs	r3, #10
  8003088:	f8a7 3042 	strh.w	r3, [r7, #66]	@ 0x42
-  const uint16_t PAYLOAD_LEN = sizeof(CommPayloadB1_t);
+{
  800308c:	231c      	movs	r3, #28
  800308e:	f8a7 3040 	strh.w	r3, [r7, #64]	@ 0x40
-  const uint16_t CRC_LEN = sizeof(uint16_t);
+    static uint16_t tx_seq = 0U;
  8003092:	2302      	movs	r3, #2
  8003094:	87fb      	strh	r3, [r7, #62]	@ 0x3e
-  const uint16_t FRAME_LEN = sizeof(CommFrameB1_t);
+    uint16_t i = 0U;
  8003096:	2328      	movs	r3, #40	@ 0x28
  8003098:	87bb      	strh	r3, [r7, #60]	@ 0x3c
-
-  if (max_len < FRAME_LEN)
+    const uint16_t FRAME_LEN = (uint16_t)sizeof(CommFrameB1_t);
+    const uint16_t HEADER_LEN = (uint16_t)sizeof(CommFrameHeader_t);
  800309a:	897a      	ldrh	r2, [r7, #10]
  800309c:	8fbb      	ldrh	r3, [r7, #60]	@ 0x3c
  800309e:	429a      	cmp	r2, r3
  80030a0:	d201      	bcs.n	80030a6 <CommPack_BuildB1Tx+0x46>
-    return 0;
+    const uint16_t PAYLOAD_LEN = (uint16_t)sizeof(CommPayloadB1_t);
  80030a2:	2300      	movs	r3, #0
  80030a4:	e064      	b.n	8003170 <CommPack_BuildB1Tx+0x110>
+    const uint16_t CRC_LEN = (uint16_t)sizeof(uint16_t);
 
-  static uint16_t tx_seq = 0;
-
-  uint16_t i = 0;
+    if ((buf == NULL) || (enc == NULL) || (sup == NULL))
+    {
  80030a6:	2300      	movs	r3, #0
  80030a8:	877b      	strh	r3, [r7, #58]	@ 0x3a
+        return 0U;
+    }
 
-
-  /* ---------- Header ---------- */
-  CommFrameHeader_t hdr;
-
-  hdr.payload_len  = PAYLOAD_LEN;
+    if (max_len < FRAME_LEN)
+    {
+        return 0U;
  80030aa:	f8b7 3040 	ldrh.w	r3, [r7, #64]	@ 0x40
  80030ae:	867b      	strh	r3, [r7, #50]	@ 0x32
-  hdr.seq          = ++tx_seq;
+    }
  80030b0:	4b31      	ldr	r3, [pc, #196]	@ (8003178 <CommPack_BuildB1Tx+0x118>)
  80030b2:	881b      	ldrh	r3, [r3, #0]
  80030b4:	3301      	adds	r3, #1
@@ -6528,15 +6528,15 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  80030bc:	4b2e      	ldr	r3, [pc, #184]	@ (8003178 <CommPack_BuildB1Tx+0x118>)
  80030be:	881b      	ldrh	r3, [r3, #0]
  80030c0:	86bb      	strh	r3, [r7, #52]	@ 0x34
-  hdr.timestamp_ms = sup->task_last_run_ms;
+
  80030c2:	683b      	ldr	r3, [r7, #0]
  80030c4:	681b      	ldr	r3, [r3, #0]
  80030c6:	f8c7 3036 	str.w	r3, [r7, #54]	@ 0x36
-  hdr.msg_id = 0xAA55;
+    CommFrameHeader_t hdr;
  80030ca:	f64a 2355 	movw	r3, #43605	@ 0xaa55
  80030ce:	863b      	strh	r3, [r7, #48]	@ 0x30
-
-  memcpy(&buf[i], &hdr, HEADER_LEN);
+    hdr.payload_len  = PAYLOAD_LEN;
+    tx_seq++;
  80030d0:	8f7b      	ldrh	r3, [r7, #58]	@ 0x3a
  80030d2:	68fa      	ldr	r2, [r7, #12]
  80030d4:	4413      	add	r3, r2
@@ -6544,21 +6544,21 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  80030da:	f107 0130 	add.w	r1, r7, #48	@ 0x30
  80030de:	4618      	mov	r0, r3
  80030e0:	f00f fbe5 	bl	80128ae <memcpy>
-  i += HEADER_LEN;
+    hdr.seq          = tx_seq;
  80030e4:	8f7a      	ldrh	r2, [r7, #58]	@ 0x3a
  80030e6:	f8b7 3042 	ldrh.w	r3, [r7, #66]	@ 0x42
  80030ea:	4413      	add	r3, r2
  80030ec:	877b      	strh	r3, [r7, #58]	@ 0x3a
+    hdr.timestamp_ms = sup->task_last_run_ms;
+    hdr.msg_id       = 0xAA55U;
 
-
-  /* ---------- Payload ---------- */
-  CommPayloadB1_t pl;
-  for (int i = 0; i < 4; i++)
+    (void)memcpy(&buf[i], &hdr, HEADER_LEN);
+    i += HEADER_LEN;
  80030ee:	2300      	movs	r3, #0
  80030f0:	647b      	str	r3, [r7, #68]	@ 0x44
  80030f2:	e00d      	b.n	8003110 <CommPack_BuildB1Tx+0xb0>
-  {
-      pl.wheel_speed_rpm[i] = enc->wheel_speed_rpm[i];
+
+    CommPayloadB1_t pl;
  80030f4:	687a      	ldr	r2, [r7, #4]
  80030f6:	6c7b      	ldr	r3, [r7, #68]	@ 0x44
  80030f8:	009b      	lsls	r3, r3, #2
@@ -6570,28 +6570,28 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  8003104:	443b      	add	r3, r7
  8003106:	3b34      	subs	r3, #52	@ 0x34
  8003108:	601a      	str	r2, [r3, #0]
-  for (int i = 0; i < 4; i++)
+    i += HEADER_LEN;
  800310a:	6c7b      	ldr	r3, [r7, #68]	@ 0x44
  800310c:	3301      	adds	r3, #1
  800310e:	647b      	str	r3, [r7, #68]	@ 0x44
  8003110:	6c7b      	ldr	r3, [r7, #68]	@ 0x44
  8003112:	2b03      	cmp	r3, #3
  8003114:	ddee      	ble.n	80030f4 <CommPack_BuildB1Tx+0x94>
-  }
-  pl.degraded_mask  = sup->degraded_mask;
+    int wheel_idx;
+    for (wheel_idx = 0; wheel_idx < 4; wheel_idx++)
  8003116:	683b      	ldr	r3, [r7, #0]
  8003118:	685b      	ldr	r3, [r3, #4]
  800311a:	627b      	str	r3, [r7, #36]	@ 0x24
-  pl.critical_mask  = sup->critical_mask;
+    {
  800311c:	683b      	ldr	r3, [r7, #0]
  800311e:	689b      	ldr	r3, [r3, #8]
  8003120:	62bb      	str	r3, [r7, #40]	@ 0x28
-  pl.alive_counter = sup->alive_counter;
+        pl.wheel_speed_rpm[wheel_idx] = enc->wheel_speed_rpm[wheel_idx];
  8003122:	683b      	ldr	r3, [r7, #0]
  8003124:	7d9b      	ldrb	r3, [r3, #22]
  8003126:	62fb      	str	r3, [r7, #44]	@ 0x2c
-
-  memcpy(&buf[i], &pl, PAYLOAD_LEN);
+    }
+    pl.degraded_mask = sup->degraded_mask;
  8003128:	8f7b      	ldrh	r3, [r7, #58]	@ 0x3a
  800312a:	68fa      	ldr	r2, [r7, #12]
  800312c:	4413      	add	r3, r2
@@ -6599,22 +6599,22 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  8003132:	f107 0114 	add.w	r1, r7, #20
  8003136:	4618      	mov	r0, r3
  8003138:	f00f fbb9 	bl	80128ae <memcpy>
-  i += PAYLOAD_LEN;
+    pl.critical_mask = sup->critical_mask;
  800313c:	8f7a      	ldrh	r2, [r7, #58]	@ 0x3a
  800313e:	f8b7 3040 	ldrh.w	r3, [r7, #64]	@ 0x40
  8003142:	4413      	add	r3, r2
  8003144:	877b      	strh	r3, [r7, #58]	@ 0x3a
+    pl.alive_counter = sup->alive_counter;
 
-
-  /* ---------- CRC ---------- */
-  uint16_t crc = crc16_ccitt(buf, i);
+    (void)memcpy(&buf[i], &pl, PAYLOAD_LEN);
+    i += PAYLOAD_LEN;
  8003146:	8f7b      	ldrh	r3, [r7, #58]	@ 0x3a
  8003148:	4619      	mov	r1, r3
  800314a:	68f8      	ldr	r0, [r7, #12]
  800314c:	f7ff ff44 	bl	8002fd8 <crc16_ccitt>
  8003150:	4603      	mov	r3, r0
  8003152:	827b      	strh	r3, [r7, #18]
-  memcpy(&buf[i], &crc, CRC_LEN);
+
  8003154:	8f7b      	ldrh	r3, [r7, #58]	@ 0x3a
  8003156:	68fa      	ldr	r2, [r7, #12]
  8003158:	4413      	add	r3, r2
@@ -6622,15 +6622,15 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  800315c:	f107 0112 	add.w	r1, r7, #18
  8003160:	4618      	mov	r0, r3
  8003162:	f00f fba4 	bl	80128ae <memcpy>
-  i += CRC_LEN;
+    uint16_t crc = crc16_ccitt(buf, i);
  8003166:	8f7a      	ldrh	r2, [r7, #58]	@ 0x3a
  8003168:	8ffb      	ldrh	r3, [r7, #62]	@ 0x3e
  800316a:	4413      	add	r3, r2
  800316c:	877b      	strh	r3, [r7, #58]	@ 0x3a
-
-  return i;   /* lunghezza frame valido */
+    (void)memcpy(&buf[i], &crc, CRC_LEN);
+    i += CRC_LEN;
  800316e:	8f7b      	ldrh	r3, [r7, #58]	@ 0x3a
-}
+
  8003170:	4618      	mov	r0, r3
  8003172:	3748      	adds	r7, #72	@ 0x48
  8003174:	46bd      	mov	sp, r7
@@ -6638,53 +6638,53 @@ uint16_t CommPack_BuildB1Tx(uint8_t *buf,
  8003178:	20004684 	.word	0x20004684
 
 0800317c <Rx_TaskInit>:
-#define RX_FRAME_LEN (sizeof(CommFrameB2_t))
-#define SYNC_WORD   0xAA56
 
-/* ===== API ===== */
-
-void Rx_TaskInit(void){
+/**
+ * @brief Inizializza il driver UART per la ricezione.
+ */
+void Rx_TaskInit(void)
+{
  800317c:	b580      	push	{r7, lr}
  800317e:	af00      	add	r7, sp, #0
-
-	CommUart_Init();
+    CommUart_Init();
+}
  8003180:	f000 f91e 	bl	80033c0 <CommUart_Init>
 
-}
+/**
  8003184:	bf00      	nop
  8003186:	bd80      	pop	{r7, pc}
 
 08003188 <Rx_TaskStep>:
+    uint8_t byte = 0U;
 
-    printf("\r\n");
-}
+    (void)ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
-void Rx_TaskStep(void)
-{
+    while (CommUart_GetByte(&byte))
+    {
  8003188:	b5b0      	push	{r4, r5, r7, lr}
  800318a:	b08e      	sub	sp, #56	@ 0x38
  800318c:	af00      	add	r7, sp, #0
-    static uint16_t acc_len = 0;
+            acc_buf[acc_len] = byte;
+            acc_len++;
 
-    uint8_t byte;
-
-    /* blocca finché arriva almeno un byte */
-    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+            if (acc_len == 2U)
+            {
+                uint16_t sync = (uint16_t)((uint16_t)acc_buf[0] | (uint16_t)((uint16_t)acc_buf[1] << 8U));
  800318e:	f04f 31ff 	mov.w	r1, #4294967295
  8003192:	2001      	movs	r0, #1
  8003194:	f00d f952 	bl	801043c <ulTaskNotifyTake>
-
-    while (CommUart_GetByte(&byte))
+                if (sync != SYNC_WORD)
+                {
  8003198:	e091      	b.n	80032be <Rx_TaskStep+0x136>
-    {
-        /* ================= SYNC ================= */
-        if (acc_len < 2)
+                    acc_buf[0] = acc_buf[1];
+                    acc_len = 1U;
+                }
  800319a:	4b50      	ldr	r3, [pc, #320]	@ (80032dc <Rx_TaskStep+0x154>)
  800319c:	881b      	ldrh	r3, [r3, #0]
  800319e:	2b01      	cmp	r3, #1
  80031a0:	d826      	bhi.n	80031f0 <Rx_TaskStep+0x68>
-        {
-            acc_buf[acc_len++] = byte;
+            }
+            continue;
  80031a2:	4b4e      	ldr	r3, [pc, #312]	@ (80032dc <Rx_TaskStep+0x154>)
  80031a4:	881b      	ldrh	r3, [r3, #0]
  80031a6:	1c5a      	adds	r2, r3, #1
@@ -6695,14 +6695,14 @@ void Rx_TaskStep(void)
  80031b0:	f897 102b 	ldrb.w	r1, [r7, #43]	@ 0x2b
  80031b4:	4b4a      	ldr	r3, [pc, #296]	@ (80032e0 <Rx_TaskStep+0x158>)
  80031b6:	5499      	strb	r1, [r3, r2]
+        }
 
-            if (acc_len == 2)
  80031b8:	4b48      	ldr	r3, [pc, #288]	@ (80032dc <Rx_TaskStep+0x154>)
  80031ba:	881b      	ldrh	r3, [r3, #0]
  80031bc:	2b02      	cmp	r3, #2
  80031be:	d17b      	bne.n	80032b8 <Rx_TaskStep+0x130>
-            {
-                uint16_t sync = acc_buf[0] | (acc_buf[1] << 8);
+        acc_buf[acc_len] = byte;
+        uint16_t w = (uint16_t)((uint16_t)acc_buf[acc_len-1U] | (uint16_t)((uint16_t)acc_buf[acc_len] << 8U));
  80031c0:	4b47      	ldr	r3, [pc, #284]	@ (80032e0 <Rx_TaskStep+0x158>)
  80031c2:	781b      	ldrb	r3, [r3, #0]
  80031c4:	b21a      	sxth	r2, r3
@@ -6714,37 +6714,37 @@ void Rx_TaskStep(void)
  80031d0:	4313      	orrs	r3, r2
  80031d2:	b21b      	sxth	r3, r3
  80031d4:	85bb      	strh	r3, [r7, #44]	@ 0x2c
-                if (sync != SYNC_WORD)
+
  80031d6:	8dbb      	ldrh	r3, [r7, #44]	@ 0x2c
  80031d8:	f64a 2256 	movw	r2, #43606	@ 0xaa56
  80031dc:	4293      	cmp	r3, r2
  80031de:	d06b      	beq.n	80032b8 <Rx_TaskStep+0x130>
-                {
-                    acc_buf[0] = acc_buf[1];
+        if (w == SYNC_WORD)
+        {
  80031e0:	4b3f      	ldr	r3, [pc, #252]	@ (80032e0 <Rx_TaskStep+0x158>)
  80031e2:	785a      	ldrb	r2, [r3, #1]
  80031e4:	4b3e      	ldr	r3, [pc, #248]	@ (80032e0 <Rx_TaskStep+0x158>)
  80031e6:	701a      	strb	r2, [r3, #0]
-                    acc_len = 1;
+            acc_buf[0] = acc_buf[acc_len-1U];
  80031e8:	4b3c      	ldr	r3, [pc, #240]	@ (80032dc <Rx_TaskStep+0x154>)
  80031ea:	2201      	movs	r2, #1
  80031ec:	801a      	strh	r2, [r3, #0]
-                }
-            }
+            acc_buf[1] = acc_buf[acc_len];
+            acc_len = 2U;
             continue;
  80031ee:	e063      	b.n	80032b8 <Rx_TaskStep+0x130>
         }
 
-        /* ============= RESTO FRAME ============== */
-        acc_buf[acc_len] = byte;
+        acc_len++;
+        if (acc_len < RX_FRAME_LEN)
  80031f0:	4b3a      	ldr	r3, [pc, #232]	@ (80032dc <Rx_TaskStep+0x154>)
  80031f2:	881b      	ldrh	r3, [r3, #0]
  80031f4:	461a      	mov	r2, r3
  80031f6:	f897 102b 	ldrb.w	r1, [r7, #43]	@ 0x2b
  80031fa:	4b39      	ldr	r3, [pc, #228]	@ (80032e0 <Rx_TaskStep+0x158>)
  80031fc:	5499      	strb	r1, [r3, r2]
-
-        uint16_t w = acc_buf[acc_len-1] | (acc_buf[acc_len] << 8);
+        {
+            continue;
  80031fe:	4b37      	ldr	r3, [pc, #220]	@ (80032dc <Rx_TaskStep+0x154>)
  8003200:	881b      	ldrh	r3, [r3, #0]
  8003202:	3b01      	subs	r3, #1
@@ -6762,15 +6762,15 @@ void Rx_TaskStep(void)
  800321a:	4313      	orrs	r3, r2
  800321c:	b21b      	sxth	r3, r3
  800321e:	86fb      	strh	r3, [r7, #54]	@ 0x36
+        }
 
-
-        if (w == SYNC_WORD)                 // aggiunto
+        uint32_t now = osKernelGetTickCount();
  8003220:	8efb      	ldrh	r3, [r7, #54]	@ 0x36
  8003222:	f64a 2256 	movw	r2, #43606	@ 0xaa56
  8003226:	4293      	cmp	r3, r2
  8003228:	d111      	bne.n	800324e <Rx_TaskStep+0xc6>
-        	{
-        	acc_buf[0] = acc_buf[acc_len-1];
+        snap.task_last_run_ms = now;
+
  800322a:	4b2c      	ldr	r3, [pc, #176]	@ (80032dc <Rx_TaskStep+0x154>)
  800322c:	881b      	ldrh	r3, [r3, #0]
  800322e:	3b01      	subs	r3, #1
@@ -6778,7 +6778,7 @@ void Rx_TaskStep(void)
  8003232:	5cd2      	ldrb	r2, [r2, r3]
  8003234:	4b2a      	ldr	r3, [pc, #168]	@ (80032e0 <Rx_TaskStep+0x158>)
  8003236:	701a      	strb	r2, [r3, #0]
-        	acc_buf[1] = acc_buf[acc_len];
+        CommFrameHeader_t hdr;
  8003238:	4b28      	ldr	r3, [pc, #160]	@ (80032dc <Rx_TaskStep+0x154>)
  800323a:	881b      	ldrh	r3, [r3, #0]
  800323c:	461a      	mov	r2, r3
@@ -6786,43 +6786,38 @@ void Rx_TaskStep(void)
  8003240:	5c9a      	ldrb	r2, [r3, r2]
  8003242:	4b27      	ldr	r3, [pc, #156]	@ (80032e0 <Rx_TaskStep+0x158>)
  8003244:	705a      	strb	r2, [r3, #1]
-        	acc_len = 2;                    // aggiunto
+        CommPayloadB2_t   pl;
  8003246:	4b25      	ldr	r3, [pc, #148]	@ (80032dc <Rx_TaskStep+0x154>)
  8003248:	2202      	movs	r2, #2
  800324a:	801a      	strh	r2, [r3, #0]
-        	continue;                       // aggiunto
+        CommUnpackStatus_t st = CommUnpack_B1FromB2(acc_buf, RX_FRAME_LEN, &hdr, &pl);
  800324c:	e037      	b.n	80032be <Rx_TaskStep+0x136>
-        	}
 
-        acc_len++;
+        snap.last_event = st;
+        if (st == COMM_UNPACK_OK)
  800324e:	4b23      	ldr	r3, [pc, #140]	@ (80032dc <Rx_TaskStep+0x154>)
  8003250:	881b      	ldrh	r3, [r3, #0]
  8003252:	3301      	adds	r3, #1
  8003254:	b29a      	uxth	r2, r3
  8003256:	4b21      	ldr	r3, [pc, #132]	@ (80032dc <Rx_TaskStep+0x154>)
  8003258:	801a      	strh	r2, [r3, #0]
-        if (acc_len < RX_FRAME_LEN)
+        {
  800325a:	4b20      	ldr	r3, [pc, #128]	@ (80032dc <Rx_TaskStep+0x154>)
  800325c:	881b      	ldrh	r3, [r3, #0]
  800325e:	2b27      	cmp	r3, #39	@ 0x27
  8003260:	d92c      	bls.n	80032bc <Rx_TaskStep+0x134>
-            continue;
-
-        /* ============= FRAME COMPLETO ============ */
-        //Debug_DumpAccBuf(acc_buf, acc_len);
-        uint32_t now = osKernelGetTickCount();
+            snap.payload = pl;
+            snap.data_last_valid_ms = now;
+        }
+        acc_len = 0U;
+        RxSnapshot_Write(&snap);
  8003262:	f00a fe0b 	bl	800de7c <osKernelGetTickCount>
  8003266:	6338      	str	r0, [r7, #48]	@ 0x30
-        snap.task_last_run_ms = now;
+    }
  8003268:	4a1e      	ldr	r2, [pc, #120]	@ (80032e4 <Rx_TaskStep+0x15c>)
  800326a:	6b3b      	ldr	r3, [r7, #48]	@ 0x30
  800326c:	6213      	str	r3, [r2, #32]
-
-        CommFrameHeader_t hdr;
-        CommPayloadB2_t   pl;
-
-        CommUnpackStatus_t st =
-            CommUnpack_B1FromB2(acc_buf, RX_FRAME_LEN, &hdr, &pl);
+}
  800326e:	1d3b      	adds	r3, r7, #4
  8003270:	f107 0220 	add.w	r2, r7, #32
  8003274:	2128      	movs	r1, #40	@ 0x28
@@ -6830,19 +6825,12 @@ void Rx_TaskStep(void)
  8003278:	f000 f9be 	bl	80035f8 <CommUnpack_B1FromB2>
  800327c:	4603      	mov	r3, r0
  800327e:	f887 302f 	strb.w	r3, [r7, #47]	@ 0x2f
-
-        snap.last_event = st;
  8003282:	4a18      	ldr	r2, [pc, #96]	@ (80032e4 <Rx_TaskStep+0x15c>)
  8003284:	f897 302f 	ldrb.w	r3, [r7, #47]	@ 0x2f
  8003288:	7713      	strb	r3, [r2, #28]
-
-
-        if (st == COMM_UNPACK_OK)
  800328a:	f897 302f 	ldrb.w	r3, [r7, #47]	@ 0x2f
  800328e:	2b00      	cmp	r3, #0
  8003290:	d10b      	bne.n	80032aa <Rx_TaskStep+0x122>
-        {
-            snap.payload = pl;
  8003292:	4b14      	ldr	r3, [pc, #80]	@ (80032e4 <Rx_TaskStep+0x15c>)
  8003294:	461d      	mov	r5, r3
  8003296:	1d3c      	adds	r4, r7, #4
@@ -6850,33 +6838,27 @@ void Rx_TaskStep(void)
  800329a:	c50f      	stmia	r5!, {r0, r1, r2, r3}
  800329c:	e894 0007 	ldmia.w	r4, {r0, r1, r2}
  80032a0:	e885 0007 	stmia.w	r5, {r0, r1, r2}
-            snap.data_last_valid_ms = now;
  80032a4:	4a0f      	ldr	r2, [pc, #60]	@ (80032e4 <Rx_TaskStep+0x15c>)
  80032a6:	6b3b      	ldr	r3, [r7, #48]	@ 0x30
  80032a8:	6253      	str	r3, [r2, #36]	@ 0x24
-        }
-        acc_len = 0;   // pronto per il prossimo frame
  80032aa:	4b0c      	ldr	r3, [pc, #48]	@ (80032dc <Rx_TaskStep+0x154>)
  80032ac:	2200      	movs	r2, #0
  80032ae:	801a      	strh	r2, [r3, #0]
-        RxSnapshot_Write(&snap);
  80032b0:	480c      	ldr	r0, [pc, #48]	@ (80032e4 <Rx_TaskStep+0x15c>)
  80032b2:	f001 fe63 	bl	8004f7c <RxSnapshot_Write>
  80032b6:	e002      	b.n	80032be <Rx_TaskStep+0x136>
             continue;
  80032b8:	bf00      	nop
  80032ba:	e000      	b.n	80032be <Rx_TaskStep+0x136>
-            continue;
+            snap.payload = pl;
  80032bc:	bf00      	nop
-    while (CommUart_GetByte(&byte))
+                {
  80032be:	f107 032b 	add.w	r3, r7, #43	@ 0x2b
  80032c2:	4618      	mov	r0, r3
  80032c4:	f000 f924 	bl	8003510 <CommUart_GetByte>
  80032c8:	4603      	mov	r3, r0
  80032ca:	2b00      	cmp	r3, #0
  80032cc:	f47f af65 	bne.w	800319a <Rx_TaskStep+0x12>
-    }
-}
  80032d0:	bf00      	nop
  80032d2:	bf00      	nop
  80032d4:	3738      	adds	r7, #56	@ 0x38
@@ -6888,31 +6870,31 @@ void Rx_TaskStep(void)
  80032e4:	200046b0 	.word	0x200046b0
 
 080032e8 <Tx_TaskStep>:
-
-#define TX_FRAME_LEN (sizeof(CommFrameB1_t))
-
-
+ * @brief Step periodico del task di trasmissione.
+ * @details Legge gli snapshot correnti dal sistema, impacchetta i dati e invia
+ * il buffer tramite il driver UART se non occupato.
+ */
 void Tx_TaskStep(void)
 {
  80032e8:	b580      	push	{r7, lr}
  80032ea:	b092      	sub	sp, #72	@ 0x48
  80032ec:	af00      	add	r7, sp, #0
+    static uint8_t tx_buf[sizeof(CommFrameB1_t)];
+    const uint16_t tx_frame_len = (uint16_t)sizeof(CommFrameB1_t);
 
-  static uint8_t tx_buf[TX_FRAME_LEN];
+    EncoderSnapshot_Read(&enc);
+    SupervisorSnapshot_Read(&sup);
 
-
-  /* === Read snapshots === */
-  EncoderSnapshot_Read(&enc);
  80032ee:	f107 031c 	add.w	r3, r7, #28
  80032f2:	4618      	mov	r0, r3
  80032f4:	f001 fe06 	bl	8004f04 <EncoderSnapshot_Read>
-  SupervisorSnapshot_Read(&sup);
+    uint16_t tx_len = CommPack_BuildB1Tx(tx_buf, tx_frame_len, &enc, &sup);
  80032f8:	1d3b      	adds	r3, r7, #4
  80032fa:	4618      	mov	r0, r3
  80032fc:	f001 fec8 	bl	8005090 <SupervisorSnapshot_Read>
 
-  /* === Build frame === */
-  uint16_t tx_len = CommPack_BuildB1Tx(tx_buf, TX_FRAME_LEN, &enc, &sup);
+    if (tx_len == tx_frame_len)
+    {
  8003300:	1d3b      	adds	r3, r7, #4
  8003302:	f107 021c 	add.w	r2, r7, #28
  8003306:	2128      	movs	r1, #40	@ 0x28
@@ -6920,20 +6902,16 @@ void Tx_TaskStep(void)
  800330a:	f7ff fea9 	bl	8003060 <CommPack_BuildB1Tx>
  800330e:	4603      	mov	r3, r0
  8003310:	f8a7 3046 	strh.w	r3, [r7, #70]	@ 0x46
-
-  /* === Send === */
-  if (tx_len == TX_FRAME_LEN)
+        CommUart_Send(tx_buf, tx_len);
+    }
+}
  8003314:	f8b7 3046 	ldrh.w	r3, [r7, #70]	@ 0x46
  8003318:	2b28      	cmp	r3, #40	@ 0x28
  800331a:	d105      	bne.n	8003328 <Tx_TaskStep+0x40>
-  {
-    CommUart_Send(tx_buf, tx_len);
  800331c:	f8b7 3046 	ldrh.w	r3, [r7, #70]	@ 0x46
  8003320:	4619      	mov	r1, r3
  8003322:	4803      	ldr	r0, [pc, #12]	@ (8003330 <Tx_TaskStep+0x48>)
  8003324:	f000 f856 	bl	80033d4 <CommUart_Send>
-  }
-}
  8003328:	bf00      	nop
  800332a:	3748      	adds	r7, #72	@ 0x48
  800332c:	46bd      	mov	sp, r7
@@ -6941,35 +6919,35 @@ void Tx_TaskStep(void)
  8003330:	200046d8 	.word	0x200046d8
 
 08003334 <ring_next>:
-static TaskHandle_t rx_task_handle = NULL;
 
 /* ===================== Local utilities ===================== */
-
-static uint16_t ring_next(uint16_t idx)
-{
+/**
+ * @brief Incrementa l'indice del buffer circolare gestendo il wrapping.
+ * @param idx Indice corrente.
+ * @return uint16_t Prossimo indice.
  8003334:	b480      	push	{r7}
  8003336:	b085      	sub	sp, #20
  8003338:	af00      	add	r7, sp, #0
  800333a:	4603      	mov	r3, r0
  800333c:	80fb      	strh	r3, [r7, #6]
-    uint16_t next = idx + 1U;
+ */
  800333e:	88fb      	ldrh	r3, [r7, #6]
  8003340:	3301      	adds	r3, #1
  8003342:	81fb      	strh	r3, [r7, #14]
-
-    if (next >= UART_RX_BUF_SIZE)
+static uint16_t ring_next(uint16_t idx)
+{
  8003344:	89fb      	ldrh	r3, [r7, #14]
  8003346:	2bff      	cmp	r3, #255	@ 0xff
  8003348:	d901      	bls.n	800334e <ring_next+0x1a>
-    {
-        next = 0U;
+    uint16_t next = idx + 1U;
+    if (next >= UART_RX_BUF_SIZE)
  800334a:	2300      	movs	r3, #0
  800334c:	81fb      	strh	r3, [r7, #14]
+    {
+        next = 0U;
     }
-
-    return next;
  800334e:	89fb      	ldrh	r3, [r7, #14]
-}
+    return next;
  8003350:	4618      	mov	r0, r3
  8003352:	3714      	adds	r7, #20
  8003354:	46bd      	mov	sp, r7
@@ -6977,20 +6955,20 @@ static uint16_t ring_next(uint16_t idx)
  800335a:	4770      	bx	lr
 
 0800335c <CommUart_RegisterRxTask>:
+}
 
 /* ===================== API ===================== */
 
-void CommUart_RegisterRxTask(TaskHandle_t h)
-{
+/**
  800335c:	b480      	push	{r7}
  800335e:	b083      	sub	sp, #12
  8003360:	af00      	add	r7, sp, #0
  8003362:	6078      	str	r0, [r7, #4]
-    rx_task_handle = h;
+ * @brief Registra il task che deve ricevere le notifiche di ricezione byte.
  8003364:	4a04      	ldr	r2, [pc, #16]	@ (8003378 <CommUart_RegisterRxTask+0x1c>)
  8003366:	687b      	ldr	r3, [r7, #4]
  8003368:	6013      	str	r3, [r2, #0]
-}
+ * @param h Handle del task FreeRTOS.
  800336a:	bf00      	nop
  800336c:	370c      	adds	r7, #12
  800336e:	46bd      	mov	sp, r7
@@ -7000,34 +6978,34 @@ void CommUart_RegisterRxTask(TaskHandle_t h)
  8003378:	20004808 	.word	0x20004808
 
 0800337c <CommUart_EarlyInit>:
-
-void CommUart_EarlyInit(void)
+ */
+void CommUart_RegisterRxTask(TaskHandle_t h)
 {
  800337c:	b580      	push	{r7, lr}
  800337e:	af00      	add	r7, sp, #0
-    rx_wr = 0U;
+    rx_task_handle = h;
  8003380:	4b09      	ldr	r3, [pc, #36]	@ (80033a8 <CommUart_EarlyInit+0x2c>)
  8003382:	2200      	movs	r2, #0
  8003384:	801a      	strh	r2, [r3, #0]
-    rx_rd = 0U;
+}
  8003386:	4b09      	ldr	r3, [pc, #36]	@ (80033ac <CommUart_EarlyInit+0x30>)
  8003388:	2200      	movs	r2, #0
  800338a:	801a      	strh	r2, [r3, #0]
-    rx_task_handle = NULL;
+
  800338c:	4b08      	ldr	r3, [pc, #32]	@ (80033b0 <CommUart_EarlyInit+0x34>)
  800338e:	2200      	movs	r2, #0
  8003390:	601a      	str	r2, [r3, #0]
-    uart4_tx_busy = false;
+/**
  8003392:	4b08      	ldr	r3, [pc, #32]	@ (80033b4 <CommUart_EarlyInit+0x38>)
  8003394:	2200      	movs	r2, #0
  8003396:	701a      	strb	r2, [r3, #0]
-
-    (void)HAL_UART_Receive_IT(&huart4, &rx_byte, 1U);
+ * @brief Inizializzazione iniziale del driver e avvio interrupt RX.
+ */
  8003398:	2201      	movs	r2, #1
  800339a:	4907      	ldr	r1, [pc, #28]	@ (80033b8 <CommUart_EarlyInit+0x3c>)
  800339c:	4807      	ldr	r0, [pc, #28]	@ (80033bc <CommUart_EarlyInit+0x40>)
  800339e:	f006 f843 	bl	8009428 <HAL_UART_Receive_IT>
-}
+void CommUart_EarlyInit(void)
  80033a2:	bf00      	nop
  80033a4:	bd80      	pop	{r7, pc}
  80033a6:	bf00      	nop
@@ -7039,52 +7017,52 @@ void CommUart_EarlyInit(void)
  80033bc:	200044fc 	.word	0x200044fc
 
 080033c0 <CommUart_Init>:
-
-void CommUart_Init(void)
 {
+    rx_wr = 0U;
+    rx_rd = 0U;
  80033c0:	b580      	push	{r7, lr}
  80033c2:	af00      	add	r7, sp, #0
-    CommUart_RegisterRxTask(xTaskGetCurrentTaskHandle());
+    rx_task_handle = NULL;
  80033c4:	f00c fe9c 	bl	8010100 <xTaskGetCurrentTaskHandle>
  80033c8:	4603      	mov	r3, r0
  80033ca:	4618      	mov	r0, r3
  80033cc:	f7ff ffc6 	bl	800335c <CommUart_RegisterRxTask>
-}
+    uart4_tx_busy = false;
  80033d0:	bf00      	nop
  80033d2:	bd80      	pop	{r7, pc}
 
 080033d4 <CommUart_Send>:
 
-void CommUart_Send(const uint8_t *buf, uint16_t len)
-{
+    (void)HAL_UART_Receive_IT(&huart4, &rx_byte, 1U);
+}
  80033d4:	b580      	push	{r7, lr}
  80033d6:	b082      	sub	sp, #8
  80033d8:	af00      	add	r7, sp, #0
  80033da:	6078      	str	r0, [r7, #4]
  80033dc:	460b      	mov	r3, r1
  80033de:	807b      	strh	r3, [r7, #2]
-    if (!buf || len == 0)
+
  80033e0:	687b      	ldr	r3, [r7, #4]
  80033e2:	2b00      	cmp	r3, #0
  80033e4:	d017      	beq.n	8003416 <CommUart_Send+0x42>
  80033e6:	887b      	ldrh	r3, [r7, #2]
  80033e8:	2b00      	cmp	r3, #0
  80033ea:	d014      	beq.n	8003416 <CommUart_Send+0x42>
-        return;
-    
-    if (uart4_tx_busy)
+/**
+ * @brief Inizializzazione standard e registrazione task chiamante per RX.
+ */
  80033ec:	4b0d      	ldr	r3, [pc, #52]	@ (8003424 <CommUart_Send+0x50>)
  80033ee:	781b      	ldrb	r3, [r3, #0]
  80033f0:	b2db      	uxtb	r3, r3
  80033f2:	2b00      	cmp	r3, #0
  80033f4:	d111      	bne.n	800341a <CommUart_Send+0x46>
-        return;
-    
-    uart4_tx_busy = 1;
+void CommUart_Init(void)
+{
+    CommUart_RegisterRxTask(xTaskGetCurrentTaskHandle());
  80033f6:	4b0b      	ldr	r3, [pc, #44]	@ (8003424 <CommUart_Send+0x50>)
  80033f8:	2201      	movs	r2, #1
  80033fa:	701a      	strb	r2, [r3, #0]
-    if (HAL_UART_Transmit_IT(&huart4, (uint8_t *)buf, len) != HAL_OK)
+}
  80033fc:	887b      	ldrh	r3, [r7, #2]
  80033fe:	461a      	mov	r2, r3
  8003400:	6879      	ldr	r1, [r7, #4]
@@ -7093,17 +7071,17 @@ void CommUart_Send(const uint8_t *buf, uint16_t len)
  8003408:	4603      	mov	r3, r0
  800340a:	2b00      	cmp	r3, #0
  800340c:	d006      	beq.n	800341c <CommUart_Send+0x48>
-    	uart4_tx_busy = 0;
+
  800340e:	4b05      	ldr	r3, [pc, #20]	@ (8003424 <CommUart_Send+0x50>)
  8003410:	2200      	movs	r2, #0
  8003412:	701a      	strb	r2, [r3, #0]
  8003414:	e002      	b.n	800341c <CommUart_Send+0x48>
-        return;
+/**
  8003416:	bf00      	nop
  8003418:	e000      	b.n	800341c <CommUart_Send+0x48>
-        return;
+void CommUart_Init(void)
  800341a:	bf00      	nop
-}
+/**
  800341c:	3708      	adds	r7, #8
  800341e:	46bd      	mov	sp, r7
  8003420:	bd80      	pop	{r7, pc}
@@ -7112,44 +7090,44 @@ void CommUart_Send(const uint8_t *buf, uint16_t len)
  8003428:	200044fc 	.word	0x200044fc
 
 0800342c <HAL_UART_TxCpltCallback>:
-
-/* ===================== HAL callbacks ===================== */
-
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
+ * @brief Invia un buffer di dati tramite UART4 in modalità asincrona (Interrupt).
+ * @param buf Puntatore ai dati da inviare.
+ * @param len Lunghezza del buffer.
+ */
+void CommUart_Send(const uint8_t *buf, uint16_t len)
  800342c:	b580      	push	{r7, lr}
  800342e:	b082      	sub	sp, #8
  8003430:	af00      	add	r7, sp, #0
  8003432:	6078      	str	r0, [r7, #4]
-    if (huart != NULL)
+{
  8003434:	687b      	ldr	r3, [r7, #4]
  8003436:	2b00      	cmp	r3, #0
  8003438:	d00d      	beq.n	8003456 <HAL_UART_TxCpltCallback+0x2a>
+    if ((buf == NULL) || (len == 0U))
     {
-        if(huart == &huart4){
  800343a:	687b      	ldr	r3, [r7, #4]
  800343c:	4a08      	ldr	r2, [pc, #32]	@ (8003460 <HAL_UART_TxCpltCallback+0x34>)
  800343e:	4293      	cmp	r3, r2
  8003440:	d103      	bne.n	800344a <HAL_UART_TxCpltCallback+0x1e>
-            uart4_tx_busy = 0;
+        return;
  8003442:	4b08      	ldr	r3, [pc, #32]	@ (8003464 <HAL_UART_TxCpltCallback+0x38>)
  8003444:	2200      	movs	r2, #0
  8003446:	701a      	strb	r2, [r3, #0]
-        else if (huart == &huart5)
-        {
-            SabertoothCallback();
-        }
+    
+    if (uart4_tx_busy != 0U)
+    {
+        return;
     }
-}
+    
  8003448:	e005      	b.n	8003456 <HAL_UART_TxCpltCallback+0x2a>
-        else if (huart == &huart5)
+    
  800344a:	687b      	ldr	r3, [r7, #4]
  800344c:	4a06      	ldr	r2, [pc, #24]	@ (8003468 <HAL_UART_TxCpltCallback+0x3c>)
  800344e:	4293      	cmp	r3, r2
  8003450:	d101      	bne.n	8003456 <HAL_UART_TxCpltCallback+0x2a>
-            SabertoothCallback();
+    {
  8003452:	f7fe fb1b 	bl	8001a8c <SabertoothCallback>
-}
+    
  8003456:	bf00      	nop
  8003458:	3708      	adds	r7, #8
  800345a:	46bd      	mov	sp, r7
@@ -7160,24 +7138,24 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
  8003468:	20004590 	.word	0x20004590
 
 0800346c <HAL_UART_RxCpltCallback>:
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
+    uart4_tx_busy = 1U;
+    if (HAL_UART_Transmit_IT(&huart4, (uint8_t *)buf, len) != HAL_OK)
+    {
  800346c:	b580      	push	{r7, lr}
  800346e:	b084      	sub	sp, #16
  8003470:	af00      	add	r7, sp, #0
  8003472:	6078      	str	r0, [r7, #4]
-    BaseType_t hpw = pdFALSE;
+        uart4_tx_busy = 0U;
  8003474:	2300      	movs	r3, #0
  8003476:	60bb      	str	r3, [r7, #8]
-
-    if (huart == &huart4)
+    }
+}
  8003478:	687b      	ldr	r3, [r7, #4]
  800347a:	4a1e      	ldr	r2, [pc, #120]	@ (80034f4 <HAL_UART_RxCpltCallback+0x88>)
  800347c:	4293      	cmp	r3, r2
  800347e:	d134      	bne.n	80034ea <HAL_UART_RxCpltCallback+0x7e>
-    {
-        uint16_t next = ring_next(rx_wr);
+
+/* ===================== HAL callbacks ===================== */
  8003480:	4b1d      	ldr	r3, [pc, #116]	@ (80034f8 <HAL_UART_RxCpltCallback+0x8c>)
  8003482:	881b      	ldrh	r3, [r3, #0]
  8003484:	b29b      	uxth	r3, r3
@@ -7186,15 +7164,15 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  800348c:	4603      	mov	r3, r0
  800348e:	81fb      	strh	r3, [r7, #14]
 
-        if (next != rx_rd)
+/**
  8003490:	4b1a      	ldr	r3, [pc, #104]	@ (80034fc <HAL_UART_RxCpltCallback+0x90>)
  8003492:	881b      	ldrh	r3, [r3, #0]
  8003494:	b29b      	uxth	r3, r3
  8003496:	89fa      	ldrh	r2, [r7, #14]
  8003498:	429a      	cmp	r2, r3
  800349a:	d00a      	beq.n	80034b2 <HAL_UART_RxCpltCallback+0x46>
-        {
-            rx_buf[rx_wr] = rx_byte;
+ * @brief Callback HAL chiamata al completamento della trasmissione.
+ * @details Gestisce lo sblocco dei driver UART4 e UART5 (Sabertooth).
  800349c:	4b16      	ldr	r3, [pc, #88]	@ (80034f8 <HAL_UART_RxCpltCallback+0x8c>)
  800349e:	881b      	ldrh	r3, [r3, #0]
  80034a0:	b29b      	uxth	r3, r3
@@ -7203,33 +7181,33 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  80034a6:	7819      	ldrb	r1, [r3, #0]
  80034a8:	4b16      	ldr	r3, [pc, #88]	@ (8003504 <HAL_UART_RxCpltCallback+0x98>)
  80034aa:	5499      	strb	r1, [r3, r2]
-            rx_wr = next;
+ * @param huart Handle della periferica UART.
  80034ac:	4a12      	ldr	r2, [pc, #72]	@ (80034f8 <HAL_UART_RxCpltCallback+0x8c>)
  80034ae:	89fb      	ldrh	r3, [r7, #14]
  80034b0:	8013      	strh	r3, [r2, #0]
-        }
-
-        if (rx_task_handle != NULL)
+ */
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
  80034b2:	4b15      	ldr	r3, [pc, #84]	@ (8003508 <HAL_UART_RxCpltCallback+0x9c>)
  80034b4:	681b      	ldr	r3, [r3, #0]
  80034b6:	2b00      	cmp	r3, #0
  80034b8:	d007      	beq.n	80034ca <HAL_UART_RxCpltCallback+0x5e>
-        {
-            vTaskNotifyGiveFromISR(rx_task_handle, &hpw);
+    if (huart != NULL)
+    {
  80034ba:	4b13      	ldr	r3, [pc, #76]	@ (8003508 <HAL_UART_RxCpltCallback+0x9c>)
  80034bc:	681b      	ldr	r3, [r3, #0]
  80034be:	f107 0208 	add.w	r2, r7, #8
  80034c2:	4611      	mov	r1, r2
  80034c4:	4618      	mov	r0, r3
  80034c6:	f00d f805 	bl	80104d4 <vTaskNotifyGiveFromISR>
-        }
-
-        (void)HAL_UART_Receive_IT(&huart4, &rx_byte, 1U);
+        if(huart == &huart4)
+        {
+            uart4_tx_busy = 0U;
  80034ca:	2201      	movs	r2, #1
  80034cc:	490c      	ldr	r1, [pc, #48]	@ (8003500 <HAL_UART_RxCpltCallback+0x94>)
  80034ce:	4809      	ldr	r0, [pc, #36]	@ (80034f4 <HAL_UART_RxCpltCallback+0x88>)
  80034d0:	f005 ffaa 	bl	8009428 <HAL_UART_Receive_IT>
-        portYIELD_FROM_ISR(hpw);
+        }
  80034d4:	68bb      	ldr	r3, [r7, #8]
  80034d6:	2b00      	cmp	r3, #0
  80034d8:	d007      	beq.n	80034ea <HAL_UART_RxCpltCallback+0x7e>
@@ -7238,8 +7216,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  80034e0:	601a      	str	r2, [r3, #0]
  80034e2:	f3bf 8f4f 	dsb	sy
  80034e6:	f3bf 8f6f 	isb	sy
-    }
-}
+        else if (huart == &huart5)
+        {
  80034ea:	bf00      	nop
  80034ec:	3710      	adds	r7, #16
  80034ee:	46bd      	mov	sp, r7
@@ -7254,20 +7232,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  800350c:	e000ed04 	.word	0xe000ed04
 
 08003510 <CommUart_GetByte>:
-
-/* ===================== RX API ===================== */
-
-bool CommUart_GetByte(uint8_t *b)
-{
+            SabertoothCallback();
+        }
+        else
+        {
+            /* Caso non gestito */
  8003510:	b580      	push	{r7, lr}
  8003512:	b084      	sub	sp, #16
  8003514:	af00      	add	r7, sp, #0
  8003516:	6078      	str	r0, [r7, #4]
-    bool has_data = false;
+        }
  8003518:	2300      	movs	r3, #0
  800351a:	73fb      	strb	r3, [r7, #15]
-
-    if ((b != NULL) && (rx_rd != rx_wr))
+    }
+}
  800351c:	687b      	ldr	r3, [r7, #4]
  800351e:	2b00      	cmp	r3, #0
  8003520:	d01b      	beq.n	800355a <CommUart_GetByte+0x4a>
@@ -7279,8 +7257,8 @@ bool CommUart_GetByte(uint8_t *b)
  800352c:	b29b      	uxth	r3, r3
  800352e:	429a      	cmp	r2, r3
  8003530:	d013      	beq.n	800355a <CommUart_GetByte+0x4a>
-    {
-        *b = rx_buf[rx_rd];
+
+/* ===================== RX API ===================== */
  8003532:	4b0c      	ldr	r3, [pc, #48]	@ (8003564 <CommUart_GetByte+0x54>)
  8003534:	881b      	ldrh	r3, [r3, #0]
  8003536:	b29b      	uxth	r3, r3
@@ -7289,7 +7267,7 @@ bool CommUart_GetByte(uint8_t *b)
  800353c:	5c9a      	ldrb	r2, [r3, r2]
  800353e:	687b      	ldr	r3, [r7, #4]
  8003540:	701a      	strb	r2, [r3, #0]
-        rx_rd = ring_next(rx_rd);
+
  8003542:	4b08      	ldr	r3, [pc, #32]	@ (8003564 <CommUart_GetByte+0x54>)
  8003544:	881b      	ldrh	r3, [r3, #0]
  8003546:	b29b      	uxth	r3, r3
@@ -7299,14 +7277,14 @@ bool CommUart_GetByte(uint8_t *b)
  8003550:	461a      	mov	r2, r3
  8003552:	4b04      	ldr	r3, [pc, #16]	@ (8003564 <CommUart_GetByte+0x54>)
  8003554:	801a      	strh	r2, [r3, #0]
-        has_data = true;
+/**
  8003556:	2301      	movs	r3, #1
  8003558:	73fb      	strb	r3, [r7, #15]
-    }
-
-    return has_data;
+ * @brief Estrae un byte dal buffer circolare di ricezione.
+ * @param[out] b Puntatore alla variabile dove scrivere il byte estratto.
+ * @return true Se un byte è stato estratto correttamente.
  800355a:	7bfb      	ldrb	r3, [r7, #15]
-}
+ * @return false Se il buffer è vuoto.
  800355c:	4618      	mov	r0, r3
  800355e:	3710      	adds	r7, #16
  8003560:	46bd      	mov	sp, r7
@@ -7390,12 +7368,12 @@ bool CommUart_GetByte(uint8_t *b)
  80035f6:	4770      	bx	lr
 
 080035f8 <CommUnpack_B1FromB2>:
+/** @brief Lunghezza specifica del payload B2. */
 #define PAYLOAD_LEN  	((uint16_t)sizeof(CommPayloadB2_t))
+/** @brief Lunghezza del campo CRC16. */
 #define CRC_LEN 		((uint16_t)sizeof(uint16_t))
+/** @brief Lunghezza totale attesa per il frame B2. */
 #define FRAME_LEN 		((uint16_t)sizeof(CommFrameB2_t))
-
-CommUnpackStatus_t CommUnpack_B1FromB2(const uint8_t *buf, uint16_t len, CommFrameHeader_t *header, CommPayloadB2_t *payload)
-{
  80035f8:	b580      	push	{r7, lr}
  80035fa:	b086      	sub	sp, #24
  80035fc:	af00      	add	r7, sp, #0
@@ -7404,11 +7382,11 @@ CommUnpackStatus_t CommUnpack_B1FromB2(const uint8_t *buf, uint16_t len, CommFra
  8003602:	603b      	str	r3, [r7, #0]
  8003604:	460b      	mov	r3, r1
  8003606:	817b      	strh	r3, [r7, #10]
-	CommUnpackStatus_t status = COMM_UNPACK_OK;
+
  8003608:	2300      	movs	r3, #0
  800360a:	75fb      	strb	r3, [r7, #23]
-
-    if (!buf || !header || !payload){
+/**
+ * @brief Valida il pacchetto ricevuto tramite CRC ed estrae header e payload.
  800360c:	68fb      	ldr	r3, [r7, #12]
  800360e:	2b00      	cmp	r3, #0
  8003610:	d005      	beq.n	800361e <CommUnpack_B1FromB2+0x26>
@@ -7418,53 +7396,53 @@ CommUnpackStatus_t CommUnpack_B1FromB2(const uint8_t *buf, uint16_t len, CommFra
  8003618:	683b      	ldr	r3, [r7, #0]
  800361a:	2b00      	cmp	r3, #0
  800361c:	d102      	bne.n	8003624 <CommUnpack_B1FromB2+0x2c>
-        status = COMM_UNPACK_NULL;
+ * @param[in] buf Buffer contenente il pacchetto grezzo ricevuto.
  800361e:	2301      	movs	r3, #1
  8003620:	75fb      	strb	r3, [r7, #23]
  8003622:	e02d      	b.n	8003680 <CommUnpack_B1FromB2+0x88>
-    }
-    else if (len < FRAME_LEN){
+ * @param[in] len Lunghezza del buffer fornito.
+ * @param[out] header Puntatore alla struttura header da popolare.
  8003624:	897b      	ldrh	r3, [r7, #10]
  8003626:	2b27      	cmp	r3, #39	@ 0x27
  8003628:	d802      	bhi.n	8003630 <CommUnpack_B1FromB2+0x38>
-    	status = COMM_UNPACK_LEN;
+ * @param[out] payload Puntatore alla struttura payload B2 da popolare.
  800362a:	2302      	movs	r3, #2
  800362c:	75fb      	strb	r3, [r7, #23]
  800362e:	e027      	b.n	8003680 <CommUnpack_B1FromB2+0x88>
-    }
-    else{
-    	/* ---------- CRC check ---------- */
-    	uint16_t rx_crc;
-		memcpy(&rx_crc, &buf[FRAME_LEN - CRC_LEN], CRC_LEN);
+ * @return CommUnpackStatus_t Stato dell'operazione (OK, errore CRC, errore lunghezza, etc).
+ */
+CommUnpackStatus_t CommUnpack_B1FromB2(const uint8_t *buf, uint16_t len, CommFrameHeader_t *header, CommPayloadB2_t *payload)
+{
+    CommUnpackStatus_t status = COMM_UNPACK_OK;
  8003630:	68fb      	ldr	r3, [r7, #12]
  8003632:	3326      	adds	r3, #38	@ 0x26
  8003634:	881b      	ldrh	r3, [r3, #0]
  8003636:	b29b      	uxth	r3, r3
  8003638:	823b      	strh	r3, [r7, #16]
 
-		uint16_t calc_crc = crc16_ccitt(buf, FRAME_LEN - CRC_LEN);
+    if ((buf == NULL) || (header == NULL) || (payload == NULL))
  800363a:	2126      	movs	r1, #38	@ 0x26
  800363c:	68f8      	ldr	r0, [r7, #12]
  800363e:	f7ff ff97 	bl	8003570 <crc16_ccitt>
  8003642:	4603      	mov	r3, r0
  8003644:	82bb      	strh	r3, [r7, #20]
-
-		if (rx_crc != calc_crc){
+    {
+        status = COMM_UNPACK_NULL;
  8003646:	8a3b      	ldrh	r3, [r7, #16]
  8003648:	8aba      	ldrh	r2, [r7, #20]
  800364a:	429a      	cmp	r2, r3
  800364c:	d001      	beq.n	8003652 <CommUnpack_B1FromB2+0x5a>
-			return COMM_UNPACK_CRC;
+    }
  800364e:	2303      	movs	r3, #3
  8003650:	e017      	b.n	8003682 <CommUnpack_B1FromB2+0x8a>
-		}
-
-		uint16_t i = 0;
+    else if (len < FRAME_LEN)
+    {
+        status = COMM_UNPACK_LEN;
  8003652:	2300      	movs	r3, #0
  8003654:	827b      	strh	r3, [r7, #18]
-
-		/* ---------- Header ---------- */
-		memcpy(header, &buf[i], HEADER_LEN);
+    }
+    else
+    {
  8003656:	8a7b      	ldrh	r3, [r7, #18]
  8003658:	68fa      	ldr	r2, [r7, #12]
  800365a:	4413      	add	r3, r2
@@ -7472,13 +7450,13 @@ CommUnpackStatus_t CommUnpack_B1FromB2(const uint8_t *buf, uint16_t len, CommFra
  800365e:	4619      	mov	r1, r3
  8003660:	6878      	ldr	r0, [r7, #4]
  8003662:	f00f f924 	bl	80128ae <memcpy>
-		i += HEADER_LEN;
+        uint16_t rx_crc = 0U;
  8003666:	8a7b      	ldrh	r3, [r7, #18]
  8003668:	330a      	adds	r3, #10
  800366a:	827b      	strh	r3, [r7, #18]
+        (void)memcpy(&rx_crc, &buf[FRAME_LEN - CRC_LEN], CRC_LEN);
 
-		/* ---------- Payload ---------- */
-		memcpy(payload, &buf[i], PAYLOAD_LEN);
+        uint16_t calc_crc = crc16_ccitt(buf, FRAME_LEN - CRC_LEN);
  800366c:	8a7b      	ldrh	r3, [r7, #18]
  800366e:	68fa      	ldr	r2, [r7, #12]
  8003670:	4413      	add	r3, r2
@@ -7487,14 +7465,14 @@ CommUnpackStatus_t CommUnpack_B1FromB2(const uint8_t *buf, uint16_t len, CommFra
  8003676:	6838      	ldr	r0, [r7, #0]
  8003678:	f00f f919 	bl	80128ae <memcpy>
 
-		status = COMM_UNPACK_OK;
+        if (rx_crc != calc_crc)
  800367c:	2300      	movs	r3, #0
  800367e:	75fb      	strb	r3, [r7, #23]
-    }
-
-    return status;
+        {
+            status = COMM_UNPACK_CRC;
+        }
  8003680:	7dfb      	ldrb	r3, [r7, #23]
-}
+        else
  8003682:	4618      	mov	r0, r3
  8003684:	3718      	adds	r7, #24
  8003686:	46bd      	mov	sp, r7
@@ -11300,49 +11278,110 @@ void Supervisor_TaskStep(void)
  8005240:	48000400 	.word	0x48000400
 
 08005244 <Reset_Handler>:
+
+    .section	.text.Reset_Handler
+	.weak	Reset_Handler
+	.type	Reset_Handler, %function
+Reset_Handler:
+  ldr   r0, =_estack
  8005244:	480d      	ldr	r0, [pc, #52]	@ (800527c <LoopForever+0x2>)
+  mov   sp, r0          /* set stack pointer */
  8005246:	4685      	mov	sp, r0
+
+/* Call the clock system initialization function.*/
+    bl  SystemInit
  8005248:	f7fd fa6a 	bl	8002720 <SystemInit>
+
+/* Copy the data segment initializers from flash to SRAM */
+  ldr r0, =_sdata
  800524c:	480c      	ldr	r0, [pc, #48]	@ (8005280 <LoopForever+0x6>)
+  ldr r1, =_edata
  800524e:	490d      	ldr	r1, [pc, #52]	@ (8005284 <LoopForever+0xa>)
+  ldr r2, =_sidata
  8005250:	4a0d      	ldr	r2, [pc, #52]	@ (8005288 <LoopForever+0xe>)
+  movs r3, #0
  8005252:	2300      	movs	r3, #0
+  b	LoopCopyDataInit
  8005254:	e002      	b.n	800525c <LoopCopyDataInit>
 
 08005256 <CopyDataInit>:
+
+CopyDataInit:
+  ldr r4, [r2, r3]
  8005256:	58d4      	ldr	r4, [r2, r3]
+  str r4, [r0, r3]
  8005258:	50c4      	str	r4, [r0, r3]
+  adds r3, r3, #4
  800525a:	3304      	adds	r3, #4
 
 0800525c <LoopCopyDataInit>:
+
+LoopCopyDataInit:
+  adds r4, r0, r3
  800525c:	18c4      	adds	r4, r0, r3
+  cmp r4, r1
  800525e:	428c      	cmp	r4, r1
+  bcc CopyDataInit
  8005260:	d3f9      	bcc.n	8005256 <CopyDataInit>
+  
+/* Zero fill the bss segment. */
+  ldr r2, =_sbss
  8005262:	4a0a      	ldr	r2, [pc, #40]	@ (800528c <LoopForever+0x12>)
+  ldr r4, =_ebss
  8005264:	4c0a      	ldr	r4, [pc, #40]	@ (8005290 <LoopForever+0x16>)
+  movs r3, #0
  8005266:	2300      	movs	r3, #0
+  b LoopFillZerobss
  8005268:	e001      	b.n	800526e <LoopFillZerobss>
 
 0800526a <FillZerobss>:
+
+FillZerobss:
+  str  r3, [r2]
  800526a:	6013      	str	r3, [r2, #0]
+  adds r2, r2, #4
  800526c:	3204      	adds	r2, #4
 
 0800526e <LoopFillZerobss>:
+
+LoopFillZerobss:
+  cmp r2, r4
  800526e:	42a2      	cmp	r2, r4
+  bcc FillZerobss
  8005270:	d3fb      	bcc.n	800526a <FillZerobss>
+
+/* Call static constructors */
+    bl __libc_init_array
  8005272:	f00d faf5 	bl	8012860 <__libc_init_array>
+/* Call the application's entry point.*/
+	bl	main
  8005276:	f7fd f80b 	bl	8002290 <main>
 
 0800527a <LoopForever>:
+
+LoopForever:
+    b LoopForever
  800527a:	e7fe      	b.n	800527a <LoopForever>
+  ldr   r0, =_estack
  800527c:	20020000 	.word	0x20020000
+  ldr r0, =_sdata
  8005280:	20000000 	.word	0x20000000
+  ldr r1, =_edata
  8005284:	2000023c 	.word	0x2000023c
+  ldr r2, =_sidata
  8005288:	08016cb4 	.word	0x08016cb4
+  ldr r2, =_sbss
  800528c:	20000240 	.word	0x20000240
+  ldr r4, =_ebss
  8005290:	20005f0c 	.word	0x20005f0c
 
 08005294 <ADC1_2_IRQHandler>:
+ * @retval : None
+*/
+    .section	.text.Default_Handler,"ax",%progbits
+Default_Handler:
+Infinite_Loop:
+	b	Infinite_Loop
  8005294:	e7fe      	b.n	8005294 <ADC1_2_IRQHandler>
 
 08005296 <HAL_Init>:

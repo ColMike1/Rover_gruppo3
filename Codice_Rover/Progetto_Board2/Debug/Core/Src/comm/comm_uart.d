@@ -1,5 +1,5 @@
 Core/Src/comm/comm_uart.o: ../Core/Src/comm/comm_uart.c \
- ../Core/Inc/comm/comm_uart.h \
+ ../Core/Inc/comm/comm_uart.h ../Core/Inc/actuation/sabertooth_driver.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -41,6 +41,7 @@ Core/Src/comm/comm_uart.o: ../Core/Src/comm/comm_uart.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 ../Core/Inc/comm/comm_uart.h:
+../Core/Inc/actuation/sabertooth_driver.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:

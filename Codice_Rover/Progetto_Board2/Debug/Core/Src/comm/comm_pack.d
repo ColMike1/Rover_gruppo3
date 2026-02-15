@@ -1,6 +1,6 @@
 Core/Src/comm/comm_pack.o: ../Core/Src/comm/comm_pack.c \
  ../Core/Inc/comm/comm_pack.h ../Core/Inc/snapshot/supervisor_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/supervisor_command.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
@@ -46,11 +46,11 @@ Core/Src/comm/comm_pack.o: ../Core/Src/comm/comm_pack.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/snapshot/imu_snapshot.h ../Core/Inc/IMU/imu_i2c.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_crc.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_crc.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_message_structures.h
 ../Core/Inc/comm/comm_pack.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/supervisor_command.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
@@ -99,5 +99,5 @@ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
 ../Core/Inc/snapshot/imu_snapshot.h:
 ../Core/Inc/IMU/imu_i2c.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_crc.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_crc.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_message_structures.h:

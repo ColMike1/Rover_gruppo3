@@ -42,8 +42,7 @@ Core/Src/sonar/sonar_hw.o: ../Core/Src/sonar/sonar_hw.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
- ../Core/Inc/log/wcet_monitor.h
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 ../Core/Inc/sonar/sonar_hw.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
@@ -90,4 +89,3 @@ Core/Src/sonar/sonar_hw.o: ../Core/Src/sonar/sonar_hw.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
-../Core/Inc/log/wcet_monitor.h:

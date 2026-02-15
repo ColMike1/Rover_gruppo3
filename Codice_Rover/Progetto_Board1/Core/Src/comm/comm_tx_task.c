@@ -1,43 +1,39 @@
-/*
- * comm_tx_task.c
- *
- *  Created on: Jan 11, 2026
- *      Author: Sterm
+/**
+ * @file comm_tx_task.c
+ * @brief Implementazione del task di trasmissione periodica della telemetria.
+ * @date Jan 11, 2026
+ * @author Sterm
  */
-
-
 
 #include "comm/comm_tx_task.h"
 #include "comm/comm_pack.h"
 #include "comm/comm_uart.h"
-
 #include "shared_headers/comm_message_structures.h"
-
 #include "snapshot/encoder_snapshot.h"
 #include "snapshot/supervisor_snapshot.h"
 
-
+/** @brief Lunghezza definita per il frame di trasmissione B1. */
 #define TX_FRAME_LEN (sizeof(CommFrameB1_t))
 
-
+/**
+ * @brief Step periodico del task di trasmissione.
+ * @details Legge gli snapshot correnti dal sistema, impacchetta i dati e invia
+ * il buffer tramite il driver UART se non occupato.
+ */
 void Tx_TaskStep(void)
 {
-  EncoderSnapshot_t enc;
-  SupervisorSnapshot_t sup;
+    EncoderSnapshot_t enc = {0};   /* Inizializzazione obbligatoria */
+    SupervisorSnapshot_t sup = {0};
+    static uint8_t tx_buf[sizeof(CommFrameB1_t)];
+    const uint16_t tx_frame_len = (uint16_t)sizeof(CommFrameB1_t);
 
-  static uint8_t tx_buf[TX_FRAME_LEN];
+    EncoderSnapshot_Read(&enc);
+    SupervisorSnapshot_Read(&sup);
 
+    uint16_t tx_len = CommPack_BuildB1Tx(tx_buf, tx_frame_len, &enc, &sup);
 
-  /* === Read snapshots === */
-  EncoderSnapshot_Read(&enc);
-  SupervisorSnapshot_Read(&sup);
-
-  /* === Build frame === */
-  uint16_t tx_len = CommPack_BuildB1Tx(tx_buf, TX_FRAME_LEN, &enc, &sup);
-
-  /* === Send === */
-  if (tx_len == TX_FRAME_LEN)
-  {
-    CommUart_Send(tx_buf, tx_len);
-  }
+    if (tx_len == tx_frame_len)
+    {
+        CommUart_Send(tx_buf, tx_len);
+    }
 }

@@ -1,8 +1,6 @@
-/*
- * encoder.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file encoder.h
+ * @brief Header principale per il modulo encoder.
  */
 
 #ifndef INC_ENCODER_ENCODER_H_

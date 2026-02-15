@@ -69,7 +69,7 @@ typedef StaticSemaphore_t osStaticMutexDef_t;
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 UBaseType_t free_words_tx = 0;
-UBaseType_t free_words_rx = 0;
+UBaseType_t free_words_rx = 0;\
 UBaseType_t free_words_sonar = 0;
 UBaseType_t free_words_ble = 0;
 UBaseType_t free_words_imu = 0;

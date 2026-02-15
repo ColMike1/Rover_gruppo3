@@ -1,8 +1,8 @@
-/*
- * comm_pack.c
- *
- *  Created on: Jan 11, 2026
- *      Author: Sterm
+/**
+ * @file comm_pack.c
+ * @brief Funzioni per il packaging dei messaggi di comunicazione (Serializzazione).
+ * @date Jan 11, 2026
+ * @author Sterm
  */
 
 #include "comm/comm_pack.h"
@@ -13,59 +13,60 @@
 
 /* ================= PACK FUNCTION ================= */
 
-uint16_t CommPack_BuildB1Tx(uint8_t *buf,
-                                uint16_t max_len,
-                                const EncoderSnapshot_t *enc,
-                                const SupervisorSnapshot_t *sup)
+/**
+ * @brief Costruisce il pacchetto di telemetria B1 (Trasmissione verso PC/Base).
+ * @details Include dati degli encoder e stato del supervisore, aggiungendo header e CRC16-CCITT.
+ * @param[out] buf Buffer di destinazione per il pacchetto serializzato.
+ * @param[in] max_len Lunghezza massima del buffer fornito.
+ * @param[in] enc Snapshot degli encoder da includere nel payload.
+ * @param[in] sup Snapshot del supervisore da includere nel payload.
+ * @return uint16_t Numero di byte scritti nel buffer (0 in caso di errore).
+ */
+uint16_t CommPack_BuildB1Tx(uint8_t *buf, uint16_t max_len, const EncoderSnapshot_t *enc, const SupervisorSnapshot_t *sup)
 {
-  if (!buf || !enc || !sup)
-    return 0;
+    static uint16_t tx_seq = 0U;
+    uint16_t i = 0U;
+    const uint16_t FRAME_LEN = (uint16_t)sizeof(CommFrameB1_t);
+    const uint16_t HEADER_LEN = (uint16_t)sizeof(CommFrameHeader_t);
+    const uint16_t PAYLOAD_LEN = (uint16_t)sizeof(CommPayloadB1_t);
+    const uint16_t CRC_LEN = (uint16_t)sizeof(uint16_t);
 
-  /* frame sizes */
-  const uint16_t HEADER_LEN = sizeof(CommFrameHeader_t);
-  const uint16_t PAYLOAD_LEN = sizeof(CommPayloadB1_t);
-  const uint16_t CRC_LEN = sizeof(uint16_t);
-  const uint16_t FRAME_LEN = sizeof(CommFrameB1_t);
+    if ((buf == NULL) || (enc == NULL) || (sup == NULL))
+    {
+        return 0U;
+    }
 
-  if (max_len < FRAME_LEN)
-    return 0;
+    if (max_len < FRAME_LEN)
+    {
+        return 0U;
+    }
 
-  static uint16_t tx_seq = 0;
+    CommFrameHeader_t hdr;
+    hdr.payload_len  = PAYLOAD_LEN;
+    tx_seq++;
+    hdr.seq          = tx_seq;
+    hdr.timestamp_ms = sup->task_last_run_ms;
+    hdr.msg_id       = 0xAA55U;
 
-  uint16_t i = 0;
+    (void)memcpy(&buf[i], &hdr, HEADER_LEN);
+    i += HEADER_LEN;
 
+    CommPayloadB1_t pl;
+    int wheel_idx;
+    for (wheel_idx = 0; wheel_idx < 4; wheel_idx++)
+    {
+        pl.wheel_speed_rpm[wheel_idx] = enc->wheel_speed_rpm[wheel_idx];
+    }
+    pl.degraded_mask = sup->degraded_mask;
+    pl.critical_mask = sup->critical_mask;
+    pl.alive_counter = sup->alive_counter;
 
-  /* ---------- Header ---------- */
-  CommFrameHeader_t hdr;
+    (void)memcpy(&buf[i], &pl, PAYLOAD_LEN);
+    i += PAYLOAD_LEN;
 
-  hdr.payload_len  = PAYLOAD_LEN;
-  hdr.seq          = ++tx_seq;
-  hdr.timestamp_ms = sup->task_last_run_ms;
-  hdr.msg_id = 0xAA55;
+    uint16_t crc = crc16_ccitt(buf, i);
+    (void)memcpy(&buf[i], &crc, CRC_LEN);
+    i += CRC_LEN;
 
-  memcpy(&buf[i], &hdr, HEADER_LEN);
-  i += HEADER_LEN;
-
-
-  /* ---------- Payload ---------- */
-  CommPayloadB1_t pl;
-  for (int i = 0; i < 4; i++)
-  {
-      pl.wheel_speed_rpm[i] = enc->wheel_speed_rpm[i];
-  }
-  pl.degraded_mask  = sup->degraded_mask;
-  pl.critical_mask  = sup->critical_mask;
-  pl.alive_counter = sup->alive_counter;
-
-  memcpy(&buf[i], &pl, PAYLOAD_LEN);
-  i += PAYLOAD_LEN;
-
-
-  /* ---------- CRC ---------- */
-  uint16_t crc = crc16_ccitt(buf, i);
-  memcpy(&buf[i], &crc, CRC_LEN);
-  i += CRC_LEN;
-
-  return i;   /* lunghezza frame valido */
+    return i;
 }
-

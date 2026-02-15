@@ -1,1 +1,2 @@
-../Core/Src/comm/comm_tx_task.c:23:6:Tx_TaskStep	2
+../Core/Src/comm/comm_tx_task.c:24:6:Tx_TaskInit	1
+../Core/Src/comm/comm_tx_task.c:34:6:Tx_TaskStep	2

@@ -1,8 +1,7 @@
-/*
- * board_health.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file board_health.h
+ * @brief Header principale per il monitoraggio dello stato della scheda.
+ * * Aggrega le funzionalità di lettura ADC e la logica del task di controllo salute.
  */
 
 #ifndef INC_BOARD_HEALTH_BOARD_HEALTH_H_

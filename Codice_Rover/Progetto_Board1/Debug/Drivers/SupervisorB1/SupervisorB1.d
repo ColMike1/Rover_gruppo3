@@ -4,9 +4,9 @@ Drivers/SupervisorB1/SupervisorB1.o: \
  ../Drivers/SupervisorB1/rtwtypes.h \
  ../Drivers/SupervisorB1/rt_nonfinite.h \
  ../Drivers/SupervisorB1/SupervisorB1_types.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
  ../Core/Inc/snapshot/rx_snapshot.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
@@ -62,9 +62,9 @@ Drivers/SupervisorB1/SupervisorB1.o: \
 ../Drivers/SupervisorB1/rtwtypes.h:
 ../Drivers/SupervisorB1/rt_nonfinite.h:
 ../Drivers/SupervisorB1/SupervisorB1_types.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:

@@ -1,20 +1,14 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * File Name          : app_freertos.c
-  * Description        : Code for freertos applications
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2026 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ * @file app_freertos.c
+ * @brief Codice per le applicazioni FreeRTOS e la gestione dei task di sistema.
+ * @details Questo file contiene l'inizializzazione del kernel FreeRTOS, la creazione
+ * di mutex, thread e la definizione della logica di esecuzione dei task per il
+ * controllo, la comunicazione e la diagnostica del sistema.
+ * * @author Sterm / OEM
+ * @date 2026
+ * * @copyright Copyright (c) 2026 STMicroelectronics. All rights reserved.
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -35,9 +29,6 @@
 #include "led/led_task.h"
 #include "supervisor/supervisor_task.h"
 #include "snapshot/snapshot.h"
-#include "log/wcet_monitor.h"
-#include <stdlib.h>
-#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,6 +40,30 @@ typedef StaticSemaphore_t osStaticMutexDef_t;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+/** @brief Periodo task default [ms]. */
+#define TASK_DEFAULT_PERIOD_MS      100000U
+/** @brief Periodo task BoardHealth [ms]. */
+#define TASK_BATTTEMP_PERIOD_MS     100U
+/** @brief Periodo task TX [ms]. */
+#define TASK_TX_PERIOD_MS           20U
+/** @brief Periodo task Supervisor [ms]. */
+#define TASK_SUPERVISOR_PERIOD_MS   20U
+/** @brief Periodo task Control [ms]. */
+#define TASK_CONTROL_PERIOD_MS      10U
+/** @brief Periodo task Debug/Log [ms]. */
+#define TASK_DEBUG_PERIOD_MS        1000U
+/** @brief Periodo task LED [ms]. */
+#define TASK_LED_PERIOD_MS          100U
+/** @brief Numero comandi ruota salvati tra un ciclo e il successivo. */
+#define CONTROL_CMD_COUNT           4U
+/** @brief Indice comando anteriore sinistro. */
+#define CONTROL_CMD_IDX_SX_A        0U
+/** @brief Indice comando anteriore destro. */
+#define CONTROL_CMD_IDX_DX_A        1U
+/** @brief Indice comando posteriore sinistro. */
+#define CONTROL_CMD_IDX_SX_P        2U
+/** @brief Indice comando posteriore destro. */
+#define CONTROL_CMD_IDX_DX_P        3U
 
 /* USER CODE END PD */
 
@@ -59,28 +74,6 @@ typedef StaticSemaphore_t osStaticMutexDef_t;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
-UBaseType_t free_words_enc = 0;
-UBaseType_t free_words_batt = 0;
-UBaseType_t free_words_tx = 0;
-UBaseType_t free_words_act = 0;
-UBaseType_t free_words_ctrl = 0;
-
-volatile uint32_t wcet_enc_cycles_max = 0;
-volatile uint32_t wcet_batt_cycles_max = 0;
-volatile uint32_t wcet_tx_cycles_max = 0;
-volatile uint32_t wcet_act_cycles_max = 0;
-volatile uint32_t wcet_ctrl_cycles_max = 0;
-
-volatile uint32_t cycles_batt = 0;
-volatile uint32_t cycles_enc = 0;
-volatile uint32_t cycles_tx = 0;
-volatile uint32_t cycles_act = 0;
-volatile uint32_t cycles_ctrl = 0;
-
-
-volatile uint32_t indice = 0;
-
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -225,11 +218,18 @@ void StartTask_Control(void *argument);
 void StartTask_Debug(void *argument);
 void StartTask_Led(void *argument);
 
-void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+/**
+ * @brief Inizializzazione di FreeRTOS.
+ * @note Questa funzione viene chiamata nel main.
+ */
+void MX_FREERTOS_Init(void);
 
-/* Hook prototypes */
+/**
+ * @brief Hook per la gestione dello Stack Overflow.
+ * @param xTask Handle del task che ha causato l'overflow.
+ * @param pcTaskName Nome del task che ha causato l'overflow.
+ */
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
-
 /* USER CODE BEGIN 4 */
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
 {
@@ -239,15 +239,12 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
 
     taskDISABLE_INTERRUPTS();
 
-    // breakpoint qui
     for (;;);
 }
 /* USER CODE END 4 */
 
 /**
-  * @brief  FreeRTOS initialization
-  * @param  None
-  * @retval None
+  * @brief  Inizializzazione di Mutex, Thread e Snapshot.
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
@@ -322,10 +319,9 @@ void MX_FREERTOS_Init(void) {
 
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
-  * @brief  Function implementing the defaultTask thread.
-  * @param  argument: Not used
-  * @retval None
-  */
+ * @brief Task di default (Idle o basso consumo).
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
@@ -333,17 +329,17 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  osDelay(100000);
+	  osDelay(TASK_DEFAULT_PERIOD_MS);
   }
   /* USER CODE END StartDefaultTask */
 }
 
 /* USER CODE BEGIN Header_StartTask_BattTemp */
 /**
-* @brief Function implementing the Task_BattTemp thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task per il monitoraggio dello stato batteria e temperatura.
+ * @details Esegue il campionamento dei sensori e aggiorna lo snapshot della board health.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_BattTemp */
 void StartTask_BattTemp(void *argument)
 {
@@ -355,22 +351,10 @@ void StartTask_BattTemp(void *argument)
 	
   for(;;)
   {
-      uint32_t start, cycles;
-
-      start = DWT->CYCCNT;
 
 	  BoardHealth_TaskStep();
 
-      cycles = DWT->CYCCNT - start;
-      cycles_batt = cycles;
-      if (cycles > wcet_batt_cycles_max){
-          wcet_batt_cycles_max = cycles;
-      }
-      indice ++ ;
-
-      free_words_batt = uxTaskGetStackHighWaterMark(NULL);
-
-	  lastWakeTime += 100;
+	  lastWakeTime += TASK_BATTTEMP_PERIOD_MS;
 	  osDelayUntil(lastWakeTime);
   }
   /* USER CODE END StartTask_BattTemp */
@@ -378,28 +362,21 @@ void StartTask_BattTemp(void *argument)
 
 /* USER CODE BEGIN Header_StartTask_TX */
 /**
-* @brief Function implementing the Task_TX thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task per la trasmissione dei dati via UART/Bus.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_TX */
 void StartTask_TX(void *argument)
 {
   /* USER CODE BEGIN StartTask_TX */
 	  TickType_t lastWakeTime = osKernelGetTickCount();
 
-
 	  for (;;)
 	  {
-		uint32_t s = DWT->CYCCNT;
 
 	    Tx_TaskStep();
 
-	    WCET_Update(WCET_TASK_TX, DWT->CYCCNT - s);
-
-	    free_words_tx = uxTaskGetStackHighWaterMark(NULL);
-
-	    lastWakeTime += 20;   // es. 20 ms
+	    lastWakeTime += TASK_TX_PERIOD_MS;
 	    osDelayUntil(lastWakeTime);
 	  }
   /* USER CODE END StartTask_TX */
@@ -407,10 +384,9 @@ void StartTask_TX(void *argument)
 
 /* USER CODE BEGIN Header_StartTask_RX */
 /**
-* @brief Function implementing the Task_RX thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task per la ricezione e il parsing dei dati in ingresso.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_RX */
 void StartTask_RX(void *argument)
 {
@@ -427,10 +403,10 @@ void StartTask_RX(void *argument)
 
 /* USER CODE BEGIN Header_StartTask_Supervisor */
 /**
-* @brief Function implementing the Task_Supervisor thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task del Supervisore di sistema.
+ * @details Gestisce la logica degli stati e la sicurezza globale della board.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_Supervisor */
 void StartTask_Supervisor(void *argument)
 {
@@ -444,7 +420,7 @@ void StartTask_Supervisor(void *argument)
   {
 
 	  Supervisor_TaskStep();
-	  lastWakeTime += 20;
+	  lastWakeTime += TASK_SUPERVISOR_PERIOD_MS;
 	  osDelayUntil(lastWakeTime);
   }
   /* USER CODE END StartTask_Supervisor */
@@ -452,41 +428,41 @@ void StartTask_Supervisor(void *argument)
 
 /* USER CODE BEGIN Header_StartTask_Control */
 /**
-* @brief Function implementing the Task_Control thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task di Controllo Motori e Attuazione.
+ * @details Legge gli encoder, esegue le leggi di controllo e invia i segnali agli attuatori.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_Control */
 void StartTask_Control(void *argument)
 {
   /* USER CODE BEGIN StartTask_Control */
+    (void)argument;
+
     Encoder_Init();
-	  Control_Init();
-	  Actuation_Init();
-    static float last_cycle_cmd[4] = {0};
+    Control_Init();
+    Actuation_Init();
+    static float last_cycle_cmd[CONTROL_CMD_COUNT] = {0.0f};
 
     TickType_t lastWakeTime = osKernelGetTickCount();
 
 	  for (;;)
 	   {
-	    uint32_t start, cycles;
-
-	    start = DWT->CYCCNT;
 
 		static SupervisorSnapshot_t sup;
 		SupervisorSnapshot_Read(&sup);
-		bool actuation_enabled = sup.isBoardActuating;
+		const bool actuation_enabled = sup.isBoardActuating;
 
 		Encoder_Step(last_cycle_cmd);
-		ControlOutput_t cmd = {0};
-		if(actuation_enabled){
+		ControlOutput_t cmd = {0.0f};
+		if (actuation_enabled != false)
+        {
             cmd = Control_Step();
             Actuation_Step(cmd);
 
-            last_cycle_cmd[0] = cmd.u_sx_a;
-            last_cycle_cmd[1] = cmd.u_dx_a;
-            last_cycle_cmd[2] = cmd.u_sx_p;
-            last_cycle_cmd[3] = cmd.u_dx_p;
+            last_cycle_cmd[CONTROL_CMD_IDX_SX_A] = cmd.u_sx_a;
+            last_cycle_cmd[CONTROL_CMD_IDX_DX_A] = cmd.u_dx_a;
+            last_cycle_cmd[CONTROL_CMD_IDX_SX_P] = cmd.u_sx_p;
+            last_cycle_cmd[CONTROL_CMD_IDX_DX_P] = cmd.u_dx_p;
 		}
         else
         {
@@ -495,21 +471,13 @@ void StartTask_Control(void *argument)
 
 
             /* === board 1 riceve alcuna info da b2, quindi non conosce il comando dato ai motori === */
-            last_cycle_cmd[0] = 0;
-            last_cycle_cmd[1] = 0;
-            last_cycle_cmd[2] = 0;
-            last_cycle_cmd[3] = 0;
+            last_cycle_cmd[CONTROL_CMD_IDX_SX_A] = 0.0f;
+            last_cycle_cmd[CONTROL_CMD_IDX_DX_A] = 0.0f;
+            last_cycle_cmd[CONTROL_CMD_IDX_SX_P] = 0.0f;
+            last_cycle_cmd[CONTROL_CMD_IDX_DX_P] = 0.0f;
         }
 
-
-	    cycles = DWT->CYCCNT - start;
-	    cycles_ctrl = cycles;
-	    if (cycles > wcet_ctrl_cycles_max)
-	      wcet_ctrl_cycles_max = cycles;
-
-	    free_words_ctrl = uxTaskGetStackHighWaterMark(NULL);
-
-	    lastWakeTime += 10;          /* 10 ms */
+	    lastWakeTime += TASK_CONTROL_PERIOD_MS;
 	    osDelayUntil(lastWakeTime);
 	  }
   /* USER CODE END StartTask_Control */
@@ -517,10 +485,10 @@ void StartTask_Control(void *argument)
 
 /* USER CODE BEGIN Header_StartTask_Debug */
 /**
-* @brief Function implementing the Task_Debug thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task di Debug e Logging.
+ * @details Formatta e trasmette i log di sistema a intervalli regolari.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_Debug */
 void StartTask_Debug(void *argument)
 {
@@ -530,8 +498,8 @@ void StartTask_Debug(void *argument)
 	  for(;;)
 	  {
 		  Log_TaskStep();
-      //WCET_Print();
-		  lastWakeTime += 1000;
+
+		  lastWakeTime += TASK_DEBUG_PERIOD_MS;
 		  osDelayUntil(lastWakeTime);
 	  }
   /* USER CODE END StartTask_Debug */
@@ -539,10 +507,9 @@ void StartTask_Debug(void *argument)
 
 /* USER CODE BEGIN Header_StartTask_Led */
 /**
-* @brief Function implementing the Task_Led thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Task per la gestione dei LED di segnalazione.
+ * @param argument Non usato.
+ */
 /* USER CODE END Header_StartTask_Led */
 void StartTask_Led(void *argument)
 {
@@ -554,7 +521,7 @@ void StartTask_Led(void *argument)
   {
 
 	  Led_TaskStep();
-	  lastWakeTime += 100;
+	  lastWakeTime += TASK_LED_PERIOD_MS;
 	  osDelayUntil(lastWakeTime);
   }
   /* USER CODE END StartTask_Led */

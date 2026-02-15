@@ -45,7 +45,7 @@ Core/Src/sonar/sonar_task.o: ../Core/Src/sonar/sonar_task.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Inc/log/wcet_monitor.h ../Core/Inc/tim.h
+ ../Core/Inc/tim.h
 ../Core/Inc/sonar/sonar_task.h:
 ../Core/Inc/sonar/sonar_hw.h:
 ../Core/Inc/main.h:
@@ -95,5 +95,4 @@ Core/Src/sonar/sonar_task.o: ../Core/Src/sonar/sonar_task.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-../Core/Inc/log/wcet_monitor.h:
 ../Core/Inc/tim.h:

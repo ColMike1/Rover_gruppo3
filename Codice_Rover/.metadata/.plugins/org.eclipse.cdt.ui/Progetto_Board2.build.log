@@ -1,10 +1,17 @@
-16:17:58 **** Incremental Build of configuration Debug for project Progetto_Board2 ****
+22:16:08 **** Incremental Build of configuration Debug for project Progetto_Board2 ****
 make -j8 all 
+arm-none-eabi-gcc "../Core/Src/actuation/sabertooth_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2" -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover" -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/.." -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Drivers/SupervisorB2" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/actuation/sabertooth_driver.d" -MT"Core/Src/actuation/sabertooth_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/actuation/sabertooth_driver.o"
+arm-none-eabi-gcc -o "Progetto_Board2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover\Progetto_Board2\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Progetto_Board2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Progetto_Board2.elf
+ 
 arm-none-eabi-size  Progetto_Board2.elf 
+arm-none-eabi-objdump -h -S Progetto_Board2.elf  > "Progetto_Board2.list"
    text	   data	    bss	    dec	    hex	filename
-  96952	    476	  21376	 118804	  1d014	Progetto_Board2.elf
+  97296	    476	  21864	 119636	  1d354	Progetto_Board2.elf
 Finished building: default.size.stdout
  
+Finished building: Progetto_Board2.list
+ 
 
-16:18:00 Build Finished. 0 errors, 0 warnings. (took 1s.642ms)
+22:16:10 Build Finished. 0 errors, 0 warnings. (took 1s.943ms)
 

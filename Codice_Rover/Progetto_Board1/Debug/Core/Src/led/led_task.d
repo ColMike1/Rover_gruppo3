@@ -1,7 +1,7 @@
 Core/Src/led/led_task.o: ../Core/Src/led/led_task.c \
  ../Core/Inc/led/led_task.h ../Core/Inc/snapshot/supervisor_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
@@ -48,13 +48,13 @@ Core/Src/led/led_task.o: ../Core/Src/led/led_task.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
  ../Core/Inc/log/wcet_monitor.h ../Core/Inc/main.h
 ../Core/Inc/led/led_task.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
@@ -102,7 +102,7 @@ C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
 ../Core/Inc/log/wcet_monitor.h:
 ../Core/Inc/main.h:

@@ -1,3 +1,0 @@
-../Core/i2c_callbacks.c:15:6:HAL_I2C_MemRxCpltCallback	2
-../Core/i2c_callbacks.c:24:6:HAL_I2C_MasterRxCpltCallback	2
-../Core/i2c_callbacks.c:32:6:HAL_I2C_ErrorCallback	3

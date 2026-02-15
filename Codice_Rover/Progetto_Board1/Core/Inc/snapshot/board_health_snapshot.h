@@ -1,8 +1,6 @@
-/*
- * board_health_snapshot.h
- *
- *  Created on: Jan 8, 2026
- *      Author: Sterm
+/**
+ * @file board_health_snapshot.h
+ * @brief Buffer protetto per lo scambio dati dello stato hardware.
  */
 
 #ifndef INC_SNAPSHOT_BOARD_HEALTH_SNAPSHOT_H_
@@ -13,29 +11,39 @@
   #include "cmsis_os.h"
 #endif
 
-
+/**
+ * @struct BoardHealthSnapshot_t
+ * @brief Snapshot dei parametri vitali della scheda.
+ */
 typedef struct
 {
-  float temperature_degC;		/* ultima lettura valida della temperatura */
-  float battery_pct;			/* ultima lettura valida della batteria */
+  float temperature_degC;		/**< Ultima lettura valida della temperatura */
+  float battery_pct;			/**< Ultima lettura valida della batteria in percentuale */
 
-  uint32_t task_last_run_ms;     /* ultima esecuzione del task */
+  uint32_t task_last_run_ms;     /**< Timestamp dell'ultima esecuzione del task [ms] */
 
-  uint32_t temp_last_valid_ms;	/* ultima rilevazione valida della temperatura */
-  uint32_t batt_last_valid_ms;	/* ultima rilevazione valida della batteria */
+  uint32_t temp_last_valid_ms;	/**< Timestamp dell'ultima rilevazione temperatura valida */
+  uint32_t batt_last_valid_ms;	/**< Timestamp dell'ultima rilevazione batteria valida */
 } BoardHealthSnapshot_t;
 
-
 #ifndef MATLAB_MEX_FILE
-/* Inizializzazione del mutex relativo allo snapshot Board Health */
+/**
+ * @brief Inizializza il mutex per l'accesso thread-safe allo snapshot.
+ * @param mutex_handle Handle del mutex FreeRTOS/CMSIS.
+ */
 void BoardHealthSnapshot_MutexInit(osMutexId_t mutex_handle);
 #endif
 
-/* Writer API (chiamata esclusivamente dal task Board Health) */
+/**
+ * @brief Scrive i nuovi dati nello snapshot (API per il produttore).
+ * @param src Puntatore ai dati da copiare.
+ */
 void BoardHealthSnapshot_Write(const BoardHealthSnapshot_t *src);
 
-/* Reader API (chiamata dai task interessati a leggere i dati prodotti) */
+/**
+ * @brief Legge i dati correnti dallo snapshot (API per i consumatori).
+ * @param dst Puntatore dove copiare i dati letti.
+ */
 void BoardHealthSnapshot_Read(BoardHealthSnapshot_t *dst);
-
 
 #endif /* INC_SNAPSHOT_BOARD_HEALTH_SNAPSHOT_H_ */

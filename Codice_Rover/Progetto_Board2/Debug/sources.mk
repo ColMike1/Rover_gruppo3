@@ -32,7 +32,6 @@ Core/Src/snapshot \
 Core/Src/sonar \
 Core/Src/supervisor \
 Core/Startup \
-Core \
 Drivers/STM32G4xx_HAL_Driver/Src \
 Drivers/SupervisorB2 \
 Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
