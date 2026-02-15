@@ -115,7 +115,7 @@ Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono tr
 
 
 \subsection{Funzionamento task di Board 2}
-\subsubsection{Acquisizione distanza ostacoli}
+\subsubsection{Task: acquisizione distanza dagli ostacoli}
 La Board 2 è equipaggiata con tre sensori ad ultrasuoni \textbf{HC-SR04} per il rilevamento di ostacoli. 
 Questi sono disposti a 45° l'uno dall'altro, come mostrato in Figura~\ref{fig:sensori}.
 
@@ -159,11 +159,19 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
     \label{fig:callback_sonar}
 \end{figure}
 
+Alla fine della lettura, il task aggiorna lo snapshot \textbf{SonarsSnapshot} con le distanze rilevate dai tre sensori, come mostrato in Figura~\ref{fig:sonars_snapshot}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/sonars_snapshot}
+    \caption{Struttura dati dello snapshot SonarsSnapshot.}
+    \label{fig:sonars_snapshot}
+\end{figure}
 
 
 
 
-\subsubsection{Lettura comandi utente}
+
+\subsubsection{Task: lettura comandi utente}
 La Board 2 riceve i comandi utente provenienti da un joistick che comunica con un'ESP32 tramite Bluetooth. La Board 2, attraverso un task dedicato, riceve i comandi provenienti dalla $ESP32$
 con il protocollo \textbf{I2C}e li integra nello snapshot \textbf{BleControllerSnapshot}. In Figura~\ref{task_step_BLE} è mostrata lo step del task dedicato alla ricezione dei comandi utente, 
 in cui viene eseguita la lettura dei dati provenienti dalla $ESP32$ e l'aggiornamento dello snapshot \textbf{BleControllerSnapshot}. 
@@ -187,9 +195,85 @@ in cui sono presenti i comandi utente normalizzati ($x\_norm$ e $y\_norm$).
     \label{fig:ble_snapshot}
 \end{figure}
 
+\subsubsection{Task: lettura giroscopio}
+La Board 2 è equipaggiata con un sensore IMU \textbf{MPU-6050}, che integra un accelerometro e un giroscopio a 3 assi. Poiché il sensore non fornisce direttamente l'orientamento assoluto, l'angolo di yaw
+(la rotazione del rover attorno al suo asse verticale) viene calcolato nel firmware integrando nel tempo i dati della velocità angolare provenienti dal giroscopio.
+All'accensione, il sistema esegue una calibrazione per impostare lo zero relativo alla direzione di avvio. La comunicazione con l'IMU avviene tramite protocollo I2C, e i dati elaborati aggiornano
+ciclicamente lo snapshot IMUSnapshot (Figura~\ref{imu_snapshot}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/IMU/IMU_snapshot}
+    \caption{Struttura dati dello snapshot IMUSnapshot.}
+    \label{imu_snapshot}
+\end{figure}
+
+\subsubsection{Task: supervisore Board 2}
+Il cuore logico della Board 2 è rappresentato dal task del supervisore, un processo che implementa una macchina a stati complessa generata tramite Simulink Stateflow. 
+Il task opera come un arbitro di sicurezza tra i comandi utente e l'ambiente circostante, garantendo che il rover si muova nella direzione voluta dall'utente a meno di 
+possibili ostacoli statici o in movimento.
+
+In Figura~\ref{fig:supervisorB2_task} è mostrato lo step del task del supervisore, in cui vengono evidenziati gli input e gli output.
 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2}
+    \caption{Step del task del supervisore della Board 2.}
+    \label{fig:supervisorB2_task}  
+\end{figure}
 
+Ad ogni ciclo, il task acquisisce i dati dai sensori locali (\textbf{Sonar}, \textbf{IMU}, \textbf{Comandi utente}) e le informazioni provenienti dalla Board 1 tramite lo snapshot \textbf{RxSnapshot}.
+Il sistema valuta l'integrità dei dati e la persistenza della comunicazione con la Board 1. In base alla latenza dei messaggi e alla coerenza dei sensori, 
+il supervisore può far transitare il rover in stati di operatività $Degraded$ o $Critical$. Utilizzando i dati dei tre sonar frontali, il supervisore implementa algoritmi di protezione, infatti,
+se viene rilevato un ostacolo a distanza critica ($<70$ cm), il sistema forza un comando di $CMD\_ESTOP$.
+In caso di ostacoli in movimento (range $75-150$ cm), il supervisore attiva delle procedure di deviazione ($CMD\_GO\_LEFT$, $CMD\_GO\_RIGHT$) o di aggiramento ($CMD\_AVOID$), calcolando i nuovi target 
+di angolo yaw necessari per direzionare il rover verso l'assenza di ostacoli.
+
+Il supervisore esegue un test di coerenza tra la rotazione stimata dalla lettura della velocità dei motori e quella misurata dall'IMU. Questa logica permette di rilevare 
+anomalie meccaniche (come lo slittamento di una ruota o il bloccaggio di un motore) o anomalie dei sensori IMU ed encoder. Se ci sono incoerenze, il supervisore di Board 2 imposta un flag $isMotionConsistent$ a 0.
+
+Infine, in condizioni nominali, la Board 2 non invia comandi di attuazione ai motori, lasciando che sia la Board 1 ad attuare. Tuttavia, il controllo attivo dei motori passa alla Board 2 se:
+\begin{itemize}
+    \item La Board 1 segnala un guasto interno tramite il proprio payload, autorizzando uno switch di attuazione.
+    \item Viene rilevato un timeout critico nella ricezione dei dati dalla Board 1 ($>150$ ms).
+    \item Il supervisore della Board 1 funziona in maniera discontinua.
+\end{itemize}
+
+La descrizione di come il comando possa essere dato da Board 2 in caso di anomalie sarà descritto in seguito.
+
+In Figura~\ref{fig:b2_actuation} è mostrata la $actuation\_step$ di Board 2 in funzione della variabile $autorized\_to\_send\_command$ in uscita dal supervisore.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/B2Actuation}
+    \caption{Step di attuazione di Board 2 in funzione della variabile autorized\_to\_send\_command.}
+    \label{fig:b2_actuation}
+\end{figure}
+
+Data l'assenza degli encoder, l'attuazione di Board 2 dovrà essere in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
+La funzione di attuazione trasforma i riferimenti di velocità del supervisore in segnali di potenza per i motori. Il sistema opera in anello aperto (open-loop), convertendo i giri al minuto (RPM) desiderati in tensione elettrica
+Infine, i comandi vengono inviati al driver di potenza Sabertooth tramite una scalatura lineare del voltaggio in uscita, con un range di $[-12V; +12V]$ corrispondente a $[-MAX\_RPM; +MAX\_RPM]$.
+
+
+\subsubsection{Task: log dei dati per il debug}
+La Board 2 integra un task dedicato alla stampa dei dati per scopi di debug. Questo task, eseguito a cadenza regolare,
+acquisisce gli snapshot:
+\begin{itemize}
+    \item \textbf{RxSnapshot}
+    \item \textbf{BleControllerSnapshot}
+    \item \textbf{SonarsSnapshot}
+    \item \textbf{IMUSnapshot}
+\end{itemize}
+e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
+Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
+    \caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
+    \label{fig:log_task}
+\end{figure}
 
 
 

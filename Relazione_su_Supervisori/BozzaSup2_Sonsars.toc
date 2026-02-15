@@ -2,21 +2,24 @@
 \contentsline {subsection}{\numberline {1.1}Interazione tra Task e Meccanismo di Snapshot}{3}{}%
 \contentsline {subsection}{\numberline {1.2}Interazione tra le due Board}{5}{}%
 \contentsline {subsection}{\numberline {1.3}Funzionamento task di Board 2}{6}{}%
-\contentsline {subsubsection}{\numberline {1.3.1}Acquisizione distanza ostacoli}{6}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}Task: acquisizione distanza dagli ostacoli}{6}{}%
 \contentsline {paragraph}{Utilizzo DMA per la lettura dei segnali}{7}{}%
-\contentsline {subsubsection}{\numberline {1.3.2}Lettura comandi utente}{9}{}%
-\contentsline {section}{\numberline {2}Supervisore Board 1}{11}{}%
-\contentsline {subsection}{\numberline {2.1}Panoramica generale}{11}{}%
-\contentsline {subsection}{\numberline {2.2}Input}{12}{}%
-\contentsline {subsection}{\numberline {2.3}Output}{14}{}%
-\contentsline {subsection}{\numberline {2.4}Rilevazione Faults}{15}{}%
-\contentsline {subsection}{\numberline {2.5}Decidere di far comandare la Board2}{19}{}%
-\contentsline {subsection}{\numberline {2.6}Costruzione maschere degradate e critiche}{21}{}%
-\contentsline {subsection}{\numberline {2.7}Calcolo riferimenti}{22}{}%
-\contentsline {section}{\numberline {3}Supervisore Board 2}{24}{}%
-\contentsline {subsection}{\numberline {3.1}Panoramica generale}{24}{}%
-\contentsline {subsection}{\numberline {3.2}Input}{25}{}%
-\contentsline {subsection}{\numberline {3.3}Output}{25}{}%
-\contentsline {subsection}{\numberline {3.4}Rilevamento ostacoli}{25}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{26}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Gestione ostacoli con sistema in stato $degradato$}{30}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}Task: lettura comandi utente}{9}{}%
+\contentsline {subsubsection}{\numberline {1.3.3}Task: lettura giroscopio}{11}{}%
+\contentsline {subsubsection}{\numberline {1.3.4}Task: supervisore Board 2}{12}{}%
+\contentsline {subsubsection}{\numberline {1.3.5}Task: log dei dati per il debug}{15}{}%
+\contentsline {section}{\numberline {2}Supervisore Board 1}{16}{}%
+\contentsline {subsection}{\numberline {2.1}Panoramica generale}{16}{}%
+\contentsline {subsection}{\numberline {2.2}Input}{17}{}%
+\contentsline {subsection}{\numberline {2.3}Output}{19}{}%
+\contentsline {subsection}{\numberline {2.4}Rilevazione Faults}{20}{}%
+\contentsline {subsection}{\numberline {2.5}Decidere di far comandare la Board2}{24}{}%
+\contentsline {subsection}{\numberline {2.6}Costruzione maschere degradate e critiche}{26}{}%
+\contentsline {subsection}{\numberline {2.7}Calcolo riferimenti}{27}{}%
+\contentsline {section}{\numberline {3}Supervisore Board 2}{29}{}%
+\contentsline {subsection}{\numberline {3.1}Panoramica generale}{29}{}%
+\contentsline {subsection}{\numberline {3.2}Input}{30}{}%
+\contentsline {subsection}{\numberline {3.3}Output}{30}{}%
+\contentsline {subsection}{\numberline {3.4}Rilevamento ostacoli}{30}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{31}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Gestione ostacoli con sistema in stato $degradato$}{35}{}%
