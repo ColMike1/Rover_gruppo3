@@ -10,6 +10,8 @@
 \usepackage{multirow}
 \usepackage{amsmath}
 \graphicspath{ {./images/} }
+\setcounter{tocdepth}{4}    % Permette a \paragraph di apparire nell'indice
+%\setcounter{secnumdepth}{4} % Opzionale: numera anche i paragrafi (es. 1.1.1.1)
 
 \title{Supervisori}
 \date{Febbraio 2026}
@@ -24,51 +26,6 @@
 \tableofcontents
 % \listoffigures
 \newpage
-
-\section{Acquisizione segnali Board 2} 
-\subsection{\textbf{HC-SR04} - Sensore ad ultrasuoni}
-La Board 2 è equipaggiata con tre sensori ad ultrasuoni \textbf{HC-SR04} per il rilevamento di ostacoli. 
-Questi sono disposti a 45° l'uno dall'altro, come mostrato in Figura~\ref{fig:sensori}.
-
-
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\textwidth]{images/Sonars/disposizioneSonar} 
-    \caption{Disposizione dei sensori sulla Board 2.}
-    \label{fig:sensori}
-\end{figure}
-
-Ogni sensore emette onde sonore ad alta frequenza e produce segnali di tipo onda quadra la cui durata è proporzionale all'ostacolo rilevato. 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{images/Sonars/segnale_sonar_3m}
-    \caption{Segnale generato dal sensore HC-SR04 in presenza di un ostacolo a 3 metri di distanza.}
-    \label{fig:segnale_sonar}
-\end{figure}
-La board2, rilevando i fronti di salita e discesa, può misurare l'intervallo tra i due fronti e utilizzare questa informazione per calcolare
-la distanza dall'ostacolo e prendere decisioni appropriate per evitare collisioni.
-
-\subsubsection*{Utilizzo DMA per la lettura dei segnali}
-Per ottimizzare la lettura dei segnali dai sensori ad ultrasuoni, la Board 2 utilizza il Direct Memory Access (DMA).
-Il DMA consente di trasferire i dati direttamente tra la periferica (i sensori ad ultrasuoni) e la memoria, senza l'intervento della CPU.
-Il timer utilizzato è il $Timer 1$, con i canali $1$, $2$ e $3$ configurati in modalità \textit{input capture} per catturare i fronti di salita e discesa generati dai tre sensori.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{images/Sonars/configurazione_timIC_sonar}
-    \caption{Configurazione del DMA per la lettura dei segnali dai sensori.}
-    \label{fig:dma_sonar}
-\end{figure}
-
-Ogni canale del DMA è configurato in modalità interrupt, permettendo, alla fine della rilevazione dei due fronti (salita e discesa), di eseguire una $Callback$ che imposta dei flag a 1. 
-Questo flag indica che i fronti sono stati rilevati e che la distanza dall'ostacolo può essere calcolata. In totale vengono eseguite solo $3$ callback, attivate solo quando uno specifico 
-canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:callback_sonar} mostra un esempio di callback eseguita al termine della rilevazione dei fronti.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{images/Sonars/callback_sonar}
-    \caption{Callback eseguita al termine della rilevazione dei fronti.}
-    \label{fig:callback_sonar}
-\end{figure}
 
 
 
@@ -108,7 +65,7 @@ canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:call
 \section{Funzionamento generale di ciascuna board}
 \subsection{Interazione tra Task e Meccanismo di Snapshot}
 Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
-variabili globali condivise. Si consideri, ad esempio, la Figura~\ref{fig:funzionamento_generale} che illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit}. 
+variabili globali condivise. Si consideri, ad esempio, la Figura~\ref{fig:funzionamento_generale} che illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit} che vengono eseguiti sulla Board 1. 
 Al termine della propria esecuzione, ogni task può aggiornare tali snapshot, rendendo i nuovi dati disponibili agli altri task. Nell'esempio, il task \textit{SupervisorB1} 
 aggiorna lo snapshot \textbf{supervisor\_snapshot}, che viene poi utilizzato dal task \textit{Transmit} per l'invio dei dati verso la Board2. Allo stesso modo, la Board 2 tiene legge
 i scrive i propri snapshot, come illustrato nella Figura~\ref{fig:funzionamento_generale_b2}.
@@ -117,7 +74,7 @@ Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio te
 
 \begin{itemize} 
     \item \textit{data\_last\_valid\_ms}: indica l'istante temporale dell'ultimo aggiornamento dei dati ritenuto valido (ad esempio, l'ultima lettura coerente ricevuta dagli encoder). 
-    \item \textit{task\_last\_run\_ms}: riporta l'ultimo istante in cui il task responsabile dell'aggiornamento è stato effettivamente eseguito. 
+    \item \textit{task\_last\_run\_ms}: riporta l'ultimo istante in cui il task è stato effettivamente eseguito. 
 \end{itemize}
 
 
@@ -135,27 +92,239 @@ Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio te
     \label{fig:funzionamento_generale_b2}
 \end{figure}
 
+\subsection{Interazione tra le due Board}
+Le due board comunicano tra loro tramite un collegamento seriale, con presenza di task di trasmissione e ricezione su entrambe le board. Il task di trasmissione su entrambe le board ha periodo di 20 ms,
+mentre il task di ricezione è di tipo event-driven, attivato dall'arrivo di nuovi dati sulla seriale. In Figura~\ref{fig:comunicazione_board21} è mostrata l'interazione tra i task di trasmissione della 
+Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono trasmessi e ricevuti tra le due board.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b2b1}
+    \caption{Interazione tra i task di trasmissione della Board 2 e ricezione della Board 1.}
+    \label{fig:comunicazione_board}
+\end{figure}
+
+ Allo stesso modo, nella Figura~\ref{fig:comunicazione_board12} è mostrata l'interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b1b2}
+    \caption{Interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.}
+    \label{fig:comunicazione_board12}
+\end{figure}
+
+
+\subsection{Funzionamento task di Board 2}
+\subsubsection{Task: acquisizione distanza dagli ostacoli}
+La Board 2 è equipaggiata con tre sensori ad ultrasuoni \textbf{HC-SR04} per il rilevamento di ostacoli. 
+Questi sono disposti a 45° l'uno dall'altro, come mostrato in Figura~\ref{fig:sensori}.
+
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/funzionamento_generale/Sonars/disposizioneSonar} 
+    \caption{Disposizione dei sensori sulla Board 2.}
+    \label{fig:sensori}
+\end{figure}
+
+Ogni sensore emette onde sonore ad alta frequenza e produce segnali di tipo onda quadra la cui durata è proporzionale all'ostacolo rilevato. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/segnale_sonar_3m}
+    \caption{Segnale generato dal sensore HC-SR04 in presenza di un ostacolo a 3 metri di distanza.}
+    \label{fig:segnale_sonar}
+\end{figure}
+La board2, rilevando i fronti di salita e discesa, può misurare l'intervallo tra i due fronti e utilizzare questa informazione per calcolare
+la distanza dall'ostacolo e prendere decisioni appropriate per evitare collisioni.
+
+\paragraph{Utilizzo DMA per la lettura dei segnali}
+Per ottimizzare la lettura dei segnali dai sensori ad ultrasuoni, la Board 2 utilizza il Direct Memory Access (DMA).
+Il DMA consente di trasferire i dati direttamente tra la periferica (i sensori ad ultrasuoni) e la memoria, senza l'intervento della CPU.
+Il timer utilizzato è il $Timer 1$, con i canali $1$, $2$ e $3$ configurati in modalità \textit{input capture} per catturare i fronti di salita e discesa generati dai tre sensori.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/configurazione_timIC_sonar}
+    \caption{Configurazione del DMA per la lettura dei segnali dai sensori.}
+    \label{fig:dma_sonar}
+\end{figure}
+
+Ogni canale del DMA è configurato in modalità interrupt, permettendo, alla fine della rilevazione dei due fronti (salita e discesa), di eseguire una $Callback$ che imposta dei flag a 1. 
+Questo flag indica che i fronti sono stati rilevati e che la distanza dall'ostacolo può essere calcolata. In totale vengono eseguite solo $3$ callback, attivate solo quando uno specifico 
+canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:callback_sonar} mostra un esempio di callback eseguita al termine della rilevazione dei fronti.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/callback_sonar}
+    \caption{Callback eseguita al termine della rilevazione dei fronti.}
+    \label{fig:callback_sonar}
+\end{figure}
+
+Alla fine della lettura, il task aggiorna lo snapshot \textbf{SonarsSnapshot} con le distanze rilevate dai tre sensori, come mostrato in Figura~\ref{fig:sonars_snapshot}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/sonars_snapshot}
+    \caption{Struttura dati dello snapshot SonarsSnapshot.}
+    \label{fig:sonars_snapshot}
+\end{figure}
 
 
 
 
 
+\subsubsection{Task: lettura comandi utente}
+La Board 2 riceve i comandi utente provenienti da un joistick che comunica con un'ESP32 tramite Bluetooth. La Board 2, attraverso un task dedicato, riceve i comandi provenienti dalla $ESP32$
+con il protocollo \textbf{I2C}e li integra nello snapshot \textbf{BleControllerSnapshot}. In Figura~\ref{task_step_BLE} è mostrata lo step del task dedicato alla ricezione dei comandi utente, 
+in cui viene eseguita la lettura dei dati provenienti dalla $ESP32$ e l'aggiornamento dello snapshot \textbf{BleControllerSnapshot}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/user_command/task_step_BLE}
+    \caption{Step del task dedicato alla ricezione dei comandi utente.}
+    \label{task_step_BLE}
+\end{figure}
+
+La funzione $BleController\_I2C\_ReadFrame$ si occupa di leggere i dati provenienti dalla $ESP32$ e di restituirli in una struttura dati, che viene poi utilizzata per aggiornare lo snapshot \textbf{BleControllerSnapshot}.
+
+In Figura~\ref{fig:ble_snapshot} è mostrata la struttura dati dello snapshot \textbf{BleControllerSnapshot},
+in cui sono presenti i comandi utente normalizzati ($x\_norm$ e $y\_norm$).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/user_command/BLE_snapshot}
+    \caption{Struttura dati dello snapshot BleControllerSnapshot.}
+    \label{fig:ble_snapshot}
+\end{figure}
+
+\subsubsection{Task: lettura giroscopio}
+La Board 2 è equipaggiata con un sensore IMU \textbf{MPU-6050}, che integra un accelerometro e un giroscopio a 3 assi. Poiché il sensore non fornisce direttamente l'orientamento assoluto, l'angolo di yaw
+(la rotazione del rover attorno al suo asse verticale) viene calcolato nel firmware integrando nel tempo i dati della velocità angolare provenienti dal giroscopio.
+All'accensione, il sistema esegue una calibrazione per impostare lo zero relativo alla direzione di avvio. La comunicazione con l'IMU avviene tramite protocollo I2C, e i dati elaborati aggiornano
+ciclicamente lo snapshot IMUSnapshot (Figura~\ref{imu_snapshot}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/funzionamento_generale/IMU/IMU_snapshot}
+    \caption{Struttura dati dello snapshot IMUSnapshot.}
+    \label{imu_snapshot}
+\end{figure}
+
+\subsubsection{Task: supervisore Board 2}
+Il cuore logico della Board 2 è rappresentato dal task del supervisore, un processo che implementa una macchina a stati complessa generata tramite Simulink Stateflow. 
+Il task opera come un arbitro di sicurezza tra i comandi utente e l'ambiente circostante, garantendo che il rover si muova nella direzione voluta dall'utente a meno di 
+possibili ostacoli statici o in movimento.
+
+In Figura~\ref{fig:supervisorB2_task} è mostrato lo step del task del supervisore, in cui vengono evidenziati gli input e gli output.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2}
+    \caption{Step del task del supervisore della Board 2.}
+    \label{fig:supervisorB2_task}  
+\end{figure}
+
+Ad ogni ciclo, il task acquisisce i dati dai sensori locali (\textbf{Sonar}, \textbf{IMU}, \textbf{Comandi utente}) e le informazioni provenienti dalla Board 1 tramite lo snapshot \textbf{RxSnapshot}.
+Il sistema valuta l'integrità dei dati e la persistenza della comunicazione con la Board 1. In base alla latenza dei messaggi e alla coerenza dei sensori, 
+il supervisore può far transitare il rover in stati di operatività $Degraded$ o $Critical$. Utilizzando i dati dei tre sonar frontali, il supervisore implementa algoritmi di protezione, infatti,
+se viene rilevato un ostacolo a distanza critica ($<70$ cm), il sistema forza un comando di $CMD\_ESTOP$.
+In caso di ostacoli in movimento (range $75-150$ cm), il supervisore attiva delle procedure di deviazione ($CMD\_GO\_LEFT$, $CMD\_GO\_RIGHT$) o di aggiramento ($CMD\_AVOID$), calcolando i nuovi target 
+di angolo yaw necessari per direzionare il rover verso l'assenza di ostacoli.
+
+Il supervisore esegue un test di coerenza tra la rotazione stimata dalla lettura della velocità dei motori e quella misurata dall'IMU. Questa logica permette di rilevare 
+anomalie meccaniche (come lo slittamento di una ruota o il bloccaggio di un motore) o anomalie dei sensori IMU ed encoder. Se ci sono incoerenze, il supervisore di Board 2 imposta un flag $isMotionConsistent$ a 0.
+
+Infine, in condizioni nominali, la Board 2 non invia comandi di attuazione ai motori, lasciando che sia la Board 1 ad attuare. Tuttavia, il controllo attivo dei motori passa alla Board 2 se:
+\begin{itemize}
+    \item La Board 1 segnala un guasto interno tramite il proprio payload, autorizzando uno switch di attuazione.
+    \item Viene rilevato un timeout critico nella ricezione dei dati dalla Board 1 ($>150$ ms).
+    \item Il supervisore della Board 1 funziona in maniera discontinua.
+\end{itemize}
+
+La descrizione di come il comando possa essere dato da Board 2 in caso di anomalie sarà descritto in seguito.
+
+In Figura~\ref{fig:b2_actuation} è mostrata la $actuation\_step$ di Board 2 in funzione della variabile $autorized\_to\_send\_command$ in uscita dal supervisore.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/B2Actuation}
+    \caption{Step di attuazione di Board 2 in funzione della variabile autorized\_to\_send\_command.}
+    \label{fig:b2_actuation}
+\end{figure}
+
+Data l'assenza degli encoder, l'attuazione di Board 2 dovrà essere in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
+La funzione di attuazione trasforma i riferimenti di velocità del supervisore in segnali di potenza per i motori. Il sistema opera in anello aperto (open-loop), convertendo i giri al minuto (RPM) desiderati in tensione elettrica
+Infine, i comandi vengono inviati al driver di potenza Sabertooth tramite una scalatura lineare del voltaggio in uscita, con un range di $[-12V; +12V]$ corrispondente a $[-MAX\_RPM; +MAX\_RPM]$.
+
+
+\subsubsection{Task: log dei dati per il debug}
+La Board 2 integra un task dedicato alla stampa dei dati per scopi di debug. Questo task, eseguito a cadenza regolare,
+acquisisce gli snapshot:
+\begin{itemize}
+    \item \textbf{RxSnapshot}
+    \item \textbf{BleControllerSnapshot}
+    \item \textbf{SonarsSnapshot}
+    \item \textbf{IMUSnapshot}
+\end{itemize}
+e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
+Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
+    \caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
+    \label{fig:log_task}
+\end{figure}
 
 
 
+\subsection{Funzionamento task di Board 1}
+\subsubsection{Task: lettura batteria e temperatura}
+La Board 1 è equipaggiata con sensori per il monitoraggio della temperatura e della batteria. Un task dedicato esegue ciclicamente la lettura di questi sensori, aggiornando lo snapshot \textbf{BoardHealthSnapshot} con i valori rilevati.
+
+In Figura~\ref{fig:health_task} è mostrato lo step del task dedicato alla lettura della batteria e temperatura, in cui vengono evidenziati i dati acquisiti e aggiornati nello snapshot \textbf{BoardHealthSnapshot}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/BatTemp/BoardHelathTask}
+    \caption{Step del task dedicato alla lettura della batteria e temperatura.}
+    \label{fig:health_task}
+\end{figure}
+
+Per garantire l'affidabilità a lungo termine, il sistema integra un modulo di diagnostica basato su convertitori Analogico-Digitali (ADC) che monitorano costantemente i parametri vitali della scheda. Questo modulo si occupa di due aspetti critici:
+
+\begin{itemize}
+\item \textbf{Gestione della Batteria:} Il sistema legge la tensione della batteria attraverso un partitore resistivo. Poiché la scarica di una batteria non è lineare, il software utilizza una \textit{Look-Up Table} (LUT) e un'interpolazione
+                                        lineare per convertire i Volt in una percentuale di carica residua (0-100\%). Ciò fornisce all'utente un'indicazione realistica dell'autonomia residua.
+\item \textbf{Monitoraggio Termico:}    Utilizzando il sensore di temperatura interno al microcontrollore STM32G4, il sistema calcola la temperatura operativa della logica di controllo. Il calcolo sfrutta i dati di calibrazione salvati in fabbrica
+                                        dal produttore per garantire la massima precisione.
+\end{itemize}
+
+Per evitare letture errate dovute a disturbi elettrici o picchi temporanei, i dati non vengono usati così come sono, ma vengono processati attraverso una media mobile. 
+Questo filtro "ammorbidisce" le letture su una finestra di 10 campioni, garantendo che i valori visualizzati siano stabili e puliti. 
+Infine, il modulo verifica che i valori rientrino in range di sicurezza (es. 7V - 15V per la batteria), segnalando errori di sistema qualora i parametri diventino critici
+
+\subsubsection{Task: supervisore Board 1}
+Il supervisore della Board 1 è implementato anch'esso tramite una macchina a stati sviluppata in Simulink Stateflow. Questo task ha il compito di supervisionare l'integrità dell'hardware e di orchestrare le logiche di movimento avanzate.
+
+In Figura~\ref{fig:supervisorB1_task} è illustrato lo step del task del supervisore della Board 1, con il dettaglio delle interfacce di input e output.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB1/task_step_supervisorB1}
+\caption{Step del task del supervisore della Board 1.}
+\label{fig:supervisorB1_task}
+
+\end{figure}
+
+Il task elabora in tempo reale i dati provenienti dalla \textbf{Board Health} (stato di batteria e temperatura), i feedback degli \textbf{Encoder} motori e i pacchetti dati ricevuti dalla Board 2.
 
 
-
-
-
-
-
-
-
-
-
-
-
+La logica di controllo è strutturata su tre pilastri fondamentali:
+\begin{itemize}
+\item \textbf{Diagnostica e Fault Masking:} Il sistema aggrega i guasti rilevati in maschere di errore (\textit{Critical} e \textit{Degraded}). Queste maschere permettono al supervisore di inibire determinate manovre o di limitare la potenza del sistema in caso di anomalie termiche o di tensione, garantendo la protezione della componentistica meccanica ed elettronica.
+\item \textbf{Gestione delle Manovre Complesse:} A differenza della Board 2, focalizzata sull'evitamento ostacoli, la Board 1 gestisce comandi di alto livello come la \textit{Rotazione a 180 gradi} assistita e la procedura di \textit{Emergency Stop}, monitorando l'arresto effettivo delle ruote tramite i sensori di velocità.
+\item \textbf{Arbitraggio dell'Attuazione:} Il supervisore valuta costantemente l'affidabilità della comunicazione inter-board. Qualora rilevi un'instabilità critica nel proprio sottosistema di controllo ma una comunicazione valida con l'altra scheda, è in grado di cedere i privilegi di attuazione alla Board 2, realizzando una strategia di ridonanza funzionale che aumenta la resilienza del rover.
+\end{itemize}
 
 
 
