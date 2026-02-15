@@ -1,11 +1,7 @@
-/*
- * comm_tx_task.c
- *
- *  Created on: Jan 11, 2026
- *      Author: Sterm
+/**
+ * @file comm_tx_task.c
+ * @brief Task TX: composizione e invio frame board2 -> board1.
  */
-
-
 
 #include "comm/comm_tx_task.h"
 #include "comm/comm_pack.h"
@@ -17,9 +13,24 @@
 #include "snapshot/supervisor_snapshot.h"
 #include "snapshot/imu_snapshot.h"
 
+/** @brief Lunghezza fissa del frame trasmesso verso board 1. */
 #define TX_FRAME_LEN (sizeof(CommFrameB2_t))
 
+/**
+ * @brief Inizializza il task TX.
+ *
+ * In questa implementazione non e' richiesta inizializzazione specifica.
+ */
+void Tx_TaskInit(void)
+{
+}
 
+/**
+ * @brief Esegue uno step del task TX.
+ *
+ * Legge gli snapshot condivisi, costruisce il frame di trasmissione e lo invia
+ * su UART solo se la lunghezza e' quella attesa.
+ */
 void Tx_TaskStep(void)
 {
     SupervisorSnapshot_t sup;
@@ -38,6 +49,5 @@ void Tx_TaskStep(void)
     {
         CommUart_Send(tx_buf, tx_len);
     }
-
 }
 

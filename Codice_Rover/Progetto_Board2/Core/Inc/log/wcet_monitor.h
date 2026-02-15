@@ -1,8 +1,6 @@
-/*
- * wcet_monitor.h
- *
- *  Created on: Jan 21, 2026
- *      Author: Sterm
+/**
+ * @file wcet_monitor.h
+ * @brief API monitor WCET e formattazione report diagnostico.
  */
 
 #ifndef INC_LOG_WCET_MONITOR_H_
@@ -35,7 +33,23 @@ typedef enum {
     WCET_ID_MAX
 } wcet_id_t;
 
+/**
+ * @brief Aggiorna il WCET per un ID monitorato.
+ * @param id Identificativo task/ISR.
+ * @param cycles Numero di cicli rilevato.
+ */
 void WCET_Update(wcet_id_t id, uint32_t cycles);
+
+/**
+ * @brief Formatta il report WCET in un buffer testuale.
+ * @param buf Buffer di output.
+ * @param buf_len Lunghezza del buffer.
+ */
+void WCET_Format(char *buf, uint32_t buf_len);
+
+/**
+ * @brief Stampa il report WCET (API legacy, solo debug).
+ */
 void WCET_Print(void);
 
 

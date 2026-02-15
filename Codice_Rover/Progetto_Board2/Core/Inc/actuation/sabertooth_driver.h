@@ -1,8 +1,6 @@
-/*
- * sabertooth_driver.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file sabertooth_driver.h
+ * @brief Driver Sabertooth: composizione pacchetti e invio comandi motore.
  */
 
 #ifndef INC_ACTUATION_SABERTOOTH_DRIVER_H_
@@ -10,22 +8,27 @@
 
 #include <stdint.h>
 
-/* === Configurazione Sabertooth === */
+/** @brief Valore massimo del comando velocita' accettato dal Sabertooth. */
 #define SABER_MAX_SPEED   127
 
-/* Indirizzi (adatta se necessario) */
+/** @brief Indirizzo seriale del Sabertooth anteriore. */
 #define SABER_FRONT_ADDR       135
+/** @brief Indirizzo seriale del Sabertooth posteriore. */
 #define SABER_BACK_ADDR       134
 
-/* API driver */
+/** @brief Procedura di inizializzazione dei driver Sabertooth. */
 void Sabertooth_Init(void);
 
-/* Invio comandi ai 4 motori (unità fisiche: RPM firmati) */
-void Sabertooth_ApplyOutputs(float usx_p,
-                             float udx_p,
-                             float usx_a,
-                             float udx_a);
+/**
+ * @brief Invia i comandi ai quattro motori.
+ * @param usx_p Comando ruota sinistra posteriore.
+ * @param udx_p Comando ruota destra posteriore.
+ * @param usx_a Comando ruota sinistra anteriore.
+ * @param udx_a Comando ruota destra anteriore.
+ */
+void Sabertooth_ApplyOutputs(float usx_p, float udx_p, float usx_a, float udx_a);
 
-
-void SaberTxCallback(void);
+/** @brief Callback chiamata al completamento della TX UART verso Sabertooth. */
+void SabertoothCallback(void);
 #endif /* INC_ACTUATION_SABERTOOTH_DRIVER_H_ */
+

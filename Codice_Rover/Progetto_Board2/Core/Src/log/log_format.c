@@ -1,8 +1,6 @@
-/*
- * log_format.c
- *
- *  Created on: Jan 19, 2026
- *      Author: Sterm
+/**
+ * @file log_format.c
+ * @brief Formattazione testuale degli snapshot di diagnostica.
  */
 
 
@@ -15,6 +13,15 @@
 
 #include "shared_headers/board1_faults.h"
 #include "shared_headers/board2_faults.h"
+
+/** @brief Lunghezza buffer usata per serializzare maschere fault in stringa. */
+#define LOG_FAULT_STR_LEN 64U
+
+/**
+ * @brief Converte lo stato di unpack in stringa breve.
+ * @param s Stato unpack.
+ * @return Stringa costante associata allo stato.
+ */
 static const char *CommUnpackStatusToStr(CommUnpackStatus_t s)
 {
     switch (s)
@@ -27,67 +34,94 @@ static const char *CommUnpackStatusToStr(CommUnpackStatus_t s)
     }
 }
 
-void B1FaultFlagsToStr(uint32_t flags, char *buf, size_t len)
+/**
+ * @brief Converte la fault mask di board 1 in stringa.
+ * @param flags Maschera fault board 1.
+ * @param buf Buffer di output.
+ * @param len Lunghezza buffer di output.
+ */
+static void B1FaultFlagsToStr(uint32_t flags, char *buf, size_t len)
 {
-    if (!buf || len == 0) return;
-
-    buf[0] = '\0';
-
-    if (flags == FAULT_NONE) {
-        strncpy(buf, "NONE", len);
-        return;
-    }
-    if (flags & FAULT_TEMP) 	strncat(buf, "TEMP-",len);
-    if (flags & FAULT_BATT) 	strncat(buf, "BATT-",len);
-    if (flags & FAULT_RX) 		strncat(buf, "RX-",len);
-    if (flags & FAULT_WHEEL_FL) strncat(buf, "FL-", len);
-    if (flags & FAULT_WHEEL_FR) strncat(buf, "FR-", len);
-    if (flags & FAULT_WHEEL_RL) strncat(buf, "RL-", len);
-    if (flags & FAULT_WHEEL_RR) strncat(buf, "RR-", len);
-    if (flags & FAULT_B2_SUP)   strncat(buf, "B2SUP-", len);
-
-    size_t l = strlen(buf);
-    if (l > 0) buf[l - 1] = '\0';
-}
-
-
-void B2FaultFlagsToStr(uint32_t flags, char *buf, size_t len)
-{
-    if (!buf || len == 0) return;
-
-    buf[0] = '\0';
-
-    if (flags == FAULT_NONE) {
-        strncpy(buf, "NONE", len);
+    if (!buf || len == 0U)
+    {
         return;
     }
 
-    if (flags & FAULT_BLE)     strncat(buf, "BLE-", len);
-    if (flags & FAULT_IMU)     strncat(buf, "IMU-", len);
-    if (flags & FAULT_RX)	   strncat(buf, "RX-", len);
-    if (flags & FAULT_B1_SUP)  strncat(buf, "B1SUP-", len);
+    buf[0] = '\0';
+
+    if (flags == FAULT_NONE)
+    {
+        strncpy(buf, "NONE", len);
+        return;
+    }
+    if (flags & FAULT_TEMP) { strncat(buf, "TEMP-", len); }
+    if (flags & FAULT_BATT) { strncat(buf, "BATT-", len); }
+    if (flags & FAULT_RX) { strncat(buf, "RX-", len); }
+    if (flags & FAULT_WHEEL_FL) { strncat(buf, "FL-", len); }
+    if (flags & FAULT_WHEEL_FR) { strncat(buf, "FR-", len); }
+    if (flags & FAULT_WHEEL_RL) { strncat(buf, "RL-", len); }
+    if (flags & FAULT_WHEEL_RR) { strncat(buf, "RR-", len); }
+    if (flags & FAULT_B2_SUP) { strncat(buf, "B2SUP-", len); }
 
     size_t l = strlen(buf);
-    if (l > 0) buf[l - 1] = '\0';
+    if (l > 0U) { buf[l - 1U] = '\0'; }
 }
 
+/**
+ * @brief Converte la fault mask di board 2 in stringa.
+ * @param flags Maschera fault board 2.
+ * @param buf Buffer di output.
+ * @param len Lunghezza buffer di output.
+ */
+static void B2FaultFlagsToStr(uint32_t flags, char *buf, size_t len)
+{
+    if (!buf || len == 0U)
+    {
+        return;
+    }
 
+    buf[0] = '\0';
+
+    if (flags == FAULT_NONE)
+    {
+        strncpy(buf, "NONE", len);
+        return;
+    }
+
+    if (flags & FAULT_BLE) { strncat(buf, "BLE-", len); }
+    if (flags & FAULT_IMU) { strncat(buf, "IMU-", len); }
+    if (flags & FAULT_RX) { strncat(buf, "RX-", len); }
+    if (flags & FAULT_B1_SUP) { strncat(buf, "B1SUP-", len); }
+
+    size_t l = strlen(buf);
+    if (l > 0U) { buf[l - 1U] = '\0'; }
+}
+
+/**
+ * @brief Costruisce una stringa di log completa a partire dagli snapshot.
+ * @param buf Buffer di output.
+ * @param buf_len Lunghezza buffer di output.
+ * @param ble Snapshot BLE.
+ * @param imu Snapshot IMU.
+ * @param sonar Snapshot sonar.
+ * @param rx Snapshot RX.
+ */
 void Log_FormatSnapshot(char *buf,
                         unsigned buf_len,
                         const BleControllerSnapshot_t *ble,
                         const IMUSnapshot_t *imu,
                         const SonarSnapshot_t *sonar,
-						const RxSnapshot_t *rx)
+                        const RxSnapshot_t *rx)
 {
     if (!buf || !ble || !imu || !sonar || !rx)
         return;
 
-    char b1_crit[64];
-    char b1_degr[64];
-    char b2_crit[64];
-    char b2_degr[64];
+    char b1_crit[LOG_FAULT_STR_LEN];
+    char b1_degr[LOG_FAULT_STR_LEN];
+    char b2_crit[LOG_FAULT_STR_LEN];
+    char b2_degr[LOG_FAULT_STR_LEN];
 
-    static SupervisorSnapshot_t sup;
+    SupervisorSnapshot_t sup;
     SupervisorSnapshot_Read(&sup);
 
     B1FaultFlagsToStr(rx->payload.critical_mask, b1_crit, sizeof(b1_crit));
@@ -95,7 +129,8 @@ void Log_FormatSnapshot(char *buf,
     B2FaultFlagsToStr(sup.critical_mask, b2_crit, sizeof(b2_crit));
     B2FaultFlagsToStr(sup.degraded_mask, b2_degr, sizeof(b2_degr));
 
-    snprintf(buf, buf_len,
+    /* Nota MISRA: snprintf è usata solo per logging/debug. In release safety-critical puo' essere sostituito/rimosso. */
+    int fmt_status = snprintf(buf, buf_len,
         "[SNAPSHOT]\r\n"
         "BLE   t=%lu | AX=%.2f AY=%.2f | BTN=%d%d%d%d (data time: %lu) \r\n"
         "IMU   t=%lu | ACC(%.2f %.2f %.2f) | GYR(%.2f %.2f %.2f) yaw: %.2f | T=%.1f (data time: %lu)\r\n"
@@ -109,7 +144,6 @@ void Log_FormatSnapshot(char *buf,
         ble->bx_norm, ble->ay_norm,
         ble->a_btn, ble->b_btn, ble->btn1, ble->btn2,
         ble->data_last_valid_ms,
-		//ble->i2c_status,
 
         /* IMU */
         imu->task_last_run_ms,
@@ -118,14 +152,13 @@ void Log_FormatSnapshot(char *buf,
         imu->temperature_degC,
         imu->data_last_valid_ms,
 
-        /* SONAR */
+        /* Sonar */
         sonar->task_last_run_ms,
         sonar->dist_cm[0], sonar->data_last_valid_ms[0],
         sonar->dist_cm[1], sonar->data_last_valid_ms[1],
         sonar->dist_cm[2], sonar->data_last_valid_ms[2],
-        //(sonar->valid_mask != 0U) ? "OK" : "INV",
 
-        /* RX SNAPSHOT B1 */
+        /* Rx snapshot di board 1 */
         rx->task_last_run_ms,
         CommUnpackStatusToStr(rx->last_event),
         rx->data_last_valid_ms,
@@ -134,12 +167,18 @@ void Log_FormatSnapshot(char *buf,
         rx->payload.wheel_speed_rpm[1],
         rx->payload.wheel_speed_rpm[2],
         rx->payload.wheel_speed_rpm[3],
-		b1_crit,
-		b1_degr,
+        b1_crit,
+        b1_degr,
         rx->payload.alive_counter,
-		b2_crit,
-		b2_degr
+
+        /* Stato safety locale di board 2*/
+        b2_crit,
+        b2_degr
     );
+    if (fmt_status < 0)
+    {
+        buf[0] = '\0';
+    }
 
 }
 

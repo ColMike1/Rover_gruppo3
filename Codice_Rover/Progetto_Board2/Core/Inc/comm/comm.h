@@ -1,8 +1,6 @@
-/*
- * comm.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file comm.h
+ * @brief Header di aggregazione del modulo comunicazione.
  */
 
 #ifndef INC_COMM_COMM_H_

@@ -1,23 +1,25 @@
-/*
- * ble_controller_i2c.c
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file ble_controller_i2c.c
+ * @brief Implementazione accesso I2C al controller BLE.
  */
 
 
 #include "ble_controller/ble_controller_i2c.h"
-#include <stdbool.h>
-/* Config I2C */
+
+/** @brief Timeout massimo della transazione I2C [ms]. */
 #define BLE_I2C_TIMEOUT_MS   5
+/** @brief Indirizzo I2C del controller BLE (formato HAL, 7 bit shiftato). */
 #define BLE_I2C_ADDRESS     (0x55 << 1)
 
 
-/* I2C handle from CubeMX */
+/** @brief Handle I2C1 generato da CubeMX. */
 extern I2C_HandleTypeDef hi2c1;
 
-
-
+/**
+ * @brief Legge in polling un frame completo dal controller BLE.
+ * @param frame Puntatore al frame di output.
+ * @return Stato dell'operazione I2C.
+ */
 BleI2CStatus_t BleController_I2C_ReadFrame(BleRawFrame_t *frame)
 {
     if (!frame)

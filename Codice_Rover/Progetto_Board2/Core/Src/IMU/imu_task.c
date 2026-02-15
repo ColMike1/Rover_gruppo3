@@ -1,57 +1,59 @@
-/*
- * imu_task.c
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file imu_task.c
+ * @brief Task di acquisizione IMU e pubblicazione snapshot.
  */
 
-#define IMU_I2C_TIMEOUT_MS   10
 #include "IMU/imu.h"
 #include "snapshot/imu_snapshot.h"
 
 #include "cmsis_os2.h"
 
+/** @brief Ritardo iniziale task IMU per stabilizzare le periferiche [ms]. */
+#define IMU_TASK_INIT_DELAY_MS 100U
 
-/* ===== API ===== */
-
+/**
+ * @brief Inizializza il task IMU.
+ */
 void IMU_TaskInit(void)
 {
-    /* Init driver IMU */
-	osDelay(100);
-	IMU_I2C_Init();
+    /* Piccolo ritardo per stabilizzazione della periferica IMU. */
+    osDelay(IMU_TASK_INIT_DELAY_MS);
+    IMU_I2C_Init();
 }
 
+/**
+ * @brief Esegue uno step del task IMU.
+ *
+ * Legge i dati dal sensore, aggiorna i timestamp e pubblica lo snapshot.
+ */
 void IMU_TaskStep(void)
 {
     static IMUSnapshot_t snap;
 
-    /* Di default: nessun dato nuovo utilizzabile in questo ciclo */
+    /* Timestamp di esecuzione del task. */
     uint32_t now = osKernelGetTickCount();
 
     snap.task_last_run_ms = now;
 
-    /* ===== Update MPU ===== */
+    /* Aggiornamento dati sensore. */
     IMUI2CStatus_t st = IMU_I2C_ReadBlocking();
 
     if (st == IMU_I2C_COMPLETE)
     {
-
-        /* Timestamp = momento di PRODUZIONE del dato */
+        /* Timestamp di produzione del dato valido. */
         snap.data_last_valid_ms = now;
-        /* ===== Accelerometer (non usato) ===== */
+        /* Accelerometro. */
         IMU_I2C_GetAccel(&snap.ax_g, &snap.ay_g, &snap.az_g);
 
-        /* ===== Gyroscope ===== */
-        IMU_I2C_GetGyro(&snap.gx_dps,
-                        &snap.gy_dps,
-                        &snap.gz_dps);
+        /* Giroscopio. */
+        IMU_I2C_GetGyro(&snap.gx_dps, &snap.gy_dps, &snap.gz_dps);
 
         snap.yaw = IMU_I2C_GetYaw();
 
-        /* ===== Temperature (non usata) ===== */
+        /* Temperatura sensore. */
         snap.temperature_degC = IMU_I2C_GetTemperature();
     }
 
-    /* ===== Publish snapshot ===== */
+    /* Pubblicazione snapshot. */
     IMUSnapshot_Write(&snap);
 }

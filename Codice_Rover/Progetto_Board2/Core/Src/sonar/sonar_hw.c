@@ -1,104 +1,115 @@
-/*
- * sonar_hw.c
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file sonar_hw.c
+ * @brief Gestione hardware sonar con cattura input tramite timer/DMA.
  */
-
 
 #include "sonar/sonar_hw.h"
 #include "tim.h"
-#include <stdbool.h>
-#include "cmsis_os2.h" 
+#include "cmsis_os2.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "tim.h"
-#include "main.h"
-#include "log/wcet_monitor.h"
+#include <string.h>
 
-#define SONAR_TIMEOUT_MS  20
-#define SONAR_MAX_CM      301
+/** @brief Timeout massimo per una scansione sonar [ms]. */
+#define SONAR_TIMEOUT_MS            20U
+/** @brief Distanza saturata quando la misura non e' valida [cm]. */
+#define SONAR_MAX_CM                301U
+/** @brief Numero di campioni di cattura per canale (rising/falling). */
+#define SONAR_DMA_CAPTURE_SAMPLES   2U
+/** @brief Valore massimo contatore timer a 16 bit. */
+#define SONAR_TIMER_MAX_TICK        0xFFFFU
+/** @brief Conversione da microsecondi a centimetri. */
+#define SONAR_US_TO_CM_DIV          58U
 
-/* ===== HW state ===== */
-
+/** @brief Stato di validita' delle tre misure sonar. */
 sonars_flag_t flag;
+/** @brief Ultime distanze calcolate. */
 distances_t distances;
+/** @brief Buffer DMA di cattura per i tre canali sonar. */
 buffer_sonars_t buffers;
 
-// Variabile per contare quanti sonar hanno completato la lettura
-uint8_t sonar_count = 0;
+/** @brief Contatore dei sonar che hanno completato la misura corrente. */
+uint8_t sonar_count = 0U;
 
-void scan()
+/**
+ * @brief Esegue una scansione sonar completa su 3 canali.
+ */
+void scan(void)
 {
-    // 1. DISABILITA gli interrupt per configurare in modo atomico
+    /* Disabilita interrupt capture e reset stato misura. */
     __HAL_TIM_DISABLE_IT(&htim1, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3);
-    sonar_count = 0;
-    flag.sonar1_ok = 0;
-    flag.sonar2_ok = 0;
-    flag.sonar3_ok = 0;
+    sonar_count = 0U;
+    flag.sonar1_ok = 0U;
+    flag.sonar2_ok = 0U;
+    flag.sonar3_ok = 0U;
 
-    while(ulTaskNotifyTake(pdTRUE, 0) > 0);
+    while (ulTaskNotifyTake(pdTRUE, 0U) > 0U)
+    {
+        /* Svuota eventuali notifiche pendenti. */
+    }
 
     memset(&buffers, 0, sizeof(buffers));
 
-    // 2. RE-INIZIALIZZA il DMA1
-    HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_1);
-    HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_2);
-    HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_3);
+    /* Reinizializza i tre stream DMA capture. */
+    (void)HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_1);
+    (void)HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_2);
+    (void)HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_3);
 
-    HAL_TIM_IC_Start_DMA(&htim1, TIM_CHANNEL_1, (uint32_t*)buffers.buf_ch1, 2);
-    HAL_TIM_IC_Start_DMA(&htim1, TIM_CHANNEL_2, (uint32_t*)buffers.buf_ch2, 2);
-    HAL_TIM_IC_Start_DMA(&htim1, TIM_CHANNEL_3, (uint32_t*)buffers.buf_ch3, 2);
+    (void)HAL_TIM_IC_Start_DMA(&htim1, TIM_CHANNEL_1, (uint32_t *)buffers.buf_ch1, SONAR_DMA_CAPTURE_SAMPLES);
+    (void)HAL_TIM_IC_Start_DMA(&htim1, TIM_CHANNEL_2, (uint32_t *)buffers.buf_ch2, SONAR_DMA_CAPTURE_SAMPLES);
+    (void)HAL_TIM_IC_Start_DMA(&htim1, TIM_CHANNEL_3, (uint32_t *)buffers.buf_ch3, SONAR_DMA_CAPTURE_SAMPLES);
 
-    // 3. RE-ABILITA e Trigger
-    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+    /* Trigger ultrasuoni e attesa completamento/timeout. */
+    (void)HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+    (void)ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(SONAR_TIMEOUT_MS));
 
-    // Attesa
-
-    ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(SONAR_TIMEOUT_MS));
-
-	uint32_t c_start = DWT->CYCCNT;
-    // 4. STOP RIGOROSO
-    HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
-
-    // Chiudi tutto subito per evitare interrupt spuri mentre il rover frena
-    HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_1);
-    HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_2);
-    HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_3);
+    /* Stop rigoroso per evitare interrupt spuri dopo la finestra di misura. */
+    (void)HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+    (void)HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_1);
+    (void)HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_2);
+    (void)HAL_TIM_IC_Stop_DMA(&htim1, TIM_CHANNEL_3);
 
     __HAL_TIM_CLEAR_IT(&htim1, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3);
 
-    // 5. Calcolo (ora sicuro perché gli interrupt sono spenti)
-    distances.distance1 = flag.sonar1_ok ? read_distance(buffers.buf_ch1) : SONAR_MAX_CM;
-    distances.distance2 = flag.sonar2_ok ? read_distance(buffers.buf_ch2) : SONAR_MAX_CM;
-    distances.distance3 = flag.sonar3_ok ? read_distance(buffers.buf_ch3) : SONAR_MAX_CM;
-
+    /* Calcolo distanza; se canale non valido applica saturazione. */
+    distances.distance1 = (flag.sonar1_ok != 0U) ? read_distance(buffers.buf_ch1) : SONAR_MAX_CM;
+    distances.distance2 = (flag.sonar2_ok != 0U) ? read_distance(buffers.buf_ch2) : SONAR_MAX_CM;
+    distances.distance3 = (flag.sonar3_ok != 0U) ? read_distance(buffers.buf_ch3) : SONAR_MAX_CM;
 }
 
-uint32_t read_distance(uint16_t* buf){
-
-	uint16_t ic1 = buf[0];
-	uint16_t ic2 = buf[1];
+/**
+ * @brief Converte la larghezza impulso catturata in distanza [cm].
+ * @param buf Buffer con due capture consecutive (start/end).
+ * @return Distanza in centimetri.
+ */
+uint32_t read_distance(uint16_t *buf)
+{
+    uint16_t ic1 = buf[0U];
+    uint16_t ic2 = buf[1U];
     uint16_t width;
 
+    if (ic2 >= ic1)
+    {
+        width = ic2 - ic1;
+    }
+    else
+    {
+        width = (uint16_t)((SONAR_TIMER_MAX_TICK - ic1) + ic2 + 1U);
+    }
 
-	if (ic2 >= ic1)
-		width = ic2 - ic1;
-	else
-		width = (0xFFFF - ic1) + ic2 + 1;
-
-	// TIM4 deve avere un clock di 1MHz. In questo modo la variabile width sarà il numero di microsecondi trascorsi.
-	// Distanza in cm =  Width(che è il numero di microsecondi trascorsi) / 58
-	return (uint16_t)(width / 58);
+    /* Con timer a 1 MHz: width e' in us, distanza cm = us / 58. */
+    return (uint32_t)(width / SONAR_US_TO_CM_DIV);
 }
 
-void SonarHW_GetDistances(uint16_t *d1, uint16_t *d2, uint16_t *d3){
-    if (d1) *d1 = distances.distance1;
-    if (d2) *d2 = distances.distance2;
-    if (d3) *d3 = distances.distance3;
+/**
+ * @brief Restituisce le ultime distanze sonar disponibili.
+ * @param d1 Distanza canale 1.
+ * @param d2 Distanza canale 2.
+ * @param d3 Distanza canale 3.
+ */
+void SonarHW_GetDistances(uint16_t *d1, uint16_t *d2, uint16_t *d3)
+{
+    if (d1 != NULL) { *d1 = distances.distance1; }
+    if (d2 != NULL) { *d2 = distances.distance2; }
+    if (d3 != NULL) { *d3 = distances.distance3; }
 }
-
-
-
-
-

@@ -1,44 +1,57 @@
-/*
- * ble_controller_snapshot.c
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file ble_controller_snapshot.c
+ * @brief Storage thread-safe dello snapshot BLE controller.
  */
 
 
 #include "snapshot/ble_controller_snapshot.h"
 
-/* Snapshot storage */
+/** @brief Copia condivisa dello snapshot BLE. */
 static BleControllerSnapshot_t snapshot;
 
-/* Mutex */
+/** @brief Mutex associato allo snapshot BLE. */
 static osMutexId_t snapshot_mutex;
 
-
+/**
+ * @brief Registra il mutex da usare per l'accesso allo snapshot.
+ * @param mutex_handle Handle mutex creato all'esterno.
+ */
 void BleControllerSnapshot_MutexInit(osMutexId_t mutex_handle)
 {
-	if (snapshot_mutex == NULL){
-		snapshot_mutex = mutex_handle;
-	}
+    if (snapshot_mutex == NULL)
+    {
+        snapshot_mutex = mutex_handle;
+    }
 }
 
-
+/**
+ * @brief Scrive lo snapshot BLE in sezione critica.
+ * @param src Dato sorgente da copiare.
+ */
 void BleControllerSnapshot_Write(const BleControllerSnapshot_t *src)
 {
     if (src == NULL)
+    {
         return;
+    }
 
-    osMutexAcquire(snapshot_mutex,osWaitForever);
+    (void)osMutexAcquire(snapshot_mutex, osWaitForever);
     snapshot = *src;
-    osMutexRelease(snapshot_mutex);
+    (void)osMutexRelease(snapshot_mutex);
 }
 
+/**
+ * @brief Legge lo snapshot BLE in sezione critica.
+ * @param dst Destinazione in cui copiare il dato.
+ */
 void BleControllerSnapshot_Read(BleControllerSnapshot_t *dst)
 {
     if (dst == NULL)
+    {
         return;
+    }
 
-    osMutexAcquire(snapshot_mutex,osWaitForever);
+    (void)osMutexAcquire(snapshot_mutex, osWaitForever);
     *dst = snapshot;
-    osMutexRelease(snapshot_mutex);
+    (void)osMutexRelease(snapshot_mutex);
 }

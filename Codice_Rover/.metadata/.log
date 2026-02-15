@@ -70,3 +70,21 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\Sterm\D
 
 !ENTRY org.eclipse.cdt.core 1 0 2026-02-14 16:13:33.556
 !MESSAGE Indexed 'Progetto_Board2' (69 sources, 202 headers) in 3.62 sec: 20,251 declarations; 110,675 references; 3 unresolved inclusions; 156 syntax errors; 174 unresolved names (0.13%)
+!SESSION 2026-02-15 16:40:27.101 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover
+
+!ENTRY org.eclipse.core.resources 2 10035 2026-02-15 16:40:28.906
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-02-15 16:40:32.910
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-02-15 16:40:32.911
+!MESSAGE Log4j2 initialized with config file C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-02-15 16:40:39.433
+!MESSAGE Started RMI Server, listening on port 41337
