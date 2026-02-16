@@ -51,10 +51,10 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../Core/Inc/main.h ../Core/Inc/snapshot/imu_snapshot.h \
  ../Core/Inc/IMU/imu_i2c.h ../Core/Inc/snapshot/sonar_snapshot.h \
  ../Core/Inc/snapshot/supervisor_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/supervisor_command.h \
  ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_status.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_message_structures.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -115,7 +115,7 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 ../Core/Inc/IMU/imu_i2c.h:
 ../Core/Inc/snapshot/sonar_snapshot.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/supervisor_command.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/supervisor_command.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_status.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board2/../shared_headers/comm_message_structures.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_status.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/shared_headers/comm_message_structures.h:

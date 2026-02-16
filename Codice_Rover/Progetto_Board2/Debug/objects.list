@@ -34,7 +34,6 @@
 "./Core/Src/sonar/sonar_task.o"
 "./Core/Src/supervisor/supervisor_task.o"
 "./Core/Startup/startup_stm32g474retx.o"
-"./Core/i2c_callbacks.o"
 "./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o"
 "./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o"
 "./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o"

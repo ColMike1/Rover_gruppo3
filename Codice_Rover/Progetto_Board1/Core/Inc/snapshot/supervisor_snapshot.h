@@ -1,8 +1,6 @@
-/*
- * supervisor_snapshot.h
- *
- *  Created on: Jan 11, 2026
- *      Author: Sterm
+/**
+ * @file supervisor_snapshot.h
+ * @brief Buffer protetto per le decisioni prese dal Supervisore di Board 1.
  */
 
 #ifndef INC_SNAPSHOT_SUPERVISOR_SNAPSHOT_H_
@@ -15,44 +13,41 @@
 #ifndef MATLAB_MEX_FILE
   #include "cmsis_os.h"
 #endif
-/* ===== Snapshot Supervisore Board 1 ===== */
+
+/**
+ * @struct SupervisorSnapshot_t
+ * @brief Snapshot delle decisioni, dei fault e dei comandi autorizzati.
+ */
 typedef struct
 {
-	/* Timestamp decisione */
-	uint32_t task_last_run_ms;
+  uint32_t task_last_run_ms;   /**< Timestamp dell'ultima decisione presa [ms] */
+  uint32_t degraded_mask;      /**< Maschera dei fault che causano stato degradato */
+  uint32_t critical_mask;      /**< Maschera dei fault che causano stato di emergenza */
 
-  /* Fault di board 1 presenti che comportano uno stato degradato*/
-  uint32_t degraded_mask;
+  float speed_ref_rpm;         /**< Velocità longitudinale autorizzata [RPM] */
+  float steering_cmd;          /**< Comando sterzata autorizzato */
 
-  /* Fault di board 1 presenti che comportano uno stato di emergenza*/
-  uint32_t critical_mask;
+  SupervisorCommand_t current_action; /**< Azione corrente decisa dal supervisore */
+  bool isBoardActuating;              /**< Stato di attivazione delle uscite di potenza */
 
-
-  /* Comandi AUTORIZZATI */
-  float speed_ref_rpm;     /* velocità longitudinale */
-  float steering_cmd;      /* comando sterzata */
-
-  SupervisorCommand_t current_action;
-  bool isBoardActuating;
-
-  /* Heartbeat / alive counter */
-  uint8_t alive_counter;
-
+  uint8_t alive_counter;              /**< Counter incrementale per heartbeat */
 } SupervisorSnapshot_t;
 
-
-
-/* ================= API ================= */
-
 #ifndef MATLAB_MEX_FILE
+/**
+ * @brief Inizializza il mutex per l'accesso thread-safe allo snapshot supervisore.
+ */
 void SupervisorSnapshot_MutexInit(osMutexId_t mutex_handle);
 #endif
 
-/* Writer: SOLO supervision task (Board 1) */
+/**
+ * @brief Scrive le decisioni del supervisore (solo task Supervisione).
+ */
 void SupervisorSnapshot_Write(const SupervisorSnapshot_t *src);
 
-/* Reader: Control, Actuation, TX */
+/**
+ * @brief Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX).
+ */
 void SupervisorSnapshot_Read(SupervisorSnapshot_t *dst);
-
 
 #endif /* INC_SNAPSHOT_SUPERVISOR_SNAPSHOT_H_ */

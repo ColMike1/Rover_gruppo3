@@ -1,8 +1,6 @@
-/*
- * encoder_hw.h
- *
- *  Created on: Jan 8, 2026
- *      Author: Sterm
+/**
+ * @file encoder_hw.h
+ * @brief Driver di basso livello per l'interfacciamento con gli encoder hardware.
  */
 
 #ifndef INC_ENCODER_ENCODER_HW_H_
@@ -10,17 +8,21 @@
 
 #include <stdint.h>
 
+/**
+ * @brief Stati di ritorno per le operazioni sugli encoder.
+ */
 typedef enum
 {
-  ENCODER_OK = 0,
-  ENCODER_OVERFLOW
+  ENCODER_OK = 0,      /**< Lettura eseguita correttamente */
+  ENCODER_OVERFLOW     /**< Rilevato overflow del contatore hardware */
 } EncoderStatus_t;
 
 /**
- * @brief Read delta ticks with overflow handling
- * @param encoder_id Encoder index
- * @param delta_ticks Signed delta ticks
+ * @brief Legge la variazione di tick (delta) con gestione dell'overflow.
+ * @param encoder_id Identificativo dell'encoder hardware.
+ * @param[out] delta_ticks Puntatore alla variabile che conterrà i tick accumulati (con segno).
+ * @return EncoderStatus_t Esito della lettura.
  */
-EncoderStatus_t Encoder_ReadDelta(uint8_t encoder_id, int32_t *delta_ticks);
+EncoderStatus_t Encoder_ReadDelta(uint8_t encoder_id, int *delta_ticks);
 
 #endif /* INC_ENCODER_ENCODER_HW_H_ */

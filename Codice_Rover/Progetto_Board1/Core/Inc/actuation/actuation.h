@@ -1,8 +1,7 @@
-/*
- * actuation.h
- *
- *  Created on: Jan 12, 2026
- *      Author: Sterm
+/**
+ * @file actuation.h
+ * @brief Header principale per il modulo di attuazione.
+ * * Include i driver e le definizioni necessarie per il movimento del robot.
  */
 
 #ifndef INC_ACTUATION_ACTUATION_H_

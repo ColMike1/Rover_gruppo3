@@ -1,8 +1,6 @@
-/*
- * rx_snapshot.h
- *
- *  Created on: Jan 18, 2026
- *      Author: Sterm
+/**
+ * @file rx_snapshot.h
+ * @brief Buffer protetto per i dati ricevuti dall'altra board.
  */
 
 #ifndef INC_SNAPSHOT_RX_SNAPSHOT_H_
@@ -14,33 +12,37 @@
 #endif
 #include "shared_headers/comm_message_structures.h"
 #include "shared_headers/comm_status.h"
-
 #include "log/wcet_monitor.h"
 #include "main.h"
 
-/* ===== Snapshot ===== */
+/**
+ * @struct RxSnapshot_t
+ * @brief Snapshot dei dati ricevuti via comunicazione.
+ */
 typedef struct
 {
-    /* Payload ricevuto (raw, applicativo) */
-    CommPayloadB2_t payload;
+    CommPayloadB2_t payload;      /**< Carico utile dell'ultimo messaggio valido ricevuto */
+    CommUnpackStatus_t last_event; /**< Esito dell'ultimo tentativo di unpacking */
 
-    /* Status dell'ultimo evento RX osservato */
-    CommUnpackStatus_t last_event;
-
-    uint32_t task_last_run_ms;     /* ultima esecuzione del task */
-    uint32_t data_last_valid_ms;  /* ultimo istante in cui i dati sono validi */
-
+    uint32_t task_last_run_ms;    /**< Timestamp dell'ultimo tentativo di ricezione */
+    uint32_t data_last_valid_ms;  /**< Timestamp dell'ultimo dato valido ricevuto */
 } RxSnapshot_t;
 
 #ifndef MATLAB_MEX_FILE
+/**
+ * @brief Inizializza il mutex per l'accesso thread-safe allo snapshot RX.
+ */
 void RxSnapshot_MutexInit(osMutexId_t mutex_handle);
 #endif
 
-/* ===== Writer (RX task only) ===== */
+/**
+ * @brief Aggiorna lo snapshot con i nuovi dati ricevuti (solo task RX).
+ */
 void RxSnapshot_Write(const RxSnapshot_t *src);
 
-/* ===== Reader (Supervisor / others) ===== */
+/**
+ * @brief Recupera i dati ricevuti per l'elaborazione (es. da parte del Supervisore).
+ */
 void RxSnapshot_Read(RxSnapshot_t *dst);
-
 
 #endif /* INC_SNAPSHOT_RX_SNAPSHOT_H_ */

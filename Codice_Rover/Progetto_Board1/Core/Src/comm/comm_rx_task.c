@@ -1,113 +1,95 @@
-/*
- * comm_rx_task.c
- *
- *  Created on: Jan 11, 2026
- *      Author: Sterm
+/**
+ * @file comm_rx_task.c
+ * @brief Gestione del task di ricezione messaggi UART.
+ * @details Implementa una macchina a stati per la sincronizzazione tramite SYNC_WORD.
  */
-
-
 
 #include "comm/comm_rx_task.h"
 #include "comm/comm_unpack.h"
 #include "comm/comm_uart.h"
-
 #include "snapshot/rx_snapshot.h"
 #include <stdio.h>
-
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os2.h"
-#define RX_FRAME_LEN (sizeof(CommFrameB2_t))
-#define SYNC_WORD   0xAA56
 
-/* ===== API ===== */
+/** @brief Lunghezza attesa del pacchetto in ingresso (Frame B2). */
+#define RX_FRAME_LEN ((uint16_t)sizeof(CommFrameB2_t))
+/** @brief Parola di sincronizzazione per identificare l'inizio del frame. */
+#define SYNC_WORD    0xAA56U
 
-void Rx_TaskInit(void){
-
-	CommUart_Init();
-
-}
-
-void Debug_DumpAccBuf(const uint8_t *buf, uint16_t len)
+/**
+ * @brief Inizializza il driver UART per la ricezione.
+ */
+void Rx_TaskInit(void)
 {
-    printf("ACC_BUF (len=%u): ", len);
-
-    for (uint16_t i = 0; i < len; i++)
-    {
-        printf("%02X ", buf[i]);
-    }
-
-    printf("\r\n");
+    CommUart_Init();
 }
 
+/**
+ * @brief Step principale del task di ricezione.
+ * @details Attende la notifica dell'ISR UART, processa il buffer circolare cercando
+ * la sincronizzazione e valida il pacchetto ricevuto tramite CRC.
+ */
 void Rx_TaskStep(void)
 {
     static RxSnapshot_t snap;
-    static uint8_t acc_buf[RX_FRAME_LEN];
-    static uint16_t acc_len = 0;
+    static uint8_t acc_buf[sizeof(CommFrameB2_t)];
+    static uint16_t acc_len = 0U;
+    uint8_t byte = 0U;
 
-    uint8_t byte;
-
-    /* blocca finché arriva almeno un byte */
-    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+    (void)ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
     while (CommUart_GetByte(&byte))
     {
-        /* ================= SYNC ================= */
-        if (acc_len < 2)
+        if (acc_len < 2U)
         {
-            acc_buf[acc_len++] = byte;
+            acc_buf[acc_len] = byte;
+            acc_len++;
 
-            if (acc_len == 2)
+            if (acc_len == 2U)
             {
-                uint16_t sync = acc_buf[0] | (acc_buf[1] << 8);
+                uint16_t sync = (uint16_t)((uint16_t)acc_buf[0U] | (uint16_t)((uint16_t)acc_buf[1U] << 8U));
                 if (sync != SYNC_WORD)
                 {
                     acc_buf[0] = acc_buf[1];
-                    acc_len = 1;
+                    acc_len = 1U;
                 }
             }
             continue;
         }
 
-        /* ============= RESTO FRAME ============== */
         acc_buf[acc_len] = byte;
+        uint16_t w = (uint16_t)((uint16_t)acc_buf[acc_len-1U] | (uint16_t)((uint16_t)acc_buf[acc_len] << 8U));
 
-        uint16_t w = acc_buf[acc_len-1] | (acc_buf[acc_len] << 8);
-
-
-        if (w == SYNC_WORD)                 // aggiunto
-        	{
-        	acc_buf[0] = acc_buf[acc_len-1];
-        	acc_buf[1] = acc_buf[acc_len];
-        	acc_len = 2;                    // aggiunto
-        	continue;                       // aggiunto
-        	}
+        if (w == SYNC_WORD)
+        {
+            acc_buf[0U] = acc_buf[acc_len-1U];
+            acc_buf[1U] = acc_buf[acc_len];
+            acc_len = 2U;
+            continue;
+        }
 
         acc_len++;
         if (acc_len < RX_FRAME_LEN)
+        {
             continue;
+        }
 
-        /* ============= FRAME COMPLETO ============ */
-        //Debug_DumpAccBuf(acc_buf, acc_len);
         uint32_t now = osKernelGetTickCount();
         snap.task_last_run_ms = now;
 
         CommFrameHeader_t hdr;
         CommPayloadB2_t   pl;
-
-        CommUnpackStatus_t st =
-            CommUnpack_B1FromB2(acc_buf, RX_FRAME_LEN, &hdr, &pl);
+        CommUnpackStatus_t st = CommUnpack_B1FromB2(acc_buf, RX_FRAME_LEN, &hdr, &pl);
 
         snap.last_event = st;
-
-
         if (st == COMM_UNPACK_OK)
         {
             snap.payload = pl;
             snap.data_last_valid_ms = now;
         }
-        acc_len = 0;   // pronto per il prossimo frame
+        acc_len = 0U;
         RxSnapshot_Write(&snap);
     }
 }

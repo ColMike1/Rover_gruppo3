@@ -50,13 +50,13 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
  ../Core/Inc/log/log_task.h ../Core/Inc/led/led_task.h \
  ../Core/Inc/supervisor/supervisor_task.h ../Core/Inc/snapshot/snapshot.h \
  ../Core/Inc/snapshot/supervisor_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h \
  ../Core/Inc/snapshot/encoder_snapshot.h \
  ../Core/Inc/snapshot/board_health_snapshot.h \
  ../Core/Inc/snapshot/rx_snapshot.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
- C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h \
+ C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h \
  ../Core/Inc/log/wcet_monitor.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
@@ -115,11 +115,11 @@ Core/Src/app_freertos.o: ../Core/Src/app_freertos.c \
 ../Core/Inc/supervisor/supervisor_task.h:
 ../Core/Inc/snapshot/snapshot.h:
 ../Core/Inc/snapshot/supervisor_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/board1_faults.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/supervisor_command.h:
 ../Core/Inc/snapshot/encoder_snapshot.h:
 ../Core/Inc/snapshot/board_health_snapshot.h:
 ../Core/Inc/snapshot/rx_snapshot.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
-C:/Users/miche/Desktop/GitRepositories/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_message_structures.h:
+C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/../shared_headers/comm_status.h:
 ../Core/Inc/log/wcet_monitor.h:

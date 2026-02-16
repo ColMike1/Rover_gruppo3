@@ -1,50 +1,41 @@
-/*
- * supervisor_snapshot.c
- *
- *  Created on: Jan 11, 2026
- *      Author: Sterm
+/**
+ * @file supervisor_snapshot.c
+ * @brief Container per lo stato del supervisore di sistema.
+ * @details Include maschere di errore (critical/degraded) e azioni correnti.
+ * È fondamentale per coordinare la logica di fallback e le protezioni.
  */
 
 #include "snapshot/supervisor_snapshot.h"
-
 #include "log/wcet_monitor.h"
 #include "main.h"
 
-/* Snapshot storage */
 static SupervisorSnapshot_t snapshot;
-
-static osMutexId_t snapshot_mutex;
-
-
+static osMutexId_t snapshot_mutex = NULL;
 
 void SupervisorSnapshot_MutexInit(osMutexId_t mutex_handle)
 {
-	if(snapshot_mutex == NULL)
-		snapshot_mutex = mutex_handle;
+    if (snapshot_mutex == NULL)
+    {
+        snapshot_mutex = mutex_handle;
+    }
 }
 
-/* ===== Writer API ===== */
 void SupervisorSnapshot_Write(const SupervisorSnapshot_t *src)
 {
-    if (src == NULL)
-        return;
-
-
-    osMutexAcquire(snapshot_mutex,osWaitForever);
-    snapshot = *src;    /* struct copy */
-    osMutexRelease(snapshot_mutex);
-
+    if (src != NULL)
+    {
+        (void)osMutexAcquire(snapshot_mutex, osWaitForever);
+        snapshot = *src;
+        (void)osMutexRelease(snapshot_mutex);
+    }
 }
 
-/* ===== Reader API ===== */
 void SupervisorSnapshot_Read(SupervisorSnapshot_t *dst)
 {
-    if (dst == NULL)
-        return;
-
-
-    osMutexAcquire(snapshot_mutex,osWaitForever);
-    *dst = snapshot;    /* struct copy */
-    osMutexRelease(snapshot_mutex);
-
+    if (dst != NULL)
+    {
+        (void)osMutexAcquire(snapshot_mutex, osWaitForever);
+        *dst = snapshot;
+        (void)osMutexRelease(snapshot_mutex);
+    }
 }
