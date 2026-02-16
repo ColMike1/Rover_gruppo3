@@ -26,11 +26,67 @@
 \tableofcontents
 % \listoffigures
 
-
-
-
-
 \newpage
+
+\section{Introduzione work-project}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{images/Introduzione/architettura_rover.png}
+	\caption{Architettura generale del rover distribuita su doppia board}
+	\label{fig:architettura_rover}
+\end{figure}
+
+Il presente progetto riguarda la progettazione e l'implementazione di un \textbf{sistema di controllo e supervisione distribuito} per un rover caratterizzato da un'architettura ad alta affidabilità. L'obiettivo principale è lo sviluppo di un veicolo capace di muoversi in modo coordinato, reagire prontamente agli stimoli ambientali rilevati tramite sensoristica avanzata e gestire scenari di guasto attraverso logiche di ridondanza e modalità di funzionamento degradate.
+
+\subsection{Architettura Hardware e Comunicazione}
+Il cuore del sistema è costituito da un'architettura a \textbf{doppia scheda} (Board 1 e Board 2), basata su microcontrollori STM32. Questa configurazione implementa il concetto di \textbf{diversità di livello 2}, dove le due board collaborano per la ricostruzione dello stato globale del sistema pur operando su partizioni di dati e algoritmi distinti.
+\begin{itemize}
+	\item La Board 1 gestisce l'interfacciamento con i driver dei motori (Front e Back), gli encoder di posizione e i LED di segnalazione.
+	\item La Board 2 è dedicata alla sensoristica ambientale, interfacciandosi con tre sensori Sonar, un accelerometro tramite protocollo $I^2C$ e il sistema di controllo remoto, che avviene tramite l'utilizzo di un joystick che invia dati a una scheda ESP32 tramite protocollo BLE.
+\end{itemize}
+
+\subsection{Dinamica di Movimento e Controllo}
+Il rover deve garantire una movimentazione precisa sincronizzando i quattro motori per procedere in linea retta o ruotare attorno al proprio baricentro.
+\begin{itemize}
+	\item \textbf{Controllo PID:} La velocità richiesta dal controller viene gestita tramite un algoritmo PID software per definire le dinamiche di raggiungimento del target e di frenata.
+\end{itemize}
+
+\subsection{Sicurezza e Gestione degli Ostacoli}
+Il sistema di supervisione utilizza i dati provenienti dai sensori ad ultrasuoni per garantire l'integrità del veicolo:
+\begin{itemize}
+	\item \textbf{Rilevamento Preventivo:} Identificazione di ostacoli fino a 3 metri di distanza con un angolo di copertura di $45^{\circ}$.
+	\item \textbf{Manovre di Emergenza:} In caso di ostacoli improvvisi a meno di 70 cm, il rover esegue una frenata d'emergenza seguita da una rotazione verso un lato libero.
+	\item \textbf{Evitamento Dinamico:} Capacità di evitare ostacoli in movimento tra 0.7 e 1,5 metri sterzando senza interrompere la marcia.
+\end{itemize}
+\clearpage
+
+\subsection{Resilienza e Modalità Degradata}
+Una specifica fondamentale del progetto è la capacità di operare in presenza di malfunzionamenti. Il sistema monitora costantemente lo stato delle board, dei motori, della batteria e della temperatura interna. 
+In caso di determinati fallimenti, il rover entra in \textbf{Modalità Degradata} o in \textbf{Emergency Stop}.
+\clearpage
+
+\section{Sensoristica del sistema}
+\subsection{Sensori Board 1}
+La Board 1 è responsabile del loop di controllo dei motori, della gestione dei led presenti sul rover e del monitoraggio della batteria e della temperatura interna del rover (Board Health).
+I sensori e gli attuatori gestiti direttamente da questa board includono:
+\begin{itemize}
+	\item \textbf{Encoder incrementali}: Quattro encoder (Front/Back, SX/DX) per il feedback sulla velocità reale delle ruote.
+	\item \textbf{Driver Motori}: Due driver sabertooth 2x12, uno che si occupa di controllare le ruote anteriori e un altro che si occupa del controllo delle ruote posteriori. Entrambi i driver sono configurati in modalità Serial Packetized.
+	\item \textbf{Sensore di Tensione e Temperatura}: Sensori per il monitoraggio dello stato della batteria e della temperatura.
+	\item \textbf{LED di stato}: Due indicatori luminosi (LED A e LED B) per il feedback visivo immediato (es. stato di emergenza).
+\end{itemize}
+
+\subsection{Sensori Board 2}
+La Board 2 funge da interfaccia di input del Rover. Il suo compito principale è raccogliere i dati dall'ambiente esterno e dai comandi dell'operatore, elaborarli e trasmetterli alla Board 1 per l'attuazione fisica. 
+I componenti e i sensori gestiti da questa board sono:
+\begin{itemize}
+	\item \textbf{Modulo BLE (Bluetooth Low Energy)}: Per la ricezione dei pacchetti dati dal controller remoto (Direzione, Velocità, Modalità).
+	\item \textbf{IMU (Inertial Measurement Unit)}: Accelerometro e giroscopio per il monitoraggio dell'assetto e della stabilità del Rover.
+	\item \textbf{Sonar (Ultrasuoni)}: Tre sensori posizionati strategicamente per la navigazione ed il superamento degli ostacoli fino a 3 metri di distanza.
+\end{itemize}
+\clearpage
+
 \section{Specifiche}
 
 Il rover è dotato di due schede di controllo, denominate Board 1 e Board 2, che collaborano per garantire il funzionamento del sistema. In Figura~\ref{fig:architettura} è mostrata l'architettura generale del sistema.
@@ -241,7 +297,7 @@ Alla fine della lettura, il task aggiorna lo snapshot \textbf{SonarsSnapshot} co
     \caption{Struttura dati dello snapshot SonarsSnapshot.}
     \label{fig:sonars_snapshot}
 \end{figure}
-
+\clearpage
 
 
 
@@ -270,11 +326,72 @@ in cui sono presenti i comandi utente normalizzati ($x\_norm$ e $y\_norm$).
     \label{fig:ble_snapshot}
 \end{figure}
 
+
+
+
 \subsubsection{Task: lettura giroscopio}
 La Board 2 è equipaggiata con un sensore IMU \textbf{MPU-6050}, che integra un accelerometro e un giroscopio a 3 assi. Poiché il sensore non fornisce direttamente l'orientamento assoluto, l'angolo di yaw
 (la rotazione del rover attorno al suo asse verticale) viene calcolato nel firmware integrando nel tempo i dati della velocità angolare provenienti dal giroscopio.
 All'accensione, il sistema esegue una calibrazione per impostare lo zero relativo alla direzione di avvio. La comunicazione con l'IMU avviene tramite protocollo I2C, e i dati elaborati aggiornano
 ciclicamente lo snapshot IMUSnapshot (Figura~\ref{imu_snapshot}).
+\clearpage
+
+\subsubsection{Interfacciamento DualSense PS5 tramite ESP32}
+Per la generazione dei comandi remoti è stato utilizzato un controller \textbf{Sony DualSense (PS5)}, interfacciato a una scheda \textbf{ESP32} che funge da bridge tra il protocollo Bluetooth e il bus I2C del rover.
+L'implementazione sul lato ESP32 è stata realizzata in ambiente Arduino IDE sfruttando la libreria \textbf{Bluepad32}.
+I dati del joystick sono stati rappresentati tramite la struct presente nell'immagine \ref{fig:rapp_tasti}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/Joystick/joystick.jpg}
+	\caption{Tasti presenti sul joystick utilizzato.}
+	\label{}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Joystick/RappresentazioneTasti.png}
+	\caption{Rappresentazione tasti del joystick.}
+	\label{fig:rapp_tasti}
+\end{figure}
+Una volta rappresentati i dati e individuato i valori di stanby, il flusso di elaborazione sull'ESP32 segue i seguenti passaggi:
+\begin{enumerate}
+	\item \textbf{Pairing e Connessione:} All'avvio, l'ESP32 scansiona i dispositivi Bluetooth. Una volta messo il DualSense in modalità pairing, la libreria stabilisce una connessione sicura.
+	
+	\item \textbf{Parsing dei dati:} Tramite le callback della libreria (\texttt{onConnectedGamepad}), vengono eseguiti alcuni controlli per garantire che si possa connettere solo il joystick autorizzato alla scheda.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/OnConnect.png}
+		\caption{Implementazione della funzione di callback per l'inizializzazione del controller DualSense all'atto della connessione Bluetooth.}
+		\label{}
+	\end{figure}
+	\clearpage
+	
+	\item \textbf{Normalizzazione:} Viene continuamente monitorato lo stato del BLuetooth e, se il joystick è connesso, i valori provenienti da esso vengono mappati in un range normalizzato a seconda delle necessità del supervisore. Una volta mappati, tali valori vengono utilizzati per aggiornare i dati presenti in controller\_data.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/Loop.png}
+		\caption{Normalizzazione dei dati inviati alla ESP32 tramite joystick}
+		\label{}
+	\end{figure}
+	\clearpage
+	
+	\item \textbf{Trasmissione I2C:} L'ESP32 è configurata come \textbf{I2C Slave}. Quando la Board 2 interroga l'ESP32 (tramite la funzione \texttt{BleController\_I2C\_ReadFrame} citata precedentemente), l'ESP32 trasmette un pacchetto dati strutturato contenente lo stato dei pulsanti e la posizione degli analogici.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/OnRequest.png}
+		\caption{Trasmissione dei dati del joystick della ESP32 al Master tramite callback}
+		\label{}
+	\end{figure}
+	
+	\item \textbf{Disconnesione:} Nel momento in cui viene rilevata la disconnesione del joystick dalla scheda, vengono impostati, tramite callback, i dati di default, che indicano al rover di rimanere fermo(velocità lineare e angolare impostate a zero). Così facendo, se il joystick dovesse disconnettersi per quelche motivo il rover rimane fermo e non vengono svolte azioni indesiderate che possono portarlo a situazioni pericolose.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/OnDIsconnect.png}
+		\caption{Normalizzazione dei dati inviati alla ESP32 tramite joystick}
+		\label{}
+	\end{figure}
+\end{enumerate}
+Questa architettura permette di delegare il carico computazionale della gestione Bluetooth alla ESP32, garantendo che la Board 2 (STM32) rimanga focalizzata esclusivamente sui task real-time di supervisione e sicurezza.
+\clearpage
 
 \begin{figure}[H]
     \centering
