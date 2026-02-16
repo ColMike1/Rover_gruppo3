@@ -1,5 +1,6 @@
 \contentsline {section}{\numberline {1}Specifiche}{3}{}%
 \contentsline {subsection}{\numberline {1.1}Condizioni di funzionamento nominale}{3}{}%
+\contentsline {paragraph}{Rilevamento ostacoli}{3}{}%
 \contentsline {subsection}{\numberline {1.2}Encoder non funzionanti}{4}{}%
 \contentsline {section}{\numberline {2}Funzionamento generale del software di ciascuna board}{5}{}%
 \contentsline {subsection}{\numberline {2.1}Interazione tra Task e Meccanismo di Snapshot}{5}{}%

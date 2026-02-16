@@ -43,13 +43,16 @@ Il rover è dotato di due schede di controllo, denominate Board 1 e Board 2, che
 \end{figure}
 
 \subsection{Condizioni di funzionamento nominale}
-In condizioni di funzionamento nominale la Board 1 si occupa di gestire l'attuazione dei motori, inviando tramite UART l'ingresso di controllo ai motori. Questi possono raggiungere una velocità massima di $160 RPM$.
+In condizioni di funzionamento nominale la Board 1 è considerata il $Master$, occupandosi dell'attuazione dei motori, inviando tramite UART l'ingresso di controllo. La Board 2 è considerata $Slave$ in quanto in condizioni nominali
+non comanda i motori. Questi ultimi possono raggiungere una velocità massima di $160 RPM$.
 Il riferimento di velocità lineare o di rotazione è calcolato in base ai comandi utente inviati attraverso un joistick tramite protocollo \textit{Bluethooth} ad un $ESP32$ e ricevuti dalla Board 2 tramite protocollo $I2C$.
-Questi riferimenti sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento o anomalie rilevate dai supervisori.
+La Board 2 quindi invia i comandi utente ricevuti alla Board 1, che si occupa di eseguirli. 
+\paragraph{Rilevamento ostacoli}
+I riferimenti di velocità sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento.
 Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $75$ e $150$ cm, il supervisore di Board 2 attiva delle procedure 
-di deviazione o di aggiramento. Questi comandi vengono inviati alla Board 1 tramite la comunicazione UART, che si occupa di eseguirli se non sono presenti fault critici o degradati.
+di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essendo che in condizioni nominali Board 2 non attua, questi comandi vengono inviati, tramite la comunicazione UART, alla Board 1 che si occupa di eseguirli.
 
-In seguito si mostrranno le condizioni di funzionamento in presenza di fault.
+
 
 \subsection{Encoder non funzionanti}
 \begin{figure}[H]
