@@ -121,8 +121,18 @@ A differenza di come descritto nel paragrafo \textit{Encoder non funzionanti}, n
 in aggiunta ad un segnale di incoerenza del movimento del rover segnalato da Board 2. 
 
 
+\paragraph{Board 1 non riceve}
 
-
+Se la Board 1 non riceve dati dalla Board 2 per un periodo di tempo superiore a 120 ms, la Board 1 decide di cedere i privilegi di attuazione alla Board 2, quindi aprendo il rele e lasciando che Board 2 possa attuare i comandi di
+movimento. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Board1_non_riceve}
+    \caption{Board 1 non riceve dati dalla Board 2.}
+    \label{fig:board1_non_riceve}
+\end{figure}
+Il controllo di Board 2 avviene in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
+Essendo questa una modalità di funzionamento degradata, la velocità del rover viene dimezzata.
 
 
 
