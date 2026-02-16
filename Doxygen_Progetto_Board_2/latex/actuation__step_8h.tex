@@ -1,0 +1,98 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+actuation/\+actuation\+\_\+step.h File Reference}
+\hypertarget{actuation__step_8h}{}\label{actuation__step_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/actuation/actuation\_step.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/actuation/actuation\_step.h}}
+
+
+Interfaccia dello step di attuazione board 2.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5}{Actuation\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il modulo di attuazione. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{actuation__step_8h_a57cd4874f1f08d0e8f2ae018f4ea5bdc}{Actuation\+\_\+\+Step}} (float v\+\_\+ref, float omega\+\_\+ref)
+\begin{DoxyCompactList}\small\item\em Esegue uno step di attuazione open-\/loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaccia dello step di attuazione board 2. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{actuation__step_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5}\index{actuation\_step.h@{actuation\_step.h}!Actuation\_Init@{Actuation\_Init}}
+\index{Actuation\_Init@{Actuation\_Init}!actuation\_step.h@{actuation\_step.h}}
+\doxysubsubsection{\texorpdfstring{Actuation\_Init()}{Actuation\_Init()}}
+{\footnotesize\ttfamily \label{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5} 
+void Actuation\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il modulo di attuazione. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{actuation__step_8h_a57cd4874f1f08d0e8f2ae018f4ea5bdc}\index{actuation\_step.h@{actuation\_step.h}!Actuation\_Step@{Actuation\_Step}}
+\index{Actuation\_Step@{Actuation\_Step}!actuation\_step.h@{actuation\_step.h}}
+\doxysubsubsection{\texorpdfstring{Actuation\_Step()}{Actuation\_Step()}}
+{\footnotesize\ttfamily \label{actuation__step_8h_a57cd4874f1f08d0e8f2ae018f4ea5bdc} 
+void Actuation\+\_\+\+Step (\begin{DoxyParamCaption}\item[{float}]{v\+\_\+ref}{, }\item[{float}]{omega\+\_\+ref}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step di attuazione open-\/loop. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+\_\+ref} & Riferimento lineare normalizzato. \\
+\hline
+{\em omega\+\_\+ref} & Riferimento angolare normalizzato.\\
+\hline
+\end{DoxyParams}
+Esegue uno step di attuazione open-\/loop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+\_\+ref} & Riferimento di velocita\textquotesingle{} lineare normalizzato (in \+[-\/1, 1]\+). \\
+\hline
+{\em omega\+\_\+ref} & Riferimento di velocita\textquotesingle{} angolare normalizzato (in \+[-\/1, 1]\+). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a57cd4874f1f08d0e8f2ae018f4ea5bdc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a57cd4874f1f08d0e8f2ae018f4ea5bdc_icgraph}
+\end{center}
+\end{figure}

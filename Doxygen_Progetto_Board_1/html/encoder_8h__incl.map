@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/encoder/encoder.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/encoder/encoder.h">
+<area shape="rect" id="Node000001" title="Header principale per il modulo encoder." alt="" coords="73,5,276,80"/>
+<area shape="rect" id="Node000002" href="$encoder__step_8h.html" title="Gestione dell&#39;elaborazione periodica dei dati encoder." alt="" coords="5,128,166,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,82,110,118,106,114,143,78"/>
+<area shape="rect" id="Node000003" href="$encoder__hw_8h.html" title="Driver di basso livello per l&#39;interfacciamento con gli encoder hardware." alt="" coords="190,128,341,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,78,246,116,240,116,208,83"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="233,203,298,229"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="267,153,268,189,263,186,264,157"/>
+</map>

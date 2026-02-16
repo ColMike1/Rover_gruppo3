@@ -1,0 +1,7 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/comm/comm_uart.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/comm/comm_uart.h">
+<area shape="rect" id="Node000001" title="Driver di basso livello per l&#39;interfaccia UART di comunicazione." alt="" coords="5,5,209,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="28,128,92,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,79,75,115,71,112,87,82"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="116,128,191,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="126,78,144,114,138,113,123,83"/>
+</map>

@@ -1,0 +1,144 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+snapshot/\+board\+\_\+health\+\_\+snapshot.c File Reference}
+\hypertarget{board__health__snapshot_8c}{}\label{board__health__snapshot_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/snapshot/board\_health\_snapshot.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/snapshot/board\_health\_snapshot.c}}
+
+
+Gestione thread-\/safe dello snapshot dei parametri vitali della scheda.  
+
+
+{\ttfamily \+\#include "{}log/\+wcet\+\_\+monitor.\+h"{}}\newline
+{\ttfamily \+\#include "{}main.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+board\+\_\+health\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for board\+\_\+health\+\_\+snapshot.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{board__health__snapshot_8c_afebf176f2f3feabd6348148a29a77682}{Board\+Health\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Inizializza il Mutex per lo snapshot della salute scheda. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__snapshot_8c_a12e61a19b32027442e181c3a68446ff0}{Board\+Health\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Scrive i dati di salute della scheda in modo atomico. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__snapshot_8c_aa514a14af3b9094239dc168e1f3341c3}{Board\+Health\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Legge lo stato attuale della salute scheda in modo atomico. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \doxymbox{\hyperlink{board__health__snapshot_8c_a24cb9a913aa58d11018a1c8f9a5727e7}{snapshot}}
+\begin{DoxyCompactList}\small\item\em Variabile globale statica che contiene l\textquotesingle{}ultimo stato valido della salute scheda. \end{DoxyCompactList}\item 
+static os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{board__health__snapshot_8c_a5d6c4d40d28bdb35b409841e0991d290}{snapshot\+\_\+mutex}} = NULL
+\begin{DoxyCompactList}\small\item\em Mutex per garantire l\textquotesingle{}accesso esclusivo alla variabile snapshot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione thread-\/safe dello snapshot dei parametri vitali della scheda. 
+
+Fornisce un\textquotesingle{}interfaccia protetta da Mutex per leggere e scrivere i dati relativi a temperatura e tensione batteria. 
+
+\label{doc-func-members}
+\Hypertarget{board__health__snapshot_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board__health__snapshot_8c_afebf176f2f3feabd6348148a29a77682}\index{board\_health\_snapshot.c@{board\_health\_snapshot.c}!BoardHealthSnapshot\_MutexInit@{BoardHealthSnapshot\_MutexInit}}
+\index{BoardHealthSnapshot\_MutexInit@{BoardHealthSnapshot\_MutexInit}!board\_health\_snapshot.c@{board\_health\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealthSnapshot\_MutexInit()}{BoardHealthSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8c_afebf176f2f3feabd6348148a29a77682} 
+void Board\+Health\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il Mutex per lo snapshot della salute scheda. 
+
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato dal kernel CMSIS-\/\+RTOS. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8c_afebf176f2f3feabd6348148a29a77682_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__snapshot_8c_aa514a14af3b9094239dc168e1f3341c3}\index{board\_health\_snapshot.c@{board\_health\_snapshot.c}!BoardHealthSnapshot\_Read@{BoardHealthSnapshot\_Read}}
+\index{BoardHealthSnapshot\_Read@{BoardHealthSnapshot\_Read}!board\_health\_snapshot.c@{board\_health\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealthSnapshot\_Read()}{BoardHealthSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8c_aa514a14af3b9094239dc168e1f3341c3} 
+void Board\+Health\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge lo stato attuale della salute scheda in modo atomico. 
+
+Legge i dati correnti dallo snapshot (API per i consumatori).
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore alla struttura di destinazione (tipicamente nel task Log o Controllo). \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8c_aa514a14af3b9094239dc168e1f3341c3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__snapshot_8c_a12e61a19b32027442e181c3a68446ff0}\index{board\_health\_snapshot.c@{board\_health\_snapshot.c}!BoardHealthSnapshot\_Write@{BoardHealthSnapshot\_Write}}
+\index{BoardHealthSnapshot\_Write@{BoardHealthSnapshot\_Write}!board\_health\_snapshot.c@{board\_health\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealthSnapshot\_Write()}{BoardHealthSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8c_a12e61a19b32027442e181c3a68446ff0} 
+void Board\+Health\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive i dati di salute della scheda in modo atomico. 
+
+Scrive i nuovi dati nello snapshot (API per il produttore).
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore alla struttura dati aggiornata dal task Board Health. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8c_a12e61a19b32027442e181c3a68446ff0_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{board__health__snapshot_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{board__health__snapshot_8c_a24cb9a913aa58d11018a1c8f9a5727e7}\index{board\_health\_snapshot.c@{board\_health\_snapshot.c}!snapshot@{snapshot}}
+\index{snapshot@{snapshot}!board\_health\_snapshot.c@{board\_health\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{snapshot}{snapshot}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8c_a24cb9a913aa58d11018a1c8f9a5727e7} 
+\doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} snapshot\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Variabile globale statica che contiene l\textquotesingle{}ultimo stato valido della salute scheda. 
+
+\Hypertarget{board__health__snapshot_8c_a5d6c4d40d28bdb35b409841e0991d290}\index{board\_health\_snapshot.c@{board\_health\_snapshot.c}!snapshot\_mutex@{snapshot\_mutex}}
+\index{snapshot\_mutex@{snapshot\_mutex}!board\_health\_snapshot.c@{board\_health\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{snapshot\_mutex}{snapshot\_mutex}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8c_a5d6c4d40d28bdb35b409841e0991d290} 
+os\+Mutex\+Id\+\_\+t snapshot\+\_\+mutex = NULL\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Mutex per garantire l\textquotesingle{}accesso esclusivo alla variabile snapshot. 
+

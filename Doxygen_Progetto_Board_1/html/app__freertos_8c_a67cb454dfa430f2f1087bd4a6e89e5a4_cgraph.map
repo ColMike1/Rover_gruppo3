@@ -1,0 +1,15 @@
+<map id="StartTask_Debug" name="StartTask_Debug">
+<area shape="rect" id="Node000001" title="Task di Debug e Logging." alt="" coords="5,107,128,133"/>
+<area shape="rect" id="Node000002" href="$log__task_8c.html#a60fce6a6a39cff4742e6f9b4b56ab7fb" title="Raccoglie i dati dagli snapshot e li invia al supporto di memorizzazione." alt="" coords="176,107,280,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,117,162,119,158,121,129,123"/>
+<area shape="rect" id="Node000003" href="$board__health__snapshot_8c.html#aa514a14af3b9094239dc168e1f3341c3" title="Legge i dati correnti dallo snapshot (API per i consumatori)." alt="" coords="328,5,514,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="242,104,278,73,327,42,345,36,340,39,329,46,282,77,245,108"/>
+<area shape="rect" id="Node000004" href="$encoder__snapshot_8c.html#af580ad966ed7718068907738755f9e22" title="Legge l&#39;ultimo snapshot encoder disponibile." alt="" coords="340,56,502,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="279,104,355,86,350,88,281,109"/>
+<area shape="rect" id="Node000005" href="$log__format_8h.html#a9cebda9599811a9a8539b9f2d07c5c8e" title="Formatta i dati degli snapshot in una stringa leggibile per il logging." alt="" coords="348,107,494,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="280,117,336,119,331,121,281,123"/>
+<area shape="rect" id="Node000006" href="$rx__snapshot_8c.html#ae785580883a2c19871811977522d68fc" title="Recupera i dati ricevuti per l&#39;elaborazione (es. da parte del Supervisore)." alt="" coords="356,157,487,184"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="280,131,355,152,350,153,280,136"/>
+<area shape="rect" id="Node000007" href="$wcet__monitor_8c.html#ae9a460ef8d6b3d0a40feed0ade2cf128" title="Stampa o logga i risultati del monitoraggio WCET." alt="" coords="374,208,469,235"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="244,131,282,163,329,194,361,208,356,208,327,198,278,167,243,136"/>
+</map>

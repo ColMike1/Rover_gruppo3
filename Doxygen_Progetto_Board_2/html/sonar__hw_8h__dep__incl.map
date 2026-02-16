@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/sonar/sonar_hw.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/sonar/sonar_hw.h">
+<area shape="rect" id="Node000001" title="API hardware sonar e strutture di supporto." alt="" coords="233,5,437,80"/>
+<area shape="rect" id="Node000002" href="$sonar_8h.html" title="Header aggregatore del modulo sonar." alt="" coords="5,128,209,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,87,178,130,175,125,249,89"/>
+<area shape="rect" id="Node000003" href="$sonar__hw_8c.html" title="Gestione hardware sonar con cattura input tramite timer/DMA." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="337,94,337,129,333,126,333,98"/>
+<area shape="rect" id="Node000004" href="$sonar__task_8c.html" title="Task sonar e callback ISR di acquisizione capture." alt="" coords="461,128,665,203"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="419,85,496,127,491,127,418,90"/>
+</map>

@@ -1,0 +1,45 @@
+\doxysection{ble\+\_\+controller\+\_\+snapshot.\+h}
+\hypertarget{ble__controller__snapshot_8h_source}{}\label{ble__controller__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/ble\_controller\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/ble\_controller\_snapshot.h}}
+\doxymbox{\hyperlink{ble__controller__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_BLE\_CONTROLLER\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_BLE\_CONTROLLER\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{ble__controller__i2c_8h}{ble\_controller/ble\_controller\_i2c.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_a2a9a56838bea976812d51b7e457b0ef2}{task\_last\_run\_ms}};\ \ \ \ \ \textcolor{comment}{/*\ ultima\ esecuzione\ del\ task\ */}}
+\DoxyCodeLine{00017\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_a57aff241cf0de3e4884a44ed9cdd28f9}{data\_last\_valid\_ms}};\ \ \textcolor{comment}{/*\ ultimo\ istante\ in\ cui\ i\ dati\ sono\ validi\ */}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{/*\ Stick\ A\ normalizzato\ */}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_a3767fd92a6fd9e675419804d3dbb328c}{ax\_norm}};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_ac046ff9cbb74623ddc7ddc77714792ec}{ay\_norm}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{/*\ Stick\ B\ normalizzato\ */}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_a4ab137c0fbb6b1b1b595e44e7544ca74}{bx\_norm}};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_abde5ad271ea514fbd126e3a0e3bc0f72}{by\_norm}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{/*\ Pulsanti\ */}}
+\DoxyCodeLine{00029\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_a6aab827861bf182f66895907f1537d85}{a\_btn}};}
+\DoxyCodeLine{00030\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_aee8c1900d1834b4bbdc47d18b6407dfa}{b\_btn}};}
+\DoxyCodeLine{00031\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_a472dd7d246447644f0eb5ae356cffee6}{btn1}};}
+\DoxyCodeLine{00032\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t_ab6982cf006182521582a133c0d7bdc82}{btn2}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \}\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{BleControllerSnapshot\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{ble__controller__snapshot_8h_ad8c768d78db42132dfe5e641659805ca}{BleControllerSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{ble__controller__snapshot_8h_ada05efc20b71fa4cecb6eaceacb389f5}{BleControllerSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{BleControllerSnapshot\_t}}\ *snap);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{ble__controller__snapshot_8h_adcf5612aedf667a09b9dabce0a93e404}{BleControllerSnapshot\_Read}}(\doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{BleControllerSnapshot\_t}}\ *snap);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_BLE\_CONTROLLER\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

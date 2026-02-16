@@ -1,0 +1,33 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/comm/comm_tx_task.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/comm/comm_tx_task.c">
+<area shape="rect" id="Node000001" title="Implementazione del task di trasmissione periodica della telemetria." alt="" coords="263,5,466,80"/>
+<area shape="rect" id="Node000002" href="$comm__tx__task_8h.html" title="Gestione del task di trasmissione dei messaggi." alt="" coords="5,136,164,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,83,134,132,131,128,267,78"/>
+<area shape="rect" id="Node000003" href="$comm__pack_8h.html" title="Funzioni per il pacchettizzamento dei dati di telemetria e stato." alt="" coords="238,136,382,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="347,78,325,124,321,121,344,82"/>
+<area shape="rect" id="Node000005" href="$supervisor__snapshot_8h.html" title="Buffer protetto per le decisioni prese dal Supervisore di Board 1." alt="" coords="486,219,624,261"/>
+<area shape="poly" id="edge19_Node000001_Node000005" title=" " alt="" coords="401,78,527,207,522,208,399,83"/>
+<area shape="rect" id="Node000010" href="$encoder__snapshot_8h.html" title="Buffer protetto per i dati letti dagli encoder." alt="" coords="267,227,462,253"/>
+<area shape="poly" id="edge18_Node000001_Node000010" title=" " alt="" coords="383,78,396,123,399,147,396,171,381,214,377,211,391,170,393,147,391,124,380,83"/>
+<area shape="rect" id="Node000011" href="$comm__uart_8h.html" title="Driver di basso livello per l&#39;interfaccia UART di comunicazione." alt="" coords="54,227,192,253"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="294,82,228,130,181,174,144,216,140,213,177,170,224,126,298,79"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="507,128,664,171"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="443,78,531,121,526,121,442,83"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="198,317,262,344"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="299,161,277,189,258,220,243,262,235,303,231,300,238,261,253,217,273,186,295,165"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="345,161,486,212,481,214,345,166"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="319,161,351,213,346,213,317,166"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="488,258,474,264,374,285,330,295,275,312,270,314,268,308,273,307,328,290,372,280,473,259,483,259"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="286,317,360,344"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="501,261,373,312,369,314,367,309,372,307,496,262"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="698,309,855,352"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="608,259,713,303,708,303,607,265"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="497,309,674,352"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="564,260,576,296,571,293,561,264"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="384,317,473,344"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="528,261,460,311,458,306,523,263"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="348,253,263,311,260,306,343,255"/>
+<area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="361,253,337,305,334,301,356,255"/>
+<area shape="poly" id="edge13_Node000010_Node000009" title=" " alt="" coords="375,252,413,305,408,304,372,256"/>
+<area shape="poly" id="edge15_Node000011_Node000004" title=" " alt="" coords="139,251,206,307,200,308,138,256"/>
+<area shape="poly" id="edge16_Node000011_Node000006" title=" " alt="" coords="152,251,283,309,278,312,151,257"/>
+</map>

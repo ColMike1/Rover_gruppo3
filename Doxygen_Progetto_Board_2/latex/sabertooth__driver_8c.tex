@@ -1,0 +1,361 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+actuation/\+sabertooth\+\_\+driver.c File Reference}
+\hypertarget{sabertooth__driver_8c}{}\label{sabertooth__driver_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/actuation/sabertooth\_driver.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/actuation/sabertooth\_driver.c}}
+
+
+Driver Sabertooth:\+ composizione pacchetti e invio comandi motore.  
+
+
+{\ttfamily \+\#include "{}actuation/\+sabertooth\+\_\+driver.\+h"{}}\newline
+{\ttfamily \+\#include "{}stm32g4xx\+\_\+hal.\+h"{}}\newline
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+Include dependency graph for sabertooth\+\_\+driver.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_acf2b24254cfdce0e26a24920f54b41ad}{SABER\+\_\+\+PACKET\+\_\+\+LEN}}~4U
+\begin{DoxyCompactList}\small\item\em Lunghezza di un singolo pacchetto Sabertooth \+[byte]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a8af9fcbd44ede90d3e28d5327ab27ca5}{SABER\+\_\+\+INIT\+\_\+\+PACKET\+\_\+\+COUNT}}~2U
+\begin{DoxyCompactList}\small\item\em Numero pacchetti inviati durante init. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a1094acdc1a6a1ef8b9de2d4e9d7e0d8a}{SABER\+\_\+\+INIT\+\_\+\+CMD}}~14U
+\begin{DoxyCompactList}\small\item\em Valore comando per impostare il timeout seriale. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a89e83225c9009d5c7a874c9c4dab445b}{SABER\+\_\+\+TIMEOUT\+\_\+\+VALUE}}~3.\+0f
+\begin{DoxyCompactList}\small\item\em Timeout fail-\/safe in step da 100 ms (3 -\/\texorpdfstring{$>$}{>} blocco motori dopo \texorpdfstring{$\sim$}{\string~}300 ms senza segnale). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a61be383c7f5739ebd76f8788501cb78d}{SABER\+\_\+\+REF\+\_\+\+VOLTAGE}}~12.\+0f
+\begin{DoxyCompactList}\small\item\em Valore assoluto tensione di riferimento \+[V]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a64e8941f89f6d4eafaf3c1c933c77834}{SABER\+\_\+\+COMMAND\+\_\+\+SCALE}}~127.\+0f
+\begin{DoxyCompactList}\small\item\em Scala massima comando seriale motore. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a706661a76d919f43a829055d16116755}{SABER\+\_\+\+CMD\+\_\+\+M1\+\_\+\+FWD}}~0U
+\begin{DoxyCompactList}\small\item\em Comando Sabertooth:\+ motore 1 avanti. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_ac67c06ab8e7a3c349b7fc145952fcd8f}{SABER\+\_\+\+CMD\+\_\+\+M1\+\_\+\+REV}}~1U
+\begin{DoxyCompactList}\small\item\em Comando Sabertooth:\+ motore 1 indietro. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_a7c810a9b4d85c2c9f9f9115c6d25d8c6}{SABER\+\_\+\+CMD\+\_\+\+M2\+\_\+\+FWD}}~4U
+\begin{DoxyCompactList}\small\item\em Comando Sabertooth:\+ motore 2 avanti. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8c_ae1c1bb7025a775852d11b5f6832a8bfc}{SABER\+\_\+\+CMD\+\_\+\+M2\+\_\+\+REV}}~5U
+\begin{DoxyCompactList}\small\item\em Comando Sabertooth:\+ motore 2 indietro. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{sabertooth__driver_8c_afe3092cef7667a37789c3d6a189336e2}{Saber\+\_\+\+Checksum}} (uint8\+\_\+t a, uint8\+\_\+t b, uint8\+\_\+t c)
+\begin{DoxyCompactList}\small\item\em Calcola il checksum Sabertooth su 3 byte. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{sabertooth__driver_8c_aff60a261fda72eadf539c1a86a000313}{Prepare\+\_\+\+Saber\+\_\+\+Packet}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}dest, uint8\+\_\+t addr, uint8\+\_\+t cmd, float value)
+\begin{DoxyCompactList}\small\item\em Compone un pacchetto Sabertooth da 4 byte. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sabertooth__driver_8c_ad8e3995889ea345e17e66905d67d0703}{Sabertooth\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Invia un breve comando di inizializzazione ai due Sabertooth. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sabertooth__driver_8c_ac82b7c928f19e7382d0804515771c21e}{Sabertooth\+\_\+\+Apply\+Outputs}} (float usx\+\_\+p, float udx\+\_\+p, float usx\+\_\+a, float udx\+\_\+a)
+\begin{DoxyCompactList}\small\item\em Converte e invia i comandi ruota ai quattro canali Sabertooth. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sabertooth__driver_8c_a64a15ea7c7abed7e4d33f56b32dbe7a0}{Sabertooth\+Callback}} ()
+\begin{DoxyCompactList}\small\item\em Callback chiamata al completamento della TX UART verso Sabertooth. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+UART\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{sabertooth__driver_8c_a25a82fcf0cd24eb6d39977cb5864cec8}{huart5}}
+\begin{DoxyCompactList}\small\item\em Handle UART usata per la comunicazione con Sabertooth (generata da Cube\+MX). \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{sabertooth__driver_8c_a1505194491a3a9285908e5b339f2220d}{saber\+\_\+tx}} \+[4U \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{sabertooth__driver_8c_acf2b24254cfdce0e26a24920f54b41ad}{SABER\+\_\+\+PACKET\+\_\+\+LEN}}]\+
+\begin{DoxyCompactList}\small\item\em Buffer TX contenente fino a 4 pacchetti Sabertooth consecutivi. \end{DoxyCompactList}\item 
+static volatile uint8\+\_\+t \doxymbox{\hyperlink{sabertooth__driver_8c_a56f2dec68ade5f3cf7ec7700b3e1fc45}{tx\+\_\+busy}} = 0
+\begin{DoxyCompactList}\small\item\em Flag busy per evitare trasmissioni concorrenti. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver Sabertooth:\+ composizione pacchetti e invio comandi motore. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{sabertooth__driver_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sabertooth__driver_8c_a706661a76d919f43a829055d16116755}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_CMD\_M1\_FWD@{SABER\_CMD\_M1\_FWD}}
+\index{SABER\_CMD\_M1\_FWD@{SABER\_CMD\_M1\_FWD}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_CMD\_M1\_FWD}{SABER\_CMD\_M1\_FWD}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a706661a76d919f43a829055d16116755} 
+\+\#define SABER\+\_\+\+CMD\+\_\+\+M1\+\_\+\+FWD~0U}
+
+
+
+Comando Sabertooth:\+ motore 1 avanti. 
+
+\Hypertarget{sabertooth__driver_8c_ac67c06ab8e7a3c349b7fc145952fcd8f}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_CMD\_M1\_REV@{SABER\_CMD\_M1\_REV}}
+\index{SABER\_CMD\_M1\_REV@{SABER\_CMD\_M1\_REV}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_CMD\_M1\_REV}{SABER\_CMD\_M1\_REV}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_ac67c06ab8e7a3c349b7fc145952fcd8f} 
+\+\#define SABER\+\_\+\+CMD\+\_\+\+M1\+\_\+\+REV~1U}
+
+
+
+Comando Sabertooth:\+ motore 1 indietro. 
+
+\Hypertarget{sabertooth__driver_8c_a7c810a9b4d85c2c9f9f9115c6d25d8c6}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_CMD\_M2\_FWD@{SABER\_CMD\_M2\_FWD}}
+\index{SABER\_CMD\_M2\_FWD@{SABER\_CMD\_M2\_FWD}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_CMD\_M2\_FWD}{SABER\_CMD\_M2\_FWD}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a7c810a9b4d85c2c9f9f9115c6d25d8c6} 
+\+\#define SABER\+\_\+\+CMD\+\_\+\+M2\+\_\+\+FWD~4U}
+
+
+
+Comando Sabertooth:\+ motore 2 avanti. 
+
+\Hypertarget{sabertooth__driver_8c_ae1c1bb7025a775852d11b5f6832a8bfc}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_CMD\_M2\_REV@{SABER\_CMD\_M2\_REV}}
+\index{SABER\_CMD\_M2\_REV@{SABER\_CMD\_M2\_REV}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_CMD\_M2\_REV}{SABER\_CMD\_M2\_REV}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_ae1c1bb7025a775852d11b5f6832a8bfc} 
+\+\#define SABER\+\_\+\+CMD\+\_\+\+M2\+\_\+\+REV~5U}
+
+
+
+Comando Sabertooth:\+ motore 2 indietro. 
+
+\Hypertarget{sabertooth__driver_8c_a64e8941f89f6d4eafaf3c1c933c77834}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_COMMAND\_SCALE@{SABER\_COMMAND\_SCALE}}
+\index{SABER\_COMMAND\_SCALE@{SABER\_COMMAND\_SCALE}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_COMMAND\_SCALE}{SABER\_COMMAND\_SCALE}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a64e8941f89f6d4eafaf3c1c933c77834} 
+\+\#define SABER\+\_\+\+COMMAND\+\_\+\+SCALE~127.\+0f}
+
+
+
+Scala massima comando seriale motore. 
+
+\Hypertarget{sabertooth__driver_8c_a1094acdc1a6a1ef8b9de2d4e9d7e0d8a}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_INIT\_CMD@{SABER\_INIT\_CMD}}
+\index{SABER\_INIT\_CMD@{SABER\_INIT\_CMD}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_INIT\_CMD}{SABER\_INIT\_CMD}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a1094acdc1a6a1ef8b9de2d4e9d7e0d8a} 
+\+\#define SABER\+\_\+\+INIT\+\_\+\+CMD~14U}
+
+
+
+Valore comando per impostare il timeout seriale. 
+
+\Hypertarget{sabertooth__driver_8c_a8af9fcbd44ede90d3e28d5327ab27ca5}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_INIT\_PACKET\_COUNT@{SABER\_INIT\_PACKET\_COUNT}}
+\index{SABER\_INIT\_PACKET\_COUNT@{SABER\_INIT\_PACKET\_COUNT}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_INIT\_PACKET\_COUNT}{SABER\_INIT\_PACKET\_COUNT}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a8af9fcbd44ede90d3e28d5327ab27ca5} 
+\+\#define SABER\+\_\+\+INIT\+\_\+\+PACKET\+\_\+\+COUNT~2U}
+
+
+
+Numero pacchetti inviati durante init. 
+
+\Hypertarget{sabertooth__driver_8c_acf2b24254cfdce0e26a24920f54b41ad}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_PACKET\_LEN@{SABER\_PACKET\_LEN}}
+\index{SABER\_PACKET\_LEN@{SABER\_PACKET\_LEN}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_PACKET\_LEN}{SABER\_PACKET\_LEN}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_acf2b24254cfdce0e26a24920f54b41ad} 
+\+\#define SABER\+\_\+\+PACKET\+\_\+\+LEN~4U}
+
+
+
+Lunghezza di un singolo pacchetto Sabertooth \+[byte]\+. 
+
+\Hypertarget{sabertooth__driver_8c_a61be383c7f5739ebd76f8788501cb78d}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_REF\_VOLTAGE@{SABER\_REF\_VOLTAGE}}
+\index{SABER\_REF\_VOLTAGE@{SABER\_REF\_VOLTAGE}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_REF\_VOLTAGE}{SABER\_REF\_VOLTAGE}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a61be383c7f5739ebd76f8788501cb78d} 
+\+\#define SABER\+\_\+\+REF\+\_\+\+VOLTAGE~12.\+0f}
+
+
+
+Valore assoluto tensione di riferimento \+[V]\+. 
+
+\Hypertarget{sabertooth__driver_8c_a89e83225c9009d5c7a874c9c4dab445b}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SABER\_TIMEOUT\_VALUE@{SABER\_TIMEOUT\_VALUE}}
+\index{SABER\_TIMEOUT\_VALUE@{SABER\_TIMEOUT\_VALUE}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SABER\_TIMEOUT\_VALUE}{SABER\_TIMEOUT\_VALUE}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a89e83225c9009d5c7a874c9c4dab445b} 
+\+\#define SABER\+\_\+\+TIMEOUT\+\_\+\+VALUE~3.\+0f}
+
+
+
+Timeout fail-\/safe in step da 100 ms (3 -\/\texorpdfstring{$>$}{>} blocco motori dopo \texorpdfstring{$\sim$}{\string~}300 ms senza segnale). 
+
+
+
+\label{doc-func-members}
+\Hypertarget{sabertooth__driver_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{sabertooth__driver_8c_aff60a261fda72eadf539c1a86a000313}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!Prepare\_Saber\_Packet@{Prepare\_Saber\_Packet}}
+\index{Prepare\_Saber\_Packet@{Prepare\_Saber\_Packet}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{Prepare\_Saber\_Packet()}{Prepare\_Saber\_Packet()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_aff60a261fda72eadf539c1a86a000313} 
+void Prepare\+\_\+\+Saber\+\_\+\+Packet (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{uint8\+\_\+t}]{addr}{, }\item[{uint8\+\_\+t}]{cmd}{, }\item[{float}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compone un pacchetto Sabertooth da 4 byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & Buffer di destinazione (almeno 4 byte). \\
+\hline
+{\em addr} & Indirizzo del Sabertooth. \\
+\hline
+{\em cmd} & Comando seriale Sabertooth. \\
+\hline
+{\em value} & Velocita\textquotesingle{} in scala Sabertooth (verra\textquotesingle{} saturata in \+[0, SABER\+\_\+\+MAX\+\_\+\+SPEED]\+). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{sabertooth__driver_8c_aff60a261fda72eadf539c1a86a000313_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_aff60a261fda72eadf539c1a86a000313_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sabertooth__driver_8c_afe3092cef7667a37789c3d6a189336e2}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!Saber\_Checksum@{Saber\_Checksum}}
+\index{Saber\_Checksum@{Saber\_Checksum}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{Saber\_Checksum()}{Saber\_Checksum()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_afe3092cef7667a37789c3d6a189336e2} 
+uint8\+\_\+t Saber\+\_\+\+Checksum (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{a}{, }\item[{uint8\+\_\+t}]{b}{, }\item[{uint8\+\_\+t}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calcola il checksum Sabertooth su 3 byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Byte 0. \\
+\hline
+{\em b} & Byte 1. \\
+\hline
+{\em c} & Byte 2. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Checksum a 7 bit. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_afe3092cef7667a37789c3d6a189336e2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sabertooth__driver_8c_ac82b7c928f19e7382d0804515771c21e}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!Sabertooth\_ApplyOutputs@{Sabertooth\_ApplyOutputs}}
+\index{Sabertooth\_ApplyOutputs@{Sabertooth\_ApplyOutputs}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{Sabertooth\_ApplyOutputs()}{Sabertooth\_ApplyOutputs()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_ac82b7c928f19e7382d0804515771c21e} 
+void Sabertooth\+\_\+\+Apply\+Outputs (\begin{DoxyParamCaption}\item[{float}]{usx\+\_\+p}{, }\item[{float}]{udx\+\_\+p}{, }\item[{float}]{usx\+\_\+a}{, }\item[{float}]{udx\+\_\+a}{}\end{DoxyParamCaption})}
+
+
+
+Converte e invia i comandi ruota ai quattro canali Sabertooth. 
+
+Invia i comandi ai quattro motori.
+
+I valori in volt vengono convertiti in scala 0..127 usando 12 V come riferimento.
+
+
+\begin{DoxyParams}{Parameters}
+{\em usx\+\_\+p} & Comando ruota sinistra posteriore. \\
+\hline
+{\em udx\+\_\+p} & Comando ruota destra posteriore. \\
+\hline
+{\em usx\+\_\+a} & Comando ruota sinistra anteriore. \\
+\hline
+{\em udx\+\_\+a} & Comando ruota destra anteriore. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_ac82b7c928f19e7382d0804515771c21e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_ac82b7c928f19e7382d0804515771c21e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sabertooth__driver_8c_ad8e3995889ea345e17e66905d67d0703}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!Sabertooth\_Init@{Sabertooth\_Init}}
+\index{Sabertooth\_Init@{Sabertooth\_Init}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{Sabertooth\_Init()}{Sabertooth\_Init()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_ad8e3995889ea345e17e66905d67d0703} 
+void Sabertooth\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Invia un breve comando di inizializzazione ai due Sabertooth. 
+
+Procedura di inizializzazione dei driver Sabertooth. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_ad8e3995889ea345e17e66905d67d0703_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_ad8e3995889ea345e17e66905d67d0703_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sabertooth__driver_8c_a64a15ea7c7abed7e4d33f56b32dbe7a0}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!SabertoothCallback@{SabertoothCallback}}
+\index{SabertoothCallback@{SabertoothCallback}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{SabertoothCallback()}{SabertoothCallback()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a64a15ea7c7abed7e4d33f56b32dbe7a0} 
+void Sabertooth\+Callback (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Callback chiamata al completamento della TX UART verso Sabertooth. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8c_a64a15ea7c7abed7e4d33f56b32dbe7a0_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{sabertooth__driver_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{sabertooth__driver_8c_a25a82fcf0cd24eb6d39977cb5864cec8}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!huart5@{huart5}}
+\index{huart5@{huart5}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{huart5}{huart5}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a25a82fcf0cd24eb6d39977cb5864cec8} 
+UART\+\_\+\+Handle\+Type\+Def huart5\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Handle UART usata per la comunicazione con Sabertooth (generata da Cube\+MX). 
+
+\Hypertarget{sabertooth__driver_8c_a1505194491a3a9285908e5b339f2220d}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!saber\_tx@{saber\_tx}}
+\index{saber\_tx@{saber\_tx}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{saber\_tx}{saber\_tx}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a1505194491a3a9285908e5b339f2220d} 
+uint8\+\_\+t saber\+\_\+tx\+[4U \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{sabertooth__driver_8c_acf2b24254cfdce0e26a24920f54b41ad}{SABER\+\_\+\+PACKET\+\_\+\+LEN}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Buffer TX contenente fino a 4 pacchetti Sabertooth consecutivi. 
+
+\Hypertarget{sabertooth__driver_8c_a56f2dec68ade5f3cf7ec7700b3e1fc45}\index{sabertooth\_driver.c@{sabertooth\_driver.c}!tx\_busy@{tx\_busy}}
+\index{tx\_busy@{tx\_busy}!sabertooth\_driver.c@{sabertooth\_driver.c}}
+\doxysubsubsection{\texorpdfstring{tx\_busy}{tx\_busy}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8c_a56f2dec68ade5f3cf7ec7700b3e1fc45} 
+volatile uint8\+\_\+t tx\+\_\+busy = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Flag busy per evitare trasmissioni concorrenti. 
+

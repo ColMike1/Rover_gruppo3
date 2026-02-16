@@ -1,0 +1,5 @@
+<map id="ControlLaw_Step" name="ControlLaw_Step">
+<area shape="rect" id="Node000001" title="Esegue il calcolo della legge di controllo multi&#45;livello." alt="" coords="5,5,127,32"/>
+<area shape="rect" id="Node000002" href="$control__law_8c.html#a9be2a088ff9fb1e2ceb9feef414072d6" title="Calcola l&#39;uscita del controllore PI usando la formulazione incrementale." alt="" coords="175,5,269,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,16,162,18,156,19,127,21"/>
+</map>

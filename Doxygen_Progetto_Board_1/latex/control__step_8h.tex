@@ -1,0 +1,107 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+control/\+control\+\_\+step.h File Reference}
+\hypertarget{control__step_8h}{}\label{control__step_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/control/control\_step.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/control/control\_step.h}}
+
+
+Interfaccia per il loop di controllo di alto livello.  
+
+
+{\ttfamily \+\#include "{}control/\+control\+\_\+types.\+h"{}}\newline
+Include dependency graph for control\+\_\+step.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{control__step_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{control__step_8h_ad2b3dfd69a990b69a69c34b19a0e0d98}{Control\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il modulo di controllo e le relative variabili di stato. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \doxymbox{\hyperlink{control__step_8h_a0fcef49c9cbce9b244be3d6251d9d445}{Control\+\_\+\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue l\textquotesingle{}iterazione principale del controllo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaccia per il loop di controllo di alto livello. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{control__step_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{control__step_8h_ad2b3dfd69a990b69a69c34b19a0e0d98}\index{control\_step.h@{control\_step.h}!Control\_Init@{Control\_Init}}
+\index{Control\_Init@{Control\_Init}!control\_step.h@{control\_step.h}}
+\doxysubsubsection{\texorpdfstring{Control\_Init()}{Control\_Init()}}
+{\footnotesize\ttfamily \label{control__step_8h_ad2b3dfd69a990b69a69c34b19a0e0d98} 
+void Control\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il modulo di controllo e le relative variabili di stato. 
+
+Inizializza il modulo di controllo e le relative variabili di stato. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{control__step_8h_ad2b3dfd69a990b69a69c34b19a0e0d98_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8h_ad2b3dfd69a990b69a69c34b19a0e0d98_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{control__step_8h_a0fcef49c9cbce9b244be3d6251d9d445}\index{control\_step.h@{control\_step.h}!Control\_Step@{Control\_Step}}
+\index{Control\_Step@{Control\_Step}!control\_step.h@{control\_step.h}}
+\doxysubsubsection{\texorpdfstring{Control\_Step()}{Control\_Step()}}
+{\footnotesize\ttfamily \label{control__step_8h_a0fcef49c9cbce9b244be3d6251d9d445} 
+\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} Control\+\_\+\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue l\textquotesingle{}iterazione principale del controllo. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_control_output__t}{Control\+Output\+\_\+t} I comandi calcolati pronti per essere inviati all\textquotesingle{}attuazione.
+\end{DoxyReturn}
+Esegue l\textquotesingle{}iterazione principale del controllo.
+
+
+\begin{DoxyEnumerate}
+\item Legge gli snapshot (Encoder, Supervisor, RX).
+\item Normalizza i setpoint di velocità e sterzata.
+\item Se tutti gli encoder sono guasti, entra in modalità {\bfseries{Open Loop}} (Anello aperto).
+\item Altrimenti, esegue la {\bfseries{Control Law}} e applica eventuali fallback per ruote singole. \begin{DoxyReturn}{Returns}
+\doxylink{struct_control_output__t}{Control\+Output\+\_\+t} Struttura contenente i comandi di tensione per i motori. 
+\end{DoxyReturn}
+
+\end{DoxyEnumerate}Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8h_a0fcef49c9cbce9b244be3d6251d9d445_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8h_a0fcef49c9cbce9b244be3d6251d9d445_icgraph}
+\end{center}
+\end{figure}

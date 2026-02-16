@@ -1,0 +1,11 @@
+<map id="Log_FormatSnapshot" name="Log_FormatSnapshot">
+<area shape="rect" id="Node000001" title="Crea un report testuale completo dello stato attuale del sistema." alt="" coords="5,81,151,108"/>
+<area shape="rect" id="Node000002" href="$log__format_8c.html#a707569490043d10f2c0af1663b75500e" title="Decodifica i flag di errore della Board 1 in una stringa concatenata." alt="" coords="222,5,352,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,78,198,42,222,36,217,38,200,46,111,83"/>
+<area shape="rect" id="Node000003" href="$log__format_8c.html#a8351e774c8282a0be527f3db067e8a8b" title="Decodifica i flag di errore della Board 2 in una stringa concatenata." alt="" coords="222,56,352,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,83,209,78,204,80,152,88"/>
+<area shape="rect" id="Node000004" href="$log__format_8c.html#a791488077acf5654b1ed4f984251cc48" title="Converte l&#39;enum CommUnpackStatus_t in stringa." alt="" coords="200,107,374,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="151,101,187,107,181,108,151,106"/>
+<area shape="rect" id="Node000005" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX)." alt="" coords="199,157,375,184"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="110,106,200,143,222,152,217,152,198,148,109,111"/>
+</map>

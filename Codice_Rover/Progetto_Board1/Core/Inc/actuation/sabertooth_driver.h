@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-/** * @name Configurazione Sabertooth
+/** @name Configurazione Sabertooth
  * @{
  */
 #define SABER_MAX_SPEED   127 /**< Massima velocità impostabile per il driver */
@@ -29,10 +29,7 @@ void Sabertooth_Init(void);
  * @param usx_a Velocità motore anteriore sinistro (RPM).
  * @param udx_a Velocità motore anteriore destro (RPM).
  */
-void Sabertooth_ApplyOutputs(float usx_p,
-                             float udx_p,
-                             float usx_a,
-                             float udx_a);
+void Sabertooth_ApplyOutputs(float usx_p, float udx_p, float usx_a, float udx_a);
 
 /**
  * @brief Callback per la gestione degli eventi legati alla comunicazione Sabertooth.

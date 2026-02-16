@@ -1,0 +1,85 @@
+\doxysection{Supervisor\+Snapshot\+\_\+t Struct Reference}
+\hypertarget{struct_supervisor_snapshot__t}{}\label{struct_supervisor_snapshot__t}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+
+
+Snapshot dello stato prodotto dal supervisore Board 2.  
+
+
+
+
+{\ttfamily \+\#include $<$supervisor\+\_\+snapshot.\+h$>$}
+
+
+
+Collaboration diagram for Supervisor\+Snapshot\+\_\+t:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{struct_supervisor_snapshot__t__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a}{task\+\_\+last\+\_\+run\+\_\+ms}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4}{degraded\+\_\+mask}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7}{critical\+\_\+mask}}
+\item 
+Supervisor\+Command\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_ac49af5f58d34733270f9bba724800c73}{command}}
+\item 
+bool \doxymbox{\hyperlink{struct_supervisor_snapshot__t_aaa03f8ad7d4072be447713d9b1e59d87}{is\+Motion\+Consistent}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_ae1ae44c63049f5edeb612df180025a00}{alive\+\_\+counter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Snapshot dello stato prodotto dal supervisore Board 2. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_supervisor_snapshot__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_supervisor_snapshot__t_ae1ae44c63049f5edeb612df180025a00}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!alive\_counter@{alive\_counter}}
+\index{alive\_counter@{alive\_counter}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{alive\_counter}{alive\_counter}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_ae1ae44c63049f5edeb612df180025a00} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+alive\+\_\+counter}
+
+\Hypertarget{struct_supervisor_snapshot__t_ac49af5f58d34733270f9bba724800c73}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!command@{command}}
+\index{command@{command}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{command}{command}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_ac49af5f58d34733270f9bba724800c73} 
+Supervisor\+Command\+\_\+t Supervisor\+Snapshot\+\_\+t::\+command}
+
+\Hypertarget{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!critical\_mask@{critical\_mask}}
+\index{critical\_mask@{critical\_mask}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{critical\_mask}{critical\_mask}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+critical\+\_\+mask}
+
+\Hypertarget{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!degraded\_mask@{degraded\_mask}}
+\index{degraded\_mask@{degraded\_mask}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{degraded\_mask}{degraded\_mask}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+degraded\+\_\+mask}
+
+\Hypertarget{struct_supervisor_snapshot__t_aaa03f8ad7d4072be447713d9b1e59d87}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!isMotionConsistent@{isMotionConsistent}}
+\index{isMotionConsistent@{isMotionConsistent}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{isMotionConsistent}{isMotionConsistent}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_aaa03f8ad7d4072be447713d9b1e59d87} 
+bool Supervisor\+Snapshot\+\_\+t::\+is\+Motion\+Consistent}
+
+\Hypertarget{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!task\_last\_run\_ms@{task\_last\_run\_ms}}
+\index{task\_last\_run\_ms@{task\_last\_run\_ms}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{task\_last\_run\_ms}{task\_last\_run\_ms}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+task\+\_\+last\+\_\+run\+\_\+ms}
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+snapshot/\+\doxymbox{\hyperlink{supervisor__snapshot_8h}{supervisor\+\_\+snapshot.\+h}}\end{DoxyCompactItemize}

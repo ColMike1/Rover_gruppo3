@@ -1,0 +1,5 @@
+<map id="CommUnpackStatusToStr" name="CommUnpackStatusToStr">
+<area shape="rect" id="Node000001" title="Converte l&#39;enum CommUnpackStatus_t in stringa." alt="" coords="199,5,373,32"/>
+<area shape="rect" id="Node000002" href="$log__format_8c.html#a93d251087d299932e872bf900a10cfb7" title="Crea un report testuale completo dello stato attuale del sistema." alt="" coords="5,5,151,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,19,151,21,151,16,185,19"/>
+</map>

@@ -1,0 +1,123 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+unpack.c File Reference}
+\hypertarget{comm__unpack_8c}{}\label{comm__unpack_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_unpack.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_unpack.c}}
+
+
+Funzioni per l\textquotesingle{}unpackaging e la validazione dei messaggi ricevuti (Deserializzazione).  
+
+
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+unpack.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+crc.\+h"{}}\newline
+Include dependency graph for comm\+\_\+unpack.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__unpack_8c_ab8f5e10b9f780e53f9583724ac965a0c}{HEADER\+\_\+\+LEN}}~((uint16\+\_\+t)sizeof(Comm\+Frame\+Header\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza dell\textquotesingle{}header comune. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{comm__unpack_8c_a212a14606599edd2c69298c5cffa64a0}{PAYLOAD\+\_\+\+LEN}}~((uint16\+\_\+t)sizeof(Comm\+Payload\+B2\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza specifica del payload B2. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{comm__unpack_8c_abdd3907fd23a4d3d6f52262c47359ddc}{CRC\+\_\+\+LEN}}~((uint16\+\_\+t)sizeof(uint16\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza del campo CRC16. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{comm__unpack_8c_a7d356b7d5a77c1e2fb7e8154f65ebfcf}{FRAME\+\_\+\+LEN}}~((uint16\+\_\+t)sizeof(Comm\+Frame\+B2\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza totale attesa per il frame B2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Comm\+Unpack\+Status\+\_\+t \doxymbox{\hyperlink{comm__unpack_8c_ac7d99e4b67965f12145921b28a60334b}{Comm\+Unpack\+\_\+\+B1\+From\+B2}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t len, Comm\+Frame\+Header\+\_\+t \texorpdfstring{$\ast$}{*}header, Comm\+Payload\+B2\+\_\+t \texorpdfstring{$\ast$}{*}payload)
+\begin{DoxyCompactList}\small\item\em Valida il pacchetto ricevuto tramite CRC ed estrae header e payload. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Funzioni per l\textquotesingle{}unpackaging e la validazione dei messaggi ricevuti (Deserializzazione). 
+
+
+
+\label{doc-define-members}
+\Hypertarget{comm__unpack_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__unpack_8c_abdd3907fd23a4d3d6f52262c47359ddc}\index{comm\_unpack.c@{comm\_unpack.c}!CRC\_LEN@{CRC\_LEN}}
+\index{CRC\_LEN@{CRC\_LEN}!comm\_unpack.c@{comm\_unpack.c}}
+\doxysubsubsection{\texorpdfstring{CRC\_LEN}{CRC\_LEN}}
+{\footnotesize\ttfamily \label{comm__unpack_8c_abdd3907fd23a4d3d6f52262c47359ddc} 
+\+\#define CRC\+\_\+\+LEN~((uint16\+\_\+t)sizeof(uint16\+\_\+t))}
+
+
+
+Lunghezza del campo CRC16. 
+
+\Hypertarget{comm__unpack_8c_a7d356b7d5a77c1e2fb7e8154f65ebfcf}\index{comm\_unpack.c@{comm\_unpack.c}!FRAME\_LEN@{FRAME\_LEN}}
+\index{FRAME\_LEN@{FRAME\_LEN}!comm\_unpack.c@{comm\_unpack.c}}
+\doxysubsubsection{\texorpdfstring{FRAME\_LEN}{FRAME\_LEN}}
+{\footnotesize\ttfamily \label{comm__unpack_8c_a7d356b7d5a77c1e2fb7e8154f65ebfcf} 
+\+\#define FRAME\+\_\+\+LEN~((uint16\+\_\+t)sizeof(Comm\+Frame\+B2\+\_\+t))}
+
+
+
+Lunghezza totale attesa per il frame B2. 
+
+\Hypertarget{comm__unpack_8c_ab8f5e10b9f780e53f9583724ac965a0c}\index{comm\_unpack.c@{comm\_unpack.c}!HEADER\_LEN@{HEADER\_LEN}}
+\index{HEADER\_LEN@{HEADER\_LEN}!comm\_unpack.c@{comm\_unpack.c}}
+\doxysubsubsection{\texorpdfstring{HEADER\_LEN}{HEADER\_LEN}}
+{\footnotesize\ttfamily \label{comm__unpack_8c_ab8f5e10b9f780e53f9583724ac965a0c} 
+\+\#define HEADER\+\_\+\+LEN~((uint16\+\_\+t)sizeof(Comm\+Frame\+Header\+\_\+t))}
+
+
+
+Lunghezza dell\textquotesingle{}header comune. 
+
+\Hypertarget{comm__unpack_8c_a212a14606599edd2c69298c5cffa64a0}\index{comm\_unpack.c@{comm\_unpack.c}!PAYLOAD\_LEN@{PAYLOAD\_LEN}}
+\index{PAYLOAD\_LEN@{PAYLOAD\_LEN}!comm\_unpack.c@{comm\_unpack.c}}
+\doxysubsubsection{\texorpdfstring{PAYLOAD\_LEN}{PAYLOAD\_LEN}}
+{\footnotesize\ttfamily \label{comm__unpack_8c_a212a14606599edd2c69298c5cffa64a0} 
+\+\#define PAYLOAD\+\_\+\+LEN~((uint16\+\_\+t)sizeof(Comm\+Payload\+B2\+\_\+t))}
+
+
+
+Lunghezza specifica del payload B2. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__unpack_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__unpack_8c_ac7d99e4b67965f12145921b28a60334b}\index{comm\_unpack.c@{comm\_unpack.c}!CommUnpack\_B1FromB2@{CommUnpack\_B1FromB2}}
+\index{CommUnpack\_B1FromB2@{CommUnpack\_B1FromB2}!comm\_unpack.c@{comm\_unpack.c}}
+\doxysubsubsection{\texorpdfstring{CommUnpack\_B1FromB2()}{CommUnpack\_B1FromB2()}}
+{\footnotesize\ttfamily \label{comm__unpack_8c_ac7d99e4b67965f12145921b28a60334b} 
+Comm\+Unpack\+Status\+\_\+t Comm\+Unpack\+\_\+\+B1\+From\+B2 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{len}{, }\item[{Comm\+Frame\+Header\+\_\+t \texorpdfstring{$\ast$}{*}}]{header}{, }\item[{Comm\+Payload\+B2\+\_\+t \texorpdfstring{$\ast$}{*}}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Valida il pacchetto ricevuto tramite CRC ed estrae header e payload. 
+
+Decodifica un frame ricevuto da Board2 destinato a Board1.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em buf} & Buffer contenente il pacchetto grezzo ricevuto. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em len} & Lunghezza del buffer fornito. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em header} & Puntatore alla struttura header da popolare. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em payload} & Puntatore alla struttura payload B2 da popolare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Comm\+Unpack\+Status\+\_\+t Stato dell\textquotesingle{}operazione (OK, errore CRC, errore lunghezza, etc). 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8c_ac7d99e4b67965f12145921b28a60334b_icgraph}
+\end{center}
+\end{figure}

@@ -1,8 +1,6 @@
 /**
  * @file comm_unpack.c
  * @brief Funzioni per l'unpackaging e la validazione dei messaggi ricevuti (Deserializzazione).
- * @date Jan 11, 2026
- * @author Sterm
  */
 
 #include <string.h>

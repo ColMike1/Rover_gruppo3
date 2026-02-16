@@ -1,0 +1,20 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/sonar/sonar.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/sonar/sonar.h">
+<area shape="rect" id="Node000001" title="Header aggregatore del modulo sonar." alt="" coords="115,5,319,80"/>
+<area shape="rect" id="Node000002" href="$sonar__hw_8h.html" title="API hardware sonar e strutture di supporto." alt="" coords="79,128,203,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,83,163,117,158,114,190,78"/>
+<area shape="rect" id="Node000009" href="$sonar__task_8h.html" title="API del task sonar periodico." alt="" coords="227,128,359,155"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="246,78,276,115,271,116,245,83"/>
+<area shape="rect" id="Node000003" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="75,277,135,304"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="78,157,43,175,26,188,13,204,9,214,9,222,19,240,38,256,63,270,59,273,35,260,15,244,3,224,3,213,8,201,22,184,40,171,81,153"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="22,203,87,229"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="125,157,83,194,79,191,127,153"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="111,203,171,229"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="142,153,144,188,138,186,140,158"/>
+<area shape="rect" id="Node000007" href="$usart_8h.html" title="This file contains all the function prototypes for the usart.c file." alt="" coords="196,203,257,229"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="156,153,203,192,198,193,156,158"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="281,203,377,229"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="174,153,284,195,280,198,174,158"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="45,352,165,379"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="107,303,108,337,103,335,103,307"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="203,232,141,271,138,267,207,228"/>
+</map>

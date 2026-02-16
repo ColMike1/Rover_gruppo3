@@ -1,0 +1,91 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+\+Board\+\_\+\+Health/\+board\+\_\+health\+\_\+task.c File Reference}
+\hypertarget{board__health__task_8c}{}\label{board__health__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/Board\_Health/board\_health\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/Board\_Health/board\_health\_task.c}}
+
+
+Implementazione del task periodico per il monitoraggio dei parametri vitali della board.  
+
+
+{\ttfamily \+\#include "{}board\+\_\+health/\+board\+\_\+health.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+board\+\_\+health\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+Include dependency graph for board\+\_\+health\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{board__health__task_8c_a214ef105dc57cc7f220590660e4d6d69}{Board\+Health\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task di Board Health. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__task_8c_a398e7c9f02fe63bb5bd8c939c14bbb0a}{Board\+Health\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Step periodico per la gestione dello stato della board. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione del task periodico per il monitoraggio dei parametri vitali della board. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{board__health__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board__health__task_8c_a214ef105dc57cc7f220590660e4d6d69}\index{board\_health\_task.c@{board\_health\_task.c}!BoardHealth\_TaskInit@{BoardHealth\_TaskInit}}
+\index{BoardHealth\_TaskInit@{BoardHealth\_TaskInit}!board\_health\_task.c@{board\_health\_task.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_TaskInit()}{BoardHealth\_TaskInit()}}
+{\footnotesize\ttfamily \label{board__health__task_8c_a214ef105dc57cc7f220590660e4d6d69} 
+void Board\+Health\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task di Board Health. 
+
+Inizializza il task o le risorse per il monitoraggio board health.
+
+Chiama l\textquotesingle{}inizializzazione dell\textquotesingle{}hardware ADC. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8c_a214ef105dc57cc7f220590660e4d6d69_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8c_a214ef105dc57cc7f220590660e4d6d69_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__task_8c_a398e7c9f02fe63bb5bd8c939c14bbb0a}\index{board\_health\_task.c@{board\_health\_task.c}!BoardHealth\_TaskStep@{BoardHealth\_TaskStep}}
+\index{BoardHealth\_TaskStep@{BoardHealth\_TaskStep}!board\_health\_task.c@{board\_health\_task.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_TaskStep()}{BoardHealth\_TaskStep()}}
+{\footnotesize\ttfamily \label{board__health__task_8c_a398e7c9f02fe63bb5bd8c939c14bbb0a} 
+void Board\+Health\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Step periodico per la gestione dello stato della board. 
+
+Esegue ciclicamente il monitoraggio dei parametri vitali.
+
+Esegue la lettura di temperatura e batteria, aggiorna i timestamp di validità e scrive lo snapshot globale del sistema. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8c_a398e7c9f02fe63bb5bd8c939c14bbb0a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8c_a398e7c9f02fe63bb5bd8c939c14bbb0a_icgraph}
+\end{center}
+\end{figure}

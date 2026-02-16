@@ -1,0 +1,144 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+log/\+log\+\_\+format.c File Reference}
+\hypertarget{log__format_8c}{}\label{log__format_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/log/log\_format.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/log/log\_format.c}}
+
+
+Utility per la formattazione delle stringhe di log.  
+
+
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include "{}log/\+log\+\_\+format.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+board1\+\_\+faults.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+board2\+\_\+faults.\+h"{}}\newline
+Include dependency graph for log\+\_\+format.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{log__format_8c_a791488077acf5654b1ed4f984251cc48}{Comm\+Unpack\+Status\+To\+Str}} (Comm\+Unpack\+Status\+\_\+t s)
+\begin{DoxyCompactList}\small\item\em Converte l\textquotesingle{}enum Comm\+Unpack\+Status\+\_\+t in stringa. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{log__format_8c_a707569490043d10f2c0af1663b75500e}{B1\+Fault\+Flags\+To\+Str}} (uint32\+\_\+t flags, char \texorpdfstring{$\ast$}{*}buf, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Decodifica i flag di errore della Board 1 in una stringa concatenata. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{log__format_8c_a8351e774c8282a0be527f3db067e8a8b}{B2\+Fault\+Flags\+To\+Str}} (uint32\+\_\+t flags, char \texorpdfstring{$\ast$}{*}buf, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Decodifica i flag di errore della Board 2 in una stringa concatenata. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{log__format_8c_a93d251087d299932e872bf900a10cfb7}{Log\+\_\+\+Format\+Snapshot}} (char \texorpdfstring{$\ast$}{*}buf, unsigned int buf\+\_\+len, const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}enc, const \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}bh, const \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}rx)
+\begin{DoxyCompactList}\small\item\em Crea un report testuale completo dello stato attuale del sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility per la formattazione delle stringhe di log. 
+
+Converte flag binari e stati di sistema in stringhe leggibili per il debug tramite UART. 
+
+\label{doc-func-members}
+\Hypertarget{log__format_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{log__format_8c_a707569490043d10f2c0af1663b75500e}\index{log\_format.c@{log\_format.c}!B1FaultFlagsToStr@{B1FaultFlagsToStr}}
+\index{B1FaultFlagsToStr@{B1FaultFlagsToStr}!log\_format.c@{log\_format.c}}
+\doxysubsubsection{\texorpdfstring{B1FaultFlagsToStr()}{B1FaultFlagsToStr()}}
+{\footnotesize\ttfamily \label{log__format_8c_a707569490043d10f2c0af1663b75500e} 
+void B1\+Fault\+Flags\+To\+Str (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{flags}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Decodifica i flag di errore della Board 1 in una stringa concatenata. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & Maschera dei bit di errore. \\
+\hline
+{\em buf} & Buffer di destinazione. \\
+\hline
+{\em len} & Lunghezza del buffer. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{log__format_8c_a707569490043d10f2c0af1663b75500e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{log__format_8c_a8351e774c8282a0be527f3db067e8a8b}\index{log\_format.c@{log\_format.c}!B2FaultFlagsToStr@{B2FaultFlagsToStr}}
+\index{B2FaultFlagsToStr@{B2FaultFlagsToStr}!log\_format.c@{log\_format.c}}
+\doxysubsubsection{\texorpdfstring{B2FaultFlagsToStr()}{B2FaultFlagsToStr()}}
+{\footnotesize\ttfamily \label{log__format_8c_a8351e774c8282a0be527f3db067e8a8b} 
+void B2\+Fault\+Flags\+To\+Str (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{flags}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Decodifica i flag di errore della Board 2 in una stringa concatenata. 
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{log__format_8c_a8351e774c8282a0be527f3db067e8a8b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{log__format_8c_a791488077acf5654b1ed4f984251cc48}\index{log\_format.c@{log\_format.c}!CommUnpackStatusToStr@{CommUnpackStatusToStr}}
+\index{CommUnpackStatusToStr@{CommUnpackStatusToStr}!log\_format.c@{log\_format.c}}
+\doxysubsubsection{\texorpdfstring{CommUnpackStatusToStr()}{CommUnpackStatusToStr()}}
+{\footnotesize\ttfamily \label{log__format_8c_a791488077acf5654b1ed4f984251cc48} 
+const char \texorpdfstring{$\ast$}{*} Comm\+Unpack\+Status\+To\+Str (\begin{DoxyParamCaption}\item[{Comm\+Unpack\+Status\+\_\+t}]{s}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converte l\textquotesingle{}enum Comm\+Unpack\+Status\+\_\+t in stringa. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Stato dell\textquotesingle{}unpacking. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+const char\texorpdfstring{$\ast$}{*} Stringa descrittiva breve. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8c_a791488077acf5654b1ed4f984251cc48_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{log__format_8c_a93d251087d299932e872bf900a10cfb7}\index{log\_format.c@{log\_format.c}!Log\_FormatSnapshot@{Log\_FormatSnapshot}}
+\index{Log\_FormatSnapshot@{Log\_FormatSnapshot}!log\_format.c@{log\_format.c}}
+\doxysubsubsection{\texorpdfstring{Log\_FormatSnapshot()}{Log\_FormatSnapshot()}}
+{\footnotesize\ttfamily \label{log__format_8c_a93d251087d299932e872bf900a10cfb7} 
+void Log\+\_\+\+Format\+Snapshot (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{unsigned int}]{buf\+\_\+len}{, }\item[{const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{enc}{, }\item[{const \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{bh}{, }\item[{const \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{rx}{}\end{DoxyParamCaption})}
+
+
+
+Crea un report testuale completo dello stato attuale del sistema. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer per la stringa finale. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em buf\+\_\+len} & Lunghezza buffer. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em enc} & Snapshot motori/\+encoder. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em bh} & Snapshot salute scheda (temp/\+batt). \\
+\hline
+\doxymbox{\texttt{in}}  & {\em rx} & Snapshot ricezione dati. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8c_a93d251087d299932e872bf900a10cfb7_cgraph}
+\end{center}
+\end{figure}

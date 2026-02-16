@@ -1,0 +1,19 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/rx_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/rx_snapshot.h">
+<area shape="rect" id="Node000001" title="Definizione dello snapshot RX e API thread&#45;safe." alt="" coords="689,5,893,80"/>
+<area shape="rect" id="Node000002" href="$log__format_8h.html" title="API di formattazione degli snapshot diagnostici." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="672,72,450,131,438,134,436,129,449,125,677,70"/>
+<area shape="rect" id="Node000005" href="$snapshot_8h.html" title="Header aggregatore degli snapshot Board 2." alt="" coords="461,128,665,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="710,87,634,130,632,125,705,89"/>
+<area shape="rect" id="Node000007" href="$comm__rx__task_8c.html" title="Task RX: acquisizione byte UART, riallineamento frame e unpack." alt="" coords="689,128,893,203"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="793,94,793,129,789,126,789,98"/>
+<area shape="rect" id="Node000008" href="$rx__snapshot_8c.html" title="Storage thread&#45;safe dello snapshot RX." alt="" coords="917,128,1121,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="875,85,952,128,947,127,874,90"/>
+<area shape="rect" id="Node000009" href="$supervisor__task_8c.html" title="Task supervisore board 2: controllo stato rover e gestione comando/attuazione." alt="" coords="1144,128,1360,203"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="908,69,1133,125,1146,131,1141,131,1132,131,908,74"/>
+<area shape="rect" id="Node000003" href="$log__format_8c.html" title="Formattazione testuale degli snapshot di diagnostica." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,209,178,252,175,248,249,212"/>
+<area shape="rect" id="Node000004" href="$log__task_8c.html" title="Task di logging periodico su UART debug." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="337,217,337,252,333,249,333,221"/>
+<area shape="rect" id="Node000006" href="$app__freertos_8c.html" title=" " alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="565,217,565,252,561,249,561,221"/>
+</map>

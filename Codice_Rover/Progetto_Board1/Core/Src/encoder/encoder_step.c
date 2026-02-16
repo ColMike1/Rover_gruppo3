@@ -3,8 +3,6 @@
  * @brief Task di elaborazione dati encoder e diagnostica feedback motori.
  * @details Converte i ticks in RPM, rileva situazioni di stallo (mancanza di feedback)
  * e applica logiche di fallback se alcuni sensori sono dichiarati guasti dal supervisore.
- * @date Jan 8, 2026
- * @author Sterm
  */
 
 #include "encoder/encoder.h"

@@ -1,0 +1,17 @@
+var searchData=
+[
+  ['imu_5fi2c_5fgetaccel_0',['IMU_I2C_GetAccel',['../imu__i2c_8h.html#ac50dd1dc63db339bdd8605a1597f69e7',1,'IMU_I2C_GetAccel(float *ax_g, float *ay_g, float *az_g):&#160;imu_i2c.c'],['../imu__i2c_8c.html#ac50dd1dc63db339bdd8605a1597f69e7',1,'IMU_I2C_GetAccel(float *ax_g, float *ay_g, float *az_g):&#160;imu_i2c.c']]],
+  ['imu_5fi2c_5fgetgyro_1',['IMU_I2C_GetGyro',['../imu__i2c_8h.html#a8b2cd060aa99805b55848d1d030b27df',1,'IMU_I2C_GetGyro(float *gx_dps, float *gy_dps, float *gz_dps):&#160;imu_i2c.c'],['../imu__i2c_8c.html#a8b2cd060aa99805b55848d1d030b27df',1,'IMU_I2C_GetGyro(float *gx_dps, float *gy_dps, float *gz_dps):&#160;imu_i2c.c']]],
+  ['imu_5fi2c_5fgettemperature_2',['IMU_I2C_GetTemperature',['../imu__i2c_8h.html#a8bc9cd8fc41b618d26be203c09096b46',1,'IMU_I2C_GetTemperature(void):&#160;imu_i2c.c'],['../imu__i2c_8c.html#a8bc9cd8fc41b618d26be203c09096b46',1,'IMU_I2C_GetTemperature(void):&#160;imu_i2c.c']]],
+  ['imu_5fi2c_5fgetyaw_3',['IMU_I2C_GetYaw',['../imu__i2c_8h.html#aa51b751a7d1cfc299c953be5cd022f48',1,'IMU_I2C_GetYaw(void):&#160;imu_i2c.c'],['../imu__i2c_8c.html#aa51b751a7d1cfc299c953be5cd022f48',1,'IMU_I2C_GetYaw(void):&#160;imu_i2c.c']]],
+  ['imu_5fi2c_5finit_4',['IMU_I2C_Init',['../imu__i2c_8h.html#aae92541f8d3fe17d6cdec8f6a8a92659',1,'IMU_I2C_Init(void):&#160;imu_i2c.c'],['../imu__i2c_8c.html#aae92541f8d3fe17d6cdec8f6a8a92659',1,'IMU_I2C_Init(void):&#160;imu_i2c.c']]],
+  ['imu_5fi2c_5fparse_5',['IMU_I2C_Parse',['../imu__i2c_8c.html#ac9443f549c13d4d99a7f63290bb66a74',1,'imu_i2c.c']]],
+  ['imu_5fi2c_5freadblocking_6',['IMU_I2C_ReadBlocking',['../imu__i2c_8h.html#a28f24e98b47ffa0c54ddf1d2032e4d1d',1,'IMU_I2C_ReadBlocking(void):&#160;imu_i2c.c'],['../imu__i2c_8c.html#a28f24e98b47ffa0c54ddf1d2032e4d1d',1,'IMU_I2C_ReadBlocking(void):&#160;imu_i2c.c']]],
+  ['imu_5fi2c_5fwritereg_7',['IMU_I2C_WriteReg',['../imu__i2c_8c.html#a29534446f80f01bca1c459b26aae504f',1,'imu_i2c.c']]],
+  ['imu_5ftaskinit_8',['IMU_TaskInit',['../imu__task_8h.html#ae19f72c003f81fd3ffbf147a09d6c486',1,'IMU_TaskInit(void):&#160;imu_task.c'],['../imu__task_8c.html#ae19f72c003f81fd3ffbf147a09d6c486',1,'IMU_TaskInit(void):&#160;imu_task.c']]],
+  ['imu_5ftaskstep_9',['IMU_TaskStep',['../imu__task_8h.html#aba43d99a94c7298c850ed66a454eb6d1',1,'IMU_TaskStep(void):&#160;imu_task.c'],['../imu__task_8c.html#aba43d99a94c7298c850ed66a454eb6d1',1,'IMU_TaskStep(void):&#160;imu_task.c']]],
+  ['imusnapshot_5fmutexinit_10',['IMUSnapshot_MutexInit',['../imu__snapshot_8h.html#a4a42b5c7fb3b0fed72a5ae2afc375b64',1,'IMUSnapshot_MutexInit(osMutexId_t mutex_handle):&#160;imu_snapshot.c'],['../imu__snapshot_8c.html#a4a42b5c7fb3b0fed72a5ae2afc375b64',1,'IMUSnapshot_MutexInit(osMutexId_t mutex_handle):&#160;imu_snapshot.c']]],
+  ['imusnapshot_5fread_11',['IMUSnapshot_Read',['../imu__snapshot_8h.html#af7492445b3f85cf0a78742d03f0a36f8',1,'IMUSnapshot_Read(IMUSnapshot_t *snap):&#160;imu_snapshot.c'],['../imu__snapshot_8c.html#ada36856513ef28b5490a6e76a10b2d20',1,'IMUSnapshot_Read(IMUSnapshot_t *dst):&#160;imu_snapshot.c']]],
+  ['imusnapshot_5fwrite_12',['IMUSnapshot_Write',['../imu__snapshot_8h.html#ac3de1c40604ab0a2e257704ed61cfbf4',1,'IMUSnapshot_Write(const IMUSnapshot_t *snap):&#160;imu_snapshot.c'],['../imu__snapshot_8c.html#a4903ec171e28c9c2dcb5b02a69e179bb',1,'IMUSnapshot_Write(const IMUSnapshot_t *src):&#160;imu_snapshot.c']]],
+  ['initialise_5fmonitor_5fhandles_13',['initialise_monitor_handles',['../syscalls_8c.html#a25c7f100d498300fff65568c2fcfe639',1,'syscalls.c']]]
+];

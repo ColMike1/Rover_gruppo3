@@ -1,0 +1,7 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/led/led_task.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/led/led_task.h">
+<area shape="rect" id="Node000001" title="Gestione del task per la segnalazione visiva tramite LED." alt="" coords="119,5,322,80"/>
+<area shape="rect" id="Node000002" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="5,128,209,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,90,143,130,140,126,173,93"/>
+<area shape="rect" id="Node000003" href="$led__task_8c.html" title="Gestione della segnalazione visiva tramite LED di stato." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="267,89,303,128,298,127,265,94"/>
+</map>

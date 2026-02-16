@@ -1,0 +1,101 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/main.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/main.h">
+<area shape="rect" id="Node000001" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="2065,5,2268,80"/>
+<area shape="rect" id="Node000002" href="$dma_8h.html" title="This file contains all the function prototypes for the dma.c file." alt="" coords="725,128,928,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2046,43,1840,48,1563,60,1410,70,1253,85,1096,105,942,131,930,133,928,128,941,125,1095,100,1253,80,1410,65,1563,54,1840,43,2052,42"/>
+<area shape="rect" id="Node000004" href="$main_8c.html" title=": Main program body" alt="" coords="897,251,1100,325"/>
+<area shape="poly" id="edge57_Node000001_Node000004" title=" " alt="" coords="2047,47,1914,56,1748,70,1568,94,1478,111,1390,131,1303,157,1217,188,1072,253,1070,248,1215,184,1301,152,1389,125,1477,106,1567,89,1747,65,1914,51,2052,46"/>
+<area shape="rect" id="Node000005" href="$gpio_8h.html" title="This file contains all the function prototypes for the gpio.c file." alt="" coords="953,128,1156,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="2047,51,1684,80,1458,102,1232,131,1157,144,1156,139,1232,125,1458,97,1684,74,2052,50"/>
+<area shape="rect" id="Node000007" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="1401,128,1604,203"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="2047,66,1605,148,1604,143,2052,64"/>
+<area shape="rect" id="Node000019" href="$app__freertos_8c.html" title=" " alt="" coords="2196,651,2399,725"/>
+<area shape="poly" id="edge56_Node000001_Node000019" title=" " alt="" coords="2284,59,2451,92,2542,115,2630,141,2709,171,2774,205,2798,224,2817,244,2829,265,2833,286,2833,420,2830,455,2821,486,2806,515,2787,541,2764,564,2737,584,2674,618,2605,644,2533,663,2463,675,2400,683,2399,678,2462,670,2532,658,2603,639,2672,614,2734,580,2760,560,2783,537,2802,512,2816,484,2825,454,2828,420,2828,287,2824,266,2813,247,2795,228,2771,210,2707,176,2628,146,2540,120,2449,98,2284,65"/>
+<area shape="rect" id="Node000031" href="$sonar__hw_8h.html" title="API hardware sonar e strutture di supporto." alt="" coords="2134,251,2338,325"/>
+<area shape="poly" id="edge42_Node000001_Node000031" title=" " alt="" coords="2197,91,2213,127,2229,192,2236,252,2231,249,2223,193,2208,129,2195,96"/>
+<area shape="rect" id="Node000035" href="$tim_8h.html" title="This file contains all the function prototypes for the tim.c file." alt="" coords="2284,128,2487,203"/>
+<area shape="poly" id="edge46_Node000001_Node000035" title=" " alt="" coords="2247,85,2321,128,2316,127,2246,90"/>
+<area shape="rect" id="Node000037" href="$usart_8h.html" title="This file contains all the function prototypes for the usart.c file." alt="" coords="1996,128,2199,203"/>
+<area shape="poly" id="edge51_Node000001_Node000037" title=" " alt="" coords="2140,92,2120,130,2117,125,2136,95"/>
+<area shape="rect" id="Node000039" href="$stm32g4xx__hal__msp_8c.html" title="This file provides code for the MSP Initialization and de&#45;Initialization codes." alt="" coords="2868,128,3071,203"/>
+<area shape="poly" id="edge58_Node000001_Node000039" title=" " alt="" coords="2284,50,2545,76,2698,98,2850,125,2870,132,2865,132,2849,131,2697,103,2544,82,2284,55"/>
+<area shape="rect" id="Node000040" href="$stm32g4xx__it_8c.html" title="Interrupt Service Routines." alt="" coords="3096,128,3299,203"/>
+<area shape="poly" id="edge59_Node000001_Node000040" title=" " alt="" coords="2283,44,2443,51,2643,66,2863,90,3083,125,3098,131,3092,131,3082,131,2863,95,2642,71,2442,57,2284,49"/>
+<area shape="rect" id="Node000003" href="$dma_8c.html" title="This file provides code for the configuration of all the requested memory to memory DMA transfers." alt="" coords="441,251,644,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="724,211,631,252,628,248,728,208"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="892,209,949,250,944,250,891,215"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="1033,215,1018,252,1014,248,1029,219"/>
+<area shape="rect" id="Node000006" href="$gpio_8c.html" title="This file provides code for the configuration of all used GPIO pins." alt="" coords="669,251,872,325"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="952,210,859,252,856,248,956,208"/>
+<area shape="poly" id="edge41_Node000007_Node000004" title=" " alt="" coords="1383,190,1255,219,1114,253,1101,257,1100,252,1113,248,1254,214,1388,188"/>
+<area shape="rect" id="Node000008" href="$ble__controller__i2c_8h.html" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="1125,251,1376,325"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="1414,209,1329,252,1327,248,1409,211"/>
+<area shape="rect" id="Node000024" href="$imu__i2c_8h.html" title="API I2C per inizializzazione e lettura sensore MPU6050." alt="" coords="1401,251,1604,325"/>
+<area shape="poly" id="edge27_Node000007_Node000024" title=" " alt="" coords="1504,216,1505,252,1500,249,1501,221"/>
+<area shape="rect" id="Node000030" href="$i2c_8c.html" title="This file provides code for the configuration of the I2C instances." alt="" coords="1629,251,1832,325"/>
+<area shape="poly" id="edge40_Node000007_Node000030" title=" " alt="" coords="1586,208,1664,250,1658,250,1585,213"/>
+<area shape="rect" id="Node000009" href="$ble__controller_8h.html" title="Header di aggregazione del modulo BLE controller." alt="" coords="528,381,755,456"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="1107,326,1013,343,937,350,862,358,769,376,742,383,740,378,767,371,861,353,936,344,1012,338,1112,325"/>
+<area shape="rect" id="Node000010" href="$ble__controller__snapshot_8h.html" title="Definizione dello snapshot BLE controller e API thread&#45;safe." alt="" coords="780,373,983,464"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="1129,332,985,384,983,379,1134,330"/>
+<area shape="rect" id="Node000020" href="$ble__controller__task_8c.html" title="Task di acquisizione e normalizzazione dati del controller BLE." alt="" coords="5,520,267,595"/>
+<area shape="poly" id="edge26_Node000008_Node000020" title=" " alt="" coords="1107,326,1019,339,942,344,809,342,745,342,678,346,604,356,517,376,426,406,338,445,260,485,196,522,193,517,257,481,336,440,424,401,515,371,603,351,678,340,745,337,809,337,941,338,1019,334,1112,325"/>
+<area shape="rect" id="Node000023" href="$ble__controller__i2c_8c.html" title="Implementazione accesso I2C al controller BLE." alt="" coords="1088,381,1341,456"/>
+<area shape="poly" id="edge25_Node000008_Node000023" title=" " alt="" coords="1238,338,1227,383,1223,379,1234,342"/>
+<area shape="rect" id="Node000011" href="$comm__pack_8h.html" title="API di serializzazione frame in uscita da board 2." alt="" coords="518,520,722,595"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="785,471,691,522,689,517,780,472"/>
+<area shape="rect" id="Node000014" href="$comm__tx__task_8c.html" title="Task TX: composizione e invio frame board2 &#45;&gt; board1." alt="" coords="746,651,950,725"/>
+<area shape="poly" id="edge21_Node000010_Node000014" title=" " alt="" coords="816,474,793,513,785,537,783,557,793,602,804,626,819,651,814,649,799,629,788,603,778,557,780,536,788,511,812,477"/>
+<area shape="rect" id="Node000015" href="$log__format_8h.html" title="API di formattazione degli snapshot diagnostici." alt="" coords="1137,520,1340,595"/>
+<area shape="poly" id="edge15_Node000010_Node000015" title=" " alt="" coords="998,462,1145,520,1140,519,997,467"/>
+<area shape="rect" id="Node000017" href="$log__task_8c.html" title="Task di logging periodico su UART debug." alt="" coords="1434,651,1638,725"/>
+<area shape="poly" id="edge22_Node000010_Node000017" title=" " alt="" coords="844,476,830,510,821,543,822,574,828,588,837,601,847,608,866,614,924,624,1087,637,1253,643,1352,648,1437,665,1431,665,1352,653,1252,648,1086,642,924,630,865,619,845,613,833,605,823,590,817,575,816,542,825,508,840,479"/>
+<area shape="rect" id="Node000018" href="$snapshot_8h.html" title="Header aggregatore degli snapshot Board 2." alt="" coords="1365,520,1568,595"/>
+<area shape="poly" id="edge18_Node000010_Node000018" title=" " alt="" coords="998,445,1077,461,1154,474,1215,482,1276,491,1353,509,1379,520,1374,519,1351,515,1275,497,1214,487,1153,480,1075,467,998,450"/>
+<area shape="poly" id="edge20_Node000010_Node000020" title=" " alt="" coords="762,465,691,481,628,489,520,493,413,496,351,502,279,515,248,522,246,517,278,509,350,497,413,491,520,488,628,483,691,476,767,463"/>
+<area shape="rect" id="Node000021" href="$ble__controller__snapshot_8c.html" title="Storage thread&#45;safe dello snapshot BLE controller." alt="" coords="290,512,494,603"/>
+<area shape="poly" id="edge23_Node000010_Node000021" title=" " alt="" coords="762,465,692,483,634,491,577,499,507,515,495,518,493,513,506,509,576,493,633,485,691,478,767,464"/>
+<area shape="rect" id="Node000022" href="$supervisor__task_8c.html" title="Task supervisore board 2: controllo stato rover e gestione comando/attuazione." alt="" coords="846,520,1063,595"/>
+<area shape="poly" id="edge24_Node000010_Node000022" title=" " alt="" coords="914,475,937,521,933,519,911,480"/>
+<area shape="rect" id="Node000012" href="$comm_8h.html" title="Header di aggregazione del modulo comunicazione." alt="" coords="290,651,494,725"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="545,602,458,652,456,648,539,603"/>
+<area shape="rect" id="Node000013" href="$comm__pack_8c.html" title="Serializzazione del frame TX board2 &#45;&gt; board1." alt="" coords="518,651,722,725"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="622,608,622,652,618,649,618,612"/>
+<area shape="poly" id="edge14_Node000011_Node000014" title=" " alt="" coords="699,600,785,650,780,650,697,605"/>
+<area shape="rect" id="Node000016" href="$log__format_8c.html" title="Formattazione testuale degli snapshot di diagnostica." alt="" coords="1137,651,1340,725"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="1241,608,1241,652,1237,648,1237,612"/>
+<area shape="poly" id="edge17_Node000015_Node000017" title=" " alt="" coords="1338,599,1454,650,1448,650,1337,604"/>
+<area shape="poly" id="edge19_Node000018_Node000019" title=" " alt="" coords="1584,589,1631,600,1785,627,1939,648,2198,678,2193,678,1938,653,1784,632,1630,605,1583,595"/>
+<area shape="rect" id="Node000025" href="$imu_8h.html" title="Header di aggregazione del modulo IMU." alt="" coords="1845,381,2048,456"/>
+<area shape="poly" id="edge28_Node000024_Node000025" title=" " alt="" coords="1619,323,1809,371,1847,384,1842,384,1807,376,1619,328"/>
+<area shape="rect" id="Node000027" href="$imu__snapshot_8h.html" title="Definizione dello snapshot IMU e API thread&#45;safe." alt="" coords="1365,381,1568,456"/>
+<area shape="poly" id="edge30_Node000024_Node000027" title=" " alt="" coords="1490,338,1479,383,1475,379,1486,342"/>
+<area shape="rect" id="Node000029" href="$imu__i2c_8c.html" title="Driver I2C per acquisizione dati da MPU6050." alt="" coords="1593,381,1796,456"/>
+<area shape="poly" id="edge39_Node000024_Node000029" title=" " alt="" coords="1570,331,1643,381,1637,381,1569,337"/>
+<area shape="rect" id="Node000026" href="$imu__task_8c.html" title="Task di acquisizione IMU e pubblicazione snapshot." alt="" coords="1870,520,2074,595"/>
+<area shape="poly" id="edge29_Node000025_Node000026" title=" " alt="" coords="1958,469,1967,521,1963,518,1955,473"/>
+<area shape="poly" id="edge31_Node000027_Node000011" title=" " alt="" coords="1368,460,1354,467,1276,483,1210,492,1095,498,981,500,914,505,835,515,723,535,722,530,834,509,913,500,981,495,1095,493,1209,486,1275,477,1353,461,1363,462"/>
+<area shape="poly" id="edge35_Node000027_Node000014" title=" " alt="" coords="1364,461,1354,467,1319,475,1288,478,1233,479,1208,480,1183,485,1156,496,1127,514,1109,535,1102,557,1095,581,1077,605,1048,626,1016,643,951,668,950,663,1014,638,1045,621,1073,601,1090,578,1097,556,1104,532,1124,510,1154,491,1181,480,1208,475,1233,473,1287,473,1318,469,1353,461,1359,462"/>
+<area shape="poly" id="edge32_Node000027_Node000015" title=" " alt="" coords="1395,463,1301,522,1299,517,1390,465"/>
+<area shape="poly" id="edge36_Node000027_Node000017" title=" " alt="" coords="1543,463,1566,485,1582,511,1591,547,1588,585,1576,621,1561,652,1558,648,1571,619,1582,584,1586,548,1578,513,1562,489,1542,468"/>
+<area shape="poly" id="edge33_Node000027_Node000018" title=" " alt="" coords="1468,470,1469,521,1465,518,1465,474"/>
+<area shape="poly" id="edge38_Node000027_Node000022" title=" " alt="" coords="1366,461,1354,467,1278,484,1218,491,1158,499,1082,515,1056,522,1055,517,1081,509,1157,493,1217,486,1277,478,1353,461,1360,462"/>
+<area shape="poly" id="edge34_Node000027_Node000026" title=" " alt="" coords="1572,458,1582,461,1659,478,1720,485,1781,493,1858,509,1884,520,1879,519,1857,515,1780,498,1719,491,1658,483,1581,467,1571,464"/>
+<area shape="rect" id="Node000028" href="$imu__snapshot_8c.html" title="Storage thread&#45;safe dello snapshot IMU." alt="" coords="1642,520,1846,595"/>
+<area shape="poly" id="edge37_Node000027_Node000028" title=" " alt="" coords="1555,461,1672,520,1667,519,1554,466"/>
+<area shape="rect" id="Node000032" href="$sonar_8h.html" title="Header aggregatore del modulo sonar." alt="" coords="2134,381,2338,456"/>
+<area shape="poly" id="edge43_Node000031_Node000032" title=" " alt="" coords="2238,339,2238,383,2234,379,2234,343"/>
+<area shape="rect" id="Node000033" href="$sonar__hw_8c.html" title="Gestione hardware sonar con cattura input tramite timer/DMA." alt="" coords="2590,381,2794,456"/>
+<area shape="poly" id="edge44_Node000031_Node000033" title=" " alt="" coords="2353,312,2463,338,2578,371,2602,381,2597,381,2577,376,2462,343,2353,317"/>
+<area shape="rect" id="Node000034" href="$sonar__task_8c.html" title="Task sonar e callback ISR di acquisizione capture." alt="" coords="2362,381,2566,456"/>
+<area shape="poly" id="edge45_Node000031_Node000034" title=" " alt="" coords="2315,330,2401,381,2396,380,2313,336"/>
+<area shape="poly" id="edge47_Node000035_Node000004" title=" " alt="" coords="2266,194,2211,205,2044,221,1902,226,1777,225,1661,220,1544,217,1420,219,1279,229,1114,253,1102,256,1100,251,1113,248,1278,224,1419,213,1544,212,1661,215,1777,219,1902,221,2044,216,2210,200,2271,193"/>
+<area shape="poly" id="edge48_Node000035_Node000033" title=" " alt="" coords="2502,180,2539,190,2575,205,2609,224,2639,249,2662,279,2677,314,2687,349,2692,382,2687,379,2682,350,2672,316,2657,282,2635,253,2606,229,2573,210,2537,195,2502,185"/>
+<area shape="poly" id="edge49_Node000035_Node000034" title=" " alt="" coords="2390,216,2399,270,2413,324,2441,382,2436,380,2408,326,2394,271,2387,220"/>
+<area shape="rect" id="Node000036" href="$tim_8c.html" title="This file provides code for the configuration of the TIM instances." alt="" coords="2422,251,2626,325"/>
+<area shape="poly" id="edge50_Node000035_Node000036" title=" " alt="" coords="2440,210,2484,251,2479,250,2438,216"/>
+<area shape="poly" id="edge54_Node000037_Node000004" title=" " alt="" coords="1978,176,1487,216,1250,237,1114,253,1102,256,1100,251,1113,248,1249,232,1487,211,1983,175"/>
+<area shape="poly" id="edge53_Node000037_Node000017" title=" " alt="" coords="2105,216,2115,313,2120,428,2118,484,2113,534,2103,575,2087,604,2057,627,2012,645,1957,659,1894,670,1760,683,1638,689,1638,683,1760,678,1893,665,1956,654,2010,640,2054,622,2083,601,2098,573,2108,533,2113,483,2115,428,2110,314,2102,220"/>
+<area shape="poly" id="edge52_Node000037_Node000031" title=" " alt="" coords="2152,210,2196,251,2191,250,2150,216"/>
+<area shape="rect" id="Node000038" href="$usart_8c.html" title="This file provides code for the configuration of the USART instances." alt="" coords="1857,251,2060,325"/>
+<area shape="poly" id="edge55_Node000037_Node000038" title=" " alt="" coords="2046,212,2002,253,2000,248,2041,214"/>
+</map>

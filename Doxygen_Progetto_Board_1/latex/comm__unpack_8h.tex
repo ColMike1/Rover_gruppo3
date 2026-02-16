@@ -1,0 +1,89 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+unpack.h File Reference}
+\hypertarget{comm__unpack_8h}{}\label{comm__unpack_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/comm/comm\_unpack.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/comm/comm\_unpack.h}}
+
+
+Funzioni per il parsing e l\textquotesingle{}estrazione dei dati dai frame ricevuti.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+status.\+h"{}}\newline
+Include dependency graph for comm\+\_\+unpack.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Comm\+Unpack\+Status\+\_\+t \doxymbox{\hyperlink{comm__unpack_8h_ac7d99e4b67965f12145921b28a60334b}{Comm\+Unpack\+\_\+\+B1\+From\+B2}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t len, Comm\+Frame\+Header\+\_\+t \texorpdfstring{$\ast$}{*}header, Comm\+Payload\+B2\+\_\+t \texorpdfstring{$\ast$}{*}payload)
+\begin{DoxyCompactList}\small\item\em Decodifica un frame ricevuto da Board2 destinato a Board1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Funzioni per il parsing e l\textquotesingle{}estrazione dei dati dai frame ricevuti. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__unpack_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__unpack_8h_ac7d99e4b67965f12145921b28a60334b}\index{comm\_unpack.h@{comm\_unpack.h}!CommUnpack\_B1FromB2@{CommUnpack\_B1FromB2}}
+\index{CommUnpack\_B1FromB2@{CommUnpack\_B1FromB2}!comm\_unpack.h@{comm\_unpack.h}}
+\doxysubsubsection{\texorpdfstring{CommUnpack\_B1FromB2()}{CommUnpack\_B1FromB2()}}
+{\footnotesize\ttfamily \label{comm__unpack_8h_ac7d99e4b67965f12145921b28a60334b} 
+Comm\+Unpack\+Status\+\_\+t Comm\+Unpack\+\_\+\+B1\+From\+B2 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{len}{, }\item[{Comm\+Frame\+Header\+\_\+t \texorpdfstring{$\ast$}{*}}]{header}{, }\item[{Comm\+Payload\+B2\+\_\+t \texorpdfstring{$\ast$}{*}}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Decodifica un frame ricevuto da Board2 destinato a Board1. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em buf} & Puntatore al buffer RX contenente il frame grezzo. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em len} & Lunghezza dei dati nel buffer. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em header} & Puntatore alla struttura dove estrarre l\textquotesingle{}header del frame. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em payload} & Puntatore alla struttura dove estrarre il carico utile (payload). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Comm\+Unpack\+Status\+\_\+t Stato della decodifica (es. OK, errore CRC, lunghezza errata).
+\end{DoxyReturn}
+Decodifica un frame ricevuto da Board2 destinato a Board1.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em buf} & Buffer contenente il pacchetto grezzo ricevuto. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em len} & Lunghezza del buffer fornito. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em header} & Puntatore alla struttura header da popolare. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em payload} & Puntatore alla struttura payload B2 da popolare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Comm\+Unpack\+Status\+\_\+t Stato dell\textquotesingle{}operazione (OK, errore CRC, errore lunghezza, etc). 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8h_ac7d99e4b67965f12145921b28a60334b_icgraph}
+\end{center}
+\end{figure}

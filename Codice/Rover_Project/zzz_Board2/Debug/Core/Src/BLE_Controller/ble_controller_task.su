@@ -1,2 +1,0 @@
-../Core/Src/BLE_Controller/ble_controller_task.c:23:14:NormalizeAxis	24	static
-../Core/Src/BLE_Controller/ble_controller_task.c:40:6:BleController_TaskStep	32	static

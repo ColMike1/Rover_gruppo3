@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['encoder_5fhasnofeedback_0',['Encoder_hasNoFeedback',['../encoder__step_8c.html#ae00e575d81dcde5b0d92b0d4cdee7255',1,'encoder_step.c']]],
+  ['encoder_5finit_1',['Encoder_Init',['../encoder__step_8h.html#a1c8318d644fc2e61cc1ef9cb0710feb6',1,'Encoder_Init(void):&#160;encoder_step.c'],['../encoder__step_8c.html#a1c8318d644fc2e61cc1ef9cb0710feb6',1,'Encoder_Init(void):&#160;encoder_step.c']]],
+  ['encoder_5freaddelta_2',['Encoder_ReadDelta',['../encoder__hw_8h.html#ae734ba8b992135e178c9347f230763cb',1,'Encoder_ReadDelta(uint8_t encoder_id, int *delta_ticks):&#160;encoder_hw.c'],['../encoder__hw_8c.html#ae734ba8b992135e178c9347f230763cb',1,'Encoder_ReadDelta(uint8_t encoder_id, int *delta_ticks):&#160;encoder_hw.c']]],
+  ['encoder_5fstep_3',['Encoder_Step',['../encoder__step_8h.html#a16ca7c2a2af8ea3a2902fcabb4a58d7f',1,'Encoder_Step(float speeds[4]):&#160;encoder_step.c'],['../encoder__step_8c.html#a620bc6b8cb569dc4ffbb6980aad07821',1,'Encoder_Step(float last_cycle_cmd[4]):&#160;encoder_step.c']]],
+  ['encodersnapshot_5fmutexinit_4',['EncoderSnapshot_MutexInit',['../encoder__snapshot_8h.html#a1f48961ee95ea98abd1c8c6b5e2498b5',1,'EncoderSnapshot_MutexInit(osMutexId_t mutex_handle):&#160;encoder_snapshot.c'],['../encoder__snapshot_8c.html#a1f48961ee95ea98abd1c8c6b5e2498b5',1,'EncoderSnapshot_MutexInit(osMutexId_t mutex_handle):&#160;encoder_snapshot.c']]],
+  ['encodersnapshot_5fread_5',['EncoderSnapshot_Read',['../encoder__snapshot_8h.html#af580ad966ed7718068907738755f9e22',1,'EncoderSnapshot_Read(EncoderSnapshot_t *dst):&#160;encoder_snapshot.c'],['../encoder__snapshot_8c.html#af580ad966ed7718068907738755f9e22',1,'EncoderSnapshot_Read(EncoderSnapshot_t *dst):&#160;encoder_snapshot.c']]],
+  ['encodersnapshot_5fwrite_6',['EncoderSnapshot_Write',['../encoder__snapshot_8h.html#a461cb0565d6741f020ebd4aae43fc68b',1,'EncoderSnapshot_Write(const EncoderSnapshot_t *src):&#160;encoder_snapshot.c'],['../encoder__snapshot_8c.html#a461cb0565d6741f020ebd4aae43fc68b',1,'EncoderSnapshot_Write(const EncoderSnapshot_t *src):&#160;encoder_snapshot.c']]],
+  ['error_5fhandler_7',['Error_Handler',['../main_8h.html#a1730ffe1e560465665eb47d9264826f9',1,'Error_Handler(void):&#160;main.c'],['../main_8c.html#a1730ffe1e560465665eb47d9264826f9',1,'Error_Handler(void):&#160;main.c']]]
+];

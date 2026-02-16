@@ -1,8 +1,6 @@
 /**
  * @file comm_tx_task.c
  * @brief Implementazione del task di trasmissione periodica della telemetria.
- * @date Jan 11, 2026
- * @author Sterm
  */
 
 #include "comm/comm_tx_task.h"

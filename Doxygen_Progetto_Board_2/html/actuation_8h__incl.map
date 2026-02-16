@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/actuation/actuation.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/actuation/actuation.h">
+<area shape="rect" id="Node000001" title="Header di aggregazione del modulo attuazione." alt="" coords="49,5,253,80"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8h.html" title="Interfaccia dello step di attuazione board 2." alt="" coords="5,128,137,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,83,98,118,94,114,125,78"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8h.html" title="Driver Sabertooth: composizione pacchetti e invio comandi motore." alt="" coords="161,128,301,171"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,78,209,116,204,116,178,83"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="199,219,263,245"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="233,169,233,204,229,201,229,173"/>
+</map>

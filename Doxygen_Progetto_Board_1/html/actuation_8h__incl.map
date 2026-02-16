@@ -1,0 +1,15 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/actuation/actuation.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/actuation/actuation.h">
+<area shape="rect" id="Node000001" title="Header principale per il modulo di attuazione." alt="" coords="55,5,258,80"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8h.html" title="Gestione del singolo step di attuazione del sistema." alt="" coords="40,128,172,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,83,125,115,120,113,140,78"/>
+<area shape="rect" id="Node000006" href="$sabertooth__driver_8h.html" title="Driver per i controller motori Sabertooth." alt="" coords="170,219,309,261"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="174,78,228,204,222,204,171,83"/>
+<area shape="rect" id="Node000003" href="$control__law_8h.html" title="Implementazione dell&#39;algoritmo della legge di controllo (PID, logica di sterzata)." alt="" coords="5,227,146,253"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,169,87,213,82,211,98,174"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="93,384,157,411"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="62,256,52,272,40,292,34,314,38,335,56,357,82,376,76,377,53,361,33,337,28,314,35,290,47,269,64,252"/>
+<area shape="rect" id="Node000005" href="$control__types_8h.html" title="Definizioni delle strutture dati per l&#39;input e l&#39;output del controllo." alt="" coords="48,309,202,336"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="84,251,112,296,107,297,83,256"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="127,335,127,369,122,367,123,339"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="240,260,234,299,216,337,194,361,168,379,165,374,191,357,212,335,229,298,236,264"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="WCET_Update" name="WCET_Update">
+<area shape="rect" id="Node000001" title="Aggiorna il tempo di esecuzione registrato per un determinato ID." alt="" coords="250,56,360,83"/>
+<area shape="rect" id="Node000002" href="$stm32g4xx__it_8c.html#a7b6fac3d670a4860ebec8a961d5c4a73" title="This function handles DMA1 channel1 global interrupt." alt="" coords="5,5,202,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,53,159,35,159,30,237,51"/>
+<area shape="rect" id="Node000003" href="$stm32g4xx__it_8c.html#aadb8937353693c94b0d8e32fc6f18fc2" title="This function handles DMA1 channel3 global interrupt." alt="" coords="5,56,202,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,70,203,72,202,67,237,69"/>
+<area shape="rect" id="Node000004" href="$stm32g4xx__it_8c.html#a88774889b903ae43403cd7e7a11a8f4f" title="This function handles UART4 global interrupt / UART4 wake&#45;up interrupt through EXTI line 34." alt="" coords="33,107,174,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="237,87,160,109,159,103,232,87"/>
+</map>

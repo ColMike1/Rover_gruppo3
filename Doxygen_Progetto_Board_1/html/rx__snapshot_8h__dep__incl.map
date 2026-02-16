@@ -1,0 +1,23 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/rx_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/rx_snapshot.h">
+<area shape="rect" id="Node000001" title="Buffer protetto per i dati ricevuti dall&#39;altra board." alt="" coords="917,5,1121,80"/>
+<area shape="rect" id="Node000002" href="$log__format_8h.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="899,57,691,86,570,106,450,131,438,134,436,128,449,125,569,101,690,81,904,55"/>
+<area shape="rect" id="Node000005" href="$snapshot_8h.html" title="Header aggregatore per tutti i tipi di snapshot di sistema." alt="" coords="461,128,665,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="900,72,678,131,666,134,664,129,677,125,905,70"/>
+<area shape="rect" id="Node000007" href="$comm__rx__task_8c.html" title="Gestione del task di ricezione messaggi UART." alt="" coords="689,128,893,203"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="938,87,862,130,860,125,933,89"/>
+<area shape="rect" id="Node000008" href="$control__step_8c.html" title="Orchestrazione del task di controllo e gestione delle strategie di fallback." alt="" coords="917,128,1121,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1021,94,1021,129,1017,126,1017,98"/>
+<area shape="rect" id="Node000009" href="$led__task_8c.html" title="Gestione della segnalazione visiva tramite LED di stato." alt="" coords="1145,128,1349,203"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1103,85,1180,128,1175,127,1102,90"/>
+<area shape="rect" id="Node000010" href="$rx__snapshot_8c.html" title="Gestione thread&#45;safe del payload ricevuto dalla comunicazione (UART/Radio)." alt="" coords="1373,128,1577,203"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1136,68,1361,125,1376,132,1371,131,1360,131,1135,73"/>
+<area shape="rect" id="Node000011" href="$supervisor__task_8c.html" title="Implementazione del Task Supervisore di Board 1." alt="" coords="1600,128,1816,203"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1136,54,1348,82,1469,102,1589,125,1603,131,1597,131,1588,131,1468,107,1347,87,1136,59"/>
+<area shape="rect" id="Node000003" href="$log__format_8c.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,209,178,252,175,248,249,212"/>
+<area shape="rect" id="Node000004" href="$log__task_8c.html" title="Task di logging periodico." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="337,217,337,252,333,249,333,221"/>
+<area shape="rect" id="Node000006" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="565,217,565,252,561,249,561,221"/>
+</map>

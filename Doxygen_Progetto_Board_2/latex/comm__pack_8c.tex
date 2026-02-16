@@ -1,0 +1,91 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+pack.c File Reference}
+\hypertarget{comm__pack_8c}{}\label{comm__pack_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/comm/comm\_pack.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/comm/comm\_pack.c}}
+
+
+Serializzazione del frame TX board2 -\/\texorpdfstring{$>$}{>} board1.  
+
+
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+pack.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+crc.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+Include dependency graph for comm\+\_\+pack.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__pack_8c_a01d73924b1cb8e9a1a3910f5d533d7c4}{COMM\+\_\+\+B2\+\_\+\+MSG\+\_\+\+ID}}~0x\+AA56U
+\begin{DoxyCompactList}\small\item\em Identificativo messaggio Board2 -\/\texorpdfstring{$>$}{>} Board1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{comm__pack_8c_a90e240ea0c70b52d9d424ee90ed384f3}{Comm\+Pack\+\_\+\+Build\+B2\+Tx}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t max\+\_\+len, const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}ble, const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}sup, const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}imu)
+\begin{DoxyCompactList}\small\item\em Costruisce un frame completo Board2 -\/\texorpdfstring{$>$}{>} Board1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Serializzazione del frame TX board2 -\/\texorpdfstring{$>$}{>} board1. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{comm__pack_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__pack_8c_a01d73924b1cb8e9a1a3910f5d533d7c4}\index{comm\_pack.c@{comm\_pack.c}!COMM\_B2\_MSG\_ID@{COMM\_B2\_MSG\_ID}}
+\index{COMM\_B2\_MSG\_ID@{COMM\_B2\_MSG\_ID}!comm\_pack.c@{comm\_pack.c}}
+\doxysubsubsection{\texorpdfstring{COMM\_B2\_MSG\_ID}{COMM\_B2\_MSG\_ID}}
+{\footnotesize\ttfamily \label{comm__pack_8c_a01d73924b1cb8e9a1a3910f5d533d7c4} 
+\+\#define COMM\+\_\+\+B2\+\_\+\+MSG\+\_\+\+ID~0x\+AA56U}
+
+
+
+Identificativo messaggio Board2 -\/\texorpdfstring{$>$}{>} Board1. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__pack_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__pack_8c_a90e240ea0c70b52d9d424ee90ed384f3}\index{comm\_pack.c@{comm\_pack.c}!CommPack\_BuildB2Tx@{CommPack\_BuildB2Tx}}
+\index{CommPack\_BuildB2Tx@{CommPack\_BuildB2Tx}!comm\_pack.c@{comm\_pack.c}}
+\doxysubsubsection{\texorpdfstring{CommPack\_BuildB2Tx()}{CommPack\_BuildB2Tx()}}
+{\footnotesize\ttfamily \label{comm__pack_8c_a90e240ea0c70b52d9d424ee90ed384f3} 
+uint16\+\_\+t Comm\+Pack\+\_\+\+Build\+B2\+Tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{max\+\_\+len}{, }\item[{const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ble}{, }\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{sup}{, }\item[{const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{imu}{}\end{DoxyParamCaption})}
+
+
+
+Costruisce un frame completo Board2 -\/\texorpdfstring{$>$}{>} Board1. 
+
+Costruisce un frame Board2 -\/\texorpdfstring{$>$}{>} Board1.
+
+Il frame e\textquotesingle{} composto da header, payload e CRC16-\/\+CCITT.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer di output. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+\_\+len} & Dimensione massima del buffer. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ble} & Snapshot BLE. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot supervisore. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em imu} & Snapshot IMU. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lunghezza del frame costruito, oppure 0 in caso di errore. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8c_a90e240ea0c70b52d9d424ee90ed384f3_icgraph}
+\end{center}
+\end{figure}

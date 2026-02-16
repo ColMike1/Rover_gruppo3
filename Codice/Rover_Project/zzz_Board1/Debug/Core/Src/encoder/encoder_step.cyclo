@@ -1,6 +1,0 @@
-../Core/Src/encoder/encoder_step.c:27:14:DeltaTicks_ToRPM	1
-../Core/Src/encoder/encoder_step.c:32:14:abs_f32	2
-../Core/Src/encoder/encoder_step.c:39:6:Encoder_Init	1
-../Core/Src/encoder/encoder_step.c:47:13:Encoder_hasNoFeedback	7
-../Core/Src/encoder/encoder_step.c:79:13:Apply_Encoders_Fallback	36
-../Core/Src/encoder/encoder_step.c:189:6:Encoder_Step	5

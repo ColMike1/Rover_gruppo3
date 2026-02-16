@@ -1,0 +1,16 @@
+<map id="MovingAverage_Update" name="MovingAverage_Update">
+<area shape="rect" id="Node000001" title="Calcola l&#39;aggiornamento della media mobile per un dato buffer." alt="" coords="939,31,1099,57"/>
+<area shape="rect" id="Node000002" href="$board__health__adc_8c.html#a6b51bda7bc1b0759dcc5cca821d3f03a" title="Legge il livello di tensione della batteria." alt="" coords="703,5,876,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="920,33,877,31,877,26,926,33"/>
+<area shape="rect" id="Node000007" href="$board__health__adc_8c.html#aff8a17cd230bd0dc31d24650a70b831d" title="Legge il sensore di temperatura interno della MCU." alt="" coords="688,56,891,83"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="926,54,892,61,891,55,921,55"/>
+<area shape="rect" id="Node000003" href="$board__health__task_8c.html#a398e7c9f02fe63bb5bd8c939c14bbb0a" title="Esegue ciclicamente il monitoraggio dei parametri vitali." alt="" coords="484,31,640,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="690,30,640,38,640,33,685,30"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#a8defcc40b3c432c05d19071b0e49c51d" title="Task per il monitoraggio dello stato batteria e temperatura." alt="" coords="296,31,436,57"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="466,44,437,47,437,41,471,44"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,31,248,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,44,248,47,248,41,283,44"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="85,45,55,47,54,41,89,43"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="670,56,640,55,640,50,675,56"/>
+</map>

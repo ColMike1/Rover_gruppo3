@@ -1,0 +1,78 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+led/\+led\+\_\+task.h File Reference}
+\hypertarget{led__task_8h}{}\label{led__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/led/led\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/led/led\_task.h}}
+
+
+Gestione del task per la segnalazione visiva tramite LED.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{led__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{led__task_8h_ad7f67cbb58dfcb82f539444e9f1fb746}{Led\+\_\+\+Task\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Inizializza l\textquotesingle{}hardware e le risorse per il task LED. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{led__task_8h_a9a8c4c2b2a2eaf4a111968230232f52c}{Led\+\_\+\+Task\+Step}} ()
+\begin{DoxyCompactList}\small\item\em Esegue un ciclo del task LED (es. lampeggio di stato). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione del task per la segnalazione visiva tramite LED. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{led__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{led__task_8h_ad7f67cbb58dfcb82f539444e9f1fb746}\index{led\_task.h@{led\_task.h}!Led\_TaskInit@{Led\_TaskInit}}
+\index{Led\_TaskInit@{Led\_TaskInit}!led\_task.h@{led\_task.h}}
+\doxysubsubsection{\texorpdfstring{Led\_TaskInit()}{Led\_TaskInit()}}
+{\footnotesize\ttfamily \label{led__task_8h_ad7f67cbb58dfcb82f539444e9f1fb746} 
+void Led\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza l\textquotesingle{}hardware e le risorse per il task LED. 
+
+Inizializza l\textquotesingle{}hardware e le risorse per il task LED. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{led__task_8h_ad7f67cbb58dfcb82f539444e9f1fb746_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{led__task_8h_a9a8c4c2b2a2eaf4a111968230232f52c}\index{led\_task.h@{led\_task.h}!Led\_TaskStep@{Led\_TaskStep}}
+\index{Led\_TaskStep@{Led\_TaskStep}!led\_task.h@{led\_task.h}}
+\doxysubsubsection{\texorpdfstring{Led\_TaskStep()}{Led\_TaskStep()}}
+{\footnotesize\ttfamily \label{led__task_8h_a9a8c4c2b2a2eaf4a111968230232f52c} 
+void Led\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue un ciclo del task LED (es. lampeggio di stato). 
+
+Esegue un ciclo del task LED (es. lampeggio di stato).
+
+Legge gli snapshot di sistema e aggiorna le uscite GPIO in base alla logica di stato. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{led__task_8h_a9a8c4c2b2a2eaf4a111968230232f52c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{led__task_8h_a9a8c4c2b2a2eaf4a111968230232f52c_icgraph}
+\end{center}
+\end{figure}

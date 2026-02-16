@@ -1,0 +1,277 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+encoder/\+encoder\+\_\+step.c File Reference}
+\hypertarget{encoder__step_8c}{}\label{encoder__step_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/encoder/encoder\_step.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/encoder/encoder\_step.c}}
+{\ttfamily \+\#include "{}encoder/\+encoder.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+encoder\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}tim.\+h"{}}\newline
+Include dependency graph for encoder\+\_\+step.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{encoder__step_8c_a0b82c67a65f9271c9624c2783dac10f6}{ENCODER\+\_\+\+TASK\+\_\+\+PERIOD\+\_\+S}}~0.\+01f
+\item 
+\+\#define \doxymbox{\hyperlink{encoder__step_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}{NUM\+\_\+\+ENCODERS}}~4U
+\item 
+\+\#define \doxymbox{\hyperlink{encoder__step_8c_adde42fcc3c8f7e4e7d22b06b681b456d}{TICKS\+\_\+\+PER\+\_\+\+REV}}~2448.\+0f
+\item 
+\+\#define \doxymbox{\hyperlink{encoder__step_8c_a0a190c6f1b10c5b6ea48e786dec7a939}{RPM\+\_\+\+EPS}}~2.\+5f
+\begin{DoxyCompactList}\small\item\em Tolleranza per considerare la ruota ferma \+[RPM]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__step_8c_aa0fb76736b347d57f09601094b72d092}{U\+\_\+\+TRIG}}~2.\+0f
+\begin{DoxyCompactList}\small\item\em Tensione minima di attivazione per il controllo di stallo \+[V]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__step_8c_a265e05e39334c60af30816a55ea6ee41}{N\+\_\+\+FAIL}}~20U
+\begin{DoxyCompactList}\small\item\em Numero di cicli consecutivi di errore per dichiarare il guasto feedback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \doxymbox{\hyperlink{encoder__step_8c_a490b7782c5a8e9a1850f12d956e23d93}{Delta\+Ticks\+\_\+\+To\+RPM}} (int delta\+\_\+ticks)
+\begin{DoxyCompactList}\small\item\em Converte i ticks misurati in velocità angolare (RPM). \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{encoder__step_8c_a42c392c4a6f5170fd61c36a38486549c}{abs\+\_\+f32}} (float x)
+\begin{DoxyCompactList}\small\item\em Calcola il valore assoluto di un float. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{encoder__step_8c_a1c8318d644fc2e61cc1ef9cb0710feb6}{Encoder\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Avvia l\textquotesingle{}interfaccia encoder dei timer hardware. \end{DoxyCompactList}\item 
+static bool \doxymbox{\hyperlink{encoder__step_8c_ae00e575d81dcde5b0d92b0d4cdee7255}{Encoder\+\_\+has\+No\+Feedback}} (uint8\+\_\+t idx, float u\+\_\+cmd, float rpm)
+\begin{DoxyCompactList}\small\item\em Diagnostica la presenza di feedback dall\textquotesingle{}encoder. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{encoder__step_8c_a6d29812c0974c1693e1fd4aa1c187c39}{Apply\+\_\+\+Encoders\+\_\+\+Fallback}} (\doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}const snap, const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} sup)
+\begin{DoxyCompactList}\small\item\em Logica di fallback per la stima dei giri ruota in caso di guasto ai sensori. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{encoder__step_8c_a620bc6b8cb569dc4ffbb6980aad07821}{Encoder\+\_\+\+Step}} (float last\+\_\+cycle\+\_\+cmd\+[4]\+)
+\begin{DoxyCompactList}\small\item\em Step periodico del task encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{encoder__step_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{encoder__step_8c_a0b82c67a65f9271c9624c2783dac10f6}\index{encoder\_step.c@{encoder\_step.c}!ENCODER\_TASK\_PERIOD\_S@{ENCODER\_TASK\_PERIOD\_S}}
+\index{ENCODER\_TASK\_PERIOD\_S@{ENCODER\_TASK\_PERIOD\_S}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{ENCODER\_TASK\_PERIOD\_S}{ENCODER\_TASK\_PERIOD\_S}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a0b82c67a65f9271c9624c2783dac10f6} 
+\+\#define ENCODER\+\_\+\+TASK\+\_\+\+PERIOD\+\_\+S~0.\+01f}
+
+\Hypertarget{encoder__step_8c_a265e05e39334c60af30816a55ea6ee41}\index{encoder\_step.c@{encoder\_step.c}!N\_FAIL@{N\_FAIL}}
+\index{N\_FAIL@{N\_FAIL}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{N\_FAIL}{N\_FAIL}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a265e05e39334c60af30816a55ea6ee41} 
+\+\#define N\+\_\+\+FAIL~20U}
+
+
+
+Numero di cicli consecutivi di errore per dichiarare il guasto feedback. 
+
+\Hypertarget{encoder__step_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}\index{encoder\_step.c@{encoder\_step.c}!NUM\_ENCODERS@{NUM\_ENCODERS}}
+\index{NUM\_ENCODERS@{NUM\_ENCODERS}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{NUM\_ENCODERS}{NUM\_ENCODERS}}
+{\footnotesize\ttfamily \label{encoder__step_8c_ae929ca78c731b77fe6f5bb516d9a9cfc} 
+\+\#define NUM\+\_\+\+ENCODERS~4U}
+
+\Hypertarget{encoder__step_8c_a0a190c6f1b10c5b6ea48e786dec7a939}\index{encoder\_step.c@{encoder\_step.c}!RPM\_EPS@{RPM\_EPS}}
+\index{RPM\_EPS@{RPM\_EPS}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{RPM\_EPS}{RPM\_EPS}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a0a190c6f1b10c5b6ea48e786dec7a939} 
+\+\#define RPM\+\_\+\+EPS~2.\+5f}
+
+
+
+Tolleranza per considerare la ruota ferma \+[RPM]\+. 
+
+\Hypertarget{encoder__step_8c_adde42fcc3c8f7e4e7d22b06b681b456d}\index{encoder\_step.c@{encoder\_step.c}!TICKS\_PER\_REV@{TICKS\_PER\_REV}}
+\index{TICKS\_PER\_REV@{TICKS\_PER\_REV}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{TICKS\_PER\_REV}{TICKS\_PER\_REV}}
+{\footnotesize\ttfamily \label{encoder__step_8c_adde42fcc3c8f7e4e7d22b06b681b456d} 
+\+\#define TICKS\+\_\+\+PER\+\_\+\+REV~2448.\+0f}
+
+\Hypertarget{encoder__step_8c_aa0fb76736b347d57f09601094b72d092}\index{encoder\_step.c@{encoder\_step.c}!U\_TRIG@{U\_TRIG}}
+\index{U\_TRIG@{U\_TRIG}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{U\_TRIG}{U\_TRIG}}
+{\footnotesize\ttfamily \label{encoder__step_8c_aa0fb76736b347d57f09601094b72d092} 
+\+\#define U\+\_\+\+TRIG~2.\+0f}
+
+
+
+Tensione minima di attivazione per il controllo di stallo \+[V]\+. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{encoder__step_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__step_8c_a42c392c4a6f5170fd61c36a38486549c}\index{encoder\_step.c@{encoder\_step.c}!abs\_f32@{abs\_f32}}
+\index{abs\_f32@{abs\_f32}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{abs\_f32()}{abs\_f32()}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a42c392c4a6f5170fd61c36a38486549c} 
+float abs\+\_\+f32 (\begin{DoxyParamCaption}\item[{float}]{x}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calcola il valore assoluto di un float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Valore in ingresso. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float Valore assoluto. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_a42c392c4a6f5170fd61c36a38486549c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__step_8c_a6d29812c0974c1693e1fd4aa1c187c39}\index{encoder\_step.c@{encoder\_step.c}!Apply\_Encoders\_Fallback@{Apply\_Encoders\_Fallback}}
+\index{Apply\_Encoders\_Fallback@{Apply\_Encoders\_Fallback}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{Apply\_Encoders\_Fallback()}{Apply\_Encoders\_Fallback()}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a6d29812c0974c1693e1fd4aa1c187c39} 
+void Apply\+\_\+\+Encoders\+\_\+\+Fallback (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{snap}{, }\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}}}]{sup}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Logica di fallback per la stima dei giri ruota in caso di guasto ai sensori. 
+
+Se uno o più encoder falliscono, i giri mancanti vengono stimati basandosi sulle letture delle ruote sane (stesso lato, stesso asse o incrociate). 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em snap} & Snapshot degli encoder da correggere. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot del supervisore per conoscere lo stato dei guasti. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_a6d29812c0974c1693e1fd4aa1c187c39_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__step_8c_a490b7782c5a8e9a1850f12d956e23d93}\index{encoder\_step.c@{encoder\_step.c}!DeltaTicks\_ToRPM@{DeltaTicks\_ToRPM}}
+\index{DeltaTicks\_ToRPM@{DeltaTicks\_ToRPM}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{DeltaTicks\_ToRPM()}{DeltaTicks\_ToRPM()}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a490b7782c5a8e9a1850f12d956e23d93} 
+float Delta\+Ticks\+\_\+\+To\+RPM (\begin{DoxyParamCaption}\item[{int}]{delta\+\_\+ticks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converte i ticks misurati in velocità angolare (RPM). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+\_\+ticks} & Variazione dei ticks nel periodo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float Velocità calcolata in RPM. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_a490b7782c5a8e9a1850f12d956e23d93_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__step_8c_ae00e575d81dcde5b0d92b0d4cdee7255}\index{encoder\_step.c@{encoder\_step.c}!Encoder\_hasNoFeedback@{Encoder\_hasNoFeedback}}
+\index{Encoder\_hasNoFeedback@{Encoder\_hasNoFeedback}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{Encoder\_hasNoFeedback()}{Encoder\_hasNoFeedback()}}
+{\footnotesize\ttfamily \label{encoder__step_8c_ae00e575d81dcde5b0d92b0d4cdee7255} 
+bool Encoder\+\_\+has\+No\+Feedback (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{idx}{, }\item[{float}]{u\+\_\+cmd}{, }\item[{float}]{rpm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Diagnostica la presenza di feedback dall\textquotesingle{}encoder. 
+
+Implementa un contatore di stallo:\+ se la tensione di comando è alta ma i giri letti sono quasi nulli per N\+\_\+\+FAIL cicli, viene segnalato un guasto. 
+\begin{DoxyParams}{Parameters}
+{\em idx} & Indice dell\textquotesingle{}encoder. \\
+\hline
+{\em u\+\_\+cmd} & Comando di tensione inviato nell\textquotesingle{}ultimo ciclo. \\
+\hline
+{\em rpm} & Velocità misurata. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Se è stato rilevato un guasto o uno stallo persistente. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{encoder__step_8c_ae00e575d81dcde5b0d92b0d4cdee7255_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_ae00e575d81dcde5b0d92b0d4cdee7255_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__step_8c_a1c8318d644fc2e61cc1ef9cb0710feb6}\index{encoder\_step.c@{encoder\_step.c}!Encoder\_Init@{Encoder\_Init}}
+\index{Encoder\_Init@{Encoder\_Init}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{Encoder\_Init()}{Encoder\_Init()}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a1c8318d644fc2e61cc1ef9cb0710feb6} 
+void Encoder\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Avvia l\textquotesingle{}interfaccia encoder dei timer hardware. 
+
+Inizializza i timer e le periferiche dedicate agli encoder. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_a1c8318d644fc2e61cc1ef9cb0710feb6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__step_8c_a620bc6b8cb569dc4ffbb6980aad07821}\index{encoder\_step.c@{encoder\_step.c}!Encoder\_Step@{Encoder\_Step}}
+\index{Encoder\_Step@{Encoder\_Step}!encoder\_step.c@{encoder\_step.c}}
+\doxysubsubsection{\texorpdfstring{Encoder\_Step()}{Encoder\_Step()}}
+{\footnotesize\ttfamily \label{encoder__step_8c_a620bc6b8cb569dc4ffbb6980aad07821} 
+void Encoder\+\_\+\+Step (\begin{DoxyParamCaption}\item[{float}]{last\+\_\+cycle\+\_\+cmd}{\+[4]\+}\end{DoxyParamCaption})}
+
+
+
+Step periodico del task encoder. 
+
+Esegue il campionamento degli encoder e converte i tick in unità fisiche.
+
+
+\begin{DoxyEnumerate}
+\item Legge i delta ticks hardware per i 4 motori.
+\item Converte i dati in RPM e aggiorna i timestamp.
+\item Esegue la diagnostica dello stallo basata sul comando del ciclo precedente.
+\item Se necessario, applica le correzioni di fallback.
+\item Scrive lo snapshot finale per gli altri task. 
+\begin{DoxyParams}{Parameters}
+{\em last\+\_\+cycle\+\_\+cmd} & Array dei comandi di tensione \+[V]\+ applicati nell\textquotesingle{}ultima iterazione. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyEnumerate}Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_a620bc6b8cb569dc4ffbb6980aad07821_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8c_a620bc6b8cb569dc4ffbb6980aad07821_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,1 @@
+La cartella Drivers contiene a sua volta la cartella SupervisorB2, in questa sono presenti tutti i file generati tramite Embedded Coder relativi al supervisore per la board 2.

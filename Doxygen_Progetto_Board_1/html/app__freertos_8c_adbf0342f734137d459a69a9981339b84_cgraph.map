@@ -1,0 +1,13 @@
+<map id="StartTask_TX" name="StartTask_TX">
+<area shape="rect" id="Node000001" title="Task per la trasmissione dei dati via UART/Bus." alt="" coords="5,81,107,108"/>
+<area shape="rect" id="Node000002" href="$comm__tx__task_8c.html#add320c948d8694068895e9744195957e" title="Esegue un passo del task di trasmissione, inviando i pacchetti pronti." alt="" coords="155,81,253,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,92,142,94,137,96,108,97"/>
+<area shape="rect" id="Node000003" href="$comm__pack_8c.html#ae30a38144a410e9d1d2b80b8377f82cf" title="Costruisce il frame di stato per la comunicazione da Board1 a Board2." alt="" coords="310,5,468,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="227,78,300,42,322,36,317,38,302,46,229,83"/>
+<area shape="rect" id="Node000004" href="$comm__uart_8c.html#aa6798e77d91bf6435a857b760113928e" title="Invia un buffer di dati grezzi sulla UART." alt="" coords="328,56,450,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="253,85,315,79,310,81,254,91"/>
+<area shape="rect" id="Node000005" href="$encoder__snapshot_8c.html#af580ad966ed7718068907738755f9e22" title="Legge l&#39;ultimo snapshot encoder disponibile." alt="" coords="308,107,470,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="254,99,295,106,290,107,254,104"/>
+<area shape="rect" id="Node000006" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX)." alt="" coords="301,157,477,184"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="229,106,302,143,323,153,317,152,300,148,228,111"/>
+</map>

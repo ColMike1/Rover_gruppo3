@@ -1,0 +1,73 @@
+\doxysection{PI\+\_\+\+Controller Struct Reference}
+\hypertarget{struct_p_i___controller}{}\label{struct_p_i___controller}\index{PI\_Controller@{PI\_Controller}}
+
+
+Struttura per la gestione di un controllore Proporzionale-\/\+Integrale in forma incrementale.  
+
+
+
+
+Collaboration diagram for PI\+\_\+\+Controller:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=145pt]{struct_p_i___controller__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{struct_p_i___controller_a01e60c8170ee37c84fc16152460cb201}{Kp}}
+\item 
+float \doxymbox{\hyperlink{struct_p_i___controller_a310bb75b3a3e9055bf64f7716eadc587}{Ki}}
+\item 
+float \doxymbox{\hyperlink{struct_p_i___controller_a9a670c0347aeed60d6a2965885957bf9}{e\+\_\+prev}}
+\item 
+float \doxymbox{\hyperlink{struct_p_i___controller_a76861ca68262089d430c5e04a30eb32f}{u\+\_\+prev}}
+\item 
+float \doxymbox{\hyperlink{struct_p_i___controller_ae0f20b295e37cecc86b1758ba52e64f1}{out\+\_\+limit}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Struttura per la gestione di un controllore Proporzionale-\/\+Integrale in forma incrementale. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_p_i___controller_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_p_i___controller_a9a670c0347aeed60d6a2965885957bf9}\index{PI\_Controller@{PI\_Controller}!e\_prev@{e\_prev}}
+\index{e\_prev@{e\_prev}!PI\_Controller@{PI\_Controller}}
+\doxysubsubsection{\texorpdfstring{e\_prev}{e\_prev}}
+{\footnotesize\ttfamily \label{struct_p_i___controller_a9a670c0347aeed60d6a2965885957bf9} 
+float PI\+\_\+\+Controller::\+e\+\_\+prev}
+
+Errore al passo precedente \Hypertarget{struct_p_i___controller_a310bb75b3a3e9055bf64f7716eadc587}\index{PI\_Controller@{PI\_Controller}!Ki@{Ki}}
+\index{Ki@{Ki}!PI\_Controller@{PI\_Controller}}
+\doxysubsubsection{\texorpdfstring{Ki}{Ki}}
+{\footnotesize\ttfamily \label{struct_p_i___controller_a310bb75b3a3e9055bf64f7716eadc587} 
+float PI\+\_\+\+Controller::\+\+Ki}
+
+Guadagno Integrale \Hypertarget{struct_p_i___controller_a01e60c8170ee37c84fc16152460cb201}\index{PI\_Controller@{PI\_Controller}!Kp@{Kp}}
+\index{Kp@{Kp}!PI\_Controller@{PI\_Controller}}
+\doxysubsubsection{\texorpdfstring{Kp}{Kp}}
+{\footnotesize\ttfamily \label{struct_p_i___controller_a01e60c8170ee37c84fc16152460cb201} 
+float PI\+\_\+\+Controller::\+\+Kp}
+
+Guadagno Proporzionale \Hypertarget{struct_p_i___controller_ae0f20b295e37cecc86b1758ba52e64f1}\index{PI\_Controller@{PI\_Controller}!out\_limit@{out\_limit}}
+\index{out\_limit@{out\_limit}!PI\_Controller@{PI\_Controller}}
+\doxysubsubsection{\texorpdfstring{out\_limit}{out\_limit}}
+{\footnotesize\ttfamily \label{struct_p_i___controller_ae0f20b295e37cecc86b1758ba52e64f1} 
+float PI\+\_\+\+Controller::\+out\+\_\+limit}
+
+Limite di saturazione dell\textquotesingle{}uscita (anti-\/windup implicito) \Hypertarget{struct_p_i___controller_a76861ca68262089d430c5e04a30eb32f}\index{PI\_Controller@{PI\_Controller}!u\_prev@{u\_prev}}
+\index{u\_prev@{u\_prev}!PI\_Controller@{PI\_Controller}}
+\doxysubsubsection{\texorpdfstring{u\_prev}{u\_prev}}
+{\footnotesize\ttfamily \label{struct_p_i___controller_a76861ca68262089d430c5e04a30eb32f} 
+float PI\+\_\+\+Controller::\+u\+\_\+prev}
+
+Comando calcolato al passo precedente 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+control/\+\doxymbox{\hyperlink{control__law_8c}{control\+\_\+law.\+c}}\end{DoxyCompactItemize}

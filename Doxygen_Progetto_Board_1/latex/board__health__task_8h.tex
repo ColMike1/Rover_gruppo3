@@ -1,0 +1,88 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+board\+\_\+health/\+board\+\_\+health\+\_\+task.h File Reference}
+\hypertarget{board__health__task_8h}{}\label{board__health__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/board\_health/board\_health\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/board\_health/board\_health\_task.h}}
+
+
+Interfaccia per il task di monitoraggio di sistema.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{board__health__task_8h_a214ef105dc57cc7f220590660e4d6d69}{Board\+Health\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task o le risorse per il monitoraggio board health. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__task_8h_a398e7c9f02fe63bb5bd8c939c14bbb0a}{Board\+Health\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue ciclicamente il monitoraggio dei parametri vitali. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaccia per il task di monitoraggio di sistema. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{board__health__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board__health__task_8h_a214ef105dc57cc7f220590660e4d6d69}\index{board\_health\_task.h@{board\_health\_task.h}!BoardHealth\_TaskInit@{BoardHealth\_TaskInit}}
+\index{BoardHealth\_TaskInit@{BoardHealth\_TaskInit}!board\_health\_task.h@{board\_health\_task.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_TaskInit()}{BoardHealth\_TaskInit()}}
+{\footnotesize\ttfamily \label{board__health__task_8h_a214ef105dc57cc7f220590660e4d6d69} 
+void Board\+Health\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task o le risorse per il monitoraggio board health. 
+
+Inizializza il task o le risorse per il monitoraggio board health.
+
+Chiama l\textquotesingle{}inizializzazione dell\textquotesingle{}hardware ADC. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8h_a214ef105dc57cc7f220590660e4d6d69_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8h_a214ef105dc57cc7f220590660e4d6d69_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__task_8h_a398e7c9f02fe63bb5bd8c939c14bbb0a}\index{board\_health\_task.h@{board\_health\_task.h}!BoardHealth\_TaskStep@{BoardHealth\_TaskStep}}
+\index{BoardHealth\_TaskStep@{BoardHealth\_TaskStep}!board\_health\_task.h@{board\_health\_task.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_TaskStep()}{BoardHealth\_TaskStep()}}
+{\footnotesize\ttfamily \label{board__health__task_8h_a398e7c9f02fe63bb5bd8c939c14bbb0a} 
+void Board\+Health\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue ciclicamente il monitoraggio dei parametri vitali. 
+
+Esegue ciclicamente il monitoraggio dei parametri vitali.
+
+Esegue la lettura di temperatura e batteria, aggiorna i timestamp di validità e scrive lo snapshot globale del sistema. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8h_a398e7c9f02fe63bb5bd8c939c14bbb0a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__task_8h_a398e7c9f02fe63bb5bd8c939c14bbb0a_icgraph}
+\end{center}
+\end{figure}

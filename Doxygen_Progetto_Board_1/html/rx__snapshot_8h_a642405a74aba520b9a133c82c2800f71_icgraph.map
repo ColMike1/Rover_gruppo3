@@ -1,0 +1,11 @@
+<map id="RxSnapshot_Write" name="RxSnapshot_Write">
+<area shape="rect" id="Node000001" title="Aggiorna lo snapshot con i nuovi dati ricevuti (solo task RX)." alt="" coords="596,5,726,32"/>
+<area shape="rect" id="Node000002" href="$comm__rx__task_8c.html#abf9927a637b1876b563ab33f41de5357" title="Esegue un passo del task di ricezione, elaborando i dati in ingresso dalla UART." alt="" coords="447,5,548,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="577,19,548,21,548,16,582,19"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#ab2162fec2b1f5b10cf3b086feb28e249" title="Task per la ricezione e il parsing dei dati in ingresso." alt="" coords="296,5,399,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="429,19,400,21,399,16,434,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

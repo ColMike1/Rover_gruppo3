@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['data_5fcache_5fenable_0',['DATA_CACHE_ENABLE',['../stm32g4xx__hal__conf_8h.html#a5b4c32a40cf49b06c0d761e385949a6b',1,'stm32g4xx_hal_conf.h']]],
+  ['data_5flast_5fvalid_5fms_1',['data_last_valid_ms',['../struct_ble_controller_snapshot__t.html#a57aff241cf0de3e4884a44ed9cdd28f9',1,'BleControllerSnapshot_t::data_last_valid_ms'],['../struct_i_m_u_snapshot__t.html#ae6c3db0c7fb6222ece1f01125a5916a5',1,'IMUSnapshot_t::data_last_valid_ms'],['../struct_rx_snapshot__t.html#a76dff45064214626b1b65d369cf17d30',1,'RxSnapshot_t::data_last_valid_ms'],['../struct_sonar_snapshot__t.html#aba11878f4c748b4d7d57e4cd286c1271',1,'SonarSnapshot_t::data_last_valid_ms']]],
+  ['debugmon_5fhandler_2',['DebugMon_Handler',['../stm32g4xx__it_8h.html#adbdfb05858cc36fc520974df37ec3cb0',1,'DebugMon_Handler(void):&#160;stm32g4xx_it.c'],['../stm32g4xx__it_8c.html#adbdfb05858cc36fc520974df37ec3cb0',1,'DebugMon_Handler(void):&#160;stm32g4xx_it.c']]],
+  ['defaulttask_5fattributes_3',['defaultTask_attributes',['../app__freertos_8c.html#a25fbb54afdba71c24ba51ed50166ac8d',1,'app_freertos.c']]],
+  ['defaulttaskbuffer_4',['defaultTaskBuffer',['../app__freertos_8c.html#a0ef1a80eb9a31084b335d4b71c24e001',1,'app_freertos.c']]],
+  ['defaulttaskcontrolblock_5',['defaultTaskControlBlock',['../app__freertos_8c.html#aca18732f09ae696fd34b94d393dc9a42',1,'app_freertos.c']]],
+  ['defaulttaskhandle_6',['defaultTaskHandle',['../app__freertos_8c.html#a6a263905468b0c37de4ee5e50ede4e74',1,'app_freertos.c']]],
+  ['degraded_5fmask_7',['degraded_mask',['../struct_supervisor_snapshot__t.html#a5e4f3385ebdd376c70bab322c3c53ec4',1,'SupervisorSnapshot_t']]],
+  ['disabled_8',['Require 48MHz for RNG | Disabled',['../system__stm32g4xx_8c.html#autotoc_md12',1,'']]],
+  ['dist_5fcm_9',['dist_cm',['../struct_sonar_snapshot__t.html#a120d50c669e0cd417ae0e5b86f51e7c7',1,'SonarSnapshot_t']]],
+  ['distance1_10',['distance1',['../structdistances__t.html#a319fc03e1327759b57455eeec1c4dca4',1,'distances_t']]],
+  ['distance2_11',['distance2',['../structdistances__t.html#a850b4ad5392f3413486dd8e2cc14abf2',1,'distances_t']]],
+  ['distance3_12',['distance3',['../structdistances__t.html#a7c284349bfae5db193fe1e4e059d2100',1,'distances_t']]],
+  ['distances_13',['distances',['../sonar__hw_8c.html#a483c75740a2152c0f3e266c93baf6430',1,'sonar_hw.c']]],
+  ['distances_5ft_14',['distances_t',['../structdistances__t.html',1,'']]],
+  ['dma_2ec_15',['dma.c',['../dma_8c.html',1,'']]],
+  ['dma_2eh_16',['dma.h',['../dma_8h.html',1,'']]],
+  ['dma1_5fchannel1_5firqhandler_17',['DMA1_Channel1_IRQHandler',['../stm32g4xx__it_8h.html#a7b6fac3d670a4860ebec8a961d5c4a73',1,'DMA1_Channel1_IRQHandler(void):&#160;stm32g4xx_it.c'],['../stm32g4xx__it_8c.html#a7b6fac3d670a4860ebec8a961d5c4a73',1,'DMA1_Channel1_IRQHandler(void):&#160;stm32g4xx_it.c']]],
+  ['dma1_5fchannel2_5firqhandler_18',['DMA1_Channel2_IRQHandler',['../stm32g4xx__it_8h.html#a0c3390d4dc5cfceccbeda71aa672d99d',1,'DMA1_Channel2_IRQHandler(void):&#160;stm32g4xx_it.c'],['../stm32g4xx__it_8c.html#a0c3390d4dc5cfceccbeda71aa672d99d',1,'DMA1_Channel2_IRQHandler(void):&#160;stm32g4xx_it.c']]],
+  ['dma1_5fchannel3_5firqhandler_19',['DMA1_Channel3_IRQHandler',['../stm32g4xx__it_8h.html#aadb8937353693c94b0d8e32fc6f18fc2',1,'DMA1_Channel3_IRQHandler(void):&#160;stm32g4xx_it.c'],['../stm32g4xx__it_8c.html#aadb8937353693c94b0d8e32fc6f18fc2',1,'DMA1_Channel3_IRQHandler(void):&#160;stm32g4xx_it.c']]],
+  ['dma1_5fchannel4_5firqhandler_20',['DMA1_Channel4_IRQHandler',['../stm32g4xx__it_8h.html#a9b75ef44037d7ed50a1078c024ae853a',1,'DMA1_Channel4_IRQHandler(void):&#160;stm32g4xx_it.c'],['../stm32g4xx__it_8c.html#a9b75ef44037d7ed50a1078c024ae853a',1,'DMA1_Channel4_IRQHandler(void):&#160;stm32g4xx_it.c']]],
+  ['dma1_5fchannel5_5firqhandler_21',['DMA1_Channel5_IRQHandler',['../stm32g4xx__it_8h.html#abd16b3391557c4a3a8020d675e2c452f',1,'DMA1_Channel5_IRQHandler(void):&#160;stm32g4xx_it.c'],['../stm32g4xx__it_8c.html#abd16b3391557c4a3a8020d675e2c452f',1,'DMA1_Channel5_IRQHandler(void):&#160;stm32g4xx_it.c']]],
+  ['dwt_5finit_22',['DWT_Init',['../main_8c.html#a51adbc4bdaaafd744303ce3c9fb3cdaa',1,'main.c']]]
+];

@@ -1,0 +1,11 @@
+<map id="StartTask_Led" name="StartTask_Led">
+<area shape="rect" id="Node000001" title="Task per la gestione dei LED di segnalazione." alt="" coords="5,31,111,57"/>
+<area shape="rect" id="Node000002" href="$led__task_8c.html#ab796cf2411245dc9d58512912bd4e67e" title="Inizializza l&#39;hardware e le risorse per il task LED." alt="" coords="163,5,258,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,33,150,28,145,30,112,38"/>
+<area shape="rect" id="Node000003" href="$led__task_8c.html#acbd41836584c569d5e38bbe8ad919e9f" title="Esegue un ciclo del task LED (es. lampeggio di stato)." alt="" coords="159,56,263,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="111,50,146,57,141,59,111,55"/>
+<area shape="rect" id="Node000004" href="$rx__snapshot_8c.html#ae785580883a2c19871811977522d68fc" title="Recupera i dati ricevuti per l&#39;elaborazione (es. da parte del Supervisore)." alt="" coords="334,31,465,57"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="263,60,321,54,316,55,264,65"/>
+<area shape="rect" id="Node000005" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX)." alt="" coords="311,81,487,108"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="263,74,298,81,293,81,263,79"/>
+</map>

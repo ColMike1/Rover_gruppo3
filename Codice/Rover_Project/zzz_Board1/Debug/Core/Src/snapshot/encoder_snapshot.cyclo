@@ -1,3 +1,0 @@
-../Core/Src/snapshot/encoder_snapshot.c:21:6:EncoderSnapshot_MutexInit	2
-../Core/Src/snapshot/encoder_snapshot.c:29:6:EncoderSnapshot_Write	2
-../Core/Src/snapshot/encoder_snapshot.c:42:6:EncoderSnapshot_Read	2

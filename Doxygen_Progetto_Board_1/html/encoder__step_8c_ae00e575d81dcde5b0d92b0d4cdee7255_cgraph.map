@@ -1,0 +1,5 @@
+<map id="Encoder_hasNoFeedback" name="Encoder_hasNoFeedback">
+<area shape="rect" id="Node000001" title="Diagnostica la presenza di feedback dall&#39;encoder." alt="" coords="5,5,177,32"/>
+<area shape="rect" id="Node000002" href="$encoder__step_8c.html#a42c392c4a6f5170fd61c36a38486549c" title="Calcola il valore assoluto di un float." alt="" coords="225,5,292,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,16,212,19,206,19,177,21"/>
+</map>

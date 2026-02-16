@@ -1,0 +1,13 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/BLE_Controller/ble_controller_i2c.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/BLE_Controller/ble_controller_i2c.h">
+<area shape="rect" id="Node000001" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="5,5,257,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="6,128,70,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,83,63,118,58,115,97,78"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,128,168,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,78,134,113,128,112,130,83"/>
+<area shape="rect" id="Node000004" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="192,128,241,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,78,198,116,192,116,163,83"/>
+<area shape="rect" id="Node000005" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="186,203,246,229"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="218,153,219,188,214,186,215,157"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="156,277,276,304"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="218,228,219,263,214,260,214,232"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/sonar_snapshot.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/sonar_snapshot.c">
+<area shape="rect" id="Node000001" title="Storage thread&#45;safe dello snapshot sonar." alt="" coords="5,5,215,80"/>
+<area shape="rect" id="Node000002" href="$sonar__snapshot_8h.html" title="Definizione dello snapshot sonar e API thread&#45;safe." alt="" coords="19,128,201,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,78,113,113,107,112,109,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="28,203,93,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,154,80,191,76,188,99,157"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="116,203,205,229"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="120,153,146,190,141,190,118,158"/>
+</map>

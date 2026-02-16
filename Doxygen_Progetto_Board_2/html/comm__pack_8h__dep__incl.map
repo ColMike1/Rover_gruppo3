@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/comm/comm_pack.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/comm/comm_pack.h">
+<area shape="rect" id="Node000001" title="API di serializzazione frame in uscita da board 2." alt="" coords="233,5,437,80"/>
+<area shape="rect" id="Node000002" href="$comm_8h.html" title="Header di aggregazione del modulo comunicazione." alt="" coords="5,128,209,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,87,178,130,175,125,249,89"/>
+<area shape="rect" id="Node000003" href="$comm__pack_8c.html" title="Serializzazione del frame TX board2 &#45;&gt; board1." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="337,94,337,129,333,126,333,98"/>
+<area shape="rect" id="Node000004" href="$comm__tx__task_8c.html" title="Task TX: composizione e invio frame board2 &#45;&gt; board1." alt="" coords="461,128,665,203"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="419,85,496,127,491,127,418,90"/>
+</map>

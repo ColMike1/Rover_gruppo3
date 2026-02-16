@@ -1,0 +1,27 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/sonar/sonar_hw.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/sonar/sonar_hw.c">
+<area shape="rect" id="Node000001" title="Gestione hardware sonar con cattura input tramite timer/DMA." alt="" coords="269,5,472,80"/>
+<area shape="rect" id="Node000002" href="$sonar__hw_8h.html" title="API hardware sonar e strutture di supporto." alt="" coords="136,128,259,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="303,82,235,122,232,118,307,79"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,203,70,229"/>
+<area shape="poly" id="edge14_Node000001_Node000005" title=" " alt="" coords="267,69,197,95,126,130,88,160,58,192,54,189,84,156,123,126,195,90,271,66"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="315,203,410,229"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="370,78,368,128,366,188,361,186,363,128,367,83"/>
+<area shape="rect" id="Node000009" href="$tim_8h.html" title="This file contains all the function prototypes for the tim.c file." alt="" coords="378,128,428,155"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="384,78,396,114,391,112,382,83"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="452,128,546,155"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="420,78,473,118,467,119,419,83"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="570,128,628,155"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="458,78,558,121,553,122,458,83"/>
+<area shape="rect" id="Node000003" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="230,277,290,304"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="174,157,158,172,140,190,131,209,131,218,134,228,150,246,171,260,217,280,212,282,168,265,147,250,130,231,125,219,126,208,136,186,155,168,178,153"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="168,158,81,198,78,194,171,153"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="145,203,205,229"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="195,153,186,189,181,187,192,157"/>
+<area shape="rect" id="Node000007" href="$usart_8h.html" title="This file contains all the function prototypes for the usart.c file." alt="" coords="230,203,291,229"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="209,153,242,191,237,191,208,158"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="226,153,322,195,317,197,226,158"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="200,352,320,379"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="262,303,262,338,258,335,258,306"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="262,228,263,263,258,260,259,232"/>
+<area shape="poly" id="edge10_Node000009_Node000003" title=" " alt="" coords="412,153,430,190,432,211,425,231,401,255,370,272,337,283,307,289,305,284,336,278,368,267,397,251,421,228,427,210,425,191,410,157"/>
+</map>

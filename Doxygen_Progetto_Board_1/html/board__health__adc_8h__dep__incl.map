@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/board_health/board_health_adc.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/board_health/board_health_adc.h">
+<area shape="rect" id="Node000001" title="Gestione dei parametri vitali della scheda tramite ADC." alt="" coords="136,5,374,80"/>
+<area shape="rect" id="Node000002" href="$board__health_8h.html" title="Header principale per il monitoraggio dello stato della scheda." alt="" coords="25,128,235,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,93,170,129,166,126,208,89"/>
+<area shape="rect" id="Node000004" href="$board__health__adc_8c.html" title="Gestione dei canali ADC per il monitoraggio dello stato della scheda (Temperatura e Batteria)." alt="" coords="259,128,505,203"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="305,88,346,128,341,128,305,94"/>
+<area shape="rect" id="Node000003" href="$board__health__task_8c.html" title="Implementazione del task periodico per il monitoraggio dei parametri vitali della board." alt="" coords="5,251,255,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="132,216,132,251,128,249,128,221"/>
+</map>

@@ -1,0 +1,42 @@
+\doxysection{sonar\+\_\+hw.\+h}
+\hypertarget{sonar__hw_8h_source}{}\label{sonar__hw_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/sonar/sonar\_hw.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/sonar/sonar\_hw.h}}
+\doxymbox{\hyperlink{sonar__hw_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SONARS\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SONARS\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{main_8h}{main.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}string.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{usart_8h}{usart.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}cmsis\_os2.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00017\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structbuffer__sonars__t_acbcaa0007c271f595fa9a2027775aac7}{buf\_ch1}}[2];}
+\DoxyCodeLine{00018\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structbuffer__sonars__t_ac1942d300f56f141546907f19e22ee0f}{buf\_ch2}}[2];}
+\DoxyCodeLine{00019\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structbuffer__sonars__t_ae62350a041970f23cbbea6b49e33e078}{buf\_ch3}}[2];}
+\DoxyCodeLine{00020\ \}\ \doxymbox{\hyperlink{structbuffer__sonars__t}{buffer\_sonars\_t}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structdistances__t_a319fc03e1327759b57455eeec1c4dca4}{distance1}};}
+\DoxyCodeLine{00025\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structdistances__t_a850b4ad5392f3413486dd8e2cc14abf2}{distance2}};}
+\DoxyCodeLine{00026\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structdistances__t_a7c284349bfae5db193fe1e4e059d2100}{distance3}};}
+\DoxyCodeLine{00027\ \}\ \doxymbox{\hyperlink{structdistances__t}{distances\_t}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00031\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{structsonars__flag__t_a344c215dabc74d3e6f33cbcb619fd45e}{sonar1\_ok}};}
+\DoxyCodeLine{00032\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{structsonars__flag__t_ae5195cfecaa9be34d9bc4b6befc3ef9e}{sonar2\_ok}};}
+\DoxyCodeLine{00033\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{structsonars__flag__t_a19607b65eb00d5d7ac4ad04902352c4c}{sonar3\_ok}};}
+\DoxyCodeLine{00034\ \}\ \doxymbox{\hyperlink{structsonars__flag__t}{sonars\_flag\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{sonar__hw_8h_ae663cf3990c25dee931f7a428950f817}{SonarHW\_GetDistances}}(uint16\_t\ *d1,\ uint16\_t\ *d2,\ uint16\_t\ *d3);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{sonar__hw_8h_a594c2ae8458bbdef1aaadb3a30e8317d}{scan}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ uint32\_t\ \doxymbox{\hyperlink{sonar__hw_8h_a11cf6bc24c69ac889efe5ee0e8e62df0}{read\_distance}}(uint16\_t\ *buf);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SONARS\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

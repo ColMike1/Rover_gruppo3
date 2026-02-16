@@ -1,0 +1,38 @@
+\doxysection{rx\+\_\+snapshot.\+h}
+\hypertarget{rx__snapshot_8h_source}{}\label{rx__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/rx\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/rx\_snapshot.h}}
+\doxymbox{\hyperlink{rx__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_RX\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_RX\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/comm\_message\_structures.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/comm\_status.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{wcet__monitor_8h}{log/wcet\_monitor.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{main_8h}{main.h}}"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ CommPayloadB2\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_ac61094f44ee12713f17c63391d0e7fc1}{payload}};\ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ CommUnpackStatus\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a44f0a9a5e4cdf6c84bc20e48effa717d}{last\_event}};\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a998ffdf2568d6bbc8203661be859a556}{task\_last\_run\_ms}};\ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a76dff45064214626b1b65d369cf17d30}{data\_last\_valid\_ms}};\ \ }
+\DoxyCodeLine{00029\ \}\ \doxymbox{\hyperlink{struct_rx_snapshot__t}{RxSnapshot\_t}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{rx__snapshot_8h_aeaab1f75c7c734c6683d2a7e9342c5b8}{RxSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{rx__snapshot_8h_a642405a74aba520b9a133c82c2800f71}{RxSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_rx_snapshot__t}{RxSnapshot\_t}}\ *src);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{rx__snapshot_8h_ae785580883a2c19871811977522d68fc}{RxSnapshot\_Read}}(\doxymbox{\hyperlink{struct_rx_snapshot__t}{RxSnapshot\_t}}\ *dst);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_RX\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

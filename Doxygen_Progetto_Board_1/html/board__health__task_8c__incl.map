@@ -1,0 +1,18 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/Board_Health/board_health_task.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/Board_Health/board_health_task.c">
+<area shape="rect" id="Node000001" title="Implementazione del task periodico per il monitoraggio dei parametri vitali della board." alt="" coords="236,5,485,80"/>
+<area shape="rect" id="Node000002" href="$board__health_8h.html" title="Header principale per il monitoraggio dello stato della scheda." alt="" coords="129,128,261,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,82,242,122,239,117,304,79"/>
+<area shape="rect" id="Node000006" href="$board__health__snapshot_8h.html" title="Buffer protetto per lo scambio dati dello stato hardware." alt="" coords="284,128,436,171"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="362,78,363,114,358,111,359,83"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="461,136,556,163"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="413,78,480,126,475,127,412,83"/>
+<area shape="rect" id="Node000003" href="$board__health__adc_8h.html" title="Gestione dei parametri vitali della scheda tramite ADC." alt="" coords="5,219,137,261"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="164,173,114,211,111,207,168,169"/>
+<area shape="rect" id="Node000005" href="$board__health__task_8h.html" title="Interfaccia per il task di monitoraggio di sistema." alt="" coords="161,219,293,261"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="203,169,217,205,212,203,201,174"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="168,309,232,336"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="105,259,170,300,165,302,104,264"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="356,169,338,217,324,241,306,263,278,287,247,305,245,300,275,282,302,259,319,238,333,214,352,173"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="367,227,455,253"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="373,169,399,214,394,212,371,174"/>
+</map>

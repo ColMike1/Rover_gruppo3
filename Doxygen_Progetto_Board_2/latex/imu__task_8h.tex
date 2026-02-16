@@ -1,0 +1,80 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+\+IMU/\+imu\+\_\+task.h File Reference}
+\hypertarget{imu__task_8h}{}\label{imu__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/IMU/imu\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/IMU/imu\_task.h}}
+
+
+API del task periodico IMU.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{imu__task_8h_ae19f72c003f81fd3ffbf147a09d6c486}{IMU\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task IMU. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__task_8h_aba43d99a94c7298c850ed66a454eb6d1}{IMU\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task IMU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API del task periodico IMU. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{imu__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{imu__task_8h_ae19f72c003f81fd3ffbf147a09d6c486}\index{imu\_task.h@{imu\_task.h}!IMU\_TaskInit@{IMU\_TaskInit}}
+\index{IMU\_TaskInit@{IMU\_TaskInit}!imu\_task.h@{imu\_task.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_TaskInit()}{IMU\_TaskInit()}}
+{\footnotesize\ttfamily \label{imu__task_8h_ae19f72c003f81fd3ffbf147a09d6c486} 
+void IMU\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task IMU. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8h_ae19f72c003f81fd3ffbf147a09d6c486_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8h_ae19f72c003f81fd3ffbf147a09d6c486_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__task_8h_aba43d99a94c7298c850ed66a454eb6d1}\index{imu\_task.h@{imu\_task.h}!IMU\_TaskStep@{IMU\_TaskStep}}
+\index{IMU\_TaskStep@{IMU\_TaskStep}!imu\_task.h@{imu\_task.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_TaskStep()}{IMU\_TaskStep()}}
+{\footnotesize\ttfamily \label{imu__task_8h_aba43d99a94c7298c850ed66a454eb6d1} 
+void IMU\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task IMU. 
+
+Legge i dati dal sensore, aggiorna i timestamp e pubblica lo snapshot. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8h_aba43d99a94c7298c850ed66a454eb6d1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8h_aba43d99a94c7298c850ed66a454eb6d1_icgraph}
+\end{center}
+\end{figure}

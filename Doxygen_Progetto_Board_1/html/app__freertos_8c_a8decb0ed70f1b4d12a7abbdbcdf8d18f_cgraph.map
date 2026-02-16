@@ -1,0 +1,55 @@
+<map id="StartTask_Control" name="StartTask_Control">
+<area shape="rect" id="Node000001" title="Task di Controllo Motori e Attuazione." alt="" coords="5,343,132,369"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8c.html#a0991cd6500749efc61a1a5f6dde7eee5" title="Inizializza il modulo di attuazione." alt="" coords="184,44,286,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,341,111,245,141,181,177,119,211,79,209,84,182,121,146,184,116,247,77,343"/>
+<area shape="rect" id="Node000006" href="$actuation__step_8c.html#adf98702f2e24c4b18f54c774350214db" title="Esegue un singolo passo di attuazione basato sull&#39;output del controllo." alt="" coords="180,132,290,159"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="73,341,112,268,142,222,178,179,197,165,194,170,182,183,146,225,117,271,78,343"/>
+<area shape="rect" id="Node000009" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX)." alt="" coords="338,157,514,184"/>
+<area shape="poly" id="edge29_Node000001_Node000009" title=" " alt="" coords="76,341,115,287,145,257,178,231,213,213,249,199,325,181,321,185,251,204,215,218,181,236,148,261,119,291,81,343"/>
+<area shape="rect" id="Node000010" href="$control__step_8c.html#ad2b3dfd69a990b69a69c34b19a0e0d98" title="Inizializza il modulo di controllo e le relative variabili di stato." alt="" coords="191,503,279,529"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="80,367,122,421,150,453,181,482,196,494,191,495,178,486,147,456,118,425,79,373"/>
+<area shape="rect" id="Node000011" href="$control__law_8c.html#a24d78a9e11c48b002a0fb8907b2411e8" title="Inizializzazione della legge di controllo." alt="" coords="370,629,482,656"/>
+<area shape="poly" id="edge19_Node000001_Node000011" title=" " alt="" coords="85,367,128,401,181,438,212,452,239,458,265,468,292,489,304,506,311,523,315,555,320,586,327,601,340,615,358,630,353,628,336,619,323,603,315,587,310,556,306,524,300,508,288,493,262,472,238,464,210,457,178,442,125,406,86,372"/>
+<area shape="rect" id="Node000012" href="$control__step_8c.html#a0fcef49c9cbce9b244be3d6251d9d445" title="Esegue l&#39;iterazione principale del controllo." alt="" coords="186,245,284,272"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="91,340,198,278,196,283,95,344"/>
+<area shape="rect" id="Node000017" href="$encoder__step_8c.html#a1c8318d644fc2e61cc1ef9cb0710feb6" title="Inizializza i timer e le periferiche dedicate agli encoder." alt="" coords="188,553,282,580"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="75,367,113,448,143,496,182,539,186,545,181,544,178,543,139,499,109,450,74,373"/>
+<area shape="rect" id="Node000018" href="$encoder__step_8c.html#a620bc6b8cb569dc4ffbb6980aad07821" title="Esegue il campionamento degli encoder e converte i tick in unità fisiche." alt="" coords="183,401,286,428"/>
+<area shape="poly" id="edge21_Node000001_Node000018" title=" " alt="" coords="108,367,183,394,179,397,109,373"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8c.html#ad8e3995889ea345e17e66905d67d0703" title="Inizializza la periferica di comunicazione per i controller Sabertooth." alt="" coords="372,5,481,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="284,45,358,31,354,35,287,49"/>
+<area shape="rect" id="Node000004" href="$sabertooth__driver_8c.html#aff60a261fda72eadf539c1a86a000313" title="Prepara un singolo pacchetto da 4 byte per il protocollo Sabertooth." alt="" coords="562,31,718,57"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="480,23,550,32,545,34,482,28"/>
+<area shape="rect" id="Node000005" href="$sabertooth__driver_8c.html#afe3092cef7667a37789c3d6a189336e2" title="Calcola il checksum a 7&#45;bit richiesto dal protocollo Sabertooth." alt="" coords="766,31,891,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="717,41,753,43,748,45,719,47"/>
+<area shape="rect" id="Node000007" href="$encoder__snapshot_8c.html#af580ad966ed7718068907738755f9e22" title="Legge l&#39;ultimo snapshot encoder disponibile." alt="" coords="345,107,507,133"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="289,136,331,131,327,134,292,140"/>
+<area shape="rect" id="Node000008" href="$sabertooth__driver_8c.html#a9611fcff8d2ff2c3ca24725024f02647" title="Invia i comandi di velocità ai 4 motori." alt="" coords="341,56,511,83"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="259,129,337,92,359,86,355,89,339,97,263,133"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="289,150,325,156,320,158,291,155"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="510,57,549,54,544,56,513,62"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="274,527,292,539,308,560,316,579,323,598,340,615,358,628,353,627,336,619,319,600,311,581,303,562,288,543,273,533"/>
+<area shape="poly" id="edge16_Node000012_Node000007" title=" " alt="" coords="243,243,279,194,306,167,337,143,349,138,346,142,339,148,310,171,283,198,247,246"/>
+<area shape="poly" id="edge18_Node000012_Node000009" title=" " alt="" coords="253,243,291,218,337,194,357,188,353,191,339,198,294,223,257,247"/>
+<area shape="rect" id="Node000013" href="$control__step_8c.html#a700796b2dc3893dab201c8f1fe2f5257" title="Applica strategie di compensazione in caso di perdita di feedback encoder." alt="" coords="340,208,512,251"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="282,249,327,243,322,246,285,254"/>
+<area shape="rect" id="Node000014" href="$control__law_8c.html#a124d0cd4613652e6514a9ac3f68b5212" title="Esegue il calcolo della legge di controllo." alt="" coords="366,275,487,301"/>
+<area shape="poly" id="edge14_Node000012_Node000014" title=" " alt="" coords="283,264,352,275,348,278,285,269"/>
+<area shape="rect" id="Node000016" href="$rx__snapshot_8c.html#ae785580883a2c19871811977522d68fc" title="Recupera i dati ricevuti per l&#39;elaborazione (es. da parte del Supervisore)." alt="" coords="360,325,492,352"/>
+<area shape="poly" id="edge17_Node000012_Node000016" title=" " alt="" coords="258,270,296,291,339,311,359,319,353,321,337,316,294,295,259,275"/>
+<area shape="rect" id="Node000015" href="$control__law_8c.html#a9be2a088ff9fb1e2ceb9feef414072d6" title="Calcola l&#39;uscita del controllore PI usando la formulazione incrementale." alt="" coords="593,275,687,301"/>
+<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="487,285,580,287,575,289,488,291"/>
+<area shape="poly" id="edge28_Node000018_Node000009" title=" " alt="" coords="240,399,288,286,316,226,336,194,345,190,341,194,340,198,321,229,293,288,244,402"/>
+<area shape="rect" id="Node000019" href="$encoder__step_8c.html#a6d29812c0974c1693e1fd4aa1c187c39" title="Logica di fallback per la stima dei giri ruota in caso di guasto ai sensori." alt="" coords="340,477,512,504"/>
+<area shape="poly" id="edge22_Node000018_Node000019" title=" " alt="" coords="261,426,339,463,360,472,355,473,337,468,261,431"/>
+<area shape="rect" id="Node000020" href="$encoder__step_8c.html#a490b7782c5a8e9a1850f12d956e23d93" title="Converte i ticks misurati in velocità angolare (RPM)." alt="" coords="358,528,494,555"/>
+<area shape="poly" id="edge23_Node000018_Node000020" title=" " alt="" coords="265,426,292,445,307,464,315,482,324,498,340,514,348,521,343,521,336,518,319,501,310,484,303,467,288,449,264,431"/>
+<area shape="rect" id="Node000021" href="$encoder__step_8c.html#ae00e575d81dcde5b0d92b0d4cdee7255" title="Diagnostica la presenza di feedback dall&#39;encoder." alt="" coords="340,579,512,605"/>
+<area shape="poly" id="edge24_Node000018_Node000021" title=" " alt="" coords="267,426,292,445,303,462,310,478,315,508,320,537,327,551,340,565,345,571,340,570,336,569,323,554,315,539,309,509,305,479,299,464,288,448,267,431"/>
+<area shape="rect" id="Node000023" href="$encoder__hw_8c.html#ae734ba8b992135e178c9347f230763cb" title="Legge la variazione di tick (delta) con gestione dell&#39;overflow." alt="" coords="357,376,495,403"/>
+<area shape="poly" id="edge26_Node000018_Node000023" title=" " alt="" coords="286,405,344,399,339,402,288,410"/>
+<area shape="rect" id="Node000024" href="$encoder__snapshot_8c.html#a461cb0565d6741f020ebd4aae43fc68b" title="Scrive i dati degli encoder nello snapshot." alt="" coords="346,427,507,453"/>
+<area shape="poly" id="edge27_Node000018_Node000024" title=" " alt="" coords="286,419,333,426,328,428,287,424"/>
+<area shape="rect" id="Node000022" href="$encoder__step_8c.html#a42c392c4a6f5170fd61c36a38486549c" title="Calcola il valore assoluto di un float." alt="" coords="606,579,674,605"/>
+<area shape="poly" id="edge25_Node000021_Node000022" title=" " alt="" coords="512,589,593,592,588,592,512,595"/>
+</map>

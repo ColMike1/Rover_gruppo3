@@ -1,0 +1,36 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/BLE_Controller/ble_controller_i2c.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/BLE_Controller/ble_controller_i2c.h">
+<area shape="rect" id="Node000001" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="1056,5,1307,80"/>
+<area shape="rect" id="Node000002" href="$ble__controller_8h.html" title="Header di aggregazione del modulo BLE controller." alt="" coords="759,136,986,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1082,85,962,138,960,133,1077,87"/>
+<area shape="rect" id="Node000003" href="$ble__controller__snapshot_8h.html" title="Definizione dello snapshot BLE controller e API thread&#45;safe." alt="" coords="1011,128,1214,219"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1157,92,1138,129,1135,125,1153,95"/>
+<area shape="rect" id="Node000013" href="$ble__controller__task_8c.html" title="Task di acquisizione e normalizzazione dati del controller BLE." alt="" coords="1706,275,1967,349"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="1209,91,1278,217,1314,232,1362,243,1480,252,1601,256,1653,259,1694,264,1727,274,1722,274,1693,269,1652,264,1601,261,1480,258,1361,248,1312,237,1275,221,1207,96"/>
+<area shape="rect" id="Node000016" href="$ble__controller__i2c_8c.html" title="Implementazione accesso I2C al controller BLE." alt="" coords="1288,136,1542,211"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="1261,85,1351,136,1346,135,1261,90"/>
+<area shape="rect" id="Node000004" href="$comm__pack_8h.html" title="API di serializzazione frame in uscita da board 2." alt="" coords="323,275,526,349"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="993,219,882,242,791,249,701,254,589,269,527,283,526,278,588,264,700,248,790,243,881,237,998,218"/>
+<area shape="rect" id="Node000007" href="$comm__tx__task_8c.html" title="Task TX: composizione e invio frame board2 &#45;&gt; board1." alt="" coords="461,405,665,480"/>
+<area shape="poly" id="edge13_Node000003_Node000007" title=" " alt="" coords="993,219,953,230,916,233,853,235,792,242,760,252,723,269,680,299,643,335,612,372,587,407,584,403,607,369,639,331,677,294,720,264,758,247,791,236,852,230,916,228,953,224,998,218"/>
+<area shape="rect" id="Node000008" href="$log__format_8h.html" title="API di formattazione degli snapshot diagnostici." alt="" coords="733,275,937,349"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="1011,225,910,277,908,272,1006,227"/>
+<area shape="rect" id="Node000010" href="$log__task_8c.html" title="Task di logging periodico su UART debug." alt="" coords="917,405,1121,480"/>
+<area shape="poly" id="edge14_Node000003_Node000010" title=" " alt="" coords="1029,228,1013,248,1001,268,992,302,991,338,997,373,1006,406,1002,403,992,374,986,339,986,301,997,266,1009,245,1025,230"/>
+<area shape="rect" id="Node000011" href="$snapshot_8h.html" title="Header aggregatore degli snapshot Board 2." alt="" coords="1011,275,1214,349"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="1114,232,1114,276,1110,273,1111,236"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="1229,215,1233,216,1302,230,1361,237,1463,242,1565,246,1624,252,1694,264,1728,274,1722,274,1693,269,1624,257,1564,251,1462,247,1361,243,1301,235,1232,221,1229,221"/>
+<area shape="rect" id="Node000014" href="$ble__controller__snapshot_8c.html" title="Storage thread&#45;safe dello snapshot BLE controller." alt="" coords="1239,267,1442,357"/>
+<area shape="poly" id="edge15_Node000003_Node000014" title=" " alt="" coords="1200,224,1268,266,1263,266,1199,229"/>
+<area shape="rect" id="Node000015" href="$supervisor__task_8c.html" title="Task supervisore board 2: controllo stato rover e gestione comando/attuazione." alt="" coords="1466,275,1682,349"/>
+<area shape="poly" id="edge16_Node000003_Node000015" title=" " alt="" coords="1229,215,1233,216,1295,231,1343,240,1392,249,1454,264,1480,274,1475,274,1453,269,1391,254,1343,245,1294,237,1232,221,1228,220"/>
+<area shape="rect" id="Node000005" href="$comm_8h.html" title="Header di aggregazione del modulo comunicazione." alt="" coords="5,405,209,480"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="323,354,199,407,197,402,318,356"/>
+<area shape="rect" id="Node000006" href="$comm__pack_8c.html" title="Serializzazione del frame TX board2 &#45;&gt; board1." alt="" coords="233,405,437,480"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="393,361,362,407,359,403,388,363"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="475,357,526,405,521,404,474,362"/>
+<area shape="rect" id="Node000009" href="$log__format_8c.html" title="Formattazione testuale degli snapshot di diagnostica." alt="" coords="689,405,893,480"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="820,362,805,407,802,403,815,366"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="901,356,969,405,964,404,899,361"/>
+<area shape="rect" id="Node000012" href="$app__freertos_8c.html" title=" " alt="" coords="1145,405,1349,480"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1163,358,1211,406,1206,404,1161,363"/>
+</map>

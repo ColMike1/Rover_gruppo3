@@ -1,0 +1,77 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+supervisor/\+supervisor\+\_\+task.h File Reference}
+\hypertarget{supervisor__task_8h}{}\label{supervisor__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/supervisor/supervisor\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/supervisor/supervisor\_task.h}}
+
+
+API del task supervisore periodico.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa}{Supervisor\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task supervisore. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a}{Supervisor\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task supervisore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API del task supervisore periodico. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{supervisor__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa}\index{supervisor\_task.h@{supervisor\_task.h}!Supervisor\_TaskInit@{Supervisor\_TaskInit}}
+\index{Supervisor\_TaskInit@{Supervisor\_TaskInit}!supervisor\_task.h@{supervisor\_task.h}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskInit()}{Supervisor\_TaskInit()}}
+{\footnotesize\ttfamily \label{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa} 
+void Supervisor\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task supervisore. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a}\index{supervisor\_task.h@{supervisor\_task.h}!Supervisor\_TaskStep@{Supervisor\_TaskStep}}
+\index{Supervisor\_TaskStep@{Supervisor\_TaskStep}!supervisor\_task.h@{supervisor\_task.h}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskStep()}{Supervisor\_TaskStep()}}
+{\footnotesize\ttfamily \label{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a} 
+void Supervisor\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task supervisore. 
+
+Esegue uno step del task supervisore.
+
+In ogni ciclo legge tutti gli snapshot, valuta freschezza/\+timeout dei dati (stato normale, degradato, critico), integra lo stato locale/\+remoto del rover e aggiorna il comando con i riferimenti di velocita\textquotesingle{} da applicare/\+trasmettere (es. riduzione in degrado, schivata sonar, stop di emergenza). Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a_icgraph}
+\end{center}
+\end{figure}

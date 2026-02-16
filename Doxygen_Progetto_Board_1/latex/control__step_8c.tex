@@ -1,0 +1,186 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+control/\+control\+\_\+step.c File Reference}
+\hypertarget{control__step_8c}{}\label{control__step_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/control/control\_step.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/control/control\_step.c}}
+
+
+Orchestrazione del task di controllo e gestione delle strategie di fallback.  
+
+
+{\ttfamily \+\#include $<$actuation/\+actuation\+\_\+step.\+h$>$}\newline
+{\ttfamily \+\#include "{}control/\+control.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+encoder\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for control\+\_\+step.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{control__step_8c_a5e274ea3b104f383bb5e203ed2653549}{MAX\+\_\+\+SPEED\+\_\+\+RPM}}~160.\+0f
+\begin{DoxyCompactList}\small\item\em Velocità massima nominale dei motori \+[RPM]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{control__step_8c_a18b0e0fa8a14f8c783e3c79cb96fa433}{MAX\+\_\+\+TURN\+\_\+\+RPM}}~80.\+0f
+\begin{DoxyCompactList}\small\item\em Massimo differenziale di sterzata ammesso \+[RPM]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{control__step_8c_adb937c57c546d906417788e4320695c6}{OPEN\+\_\+\+LOOP\+\_\+\+LIMIT}}~80.\+0f
+\begin{DoxyCompactList}\small\item\em Limite cautelativo di velocità in modalità Open Loop \+[RPM]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{control__step_8c_adece81f5e3255e556c93b3f54e1d80d7}{MAX\+\_\+\+ACTUATION\+\_\+\+VOLTAGE}}~12.\+0f
+\begin{DoxyCompactList}\small\item\em Tensione massima di alimentazione motori \+[V]\+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{control__step_8c_a700796b2dc3893dab201c8f1fe2f5257}{Apply\+\_\+\+Encoders\+\_\+\+Fallback\+\_\+\+Actuation}} (\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \texorpdfstring{$\ast$}{*}const cmd, const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} sup)
+\begin{DoxyCompactList}\small\item\em Applica strategie di compensazione in caso di perdita di feedback encoder. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{control__step_8c_ad2b3dfd69a990b69a69c34b19a0e0d98}{Control\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializzazione del modulo di controllo. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \doxymbox{\hyperlink{control__step_8c_a0fcef49c9cbce9b244be3d6251d9d445}{Control\+\_\+\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue lo step periodico di controllo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Orchestrazione del task di controllo e gestione delle strategie di fallback. 
+
+Si occupa di processare gli snapshot di sistema, decidere tra controllo ad anello chiuso o aperto, e gestire i guasti agli encoder. 
+
+\label{doc-define-members}
+\Hypertarget{control__step_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{control__step_8c_adece81f5e3255e556c93b3f54e1d80d7}\index{control\_step.c@{control\_step.c}!MAX\_ACTUATION\_VOLTAGE@{MAX\_ACTUATION\_VOLTAGE}}
+\index{MAX\_ACTUATION\_VOLTAGE@{MAX\_ACTUATION\_VOLTAGE}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_ACTUATION\_VOLTAGE}{MAX\_ACTUATION\_VOLTAGE}}
+{\footnotesize\ttfamily \label{control__step_8c_adece81f5e3255e556c93b3f54e1d80d7} 
+\+\#define MAX\+\_\+\+ACTUATION\+\_\+\+VOLTAGE~12.\+0f}
+
+
+
+Tensione massima di alimentazione motori \+[V]\+. 
+
+\Hypertarget{control__step_8c_a5e274ea3b104f383bb5e203ed2653549}\index{control\_step.c@{control\_step.c}!MAX\_SPEED\_RPM@{MAX\_SPEED\_RPM}}
+\index{MAX\_SPEED\_RPM@{MAX\_SPEED\_RPM}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_SPEED\_RPM}{MAX\_SPEED\_RPM}}
+{\footnotesize\ttfamily \label{control__step_8c_a5e274ea3b104f383bb5e203ed2653549} 
+\+\#define MAX\+\_\+\+SPEED\+\_\+\+RPM~160.\+0f}
+
+
+
+Velocità massima nominale dei motori \+[RPM]\+. 
+
+\Hypertarget{control__step_8c_a18b0e0fa8a14f8c783e3c79cb96fa433}\index{control\_step.c@{control\_step.c}!MAX\_TURN\_RPM@{MAX\_TURN\_RPM}}
+\index{MAX\_TURN\_RPM@{MAX\_TURN\_RPM}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_TURN\_RPM}{MAX\_TURN\_RPM}}
+{\footnotesize\ttfamily \label{control__step_8c_a18b0e0fa8a14f8c783e3c79cb96fa433} 
+\+\#define MAX\+\_\+\+TURN\+\_\+\+RPM~80.\+0f}
+
+
+
+Massimo differenziale di sterzata ammesso \+[RPM]\+. 
+
+\Hypertarget{control__step_8c_adb937c57c546d906417788e4320695c6}\index{control\_step.c@{control\_step.c}!OPEN\_LOOP\_LIMIT@{OPEN\_LOOP\_LIMIT}}
+\index{OPEN\_LOOP\_LIMIT@{OPEN\_LOOP\_LIMIT}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{OPEN\_LOOP\_LIMIT}{OPEN\_LOOP\_LIMIT}}
+{\footnotesize\ttfamily \label{control__step_8c_adb937c57c546d906417788e4320695c6} 
+\+\#define OPEN\+\_\+\+LOOP\+\_\+\+LIMIT~80.\+0f}
+
+
+
+Limite cautelativo di velocità in modalità Open Loop \+[RPM]\+. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{control__step_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{control__step_8c_a700796b2dc3893dab201c8f1fe2f5257}\index{control\_step.c@{control\_step.c}!Apply\_Encoders\_Fallback\_Actuation@{Apply\_Encoders\_Fallback\_Actuation}}
+\index{Apply\_Encoders\_Fallback\_Actuation@{Apply\_Encoders\_Fallback\_Actuation}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{Apply\_Encoders\_Fallback\_Actuation()}{Apply\_Encoders\_Fallback\_Actuation()}}
+{\footnotesize\ttfamily \label{control__step_8c_a700796b2dc3893dab201c8f1fe2f5257} 
+void Apply\+\_\+\+Encoders\+\_\+\+Fallback\+\_\+\+Actuation (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{cmd}{, }\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}}}]{sup}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Applica strategie di compensazione in caso di perdita di feedback encoder. 
+
+In base al numero e alla posizione dei sensori guasti, copia i comandi di tensione dalle ruote funzionanti a quelle in avaria per mantenere la trazione. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em cmd} & Puntatore ai comandi di attuazione da modificare. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot del supervisore contenente i flag di errore. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8c_a700796b2dc3893dab201c8f1fe2f5257_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{control__step_8c_ad2b3dfd69a990b69a69c34b19a0e0d98}\index{control\_step.c@{control\_step.c}!Control\_Init@{Control\_Init}}
+\index{Control\_Init@{Control\_Init}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{Control\_Init()}{Control\_Init()}}
+{\footnotesize\ttfamily \label{control__step_8c_ad2b3dfd69a990b69a69c34b19a0e0d98} 
+void Control\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializzazione del modulo di controllo. 
+
+Inizializza il modulo di controllo e le relative variabili di stato. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{control__step_8c_ad2b3dfd69a990b69a69c34b19a0e0d98_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8c_ad2b3dfd69a990b69a69c34b19a0e0d98_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{control__step_8c_a0fcef49c9cbce9b244be3d6251d9d445}\index{control\_step.c@{control\_step.c}!Control\_Step@{Control\_Step}}
+\index{Control\_Step@{Control\_Step}!control\_step.c@{control\_step.c}}
+\doxysubsubsection{\texorpdfstring{Control\_Step()}{Control\_Step()}}
+{\footnotesize\ttfamily \label{control__step_8c_a0fcef49c9cbce9b244be3d6251d9d445} 
+\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} Control\+\_\+\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue lo step periodico di controllo. 
+
+Esegue l\textquotesingle{}iterazione principale del controllo.
+
+
+\begin{DoxyEnumerate}
+\item Legge gli snapshot (Encoder, Supervisor, RX).
+\item Normalizza i setpoint di velocità e sterzata.
+\item Se tutti gli encoder sono guasti, entra in modalità {\bfseries{Open Loop}} (Anello aperto).
+\item Altrimenti, esegue la {\bfseries{Control Law}} e applica eventuali fallback per ruote singole. \begin{DoxyReturn}{Returns}
+\doxylink{struct_control_output__t}{Control\+Output\+\_\+t} Struttura contenente i comandi di tensione per i motori. 
+\end{DoxyReturn}
+
+\end{DoxyEnumerate}Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8c_a0fcef49c9cbce9b244be3d6251d9d445_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__step_8c_a0fcef49c9cbce9b244be3d6251d9d445_icgraph}
+\end{center}
+\end{figure}

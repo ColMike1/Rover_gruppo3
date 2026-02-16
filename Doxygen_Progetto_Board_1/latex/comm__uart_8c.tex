@@ -1,0 +1,346 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+uart.c File Reference}
+\hypertarget{comm__uart_8c}{}\label{comm__uart_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_uart.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_uart.c}}
+
+
+Driver di basso livello per la comunicazione UART con gestione interrupt.  
+
+
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}stm32g4xx\+\_\+hal.\+h"{}}\newline
+{\ttfamily \+\#include "{}actuation/\+sabertooth\+\_\+driver.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for comm\+\_\+uart.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__uart_8c_a1f25fe45d891de244a8135ae02fc9265}{UART\+\_\+\+RX\+\_\+\+BUF\+\_\+\+SIZE}}~(256U)
+\begin{DoxyCompactList}\small\item\em Dimensione del buffer circolare di ricezione. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint16\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_a349d4db57138c454acefda569ed3909c}{ring\+\_\+next}} (uint16\+\_\+t idx)
+\begin{DoxyCompactList}\small\item\em Incrementa l\textquotesingle{}indice del buffer circolare gestendo il wrapping. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8c_a1fa5f2e3248e19bea05ca2c1006972a9}{Comm\+Uart\+\_\+\+Register\+Rx\+Task}} (Task\+Handle\+\_\+t h)
+\begin{DoxyCompactList}\small\item\em Registra il task che deve ricevere le notifiche di ricezione byte. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8c_a99c3d964ff55f8369c528aa78c2b0258}{Comm\+Uart\+\_\+\+Early\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializzazione iniziale del driver e avvio interrupt RX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8c_ad8213afef04db7813169c63f63f05f53}{Comm\+Uart\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializzazione standard e registrazione task chiamante per RX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8c_aa6798e77d91bf6435a857b760113928e}{Comm\+Uart\+\_\+\+Send}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Invia un buffer di dati tramite UART4 in modalità asincrona (Interrupt). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8c_abcdf9b59049eccbc87d54042f9235b1a}{HAL\+\_\+\+UART\+\_\+\+Tx\+Cplt\+Callback}} (UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}huart)
+\begin{DoxyCompactList}\small\item\em Callback HAL chiamata al completamento della trasmissione. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{comm__uart_8c_aa7a2f2fa5ecbe31a88a1b315c21251bb}{Comm\+Uart\+\_\+\+Get\+Byte}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}b)
+\begin{DoxyCompactList}\small\item\em Estrae un byte dal buffer circolare di ricezione. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+UART\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{comm__uart_8c_ae273feb3e0dc44e38892650faa58fced}{huart4}}
+\begin{DoxyCompactList}\small\item\em Handle per la comunicazione seriale principale (Telemetria). \end{DoxyCompactList}\item 
+UART\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{comm__uart_8c_a25a82fcf0cd24eb6d39977cb5864cec8}{huart5}}
+\begin{DoxyCompactList}\small\item\em Handle per la comunicazione con i driver Sabertooth. \end{DoxyCompactList}\item 
+static volatile uint8\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_a70d50fcb51a06051ca820cee408841fa}{uart4\+\_\+tx\+\_\+busy}} = 0U
+\begin{DoxyCompactList}\small\item\em Flag di stato TX per UART4. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_abecb9f7f424287335a67817a45e061a0}{rx\+\_\+byte}} = 0U
+\begin{DoxyCompactList}\small\item\em Variabile di supporto per l\textquotesingle{}interrupt di ricezione (singolo byte). \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_ad3df710aaf221ab1759f152b41a26aa5}{rx\+\_\+buf}} \+[\doxymbox{\hyperlink{comm__uart_8c_a1f25fe45d891de244a8135ae02fc9265}{UART\+\_\+\+RX\+\_\+\+BUF\+\_\+\+SIZE}}]\+
+\begin{DoxyCompactList}\small\item\em Buffer circolare di ricezione. \end{DoxyCompactList}\item 
+static volatile uint16\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_ab937d2e0dd6809aaf9ae170a5b442e14}{rx\+\_\+wr}} = 0U
+\item 
+static volatile uint16\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_a76cae229d21678d5102cfdd291e7045c}{rx\+\_\+rd}} = 0U
+\item 
+static Task\+Handle\+\_\+t \doxymbox{\hyperlink{comm__uart_8c_ae60a55ebafdb62cef0e0c4118a6fd256}{rx\+\_\+task\+\_\+handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle del task da notificare all\textquotesingle{}arrivo di nuovi dati. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver di basso livello per la comunicazione UART con gestione interrupt. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{comm__uart_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__uart_8c_a1f25fe45d891de244a8135ae02fc9265}\index{comm\_uart.c@{comm\_uart.c}!UART\_RX\_BUF\_SIZE@{UART\_RX\_BUF\_SIZE}}
+\index{UART\_RX\_BUF\_SIZE@{UART\_RX\_BUF\_SIZE}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{UART\_RX\_BUF\_SIZE}{UART\_RX\_BUF\_SIZE}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a1f25fe45d891de244a8135ae02fc9265} 
+\+\#define UART\+\_\+\+RX\+\_\+\+BUF\+\_\+\+SIZE~(256U)}
+
+
+
+Dimensione del buffer circolare di ricezione. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__uart_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__uart_8c_a99c3d964ff55f8369c528aa78c2b0258}\index{comm\_uart.c@{comm\_uart.c}!CommUart\_EarlyInit@{CommUart\_EarlyInit}}
+\index{CommUart\_EarlyInit@{CommUart\_EarlyInit}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{CommUart\_EarlyInit()}{CommUart\_EarlyInit()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a99c3d964ff55f8369c528aa78c2b0258} 
+void Comm\+Uart\+\_\+\+Early\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializzazione iniziale del driver e avvio interrupt RX. 
+
+Inizializzazione precoce della periferica (es. configurazione GPIO e clock). Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{comm__uart_8c_a99c3d964ff55f8369c528aa78c2b0258_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8c_aa7a2f2fa5ecbe31a88a1b315c21251bb}\index{comm\_uart.c@{comm\_uart.c}!CommUart\_GetByte@{CommUart\_GetByte}}
+\index{CommUart\_GetByte@{CommUart\_GetByte}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{CommUart\_GetByte()}{CommUart\_GetByte()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_aa7a2f2fa5ecbe31a88a1b315c21251bb} 
+bool Comm\+Uart\+\_\+\+Get\+Byte (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Estrae un byte dal buffer circolare di ricezione. 
+
+Tenta di prelevare un singolo byte dal buffer di ricezione.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em b} & Puntatore alla variabile dove scrivere il byte estratto. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Se un byte è stato estratto correttamente. 
+
+false Se il buffer è vuoto. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{comm__uart_8c_aa7a2f2fa5ecbe31a88a1b315c21251bb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c_aa7a2f2fa5ecbe31a88a1b315c21251bb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8c_ad8213afef04db7813169c63f63f05f53}\index{comm\_uart.c@{comm\_uart.c}!CommUart\_Init@{CommUart\_Init}}
+\index{CommUart\_Init@{CommUart\_Init}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{CommUart\_Init()}{CommUart\_Init()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_ad8213afef04db7813169c63f63f05f53} 
+void Comm\+Uart\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializzazione standard e registrazione task chiamante per RX. 
+
+Inizializzazione completa della periferica UART e degli interrupt/\+\+DMA. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{comm__uart_8c_ad8213afef04db7813169c63f63f05f53_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c_ad8213afef04db7813169c63f63f05f53_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8c_a1fa5f2e3248e19bea05ca2c1006972a9}\index{comm\_uart.c@{comm\_uart.c}!CommUart\_RegisterRxTask@{CommUart\_RegisterRxTask}}
+\index{CommUart\_RegisterRxTask@{CommUart\_RegisterRxTask}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{CommUart\_RegisterRxTask()}{CommUart\_RegisterRxTask()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a1fa5f2e3248e19bea05ca2c1006972a9} 
+void Comm\+Uart\+\_\+\+Register\+Rx\+Task (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{h}{}\end{DoxyParamCaption})}
+
+
+
+Registra il task che deve ricevere le notifiche di ricezione byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em h} & Handle del task Free\+RTOS. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c_a1fa5f2e3248e19bea05ca2c1006972a9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8c_aa6798e77d91bf6435a857b760113928e}\index{comm\_uart.c@{comm\_uart.c}!CommUart\_Send@{CommUart\_Send}}
+\index{CommUart\_Send@{CommUart\_Send}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{CommUart\_Send()}{CommUart\_Send()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_aa6798e77d91bf6435a857b760113928e} 
+void Comm\+Uart\+\_\+\+Send (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Invia un buffer di dati tramite UART4 in modalità asincrona (Interrupt). 
+
+Invia un buffer di dati grezzi sulla UART.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Puntatore ai dati da inviare. \\
+\hline
+{\em len} & Lunghezza del buffer. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c_aa6798e77d91bf6435a857b760113928e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8c_abcdf9b59049eccbc87d54042f9235b1a}\index{comm\_uart.c@{comm\_uart.c}!HAL\_UART\_TxCpltCallback@{HAL\_UART\_TxCpltCallback}}
+\index{HAL\_UART\_TxCpltCallback@{HAL\_UART\_TxCpltCallback}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_UART\_TxCpltCallback()}{HAL\_UART\_TxCpltCallback()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_abcdf9b59049eccbc87d54042f9235b1a} 
+void HAL\+\_\+\+UART\+\_\+\+Tx\+Cplt\+Callback (\begin{DoxyParamCaption}\item[{UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{huart}{}\end{DoxyParamCaption})}
+
+
+
+Callback HAL chiamata al completamento della trasmissione. 
+
+Gestisce lo sblocco dei driver UART4 e UART5 (Sabertooth). 
+\begin{DoxyParams}{Parameters}
+{\em huart} & Handle della periferica UART. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c_abcdf9b59049eccbc87d54042f9235b1a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8c_a349d4db57138c454acefda569ed3909c}\index{comm\_uart.c@{comm\_uart.c}!ring\_next@{ring\_next}}
+\index{ring\_next@{ring\_next}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{ring\_next()}{ring\_next()}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a349d4db57138c454acefda569ed3909c} 
+uint16\+\_\+t ring\+\_\+next (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{idx}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Incrementa l\textquotesingle{}indice del buffer circolare gestendo il wrapping. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & Indice corrente. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t Prossimo indice. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8c_a349d4db57138c454acefda569ed3909c_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{comm__uart_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{comm__uart_8c_ae273feb3e0dc44e38892650faa58fced}\index{comm\_uart.c@{comm\_uart.c}!huart4@{huart4}}
+\index{huart4@{huart4}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{huart4}{huart4}}
+{\footnotesize\ttfamily \label{comm__uart_8c_ae273feb3e0dc44e38892650faa58fced} 
+UART\+\_\+\+Handle\+Type\+Def huart4\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Handle per la comunicazione seriale principale (Telemetria). 
+
+\Hypertarget{comm__uart_8c_a25a82fcf0cd24eb6d39977cb5864cec8}\index{comm\_uart.c@{comm\_uart.c}!huart5@{huart5}}
+\index{huart5@{huart5}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{huart5}{huart5}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a25a82fcf0cd24eb6d39977cb5864cec8} 
+UART\+\_\+\+Handle\+Type\+Def huart5\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Handle per la comunicazione con i driver Sabertooth. 
+
+Handle per la comunicazione con i driver Sabertooth. \Hypertarget{comm__uart_8c_ad3df710aaf221ab1759f152b41a26aa5}\index{comm\_uart.c@{comm\_uart.c}!rx\_buf@{rx\_buf}}
+\index{rx\_buf@{rx\_buf}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{rx\_buf}{rx\_buf}}
+{\footnotesize\ttfamily \label{comm__uart_8c_ad3df710aaf221ab1759f152b41a26aa5} 
+uint8\+\_\+t rx\+\_\+buf\+[\doxymbox{\hyperlink{comm__uart_8c_a1f25fe45d891de244a8135ae02fc9265}{UART\+\_\+\+RX\+\_\+\+BUF\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Buffer circolare di ricezione. 
+
+\Hypertarget{comm__uart_8c_abecb9f7f424287335a67817a45e061a0}\index{comm\_uart.c@{comm\_uart.c}!rx\_byte@{rx\_byte}}
+\index{rx\_byte@{rx\_byte}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{rx\_byte}{rx\_byte}}
+{\footnotesize\ttfamily \label{comm__uart_8c_abecb9f7f424287335a67817a45e061a0} 
+uint8\+\_\+t rx\+\_\+byte = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Variabile di supporto per l\textquotesingle{}interrupt di ricezione (singolo byte). 
+
+\Hypertarget{comm__uart_8c_a76cae229d21678d5102cfdd291e7045c}\index{comm\_uart.c@{comm\_uart.c}!rx\_rd@{rx\_rd}}
+\index{rx\_rd@{rx\_rd}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{rx\_rd}{rx\_rd}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a76cae229d21678d5102cfdd291e7045c} 
+volatile uint16\+\_\+t rx\+\_\+rd = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{comm__uart_8c_ae60a55ebafdb62cef0e0c4118a6fd256}\index{comm\_uart.c@{comm\_uart.c}!rx\_task\_handle@{rx\_task\_handle}}
+\index{rx\_task\_handle@{rx\_task\_handle}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{rx\_task\_handle}{rx\_task\_handle}}
+{\footnotesize\ttfamily \label{comm__uart_8c_ae60a55ebafdb62cef0e0c4118a6fd256} 
+Task\+Handle\+\_\+t rx\+\_\+task\+\_\+handle = NULL\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handle del task da notificare all\textquotesingle{}arrivo di nuovi dati. 
+
+\Hypertarget{comm__uart_8c_ab937d2e0dd6809aaf9ae170a5b442e14}\index{comm\_uart.c@{comm\_uart.c}!rx\_wr@{rx\_wr}}
+\index{rx\_wr@{rx\_wr}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{rx\_wr}{rx\_wr}}
+{\footnotesize\ttfamily \label{comm__uart_8c_ab937d2e0dd6809aaf9ae170a5b442e14} 
+volatile uint16\+\_\+t rx\+\_\+wr = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{comm__uart_8c_a70d50fcb51a06051ca820cee408841fa}\index{comm\_uart.c@{comm\_uart.c}!uart4\_tx\_busy@{uart4\_tx\_busy}}
+\index{uart4\_tx\_busy@{uart4\_tx\_busy}!comm\_uart.c@{comm\_uart.c}}
+\doxysubsubsection{\texorpdfstring{uart4\_tx\_busy}{uart4\_tx\_busy}}
+{\footnotesize\ttfamily \label{comm__uart_8c_a70d50fcb51a06051ca820cee408841fa} 
+volatile uint8\+\_\+t uart4\+\_\+tx\+\_\+busy = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Flag di stato TX per UART4. 
+

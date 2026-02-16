@@ -1,3 +1,0 @@
-../Core/Src/snapshot/rx_snapshot.c:17:6:RxSnapshot_MutexInit	2
-../Core/Src/snapshot/rx_snapshot.c:25:6:RxSnapshot_Write	2
-../Core/Src/snapshot/rx_snapshot.c:36:6:RxSnapshot_Read	2

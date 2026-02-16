@@ -1,0 +1,193 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+usart.c File Reference}
+\hypertarget{usart_8c}{}\label{usart_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/usart.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/usart.c}}
+
+
+This file provides code for the configuration of the USART instances.  
+
+
+{\ttfamily \+\#include "{}usart.\+h"{}}\newline
+Include dependency graph for usart.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{usart_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{usart_8c_a2d6e29406e35a65323b382515e095cd4}{MX\+\_\+\+LPUART1\+\_\+\+UART\+\_\+\+Init}} (void)
+\item 
+void \doxymbox{\hyperlink{usart_8c_a41df2bc0e6f13b33f862ea4eddfc6a23}{MX\+\_\+\+UART4\+\_\+\+Init}} (void)
+\item 
+void \doxymbox{\hyperlink{usart_8c_a0664dce420227295e70164b7a89f0771}{MX\+\_\+\+UART5\+\_\+\+Init}} (void)
+\item 
+void \doxymbox{\hyperlink{usart_8c_a62a25476866998c7aadfb5c0864fa349}{HAL\+\_\+\+UART\+\_\+\+Msp\+Init}} (UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}uart\+Handle)
+\item 
+void \doxymbox{\hyperlink{usart_8c_a94cd2c58add4f2549895a03bf267622e}{HAL\+\_\+\+UART\+\_\+\+Msp\+De\+Init}} (UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}uart\+Handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+UART\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{usart_8c_a5c3f9dccaa7cebcc70e1657af9e5e5dc}{hlpuart1}}
+\item 
+UART\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{usart_8c_ae273feb3e0dc44e38892650faa58fced}{huart4}}
+\begin{DoxyCompactList}\small\item\em Handle per la comunicazione seriale principale (Telemetria). \end{DoxyCompactList}\item 
+UART\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{usart_8c_a25a82fcf0cd24eb6d39977cb5864cec8}{huart5}}
+\begin{DoxyCompactList}\small\item\em Handle della periferica UART utilizzata per la comunicazione con i driver. \end{DoxyCompactList}\item 
+DMA\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{usart_8c_a4dcd0f023eeeb234649d17e647391be3}{hdma\+\_\+uart4\+\_\+tx}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file provides code for the configuration of the USART instances. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2026 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\label{doc-func-members}
+\Hypertarget{usart_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{usart_8c_a94cd2c58add4f2549895a03bf267622e}\index{usart.c@{usart.c}!HAL\_UART\_MspDeInit@{HAL\_UART\_MspDeInit}}
+\index{HAL\_UART\_MspDeInit@{HAL\_UART\_MspDeInit}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_UART\_MspDeInit()}{HAL\_UART\_MspDeInit()}}
+{\footnotesize\ttfamily \label{usart_8c_a94cd2c58add4f2549895a03bf267622e} 
+void HAL\+\_\+\+UART\+\_\+\+Msp\+De\+Init (\begin{DoxyParamCaption}\item[{UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{uart\+Handle}{}\end{DoxyParamCaption})}
+
+LPUART1 GPIO Configuration PA2 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} LPUART1\+\_\+\+TX PA3 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} LPUART1\+\_\+\+RX
+
+UART4 GPIO Configuration PC10 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} UART4\+\_\+\+TX PC11 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} UART4\+\_\+\+RX
+
+UART5 GPIO Configuration PC12 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} UART5\+\_\+\+TX\Hypertarget{usart_8c_a62a25476866998c7aadfb5c0864fa349}\index{usart.c@{usart.c}!HAL\_UART\_MspInit@{HAL\_UART\_MspInit}}
+\index{HAL\_UART\_MspInit@{HAL\_UART\_MspInit}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_UART\_MspInit()}{HAL\_UART\_MspInit()}}
+{\footnotesize\ttfamily \label{usart_8c_a62a25476866998c7aadfb5c0864fa349} 
+void HAL\+\_\+\+UART\+\_\+\+Msp\+Init (\begin{DoxyParamCaption}\item[{UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{uart\+Handle}{}\end{DoxyParamCaption})}
+
+Initializes the peripherals clocks
+
+LPUART1 GPIO Configuration PA2 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} LPUART1\+\_\+\+TX PA3 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} LPUART1\+\_\+\+RX
+
+Initializes the peripherals clocks
+
+UART4 GPIO Configuration PC10 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} UART4\+\_\+\+TX PC11 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} UART4\+\_\+\+RX
+
+Initializes the peripherals clocks
+
+UART5 GPIO Configuration PC12 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} UART5\+\_\+\+TXHere is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{usart_8c_a62a25476866998c7aadfb5c0864fa349_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{usart_8c_a2d6e29406e35a65323b382515e095cd4}\index{usart.c@{usart.c}!MX\_LPUART1\_UART\_Init@{MX\_LPUART1\_UART\_Init}}
+\index{MX\_LPUART1\_UART\_Init@{MX\_LPUART1\_UART\_Init}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{MX\_LPUART1\_UART\_Init()}{MX\_LPUART1\_UART\_Init()}}
+{\footnotesize\ttfamily \label{usart_8c_a2d6e29406e35a65323b382515e095cd4} 
+void MX\+\_\+\+LPUART1\+\_\+\+UART\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{usart_8c_a2d6e29406e35a65323b382515e095cd4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{usart_8c_a2d6e29406e35a65323b382515e095cd4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{usart_8c_a41df2bc0e6f13b33f862ea4eddfc6a23}\index{usart.c@{usart.c}!MX\_UART4\_Init@{MX\_UART4\_Init}}
+\index{MX\_UART4\_Init@{MX\_UART4\_Init}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{MX\_UART4\_Init()}{MX\_UART4\_Init()}}
+{\footnotesize\ttfamily \label{usart_8c_a41df2bc0e6f13b33f862ea4eddfc6a23} 
+void MX\+\_\+\+UART4\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{usart_8c_a41df2bc0e6f13b33f862ea4eddfc6a23_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{usart_8c_a41df2bc0e6f13b33f862ea4eddfc6a23_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{usart_8c_a0664dce420227295e70164b7a89f0771}\index{usart.c@{usart.c}!MX\_UART5\_Init@{MX\_UART5\_Init}}
+\index{MX\_UART5\_Init@{MX\_UART5\_Init}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{MX\_UART5\_Init()}{MX\_UART5\_Init()}}
+{\footnotesize\ttfamily \label{usart_8c_a0664dce420227295e70164b7a89f0771} 
+void MX\+\_\+\+UART5\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{usart_8c_a0664dce420227295e70164b7a89f0771_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{usart_8c_a0664dce420227295e70164b7a89f0771_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{usart_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{usart_8c_a4dcd0f023eeeb234649d17e647391be3}\index{usart.c@{usart.c}!hdma\_uart4\_tx@{hdma\_uart4\_tx}}
+\index{hdma\_uart4\_tx@{hdma\_uart4\_tx}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{hdma\_uart4\_tx}{hdma\_uart4\_tx}}
+{\footnotesize\ttfamily \label{usart_8c_a4dcd0f023eeeb234649d17e647391be3} 
+DMA\+\_\+\+Handle\+Type\+Def hdma\+\_\+uart4\+\_\+tx}
+
+\Hypertarget{usart_8c_a5c3f9dccaa7cebcc70e1657af9e5e5dc}\index{usart.c@{usart.c}!hlpuart1@{hlpuart1}}
+\index{hlpuart1@{hlpuart1}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{hlpuart1}{hlpuart1}}
+{\footnotesize\ttfamily \label{usart_8c_a5c3f9dccaa7cebcc70e1657af9e5e5dc} 
+UART\+\_\+\+Handle\+Type\+Def hlpuart1}
+
+\Hypertarget{usart_8c_ae273feb3e0dc44e38892650faa58fced}\index{usart.c@{usart.c}!huart4@{huart4}}
+\index{huart4@{huart4}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{huart4}{huart4}}
+{\footnotesize\ttfamily \label{usart_8c_ae273feb3e0dc44e38892650faa58fced} 
+UART\+\_\+\+Handle\+Type\+Def huart4}
+
+
+
+Handle per la comunicazione seriale principale (Telemetria). 
+
+\Hypertarget{usart_8c_a25a82fcf0cd24eb6d39977cb5864cec8}\index{usart.c@{usart.c}!huart5@{huart5}}
+\index{huart5@{huart5}!usart.c@{usart.c}}
+\doxysubsubsection{\texorpdfstring{huart5}{huart5}}
+{\footnotesize\ttfamily \label{usart_8c_a25a82fcf0cd24eb6d39977cb5864cec8} 
+UART\+\_\+\+Handle\+Type\+Def huart5}
+
+
+
+Handle della periferica UART utilizzata per la comunicazione con i driver. 
+
+Handle per la comunicazione con i driver Sabertooth. 

@@ -3,8 +3,6 @@
  * @brief Interfaccia di basso livello per la lettura degli encoder hardware via timer.
  * @details Gestisce il calcolo del delta dei ticks, risolvendo le problematiche di
  * overflow dei timer a 16 bit e verificando la plausibilità fisica delle letture.
- * @date Jan 8, 2026
- * @author Sterm
  */
 
 #include "encoder/encoder_hw.h"

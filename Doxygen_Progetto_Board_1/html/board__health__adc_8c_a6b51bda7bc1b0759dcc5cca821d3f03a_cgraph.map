@@ -1,0 +1,7 @@
+<map id="BoardHealth_ReadBattery" name="BoardHealth_ReadBattery">
+<area shape="rect" id="Node000001" title="Legge ed elabora la tensione della batteria convertendola in percentuale." alt="" coords="5,31,179,57"/>
+<area shape="rect" id="Node000002" href="$board__health__adc_8c.html#a1ae2de8a6d0a24f56c2514b5bb70fe36" title="Converte la tensione della batteria in percentuale tramite interpolazione lineare su LUT." alt="" coords="227,5,399,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,31,214,30,208,31,179,37"/>
+<area shape="rect" id="Node000003" href="$board__health__adc_8c.html#a9cf6404847167cea46c41b3a4aca731f" title="Calcola l&#39;aggiornamento della media mobile per un dato buffer." alt="" coords="233,56,393,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,51,220,58,214,59,179,57"/>
+</map>

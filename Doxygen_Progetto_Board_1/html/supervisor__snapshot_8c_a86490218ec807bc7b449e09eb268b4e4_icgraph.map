@@ -1,0 +1,30 @@
+<map id="SupervisorSnapshot_Read" name="SupervisorSnapshot_Read">
+<area shape="rect" id="Node000001" title="Legge lo stato attuale del supervisore in modo atomico." alt="" coords="664,157,840,184"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8c.html#adf98702f2e24c4b18f54c774350214db" title="Esegue un singolo passo di attuazione basato sull&#39;output del controllo." alt="" coords="488,5,598,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="725,146,676,101,614,53,581,35,581,30,617,48,680,97,730,147"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a8decb0ed70f1b4d12a7abbdbcdf8d18f" title="Task di Controllo Motori e Attuazione." alt="" coords="296,107,422,133"/>
+<area shape="poly" id="edge13_Node000001_Node000003" title=" " alt="" coords="718,148,672,121,644,107,615,97,560,89,503,91,450,98,406,109,405,104,449,93,503,85,560,84,616,92,646,102,674,116,723,148"/>
+<area shape="rect" id="Node000006" href="$control__step_8c.html#a0fcef49c9cbce9b244be3d6251d9d445" title="Esegue l&#39;iterazione principale del controllo." alt="" coords="494,107,592,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="676,153,592,134,592,129,682,153"/>
+<area shape="rect" id="Node000007" href="$encoder__step_8c.html#a620bc6b8cb569dc4ffbb6980aad07821" title="Esegue il campionamento degli encoder e converte i tick in unità fisiche." alt="" coords="491,157,595,184"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="646,171,595,173,595,168,651,170"/>
+<area shape="rect" id="Node000008" href="$led__task_8c.html#acbd41836584c569d5e38bbe8ad919e9f" title="Esegue un ciclo del task LED (es. lampeggio di stato)." alt="" coords="491,208,595,235"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="681,188,596,211,595,206,676,189"/>
+<area shape="rect" id="Node000010" href="$log__format_8c.html#a93d251087d299932e872bf900a10cfb7" title="Crea un report testuale completo dello stato attuale del sistema." alt="" coords="470,259,616,285"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="718,192,670,222,617,249,588,261,587,255,615,244,668,217,713,193"/>
+<area shape="rect" id="Node000011" href="$comm__tx__task_8c.html#add320c948d8694068895e9744195957e" title="Esegue un passo del task di trasmissione, inviando i pacchetti pronti." alt="" coords="494,309,592,336"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="732,195,682,249,651,276,617,300,593,311,592,306,614,295,648,272,679,245,727,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="492,40,472,53,382,108,379,104,469,48,497,37"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,208,248,235"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="318,143,203,210,200,205,322,140"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,208,55,235"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,223,56,224,54,219,89,220"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="477,121,423,123,422,117,482,119"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="474,153,410,137,410,131,480,152"/>
+<area shape="rect" id="Node000009" href="$app__freertos_8c.html#abedbe7e246a468688f3b059e09870ea5" title="Task per la gestione dei LED di segnalazione." alt="" coords="306,208,412,235"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="473,222,412,224,412,219,478,221"/>
+<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="288,222,249,224,248,219,293,221"/>
+<area shape="rect" id="Node000012" href="$app__freertos_8c.html#adbf0342f734137d459a69a9981339b84" title="Task per la trasmissione dei dati via UART/Bus." alt="" coords="308,284,410,311"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="476,314,410,307,410,302,481,314"/>
+<area shape="poly" id="edge16_Node000012_Node000004" title=" " alt="" coords="308,278,209,238,210,233,313,277"/>
+</map>

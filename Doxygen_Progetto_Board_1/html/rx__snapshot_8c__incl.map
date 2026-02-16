@@ -1,0 +1,22 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/snapshot/rx_snapshot.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/snapshot/rx_snapshot.c">
+<area shape="rect" id="Node000001" title="Gestione thread&#45;safe del payload ricevuto dalla comunicazione (UART/Radio)." alt="" coords="227,5,430,80"/>
+<area shape="rect" id="Node000002" href="$rx__snapshot_8h.html" title="Buffer protetto per i dati ricevuti dall&#39;altra board." alt="" coords="248,128,408,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="330,78,331,113,326,111,327,83"/>
+<area shape="rect" id="Node000007" href="$wcet__monitor_8h.html" title="Monitoraggio del &quot;Worst Case Execution Time&quot; (WCET) per task e ISR." alt="" coords="5,211,137,237"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="276,83,103,204,100,199,275,78"/>
+<area shape="rect" id="Node000008" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="682,211,742,237"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="409,78,672,200,676,204,670,203,670,205,408,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="91,293,155,320"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="286,156,245,177,201,205,165,242,139,281,135,278,161,239,197,201,242,172,291,154"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="211,211,299,237"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="319,154,278,202,275,197,315,157"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="323,203,480,245"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="341,153,376,192,370,191,339,158"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="505,203,658,245"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="368,153,505,197,500,198,368,158"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="287,158,127,208,125,203,289,153"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="409,148,534,166,604,181,672,200,678,204,673,204,670,205,603,186,533,172,409,153"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="80,236,109,280,104,281,78,240"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="652,293,772,320"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="714,236,714,280,710,276,710,240"/>
+</map>

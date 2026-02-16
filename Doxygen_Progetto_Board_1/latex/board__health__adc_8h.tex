@@ -1,0 +1,202 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+board\+\_\+health/\+board\+\_\+health\+\_\+adc.h File Reference}
+\hypertarget{board__health__adc_8h}{}\label{board__health__adc_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/board\_health/board\_health\_adc.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/board\_health/board\_health\_adc.h}}
+
+
+Gestione dei parametri vitali della scheda tramite ADC.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+Include dependency graph for board\+\_\+health\+\_\+adc.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{board__health__adc_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} \{ \doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889a3e57857337ac7b8ee0164f2709a6b020}{BOARD\+\_\+\+HEALTH\+\_\+\+OK}} = 0
+, \doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889ac8fb6b6d76f640a1e99d1d2fd494cb7e}{BOARD\+\_\+\+HEALTH\+\_\+\+ADC\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889abe0b9cefca3645bfe80475c601d4e881}{BOARD\+\_\+\+HEALTH\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerazione per lo stato di salute della scheda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} \doxymbox{\hyperlink{board__health__adc_8h_ae5534a0c0878e4fa448e49af29fe4c41}{Board\+Health\+\_\+\+Read\+Temperature}} (float \texorpdfstring{$\ast$}{*}temp\+\_\+degC)
+\begin{DoxyCompactList}\small\item\em Legge il sensore di temperatura interno della MCU. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} \doxymbox{\hyperlink{board__health__adc_8h_a93758b7adb8f009be97e4235193e30b9}{Board\+Health\+\_\+\+Read\+Battery}} (float \texorpdfstring{$\ast$}{*}battery\+\_\+pct)
+\begin{DoxyCompactList}\small\item\em Legge il livello di tensione della batteria. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__adc_8h_a108165b5d41101fa07468cebada6609f}{Board\+Health\+ADC\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza l\textquotesingle{}ADC e i canali dedicati al monitoraggio della scheda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione dei parametri vitali della scheda tramite ADC. 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{board__health__adc_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}\index{board\_health\_adc.h@{board\_health\_adc.h}!BoardHealthStatus\_t@{BoardHealthStatus\_t}}
+\index{BoardHealthStatus\_t@{BoardHealthStatus\_t}!board\_health\_adc.h@{board\_health\_adc.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealthStatus\_t}{BoardHealthStatus\_t}}
+{\footnotesize\ttfamily \label{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889} 
+enum \doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}}}
+
+
+
+Enumerazione per lo stato di salute della scheda. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOARD\_HEALTH\_OK@{BOARD\_HEALTH\_OK}!board\_health\_adc.h@{board\_health\_adc.h}}
+\index{board\_health\_adc.h@{board\_health\_adc.h}!BOARD\_HEALTH\_OK@{BOARD\_HEALTH\_OK}}
+}\Hypertarget{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889a3e57857337ac7b8ee0164f2709a6b020}\label{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889a3e57857337ac7b8ee0164f2709a6b020} 
+BOARD\+\_\+\+HEALTH\+\_\+\+OK&Operazione completata con successo \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOARD\_HEALTH\_ADC\_ERROR@{BOARD\_HEALTH\_ADC\_ERROR}!board\_health\_adc.h@{board\_health\_adc.h}}
+\index{board\_health\_adc.h@{board\_health\_adc.h}!BOARD\_HEALTH\_ADC\_ERROR@{BOARD\_HEALTH\_ADC\_ERROR}}
+}\Hypertarget{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889ac8fb6b6d76f640a1e99d1d2fd494cb7e}\label{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889ac8fb6b6d76f640a1e99d1d2fd494cb7e} 
+BOARD\+\_\+\+HEALTH\+\_\+\+ADC\+\_\+\+ERROR&Errore hardware o di lettura ADC \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOARD\_HEALTH\_OUT\_OF\_RANGE@{BOARD\_HEALTH\_OUT\_OF\_RANGE}!board\_health\_adc.h@{board\_health\_adc.h}}
+\index{board\_health\_adc.h@{board\_health\_adc.h}!BOARD\_HEALTH\_OUT\_OF\_RANGE@{BOARD\_HEALTH\_OUT\_OF\_RANGE}}
+}\Hypertarget{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889abe0b9cefca3645bfe80475c601d4e881}\label{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889abe0b9cefca3645bfe80475c601d4e881} 
+BOARD\+\_\+\+HEALTH\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE&Valore letto fuori dai limiti di sicurezza \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{board__health__adc_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board__health__adc_8h_a93758b7adb8f009be97e4235193e30b9}\index{board\_health\_adc.h@{board\_health\_adc.h}!BoardHealth\_ReadBattery@{BoardHealth\_ReadBattery}}
+\index{BoardHealth\_ReadBattery@{BoardHealth\_ReadBattery}!board\_health\_adc.h@{board\_health\_adc.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_ReadBattery()}{BoardHealth\_ReadBattery()}}
+{\footnotesize\ttfamily \label{board__health__adc_8h_a93758b7adb8f009be97e4235193e30b9} 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} Board\+Health\+\_\+\+Read\+Battery (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}const}]{battery\+\_\+pct}{}\end{DoxyParamCaption})}
+
+
+
+Legge il livello di tensione della batteria. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em battery\+\_\+pct} & Puntatore alla variabile per il livello percentuale \+[0..100]\+. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t} Stato della lettura.
+\end{DoxyReturn}
+Legge il livello di tensione della batteria.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em battery\+\_\+pct} & Puntatore dove scrivere la percentuale calcolata. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t} OK se la lettura è valida, errore altrimenti. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h_a93758b7adb8f009be97e4235193e30b9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h_a93758b7adb8f009be97e4235193e30b9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8h_ae5534a0c0878e4fa448e49af29fe4c41}\index{board\_health\_adc.h@{board\_health\_adc.h}!BoardHealth\_ReadTemperature@{BoardHealth\_ReadTemperature}}
+\index{BoardHealth\_ReadTemperature@{BoardHealth\_ReadTemperature}!board\_health\_adc.h@{board\_health\_adc.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_ReadTemperature()}{BoardHealth\_ReadTemperature()}}
+{\footnotesize\ttfamily \label{board__health__adc_8h_ae5534a0c0878e4fa448e49af29fe4c41} 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} Board\+Health\+\_\+\+Read\+Temperature (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}const}]{temp\+\_\+degC}{}\end{DoxyParamCaption})}
+
+
+
+Legge il sensore di temperatura interno della MCU. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em temp\+\_\+degC} & Puntatore alla variabile dove salvare la temperatura in gradi Celsius. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t} Stato della lettura.
+\end{DoxyReturn}
+Legge il sensore di temperatura interno della MCU.
+
+Utilizza VREFINT per compensare fluttuazioni di VDDA e applica i parametri di calibrazione. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em temp\+\_\+degC} & Puntatore dove scrivere il valore di temperatura calcolato. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t} OK se la lettura è valida, errore altrimenti. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h_ae5534a0c0878e4fa448e49af29fe4c41_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h_ae5534a0c0878e4fa448e49af29fe4c41_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8h_a108165b5d41101fa07468cebada6609f}\index{board\_health\_adc.h@{board\_health\_adc.h}!BoardHealthADC\_Init@{BoardHealthADC\_Init}}
+\index{BoardHealthADC\_Init@{BoardHealthADC\_Init}!board\_health\_adc.h@{board\_health\_adc.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealthADC\_Init()}{BoardHealthADC\_Init()}}
+{\footnotesize\ttfamily \label{board__health__adc_8h_a108165b5d41101fa07468cebada6609f} 
+void Board\+Health\+ADC\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza l\textquotesingle{}ADC e i canali dedicati al monitoraggio della scheda. 
+
+Inizializza l\textquotesingle{}ADC e i canali dedicati al monitoraggio della scheda.
+
+Carica i valori di calibrazione e avvia la scansione circolare in DMA. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h_a108165b5d41101fa07468cebada6609f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8h_a108165b5d41101fa07468cebada6609f_icgraph}
+\end{center}
+\end{figure}

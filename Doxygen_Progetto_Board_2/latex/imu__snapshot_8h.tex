@@ -1,0 +1,129 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+snapshot/\+imu\+\_\+snapshot.h File Reference}
+\hypertarget{imu__snapshot_8h}{}\label{imu__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/imu\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/imu\_snapshot.h}}
+
+
+Definizione dello snapshot IMU e API thread-\/safe.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}IMU/\+imu\+\_\+i2c.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+Include dependency graph for imu\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{imu__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot delle misure IMU e dati temporali. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{imu__snapshot_8h_a4a42b5c7fb3b0fed72a5ae2afc375b64}{IMUSnapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Registra il mutex usato per proteggere lo snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__snapshot_8h_ac3de1c40604ab0a2e257704ed61cfbf4}{IMUSnapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}snap)
+\begin{DoxyCompactList}\small\item\em Scrive lo snapshot IMU in sezione critica. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__snapshot_8h_af7492445b3f85cf0a78742d03f0a36f8}{IMUSnapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}snap)
+\begin{DoxyCompactList}\small\item\em Legge lo snapshot IMU in sezione critica. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definizione dello snapshot IMU e API thread-\/safe. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{imu__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{imu__snapshot_8h_a4a42b5c7fb3b0fed72a5ae2afc375b64}\index{imu\_snapshot.h@{imu\_snapshot.h}!IMUSnapshot\_MutexInit@{IMUSnapshot\_MutexInit}}
+\index{IMUSnapshot\_MutexInit@{IMUSnapshot\_MutexInit}!imu\_snapshot.h@{imu\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{IMUSnapshot\_MutexInit()}{IMUSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{imu__snapshot_8h_a4a42b5c7fb3b0fed72a5ae2afc375b64} 
+void IMUSnapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Registra il mutex usato per proteggere lo snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato all\textquotesingle{}esterno.\\
+\hline
+\end{DoxyParams}
+Registra il mutex usato per proteggere lo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle mutex creato all\textquotesingle{}esterno. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__snapshot_8h_a4a42b5c7fb3b0fed72a5ae2afc375b64_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__snapshot_8h_af7492445b3f85cf0a78742d03f0a36f8}\index{imu\_snapshot.h@{imu\_snapshot.h}!IMUSnapshot\_Read@{IMUSnapshot\_Read}}
+\index{IMUSnapshot\_Read@{IMUSnapshot\_Read}!imu\_snapshot.h@{imu\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{IMUSnapshot\_Read()}{IMUSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{imu__snapshot_8h_af7492445b3f85cf0a78742d03f0a36f8} 
+void IMUSnapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge lo snapshot IMU in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snap} & Puntatore al buffer di destinazione.\\
+\hline
+{\em dst} & Destinazione in cui copiare il dato. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__snapshot_8h_af7492445b3f85cf0a78742d03f0a36f8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__snapshot_8h_ac3de1c40604ab0a2e257704ed61cfbf4}\index{imu\_snapshot.h@{imu\_snapshot.h}!IMUSnapshot\_Write@{IMUSnapshot\_Write}}
+\index{IMUSnapshot\_Write@{IMUSnapshot\_Write}!imu\_snapshot.h@{imu\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{IMUSnapshot\_Write()}{IMUSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{imu__snapshot_8h_ac3de1c40604ab0a2e257704ed61cfbf4} 
+void IMUSnapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive lo snapshot IMU in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snap} & Puntatore al dato sorgente da copiare.\\
+\hline
+{\em src} & Dato sorgente da copiare. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__snapshot_8h_ac3de1c40604ab0a2e257704ed61cfbf4_icgraph}
+\end{center}
+\end{figure}

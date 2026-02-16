@@ -1,0 +1,103 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+\+IMU/\+imu\+\_\+task.c File Reference}
+\hypertarget{imu__task_8c}{}\label{imu__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/IMU/imu\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/IMU/imu\_task.c}}
+
+
+Task di acquisizione IMU e pubblicazione snapshot.  
+
+
+{\ttfamily \+\#include "{}IMU/\+imu.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+imu\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+Include dependency graph for imu\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{imu__task_8c_a642685d2965198c00ddb7b9b173dbfcd}{IMU\+\_\+\+TASK\+\_\+\+INIT\+\_\+\+DELAY\+\_\+\+MS}}~100U
+\begin{DoxyCompactList}\small\item\em Ritardo iniziale task IMU per stabilizzare le periferiche \+[ms]\+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{imu__task_8c_ae19f72c003f81fd3ffbf147a09d6c486}{IMU\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task IMU. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__task_8c_aba43d99a94c7298c850ed66a454eb6d1}{IMU\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task IMU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di acquisizione IMU e pubblicazione snapshot. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{imu__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{imu__task_8c_a642685d2965198c00ddb7b9b173dbfcd}\index{imu\_task.c@{imu\_task.c}!IMU\_TASK\_INIT\_DELAY\_MS@{IMU\_TASK\_INIT\_DELAY\_MS}}
+\index{IMU\_TASK\_INIT\_DELAY\_MS@{IMU\_TASK\_INIT\_DELAY\_MS}!imu\_task.c@{imu\_task.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_TASK\_INIT\_DELAY\_MS}{IMU\_TASK\_INIT\_DELAY\_MS}}
+{\footnotesize\ttfamily \label{imu__task_8c_a642685d2965198c00ddb7b9b173dbfcd} 
+\+\#define IMU\+\_\+\+TASK\+\_\+\+INIT\+\_\+\+DELAY\+\_\+\+MS~100U}
+
+
+
+Ritardo iniziale task IMU per stabilizzare le periferiche \+[ms]\+. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{imu__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{imu__task_8c_ae19f72c003f81fd3ffbf147a09d6c486}\index{imu\_task.c@{imu\_task.c}!IMU\_TaskInit@{IMU\_TaskInit}}
+\index{IMU\_TaskInit@{IMU\_TaskInit}!imu\_task.c@{imu\_task.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_TaskInit()}{IMU\_TaskInit()}}
+{\footnotesize\ttfamily \label{imu__task_8c_ae19f72c003f81fd3ffbf147a09d6c486} 
+void IMU\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task IMU. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8c_ae19f72c003f81fd3ffbf147a09d6c486_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8c_ae19f72c003f81fd3ffbf147a09d6c486_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__task_8c_aba43d99a94c7298c850ed66a454eb6d1}\index{imu\_task.c@{imu\_task.c}!IMU\_TaskStep@{IMU\_TaskStep}}
+\index{IMU\_TaskStep@{IMU\_TaskStep}!imu\_task.c@{imu\_task.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_TaskStep()}{IMU\_TaskStep()}}
+{\footnotesize\ttfamily \label{imu__task_8c_aba43d99a94c7298c850ed66a454eb6d1} 
+void IMU\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task IMU. 
+
+Legge i dati dal sensore, aggiorna i timestamp e pubblica lo snapshot. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8c_aba43d99a94c7298c850ed66a454eb6d1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__task_8c_aba43d99a94c7298c850ed66a454eb6d1_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,20 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/comm/comm_uart.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/comm/comm_uart.c">
+<area shape="rect" id="Node000001" title="Driver di basso livello per la comunicazione UART con gestione interrupt." alt="" coords="340,5,543,80"/>
+<area shape="rect" id="Node000002" href="$comm__uart_8h.html" title="Driver di basso livello per l&#39;interfaccia UART di comunicazione." alt="" coords="220,136,357,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="390,80,321,129,318,125,385,82"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="150,219,214,245"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="337,59,305,71,270,86,237,105,209,130,198,146,190,165,184,204,179,201,185,164,193,144,205,126,234,101,268,81,303,66,342,57"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="376,219,451,245"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="485,78,504,100,517,123,522,147,516,172,494,197,465,215,464,210,490,193,511,169,517,147,512,125,499,103,484,83"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="382,136,502,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="443,78,444,122,439,119,440,82"/>
+<area shape="rect" id="Node000006" href="$sabertooth__driver_8h.html" title="Driver per i controller motori Sabertooth." alt="" coords="5,128,145,171"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="338,75,161,126,159,121,341,71"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="576,136,670,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="506,78,591,128,586,128,505,83"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="694,136,752,163"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="544,74,683,126,687,130,682,129,681,130,543,79"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="274,162,211,212,209,207,269,164"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="309,161,384,210,379,210,307,166"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="103,169,155,208,150,210,102,174"/>
+</map>

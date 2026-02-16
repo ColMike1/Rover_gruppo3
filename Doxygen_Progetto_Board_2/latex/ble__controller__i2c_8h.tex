@@ -1,0 +1,154 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+\+BLE\+\_\+\+Controller/\+ble\+\_\+controller\+\_\+i2c.h File Reference}
+\hypertarget{ble__controller__i2c_8h}{}\label{ble__controller__i2c_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/BLE\_Controller/ble\_controller\_i2c.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/BLE\_Controller/ble\_controller\_i2c.h}}
+
+
+Interfaccia I2C per lettura frame dal controller BLE.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}i2c.\+h"{}}\newline
+Include dependency graph for ble\+\_\+controller\+\_\+i2c.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{ble__controller__i2c_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__i2c_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{Ble\+I2\+CStatus\+\_\+t}} \{ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06ab1f85682caf1c16402a414a5f31f4940}{BLE\+\_\+\+I2\+C\+\_\+\+COMPLETE}} = 0
+, \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a339cf3d4564bdfa2dcc984a3ad0ef564}{BLE\+\_\+\+I2\+C\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06afc3eed2c46dc19776d1c46c28441e3dc}{BLE\+\_\+\+I2\+C\+\_\+\+BUSY}}
+, \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a238bae47db9198a354b02ff6f5cf7a6b}{BLE\+\_\+\+I2\+C\+\_\+\+TIMEOUT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Esito delle operazioni I2C del modulo BLE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{ble__controller__i2c_8h_ab898071398b359603a35c202e9c65f3b}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}} ((packed))
+\begin{DoxyCompactList}\small\item\em Frame raw ricevuto dal controller BLE. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{Ble\+I2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{ble__controller__i2c_8h_ac3cafc261590edc62dcd9f1017ca80e1}{Ble\+Controller\+\_\+\+I2\+C\+\_\+\+Read\+Frame}} (\doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{Ble\+Raw\+Frame\+\_\+t}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Legge un frame completo dal controller BLE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{Ble\+Raw\+Frame\+\_\+t}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaccia I2C per lettura frame dal controller BLE. 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{ble__controller__i2c_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BleI2CStatus\_t@{BleI2CStatus\_t}}
+\index{BleI2CStatus\_t@{BleI2CStatus\_t}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{BleI2CStatus\_t}{BleI2CStatus\_t}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06} 
+enum \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{Ble\+I2\+CStatus\+\_\+t}}}
+
+
+
+Esito delle operazioni I2C del modulo BLE. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLE\_I2C\_COMPLETE@{BLE\_I2C\_COMPLETE}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BLE\_I2C\_COMPLETE@{BLE\_I2C\_COMPLETE}}
+}\Hypertarget{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06ab1f85682caf1c16402a414a5f31f4940}\label{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06ab1f85682caf1c16402a414a5f31f4940} 
+BLE\+\_\+\+I2\+C\+\_\+\+COMPLETE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLE\_I2C\_ERROR@{BLE\_I2C\_ERROR}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BLE\_I2C\_ERROR@{BLE\_I2C\_ERROR}}
+}\Hypertarget{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a339cf3d4564bdfa2dcc984a3ad0ef564}\label{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a339cf3d4564bdfa2dcc984a3ad0ef564} 
+BLE\+\_\+\+I2\+C\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLE\_I2C\_BUSY@{BLE\_I2C\_BUSY}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BLE\_I2C\_BUSY@{BLE\_I2C\_BUSY}}
+}\Hypertarget{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06afc3eed2c46dc19776d1c46c28441e3dc}\label{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06afc3eed2c46dc19776d1c46c28441e3dc} 
+BLE\+\_\+\+I2\+C\+\_\+\+BUSY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLE\_I2C\_TIMEOUT@{BLE\_I2C\_TIMEOUT}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BLE\_I2C\_TIMEOUT@{BLE\_I2C\_TIMEOUT}}
+}\Hypertarget{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a238bae47db9198a354b02ff6f5cf7a6b}\label{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a238bae47db9198a354b02ff6f5cf7a6b} 
+BLE\+\_\+\+I2\+C\+\_\+\+TIMEOUT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{ble__controller__i2c_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ble__controller__i2c_8h_ab898071398b359603a35c202e9c65f3b}\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!\_\_attribute\_\_@{\_\_attribute\_\_}}
+\index{\_\_attribute\_\_@{\_\_attribute\_\_}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{\_\_attribute\_\_()}{\_\_attribute\_\_()}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8h_ab898071398b359603a35c202e9c65f3b} 
+struct \+\_\+\+\_\+attribute\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{(packed)}]{}{}\end{DoxyParamCaption})}
+
+
+
+Frame raw ricevuto dal controller BLE. 
+
+\Hypertarget{ble__controller__i2c_8h_ac3cafc261590edc62dcd9f1017ca80e1}\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BleController\_I2C\_ReadFrame@{BleController\_I2C\_ReadFrame}}
+\index{BleController\_I2C\_ReadFrame@{BleController\_I2C\_ReadFrame}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{BleController\_I2C\_ReadFrame()}{BleController\_I2C\_ReadFrame()}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8h_ac3cafc261590edc62dcd9f1017ca80e1} 
+\doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{Ble\+I2\+CStatus\+\_\+t}} Ble\+Controller\+\_\+\+I2\+C\+\_\+\+Read\+Frame (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{Ble\+Raw\+Frame\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Legge un frame completo dal controller BLE. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & Puntatore alla struttura di output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}operazione I2C.
+\end{DoxyReturn}
+Legge un frame completo dal controller BLE.
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & Puntatore al frame di output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}operazione I2C. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__i2c_8h_ac3cafc261590edc62dcd9f1017ca80e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{ble__controller__i2c_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}\index{ble\_controller\_i2c.h@{ble\_controller\_i2c.h}!BleRawFrame\_t@{BleRawFrame\_t}}
+\index{BleRawFrame\_t@{BleRawFrame\_t}!ble\_controller\_i2c.h@{ble\_controller\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{BleRawFrame\_t}{BleRawFrame\_t}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641} 
+Ble\+Raw\+Frame\+\_\+t}
+

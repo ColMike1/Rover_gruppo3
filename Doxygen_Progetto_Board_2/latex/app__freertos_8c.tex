@@ -1,0 +1,997 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+app\+\_\+freertos.c File Reference}
+\hypertarget{app__freertos_8c}{}\label{app__freertos_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/app\_freertos.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/app\_freertos.c}}
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+{\ttfamily \+\#include "{}main.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+{\ttfamily \+\#include "{}BLE\+\_\+\+Controller/\+ble\+\_\+controller\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+rx\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+tx\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}IMU/\+imu\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}sonar/\+sonar\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+log\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}supervisor/\+supervisor\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+snapshot.\+h"{}}\newline
+Include dependency graph for app\+\_\+freertos.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{app__freertos_8c_a0224e10d58bd6d35d2f66ef268e90248}{TASK\+\_\+\+BLE\+\_\+\+PERIOD\+\_\+\+MS}}~20U
+\begin{DoxyCompactList}\small\item\em Periodo task BLE \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{app__freertos_8c_a0ffe77b4a33d592886cc361f6715d5a0}{TASK\+\_\+\+IMU\+\_\+\+PERIOD\+\_\+\+MS}}~20U
+\begin{DoxyCompactList}\small\item\em Periodo task IMU \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{app__freertos_8c_a66045465da1ebf4cf9d8dc72961a4be7}{TASK\+\_\+\+SONAR\+\_\+\+PERIOD\+\_\+\+MS}}~60U
+\begin{DoxyCompactList}\small\item\em Periodo task sonar \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{app__freertos_8c_aa3de5de2303947444e7d2d3a221ed25d}{TASK\+\_\+\+TX\+\_\+\+PERIOD\+\_\+\+MS}}~20U
+\begin{DoxyCompactList}\small\item\em Periodo task TX \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{app__freertos_8c_ada4dfa33432ffc95721f26ec6f9fa568}{TASK\+\_\+\+SUPERVISOR\+\_\+\+PERIOD\+\_\+\+MS}}~20U
+\begin{DoxyCompactList}\small\item\em Periodo task supervisore \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{app__freertos_8c_a7739d5771438d1f364787932ab4a66c8}{TASK\+\_\+\+LOG\+\_\+\+PERIOD\+\_\+\+MS}}~1000U
+\begin{DoxyCompactList}\small\item\em Periodo task log \+[ms]\+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Static\+Task\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}}
+\item 
+typedef Static\+Semaphore\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{app__freertos_8c_a99d0fdb0434092bcb24d9c9af917e4e9}{Start\+Default\+Task}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the default\+Task thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_af657df7e3e2fe90f43a2de18975001a0}{Start\+Task\+\_\+\+Read\+BLE}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Read\+BLE thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_ab4917357938b0c856c97e082d7c00f45}{Start\+Task\+\_\+\+Read\+IMU}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Read\+IMU thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_a36b9e6d4432bac97c11daece6a8d8fac}{Start\+Task\+\_\+\+Read\+Sonars}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Read\+Sonars thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_a79e59fed7352310066bb0919d8ad999d}{Start\+Task\+\_\+\+Rx}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Rx thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_a5dc3d606e8c5b7a8b2dd4b068fc7863f}{Start\+Task\+\_\+\+Tx}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Tx thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_a3f7778cdf1274eaffeab60f470433691}{Start\+Task\+\_\+\+Supervisor}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Supervisor thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_ae4c002c5fce77e8d1560809be699d795}{Start\+Task\+\_\+\+Log}} (void \texorpdfstring{$\ast$}{*}argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the Task\+\_\+\+Log thread. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_abade755e13d07c10889ae83143656158}{MX\+\_\+\+FREERTOS\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Free\+RTOS initialization. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{app__freertos_8c_a407179f96d6ae48a303e8695fd23379b}{v\+Application\+Stack\+Overflow\+Hook}} (x\+Task\+Handle x\+Task, signed char \texorpdfstring{$\ast$}{*}pc\+Task\+Name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a6a263905468b0c37de4ee5e50ede4e74}{default\+Task\+Handle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a0ef1a80eb9a31084b335d4b71c24e001}{default\+Task\+Buffer}} \+[128]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_aca18732f09ae696fd34b94d393dc9a42}{default\+Task\+Control\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a25fbb54afdba71c24ba51ed50166ac8d}{default\+Task\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_aef9764a87de1bde3ada803fbd9d57d79}{Task\+\_\+\+Read\+BLEHandle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a0e231ccf807ddbc3347d6f1a79974ee0}{Task\+\_\+\+Read\+BLEBuffer}} \+[256]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a7f00e508975a0f14e6922cc43ae40e97}{Task\+\_\+\+Read\+BLEControl\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a8ad0060d9991ae3268df73673de9ede9}{Task\+\_\+\+Read\+BLE\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_af510bc8fcf76acbbac0cfe3730ec5c01}{Task\+\_\+\+Read\+IMUHandle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a8764c7d1224832e08113d8ef6810065f}{Task\+\_\+\+Read\+IMUBuffer}} \+[128]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a44b2c24c2bd2200a6f9c4e2953982613}{Task\+\_\+\+Read\+IMUControl\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_aaaf9058adde56f3545d08bf1cb208e98}{Task\+\_\+\+Read\+IMU\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_aa87191f35a63b523b1305690be037039}{Task\+\_\+\+Read\+Sonars\+Handle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a9b9636c710c8a892b644e8d9380fd28a}{Task\+\_\+\+Read\+Sonars\+Buffer}} \+[256]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a7e8f080b4b2e6fc76aae99661a5abc9a}{Task\+\_\+\+Read\+Sonars\+Control\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a21ed63b12b9a0c6026ae63d183e62d32}{Task\+\_\+\+Read\+Sonars\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_affa24209ce7663dce4b2dcf41dc395eb}{Task\+\_\+\+Rx\+Handle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_af2f822abce1e7a637eca419054c447bc}{Task\+\_\+\+Rx\+Buffer}} \+[256]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a10e5a00bd78f86c02e29dda347dc377e}{Task\+\_\+\+Rx\+Control\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a949b010adadbd580db269d29f347c00e}{Task\+\_\+\+Rx\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_af041dc13b089b0b29ef295e8f1a94713}{Task\+\_\+\+Tx\+Handle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_ae121e9704c2ff72540863b7c0ad475e6}{Task\+\_\+\+Tx\+Buffer}} \+[256]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a9de4dfd8f6741cb66fd165af00b27292}{Task\+\_\+\+Tx\+Control\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a3f80fe8aa757148083fdc6d7c75c50c6}{Task\+\_\+\+Tx\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a7d70abee0153016b7d5d216364f5b38a}{Task\+\_\+\+Supervisor\+Handle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_ad18805ba1e3f364efb6c5c7305039843}{Task\+\_\+\+Supervisor\+Buffer}} \+[512]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_ac311c4e2f696864018bc8dc43127dc4d}{Task\+\_\+\+Supervisor\+Control\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a0e8d82be73fc50b1d9272818af68448f}{Task\+\_\+\+Supervisor\+\_\+attributes}}
+\item 
+os\+Thread\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_ac8cf40c41639eda255105303274b4f77}{Task\+\_\+\+Log\+Handle}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a323a3a386e6c3806bbdc50fd140ad076}{Task\+\_\+\+Log\+Buffer}} \+[512]\+
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a173e6fc5d7133b1574c2d90575e9e140}{Task\+\_\+\+Log\+Control\+Block}}
+\item 
+const os\+Thread\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a78f3a613003dcff5cfd6aafc01453ec9}{Task\+\_\+\+Log\+\_\+attributes}}
+\item 
+os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a725a234ae82bc1ea1dbf200a0f3ab006}{mutex\+\_\+\+Ble\+Handle}}
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_ac255f5f355066d64df0baf7ce8d09a23}{mutex\+\_\+\+Ble\+Control\+Block}}
+\item 
+const os\+Mutex\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a5fc1979ee30f477367360736e6d787ce}{mutex\+\_\+\+Ble\+\_\+attributes}}
+\item 
+os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_ae564c78ec2ebf66e2049d946b4b353a4}{mutex\+\_\+\+Imu\+Handle}}
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a40510a144183f2d503efed1589718fb4}{mutex\+\_\+\+Imu\+Control\+Block}}
+\item 
+const os\+Mutex\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_afb75cd12a38a2292c1cb946ef3a8c49c}{mutex\+\_\+\+Imu\+\_\+attributes}}
+\item 
+os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a1ae5d3459d2d1478549687d1ac550c9a}{mutex\+\_\+\+Uart\+Rx\+Handle}}
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a6dba24886d1a1a9834e80ee69fb9fa5c}{mutex\+\_\+\+Uart\+Rx\+Control\+Block}}
+\item 
+const os\+Mutex\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_ad85c3ccd7d3fe4e68f143182aaa37265}{mutex\+\_\+\+Uart\+Rx\+\_\+attributes}}
+\item 
+os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a391f3e3da8ec8f3570728ac2026f400d}{mutex\+\_\+\+Sonar\+Handle}}
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a8935d2b08fe4e7728a6cd1b5bebf8693}{mutex\+\_\+\+Sonar\+Control\+Block}}
+\item 
+const os\+Mutex\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a52cfa599dea23b6f34fd9d846cfdce88}{mutex\+\_\+\+Sonar\+\_\+attributes}}
+\item 
+os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_adf68e01765e3e220f6a8707dc9e938ee}{mutex\+\_\+\+Supervisor\+Handle}}
+\item 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} \doxymbox{\hyperlink{app__freertos_8c_a3832a9d15a6b4ff85ae94c5068f5cdb8}{mutex\+\_\+\+Supervisor\+Control\+Block}}
+\item 
+const os\+Mutex\+Attr\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_ad4cfaa7531d6dde600a2e1aadbc4de25}{mutex\+\_\+\+Supervisor\+\_\+attributes}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{app__freertos_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{app__freertos_8c_a0224e10d58bd6d35d2f66ef268e90248}\index{app\_freertos.c@{app\_freertos.c}!TASK\_BLE\_PERIOD\_MS@{TASK\_BLE\_PERIOD\_MS}}
+\index{TASK\_BLE\_PERIOD\_MS@{TASK\_BLE\_PERIOD\_MS}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_BLE\_PERIOD\_MS}{TASK\_BLE\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a0224e10d58bd6d35d2f66ef268e90248} 
+\+\#define TASK\+\_\+\+BLE\+\_\+\+PERIOD\+\_\+\+MS~20U}
+
+
+
+Periodo task BLE \+[ms]\+. 
+
+\Hypertarget{app__freertos_8c_a0ffe77b4a33d592886cc361f6715d5a0}\index{app\_freertos.c@{app\_freertos.c}!TASK\_IMU\_PERIOD\_MS@{TASK\_IMU\_PERIOD\_MS}}
+\index{TASK\_IMU\_PERIOD\_MS@{TASK\_IMU\_PERIOD\_MS}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_IMU\_PERIOD\_MS}{TASK\_IMU\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a0ffe77b4a33d592886cc361f6715d5a0} 
+\+\#define TASK\+\_\+\+IMU\+\_\+\+PERIOD\+\_\+\+MS~20U}
+
+
+
+Periodo task IMU \+[ms]\+. 
+
+\Hypertarget{app__freertos_8c_a7739d5771438d1f364787932ab4a66c8}\index{app\_freertos.c@{app\_freertos.c}!TASK\_LOG\_PERIOD\_MS@{TASK\_LOG\_PERIOD\_MS}}
+\index{TASK\_LOG\_PERIOD\_MS@{TASK\_LOG\_PERIOD\_MS}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_LOG\_PERIOD\_MS}{TASK\_LOG\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a7739d5771438d1f364787932ab4a66c8} 
+\+\#define TASK\+\_\+\+LOG\+\_\+\+PERIOD\+\_\+\+MS~1000U}
+
+
+
+Periodo task log \+[ms]\+. 
+
+\Hypertarget{app__freertos_8c_a66045465da1ebf4cf9d8dc72961a4be7}\index{app\_freertos.c@{app\_freertos.c}!TASK\_SONAR\_PERIOD\_MS@{TASK\_SONAR\_PERIOD\_MS}}
+\index{TASK\_SONAR\_PERIOD\_MS@{TASK\_SONAR\_PERIOD\_MS}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_SONAR\_PERIOD\_MS}{TASK\_SONAR\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a66045465da1ebf4cf9d8dc72961a4be7} 
+\+\#define TASK\+\_\+\+SONAR\+\_\+\+PERIOD\+\_\+\+MS~60U}
+
+
+
+Periodo task sonar \+[ms]\+. 
+
+\Hypertarget{app__freertos_8c_ada4dfa33432ffc95721f26ec6f9fa568}\index{app\_freertos.c@{app\_freertos.c}!TASK\_SUPERVISOR\_PERIOD\_MS@{TASK\_SUPERVISOR\_PERIOD\_MS}}
+\index{TASK\_SUPERVISOR\_PERIOD\_MS@{TASK\_SUPERVISOR\_PERIOD\_MS}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_SUPERVISOR\_PERIOD\_MS}{TASK\_SUPERVISOR\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ada4dfa33432ffc95721f26ec6f9fa568} 
+\+\#define TASK\+\_\+\+SUPERVISOR\+\_\+\+PERIOD\+\_\+\+MS~20U}
+
+
+
+Periodo task supervisore \+[ms]\+. 
+
+\Hypertarget{app__freertos_8c_aa3de5de2303947444e7d2d3a221ed25d}\index{app\_freertos.c@{app\_freertos.c}!TASK\_TX\_PERIOD\_MS@{TASK\_TX\_PERIOD\_MS}}
+\index{TASK\_TX\_PERIOD\_MS@{TASK\_TX\_PERIOD\_MS}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{TASK\_TX\_PERIOD\_MS}{TASK\_TX\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{app__freertos_8c_aa3de5de2303947444e7d2d3a221ed25d} 
+\+\#define TASK\+\_\+\+TX\+\_\+\+PERIOD\+\_\+\+MS~20U}
+
+
+
+Periodo task TX \+[ms]\+. 
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{app__freertos_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}\index{app\_freertos.c@{app\_freertos.c}!osStaticMutexDef\_t@{osStaticMutexDef\_t}}
+\index{osStaticMutexDef\_t@{osStaticMutexDef\_t}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{osStaticMutexDef\_t}{osStaticMutexDef\_t}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263} 
+typedef Static\+Semaphore\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}}}
+
+\Hypertarget{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}\index{app\_freertos.c@{app\_freertos.c}!osStaticThreadDef\_t@{osStaticThreadDef\_t}}
+\index{osStaticThreadDef\_t@{osStaticThreadDef\_t}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{osStaticThreadDef\_t}{osStaticThreadDef\_t}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573} 
+typedef Static\+Task\+\_\+t \doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}}}
+
+File Name :\+ \doxylink{app__freertos_8c}{app\+\_\+freertos.\+c} Description :\+ Code for freertos applications
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2026 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\label{doc-func-members}
+\Hypertarget{app__freertos_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{app__freertos_8c_abade755e13d07c10889ae83143656158}\index{app\_freertos.c@{app\_freertos.c}!MX\_FREERTOS\_Init@{MX\_FREERTOS\_Init}}
+\index{MX\_FREERTOS\_Init@{MX\_FREERTOS\_Init}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{MX\_FREERTOS\_Init()}{MX\_FREERTOS\_Init()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_abade755e13d07c10889ae83143656158} 
+void MX\+\_\+\+FREERTOS\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Free\+RTOS initialization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_abade755e13d07c10889ae83143656158_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{app__freertos_8c_abade755e13d07c10889ae83143656158_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_a99d0fdb0434092bcb24d9c9af917e4e9}\index{app\_freertos.c@{app\_freertos.c}!StartDefaultTask@{StartDefaultTask}}
+\index{StartDefaultTask@{StartDefaultTask}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartDefaultTask()}{StartDefaultTask()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a99d0fdb0434092bcb24d9c9af917e4e9} 
+void Start\+Default\+Task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the default\+Task thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a99d0fdb0434092bcb24d9c9af917e4e9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_ae4c002c5fce77e8d1560809be699d795}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_Log@{StartTask\_Log}}
+\index{StartTask\_Log@{StartTask\_Log}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_Log()}{StartTask\_Log()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ae4c002c5fce77e8d1560809be699d795} 
+void Start\+Task\+\_\+\+Log (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Log thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_ae4c002c5fce77e8d1560809be699d795_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_ae4c002c5fce77e8d1560809be699d795_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_af657df7e3e2fe90f43a2de18975001a0}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_ReadBLE@{StartTask\_ReadBLE}}
+\index{StartTask\_ReadBLE@{StartTask\_ReadBLE}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_ReadBLE()}{StartTask\_ReadBLE()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_af657df7e3e2fe90f43a2de18975001a0} 
+void Start\+Task\+\_\+\+Read\+BLE (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Read\+BLE thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_af657df7e3e2fe90f43a2de18975001a0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_af657df7e3e2fe90f43a2de18975001a0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_ab4917357938b0c856c97e082d7c00f45}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_ReadIMU@{StartTask\_ReadIMU}}
+\index{StartTask\_ReadIMU@{StartTask\_ReadIMU}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_ReadIMU()}{StartTask\_ReadIMU()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ab4917357938b0c856c97e082d7c00f45} 
+void Start\+Task\+\_\+\+Read\+IMU (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Read\+IMU thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_ab4917357938b0c856c97e082d7c00f45_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_ab4917357938b0c856c97e082d7c00f45_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_a36b9e6d4432bac97c11daece6a8d8fac}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_ReadSonars@{StartTask\_ReadSonars}}
+\index{StartTask\_ReadSonars@{StartTask\_ReadSonars}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_ReadSonars()}{StartTask\_ReadSonars()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a36b9e6d4432bac97c11daece6a8d8fac} 
+void Start\+Task\+\_\+\+Read\+Sonars (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Read\+Sonars thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a36b9e6d4432bac97c11daece6a8d8fac_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a36b9e6d4432bac97c11daece6a8d8fac_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_a79e59fed7352310066bb0919d8ad999d}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_Rx@{StartTask\_Rx}}
+\index{StartTask\_Rx@{StartTask\_Rx}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_Rx()}{StartTask\_Rx()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a79e59fed7352310066bb0919d8ad999d} 
+void Start\+Task\+\_\+\+Rx (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Rx thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a79e59fed7352310066bb0919d8ad999d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a79e59fed7352310066bb0919d8ad999d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_a3f7778cdf1274eaffeab60f470433691}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_Supervisor@{StartTask\_Supervisor}}
+\index{StartTask\_Supervisor@{StartTask\_Supervisor}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_Supervisor()}{StartTask\_Supervisor()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a3f7778cdf1274eaffeab60f470433691} 
+void Start\+Task\+\_\+\+Supervisor (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Supervisor thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a3f7778cdf1274eaffeab60f470433691_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a3f7778cdf1274eaffeab60f470433691_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_a5dc3d606e8c5b7a8b2dd4b068fc7863f}\index{app\_freertos.c@{app\_freertos.c}!StartTask\_Tx@{StartTask\_Tx}}
+\index{StartTask\_Tx@{StartTask\_Tx}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{StartTask\_Tx()}{StartTask\_Tx()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a5dc3d606e8c5b7a8b2dd4b068fc7863f} 
+void Start\+Task\+\_\+\+Tx (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{argument}{}\end{DoxyParamCaption})}
+
+
+
+Function implementing the Task\+\_\+\+Tx thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a5dc3d606e8c5b7a8b2dd4b068fc7863f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{app__freertos_8c_a5dc3d606e8c5b7a8b2dd4b068fc7863f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{app__freertos_8c_a407179f96d6ae48a303e8695fd23379b}\index{app\_freertos.c@{app\_freertos.c}!vApplicationStackOverflowHook@{vApplicationStackOverflowHook}}
+\index{vApplicationStackOverflowHook@{vApplicationStackOverflowHook}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{vApplicationStackOverflowHook()}{vApplicationStackOverflowHook()}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a407179f96d6ae48a303e8695fd23379b} 
+void v\+Application\+Stack\+Overflow\+Hook (\begin{DoxyParamCaption}\item[{x\+Task\+Handle}]{x\+Task}{, }\item[{signed char \texorpdfstring{$\ast$}{*}}]{pc\+Task\+Name}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{app__freertos_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{app__freertos_8c_a25fbb54afdba71c24ba51ed50166ac8d}\index{app\_freertos.c@{app\_freertos.c}!defaultTask\_attributes@{defaultTask\_attributes}}
+\index{defaultTask\_attributes@{defaultTask\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{defaultTask\_attributes}{defaultTask\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a25fbb54afdba71c24ba51ed50166ac8d} 
+const os\+Thread\+Attr\+\_\+t default\+Task\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}defaultTask"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a0ef1a80eb9a31084b335d4b71c24e001}{defaultTaskBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a0ef1a80eb9a31084b335d4b71c24e001}{defaultTaskBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_aca18732f09ae696fd34b94d393dc9a42}{defaultTaskControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_aca18732f09ae696fd34b94d393dc9a42}{defaultTaskControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityNormal,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a0ef1a80eb9a31084b335d4b71c24e001}\index{app\_freertos.c@{app\_freertos.c}!defaultTaskBuffer@{defaultTaskBuffer}}
+\index{defaultTaskBuffer@{defaultTaskBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{defaultTaskBuffer}{defaultTaskBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a0ef1a80eb9a31084b335d4b71c24e001} 
+uint32\+\_\+t default\+Task\+Buffer\+[128]\+}
+
+\Hypertarget{app__freertos_8c_aca18732f09ae696fd34b94d393dc9a42}\index{app\_freertos.c@{app\_freertos.c}!defaultTaskControlBlock@{defaultTaskControlBlock}}
+\index{defaultTaskControlBlock@{defaultTaskControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{defaultTaskControlBlock}{defaultTaskControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_aca18732f09ae696fd34b94d393dc9a42} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} default\+Task\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_a6a263905468b0c37de4ee5e50ede4e74}\index{app\_freertos.c@{app\_freertos.c}!defaultTaskHandle@{defaultTaskHandle}}
+\index{defaultTaskHandle@{defaultTaskHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{defaultTaskHandle}{defaultTaskHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a6a263905468b0c37de4ee5e50ede4e74} 
+os\+Thread\+Id\+\_\+t default\+Task\+Handle}
+
+\Hypertarget{app__freertos_8c_a5fc1979ee30f477367360736e6d787ce}\index{app\_freertos.c@{app\_freertos.c}!mutex\_Ble\_attributes@{mutex\_Ble\_attributes}}
+\index{mutex\_Ble\_attributes@{mutex\_Ble\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_Ble\_attributes}{mutex\_Ble\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a5fc1979ee30f477367360736e6d787ce} 
+const os\+Mutex\+Attr\+\_\+t mutex\+\_\+\+Ble\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}mutex\_Ble"{}},}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_ac255f5f355066d64df0baf7ce8d09a23}{mutex\_BleControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_ac255f5f355066d64df0baf7ce8d09a23}{mutex\_BleControlBlock}}),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_ac255f5f355066d64df0baf7ce8d09a23}\index{app\_freertos.c@{app\_freertos.c}!mutex\_BleControlBlock@{mutex\_BleControlBlock}}
+\index{mutex\_BleControlBlock@{mutex\_BleControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_BleControlBlock}{mutex\_BleControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ac255f5f355066d64df0baf7ce8d09a23} 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} mutex\+\_\+\+Ble\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_a725a234ae82bc1ea1dbf200a0f3ab006}\index{app\_freertos.c@{app\_freertos.c}!mutex\_BleHandle@{mutex\_BleHandle}}
+\index{mutex\_BleHandle@{mutex\_BleHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_BleHandle}{mutex\_BleHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a725a234ae82bc1ea1dbf200a0f3ab006} 
+os\+Mutex\+Id\+\_\+t mutex\+\_\+\+Ble\+Handle}
+
+\Hypertarget{app__freertos_8c_afb75cd12a38a2292c1cb946ef3a8c49c}\index{app\_freertos.c@{app\_freertos.c}!mutex\_Imu\_attributes@{mutex\_Imu\_attributes}}
+\index{mutex\_Imu\_attributes@{mutex\_Imu\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_Imu\_attributes}{mutex\_Imu\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_afb75cd12a38a2292c1cb946ef3a8c49c} 
+const os\+Mutex\+Attr\+\_\+t mutex\+\_\+\+Imu\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}mutex\_Imu"{}},}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a40510a144183f2d503efed1589718fb4}{mutex\_ImuControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a40510a144183f2d503efed1589718fb4}{mutex\_ImuControlBlock}}),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a40510a144183f2d503efed1589718fb4}\index{app\_freertos.c@{app\_freertos.c}!mutex\_ImuControlBlock@{mutex\_ImuControlBlock}}
+\index{mutex\_ImuControlBlock@{mutex\_ImuControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_ImuControlBlock}{mutex\_ImuControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a40510a144183f2d503efed1589718fb4} 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} mutex\+\_\+\+Imu\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_ae564c78ec2ebf66e2049d946b4b353a4}\index{app\_freertos.c@{app\_freertos.c}!mutex\_ImuHandle@{mutex\_ImuHandle}}
+\index{mutex\_ImuHandle@{mutex\_ImuHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_ImuHandle}{mutex\_ImuHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ae564c78ec2ebf66e2049d946b4b353a4} 
+os\+Mutex\+Id\+\_\+t mutex\+\_\+\+Imu\+Handle}
+
+\Hypertarget{app__freertos_8c_a52cfa599dea23b6f34fd9d846cfdce88}\index{app\_freertos.c@{app\_freertos.c}!mutex\_Sonar\_attributes@{mutex\_Sonar\_attributes}}
+\index{mutex\_Sonar\_attributes@{mutex\_Sonar\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_Sonar\_attributes}{mutex\_Sonar\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a52cfa599dea23b6f34fd9d846cfdce88} 
+const os\+Mutex\+Attr\+\_\+t mutex\+\_\+\+Sonar\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}mutex\_Sonar"{}},}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a8935d2b08fe4e7728a6cd1b5bebf8693}{mutex\_SonarControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a8935d2b08fe4e7728a6cd1b5bebf8693}{mutex\_SonarControlBlock}}),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a8935d2b08fe4e7728a6cd1b5bebf8693}\index{app\_freertos.c@{app\_freertos.c}!mutex\_SonarControlBlock@{mutex\_SonarControlBlock}}
+\index{mutex\_SonarControlBlock@{mutex\_SonarControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_SonarControlBlock}{mutex\_SonarControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a8935d2b08fe4e7728a6cd1b5bebf8693} 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} mutex\+\_\+\+Sonar\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_a391f3e3da8ec8f3570728ac2026f400d}\index{app\_freertos.c@{app\_freertos.c}!mutex\_SonarHandle@{mutex\_SonarHandle}}
+\index{mutex\_SonarHandle@{mutex\_SonarHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_SonarHandle}{mutex\_SonarHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a391f3e3da8ec8f3570728ac2026f400d} 
+os\+Mutex\+Id\+\_\+t mutex\+\_\+\+Sonar\+Handle}
+
+\Hypertarget{app__freertos_8c_ad4cfaa7531d6dde600a2e1aadbc4de25}\index{app\_freertos.c@{app\_freertos.c}!mutex\_Supervisor\_attributes@{mutex\_Supervisor\_attributes}}
+\index{mutex\_Supervisor\_attributes@{mutex\_Supervisor\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_Supervisor\_attributes}{mutex\_Supervisor\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ad4cfaa7531d6dde600a2e1aadbc4de25} 
+const os\+Mutex\+Attr\+\_\+t mutex\+\_\+\+Supervisor\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}mutex\_Supervisor"{}},}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a3832a9d15a6b4ff85ae94c5068f5cdb8}{mutex\_SupervisorControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a3832a9d15a6b4ff85ae94c5068f5cdb8}{mutex\_SupervisorControlBlock}}),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a3832a9d15a6b4ff85ae94c5068f5cdb8}\index{app\_freertos.c@{app\_freertos.c}!mutex\_SupervisorControlBlock@{mutex\_SupervisorControlBlock}}
+\index{mutex\_SupervisorControlBlock@{mutex\_SupervisorControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_SupervisorControlBlock}{mutex\_SupervisorControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a3832a9d15a6b4ff85ae94c5068f5cdb8} 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} mutex\+\_\+\+Supervisor\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_adf68e01765e3e220f6a8707dc9e938ee}\index{app\_freertos.c@{app\_freertos.c}!mutex\_SupervisorHandle@{mutex\_SupervisorHandle}}
+\index{mutex\_SupervisorHandle@{mutex\_SupervisorHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_SupervisorHandle}{mutex\_SupervisorHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_adf68e01765e3e220f6a8707dc9e938ee} 
+os\+Mutex\+Id\+\_\+t mutex\+\_\+\+Supervisor\+Handle}
+
+\Hypertarget{app__freertos_8c_ad85c3ccd7d3fe4e68f143182aaa37265}\index{app\_freertos.c@{app\_freertos.c}!mutex\_UartRx\_attributes@{mutex\_UartRx\_attributes}}
+\index{mutex\_UartRx\_attributes@{mutex\_UartRx\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_UartRx\_attributes}{mutex\_UartRx\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ad85c3ccd7d3fe4e68f143182aaa37265} 
+const os\+Mutex\+Attr\+\_\+t mutex\+\_\+\+Uart\+Rx\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}mutex\_UartRx"{}},}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a6dba24886d1a1a9834e80ee69fb9fa5c}{mutex\_UartRxControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a6dba24886d1a1a9834e80ee69fb9fa5c}{mutex\_UartRxControlBlock}}),}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a6dba24886d1a1a9834e80ee69fb9fa5c}\index{app\_freertos.c@{app\_freertos.c}!mutex\_UartRxControlBlock@{mutex\_UartRxControlBlock}}
+\index{mutex\_UartRxControlBlock@{mutex\_UartRxControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_UartRxControlBlock}{mutex\_UartRxControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a6dba24886d1a1a9834e80ee69fb9fa5c} 
+\doxymbox{\hyperlink{app__freertos_8c_a81195ddfc48ce113ebe9a34a09d10263}{os\+Static\+Mutex\+Def\+\_\+t}} mutex\+\_\+\+Uart\+Rx\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_a1ae5d3459d2d1478549687d1ac550c9a}\index{app\_freertos.c@{app\_freertos.c}!mutex\_UartRxHandle@{mutex\_UartRxHandle}}
+\index{mutex\_UartRxHandle@{mutex\_UartRxHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{mutex\_UartRxHandle}{mutex\_UartRxHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a1ae5d3459d2d1478549687d1ac550c9a} 
+os\+Mutex\+Id\+\_\+t mutex\+\_\+\+Uart\+Rx\+Handle}
+
+\Hypertarget{app__freertos_8c_a78f3a613003dcff5cfd6aafc01453ec9}\index{app\_freertos.c@{app\_freertos.c}!Task\_Log\_attributes@{Task\_Log\_attributes}}
+\index{Task\_Log\_attributes@{Task\_Log\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_Log\_attributes}{Task\_Log\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a78f3a613003dcff5cfd6aafc01453ec9} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Log\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_Log"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a323a3a386e6c3806bbdc50fd140ad076}{Task\_LogBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a323a3a386e6c3806bbdc50fd140ad076}{Task\_LogBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a173e6fc5d7133b1574c2d90575e9e140}{Task\_LogControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a173e6fc5d7133b1574c2d90575e9e140}{Task\_LogControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityLow,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a323a3a386e6c3806bbdc50fd140ad076}\index{app\_freertos.c@{app\_freertos.c}!Task\_LogBuffer@{Task\_LogBuffer}}
+\index{Task\_LogBuffer@{Task\_LogBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_LogBuffer}{Task\_LogBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a323a3a386e6c3806bbdc50fd140ad076} 
+uint32\+\_\+t Task\+\_\+\+Log\+Buffer\+[512]\+}
+
+\Hypertarget{app__freertos_8c_a173e6fc5d7133b1574c2d90575e9e140}\index{app\_freertos.c@{app\_freertos.c}!Task\_LogControlBlock@{Task\_LogControlBlock}}
+\index{Task\_LogControlBlock@{Task\_LogControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_LogControlBlock}{Task\_LogControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a173e6fc5d7133b1574c2d90575e9e140} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Log\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_ac8cf40c41639eda255105303274b4f77}\index{app\_freertos.c@{app\_freertos.c}!Task\_LogHandle@{Task\_LogHandle}}
+\index{Task\_LogHandle@{Task\_LogHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_LogHandle}{Task\_LogHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ac8cf40c41639eda255105303274b4f77} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Log\+Handle}
+
+\Hypertarget{app__freertos_8c_a8ad0060d9991ae3268df73673de9ede9}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadBLE\_attributes@{Task\_ReadBLE\_attributes}}
+\index{Task\_ReadBLE\_attributes@{Task\_ReadBLE\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadBLE\_attributes}{Task\_ReadBLE\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a8ad0060d9991ae3268df73673de9ede9} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Read\+BLE\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_ReadBLE"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a0e231ccf807ddbc3347d6f1a79974ee0}{Task\_ReadBLEBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a0e231ccf807ddbc3347d6f1a79974ee0}{Task\_ReadBLEBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a7f00e508975a0f14e6922cc43ae40e97}{Task\_ReadBLEControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a7f00e508975a0f14e6922cc43ae40e97}{Task\_ReadBLEControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityNormal,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a0e231ccf807ddbc3347d6f1a79974ee0}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadBLEBuffer@{Task\_ReadBLEBuffer}}
+\index{Task\_ReadBLEBuffer@{Task\_ReadBLEBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadBLEBuffer}{Task\_ReadBLEBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a0e231ccf807ddbc3347d6f1a79974ee0} 
+uint32\+\_\+t Task\+\_\+\+Read\+BLEBuffer\+[256]\+}
+
+\Hypertarget{app__freertos_8c_a7f00e508975a0f14e6922cc43ae40e97}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadBLEControlBlock@{Task\_ReadBLEControlBlock}}
+\index{Task\_ReadBLEControlBlock@{Task\_ReadBLEControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadBLEControlBlock}{Task\_ReadBLEControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a7f00e508975a0f14e6922cc43ae40e97} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Read\+BLEControl\+Block}
+
+\Hypertarget{app__freertos_8c_aef9764a87de1bde3ada803fbd9d57d79}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadBLEHandle@{Task\_ReadBLEHandle}}
+\index{Task\_ReadBLEHandle@{Task\_ReadBLEHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadBLEHandle}{Task\_ReadBLEHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_aef9764a87de1bde3ada803fbd9d57d79} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Read\+BLEHandle}
+
+\Hypertarget{app__freertos_8c_aaaf9058adde56f3545d08bf1cb208e98}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadIMU\_attributes@{Task\_ReadIMU\_attributes}}
+\index{Task\_ReadIMU\_attributes@{Task\_ReadIMU\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadIMU\_attributes}{Task\_ReadIMU\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_aaaf9058adde56f3545d08bf1cb208e98} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Read\+IMU\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_ReadIMU"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a8764c7d1224832e08113d8ef6810065f}{Task\_ReadIMUBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a8764c7d1224832e08113d8ef6810065f}{Task\_ReadIMUBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a44b2c24c2bd2200a6f9c4e2953982613}{Task\_ReadIMUControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a44b2c24c2bd2200a6f9c4e2953982613}{Task\_ReadIMUControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityLow,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a8764c7d1224832e08113d8ef6810065f}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadIMUBuffer@{Task\_ReadIMUBuffer}}
+\index{Task\_ReadIMUBuffer@{Task\_ReadIMUBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadIMUBuffer}{Task\_ReadIMUBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a8764c7d1224832e08113d8ef6810065f} 
+uint32\+\_\+t Task\+\_\+\+Read\+IMUBuffer\+[128]\+}
+
+\Hypertarget{app__freertos_8c_a44b2c24c2bd2200a6f9c4e2953982613}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadIMUControlBlock@{Task\_ReadIMUControlBlock}}
+\index{Task\_ReadIMUControlBlock@{Task\_ReadIMUControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadIMUControlBlock}{Task\_ReadIMUControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a44b2c24c2bd2200a6f9c4e2953982613} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Read\+IMUControl\+Block}
+
+\Hypertarget{app__freertos_8c_af510bc8fcf76acbbac0cfe3730ec5c01}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadIMUHandle@{Task\_ReadIMUHandle}}
+\index{Task\_ReadIMUHandle@{Task\_ReadIMUHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadIMUHandle}{Task\_ReadIMUHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_af510bc8fcf76acbbac0cfe3730ec5c01} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Read\+IMUHandle}
+
+\Hypertarget{app__freertos_8c_a21ed63b12b9a0c6026ae63d183e62d32}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadSonars\_attributes@{Task\_ReadSonars\_attributes}}
+\index{Task\_ReadSonars\_attributes@{Task\_ReadSonars\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadSonars\_attributes}{Task\_ReadSonars\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a21ed63b12b9a0c6026ae63d183e62d32} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Read\+Sonars\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_ReadSonars"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a9b9636c710c8a892b644e8d9380fd28a}{Task\_ReadSonarsBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a9b9636c710c8a892b644e8d9380fd28a}{Task\_ReadSonarsBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a7e8f080b4b2e6fc76aae99661a5abc9a}{Task\_ReadSonarsControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a7e8f080b4b2e6fc76aae99661a5abc9a}{Task\_ReadSonarsControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityAboveNormal,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_a9b9636c710c8a892b644e8d9380fd28a}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadSonarsBuffer@{Task\_ReadSonarsBuffer}}
+\index{Task\_ReadSonarsBuffer@{Task\_ReadSonarsBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadSonarsBuffer}{Task\_ReadSonarsBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a9b9636c710c8a892b644e8d9380fd28a} 
+uint32\+\_\+t Task\+\_\+\+Read\+Sonars\+Buffer\+[256]\+}
+
+\Hypertarget{app__freertos_8c_a7e8f080b4b2e6fc76aae99661a5abc9a}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadSonarsControlBlock@{Task\_ReadSonarsControlBlock}}
+\index{Task\_ReadSonarsControlBlock@{Task\_ReadSonarsControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadSonarsControlBlock}{Task\_ReadSonarsControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a7e8f080b4b2e6fc76aae99661a5abc9a} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Read\+Sonars\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_aa87191f35a63b523b1305690be037039}\index{app\_freertos.c@{app\_freertos.c}!Task\_ReadSonarsHandle@{Task\_ReadSonarsHandle}}
+\index{Task\_ReadSonarsHandle@{Task\_ReadSonarsHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_ReadSonarsHandle}{Task\_ReadSonarsHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_aa87191f35a63b523b1305690be037039} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Read\+Sonars\+Handle}
+
+\Hypertarget{app__freertos_8c_a949b010adadbd580db269d29f347c00e}\index{app\_freertos.c@{app\_freertos.c}!Task\_Rx\_attributes@{Task\_Rx\_attributes}}
+\index{Task\_Rx\_attributes@{Task\_Rx\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_Rx\_attributes}{Task\_Rx\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a949b010adadbd580db269d29f347c00e} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Rx\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_Rx"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_af2f822abce1e7a637eca419054c447bc}{Task\_RxBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_af2f822abce1e7a637eca419054c447bc}{Task\_RxBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a10e5a00bd78f86c02e29dda347dc377e}{Task\_RxControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a10e5a00bd78f86c02e29dda347dc377e}{Task\_RxControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityNormal,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_af2f822abce1e7a637eca419054c447bc}\index{app\_freertos.c@{app\_freertos.c}!Task\_RxBuffer@{Task\_RxBuffer}}
+\index{Task\_RxBuffer@{Task\_RxBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_RxBuffer}{Task\_RxBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_af2f822abce1e7a637eca419054c447bc} 
+uint32\+\_\+t Task\+\_\+\+Rx\+Buffer\+[256]\+}
+
+\Hypertarget{app__freertos_8c_a10e5a00bd78f86c02e29dda347dc377e}\index{app\_freertos.c@{app\_freertos.c}!Task\_RxControlBlock@{Task\_RxControlBlock}}
+\index{Task\_RxControlBlock@{Task\_RxControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_RxControlBlock}{Task\_RxControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a10e5a00bd78f86c02e29dda347dc377e} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Rx\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_affa24209ce7663dce4b2dcf41dc395eb}\index{app\_freertos.c@{app\_freertos.c}!Task\_RxHandle@{Task\_RxHandle}}
+\index{Task\_RxHandle@{Task\_RxHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_RxHandle}{Task\_RxHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_affa24209ce7663dce4b2dcf41dc395eb} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Rx\+Handle}
+
+\Hypertarget{app__freertos_8c_a0e8d82be73fc50b1d9272818af68448f}\index{app\_freertos.c@{app\_freertos.c}!Task\_Supervisor\_attributes@{Task\_Supervisor\_attributes}}
+\index{Task\_Supervisor\_attributes@{Task\_Supervisor\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_Supervisor\_attributes}{Task\_Supervisor\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a0e8d82be73fc50b1d9272818af68448f} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Supervisor\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_Supervisor"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_ad18805ba1e3f364efb6c5c7305039843}{Task\_SupervisorBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_ad18805ba1e3f364efb6c5c7305039843}{Task\_SupervisorBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_ac311c4e2f696864018bc8dc43127dc4d}{Task\_SupervisorControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_ac311c4e2f696864018bc8dc43127dc4d}{Task\_SupervisorControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityAboveNormal,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_ad18805ba1e3f364efb6c5c7305039843}\index{app\_freertos.c@{app\_freertos.c}!Task\_SupervisorBuffer@{Task\_SupervisorBuffer}}
+\index{Task\_SupervisorBuffer@{Task\_SupervisorBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_SupervisorBuffer}{Task\_SupervisorBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ad18805ba1e3f364efb6c5c7305039843} 
+uint32\+\_\+t Task\+\_\+\+Supervisor\+Buffer\+[512]\+}
+
+\Hypertarget{app__freertos_8c_ac311c4e2f696864018bc8dc43127dc4d}\index{app\_freertos.c@{app\_freertos.c}!Task\_SupervisorControlBlock@{Task\_SupervisorControlBlock}}
+\index{Task\_SupervisorControlBlock@{Task\_SupervisorControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_SupervisorControlBlock}{Task\_SupervisorControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ac311c4e2f696864018bc8dc43127dc4d} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Supervisor\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_a7d70abee0153016b7d5d216364f5b38a}\index{app\_freertos.c@{app\_freertos.c}!Task\_SupervisorHandle@{Task\_SupervisorHandle}}
+\index{Task\_SupervisorHandle@{Task\_SupervisorHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_SupervisorHandle}{Task\_SupervisorHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a7d70abee0153016b7d5d216364f5b38a} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Supervisor\+Handle}
+
+\Hypertarget{app__freertos_8c_a3f80fe8aa757148083fdc6d7c75c50c6}\index{app\_freertos.c@{app\_freertos.c}!Task\_Tx\_attributes@{Task\_Tx\_attributes}}
+\index{Task\_Tx\_attributes@{Task\_Tx\_attributes}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_Tx\_attributes}{Task\_Tx\_attributes}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a3f80fe8aa757148083fdc6d7c75c50c6} 
+const os\+Thread\+Attr\+\_\+t Task\+\_\+\+Tx\+\_\+attributes}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .name\ =\ \textcolor{stringliteral}{"{}Task\_Tx"{}},}
+\DoxyCodeLine{\ \ .stack\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_ae121e9704c2ff72540863b7c0ad475e6}{Task\_TxBuffer}}[0],}
+\DoxyCodeLine{\ \ .stack\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_ae121e9704c2ff72540863b7c0ad475e6}{Task\_TxBuffer}}),}
+\DoxyCodeLine{\ \ .cb\_mem\ =\ \&\doxymbox{\hyperlink{app__freertos_8c_a9de4dfd8f6741cb66fd165af00b27292}{Task\_TxControlBlock}},}
+\DoxyCodeLine{\ \ .cb\_size\ =\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{app__freertos_8c_a9de4dfd8f6741cb66fd165af00b27292}{Task\_TxControlBlock}}),}
+\DoxyCodeLine{\ \ .priority\ =\ (osPriority\_t)\ osPriorityAboveNormal,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{app__freertos_8c_ae121e9704c2ff72540863b7c0ad475e6}\index{app\_freertos.c@{app\_freertos.c}!Task\_TxBuffer@{Task\_TxBuffer}}
+\index{Task\_TxBuffer@{Task\_TxBuffer}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_TxBuffer}{Task\_TxBuffer}}
+{\footnotesize\ttfamily \label{app__freertos_8c_ae121e9704c2ff72540863b7c0ad475e6} 
+uint32\+\_\+t Task\+\_\+\+Tx\+Buffer\+[256]\+}
+
+\Hypertarget{app__freertos_8c_a9de4dfd8f6741cb66fd165af00b27292}\index{app\_freertos.c@{app\_freertos.c}!Task\_TxControlBlock@{Task\_TxControlBlock}}
+\index{Task\_TxControlBlock@{Task\_TxControlBlock}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_TxControlBlock}{Task\_TxControlBlock}}
+{\footnotesize\ttfamily \label{app__freertos_8c_a9de4dfd8f6741cb66fd165af00b27292} 
+\doxymbox{\hyperlink{app__freertos_8c_a5bee4f77f84f0c92aeb06fdccdb82573}{os\+Static\+Thread\+Def\+\_\+t}} Task\+\_\+\+Tx\+Control\+Block}
+
+\Hypertarget{app__freertos_8c_af041dc13b089b0b29ef295e8f1a94713}\index{app\_freertos.c@{app\_freertos.c}!Task\_TxHandle@{Task\_TxHandle}}
+\index{Task\_TxHandle@{Task\_TxHandle}!app\_freertos.c@{app\_freertos.c}}
+\doxysubsubsection{\texorpdfstring{Task\_TxHandle}{Task\_TxHandle}}
+{\footnotesize\ttfamily \label{app__freertos_8c_af041dc13b089b0b29ef295e8f1a94713} 
+os\+Thread\+Id\+\_\+t Task\+\_\+\+Tx\+Handle}
+

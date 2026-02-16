@@ -1,3 +1,0 @@
-../Core/Src/snapshot/control_snapshot.c:20:13:CommandSnapshot_Init	8	static
-../Core/Src/snapshot/control_snapshot.c:36:6:CommandSnapshot_Write	24	static
-../Core/Src/snapshot/control_snapshot.c:49:6:CommandSnapshot_Read	24	static

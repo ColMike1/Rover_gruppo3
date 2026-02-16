@@ -1,3 +1,0 @@
-../Core/Src/sonar/sonar_hw.c:27:6:scan	5
-../Core/Src/sonar/sonar_hw.c:74:10:read_distance	2
-../Core/Src/sonar/sonar_hw.c:91:6:SonarHW_GetDistances	4

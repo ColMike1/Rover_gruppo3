@@ -1,0 +1,104 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+led/\+led\+\_\+task.c File Reference}
+\hypertarget{led__task_8c}{}\label{led__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/led/led\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/led/led\_task.c}}
+
+
+Gestione della segnalazione visiva tramite LED di stato.  
+
+
+{\ttfamily \+\#include "{}led/\+led\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include "{}string.\+h"{}}\newline
+{\ttfamily \+\#include "{}gpio.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for led\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{led__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{led__task_8c_ab796cf2411245dc9d58512912bd4e67e}{Led\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza i pin GPIO dei LED allo stato spento. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{led__task_8c_acbd41836584c569d5e38bbe8ad919e9f}{Led\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Step periodico del task LED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static int \doxymbox{\hyperlink{led__task_8c_a76f11d9a0a47b94f72c2d0e77fb32240}{n}} = 0
+\begin{DoxyCompactList}\small\item\em Contatore per il timing del lampeggio (utilizzato per lo stato degraded). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione della segnalazione visiva tramite LED di stato. 
+
+Controlla i LED per indicare errori critici (Rosso fisso), stati degradati (Rosso lampeggiante), direzioni di marcia (Giallo) ed Emergency Stop (Blu). 
+
+\label{doc-func-members}
+\Hypertarget{led__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{led__task_8c_ab796cf2411245dc9d58512912bd4e67e}\index{led\_task.c@{led\_task.c}!Led\_TaskInit@{Led\_TaskInit}}
+\index{Led\_TaskInit@{Led\_TaskInit}!led\_task.c@{led\_task.c}}
+\doxysubsubsection{\texorpdfstring{Led\_TaskInit()}{Led\_TaskInit()}}
+{\footnotesize\ttfamily \label{led__task_8c_ab796cf2411245dc9d58512912bd4e67e} 
+void Led\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza i pin GPIO dei LED allo stato spento. 
+
+Inizializza l\textquotesingle{}hardware e le risorse per il task LED. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{led__task_8c_ab796cf2411245dc9d58512912bd4e67e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{led__task_8c_acbd41836584c569d5e38bbe8ad919e9f}\index{led\_task.c@{led\_task.c}!Led\_TaskStep@{Led\_TaskStep}}
+\index{Led\_TaskStep@{Led\_TaskStep}!led\_task.c@{led\_task.c}}
+\doxysubsubsection{\texorpdfstring{Led\_TaskStep()}{Led\_TaskStep()}}
+{\footnotesize\ttfamily \label{led__task_8c_acbd41836584c569d5e38bbe8ad919e9f} 
+void Led\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Step periodico del task LED. 
+
+Esegue un ciclo del task LED (es. lampeggio di stato).
+
+Legge gli snapshot di sistema e aggiorna le uscite GPIO in base alla logica di stato. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{led__task_8c_acbd41836584c569d5e38bbe8ad919e9f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{led__task_8c_acbd41836584c569d5e38bbe8ad919e9f_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{led__task_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{led__task_8c_a76f11d9a0a47b94f72c2d0e77fb32240}\index{led\_task.c@{led\_task.c}!n@{n}}
+\index{n@{n}!led\_task.c@{led\_task.c}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily \label{led__task_8c_a76f11d9a0a47b94f72c2d0e77fb32240} 
+int n = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Contatore per il timing del lampeggio (utilizzato per lo stato degraded). 
+

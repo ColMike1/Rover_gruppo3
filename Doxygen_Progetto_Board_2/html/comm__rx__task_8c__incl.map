@@ -1,0 +1,31 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/comm/comm_rx_task.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/comm/comm_rx_task.c">
+<area shape="rect" id="Node000001" title="Task RX: acquisizione byte UART, riallineamento frame e unpack." alt="" coords="510,5,713,80"/>
+<area shape="rect" id="Node000002" href="$comm__rx__task_8h.html" title="Task di ricezione UART e parsing frame da board 1." alt="" coords="5,128,164,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="509,65,169,127,168,122,509,60"/>
+<area shape="rect" id="Node000003" href="$comm__unpack_8h.html" title="API di deserializzazione frame ricevuti da board 1." alt="" coords="350,128,507,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="544,80,467,123,465,118,539,81"/>
+<area shape="rect" id="Node000007" href="$comm__uart_8h.html" title="Driver UART con buffer circolare per comunicazione inter&#45;board." alt="" coords="188,128,325,155"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="507,73,318,126,317,121,512,71"/>
+<area shape="rect" id="Node000009" href="$rx__snapshot_8h.html" title="Definizione dello snapshot RX e API thread&#45;safe." alt="" coords="531,128,691,155"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="613,78,613,114,609,111,609,82"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="716,128,811,155"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="670,78,733,120,728,119,668,83"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="835,128,929,155"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="714,78,835,122,829,122,713,83"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="953,128,1010,155"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="714,67,941,127,935,128,713,72"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="266,211,330,237"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="411,154,332,205,330,200,406,156"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="532,203,690,245"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="458,153,553,196,547,196,457,158"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="354,203,508,245"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="431,153,432,189,428,186,427,157"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="264,153,287,198,282,196,262,157"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="167,211,242,237"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="251,154,223,200,219,196,246,156"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="539,155,444,177,344,205,338,207,337,202,342,200,443,172,534,156"/>
+<area shape="poly" id="edge12_Node000009_Node000005" title=" " alt="" coords="613,153,613,189,609,186,609,157"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="586,155,492,198,491,193,580,156"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="714,211,802,237"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="635,153,724,203,719,203,633,158"/>
+</map>

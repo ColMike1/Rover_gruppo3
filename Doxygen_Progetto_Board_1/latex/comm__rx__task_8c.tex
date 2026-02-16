@@ -1,0 +1,126 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+rx\+\_\+task.c File Reference}
+\hypertarget{comm__rx__task_8c}{}\label{comm__rx__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_rx\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_rx\_task.c}}
+
+
+Gestione del task di ricezione messaggi UART.  
+
+
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+rx\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+unpack.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+Include dependency graph for comm\+\_\+rx\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__rx__task_8c_afbc5269f48d97291e12a97045fdecbff}{RX\+\_\+\+FRAME\+\_\+\+LEN}}~((uint16\+\_\+t)sizeof(Comm\+Frame\+B2\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza attesa del pacchetto in ingresso (Frame B2). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{comm__rx__task_8c_a3e9af6b370e370158949ba1f4d064a38}{SYNC\+\_\+\+WORD}}~0x\+AA56U
+\begin{DoxyCompactList}\small\item\em Parola di sincronizzazione per identificare l\textquotesingle{}inizio del frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb}{Rx\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il driver UART per la ricezione. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357}{Rx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Step principale del task di ricezione. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione del task di ricezione messaggi UART. 
+
+Implementa una macchina a stati per la sincronizzazione tramite SYNC\+\_\+\+WORD. 
+
+\label{doc-define-members}
+\Hypertarget{comm__rx__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__rx__task_8c_afbc5269f48d97291e12a97045fdecbff}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!RX\_FRAME\_LEN@{RX\_FRAME\_LEN}}
+\index{RX\_FRAME\_LEN@{RX\_FRAME\_LEN}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{RX\_FRAME\_LEN}{RX\_FRAME\_LEN}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_afbc5269f48d97291e12a97045fdecbff} 
+\+\#define RX\+\_\+\+FRAME\+\_\+\+LEN~((uint16\+\_\+t)sizeof(Comm\+Frame\+B2\+\_\+t))}
+
+
+
+Lunghezza attesa del pacchetto in ingresso (Frame B2). 
+
+\Hypertarget{comm__rx__task_8c_a3e9af6b370e370158949ba1f4d064a38}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!SYNC\_WORD@{SYNC\_WORD}}
+\index{SYNC\_WORD@{SYNC\_WORD}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{SYNC\_WORD}{SYNC\_WORD}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_a3e9af6b370e370158949ba1f4d064a38} 
+\+\#define SYNC\+\_\+\+WORD~0x\+AA56U}
+
+
+
+Parola di sincronizzazione per identificare l\textquotesingle{}inizio del frame. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__rx__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!Rx\_TaskInit@{Rx\_TaskInit}}
+\index{Rx\_TaskInit@{Rx\_TaskInit}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Rx\_TaskInit()}{Rx\_TaskInit()}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb} 
+void Rx\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il driver UART per la ricezione. 
+
+Inizializza le risorse necessarie per il task di ricezione (code, semafori, etc.). Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!Rx\_TaskStep@{Rx\_TaskStep}}
+\index{Rx\_TaskStep@{Rx\_TaskStep}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Rx\_TaskStep()}{Rx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357} 
+void Rx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Step principale del task di ricezione. 
+
+Esegue un passo del task di ricezione, elaborando i dati in ingresso dalla UART.
+
+Attende la notifica dell\textquotesingle{}ISR UART, processa il buffer circolare cercando la sincronizzazione e valida il pacchetto ricevuto tramite CRC. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357_icgraph}
+\end{center}
+\end{figure}

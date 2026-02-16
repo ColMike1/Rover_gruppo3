@@ -1,2 +1,0 @@
-../Core/Src/IMU/imu_task.c:17:6:IMU_TaskInit	8	static
-../Core/Src/IMU/imu_task.c:24:6:IMU_TaskStep	16	static

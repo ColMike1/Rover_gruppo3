@@ -1,3 +1,0 @@
-../Core/Src/snapshot/imu_snapshot.c:17:6:IMUSnapshot_MutexInit	16	static
-../Core/Src/snapshot/imu_snapshot.c:28:6:IMUSnapshot_Write	24	static
-../Core/Src/snapshot/imu_snapshot.c:38:6:IMUSnapshot_Read	24	static

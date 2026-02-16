@@ -1,0 +1,93 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+log/\+log\+\_\+format.h File Reference}
+\hypertarget{log__format_8h}{}\label{log__format_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/log/log\_format.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/log/log\_format.h}}
+
+
+API di formattazione degli snapshot diagnostici.  
+
+
+{\ttfamily \+\#include "{}snapshot/\+ble\+\_\+controller\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+imu\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+sonar\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for log\+\_\+format.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{log__format_8h_a7d16f9ede7c655ed1b3ad8ef0fcc925f}{Log\+\_\+\+Format\+Snapshot}} (char \texorpdfstring{$\ast$}{*}buf, unsigned buf\+\_\+len, const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}ble, const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}imu, const \doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}sonar, const \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}rx)
+\begin{DoxyCompactList}\small\item\em Costruisce una stringa di log completa a partire dagli snapshot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API di formattazione degli snapshot diagnostici. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{log__format_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{log__format_8h_a7d16f9ede7c655ed1b3ad8ef0fcc925f}\index{log\_format.h@{log\_format.h}!Log\_FormatSnapshot@{Log\_FormatSnapshot}}
+\index{Log\_FormatSnapshot@{Log\_FormatSnapshot}!log\_format.h@{log\_format.h}}
+\doxysubsubsection{\texorpdfstring{Log\_FormatSnapshot()}{Log\_FormatSnapshot()}}
+{\footnotesize\ttfamily \label{log__format_8h_a7d16f9ede7c655ed1b3ad8ef0fcc925f} 
+void Log\+\_\+\+Format\+Snapshot (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{unsigned}]{buf\+\_\+len}{, }\item[{const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ble}{, }\item[{const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{imu}{, }\item[{const \doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{sonar}{, }\item[{const \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{rx}{}\end{DoxyParamCaption})}
+
+
+
+Costruisce una stringa di log completa a partire dagli snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Buffer di output. \\
+\hline
+{\em buf\+\_\+len} & Lunghezza del buffer di output. \\
+\hline
+{\em ble} & Snapshot BLE. \\
+\hline
+{\em imu} & Snapshot IMU. \\
+\hline
+{\em sonar} & Snapshot sonar. \\
+\hline
+{\em rx} & Snapshot RX.\\
+\hline
+{\em buf} & Buffer di output. \\
+\hline
+{\em buf\+\_\+len} & Lunghezza buffer di output. \\
+\hline
+{\em ble} & Snapshot BLE. \\
+\hline
+{\em imu} & Snapshot IMU. \\
+\hline
+{\em sonar} & Snapshot sonar. \\
+\hline
+{\em rx} & Snapshot RX. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8h_a7d16f9ede7c655ed1b3ad8ef0fcc925f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__format_8h_a7d16f9ede7c655ed1b3ad8ef0fcc925f_icgraph}
+\end{center}
+\end{figure}

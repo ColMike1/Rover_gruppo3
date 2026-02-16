@@ -1,0 +1,125 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+snapshot/\+encoder\+\_\+snapshot.h File Reference}
+\hypertarget{encoder__snapshot_8h}{}\label{encoder__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/encoder\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/encoder\_snapshot.h}}
+
+
+Buffer protetto per i dati letti dagli encoder.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+Include dependency graph for encoder\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{encoder__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot delle velocità ruota e dello stato feedback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{encoder__snapshot_8h_a1f48961ee95ea98abd1c8c6b5e2498b5}{Encoder\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot encoder. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{encoder__snapshot_8h_a461cb0565d6741f020ebd4aae43fc68b}{Encoder\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Scrive i dati degli encoder nello snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{encoder__snapshot_8h_af580ad966ed7718068907738755f9e22}{Encoder\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Legge l\textquotesingle{}ultimo snapshot encoder disponibile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Buffer protetto per i dati letti dagli encoder. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{encoder__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__snapshot_8h_a1f48961ee95ea98abd1c8c6b5e2498b5}\index{encoder\_snapshot.h@{encoder\_snapshot.h}!EncoderSnapshot\_MutexInit@{EncoderSnapshot\_MutexInit}}
+\index{EncoderSnapshot\_MutexInit@{EncoderSnapshot\_MutexInit}!encoder\_snapshot.h@{encoder\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{EncoderSnapshot\_MutexInit()}{EncoderSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{encoder__snapshot_8h_a1f48961ee95ea98abd1c8c6b5e2498b5} 
+void Encoder\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot encoder. 
+
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot encoder.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato dal kernel CMSIS-\/\+RTOS. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__snapshot_8h_a1f48961ee95ea98abd1c8c6b5e2498b5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__snapshot_8h_af580ad966ed7718068907738755f9e22}\index{encoder\_snapshot.h@{encoder\_snapshot.h}!EncoderSnapshot\_Read@{EncoderSnapshot\_Read}}
+\index{EncoderSnapshot\_Read@{EncoderSnapshot\_Read}!encoder\_snapshot.h@{encoder\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{EncoderSnapshot\_Read()}{EncoderSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{encoder__snapshot_8h_af580ad966ed7718068907738755f9e22} 
+void Encoder\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge l\textquotesingle{}ultimo snapshot encoder disponibile. 
+
+Legge l\textquotesingle{}ultimo snapshot encoder disponibile.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore alla struttura di destinazione (tipicamente nel task Controllo). \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__snapshot_8h_af580ad966ed7718068907738755f9e22_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__snapshot_8h_a461cb0565d6741f020ebd4aae43fc68b}\index{encoder\_snapshot.h@{encoder\_snapshot.h}!EncoderSnapshot\_Write@{EncoderSnapshot\_Write}}
+\index{EncoderSnapshot\_Write@{EncoderSnapshot\_Write}!encoder\_snapshot.h@{encoder\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{EncoderSnapshot\_Write()}{EncoderSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{encoder__snapshot_8h_a461cb0565d6741f020ebd4aae43fc68b} 
+void Encoder\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive i dati degli encoder nello snapshot. 
+
+Scrive i dati degli encoder nello snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore alla struttura dati aggiornata dal task Encoder. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__snapshot_8h_a461cb0565d6741f020ebd4aae43fc68b_icgraph}
+\end{center}
+\end{figure}

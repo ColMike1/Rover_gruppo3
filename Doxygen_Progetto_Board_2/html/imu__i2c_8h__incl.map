@@ -1,0 +1,11 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/IMU/imu_i2c.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/IMU/imu_i2c.h">
+<area shape="rect" id="Node000001" title="API I2C per inizializzazione e lettura sensore MPU6050." alt="" coords="5,5,209,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="35,128,99,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,83,81,114,76,112,93,78"/>
+<area shape="rect" id="Node000003" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="124,128,173,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="123,78,140,113,134,113,122,83"/>
+<area shape="rect" id="Node000004" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="118,203,178,229"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="150,153,151,188,146,186,147,158"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="88,277,208,304"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="150,228,151,263,146,260,147,232"/>
+</map>

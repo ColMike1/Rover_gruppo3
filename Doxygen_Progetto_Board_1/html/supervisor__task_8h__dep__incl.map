@@ -1,0 +1,7 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/supervisor/supervisor_task.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/supervisor/supervisor_task.h">
+<area shape="rect" id="Node000001" title="Gestione del task supervisore di sistema." alt="" coords="116,5,330,80"/>
+<area shape="rect" id="Node000002" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="5,128,209,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,90,144,130,140,126,175,93"/>
+<area shape="rect" id="Node000003" href="$supervisor__task_8c.html" title="Implementazione del Task Supervisore di Board 1." alt="" coords="232,128,448,203"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="270,89,307,128,302,127,268,94"/>
+</map>

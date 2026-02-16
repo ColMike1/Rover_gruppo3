@@ -1,0 +1,99 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+supervisor/\+supervisor\+\_\+task.c File Reference}
+\hypertarget{supervisor__task_8c}{}\label{supervisor__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/supervisor/supervisor\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/supervisor/supervisor\_task.c}}
+
+
+Implementazione del Task Supervisore di Board 1.  
+
+
+{\ttfamily \+\#include "{}supervisor/\+supervisor\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+board\+\_\+health\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+encoder\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+supervisor\+\_\+command.\+h"{}}\newline
+{\ttfamily \+\#include "{}supervisor\+B1.\+h"{}}\newline
+{\ttfamily \+\#include "{}rtwtypes.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+Include dependency graph for supervisor\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa}{Supervisor\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il modello del supervisore. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a}{Supervisor\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue il ciclo periodico di supervisione e gestione guasti. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione del Task Supervisore di Board 1. 
+
+Questo modulo aggrega gli snapshot di salute della scheda, encoder e comunicazioni per alimentare la logica di controllo di alto livello (Supervisor\+B1). Gestisce inoltre le uscite hardware critiche come il relè di potenza e il pin di Emergency Stop. 
+
+\label{doc-func-members}
+\Hypertarget{supervisor__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa}\index{supervisor\_task.c@{supervisor\_task.c}!Supervisor\_TaskInit@{Supervisor\_TaskInit}}
+\index{Supervisor\_TaskInit@{Supervisor\_TaskInit}!supervisor\_task.c@{supervisor\_task.c}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskInit()}{Supervisor\_TaskInit()}}
+{\footnotesize\ttfamily \label{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa} 
+void Supervisor\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il modello del supervisore. 
+
+Inizializza il task supervisore, i timer e le strutture di stato interne.
+
+Richiama la funzione di inizializzazione del supervisore, generata tramite embedded coder. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a}\index{supervisor\_task.c@{supervisor\_task.c}!Supervisor\_TaskStep@{Supervisor\_TaskStep}}
+\index{Supervisor\_TaskStep@{Supervisor\_TaskStep}!supervisor\_task.c@{supervisor\_task.c}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskStep()}{Supervisor\_TaskStep()}}
+{\footnotesize\ttfamily \label{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a} 
+void Supervisor\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue il ciclo periodico di supervisione e gestione guasti. 
+
+Esegue un ciclo della logica di supervisione.
+
+
+\begin{DoxyEnumerate}
+\item Legge gli snapshot correnti (Health, Encoder, RX).
+\item Verifica la "{}liveliness"{} della Board 2 tramite l\textquotesingle{}alive\+\_\+counter.
+\item Alimenta la struttura di input del modello \textquotesingle{}Supervisor\+B1\+\_\+U\textquotesingle{}.
+\item Esegue lo step della logica (\textquotesingle{}Supervisor\+B1\+\_\+step\textquotesingle{}).
+\item Attua le decisioni di sicurezza (E-\/\+Stop, Relè) e pubblica lo snapshot del supervisore. 
+\end{DoxyEnumerate}Gestione Emergency Stop hardware. RESET spegne il sistema (sicurezza positiva), SET consente il movimento.
+
+Controllo Relè di potenza. Abilita o disabilita l\textquotesingle{}alimentazione ai driver motori.Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,155 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+uart.h File Reference}
+\hypertarget{comm__uart_8h}{}\label{comm__uart_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_uart.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_uart.h}}
+
+
+Driver UART con buffer circolare per comunicazione inter-\/board.  
+
+
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+Include dependency graph for comm\+\_\+uart.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{comm__uart_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__uart_8h_a99c3d964ff55f8369c528aa78c2b0258}{Comm\+Uart\+\_\+\+Early\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializzazione anticipata del driver UART. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8h_ad8213afef04db7813169c63f63f05f53}{Comm\+Uart\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il modulo UART nel contesto del task chiamante. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__uart_8h_aa6798e77d91bf6435a857b760113928e}{Comm\+Uart\+\_\+\+Send}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Invia un buffer su UART. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{comm__uart_8h_aa7a2f2fa5ecbe31a88a1b315c21251bb}{Comm\+Uart\+\_\+\+Get\+Byte}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}b)
+\begin{DoxyCompactList}\small\item\em Estrae un byte dal buffer RX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver UART con buffer circolare per comunicazione inter-\/board. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__uart_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__uart_8h_a99c3d964ff55f8369c528aa78c2b0258}\index{comm\_uart.h@{comm\_uart.h}!CommUart\_EarlyInit@{CommUart\_EarlyInit}}
+\index{CommUart\_EarlyInit@{CommUart\_EarlyInit}!comm\_uart.h@{comm\_uart.h}}
+\doxysubsubsection{\texorpdfstring{CommUart\_EarlyInit()}{CommUart\_EarlyInit()}}
+{\footnotesize\ttfamily \label{comm__uart_8h_a99c3d964ff55f8369c528aa78c2b0258} 
+void Comm\+Uart\+\_\+\+Early\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializzazione anticipata del driver UART. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{comm__uart_8h_a99c3d964ff55f8369c528aa78c2b0258_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8h_aa7a2f2fa5ecbe31a88a1b315c21251bb}\index{comm\_uart.h@{comm\_uart.h}!CommUart\_GetByte@{CommUart\_GetByte}}
+\index{CommUart\_GetByte@{CommUart\_GetByte}!comm\_uart.h@{comm\_uart.h}}
+\doxysubsubsection{\texorpdfstring{CommUart\_GetByte()}{CommUart\_GetByte()}}
+{\footnotesize\ttfamily \label{comm__uart_8h_aa7a2f2fa5ecbe31a88a1b315c21251bb} 
+bool Comm\+Uart\+\_\+\+Get\+Byte (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Estrae un byte dal buffer RX. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Puntatore al byte di output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}true\textquotesingle{} se un byte e\textquotesingle{} disponibile, \textquotesingle{}false\textquotesingle{} altrimenti.
+\end{DoxyReturn}
+Estrae un byte dal buffer RX.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Puntatore al byte di output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} se e\textquotesingle{} stato letto un byte, {\ttfamily false} se il buffer e\textquotesingle{} vuoto. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8h_aa7a2f2fa5ecbe31a88a1b315c21251bb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8h_ad8213afef04db7813169c63f63f05f53}\index{comm\_uart.h@{comm\_uart.h}!CommUart\_Init@{CommUart\_Init}}
+\index{CommUart\_Init@{CommUart\_Init}!comm\_uart.h@{comm\_uart.h}}
+\doxysubsubsection{\texorpdfstring{CommUart\_Init()}{CommUart\_Init()}}
+{\footnotesize\ttfamily \label{comm__uart_8h_ad8213afef04db7813169c63f63f05f53} 
+void Comm\+Uart\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il modulo UART nel contesto del task chiamante. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{comm__uart_8h_ad8213afef04db7813169c63f63f05f53_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8h_ad8213afef04db7813169c63f63f05f53_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__uart_8h_aa6798e77d91bf6435a857b760113928e}\index{comm\_uart.h@{comm\_uart.h}!CommUart\_Send@{CommUart\_Send}}
+\index{CommUart\_Send@{CommUart\_Send}!comm\_uart.h@{comm\_uart.h}}
+\doxysubsubsection{\texorpdfstring{CommUart\_Send()}{CommUart\_Send()}}
+{\footnotesize\ttfamily \label{comm__uart_8h_aa6798e77d91bf6435a857b760113928e} 
+void Comm\+Uart\+\_\+\+Send (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Invia un buffer su UART. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Buffer dati. \\
+\hline
+{\em len} & Lunghezza in byte.\\
+\hline
+\end{DoxyParams}
+Invia un buffer su UART.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Puntatore al buffer dati. \\
+\hline
+{\em len} & Numero di byte da inviare. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__uart_8h_aa6798e77d91bf6435a857b760113928e_icgraph}
+\end{center}
+\end{figure}

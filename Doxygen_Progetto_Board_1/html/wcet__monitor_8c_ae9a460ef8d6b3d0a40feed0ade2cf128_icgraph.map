@@ -1,0 +1,11 @@
+<map id="WCET_Print" name="WCET_Print">
+<area shape="rect" id="Node000001" title="Stampa su console seriale i tempi WCET registrati, raggruppati per tipologia." alt="" coords="619,5,714,32"/>
+<area shape="rect" id="Node000002" href="$log__task_8c.html#a60fce6a6a39cff4742e6f9b4b56ab7fb" title="Raccoglie i dati dagli snapshot e li invia al supporto di memorizzazione." alt="" coords="466,5,571,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="600,19,571,21,571,16,606,19"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a67cb454dfa430f2f1087bd4a6e89e5a4" title="Task di Debug e Logging." alt="" coords="296,5,418,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="448,19,419,21,419,16,454,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

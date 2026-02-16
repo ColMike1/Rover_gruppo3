@@ -18,10 +18,6 @@
  * @param[in]  bh  Puntatore allo snapshot board health.
  * @param[in]  rx  Puntatore allo snapshot di ricezione.
  */
-void Log_FormatSnapshot(char *buf,
-                        unsigned buf_len,
-                        const EncoderSnapshot_t *enc,
-                        const BoardHealthSnapshot_t *bh,
-						const RxSnapshot_t *rx);
+void Log_FormatSnapshot(char *buf, unsigned buf_len, const EncoderSnapshot_t *enc, const BoardHealthSnapshot_t *bh, const RxSnapshot_t *rx);
 
 #endif /* INC_LOG_LOG_FORMAT_H_ */

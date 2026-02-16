@@ -1,8 +1,6 @@
 /**
  * @file comm_pack.c
  * @brief Funzioni per il packaging dei messaggi di comunicazione (Serializzazione).
- * @date Jan 11, 2026
- * @author Sterm
  */
 
 #include "comm/comm_pack.h"

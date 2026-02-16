@@ -1,0 +1,18 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/comm/comm_uart.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/comm/comm_uart.c">
+<area shape="rect" id="Node000001" title="Driver UART con buffer circolare per RX/TX inter&#45;board." alt="" coords="288,5,492,80"/>
+<area shape="rect" id="Node000002" href="$comm__uart_8h.html" title="Driver UART con buffer circolare per comunicazione inter&#45;board." alt="" coords="5,136,143,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="287,80,127,133,125,128,289,75"/>
+<area shape="rect" id="Node000005" href="$sabertooth__driver_8h.html" title="Driver Sabertooth: composizione pacchetti e invio comandi motore." alt="" coords="167,128,306,171"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="338,79,281,121,278,116,334,82"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="330,136,450,163"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="392,78,392,122,388,119,388,82"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="475,136,569,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="437,78,497,127,492,126,436,83"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="593,136,651,163"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="475,78,582,126,585,129,580,129,580,130,474,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="37,219,111,245"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="76,161,77,204,71,203,72,165"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="170,219,234,245"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="95,161,172,209,167,211,93,166"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="230,170,215,206,212,202,226,173"/>
+</map>

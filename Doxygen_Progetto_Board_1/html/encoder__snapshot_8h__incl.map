@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/encoder_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/encoder_snapshot.h">
+<area shape="rect" id="Node000001" title="Buffer protetto per i dati letti dagli encoder." alt="" coords="20,5,242,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,128,70,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,79,62,119,58,115,93,81"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,128,168,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,78,133,113,128,111,129,82"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="192,128,280,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,78,214,117,209,117,170,83"/>
+</map>

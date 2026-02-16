@@ -1,0 +1,104 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+log/\+wcet\+\_\+monitor.c File Reference}
+\hypertarget{wcet__monitor_8c}{}\label{wcet__monitor_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/log/wcet\_monitor.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/log/wcet\_monitor.c}}
+
+
+Monitoraggio dei tempi di esecuzione nel peggior caso (Worst Case Execution Time).  
+
+
+{\ttfamily \+\#include "{}stm32g4xx.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+wcet\+\_\+monitor.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+Include dependency graph for wcet\+\_\+monitor.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wcet__monitor_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{wcet__monitor_8c_a97bca39385325a1e370291f3e7c81cec}{WCET\+\_\+\+Update}} (\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\+\_\+id\+\_\+t}} id, uint32\+\_\+t cycles)
+\begin{DoxyCompactList}\small\item\em Aggiorna il valore massimo di WCET per un determinato modulo. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{wcet__monitor_8c_ae9a460ef8d6b3d0a40feed0ade2cf128}{WCET\+\_\+\+Print}} (void)
+\begin{DoxyCompactList}\small\item\em Stampa su console seriale i tempi WCET registrati, raggruppati per tipologia. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \doxymbox{\hyperlink{wcet__monitor_8c_a2dcbe31895895a655d81358b49e44142}{wcet\+\_\+max}} \+[\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8adb98d3d045f9c7de485578fef3572791}{WCET\+\_\+\+ID\+\_\+\+MAX}}]\+
+\begin{DoxyCompactList}\small\item\em Array statico per memorizzare i picchi massimi di cicli per ogni ID monitorato. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Monitoraggio dei tempi di esecuzione nel peggior caso (Worst Case Execution Time). 
+
+Registra i cicli CPU massimi impiegati da task e ISR, convertendoli in microsecondi per l\textquotesingle{}analisi real-\/time. 
+
+\label{doc-func-members}
+\Hypertarget{wcet__monitor_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{wcet__monitor_8c_ae9a460ef8d6b3d0a40feed0ade2cf128}\index{wcet\_monitor.c@{wcet\_monitor.c}!WCET\_Print@{WCET\_Print}}
+\index{WCET\_Print@{WCET\_Print}!wcet\_monitor.c@{wcet\_monitor.c}}
+\doxysubsubsection{\texorpdfstring{WCET\_Print()}{WCET\_Print()}}
+{\footnotesize\ttfamily \label{wcet__monitor_8c_ae9a460ef8d6b3d0a40feed0ade2cf128} 
+void WCET\+\_\+\+Print (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Stampa su console seriale i tempi WCET registrati, raggruppati per tipologia. 
+
+Stampa o logga i risultati del monitoraggio WCET.
+
+Converte i cicli in microsecondi utilizzando la frequenza di clock di sistema. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wcet__monitor_8c_ae9a460ef8d6b3d0a40feed0ade2cf128_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{wcet__monitor_8c_a97bca39385325a1e370291f3e7c81cec}\index{wcet\_monitor.c@{wcet\_monitor.c}!WCET\_Update@{WCET\_Update}}
+\index{WCET\_Update@{WCET\_Update}!wcet\_monitor.c@{wcet\_monitor.c}}
+\doxysubsubsection{\texorpdfstring{WCET\_Update()}{WCET\_Update()}}
+{\footnotesize\ttfamily \label{wcet__monitor_8c_a97bca39385325a1e370291f3e7c81cec} 
+void WCET\+\_\+\+Update (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\+\_\+id\+\_\+t}}}]{id}{, }\item[{uint32\+\_\+t}]{cycles}{}\end{DoxyParamCaption})}
+
+
+
+Aggiorna il valore massimo di WCET per un determinato modulo. 
+
+Aggiorna il tempo di esecuzione registrato per un determinato ID.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identificativo del task o dell\textquotesingle{}ISR. \\
+\hline
+{\em cycles} & Cicli CPU misurati. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{wcet__monitor_8c_a97bca39385325a1e370291f3e7c81cec_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{wcet__monitor_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{wcet__monitor_8c_a2dcbe31895895a655d81358b49e44142}\index{wcet\_monitor.c@{wcet\_monitor.c}!wcet\_max@{wcet\_max}}
+\index{wcet\_max@{wcet\_max}!wcet\_monitor.c@{wcet\_monitor.c}}
+\doxysubsubsection{\texorpdfstring{wcet\_max}{wcet\_max}}
+{\footnotesize\ttfamily \label{wcet__monitor_8c_a2dcbe31895895a655d81358b49e44142} 
+uint32\+\_\+t wcet\+\_\+max\+[\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8adb98d3d045f9c7de485578fef3572791}{WCET\+\_\+\+ID\+\_\+\+MAX}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Array statico per memorizzare i picchi massimi di cicli per ogni ID monitorato. 
+

@@ -1,0 +1,11 @@
+<map id="Tx_TaskStep" name="Tx_TaskStep">
+<area shape="rect" id="Node000001" title="Step periodico del task di trasmissione." alt="" coords="5,81,104,108"/>
+<area shape="rect" id="Node000002" href="$comm__pack_8c.html#ae30a38144a410e9d1d2b80b8377f82cf" title="Costruisce il frame di stato per la comunicazione da Board1 a Board2." alt="" coords="161,5,318,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,79,151,42,173,36,168,39,153,46,80,83"/>
+<area shape="rect" id="Node000003" href="$comm__uart_8c.html#aa6798e77d91bf6435a857b760113928e" title="Invia un buffer di dati grezzi sulla UART." alt="" coords="179,56,301,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="103,85,165,78,161,81,105,90"/>
+<area shape="rect" id="Node000004" href="$encoder__snapshot_8c.html#af580ad966ed7718068907738755f9e22" title="Legge l&#39;ultimo snapshot encoder disponibile." alt="" coords="159,107,321,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="104,99,145,106,140,108,105,104"/>
+<area shape="rect" id="Node000005" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX)." alt="" coords="152,157,328,184"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="79,106,153,143,173,152,168,152,151,148,78,111"/>
+</map>

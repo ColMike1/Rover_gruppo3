@@ -1,0 +1,66 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+\+BLE\+\_\+\+Controller/\+ble\+\_\+controller\+\_\+task.h File Reference}
+\hypertarget{ble__controller__task_8h}{}\label{ble__controller__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/BLE\_Controller/ble\_controller\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/BLE\_Controller/ble\_controller\_task.h}}
+
+
+Task di acquisizione e normalizzazione dati del controller BLE.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{ble__controller__task_8h_a55331bd6cb5dd976aee67969de7028a8}{Ble\+Controller\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task BLE. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{ble__controller__task_8h_aba0f01ab46b8c308281d05541001d02d}{Ble\+Controller\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task BLE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di acquisizione e normalizzazione dati del controller BLE. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{ble__controller__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ble__controller__task_8h_a55331bd6cb5dd976aee67969de7028a8}\index{ble\_controller\_task.h@{ble\_controller\_task.h}!BleController\_TaskInit@{BleController\_TaskInit}}
+\index{BleController\_TaskInit@{BleController\_TaskInit}!ble\_controller\_task.h@{ble\_controller\_task.h}}
+\doxysubsubsection{\texorpdfstring{BleController\_TaskInit()}{BleController\_TaskInit()}}
+{\footnotesize\ttfamily \label{ble__controller__task_8h_a55331bd6cb5dd976aee67969de7028a8} 
+void Ble\+Controller\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task BLE. 
+
+In questa implementazione non e\textquotesingle{} richiesta inizializzazione specifica. \Hypertarget{ble__controller__task_8h_aba0f01ab46b8c308281d05541001d02d}\index{ble\_controller\_task.h@{ble\_controller\_task.h}!BleController\_TaskStep@{BleController\_TaskStep}}
+\index{BleController\_TaskStep@{BleController\_TaskStep}!ble\_controller\_task.h@{ble\_controller\_task.h}}
+\doxysubsubsection{\texorpdfstring{BleController\_TaskStep()}{BleController\_TaskStep()}}
+{\footnotesize\ttfamily \label{ble__controller__task_8h_aba0f01ab46b8c308281d05541001d02d} 
+void Ble\+Controller\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task BLE. 
+
+Se la lettura I2C va a buon fine, aggiorna gli assi normalizzati e i pulsanti nello snapshot condiviso. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8h_aba0f01ab46b8c308281d05541001d02d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8h_aba0f01ab46b8c308281d05541001d02d_icgraph}
+\end{center}
+\end{figure}

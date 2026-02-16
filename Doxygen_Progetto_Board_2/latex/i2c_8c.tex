@@ -1,0 +1,145 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+i2c.c File Reference}
+\hypertarget{i2c_8c}{}\label{i2c_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/i2c.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/i2c.c}}
+
+
+This file provides code for the configuration of the I2C instances.  
+
+
+{\ttfamily \+\#include "{}i2c.\+h"{}}\newline
+Include dependency graph for i2c.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{i2c_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{i2c_8c_ada6e763cfa4108a8d24cd27b75f2f489}{MX\+\_\+\+I2\+C1\+\_\+\+Init}} (void)
+\item 
+void \doxymbox{\hyperlink{i2c_8c_ad154e0c7086cb7e507cc717184567ff5}{MX\+\_\+\+I2\+C3\+\_\+\+Init}} (void)
+\item 
+void \doxymbox{\hyperlink{i2c_8c_a08b1eb7b7be5b94395127e2a33b1b67e}{HAL\+\_\+\+I2\+C\+\_\+\+Msp\+Init}} (I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}i2c\+Handle)
+\item 
+void \doxymbox{\hyperlink{i2c_8c_adaa17249f3d5001ad363c736df31c593}{HAL\+\_\+\+I2\+C\+\_\+\+Msp\+De\+Init}} (I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}i2c\+Handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+I2\+C\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{i2c_8c_af7b2c26e44dadaaa798a5c3d82914ba7}{hi2c1}}
+\begin{DoxyCompactList}\small\item\em Handle I2\+C1 generato da Cube\+MX. \end{DoxyCompactList}\item 
+I2\+C\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{i2c_8c_a5ccf4a01a8d7f08d3190181f843f7515}{hi2c3}}
+\begin{DoxyCompactList}\small\item\em Handle I2\+C3 generato da Cube\+MX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file provides code for the configuration of the I2C instances. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2026 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\label{doc-func-members}
+\Hypertarget{i2c_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{i2c_8c_adaa17249f3d5001ad363c736df31c593}\index{i2c.c@{i2c.c}!HAL\_I2C\_MspDeInit@{HAL\_I2C\_MspDeInit}}
+\index{HAL\_I2C\_MspDeInit@{HAL\_I2C\_MspDeInit}!i2c.c@{i2c.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_I2C\_MspDeInit()}{HAL\_I2C\_MspDeInit()}}
+{\footnotesize\ttfamily \label{i2c_8c_adaa17249f3d5001ad363c736df31c593} 
+void HAL\+\_\+\+I2\+C\+\_\+\+Msp\+De\+Init (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{i2c\+Handle}{}\end{DoxyParamCaption})}
+
+I2\+C1 GPIO Configuration PB8-\/\+BOOT0 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C1\+\_\+\+SCL PB9 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C1\+\_\+\+SDA
+
+I2\+C3 GPIO Configuration PC8 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C3\+\_\+\+SCL PC9 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C3\+\_\+\+SDA\Hypertarget{i2c_8c_a08b1eb7b7be5b94395127e2a33b1b67e}\index{i2c.c@{i2c.c}!HAL\_I2C\_MspInit@{HAL\_I2C\_MspInit}}
+\index{HAL\_I2C\_MspInit@{HAL\_I2C\_MspInit}!i2c.c@{i2c.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_I2C\_MspInit()}{HAL\_I2C\_MspInit()}}
+{\footnotesize\ttfamily \label{i2c_8c_a08b1eb7b7be5b94395127e2a33b1b67e} 
+void HAL\+\_\+\+I2\+C\+\_\+\+Msp\+Init (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{i2c\+Handle}{}\end{DoxyParamCaption})}
+
+Initializes the peripherals clocks
+
+I2\+C1 GPIO Configuration PB8-\/\+BOOT0 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C1\+\_\+\+SCL PB9 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C1\+\_\+\+SDA
+
+Initializes the peripherals clocks
+
+I2\+C3 GPIO Configuration PC8 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C3\+\_\+\+SCL PC9 -\/-\/-\/-\/-\/-\/\texorpdfstring{$>$}{>} I2\+C3\+\_\+\+SDAHere is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{i2c_8c_a08b1eb7b7be5b94395127e2a33b1b67e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{i2c_8c_ada6e763cfa4108a8d24cd27b75f2f489}\index{i2c.c@{i2c.c}!MX\_I2C1\_Init@{MX\_I2C1\_Init}}
+\index{MX\_I2C1\_Init@{MX\_I2C1\_Init}!i2c.c@{i2c.c}}
+\doxysubsubsection{\texorpdfstring{MX\_I2C1\_Init()}{MX\_I2C1\_Init()}}
+{\footnotesize\ttfamily \label{i2c_8c_ada6e763cfa4108a8d24cd27b75f2f489} 
+void MX\+\_\+\+I2\+C1\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Configure Analogue filter
+
+Configure Digital filterHere is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{i2c_8c_ada6e763cfa4108a8d24cd27b75f2f489_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{i2c_8c_ada6e763cfa4108a8d24cd27b75f2f489_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{i2c_8c_ad154e0c7086cb7e507cc717184567ff5}\index{i2c.c@{i2c.c}!MX\_I2C3\_Init@{MX\_I2C3\_Init}}
+\index{MX\_I2C3\_Init@{MX\_I2C3\_Init}!i2c.c@{i2c.c}}
+\doxysubsubsection{\texorpdfstring{MX\_I2C3\_Init()}{MX\_I2C3\_Init()}}
+{\footnotesize\ttfamily \label{i2c_8c_ad154e0c7086cb7e507cc717184567ff5} 
+void MX\+\_\+\+I2\+C3\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Configure Analogue filter
+
+Configure Digital filterHere is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{i2c_8c_ad154e0c7086cb7e507cc717184567ff5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{i2c_8c_ad154e0c7086cb7e507cc717184567ff5_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{i2c_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{i2c_8c_af7b2c26e44dadaaa798a5c3d82914ba7}\index{i2c.c@{i2c.c}!hi2c1@{hi2c1}}
+\index{hi2c1@{hi2c1}!i2c.c@{i2c.c}}
+\doxysubsubsection{\texorpdfstring{hi2c1}{hi2c1}}
+{\footnotesize\ttfamily \label{i2c_8c_af7b2c26e44dadaaa798a5c3d82914ba7} 
+I2\+C\+\_\+\+Handle\+Type\+Def hi2c1}
+
+
+
+Handle I2\+C1 generato da Cube\+MX. 
+
+\Hypertarget{i2c_8c_a5ccf4a01a8d7f08d3190181f843f7515}\index{i2c.c@{i2c.c}!hi2c3@{hi2c3}}
+\index{hi2c3@{hi2c3}!i2c.c@{i2c.c}}
+\doxysubsubsection{\texorpdfstring{hi2c3}{hi2c3}}
+{\footnotesize\ttfamily \label{i2c_8c_a5ccf4a01a8d7f08d3190181f843f7515} 
+I2\+C\+\_\+\+Handle\+Type\+Def hi2c3}
+
+
+
+Handle I2\+C3 generato da Cube\+MX. 
+

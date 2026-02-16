@@ -3,8 +3,6 @@
  * @brief Gestione della segnalazione visiva tramite LED di stato.
  * @details Controlla i LED per indicare errori critici (Rosso fisso), stati degradati
  * (Rosso lampeggiante), direzioni di marcia (Giallo) ed Emergency Stop (Blu).
- * @date Jan 26, 2026
- * @author OEM
  */
 
 #include "led/led_task.h"

@@ -1,0 +1,38 @@
+\doxysection{wcet\+\_\+monitor.\+h}
+\hypertarget{wcet__monitor_8h_source}{}\label{wcet__monitor_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/log/wcet\_monitor.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/log/wcet\_monitor.h}}
+\doxymbox{\hyperlink{wcet__monitor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_LOG\_WCET\_MONITOR\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_LOG\_WCET\_MONITOR\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab4c87bdf3327583e315f637c2e2f2fc1}{WCET\_TASK\_ENCODER}},\ \ \ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a430e29157015a36b5d03af50768cf553}{WCET\_TASK\_BOARD\_HEALTH}},\ }
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a06bb3490e8b335f24642db4d3ed43600}{WCET\_TASK\_TX}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8af819808a5d54d729ebbb204a0111c54d}{WCET\_TASK\_RX}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a7d58a78057c0919c480aa3b6ec3d8f8c}{WCET\_TASK\_SUPERVISOR}},\ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a0e7d59a37ebdea9a4dd863f09422e974}{WCET\_TASK\_CONTROL}},\ \ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8acf6b7b5994409fb98dab4256c0b4c020}{WCET\_TASK\_ACTUATION}},\ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8aff12a6de29af74b7f4bfccabff776808}{WCET\_MUTEX}},\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a9b55307dd4ce0eeb0ac7ee32e4417408}{WCET\_ISR\_UART\_4}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8afbb29f2746d094ae2f671984bbceed35}{WCET\_ISR\_UART\_5}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a64d6b807582a8283e3e8b47c3edde5ab}{WCET\_ISR\_DMA\_1}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab05942c6d188d46212b5e3be619b7ccd}{WCET\_ISR\_DMA\_2}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab406a7302686c509276381551082c48b}{WCET\_ISR\_DMA\_3}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8adb98d3d045f9c7de485578fef3572791}{WCET\_ID\_MAX}}\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \}\ \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\_id\_t}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{wcet__monitor_8h_a97bca39385325a1e370291f3e7c81cec}{WCET\_Update}}(\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\_id\_t}}\ \textcolor{keywordtype}{id},\ uint32\_t\ cycles);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{wcet__monitor_8h_ae9a460ef8d6b3d0a40feed0ade2cf128}{WCET\_Print}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_LOG\_WCET\_MONITOR\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

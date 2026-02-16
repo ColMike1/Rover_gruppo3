@@ -1,0 +1,47 @@
+\doxysection{imu\+\_\+snapshot.\+h}
+\hypertarget{imu__snapshot_8h_source}{}\label{imu__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/imu\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/imu\_snapshot.h}}
+\doxymbox{\hyperlink{imu__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_IMU\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_IMU\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{imu__i2c_8h}{IMU/imu\_i2c.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a254d701e51f2d709f8c982286e07f3b0}{task\_last\_run\_ms}};\ \ \ \ \ \textcolor{comment}{/*\ ultima\ esecuzione\ del\ task\ */}}
+\DoxyCodeLine{00018\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_ae6c3db0c7fb6222ece1f01125a5916a5}{data\_last\_valid\_ms}};\ \ \textcolor{comment}{/*\ ultimo\ istante\ in\ cui\ i\ dati\ sono\ validi\ */}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{/*\ Accellerometro\ (g)\ */}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a50ba9b7fa9fe0dd3b74fa58119d359cb}{ax\_g}};}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a3cd6681ee55a16a24adf544553822503}{ay\_g}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_aa8179cd43f86280abfd8088e40371b11}{az\_g}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{/*\ Giroscopio\ (deg/s)\ */}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a00efb3945aadaa4343cfd4fc141b3c08}{gx\_dps}};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a06d171f63adc778284a2602ffacc08f5}{gy\_dps}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a1b748e24cf58071180d69c8d5d340cbe}{gz\_dps}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{/*\ Temperatura\ (°C)\ */}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a7d167040d5b669e58555e21ee0d38e1f}{temperature\_degC}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t_a449dac1df0d3eadf36c12d22ac5cc15a}{yaw}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\_t}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{imu__snapshot_8h_a4a42b5c7fb3b0fed72a5ae2afc375b64}{IMUSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{imu__snapshot_8h_ac3de1c40604ab0a2e257704ed61cfbf4}{IMUSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\_t}}\ *snap);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{imu__snapshot_8h_af7492445b3f85cf0a78742d03f0a36f8}{IMUSnapshot\_Read}}(\doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\_t}}\ *snap);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_IMU\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

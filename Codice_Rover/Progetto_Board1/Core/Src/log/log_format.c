@@ -2,8 +2,6 @@
  * @file log_format.c
  * @brief Utility per la formattazione delle stringhe di log.
  * @details Converte flag binari e stati di sistema in stringhe leggibili per il debug tramite UART.
- * @date Jan 19, 2026
- * @author Sterm
  */
 
 #include <stdio.h>

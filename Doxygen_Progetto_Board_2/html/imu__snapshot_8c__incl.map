@@ -1,0 +1,18 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/imu_snapshot.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/imu_snapshot.c">
+<area shape="rect" id="Node000001" title="Storage thread&#45;safe dello snapshot IMU." alt="" coords="21,5,224,80"/>
+<area shape="rect" id="Node000002" href="$imu__snapshot_8h.html" title="Definizione dello snapshot IMU e API thread&#45;safe." alt="" coords="38,128,208,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,78,125,113,120,112,122,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,277,70,304"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,157,81,177,60,204,48,233,42,262,37,261,43,231,55,201,78,174,105,153"/>
+<area shape="rect" id="Node000004" href="$imu__i2c_8h.html" title="API I2C per inizializzazione e lettura sensore MPU6050." alt="" coords="70,203,176,229"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="123,153,125,187,120,187,122,158"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="200,203,288,229"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="144,153,212,193,207,195,144,158"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="107,232,66,269,61,266,109,228"/>
+<area shape="rect" id="Node000005" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="98,277,148,304"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="124,227,125,262,120,261,122,232"/>
+<area shape="rect" id="Node000006" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="93,352,153,379"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="124,302,125,337,120,336,122,307"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="63,427,183,453"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="125,377,125,412,120,410,121,381"/>
+</map>

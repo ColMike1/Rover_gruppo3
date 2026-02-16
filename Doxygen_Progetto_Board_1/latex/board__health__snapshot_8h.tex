@@ -1,0 +1,139 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+snapshot/\+board\+\_\+health\+\_\+snapshot.h File Reference}
+\hypertarget{board__health__snapshot_8h}{}\label{board__health__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/board\_health\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/board\_health\_snapshot.h}}
+
+
+Buffer protetto per lo scambio dati dello stato hardware.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+Include dependency graph for board\+\_\+health\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{board__health__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot dei parametri vitali della scheda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{board__health__snapshot_8h_afebf176f2f3feabd6348148a29a77682}{Board\+Health\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__snapshot_8h_a12e61a19b32027442e181c3a68446ff0}{Board\+Health\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Scrive i nuovi dati nello snapshot (API per il produttore). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__snapshot_8h_aa514a14af3b9094239dc168e1f3341c3}{Board\+Health\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Legge i dati correnti dallo snapshot (API per i consumatori). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Buffer protetto per lo scambio dati dello stato hardware. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{board__health__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board__health__snapshot_8h_afebf176f2f3feabd6348148a29a77682}\index{board\_health\_snapshot.h@{board\_health\_snapshot.h}!BoardHealthSnapshot\_MutexInit@{BoardHealthSnapshot\_MutexInit}}
+\index{BoardHealthSnapshot\_MutexInit@{BoardHealthSnapshot\_MutexInit}!board\_health\_snapshot.h@{board\_health\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealthSnapshot\_MutexInit()}{BoardHealthSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8h_afebf176f2f3feabd6348148a29a77682} 
+void Board\+Health\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex Free\+RTOS/\+\+CMSIS.\\
+\hline
+\end{DoxyParams}
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato dal kernel CMSIS-\/\+RTOS. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8h_afebf176f2f3feabd6348148a29a77682_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__snapshot_8h_aa514a14af3b9094239dc168e1f3341c3}\index{board\_health\_snapshot.h@{board\_health\_snapshot.h}!BoardHealthSnapshot\_Read@{BoardHealthSnapshot\_Read}}
+\index{BoardHealthSnapshot\_Read@{BoardHealthSnapshot\_Read}!board\_health\_snapshot.h@{board\_health\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealthSnapshot\_Read()}{BoardHealthSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8h_aa514a14af3b9094239dc168e1f3341c3} 
+void Board\+Health\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge i dati correnti dallo snapshot (API per i consumatori). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore dove copiare i dati letti.\\
+\hline
+\end{DoxyParams}
+Legge i dati correnti dallo snapshot (API per i consumatori).
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore alla struttura di destinazione (tipicamente nel task Log o Controllo). \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8h_aa514a14af3b9094239dc168e1f3341c3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__snapshot_8h_a12e61a19b32027442e181c3a68446ff0}\index{board\_health\_snapshot.h@{board\_health\_snapshot.h}!BoardHealthSnapshot\_Write@{BoardHealthSnapshot\_Write}}
+\index{BoardHealthSnapshot\_Write@{BoardHealthSnapshot\_Write}!board\_health\_snapshot.h@{board\_health\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{BoardHealthSnapshot\_Write()}{BoardHealthSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{board__health__snapshot_8h_a12e61a19b32027442e181c3a68446ff0} 
+void Board\+Health\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_board_health_snapshot__t}{Board\+Health\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive i nuovi dati nello snapshot (API per il produttore). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore ai dati da copiare.\\
+\hline
+\end{DoxyParams}
+Scrive i nuovi dati nello snapshot (API per il produttore).
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore alla struttura dati aggiornata dal task Board Health. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__snapshot_8h_a12e61a19b32027442e181c3a68446ff0_icgraph}
+\end{center}
+\end{figure}

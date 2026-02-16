@@ -1,0 +1,35 @@
+\doxysection{rx\+\_\+snapshot.\+h}
+\hypertarget{rx__snapshot_8h_source}{}\label{rx__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/rx\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/rx\_snapshot.h}}
+\doxymbox{\hyperlink{rx__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_RX\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_RX\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/comm\_status.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/comm\_message\_structures.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{/*\ Payload\ ricevuto\ */}}
+\DoxyCodeLine{00017\ \ \ \ \ CommPayloadB1\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a90a01e0b0155174c108dbede15e4a480}{payload}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{/*\ Status\ dell'ultimo\ evento\ RX\ osservato\ */}}
+\DoxyCodeLine{00020\ \ \ \ \ CommUnpackStatus\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a44f0a9a5e4cdf6c84bc20e48effa717d}{last\_event}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a998ffdf2568d6bbc8203661be859a556}{task\_last\_run\_ms}};\ \ \ \ \ \textcolor{comment}{/*\ ultima\ esecuzione\ del\ task\ */}}
+\DoxyCodeLine{00023\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_rx_snapshot__t_a76dff45064214626b1b65d369cf17d30}{data\_last\_valid\_ms}};\ \ \textcolor{comment}{/*\ ultimo\ istante\ in\ cui\ i\ dati\ sono\ validi\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \}\ \doxymbox{\hyperlink{struct_rx_snapshot__t}{RxSnapshot\_t}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{rx__snapshot_8h_aeaab1f75c7c734c6683d2a7e9342c5b8}{RxSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{rx__snapshot_8h_a642405a74aba520b9a133c82c2800f71}{RxSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_rx_snapshot__t}{RxSnapshot\_t}}\ *src);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{rx__snapshot_8h_ae785580883a2c19871811977522d68fc}{RxSnapshot\_Read}}(\doxymbox{\hyperlink{struct_rx_snapshot__t}{RxSnapshot\_t}}\ *dst);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_RX\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

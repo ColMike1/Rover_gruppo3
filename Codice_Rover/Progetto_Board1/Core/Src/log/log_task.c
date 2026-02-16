@@ -2,8 +2,6 @@
  * @file log_task.c
  * @brief Task di logging periodico.
  * @details Estrae gli snapshot dai vari moduli e li invia sulla LPUART per il monitoraggio esterno.
- * @date Jan 19, 2026
- * @author Sterm
  */
 
 #include "log/log_task.h"

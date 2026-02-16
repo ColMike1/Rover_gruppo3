@@ -1,0 +1,5 @@
+<map id="BoardHealthADC_Init" name="BoardHealthADC_Init">
+<area shape="rect" id="Node000001" title="Inizializza l&#39;ADC e i canali dedicati al monitoraggio della scheda." alt="" coords="5,5,153,32"/>
+<area shape="rect" id="Node000002" href="$board__health__adc_8c.html#a0097552fbc41c90ef2e1e11a409491fd" title="Carica i valori di calibrazione di fabbrica dai registri di sistema STM32." alt="" coords="201,5,378,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,16,188,19,182,19,153,21"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control_step.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control_step.h">
+<area shape="rect" id="Node000001" title="Interfaccia per il loop di controllo di alto livello." alt="" coords="119,5,322,80"/>
+<area shape="rect" id="Node000002" href="$control_8h.html" title="Header aggregatore del modulo di controllo." alt="" coords="5,128,209,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,94,143,129,139,126,177,90"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,89,303,127,298,128,265,94"/>
+<area shape="rect" id="Node000003" href="$control__step_8c.html" title="Orchestrazione del task di controllo e gestione delle strategie di fallback." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,216,110,251,104,249,106,221"/>
+</map>

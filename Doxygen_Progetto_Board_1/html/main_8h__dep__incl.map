@@ -1,0 +1,70 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/main.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/main.h">
+<area shape="rect" id="Node000001" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="2599,5,2802,80"/>
+<area shape="rect" id="Node000002" href="$adc_8h.html" title="This file contains all the function prototypes for the adc.c file." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2580,45,2139,51,1522,62,1202,73,902,88,645,107,450,131,438,133,436,128,449,125,644,101,902,82,1202,68,1522,57,2139,45,2586,44"/>
+<area shape="rect" id="Node000004" href="$main_8c.html" title=": Main program body" alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge32_Node000001_Node000004" title=" " alt="" coords="2581,46,2131,58,1531,76,994,100,813,114,757,122,728,130,710,145,701,163,693,183,678,204,621,253,618,248,674,201,689,180,697,161,706,142,726,126,756,117,813,109,993,95,1531,70,2131,53,2586,46"/>
+<area shape="rect" id="Node000005" href="$dma_8h.html" title="This file contains all the function prototypes for the dma.c file." alt="" coords="461,128,665,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="2581,45,2181,54,1632,67,1348,78,1083,92,856,109,683,131,666,134,664,129,683,125,855,104,1083,87,1348,73,1632,62,2181,48,2586,45"/>
+<area shape="rect" id="Node000007" href="$gpio_8h.html" title="This file contains all the function prototypes for the gpio.c file." alt="" coords="1081,128,1285,203"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="2582,55,1285,159,1285,153,2585,51"/>
+<area shape="rect" id="Node000010" href="$rx__snapshot_8h.html" title="Buffer protetto per i dati ricevuti dall&#39;altra board." alt="" coords="1995,128,2198,203"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="2586,67,2199,146,2198,141,2581,68"/>
+<area shape="rect" id="Node000015" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="2528,373,2731,448"/>
+<area shape="poly" id="edge31_Node000001_Node000015" title=" " alt="" coords="2713,93,2730,147,2753,201,2763,215,2773,224,2783,234,2791,250,2801,289,2800,307,2791,327,2765,356,2732,379,2731,373,2762,352,2786,324,2794,305,2796,289,2786,252,2778,237,2769,228,2759,218,2749,204,2725,149,2710,97"/>
+<area shape="rect" id="Node000018" href="$rx__snapshot_8c.html" title="Gestione thread&#45;safe del payload ricevuto dalla comunicazione (UART/Radio)." alt="" coords="2573,251,2777,325"/>
+<area shape="poly" id="edge35_Node000001_Node000018" title=" " alt="" coords="2697,93,2681,252,2677,248,2693,97"/>
+<area shape="rect" id="Node000020" href="$tim_8h.html" title="This file contains all the function prototypes for the tim.c file." alt="" coords="2763,128,2966,203"/>
+<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="2763,87,2817,128,2812,127,2762,92"/>
+<area shape="rect" id="Node000024" href="$usart_8h.html" title="This file contains all the function prototypes for the usart.c file." alt="" coords="739,128,942,203"/>
+<area shape="poly" id="edge27_Node000001_Node000024" title=" " alt="" coords="2581,46,2313,55,1938,69,1507,94,1286,110,1070,131,943,148,942,143,1069,125,1286,105,1507,88,1938,64,2313,50,2586,46"/>
+<area shape="rect" id="Node000026" href="$board__health__snapshot_8c.html" title="Gestione thread&#45;safe dello snapshot dei parametri vitali della scheda." alt="" coords="2991,128,3242,203"/>
+<area shape="poly" id="edge33_Node000001_Node000026" title=" " alt="" coords="2817,75,2993,128,2988,127,2817,80"/>
+<area shape="rect" id="Node000027" href="$encoder__snapshot_8c.html" title="Container sicuro per i dati di velocità e feedback degli encoder." alt="" coords="3266,128,3489,203"/>
+<area shape="poly" id="edge34_Node000001_Node000027" title=" " alt="" coords="2818,55,3022,83,3139,102,3254,125,3268,131,3263,131,3253,131,3138,108,3022,88,2818,60"/>
+<area shape="rect" id="Node000028" href="$supervisor__snapshot_8c.html" title="Container per lo stato del supervisore di sistema." alt="" coords="3514,128,3751,203"/>
+<area shape="poly" id="edge36_Node000001_Node000028" title=" " alt="" coords="2818,48,3128,73,3316,95,3502,125,3516,130,3511,130,3501,131,3315,101,3128,78,2818,53"/>
+<area shape="rect" id="Node000029" href="$stm32g4xx__hal__msp_8c.html" title="This file provides code for the MSP Initialization and de&#45;Initialization codes." alt="" coords="3775,128,3978,203"/>
+<area shape="poly" id="edge37_Node000001_Node000029" title=" " alt="" coords="2817,42,3001,47,3237,60,3500,85,3634,103,3764,125,3777,131,3771,130,3762,131,3633,108,3500,90,3237,65,3001,52,2818,47"/>
+<area shape="rect" id="Node000030" href="$stm32g4xx__it_8c.html" title="Interrupt Service Routines." alt="" coords="4003,128,4206,203"/>
+<area shape="poly" id="edge38_Node000001_Node000030" title=" " alt="" coords="2817,45,3085,56,3423,73,3751,97,3887,110,3990,125,4005,131,3999,130,3989,131,3886,116,3751,102,3422,79,3084,62,2817,51"/>
+<area shape="rect" id="Node000003" href="$adc_8c.html" title="This file provides code for the configuration of the ADC instances." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="250,212,178,252,175,248,254,209"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="418,208,496,250,491,250,418,213"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="565,216,565,252,561,249,561,221"/>
+<area shape="rect" id="Node000006" href="$dma_8c.html" title="This file provides code for the configuration of all the requested memory to memory DMA transfers." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="482,209,406,252,403,248,477,212"/>
+<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="1063,188,728,253,666,266,665,261,726,248,1068,186"/>
+<area shape="rect" id="Node000008" href="$gpio_8c.html" title="This file provides code for the configuration of all used GPIO pins." alt="" coords="967,251,1170,325"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="1140,213,1104,253,1102,248,1135,215"/>
+<area shape="rect" id="Node000009" href="$led__task_8c.html" title="Gestione della segnalazione visiva tramite LED di stato." alt="" coords="1195,251,1398,325"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="1229,212,1264,251,1259,249,1227,217"/>
+<area shape="poly" id="edge19_Node000010_Node000009" title=" " alt="" coords="1977,175,1718,203,1564,225,1412,253,1399,256,1398,251,1410,248,1563,220,1717,198,1982,174"/>
+<area shape="rect" id="Node000011" href="$log__format_8h.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="1423,251,1626,325"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="1982,184,1818,215,1640,253,1627,257,1626,251,1638,248,1817,210,1977,185"/>
+<area shape="rect" id="Node000014" href="$snapshot_8h.html" title="Header aggregatore per tutti i tipi di snapshot di sistema." alt="" coords="2345,251,2549,325"/>
+<area shape="poly" id="edge15_Node000010_Node000014" title=" " alt="" coords="2213,204,2348,252,2342,251,2212,209"/>
+<area shape="rect" id="Node000016" href="$comm__rx__task_8c.html" title="Gestione del task di ricezione messaggi UART." alt="" coords="1651,251,1854,325"/>
+<area shape="poly" id="edge17_Node000010_Node000016" title=" " alt="" coords="1982,207,1855,254,1854,249,1977,208"/>
+<area shape="rect" id="Node000017" href="$control__step_8c.html" title="Orchestrazione del task di controllo e gestione delle strategie di fallback." alt="" coords="1879,251,2082,325"/>
+<area shape="poly" id="edge18_Node000010_Node000017" title=" " alt="" coords="2053,213,2017,253,2014,248,2048,215"/>
+<area shape="poly" id="edge20_Node000010_Node000018" title=" " alt="" coords="2213,181,2379,209,2561,248,2576,254,2571,254,2560,253,2378,215,2213,186"/>
+<area shape="rect" id="Node000019" href="$supervisor__task_8c.html" title="Implementazione del Task Supervisore di Board 1." alt="" coords="2106,251,2322,325"/>
+<area shape="poly" id="edge21_Node000010_Node000019" title=" " alt="" coords="2144,212,2181,251,2176,249,2142,217"/>
+<area shape="rect" id="Node000012" href="$log__format_8c.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="1423,373,1626,448"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="1526,339,1526,375,1522,371,1522,343"/>
+<area shape="rect" id="Node000013" href="$log__task_8c.html" title="Task di logging periodico." alt="" coords="897,373,1101,448"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="1410,325,1243,366,1101,394,1101,389,1242,361,1405,326"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="2516,332,2577,374,2572,372,2515,337"/>
+<area shape="poly" id="edge25_Node000020_Node000004" title=" " alt="" coords="2745,174,2210,205,1984,212,1792,213,1467,209,1310,210,1142,215,952,229,727,253,666,264,665,259,727,248,951,224,1142,210,1310,204,1467,204,1792,208,1984,207,2210,200,2750,174"/>
+<area shape="rect" id="Node000021" href="$encoder__hw_8c.html" title="Interfaccia di basso livello per la lettura degli encoder hardware via timer." alt="" coords="2851,251,3054,325"/>
+<area shape="poly" id="edge23_Node000020_Node000021" title=" " alt="" coords="2901,213,2928,251,2923,249,2899,218"/>
+<area shape="rect" id="Node000022" href="$encoder__step_8c.html" title=" " alt="" coords="3079,251,3282,325"/>
+<area shape="poly" id="edge24_Node000020_Node000022" title=" " alt="" coords="2975,206,3086,250,3081,250,2974,211"/>
+<area shape="rect" id="Node000023" href="$tim_8c.html" title="This file provides code for the configuration of the TIM instances." alt="" coords="3307,251,3510,325"/>
+<area shape="poly" id="edge26_Node000020_Node000023" title=" " alt="" coords="2981,200,3070,216,3140,224,3208,232,3294,248,3309,254,3303,253,3293,253,3208,237,3139,229,3069,222,2981,206"/>
+<area shape="poly" id="edge29_Node000024_Node000004" title=" " alt="" coords="744,208,649,253,647,248,739,210"/>
+<area shape="poly" id="edge28_Node000024_Node000013" title=" " alt="" coords="760,211,743,232,729,252,720,272,717,289,719,306,729,324,763,357,805,380,851,395,900,406,894,406,850,400,803,385,760,361,725,327,714,307,711,289,715,270,725,249,739,229,756,214"/>
+<area shape="rect" id="Node000025" href="$usart_8c.html" title="This file provides code for the configuration of the USART instances." alt="" coords="739,251,942,325"/>
+<area shape="poly" id="edge30_Node000024_Node000025" title=" " alt="" coords="842,216,842,252,838,249,839,221"/>
+</map>

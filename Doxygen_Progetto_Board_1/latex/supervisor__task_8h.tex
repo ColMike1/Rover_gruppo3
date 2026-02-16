@@ -1,0 +1,97 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+supervisor/\+supervisor\+\_\+task.h File Reference}
+\hypertarget{supervisor__task_8h}{}\label{supervisor__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/supervisor/supervisor\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/supervisor/supervisor\_task.h}}
+
+
+Gestione del task supervisore di sistema.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa}{Supervisor\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task supervisore, i timer e le strutture di stato interne. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a}{Supervisor\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue un ciclo della logica di supervisione. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione del task supervisore di sistema. 
+
+
+\begin{DoxyItemize}
+\item Questo modulo si occupa della logica di alto livello, della gestione dei fault e della transizione degli stati operativi del robot. 
+\end{DoxyItemize}
+
+\label{doc-func-members}
+\Hypertarget{supervisor__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa}\index{supervisor\_task.h@{supervisor\_task.h}!Supervisor\_TaskInit@{Supervisor\_TaskInit}}
+\index{Supervisor\_TaskInit@{Supervisor\_TaskInit}!supervisor\_task.h@{supervisor\_task.h}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskInit()}{Supervisor\_TaskInit()}}
+{\footnotesize\ttfamily \label{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa} 
+void Supervisor\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task supervisore, i timer e le strutture di stato interne. 
+
+Inizializza il task supervisore, i timer e le strutture di stato interne.
+
+Richiama la funzione di inizializzazione del supervisore, generata tramite embedded coder. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h_a1b6dcdb3284701ac77518d94adf7aafa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a}\index{supervisor\_task.h@{supervisor\_task.h}!Supervisor\_TaskStep@{Supervisor\_TaskStep}}
+\index{Supervisor\_TaskStep@{Supervisor\_TaskStep}!supervisor\_task.h@{supervisor\_task.h}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskStep()}{Supervisor\_TaskStep()}}
+{\footnotesize\ttfamily \label{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a} 
+void Supervisor\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue un ciclo della logica di supervisione. 
+
+
+\begin{DoxyItemize}
+\item Analizza gli snapshot di sistema, valuta i fault attivi e decide i riferimenti di velocità e sterzata autorizzati per il controllo.
+\end{DoxyItemize}
+
+Esegue un ciclo della logica di supervisione.
+
+
+\begin{DoxyEnumerate}
+\item Legge gli snapshot correnti (Health, Encoder, RX).
+\item Verifica la "{}liveliness"{} della Board 2 tramite l\textquotesingle{}alive\+\_\+counter.
+\item Alimenta la struttura di input del modello \textquotesingle{}Supervisor\+B1\+\_\+U\textquotesingle{}.
+\item Esegue lo step della logica (\textquotesingle{}Supervisor\+B1\+\_\+step\textquotesingle{}).
+\item Attua le decisioni di sicurezza (E-\/\+Stop, Relè) e pubblica lo snapshot del supervisore. 
+\end{DoxyEnumerate}Gestione Emergency Stop hardware. RESET spegne il sistema (sicurezza positiva), SET consente il movimento.
+
+Controllo Relè di potenza. Abilita o disabilita l\textquotesingle{}alimentazione ai driver motori.Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8h_a1e5a23016dfdc674b16635ad0e62848a_icgraph}
+\end{center}
+\end{figure}

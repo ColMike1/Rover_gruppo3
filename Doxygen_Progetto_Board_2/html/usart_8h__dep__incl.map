@@ -1,0 +1,17 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/usart.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/usart.h">
+<area shape="rect" id="Node000001" title="This file contains all the function prototypes for the usart.c file." alt="" coords="575,5,778,80"/>
+<area shape="rect" id="Node000002" href="$sonar__hw_8h.html" title="API hardware sonar e strutture di supporto." alt="" coords="233,128,437,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="557,86,438,131,436,126,562,84"/>
+<area shape="rect" id="Node000006" href="$log__task_8c.html" title="Task di logging periodico su UART debug." alt="" coords="461,128,665,203"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="633,90,599,130,596,125,629,93"/>
+<area shape="rect" id="Node000007" href="$main_8c.html" title=": Main program body" alt="" coords="689,128,893,203"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="722,89,759,128,754,127,721,94"/>
+<area shape="rect" id="Node000008" href="$usart_8c.html" title="This file provides code for the configuration of the USART instances." alt="" coords="917,128,1121,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="793,82,920,128,914,128,792,87"/>
+<area shape="rect" id="Node000003" href="$sonar_8h.html" title="Header aggregatore del modulo sonar." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,209,178,252,175,248,249,212"/>
+<area shape="rect" id="Node000004" href="$sonar__hw_8c.html" title="Gestione hardware sonar con cattura input tramite timer/DMA." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="337,217,337,252,333,249,333,221"/>
+<area shape="rect" id="Node000005" href="$sonar__task_8c.html" title="Task sonar e callback ISR di acquisizione capture." alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="419,208,496,250,491,250,418,213"/>
+</map>

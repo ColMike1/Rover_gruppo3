@@ -1,0 +1,13 @@
+<map id="Actuation_Step" name="Actuation_Step">
+<area shape="rect" id="Node000001" title="Esegue un singolo passo di attuazione basato sull&#39;output del controllo." alt="" coords="5,56,116,83"/>
+<area shape="rect" id="Node000002" href="$encoder__snapshot_8c.html#af580ad966ed7718068907738755f9e22" title="Legge l&#39;ultimo snapshot encoder disponibile." alt="" coords="171,5,333,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,53,186,35,182,38,115,58"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8c.html#a9611fcff8d2ff2c3ca24725024f02647" title="Invia i comandi di velocità ai 4 motori." alt="" coords="167,56,337,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="115,67,153,68,148,70,116,72"/>
+<area shape="rect" id="Node000006" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge le decisioni del supervisore (usato da Controllo, Attuazione, TX)." alt="" coords="164,107,340,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="114,81,186,101,181,103,114,86"/>
+<area shape="rect" id="Node000004" href="$sabertooth__driver_8c.html#aff60a261fda72eadf539c1a86a000313" title="Prepara un singolo pacchetto da 4 byte per il protocollo Sabertooth." alt="" coords="388,56,543,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="337,67,375,69,370,70,337,72"/>
+<area shape="rect" id="Node000005" href="$sabertooth__driver_8c.html#afe3092cef7667a37789c3d6a189336e2" title="Calcola il checksum a 7&#45;bit richiesto dal protocollo Sabertooth." alt="" coords="591,56,717,83"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="543,67,578,69,573,70,544,72"/>
+</map>

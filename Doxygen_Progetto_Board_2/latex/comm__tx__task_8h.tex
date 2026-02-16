@@ -1,0 +1,66 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+tx\+\_\+task.h File Reference}
+\hypertarget{comm__tx__task_8h}{}\label{comm__tx__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_tx\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_tx\_task.h}}
+
+
+Task di trasmissione frame da board 2 verso board 1.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__tx__task_8h_a151a544e02c1d1ebb6d8082966fdcebc}{Tx\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task TX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__tx__task_8h_add320c948d8694068895e9744195957e}{Tx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task TX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di trasmissione frame da board 2 verso board 1. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__tx__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__tx__task_8h_a151a544e02c1d1ebb6d8082966fdcebc}\index{comm\_tx\_task.h@{comm\_tx\_task.h}!Tx\_TaskInit@{Tx\_TaskInit}}
+\index{Tx\_TaskInit@{Tx\_TaskInit}!comm\_tx\_task.h@{comm\_tx\_task.h}}
+\doxysubsubsection{\texorpdfstring{Tx\_TaskInit()}{Tx\_TaskInit()}}
+{\footnotesize\ttfamily \label{comm__tx__task_8h_a151a544e02c1d1ebb6d8082966fdcebc} 
+void Tx\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task TX. 
+
+In questa implementazione non e\textquotesingle{} richiesta inizializzazione specifica. \Hypertarget{comm__tx__task_8h_add320c948d8694068895e9744195957e}\index{comm\_tx\_task.h@{comm\_tx\_task.h}!Tx\_TaskStep@{Tx\_TaskStep}}
+\index{Tx\_TaskStep@{Tx\_TaskStep}!comm\_tx\_task.h@{comm\_tx\_task.h}}
+\doxysubsubsection{\texorpdfstring{Tx\_TaskStep()}{Tx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__tx__task_8h_add320c948d8694068895e9744195957e} 
+void Tx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task TX. 
+
+Legge gli snapshot condivisi, costruisce il frame di trasmissione e lo invia su UART solo se la lunghezza e\textquotesingle{} quella attesa. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{comm__tx__task_8h_add320c948d8694068895e9744195957e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8h_add320c948d8694068895e9744195957e_icgraph}
+\end{center}
+\end{figure}

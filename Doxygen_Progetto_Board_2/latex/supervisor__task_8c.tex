@@ -1,0 +1,85 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+supervisor/\+supervisor\+\_\+task.c File Reference}
+\hypertarget{supervisor__task_8c}{}\label{supervisor__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/supervisor/supervisor\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/supervisor/supervisor\_task.c}}
+
+
+Task supervisore board 2:\+ controllo stato rover e gestione comando/\+attuazione.  
+
+
+{\ttfamily \+\#include "{}supervisor/\+supervisor\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+ble\+\_\+controller\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+imu\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+sonar\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}actuation/\+actuation\+\_\+step.\+h"{}}\newline
+{\ttfamily \+\#include "{}Supervisor\+B2.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for supervisor\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa}{Supervisor\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task supervisore. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a}{Supervisor\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del supervisore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task supervisore board 2:\+ controllo stato rover e gestione comando/\+attuazione. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{supervisor__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa}\index{supervisor\_task.c@{supervisor\_task.c}!Supervisor\_TaskInit@{Supervisor\_TaskInit}}
+\index{Supervisor\_TaskInit@{Supervisor\_TaskInit}!supervisor\_task.c@{supervisor\_task.c}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskInit()}{Supervisor\_TaskInit()}}
+{\footnotesize\ttfamily \label{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa} 
+void Supervisor\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task supervisore. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c_a1b6dcdb3284701ac77518d94adf7aafa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a}\index{supervisor\_task.c@{supervisor\_task.c}!Supervisor\_TaskStep@{Supervisor\_TaskStep}}
+\index{Supervisor\_TaskStep@{Supervisor\_TaskStep}!supervisor\_task.c@{supervisor\_task.c}}
+\doxysubsubsection{\texorpdfstring{Supervisor\_TaskStep()}{Supervisor\_TaskStep()}}
+{\footnotesize\ttfamily \label{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a} 
+void Supervisor\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del supervisore. 
+
+Esegue uno step del task supervisore.
+
+In ogni ciclo legge tutti gli snapshot, valuta freschezza/\+timeout dei dati (stato normale, degradato, critico), integra lo stato locale/\+remoto del rover e aggiorna il comando con i riferimenti di velocita\textquotesingle{} da applicare/\+trasmettere (es. riduzione in degrado, schivata sonar, stop di emergenza). Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__task_8c_a1e5a23016dfdc674b16635ad0e62848a_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,35 @@
+\doxysection{encoder\+\_\+snapshot.\+h}
+\hypertarget{encoder__snapshot_8h_source}{}\label{encoder__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/encoder\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/encoder\_snapshot.h}}
+\doxymbox{\hyperlink{encoder__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_CONTROL\_CYCLE\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_CONTROL\_CYCLE\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_encoder_snapshot__t_ae010d35e154326cf2c33ecbe63ca10fa}{wheel\_speed\_rpm}}[4];\ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_encoder_snapshot__t_a94a6482f20e8268b5ef24d9605315e6d}{hasNoFeedback}}[4];\ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_encoder_snapshot__t_aadd896dc1e65c8114313034f9a690a2b}{task\_last\_run\_ms}};\ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_encoder_snapshot__t_a228f2623e4e4882693e07db0b8b835b8}{data\_last\_valid\_ms}}[4];\ }
+\DoxyCodeLine{00026\ \}\ \doxymbox{\hyperlink{struct_encoder_snapshot__t}{EncoderSnapshot\_t}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{encoder__snapshot_8h_a1f48961ee95ea98abd1c8c6b5e2498b5}{EncoderSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{encoder__snapshot_8h_a461cb0565d6741f020ebd4aae43fc68b}{EncoderSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_encoder_snapshot__t}{EncoderSnapshot\_t}}\ *src);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{encoder__snapshot_8h_af580ad966ed7718068907738755f9e22}{EncoderSnapshot\_Read}}(\doxymbox{\hyperlink{struct_encoder_snapshot__t}{EncoderSnapshot\_t}}\ *dst);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_CONTROL\_CYCLE\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,201 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+control/\+control\+\_\+law.c File Reference}
+\hypertarget{control__law_8c}{}\label{control__law_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/control/control\_law.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/control/control\_law.c}}
+
+
+Implementazione degli algoritmi di controllo (PI) per la dinamica del rover.  
+
+
+{\ttfamily \+\#include $<$actuation/\+actuation\+\_\+step.\+h$>$}\newline
+{\ttfamily \+\#include $<$encoder/\+encoder\+\_\+step.\+h$>$}\newline
+{\ttfamily \+\#include "{}control/\+control\+\_\+law.\+h"{}}\newline
+Include dependency graph for control\+\_\+law.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}}
+\begin{DoxyCompactList}\small\item\em Struttura per la gestione di un controllore Proporzionale-\/\+Integrale in forma incrementale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \doxymbox{\hyperlink{control__law_8c_a9be2a088ff9fb1e2ceb9feef414072d6}{PI\+\_\+\+Compute}} (\doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} \texorpdfstring{$\ast$}{*}const pi, float error, float dt)
+\begin{DoxyCompactList}\small\item\em Calcola l\textquotesingle{}uscita del controllore PI usando la formulazione incrementale. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{control__law_8c_a24d78a9e11c48b002a0fb8907b2411e8}{Control\+Law\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza (resetta) gli stati interni di tutti i controllori PI. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{control__law_8c_a124d0cd4613652e6514a9ac3f68b5212}{Control\+Law\+\_\+\+Step}} (const \doxymbox{\hyperlink{struct_control_input__t}{Control\+Input\+\_\+t}} \texorpdfstring{$\ast$}{*}const in, \doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \texorpdfstring{$\ast$}{*}const out)
+\begin{DoxyCompactList}\small\item\em Esegue il calcolo della legge di controllo multi-\/livello. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const float \doxymbox{\hyperlink{control__law_8c_a5186f9e48757d8fbf64fee7e03f7bd61}{Ts}} = 0.\+010f
+\begin{DoxyCompactList}\small\item\em Tempo di campionamento del task di controllo \+[s]\+. \end{DoxyCompactList}\item 
+static \doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} \doxymbox{\hyperlink{control__law_8c_ad80330a9f3951afa1daf0314f128de3b}{pi\+\_\+global}} = \{0.\+013f, 0.\+267f, 0.\+0f, 0.\+0f, 12.\+0f\}
+\begin{DoxyCompactList}\small\item\em Controllore Master per la velocità media del rover. \end{DoxyCompactList}\item 
+static \doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} \doxymbox{\hyperlink{control__law_8c_a2088fd2fb5c549c34bc58b457ae0be02}{pi\+\_\+sync\+\_\+asse}} = \{0.\+005f, 0.\+189f, 0.\+0f, 0.\+0f, 2.\+4f\}
+\begin{DoxyCompactList}\small\item\em Controllore per il bilanciamento della velocità tra asse anteriore e posteriore. \end{DoxyCompactList}\item 
+static \doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} \doxymbox{\hyperlink{control__law_8c_aa8837646199a932c8b1dc3b6bea59062}{pi\+\_\+diff\+\_\+p}} = \{0.\+01f, 0.\+25f, 0.\+0f, 0.\+0f, 6.\+0f\}
+\begin{DoxyCompactList}\small\item\em Controllore differenziale per l\textquotesingle{}asse posteriore (bilanciamento DX/\+\+SX). \end{DoxyCompactList}\item 
+static \doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} \doxymbox{\hyperlink{control__law_8c_aa8602be9d887af086dc2c81df5bba345}{pi\+\_\+diff\+\_\+a}} = \{0.\+01f, 0.\+25f, 0.\+0f, 0.\+0f, 6.\+0f\}
+\begin{DoxyCompactList}\small\item\em Controllore differenziale per l\textquotesingle{}asse anteriore (bilanciamento DX/\+\+SX). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione degli algoritmi di controllo (PI) per la dinamica del rover. 
+
+Gestisce il controllo della velocità globale, il bilanciamento tra assi e la logica differenziale per la sterzata. 
+
+\label{doc-func-members}
+\Hypertarget{control__law_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{control__law_8c_a24d78a9e11c48b002a0fb8907b2411e8}\index{control\_law.c@{control\_law.c}!ControlLaw\_Init@{ControlLaw\_Init}}
+\index{ControlLaw\_Init@{ControlLaw\_Init}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{ControlLaw\_Init()}{ControlLaw\_Init()}}
+{\footnotesize\ttfamily \label{control__law_8c_a24d78a9e11c48b002a0fb8907b2411e8} 
+void Control\+Law\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza (resetta) gli stati interni di tutti i controllori PI. 
+
+Inizializzazione della legge di controllo. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8c_a24d78a9e11c48b002a0fb8907b2411e8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{control__law_8c_a124d0cd4613652e6514a9ac3f68b5212}\index{control\_law.c@{control\_law.c}!ControlLaw\_Step@{ControlLaw\_Step}}
+\index{ControlLaw\_Step@{ControlLaw\_Step}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{ControlLaw\_Step()}{ControlLaw\_Step()}}
+{\footnotesize\ttfamily \label{control__law_8c_a124d0cd4613652e6514a9ac3f68b5212} 
+void Control\+Law\+\_\+\+Step (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_control_input__t}{Control\+Input\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{in}{, }\item[{\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Esegue il calcolo della legge di controllo multi-\/livello. 
+
+Esegue il calcolo della legge di controllo.
+
+
+\begin{DoxyEnumerate}
+\item Calcola la velocità media globale e l\textquotesingle{}errore rispetto al riferimento.
+\item Bilancia la trazione tra asse anteriore e posteriore.
+\item Applica la correzione differenziale per soddisfare il comando di sterzata (steering\+\_\+cmd). 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em in} & Struttura con i feedback dagli encoder e i setpoint. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out} & Struttura popolata con i comandi di tensione per i 4 motori. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyEnumerate}Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{control__law_8c_a124d0cd4613652e6514a9ac3f68b5212_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8c_a124d0cd4613652e6514a9ac3f68b5212_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{control__law_8c_a9be2a088ff9fb1e2ceb9feef414072d6}\index{control\_law.c@{control\_law.c}!PI\_Compute@{PI\_Compute}}
+\index{PI\_Compute@{PI\_Compute}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{PI\_Compute()}{PI\_Compute()}}
+{\footnotesize\ttfamily \label{control__law_8c_a9be2a088ff9fb1e2ceb9feef414072d6} 
+float PI\+\_\+\+Compute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} \texorpdfstring{$\ast$}{*}const}]{pi}{, }\item[{float}]{error}{, }\item[{float}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calcola l\textquotesingle{}uscita del controllore PI usando la formulazione incrementale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pi} & Puntatore alla struttura del controllore. \\
+\hline
+{\em error} & Errore di controllo corrente (Setpoint -\/ Feedback). \\
+\hline
+{\em dt} & Tempo di campionamento. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float Comando di uscita saturato. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8c_a9be2a088ff9fb1e2ceb9feef414072d6_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{control__law_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{control__law_8c_aa8602be9d887af086dc2c81df5bba345}\index{control\_law.c@{control\_law.c}!pi\_diff\_a@{pi\_diff\_a}}
+\index{pi\_diff\_a@{pi\_diff\_a}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{pi\_diff\_a}{pi\_diff\_a}}
+{\footnotesize\ttfamily \label{control__law_8c_aa8602be9d887af086dc2c81df5bba345} 
+\doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} pi\+\_\+diff\+\_\+a = \{0.\+01f, 0.\+25f, 0.\+0f, 0.\+0f, 6.\+0f\}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Controllore differenziale per l\textquotesingle{}asse anteriore (bilanciamento DX/\+\+SX). 
+
+\Hypertarget{control__law_8c_aa8837646199a932c8b1dc3b6bea59062}\index{control\_law.c@{control\_law.c}!pi\_diff\_p@{pi\_diff\_p}}
+\index{pi\_diff\_p@{pi\_diff\_p}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{pi\_diff\_p}{pi\_diff\_p}}
+{\footnotesize\ttfamily \label{control__law_8c_aa8837646199a932c8b1dc3b6bea59062} 
+\doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} pi\+\_\+diff\+\_\+p = \{0.\+01f, 0.\+25f, 0.\+0f, 0.\+0f, 6.\+0f\}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Controllore differenziale per l\textquotesingle{}asse posteriore (bilanciamento DX/\+\+SX). 
+
+\Hypertarget{control__law_8c_ad80330a9f3951afa1daf0314f128de3b}\index{control\_law.c@{control\_law.c}!pi\_global@{pi\_global}}
+\index{pi\_global@{pi\_global}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{pi\_global}{pi\_global}}
+{\footnotesize\ttfamily \label{control__law_8c_ad80330a9f3951afa1daf0314f128de3b} 
+\doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} pi\+\_\+global = \{0.\+013f, 0.\+267f, 0.\+0f, 0.\+0f, 12.\+0f\}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Controllore Master per la velocità media del rover. 
+
+\begin{DoxyNote}{Note}
+Tuning finale per un tempo di risposta di circa 1 secondo. 
+\end{DoxyNote}
+\Hypertarget{control__law_8c_a2088fd2fb5c549c34bc58b457ae0be02}\index{control\_law.c@{control\_law.c}!pi\_sync\_asse@{pi\_sync\_asse}}
+\index{pi\_sync\_asse@{pi\_sync\_asse}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{pi\_sync\_asse}{pi\_sync\_asse}}
+{\footnotesize\ttfamily \label{control__law_8c_a2088fd2fb5c549c34bc58b457ae0be02} 
+\doxymbox{\hyperlink{struct_p_i___controller}{PI\+\_\+\+Controller}} pi\+\_\+sync\+\_\+asse = \{0.\+005f, 0.\+189f, 0.\+0f, 0.\+0f, 2.\+4f\}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Controllore per il bilanciamento della velocità tra asse anteriore e posteriore. 
+
+\Hypertarget{control__law_8c_a5186f9e48757d8fbf64fee7e03f7bd61}\index{control\_law.c@{control\_law.c}!Ts@{Ts}}
+\index{Ts@{Ts}!control\_law.c@{control\_law.c}}
+\doxysubsubsection{\texorpdfstring{Ts}{Ts}}
+{\footnotesize\ttfamily \label{control__law_8c_a5186f9e48757d8fbf64fee7e03f7bd61} 
+const float Ts = 0.\+010f\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tempo di campionamento del task di controllo \+[s]\+. 
+

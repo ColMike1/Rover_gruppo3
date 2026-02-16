@@ -1,0 +1,84 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+tx\+\_\+task.c File Reference}
+\hypertarget{comm__tx__task_8c}{}\label{comm__tx__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_tx\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_tx\_task.c}}
+
+
+Implementazione del task di trasmissione periodica della telemetria.  
+
+
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+tx\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+pack.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+encoder\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for comm\+\_\+tx\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__tx__task_8c_a728eacf351476835afcb4230592c3593}{TX\+\_\+\+FRAME\+\_\+\+LEN}}~(sizeof(Comm\+Frame\+B1\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza definita per il frame di trasmissione B1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__tx__task_8c_add320c948d8694068895e9744195957e}{Tx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Step periodico del task di trasmissione. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione del task di trasmissione periodica della telemetria. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{comm__tx__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__tx__task_8c_a728eacf351476835afcb4230592c3593}\index{comm\_tx\_task.c@{comm\_tx\_task.c}!TX\_FRAME\_LEN@{TX\_FRAME\_LEN}}
+\index{TX\_FRAME\_LEN@{TX\_FRAME\_LEN}!comm\_tx\_task.c@{comm\_tx\_task.c}}
+\doxysubsubsection{\texorpdfstring{TX\_FRAME\_LEN}{TX\_FRAME\_LEN}}
+{\footnotesize\ttfamily \label{comm__tx__task_8c_a728eacf351476835afcb4230592c3593} 
+\+\#define TX\+\_\+\+FRAME\+\_\+\+LEN~(sizeof(Comm\+Frame\+B1\+\_\+t))}
+
+
+
+Lunghezza definita per il frame di trasmissione B1. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__tx__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__tx__task_8c_add320c948d8694068895e9744195957e}\index{comm\_tx\_task.c@{comm\_tx\_task.c}!Tx\_TaskStep@{Tx\_TaskStep}}
+\index{Tx\_TaskStep@{Tx\_TaskStep}!comm\_tx\_task.c@{comm\_tx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Tx\_TaskStep()}{Tx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__tx__task_8c_add320c948d8694068895e9744195957e} 
+void Tx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Step periodico del task di trasmissione. 
+
+Esegue un passo del task di trasmissione, inviando i pacchetti pronti.
+
+Legge gli snapshot correnti dal sistema, impacchetta i dati e invia il buffer tramite il driver UART se non occupato. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{comm__tx__task_8c_add320c948d8694068895e9744195957e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8c_add320c948d8694068895e9744195957e_icgraph}
+\end{center}
+\end{figure}

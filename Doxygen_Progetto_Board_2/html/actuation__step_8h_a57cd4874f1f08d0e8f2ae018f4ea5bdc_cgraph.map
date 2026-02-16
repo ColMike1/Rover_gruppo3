@@ -1,0 +1,11 @@
+<map id="Actuation_Step" name="Actuation_Step">
+<area shape="rect" id="Node000001" title="Esegue uno step di attuazione open&#45;loop." alt="" coords="5,31,116,57"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8c.html#a2c20bfa1a064971b0fdf73213d02ab58" title="Limita la variazione tra due comandi consecutivi." alt="" coords="212,5,286,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,34,198,24,194,27,117,39"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8c.html#ac82b7c928f19e7382d0804515771c21e" title="Invia i comandi ai quattro motori." alt="" coords="164,56,334,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="116,49,151,55,145,56,116,54"/>
+<area shape="rect" id="Node000004" href="$sabertooth__driver_8c.html#aff60a261fda72eadf539c1a86a000313" title="Compone un pacchetto Sabertooth da 4 byte." alt="" coords="382,56,537,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="334,67,369,69,363,69,334,72"/>
+<area shape="rect" id="Node000005" href="$sabertooth__driver_8c.html#afe3092cef7667a37789c3d6a189336e2" title="Calcola il checksum Sabertooth su 3 byte." alt="" coords="585,56,711,83"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="538,67,572,69,567,69,538,72"/>
+</map>

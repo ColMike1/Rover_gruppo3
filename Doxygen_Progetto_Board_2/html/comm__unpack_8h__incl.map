@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/comm/comm_unpack.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/comm/comm_unpack.h">
+<area shape="rect" id="Node000001" title="API di deserializzazione frame ricevuti da board 1." alt="" coords="70,5,274,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,136,70,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,81,67,128,64,124,122,80"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,128,251,171"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,78,175,114,170,111,170,82"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="276,128,429,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="236,78,306,120,301,120,235,83"/>
+</map>

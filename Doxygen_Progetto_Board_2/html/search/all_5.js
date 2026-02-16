@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['a_5fbtn_0',['a_btn',['../struct_ble_controller_snapshot__t.html#a6aab827861bf182f66895907f1537d85',1,'BleControllerSnapshot_t']]],
+  ['accel_5fg_1',['accel_g',['../imu__i2c_8c.html#ad577568bc1ef1b4825e8f8428270b67a',1,'imu_i2c.c']]],
+  ['accel_5fraw_2',['accel_raw',['../imu__i2c_8c.html#a50bc369d54e473935ecbd35c4dc7ebdd',1,'imu_i2c.c']]],
+  ['actuation_2eh_3',['actuation.h',['../actuation_8h.html',1,'']]],
+  ['actuation_5finit_4',['Actuation_Init',['../actuation__step_8h.html#a0991cd6500749efc61a1a5f6dde7eee5',1,'Actuation_Init(void):&#160;actuation_step.c'],['../actuation__step_8c.html#a0991cd6500749efc61a1a5f6dde7eee5',1,'Actuation_Init(void):&#160;actuation_step.c']]],
+  ['actuation_5fstep_5',['Actuation_Step',['../actuation__step_8h.html#a57cd4874f1f08d0e8f2ae018f4ea5bdc',1,'Actuation_Step(float v_ref, float omega_ref):&#160;actuation_step.c'],['../actuation__step_8c.html#a57cd4874f1f08d0e8f2ae018f4ea5bdc',1,'Actuation_Step(float v_ref, float omega_ref):&#160;actuation_step.c']]],
+  ['actuation_5fstep_2ec_6',['actuation_step.c',['../actuation__step_8c.html',1,'']]],
+  ['actuation_5fstep_2eh_7',['actuation_step.h',['../actuation__step_8h.html',1,'']]],
+  ['ahb_20prescaler_201_8',['AHB Prescaler | 1',['../system__stm32g4xx_8c.html#autotoc_md4',1,'']]],
+  ['ahbpresctable_9',['AHBPrescTable',['../group___s_t_m32_g4xx___system___private___variables.html#ga6e1d9cd666f0eacbfde31e9932a93466',1,'system_stm32g4xx.c']]],
+  ['alive_5fcounter_10',['alive_counter',['../struct_supervisor_snapshot__t.html#ae1ae44c63049f5edeb612df180025a00',1,'SupervisorSnapshot_t']]],
+  ['apb1_20prescaler_201_11',['APB1 Prescaler | 1',['../system__stm32g4xx_8c.html#autotoc_md5',1,'']]],
+  ['apb2_20prescaler_201_12',['APB2 Prescaler | 1',['../system__stm32g4xx_8c.html#autotoc_md6',1,'']]],
+  ['apbpresctable_13',['APBPrescTable',['../group___s_t_m32_g4xx___system___private___variables.html#ga5b4f8b768465842cf854a8f993b375e9',1,'system_stm32g4xx.c']]],
+  ['app_5ffreertos_2ec_14',['app_freertos.c',['../app__freertos_8c.html',1,'']]],
+  ['as_20follows_3a_15',['This file configures the system clock as follows:',['../system__stm32g4xx_8c.html#autotoc_md0',1,'']]],
+  ['assert_5fparam_16',['assert_param',['../stm32g4xx__hal__conf_8h.html#a631dea7b230e600555f979c62af1de21',1,'stm32g4xx_hal_conf.h']]],
+  ['ax_5fg_17',['ax_g',['../struct_i_m_u_snapshot__t.html#a50ba9b7fa9fe0dd3b74fa58119d359cb',1,'IMUSnapshot_t']]],
+  ['ax_5fnorm_18',['ax_norm',['../struct_ble_controller_snapshot__t.html#a3767fd92a6fd9e675419804d3dbb328c',1,'BleControllerSnapshot_t']]],
+  ['ay_5fg_19',['ay_g',['../struct_i_m_u_snapshot__t.html#a3cd6681ee55a16a24adf544553822503',1,'IMUSnapshot_t']]],
+  ['ay_5fnorm_20',['ay_norm',['../struct_ble_controller_snapshot__t.html#ac046ff9cbb74623ddc7ddc77714792ec',1,'BleControllerSnapshot_t']]],
+  ['az_5fg_21',['az_g',['../struct_i_m_u_snapshot__t.html#aa8179cd43f86280abfd8088e40371b11',1,'IMUSnapshot_t']]]
+];

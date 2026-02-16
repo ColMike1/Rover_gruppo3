@@ -32,7 +32,6 @@
 #include "sonar/sonar_task.h"
 #include "log/log_task.h"
 #include "supervisor/supervisor_task.h"
-#include "log/wcet_monitor.h"
 #include "snapshot/snapshot.h"
 /* USER CODE END Includes */
 
@@ -57,7 +56,7 @@ typedef StaticSemaphore_t osStaticMutexDef_t;
 /** @brief Periodo task supervisore [ms]. */
 #define TASK_SUPERVISOR_PERIOD_MS  20U
 /** @brief Periodo task log [ms]. */
-#define TASK_LOG_PERIOD_MS       1000U
+#define TASK_LOG_PERIOD_MS      1000U
 
 /* USER CODE END PD */
 
@@ -68,23 +67,6 @@ typedef StaticSemaphore_t osStaticMutexDef_t;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-UBaseType_t free_words_tx = 0;
-UBaseType_t free_words_rx = 0;\
-UBaseType_t free_words_sonar = 0;
-UBaseType_t free_words_ble = 0;
-UBaseType_t free_words_imu = 0;
-
-volatile uint32_t wcet_tx_cycles_max = 0;
-volatile uint32_t wcet_rx_cycles_max = 0;
-volatile uint32_t wcet_sonar_cycles_max = 0;
-volatile uint32_t wcet_ble_cycles_max = 0;
-volatile uint32_t wcet_imu_cycles_max = 0;
-
-volatile uint32_t cycles_tx = 0;
-volatile uint32_t cycles_rx = 0;
-volatile uint32_t cycles_sonar = 0;
-volatile uint32_t cycles_ble = 0;
-volatile uint32_t cycles_imu = 0;
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
@@ -279,11 +261,11 @@ void MX_FREERTOS_Init(void) {
   mutex_SupervisorHandle = osMutexNew(&mutex_Supervisor_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
-	BleControllerSnapshot_MutexInit(mutex_BleHandle);
-	IMUSnapshot_MutexInit(mutex_ImuHandle);
-	RxSnapshot_MutexInit(mutex_UartRxHandle);
-	SonarSnapshot_MutexInit(mutex_SonarHandle);
-	SupervisorSnapshot_MutexInit(mutex_SupervisorHandle);
+  BleControllerSnapshot_MutexInit(mutex_BleHandle);
+  IMUSnapshot_MutexInit(mutex_ImuHandle);
+  RxSnapshot_MutexInit(mutex_UartRxHandle);
+  SonarSnapshot_MutexInit(mutex_SonarHandle);
+  SupervisorSnapshot_MutexInit(mutex_SupervisorHandle);
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
@@ -367,14 +349,7 @@ void StartTask_ReadBLE(void *argument)
 
     for (;;)
     {
-
-    	uint32_t s = DWT->CYCCNT;
-
         BleController_TaskStep();
-
-        WCET_Update(WCET_TASK_BLE, DWT->CYCCNT - s);
-
-	    free_words_ble = uxTaskGetStackHighWaterMark(NULL);
 
         lastWakeTime += TASK_BLE_PERIOD_MS;
         osDelayUntil(lastWakeTime);
@@ -396,19 +371,9 @@ void StartTask_ReadIMU(void *argument)
     IMU_TaskInit();
     TickType_t lastWakeTime = xTaskGetTickCount();
 
-    
-
     for (;;)
     {
-
-    	uint32_t s = DWT->CYCCNT;
-
-	    IMU_TaskStep();
-
-	    WCET_Update(WCET_TASK_IMU, DWT->CYCCNT - s);
-
-
-	    free_words_imu = uxTaskGetStackHighWaterMark(NULL);
+        IMU_TaskStep();
 
         lastWakeTime += TASK_IMU_PERIOD_MS;
         osDelayUntil(lastWakeTime);
@@ -429,14 +394,10 @@ void StartTask_ReadSonars(void *argument)
     (void)argument;
     Sonar_TaskInit();
     TickType_t lastWakeTime = xTaskGetTickCount();
-    
 
     for (;;)
     {
-
         Sonar_TaskStep();
-
-	    free_words_sonar = uxTaskGetStackHighWaterMark(NULL);
 
         lastWakeTime += TASK_SONAR_PERIOD_MS;
         osDelayUntil(lastWakeTime);
@@ -455,17 +416,12 @@ void StartTask_Rx(void *argument)
 {
   /* USER CODE BEGIN StartTask_Rx */
   (void)argument;
-	Rx_TaskInit();
+  Rx_TaskInit();
 
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
-
-
-  	Rx_TaskStep();
-
-
-
+    Rx_TaskStep();
   }
   /* USER CODE END StartTask_Rx */
 }
@@ -486,13 +442,7 @@ void StartTask_Tx(void *argument)
 
     for (;;)
     {
-
-    	uint32_t s = DWT->CYCCNT;
-
         Tx_TaskStep();
-
-        WCET_Update(WCET_TASK_TX, DWT->CYCCNT - s);
-	    free_words_tx = uxTaskGetStackHighWaterMark(NULL);
 
         lastWakeTime += TASK_TX_PERIOD_MS;
         osDelayUntil(lastWakeTime);
@@ -510,22 +460,18 @@ void StartTask_Tx(void *argument)
 void StartTask_Supervisor(void *argument)
 {
   /* USER CODE BEGIN StartTask_Supervisor */
-	(void)argument;
-	Supervisor_TaskInit();
-	TickType_t lastWakeTime = osKernelGetTickCount();
+  (void)argument;
+  Supervisor_TaskInit();
+  TickType_t lastWakeTime = osKernelGetTickCount();
 
 
   /* Infinite loop */
-  for(;;)
+  for (;;)
   {
-	  uint32_t s = DWT->CYCCNT;
+      Supervisor_TaskStep();
 
-	  Supervisor_TaskStep();
-	  WCET_Update(WCET_TASK_SUPERVISOR, DWT->CYCCNT - s);
-
-
-	  lastWakeTime += TASK_SUPERVISOR_PERIOD_MS;
-	  osDelayUntil(lastWakeTime);
+      lastWakeTime += TASK_SUPERVISOR_PERIOD_MS;
+      osDelayUntil(lastWakeTime);
   }
   /* USER CODE END StartTask_Supervisor */
 }
@@ -547,7 +493,7 @@ void StartTask_Log(void *argument)
 
     for (;;)
     {
-    	  Log_TaskStep();
+        Log_TaskStep();
 
         lastWakeTime += TASK_LOG_PERIOD_MS;
         osDelayUntil(lastWakeTime);

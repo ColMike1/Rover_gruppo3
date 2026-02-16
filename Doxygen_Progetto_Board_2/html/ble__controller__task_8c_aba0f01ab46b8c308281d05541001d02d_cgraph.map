@@ -1,0 +1,9 @@
+<map id="BleController_TaskStep" name="BleController_TaskStep">
+<area shape="rect" id="Node000001" title="Esegue uno step del task BLE." alt="" coords="5,64,164,91"/>
+<area shape="rect" id="Node000002" href="$ble__controller__i2c_8c.html#ac3cafc261590edc62dcd9f1017ca80e1" title="Legge un frame completo dal controller BLE." alt="" coords="212,5,411,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,61,211,41,244,35,239,37,212,47,139,66"/>
+<area shape="rect" id="Node000003" href="$ble__controller__snapshot_8c.html#a356961c1ea7bcc7ed2d47d04d36ed618" title="Scrive lo snapshot BLE in sezione critica." alt="" coords="236,56,387,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,75,222,77,217,78,165,80"/>
+<area shape="rect" id="Node000004" href="$ble__controller__task_8c.html#a9f5f90351d1d9bc76b73309f8b55654b" title="Normalizza un asse joystick da raw a intervallo [&#45;1, 1]." alt="" coords="258,123,364,149"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="138,89,212,108,246,119,241,119,211,113,138,94"/>
+</map>

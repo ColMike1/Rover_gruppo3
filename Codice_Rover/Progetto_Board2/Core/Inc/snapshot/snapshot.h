@@ -1,8 +1,6 @@
-/*
- * snapshot.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file snapshot.h
+ * @brief Header aggregatore degli snapshot Board 2.
  */
 
 #ifndef INC_SNAPSHOT_SNAPSHOT_H_

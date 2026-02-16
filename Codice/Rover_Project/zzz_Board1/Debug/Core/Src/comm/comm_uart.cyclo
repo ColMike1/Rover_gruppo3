@@ -1,8 +1,0 @@
-../Core/Src/comm/comm_uart.c:41:17:ring_next	2
-../Core/Src/comm/comm_uart.c:55:6:CommUart_RegisterRxTask	1
-../Core/Src/comm/comm_uart.c:60:6:CommUart_EarlyInit	1
-../Core/Src/comm/comm_uart.c:70:6:CommUart_Init	1
-../Core/Src/comm/comm_uart.c:75:6:CommUart_Send	3
-../Core/Src/comm/comm_uart.c:88:6:HAL_UART_TxCpltCallback	3
-../Core/Src/comm/comm_uart.c:99:6:HAL_UART_RxCpltCallback	5
-../Core/Src/comm/comm_uart.c:125:6:CommUart_GetByte	3

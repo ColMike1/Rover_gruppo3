@@ -1,0 +1,48 @@
+\doxysection{ble\+\_\+controller\+\_\+i2c.\+h}
+\hypertarget{ble__controller__i2c_8h_source}{}\label{ble__controller__i2c_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/BLE\_Controller/ble\_controller\_i2c.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/BLE\_Controller/ble\_controller\_i2c.h}}
+\doxymbox{\hyperlink{ble__controller__i2c_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_BLE\_CONTROLLER\_BLE\_CONTROLLER\_I2C\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_BLE\_CONTROLLER\_BLE\_CONTROLLER\_I2C\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{i2c_8h}{i2c.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ =================\ STATUS\ =================\ */}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06ab1f85682caf1c16402a414a5f31f4940}{BLE\_I2C\_COMPLETE}}\ =\ 0,}
+\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a339cf3d4564bdfa2dcc984a3ad0ef564}{BLE\_I2C\_ERROR}},}
+\DoxyCodeLine{00020\ \ \ \ \ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06afc3eed2c46dc19776d1c46c28441e3dc}{BLE\_I2C\_BUSY}},}
+\DoxyCodeLine{00021\ \ \ \ \ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06a238bae47db9198a354b02ff6f5cf7a6b}{BLE\_I2C\_TIMEOUT}}}
+\DoxyCodeLine{00022\ \}\ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{BleI2CStatus\_t}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{ble__controller__i2c_8h_ab898071398b359603a35c202e9c65f3b}{\_\_attribute\_\_}}((packed))}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ uint16\_t\ ax;}
+\DoxyCodeLine{00029\ \ \ \ \ uint16\_t\ ay;}
+\DoxyCodeLine{00030\ \ \ \ \ uint8\_t\ \ a\_btn;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ uint16\_t\ bx;}
+\DoxyCodeLine{00033\ \ \ \ \ uint16\_t\ by;}
+\DoxyCodeLine{00034\ \ \ \ \ uint8\_t\ \ b\_btn;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ uint8\_t\ \ btn1;}
+\DoxyCodeLine{00037\ \ \ \ \ uint8\_t\ \ btn2;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \}\ \doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{BleRawFrame\_t}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{BleI2CStatus\_t}}\ \doxymbox{\hyperlink{ble__controller__i2c_8h_ac3cafc261590edc62dcd9f1017ca80e1}{BleController\_I2C\_ReadFrame}}(\doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{BleRawFrame\_t}}\ *frame);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_BLE\_CONTROLLER\_BLE\_CONTROLLER\_I2C\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -4,8 +4,6 @@
  * @details Questo modulo aggrega gli snapshot di salute della scheda, encoder e
  * comunicazioni per alimentare la logica di controllo di alto livello (SupervisorB1).
  * Gestisce inoltre le uscite hardware critiche come il relè di potenza e il pin di Emergency Stop.
- * @date Feb 1, 2026
- * @author Sterm
  */
 
 #include "supervisor/supervisor_task.h"
@@ -83,7 +81,7 @@ void Supervisor_TaskStep(void)
 
     /* --- Attuazione Hardware di Sicurezza --- */
 
-    /** * @brief Gestione Emergency Stop hardware.
+    /** @brief Gestione Emergency Stop hardware.
      * RESET spegne il sistema (sicurezza positiva), SET consente il movimento.
      */
     if(SupervisorB1_Y.actuate_emergency_stop)
@@ -95,7 +93,7 @@ void Supervisor_TaskStep(void)
         HAL_GPIO_WritePin(ESTOP_GPIO_Port, ESTOP_Pin, GPIO_PIN_SET);
     }
 
-    /** * @brief Controllo Relè di potenza.
+    /** @brief Controllo Relè di potenza.
      * Abilita o disabilita l'alimentazione ai driver motori.
      */
     if (sup.isBoardActuating)

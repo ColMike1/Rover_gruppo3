@@ -1,0 +1,22 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/supervisor_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/supervisor_snapshot.h">
+<area shape="rect" id="Node000001" title="Definizione dello snapshot supervisore e API thread&#45;safe." alt="" coords="697,5,933,80"/>
+<area shape="rect" id="Node000002" href="$comm__pack_8h.html" title="API di serializzazione frame in uscita da board 2." alt="" coords="279,128,482,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="680,82,483,138,482,133,685,80"/>
+<area shape="rect" id="Node000005" href="$comm__tx__task_8c.html" title="Task TX: composizione e invio frame board2 &#45;&gt; board1." alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="685,66,633,94,610,110,590,130,574,158,565,189,562,221,561,252,557,249,556,221,560,188,569,156,586,126,607,106,630,89,680,68"/>
+<area shape="rect" id="Node000006" href="$snapshot_8h.html" title="Header aggregatore degli snapshot Board 2." alt="" coords="600,128,803,203"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="772,90,738,130,735,125,768,93"/>
+<area shape="rect" id="Node000008" href="$log__format_8c.html" title="Formattazione testuale degli snapshot di diagnostica." alt="" coords="828,128,1031,203"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="861,89,897,128,892,127,859,94"/>
+<area shape="rect" id="Node000009" href="$supervisor__snapshot_8c.html" title="Storage thread&#45;safe dello snapshot supervisore." alt="" coords="1055,128,1292,203"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="939,83,1067,127,1061,127,939,88"/>
+<area shape="rect" id="Node000010" href="$supervisor__task_8c.html" title="Task supervisore board 2: controllo stato rover e gestione comando/attuazione." alt="" coords="1316,128,1532,203"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="948,60,1119,88,1305,125,1319,131,1313,131,1304,131,1118,93,948,65"/>
+<area shape="rect" id="Node000003" href="$comm_8h.html" title="Header di aggregazione del modulo comunicazione." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="286,208,192,252,189,248,281,210"/>
+<area shape="rect" id="Node000004" href="$comm__pack_8c.html" title="Serializzazione del frame TX board2 &#45;&gt; board1." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="363,216,351,252,347,248,359,219"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="449,209,510,251,505,250,448,214"/>
+<area shape="rect" id="Node000007" href="$app__freertos_8c.html" title=" " alt="" coords="689,251,893,325"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="739,213,766,251,761,249,737,218"/>
+</map>

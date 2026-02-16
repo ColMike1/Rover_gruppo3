@@ -1,0 +1,214 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+encoder/\+encoder\+\_\+hw.c File Reference}
+\hypertarget{encoder__hw_8c}{}\label{encoder__hw_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/encoder/encoder\_hw.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/encoder/encoder\_hw.c}}
+
+
+Interfaccia di basso livello per la lettura degli encoder hardware via timer.  
+
+
+{\ttfamily \+\#include "{}encoder/\+encoder\+\_\+hw.\+h"{}}\newline
+{\ttfamily \+\#include "{}tim.\+h"{}}\newline
+Include dependency graph for encoder\+\_\+hw.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{encoder__hw_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{encoder__hw_8c_a5ad4a51a562a0eeb8a7fbb64530286ed}{ENCODER\+\_\+\+TIMER\+\_\+\+MAX}}~65536.\+0f
+\begin{DoxyCompactList}\small\item\em Valore massimo del timer encoder (16-\/bit). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__hw_8c_a0d0de63cb3b2b767719451b355cb94fa}{MAX\+\_\+\+RPM}}~200.\+0f
+\begin{DoxyCompactList}\small\item\em Velocità massima attesa per ruota \+[RPM]\+ per controlli di plausibilità. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__hw_8c_adde42fcc3c8f7e4e7d22b06b681b456d}{TICKS\+\_\+\+PER\+\_\+\+REV}}~2448.\+0f
+\begin{DoxyCompactList}\small\item\em Risoluzione dell\textquotesingle{}encoder (ticks per rivoluzione completa). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__hw_8c_a0b82c67a65f9271c9624c2783dac10f6}{ENCODER\+\_\+\+TASK\+\_\+\+PERIOD\+\_\+S}}~0.\+010f
+\begin{DoxyCompactList}\small\item\em Periodo di campionamento del task encoder \+[s]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__hw_8c_a3e3126ce4746c4c18b65ab58192cdb65}{MAX\+\_\+\+DELTA\+\_\+\+TICKS}}~((int)((\doxymbox{\hyperlink{encoder__hw_8c_a0d0de63cb3b2b767719451b355cb94fa}{MAX\+\_\+\+RPM}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{encoder__hw_8c_adde42fcc3c8f7e4e7d22b06b681b456d}{TICKS\+\_\+\+PER\+\_\+\+REV}} /\+ 60.\+0f) \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{encoder__hw_8c_a0b82c67a65f9271c9624c2783dac10f6}{ENCODER\+\_\+\+TASK\+\_\+\+PERIOD\+\_\+S}}) + 1)
+\begin{DoxyCompactList}\small\item\em Massimo numero di ticks fisicamente possibili in un periodo di campionamento. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}{NUM\+\_\+\+ENCODERS}}~4U
+\begin{DoxyCompactList}\small\item\em Numero totale di encoder gestiti dal sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t}} \doxymbox{\hyperlink{encoder__hw_8c_ae734ba8b992135e178c9347f230763cb}{Encoder\+\_\+\+Read\+Delta}} (uint8\+\_\+t encoder\+\_\+id, int \texorpdfstring{$\ast$}{*}delta\+\_\+ticks)
+\begin{DoxyCompactList}\small\item\em Legge la variazione (delta) dei ticks dall\textquotesingle{}ultima chiamata per un dato encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{encoder__hw_8c_a25fc663547539bc49fecc0011bd76ab5}{htim1}}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{encoder__hw_8c_a2c80fd5510e2990a59a5c90d745c716c}{htim2}}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{encoder__hw_8c_aac3d2c59ee0e3bbae1b99529a154eb62}{htim3}}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{encoder__hw_8c_a85788cec5a97ee377e4ee2e74f026484}{htim4}}
+\item 
+static TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{encoder__hw_8c_a7351257fc87484c73d761014d6625637}{enc\+\_\+timers}} \+[\doxymbox{\hyperlink{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}{NUM\+\_\+\+ENCODERS}}]\+
+\begin{DoxyCompactList}\small\item\em Array di puntatori ai timer hardware configurati in Encoder Mode. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \doxymbox{\hyperlink{encoder__hw_8c_a826f2e0f3e03d521002673cd10d4dbac}{last\+\_\+ticks}} \+[\doxymbox{\hyperlink{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}{NUM\+\_\+\+ENCODERS}}]\+ = \{0U, 0U, 0U, 0U\}
+\begin{DoxyCompactList}\small\item\em Buffer interno per memorizzare l\textquotesingle{}ultima lettura dei ticks per ogni encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfaccia di basso livello per la lettura degli encoder hardware via timer. 
+
+Gestisce il calcolo del delta dei ticks, risolvendo le problematiche di overflow dei timer a 16 bit e verificando la plausibilità fisica delle letture. 
+
+\label{doc-define-members}
+\Hypertarget{encoder__hw_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{encoder__hw_8c_a0b82c67a65f9271c9624c2783dac10f6}\index{encoder\_hw.c@{encoder\_hw.c}!ENCODER\_TASK\_PERIOD\_S@{ENCODER\_TASK\_PERIOD\_S}}
+\index{ENCODER\_TASK\_PERIOD\_S@{ENCODER\_TASK\_PERIOD\_S}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{ENCODER\_TASK\_PERIOD\_S}{ENCODER\_TASK\_PERIOD\_S}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a0b82c67a65f9271c9624c2783dac10f6} 
+\+\#define ENCODER\+\_\+\+TASK\+\_\+\+PERIOD\+\_\+S~0.\+010f}
+
+
+
+Periodo di campionamento del task encoder \+[s]\+. 
+
+\Hypertarget{encoder__hw_8c_a5ad4a51a562a0eeb8a7fbb64530286ed}\index{encoder\_hw.c@{encoder\_hw.c}!ENCODER\_TIMER\_MAX@{ENCODER\_TIMER\_MAX}}
+\index{ENCODER\_TIMER\_MAX@{ENCODER\_TIMER\_MAX}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{ENCODER\_TIMER\_MAX}{ENCODER\_TIMER\_MAX}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a5ad4a51a562a0eeb8a7fbb64530286ed} 
+\+\#define ENCODER\+\_\+\+TIMER\+\_\+\+MAX~65536.\+0f}
+
+
+
+Valore massimo del timer encoder (16-\/bit). 
+
+\Hypertarget{encoder__hw_8c_a3e3126ce4746c4c18b65ab58192cdb65}\index{encoder\_hw.c@{encoder\_hw.c}!MAX\_DELTA\_TICKS@{MAX\_DELTA\_TICKS}}
+\index{MAX\_DELTA\_TICKS@{MAX\_DELTA\_TICKS}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_DELTA\_TICKS}{MAX\_DELTA\_TICKS}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a3e3126ce4746c4c18b65ab58192cdb65} 
+\+\#define MAX\+\_\+\+DELTA\+\_\+\+TICKS~((int)((\doxymbox{\hyperlink{encoder__hw_8c_a0d0de63cb3b2b767719451b355cb94fa}{MAX\+\_\+\+RPM}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{encoder__hw_8c_adde42fcc3c8f7e4e7d22b06b681b456d}{TICKS\+\_\+\+PER\+\_\+\+REV}} /\+ 60.\+0f) \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{encoder__hw_8c_a0b82c67a65f9271c9624c2783dac10f6}{ENCODER\+\_\+\+TASK\+\_\+\+PERIOD\+\_\+S}}) + 1)}
+
+
+
+Massimo numero di ticks fisicamente possibili in un periodo di campionamento. 
+
+\Hypertarget{encoder__hw_8c_a0d0de63cb3b2b767719451b355cb94fa}\index{encoder\_hw.c@{encoder\_hw.c}!MAX\_RPM@{MAX\_RPM}}
+\index{MAX\_RPM@{MAX\_RPM}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_RPM}{MAX\_RPM}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a0d0de63cb3b2b767719451b355cb94fa} 
+\+\#define MAX\+\_\+\+RPM~200.\+0f}
+
+
+
+Velocità massima attesa per ruota \+[RPM]\+ per controlli di plausibilità. 
+
+\Hypertarget{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}\index{encoder\_hw.c@{encoder\_hw.c}!NUM\_ENCODERS@{NUM\_ENCODERS}}
+\index{NUM\_ENCODERS@{NUM\_ENCODERS}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{NUM\_ENCODERS}{NUM\_ENCODERS}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc} 
+\+\#define NUM\+\_\+\+ENCODERS~4U}
+
+
+
+Numero totale di encoder gestiti dal sistema. 
+
+\Hypertarget{encoder__hw_8c_adde42fcc3c8f7e4e7d22b06b681b456d}\index{encoder\_hw.c@{encoder\_hw.c}!TICKS\_PER\_REV@{TICKS\_PER\_REV}}
+\index{TICKS\_PER\_REV@{TICKS\_PER\_REV}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{TICKS\_PER\_REV}{TICKS\_PER\_REV}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_adde42fcc3c8f7e4e7d22b06b681b456d} 
+\+\#define TICKS\+\_\+\+PER\+\_\+\+REV~2448.\+0f}
+
+
+
+Risoluzione dell\textquotesingle{}encoder (ticks per rivoluzione completa). 
+
+
+
+\label{doc-func-members}
+\Hypertarget{encoder__hw_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__hw_8c_ae734ba8b992135e178c9347f230763cb}\index{encoder\_hw.c@{encoder\_hw.c}!Encoder\_ReadDelta@{Encoder\_ReadDelta}}
+\index{Encoder\_ReadDelta@{Encoder\_ReadDelta}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{Encoder\_ReadDelta()}{Encoder\_ReadDelta()}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_ae734ba8b992135e178c9347f230763cb} 
+\doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t}} Encoder\+\_\+\+Read\+Delta (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{encoder\+\_\+id}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{delta\+\_\+ticks}{}\end{DoxyParamCaption})}
+
+
+
+Legge la variazione (delta) dei ticks dall\textquotesingle{}ultima chiamata per un dato encoder. 
+
+Legge la variazione di tick (delta) con gestione dell\textquotesingle{}overflow.
+
+Calcola la differenza gestendo l\textquotesingle{}overflow del timer circolare e verifica che il movimento non superi i limiti fisici definiti da MAX\+\_\+\+DELTA\+\_\+\+TICKS. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em encoder\+\_\+id} & Indice dell\textquotesingle{}encoder (0 a 3). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em delta\+\_\+ticks} & Puntatore alla variabile dove scrivere il delta calcolato. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t} OK se la lettura è valida, OVERFLOW se supera i limiti fisici. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__hw_8c_ae734ba8b992135e178c9347f230763cb_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{encoder__hw_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{encoder__hw_8c_a7351257fc87484c73d761014d6625637}\index{encoder\_hw.c@{encoder\_hw.c}!enc\_timers@{enc\_timers}}
+\index{enc\_timers@{enc\_timers}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{enc\_timers}{enc\_timers}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a7351257fc87484c73d761014d6625637} 
+TIM\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} enc\+\_\+timers\+[\doxymbox{\hyperlink{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}{NUM\+\_\+\+ENCODERS}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \&\doxymbox{\hyperlink{tim_8h_a2c80fd5510e2990a59a5c90d745c716c}{htim2}},\ \&\doxymbox{\hyperlink{tim_8h_a85788cec5a97ee377e4ee2e74f026484}{htim4}},\ \&\doxymbox{\hyperlink{tim_8h_a25fc663547539bc49fecc0011bd76ab5}{htim1}},\ \&\doxymbox{\hyperlink{tim_8h_aac3d2c59ee0e3bbae1b99529a154eb62}{htim3}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Array di puntatori ai timer hardware configurati in Encoder Mode. 
+
+\Hypertarget{encoder__hw_8c_a25fc663547539bc49fecc0011bd76ab5}\index{encoder\_hw.c@{encoder\_hw.c}!htim1@{htim1}}
+\index{htim1@{htim1}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{htim1}{htim1}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a25fc663547539bc49fecc0011bd76ab5} 
+TIM\+\_\+\+Handle\+Type\+Def htim1\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{encoder__hw_8c_a2c80fd5510e2990a59a5c90d745c716c}\index{encoder\_hw.c@{encoder\_hw.c}!htim2@{htim2}}
+\index{htim2@{htim2}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{htim2}{htim2}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a2c80fd5510e2990a59a5c90d745c716c} 
+TIM\+\_\+\+Handle\+Type\+Def htim2\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{encoder__hw_8c_aac3d2c59ee0e3bbae1b99529a154eb62}\index{encoder\_hw.c@{encoder\_hw.c}!htim3@{htim3}}
+\index{htim3@{htim3}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{htim3}{htim3}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_aac3d2c59ee0e3bbae1b99529a154eb62} 
+TIM\+\_\+\+Handle\+Type\+Def htim3\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{encoder__hw_8c_a85788cec5a97ee377e4ee2e74f026484}\index{encoder\_hw.c@{encoder\_hw.c}!htim4@{htim4}}
+\index{htim4@{htim4}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{htim4}{htim4}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a85788cec5a97ee377e4ee2e74f026484} 
+TIM\+\_\+\+Handle\+Type\+Def htim4\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{encoder__hw_8c_a826f2e0f3e03d521002673cd10d4dbac}\index{encoder\_hw.c@{encoder\_hw.c}!last\_ticks@{last\_ticks}}
+\index{last\_ticks@{last\_ticks}!encoder\_hw.c@{encoder\_hw.c}}
+\doxysubsubsection{\texorpdfstring{last\_ticks}{last\_ticks}}
+{\footnotesize\ttfamily \label{encoder__hw_8c_a826f2e0f3e03d521002673cd10d4dbac} 
+uint32\+\_\+t last\+\_\+ticks\+[\doxymbox{\hyperlink{encoder__hw_8c_ae929ca78c731b77fe6f5bb516d9a9cfc}{NUM\+\_\+\+ENCODERS}}]\+ = \{0U, 0U, 0U, 0U\}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Buffer interno per memorizzare l\textquotesingle{}ultima lettura dei ticks per ogni encoder. 
+

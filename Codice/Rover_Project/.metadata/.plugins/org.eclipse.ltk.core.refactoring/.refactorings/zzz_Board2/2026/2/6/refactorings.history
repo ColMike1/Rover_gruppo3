@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;zzz_Board2/Core/Inc/shared_resources/global_faults.h&apos; to &apos;board1_faults.h&apos;" description="Rename resource &apos;global_faults.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/shared_resources/global_faults.h" name="board1_faults.h" stamp="1770040751673" updateReferences="true"/>
-</session>

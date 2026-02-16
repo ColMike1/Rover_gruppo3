@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/actuation/actuation_step.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/actuation/actuation_step.h">
+<area shape="rect" id="Node000001" title="Interfaccia dello step di attuazione board 2." alt="" coords="121,5,325,80"/>
+<area shape="rect" id="Node000002" href="$actuation_8h.html" title="Header di aggregazione del modulo attuazione." alt="" coords="5,128,209,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,94,144,129,140,126,179,89"/>
+<area shape="rect" id="Node000004" href="$supervisor__task_8c.html" title="Task supervisore board 2: controllo stato rover e gestione comando/attuazione." alt="" coords="232,128,448,203"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="270,89,307,127,302,128,269,94"/>
+<area shape="rect" id="Node000003" href="$actuation__step_8c.html" title="Step di attuazione open&#45;loop per board 2." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,216,110,251,104,249,106,221"/>
+</map>

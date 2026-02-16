@@ -3,8 +3,6 @@
  * @brief Orchestrazione del task di controllo e gestione delle strategie di fallback.
  * @details Si occupa di processare gli snapshot di sistema, decidere tra controllo
  * ad anello chiuso o aperto, e gestire i guasti agli encoder.
- * @date Jan 12, 2026
- * @author Sterm
  */
 
 #include <actuation/actuation_step.h>

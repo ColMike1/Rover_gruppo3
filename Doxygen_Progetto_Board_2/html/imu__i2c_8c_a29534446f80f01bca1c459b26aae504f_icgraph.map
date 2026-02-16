@@ -1,0 +1,13 @@
+<map id="IMU_I2C_WriteReg" name="IMU_I2C_WriteReg">
+<area shape="rect" id="Node000001" title="Scrive un registro MPU6050 con gestione stato HAL." alt="" coords="779,5,914,32"/>
+<area shape="rect" id="Node000002" href="$imu__i2c_8c.html#aae92541f8d3fe17d6cdec8f6a8a92659" title="Inizializza e configura il sensore MPU6050." alt="" coords="632,5,731,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="761,19,732,21,731,16,766,19"/>
+<area shape="rect" id="Node000003" href="$imu__task_8c.html#ae19f72c003f81fd3ffbf147a09d6c486" title="Inizializza il task IMU." alt="" coords="484,5,584,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="613,19,584,21,584,16,618,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#ab4917357938b0c856c97e082d7c00f45" title="Function implementing the Task_ReadIMU thread." alt="" coords="296,5,436,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="466,19,437,21,437,16,472,19"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

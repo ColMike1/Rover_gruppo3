@@ -1,0 +1,69 @@
+\doxysection{Encoder\+Snapshot\+\_\+t Struct Reference}
+\hypertarget{struct_encoder_snapshot__t}{}\label{struct_encoder_snapshot__t}\index{EncoderSnapshot\_t@{EncoderSnapshot\_t}}
+
+
+Snapshot delle velocità ruota e dello stato feedback.  
+
+
+
+
+{\ttfamily \+\#include $<$encoder\+\_\+snapshot.\+h$>$}
+
+
+
+Collaboration diagram for Encoder\+Snapshot\+\_\+t:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{struct_encoder_snapshot__t__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{struct_encoder_snapshot__t_ae010d35e154326cf2c33ecbe63ca10fa}{wheel\+\_\+speed\+\_\+rpm}} \+[4]\+
+\item 
+bool \doxymbox{\hyperlink{struct_encoder_snapshot__t_a94a6482f20e8268b5ef24d9605315e6d}{has\+No\+Feedback}} \+[4]\+
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_encoder_snapshot__t_aadd896dc1e65c8114313034f9a690a2b}{task\+\_\+last\+\_\+run\+\_\+ms}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_encoder_snapshot__t_a228f2623e4e4882693e07db0b8b835b8}{data\+\_\+last\+\_\+valid\+\_\+ms}} \+[4]\+
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Snapshot delle velocità ruota e dello stato feedback. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_encoder_snapshot__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_encoder_snapshot__t_a228f2623e4e4882693e07db0b8b835b8}\index{EncoderSnapshot\_t@{EncoderSnapshot\_t}!data\_last\_valid\_ms@{data\_last\_valid\_ms}}
+\index{data\_last\_valid\_ms@{data\_last\_valid\_ms}!EncoderSnapshot\_t@{EncoderSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{data\_last\_valid\_ms}{data\_last\_valid\_ms}}
+{\footnotesize\ttfamily \label{struct_encoder_snapshot__t_a228f2623e4e4882693e07db0b8b835b8} 
+uint32\+\_\+t Encoder\+Snapshot\+\_\+t::\+data\+\_\+last\+\_\+valid\+\_\+ms\+[4]\+}
+
+Timestamp di validità per singolo encoder \+[ms]\+ \Hypertarget{struct_encoder_snapshot__t_a94a6482f20e8268b5ef24d9605315e6d}\index{EncoderSnapshot\_t@{EncoderSnapshot\_t}!hasNoFeedback@{hasNoFeedback}}
+\index{hasNoFeedback@{hasNoFeedback}!EncoderSnapshot\_t@{EncoderSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{hasNoFeedback}{hasNoFeedback}}
+{\footnotesize\ttfamily \label{struct_encoder_snapshot__t_a94a6482f20e8268b5ef24d9605315e6d} 
+bool Encoder\+Snapshot\+\_\+t::\+has\+No\+Feedback\+[4]\+}
+
+Vero se il motore non risponde al comando (0 RPM con comando attivo) \Hypertarget{struct_encoder_snapshot__t_aadd896dc1e65c8114313034f9a690a2b}\index{EncoderSnapshot\_t@{EncoderSnapshot\_t}!task\_last\_run\_ms@{task\_last\_run\_ms}}
+\index{task\_last\_run\_ms@{task\_last\_run\_ms}!EncoderSnapshot\_t@{EncoderSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{task\_last\_run\_ms}{task\_last\_run\_ms}}
+{\footnotesize\ttfamily \label{struct_encoder_snapshot__t_aadd896dc1e65c8114313034f9a690a2b} 
+uint32\+\_\+t Encoder\+Snapshot\+\_\+t::\+task\+\_\+last\+\_\+run\+\_\+ms}
+
+Timestamp dell\textquotesingle{}ultima esecuzione del task \+[ms]\+ \Hypertarget{struct_encoder_snapshot__t_ae010d35e154326cf2c33ecbe63ca10fa}\index{EncoderSnapshot\_t@{EncoderSnapshot\_t}!wheel\_speed\_rpm@{wheel\_speed\_rpm}}
+\index{wheel\_speed\_rpm@{wheel\_speed\_rpm}!EncoderSnapshot\_t@{EncoderSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{wheel\_speed\_rpm}{wheel\_speed\_rpm}}
+{\footnotesize\ttfamily \label{struct_encoder_snapshot__t_ae010d35e154326cf2c33ecbe63ca10fa} 
+float Encoder\+Snapshot\+\_\+t::\+wheel\+\_\+speed\+\_\+rpm\+[4]\+}
+
+Velocità misurate per le 4 ruote \+[RPM]\+ 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+snapshot/\+\doxymbox{\hyperlink{encoder__snapshot_8h}{encoder\+\_\+snapshot.\+h}}\end{DoxyCompactItemize}

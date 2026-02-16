@@ -1,0 +1,52 @@
+\doxysection{imu\+\_\+i2c.\+h}
+\hypertarget{imu__i2c_8h_source}{}\label{imu__i2c_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/IMU/imu\_i2c.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/IMU/imu\_i2c.h}}
+\doxymbox{\hyperlink{imu__i2c_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_IMU\_IMU\_I2C\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_IMU\_IMU\_I2C\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{i2c_8h}{i2c.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ MPU6050\_ADDR\ \ \ \ \ \ \ \ \ \ (0x68U\ <<\ 1U)}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ MPU6050\_WHO\_AM\_I\ \ \ \ \ \ 0x75U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ MPU6050\_PWR\_MGMT\_1\ \ \ \ 0x6BU}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ MPU6050\_SMPLRT\_DIV\ \ \ \ 0x19U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ MPU6050\_GYRO\_CONFIG\ \ \ 0x1BU}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ MPU6050\_ACCEL\_CONFIG\ \ 0x1CU}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ MPU6050\_ACCEL\_XOUT\_H\ \ 0x3BU}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ MPU6050\_TEMP\_OUT\_H\ \ \ \ 0x41U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ MPU6050\_GYRO\_XOUT\_H\ \ \ 0x43U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ MPU6050\_GYRO\_ZOUT\_H\ \ \ 0x47U}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ MPU6050\_ACCEL\_SENS\_2G\ \ \ \ \ 16384.0f}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ MPU6050\_GYRO\_SENS\_250DPS\ \ 131.0f}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9bab41125dbdac997e28af0c2b7239cf7f6}{IMU\_I2C\_COMPLETE}}\ =\ 0,}
+\DoxyCodeLine{00047\ \ \ \ \ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba2d87d3f292f9982f72a8b53bb3f590c8}{IMU\_I2C\_ERROR}},}
+\DoxyCodeLine{00048\ \ \ \ \ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba40a54101a2a5d2a628fa97993c98b72d}{IMU\_I2C\_BUSY}},}
+\DoxyCodeLine{00049\ \ \ \ \ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba76e3a7e35794f03c1e96fe8e8aea1ace}{IMU\_I2C\_TIMEOUT}}}
+\DoxyCodeLine{00050\ \}\ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2CStatus\_t}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2CStatus\_t}}\ \doxymbox{\hyperlink{imu__i2c_8h_aae92541f8d3fe17d6cdec8f6a8a92659}{IMU\_I2C\_Init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2CStatus\_t}}\ \doxymbox{\hyperlink{imu__i2c_8h_a28f24e98b47ffa0c54ddf1d2032e4d1d}{IMU\_I2C\_ReadBlocking}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{imu__i2c_8h_ac50dd1dc63db339bdd8605a1597f69e7}{IMU\_I2C\_GetAccel}}(\textcolor{keywordtype}{float}\ *ax\_g,\ \textcolor{keywordtype}{float}\ *ay\_g,\ \textcolor{keywordtype}{float}\ *az\_g);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{imu__i2c_8h_a8b2cd060aa99805b55848d1d030b27df}{IMU\_I2C\_GetGyro}}(\textcolor{keywordtype}{float}\ *gx\_dps,\ \textcolor{keywordtype}{float}\ *gy\_dps,\ \textcolor{keywordtype}{float}\ *gz\_dps);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{imu__i2c_8h_a8bc9cd8fc41b618d26be203c09096b46}{IMU\_I2C\_GetTemperature}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{imu__i2c_8h_aa51b751a7d1cfc299c953be5cd022f48}{IMU\_I2C\_GetYaw}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_IMU\_IMU\_I2C\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

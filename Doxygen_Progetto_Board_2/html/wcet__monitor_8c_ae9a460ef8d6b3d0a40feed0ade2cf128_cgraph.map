@@ -1,0 +1,5 @@
+<map id="WCET_Print" name="WCET_Print">
+<area shape="rect" id="Node000001" title="Stampa a console il riepilogo WCET." alt="" coords="5,5,101,32"/>
+<area shape="rect" id="Node000002" href="$wcet__monitor_8c.html#abc79b8a411a3607c9798350ce5615759" title="Formatta in testo il riepilogo WCET." alt="" coords="149,5,258,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,16,136,18,131,19,101,21"/>
+</map>

@@ -1,0 +1,129 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+snapshot/\+ble\+\_\+controller\+\_\+snapshot.h File Reference}
+\hypertarget{ble__controller__snapshot_8h}{}\label{ble__controller__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/ble\_controller\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/ble\_controller\_snapshot.h}}
+
+
+Definizione dello snapshot BLE controller e API thread-\/safe.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}ble\+\_\+controller/\+ble\+\_\+controller\+\_\+i2c.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+Include dependency graph for ble\+\_\+controller\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{ble__controller__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot dei dati acquisiti dal controller BLE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{ble__controller__snapshot_8h_ad8c768d78db42132dfe5e641659805ca}{Ble\+Controller\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Registra il mutex usato per proteggere lo snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{ble__controller__snapshot_8h_ada05efc20b71fa4cecb6eaceacb389f5}{Ble\+Controller\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}snap)
+\begin{DoxyCompactList}\small\item\em Scrive lo snapshot BLE in sezione critica. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{ble__controller__snapshot_8h_adcf5612aedf667a09b9dabce0a93e404}{Ble\+Controller\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}snap)
+\begin{DoxyCompactList}\small\item\em Legge lo snapshot BLE in sezione critica. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definizione dello snapshot BLE controller e API thread-\/safe. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{ble__controller__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ble__controller__snapshot_8h_ad8c768d78db42132dfe5e641659805ca}\index{ble\_controller\_snapshot.h@{ble\_controller\_snapshot.h}!BleControllerSnapshot\_MutexInit@{BleControllerSnapshot\_MutexInit}}
+\index{BleControllerSnapshot\_MutexInit@{BleControllerSnapshot\_MutexInit}!ble\_controller\_snapshot.h@{ble\_controller\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{BleControllerSnapshot\_MutexInit()}{BleControllerSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{ble__controller__snapshot_8h_ad8c768d78db42132dfe5e641659805ca} 
+void Ble\+Controller\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Registra il mutex usato per proteggere lo snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato all\textquotesingle{}esterno.\\
+\hline
+\end{DoxyParams}
+Registra il mutex usato per proteggere lo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle mutex creato all\textquotesingle{}esterno. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__snapshot_8h_ad8c768d78db42132dfe5e641659805ca_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{ble__controller__snapshot_8h_adcf5612aedf667a09b9dabce0a93e404}\index{ble\_controller\_snapshot.h@{ble\_controller\_snapshot.h}!BleControllerSnapshot\_Read@{BleControllerSnapshot\_Read}}
+\index{BleControllerSnapshot\_Read@{BleControllerSnapshot\_Read}!ble\_controller\_snapshot.h@{ble\_controller\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{BleControllerSnapshot\_Read()}{BleControllerSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{ble__controller__snapshot_8h_adcf5612aedf667a09b9dabce0a93e404} 
+void Ble\+Controller\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge lo snapshot BLE in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snap} & Puntatore al buffer di destinazione.\\
+\hline
+{\em dst} & Destinazione in cui copiare il dato. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__snapshot_8h_adcf5612aedf667a09b9dabce0a93e404_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{ble__controller__snapshot_8h_ada05efc20b71fa4cecb6eaceacb389f5}\index{ble\_controller\_snapshot.h@{ble\_controller\_snapshot.h}!BleControllerSnapshot\_Write@{BleControllerSnapshot\_Write}}
+\index{BleControllerSnapshot\_Write@{BleControllerSnapshot\_Write}!ble\_controller\_snapshot.h@{ble\_controller\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{BleControllerSnapshot\_Write()}{BleControllerSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{ble__controller__snapshot_8h_ada05efc20b71fa4cecb6eaceacb389f5} 
+void Ble\+Controller\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive lo snapshot BLE in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snap} & Puntatore al dato sorgente da copiare.\\
+\hline
+{\em src} & Dato sorgente da copiare. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__snapshot_8h_ada05efc20b71fa4cecb6eaceacb389f5_icgraph}
+\end{center}
+\end{figure}

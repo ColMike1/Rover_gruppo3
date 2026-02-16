@@ -1,0 +1,422 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+\+IMU/\+imu\+\_\+i2c.h File Reference}
+\hypertarget{imu__i2c_8h}{}\label{imu__i2c_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/IMU/imu\_i2c.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/IMU/imu\_i2c.h}}
+
+
+API I2C per inizializzazione e lettura sensore MPU6050.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}i2c.\+h"{}}\newline
+Include dependency graph for imu\+\_\+i2c.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{imu__i2c_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_ad4d6255d8f7e5dc770e773b787977508}{MPU6050\+\_\+\+ADDR}}~(0x68U $<$$<$ 1U)
+\begin{DoxyCompactList}\small\item\em Indirizzo I2C MPU6050 in formato 8 bit (7 bit shiftato). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_aaec612b81685da5fe63800de760c618e}{MPU6050\+\_\+\+WHO\+\_\+\+AM\+\_\+I}}~0x75U
+\begin{DoxyCompactList}\small\item\em Registro identificativo dispositivo. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a1308d38ea177e0f08f6f4bc7280b42b8}{MPU6050\+\_\+\+PWR\+\_\+\+MGMT\+\_\+1}}~0x6\+BU
+\begin{DoxyCompactList}\small\item\em Registro power management 1. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a0933054fd5f61db997c798162dbab13a}{MPU6050\+\_\+\+SMPLRT\+\_\+\+DIV}}~0x19U
+\begin{DoxyCompactList}\small\item\em Registro divisore sample rate. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a463dbedb5bf492ce318b1f9fdac355fc}{MPU6050\+\_\+\+GYRO\+\_\+\+CONFIG}}~0x1\+BU
+\begin{DoxyCompactList}\small\item\em Registro configurazione giroscopio. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a5647db07cb598d0c61f1a60bfa941496}{MPU6050\+\_\+\+ACCEL\+\_\+\+CONFIG}}~0x1\+CU
+\begin{DoxyCompactList}\small\item\em Registro configurazione accelerometro. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a444ee693cac934a19d2cd4821f4dd7ea}{MPU6050\+\_\+\+ACCEL\+\_\+\+XOUT\+\_\+H}}~0x3\+BU
+\begin{DoxyCompactList}\small\item\em Primo registro burst accelerometro X high byte. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a7d1feb7c396a53aaa60d5fca9f268b44}{MPU6050\+\_\+\+TEMP\+\_\+\+OUT\+\_\+H}}~0x41U
+\begin{DoxyCompactList}\small\item\em Registro temperatura high byte. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_aa5ec6d5e98fd95dc2053f47c23beb8f9}{MPU6050\+\_\+\+GYRO\+\_\+\+XOUT\+\_\+H}}~0x43U
+\begin{DoxyCompactList}\small\item\em Primo registro burst giroscopio X high byte. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_ab63cef7bb790f67fc89791523d69d7be}{MPU6050\+\_\+\+GYRO\+\_\+\+ZOUT\+\_\+H}}~0x47U
+\begin{DoxyCompactList}\small\item\em Registro giroscopio Z high byte. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_a30d3e35c34a6b50d2599ee7be16c4d95}{MPU6050\+\_\+\+ACCEL\+\_\+\+SENS\+\_\+2G}}~16384.\+0f
+\begin{DoxyCompactList}\small\item\em Sensibilita\textquotesingle{} accelerometro per range +/\+-\/2g \+[LSB/\+g]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8h_aaf1365e11dec589b0bc3deee9fb119d6}{MPU6050\+\_\+\+GYRO\+\_\+\+SENS\+\_\+250\+DPS}}~131.\+0f
+\begin{DoxyCompactList}\small\item\em Sensibilita\textquotesingle{} giroscopio per range +/\+-\/250 dps \+[LSB/\+(deg/\+s)]\+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} \{ \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9bab41125dbdac997e28af0c2b7239cf7f6}{IMU\+\_\+\+I2\+C\+\_\+\+COMPLETE}} = 0
+, \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba2d87d3f292f9982f72a8b53bb3f590c8}{IMU\+\_\+\+I2\+C\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba40a54101a2a5d2a628fa97993c98b72d}{IMU\+\_\+\+I2\+C\+\_\+\+BUSY}}
+, \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba76e3a7e35794f03c1e96fe8e8aea1ace}{IMU\+\_\+\+I2\+C\+\_\+\+TIMEOUT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Stato delle operazioni I2C del modulo IMU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{imu__i2c_8h_aae92541f8d3fe17d6cdec8f6a8a92659}{IMU\+\_\+\+I2\+C\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza e configura il sensore MPU6050. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{imu__i2c_8h_a28f24e98b47ffa0c54ddf1d2032e4d1d}{IMU\+\_\+\+I2\+C\+\_\+\+Read\+Blocking}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue una lettura bloccante dei registri dati sensore. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__i2c_8h_ac50dd1dc63db339bdd8605a1597f69e7}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Accel}} (float \texorpdfstring{$\ast$}{*}ax\+\_\+g, float \texorpdfstring{$\ast$}{*}ay\+\_\+g, float \texorpdfstring{$\ast$}{*}az\+\_\+g)
+\begin{DoxyCompactList}\small\item\em Restituisce le accelerazioni correnti. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__i2c_8h_a8b2cd060aa99805b55848d1d030b27df}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Gyro}} (float \texorpdfstring{$\ast$}{*}gx\+\_\+dps, float \texorpdfstring{$\ast$}{*}gy\+\_\+dps, float \texorpdfstring{$\ast$}{*}gz\+\_\+dps)
+\begin{DoxyCompactList}\small\item\em Restituisce le velocita\textquotesingle{} angolari correnti. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{imu__i2c_8h_a8bc9cd8fc41b618d26be203c09096b46}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Temperature}} (void)
+\begin{DoxyCompactList}\small\item\em Restituisce la temperatura corrente del sensore. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{imu__i2c_8h_aa51b751a7d1cfc299c953be5cd022f48}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Yaw}} (void)
+\begin{DoxyCompactList}\small\item\em Restituisce la stima di yaw corrente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API I2C per inizializzazione e lettura sensore MPU6050. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{imu__i2c_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{imu__i2c_8h_a5647db07cb598d0c61f1a60bfa941496}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_ACCEL\_CONFIG@{MPU6050\_ACCEL\_CONFIG}}
+\index{MPU6050\_ACCEL\_CONFIG@{MPU6050\_ACCEL\_CONFIG}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_ACCEL\_CONFIG}{MPU6050\_ACCEL\_CONFIG}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a5647db07cb598d0c61f1a60bfa941496} 
+\+\#define MPU6050\+\_\+\+ACCEL\+\_\+\+CONFIG~0x1\+CU}
+
+
+
+Registro configurazione accelerometro. 
+
+\Hypertarget{imu__i2c_8h_a30d3e35c34a6b50d2599ee7be16c4d95}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_ACCEL\_SENS\_2G@{MPU6050\_ACCEL\_SENS\_2G}}
+\index{MPU6050\_ACCEL\_SENS\_2G@{MPU6050\_ACCEL\_SENS\_2G}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_ACCEL\_SENS\_2G}{MPU6050\_ACCEL\_SENS\_2G}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a30d3e35c34a6b50d2599ee7be16c4d95} 
+\+\#define MPU6050\+\_\+\+ACCEL\+\_\+\+SENS\+\_\+2G~16384.\+0f}
+
+
+
+Sensibilita\textquotesingle{} accelerometro per range +/\+-\/2g \+[LSB/\+g]\+. 
+
+\Hypertarget{imu__i2c_8h_a444ee693cac934a19d2cd4821f4dd7ea}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_ACCEL\_XOUT\_H@{MPU6050\_ACCEL\_XOUT\_H}}
+\index{MPU6050\_ACCEL\_XOUT\_H@{MPU6050\_ACCEL\_XOUT\_H}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_ACCEL\_XOUT\_H}{MPU6050\_ACCEL\_XOUT\_H}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a444ee693cac934a19d2cd4821f4dd7ea} 
+\+\#define MPU6050\+\_\+\+ACCEL\+\_\+\+XOUT\+\_\+H~0x3\+BU}
+
+
+
+Primo registro burst accelerometro X high byte. 
+
+\Hypertarget{imu__i2c_8h_ad4d6255d8f7e5dc770e773b787977508}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_ADDR@{MPU6050\_ADDR}}
+\index{MPU6050\_ADDR@{MPU6050\_ADDR}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_ADDR}{MPU6050\_ADDR}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_ad4d6255d8f7e5dc770e773b787977508} 
+\+\#define MPU6050\+\_\+\+ADDR~(0x68U $<$$<$ 1U)}
+
+
+
+Indirizzo I2C MPU6050 in formato 8 bit (7 bit shiftato). 
+
+\Hypertarget{imu__i2c_8h_a463dbedb5bf492ce318b1f9fdac355fc}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_GYRO\_CONFIG@{MPU6050\_GYRO\_CONFIG}}
+\index{MPU6050\_GYRO\_CONFIG@{MPU6050\_GYRO\_CONFIG}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_GYRO\_CONFIG}{MPU6050\_GYRO\_CONFIG}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a463dbedb5bf492ce318b1f9fdac355fc} 
+\+\#define MPU6050\+\_\+\+GYRO\+\_\+\+CONFIG~0x1\+BU}
+
+
+
+Registro configurazione giroscopio. 
+
+\Hypertarget{imu__i2c_8h_aaf1365e11dec589b0bc3deee9fb119d6}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_GYRO\_SENS\_250DPS@{MPU6050\_GYRO\_SENS\_250DPS}}
+\index{MPU6050\_GYRO\_SENS\_250DPS@{MPU6050\_GYRO\_SENS\_250DPS}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_GYRO\_SENS\_250DPS}{MPU6050\_GYRO\_SENS\_250DPS}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_aaf1365e11dec589b0bc3deee9fb119d6} 
+\+\#define MPU6050\+\_\+\+GYRO\+\_\+\+SENS\+\_\+250\+DPS~131.\+0f}
+
+
+
+Sensibilita\textquotesingle{} giroscopio per range +/\+-\/250 dps \+[LSB/\+(deg/\+s)]\+. 
+
+\Hypertarget{imu__i2c_8h_aa5ec6d5e98fd95dc2053f47c23beb8f9}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_GYRO\_XOUT\_H@{MPU6050\_GYRO\_XOUT\_H}}
+\index{MPU6050\_GYRO\_XOUT\_H@{MPU6050\_GYRO\_XOUT\_H}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_GYRO\_XOUT\_H}{MPU6050\_GYRO\_XOUT\_H}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_aa5ec6d5e98fd95dc2053f47c23beb8f9} 
+\+\#define MPU6050\+\_\+\+GYRO\+\_\+\+XOUT\+\_\+H~0x43U}
+
+
+
+Primo registro burst giroscopio X high byte. 
+
+\Hypertarget{imu__i2c_8h_ab63cef7bb790f67fc89791523d69d7be}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_GYRO\_ZOUT\_H@{MPU6050\_GYRO\_ZOUT\_H}}
+\index{MPU6050\_GYRO\_ZOUT\_H@{MPU6050\_GYRO\_ZOUT\_H}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_GYRO\_ZOUT\_H}{MPU6050\_GYRO\_ZOUT\_H}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_ab63cef7bb790f67fc89791523d69d7be} 
+\+\#define MPU6050\+\_\+\+GYRO\+\_\+\+ZOUT\+\_\+H~0x47U}
+
+
+
+Registro giroscopio Z high byte. 
+
+\Hypertarget{imu__i2c_8h_a1308d38ea177e0f08f6f4bc7280b42b8}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_PWR\_MGMT\_1@{MPU6050\_PWR\_MGMT\_1}}
+\index{MPU6050\_PWR\_MGMT\_1@{MPU6050\_PWR\_MGMT\_1}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_PWR\_MGMT\_1}{MPU6050\_PWR\_MGMT\_1}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a1308d38ea177e0f08f6f4bc7280b42b8} 
+\+\#define MPU6050\+\_\+\+PWR\+\_\+\+MGMT\+\_\+1~0x6\+BU}
+
+
+
+Registro power management 1. 
+
+\Hypertarget{imu__i2c_8h_a0933054fd5f61db997c798162dbab13a}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_SMPLRT\_DIV@{MPU6050\_SMPLRT\_DIV}}
+\index{MPU6050\_SMPLRT\_DIV@{MPU6050\_SMPLRT\_DIV}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_SMPLRT\_DIV}{MPU6050\_SMPLRT\_DIV}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a0933054fd5f61db997c798162dbab13a} 
+\+\#define MPU6050\+\_\+\+SMPLRT\+\_\+\+DIV~0x19U}
+
+
+
+Registro divisore sample rate. 
+
+\Hypertarget{imu__i2c_8h_a7d1feb7c396a53aaa60d5fca9f268b44}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_TEMP\_OUT\_H@{MPU6050\_TEMP\_OUT\_H}}
+\index{MPU6050\_TEMP\_OUT\_H@{MPU6050\_TEMP\_OUT\_H}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_TEMP\_OUT\_H}{MPU6050\_TEMP\_OUT\_H}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a7d1feb7c396a53aaa60d5fca9f268b44} 
+\+\#define MPU6050\+\_\+\+TEMP\+\_\+\+OUT\+\_\+H~0x41U}
+
+
+
+Registro temperatura high byte. 
+
+\Hypertarget{imu__i2c_8h_aaec612b81685da5fe63800de760c618e}\index{imu\_i2c.h@{imu\_i2c.h}!MPU6050\_WHO\_AM\_I@{MPU6050\_WHO\_AM\_I}}
+\index{MPU6050\_WHO\_AM\_I@{MPU6050\_WHO\_AM\_I}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_WHO\_AM\_I}{MPU6050\_WHO\_AM\_I}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_aaec612b81685da5fe63800de760c618e} 
+\+\#define MPU6050\+\_\+\+WHO\+\_\+\+AM\+\_\+I~0x75U}
+
+
+
+Registro identificativo dispositivo. 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{imu__i2c_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}\index{imu\_i2c.h@{imu\_i2c.h}!IMUI2CStatus\_t@{IMUI2CStatus\_t}}
+\index{IMUI2CStatus\_t@{IMUI2CStatus\_t}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMUI2CStatus\_t}{IMUI2CStatus\_t}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b} 
+enum \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}}}
+
+
+
+Stato delle operazioni I2C del modulo IMU. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMU\_I2C\_COMPLETE@{IMU\_I2C\_COMPLETE}!imu\_i2c.h@{imu\_i2c.h}}
+\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_COMPLETE@{IMU\_I2C\_COMPLETE}}
+}\Hypertarget{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9bab41125dbdac997e28af0c2b7239cf7f6}\label{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9bab41125dbdac997e28af0c2b7239cf7f6} 
+IMU\+\_\+\+I2\+C\+\_\+\+COMPLETE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMU\_I2C\_ERROR@{IMU\_I2C\_ERROR}!imu\_i2c.h@{imu\_i2c.h}}
+\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_ERROR@{IMU\_I2C\_ERROR}}
+}\Hypertarget{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba2d87d3f292f9982f72a8b53bb3f590c8}\label{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba2d87d3f292f9982f72a8b53bb3f590c8} 
+IMU\+\_\+\+I2\+C\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMU\_I2C\_BUSY@{IMU\_I2C\_BUSY}!imu\_i2c.h@{imu\_i2c.h}}
+\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_BUSY@{IMU\_I2C\_BUSY}}
+}\Hypertarget{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba40a54101a2a5d2a628fa97993c98b72d}\label{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba40a54101a2a5d2a628fa97993c98b72d} 
+IMU\+\_\+\+I2\+C\+\_\+\+BUSY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMU\_I2C\_TIMEOUT@{IMU\_I2C\_TIMEOUT}!imu\_i2c.h@{imu\_i2c.h}}
+\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_TIMEOUT@{IMU\_I2C\_TIMEOUT}}
+}\Hypertarget{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba76e3a7e35794f03c1e96fe8e8aea1ace}\label{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9ba76e3a7e35794f03c1e96fe8e8aea1ace} 
+IMU\+\_\+\+I2\+C\+\_\+\+TIMEOUT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{imu__i2c_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{imu__i2c_8h_ac50dd1dc63db339bdd8605a1597f69e7}\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_GetAccel@{IMU\_I2C\_GetAccel}}
+\index{IMU\_I2C\_GetAccel@{IMU\_I2C\_GetAccel}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetAccel()}{IMU\_I2C\_GetAccel()}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_ac50dd1dc63db339bdd8605a1597f69e7} 
+void IMU\+\_\+\+I2\+C\+\_\+\+Get\+Accel (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{ax\+\_\+g}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{ay\+\_\+g}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{az\+\_\+g}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce le accelerazioni correnti. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em ax\+\_\+g} & Accelerazione asse X \+[g]\+. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em ay\+\_\+g} & Accelerazione asse Y \+[g]\+. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em az\+\_\+g} & Accelerazione asse Z \+[g]\+.\\
+\hline
+ & {\em ax\+\_\+g} & Uscita asse X in g. \\
+\hline
+ & {\em ay\+\_\+g} & Uscita asse Y in g. \\
+\hline
+ & {\em az\+\_\+g} & Uscita asse Z in g. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_ac50dd1dc63db339bdd8605a1597f69e7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8h_a8b2cd060aa99805b55848d1d030b27df}\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_GetGyro@{IMU\_I2C\_GetGyro}}
+\index{IMU\_I2C\_GetGyro@{IMU\_I2C\_GetGyro}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetGyro()}{IMU\_I2C\_GetGyro()}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a8b2cd060aa99805b55848d1d030b27df} 
+void IMU\+\_\+\+I2\+C\+\_\+\+Get\+Gyro (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{gx\+\_\+dps}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{gy\+\_\+dps}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{gz\+\_\+dps}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce le velocita\textquotesingle{} angolari correnti. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em gx\+\_\+dps} & Velocita\textquotesingle{} asse X \+[deg/\+s]\+. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em gy\+\_\+dps} & Velocita\textquotesingle{} asse Y \+[deg/\+s]\+. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em gz\+\_\+dps} & Velocita\textquotesingle{} asse Z \+[deg/\+s]\+.\\
+\hline
+ & {\em gx\+\_\+dps} & Uscita asse X in dps. \\
+\hline
+ & {\em gy\+\_\+dps} & Uscita asse Y in dps. \\
+\hline
+ & {\em gz\+\_\+dps} & Uscita asse Z in dps. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_a8b2cd060aa99805b55848d1d030b27df_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8h_a8bc9cd8fc41b618d26be203c09096b46}\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_GetTemperature@{IMU\_I2C\_GetTemperature}}
+\index{IMU\_I2C\_GetTemperature@{IMU\_I2C\_GetTemperature}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetTemperature()}{IMU\_I2C\_GetTemperature()}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a8bc9cd8fc41b618d26be203c09096b46} 
+float IMU\+\_\+\+I2\+C\+\_\+\+Get\+Temperature (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce la temperatura corrente del sensore. 
+
+\begin{DoxyReturn}{Returns}
+Temperatura in gradi Celsius. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_a8bc9cd8fc41b618d26be203c09096b46_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8h_aa51b751a7d1cfc299c953be5cd022f48}\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_GetYaw@{IMU\_I2C\_GetYaw}}
+\index{IMU\_I2C\_GetYaw@{IMU\_I2C\_GetYaw}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetYaw()}{IMU\_I2C\_GetYaw()}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_aa51b751a7d1cfc299c953be5cd022f48} 
+float IMU\+\_\+\+I2\+C\+\_\+\+Get\+Yaw (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce la stima di yaw corrente. 
+
+\begin{DoxyReturn}{Returns}
+Angolo yaw in gradi \+[0, 360]\+.
+
+Yaw in gradi \+[0, 360]\+. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_aa51b751a7d1cfc299c953be5cd022f48_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8h_aae92541f8d3fe17d6cdec8f6a8a92659}\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_Init@{IMU\_I2C\_Init}}
+\index{IMU\_I2C\_Init@{IMU\_I2C\_Init}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_Init()}{IMU\_I2C\_Init()}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_aae92541f8d3fe17d6cdec8f6a8a92659} 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} IMU\+\_\+\+I2\+C\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza e configura il sensore MPU6050. 
+
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}inizializzazione.
+\end{DoxyReturn}
+Inizializza e configura il sensore MPU6050.
+
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}inizializzazione. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{imu__i2c_8h_aae92541f8d3fe17d6cdec8f6a8a92659_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_aae92541f8d3fe17d6cdec8f6a8a92659_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8h_a28f24e98b47ffa0c54ddf1d2032e4d1d}\index{imu\_i2c.h@{imu\_i2c.h}!IMU\_I2C\_ReadBlocking@{IMU\_I2C\_ReadBlocking}}
+\index{IMU\_I2C\_ReadBlocking@{IMU\_I2C\_ReadBlocking}!imu\_i2c.h@{imu\_i2c.h}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_ReadBlocking()}{IMU\_I2C\_ReadBlocking()}}
+{\footnotesize\ttfamily \label{imu__i2c_8h_a28f24e98b47ffa0c54ddf1d2032e4d1d} 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} IMU\+\_\+\+I2\+C\+\_\+\+Read\+Blocking (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue una lettura bloccante dei registri dati sensore. 
+
+\begin{DoxyReturn}{Returns}
+Stato della transazione I2C.
+\end{DoxyReturn}
+Esegue una lettura bloccante dei registri dati sensore.
+
+\begin{DoxyReturn}{Returns}
+Stato della transazione I2C. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_a28f24e98b47ffa0c54ddf1d2032e4d1d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8h_a28f24e98b47ffa0c54ddf1d2032e4d1d_icgraph}
+\end{center}
+\end{figure}

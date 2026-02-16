@@ -1,0 +1,108 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+actuation/\+actuation\+\_\+step.h File Reference}
+\hypertarget{actuation__step_8h}{}\label{actuation__step_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/actuation/actuation\_step.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/actuation/actuation\_step.h}}
+
+
+Gestione del singolo step di attuazione del sistema.  
+
+
+{\ttfamily \+\#include "{}control/\+control\+\_\+law.\+h"{}}\newline
+Include dependency graph for actuation\+\_\+step.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{actuation__step_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5}{Actuation\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il modulo di attuazione. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{actuation__step_8h_a9bab02f8b5970ba00ab8fa8e34b5977a}{Actuation\+\_\+\+Step}} (\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} ctrl\+\_\+out)
+\begin{DoxyCompactList}\small\item\em Esegue un singolo passo di attuazione basato sull\textquotesingle{}output del controllo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione del singolo step di attuazione del sistema. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{actuation__step_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5}\index{actuation\_step.h@{actuation\_step.h}!Actuation\_Init@{Actuation\_Init}}
+\index{Actuation\_Init@{Actuation\_Init}!actuation\_step.h@{actuation\_step.h}}
+\doxysubsubsection{\texorpdfstring{Actuation\_Init()}{Actuation\_Init()}}
+{\footnotesize\ttfamily \label{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5} 
+void Actuation\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il modulo di attuazione. 
+
+Inizializza il modulo di attuazione. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a0991cd6500749efc61a1a5f6dde7eee5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{actuation__step_8h_a9bab02f8b5970ba00ab8fa8e34b5977a}\index{actuation\_step.h@{actuation\_step.h}!Actuation\_Step@{Actuation\_Step}}
+\index{Actuation\_Step@{Actuation\_Step}!actuation\_step.h@{actuation\_step.h}}
+\doxysubsubsection{\texorpdfstring{Actuation\_Step()}{Actuation\_Step()}}
+{\footnotesize\ttfamily \label{actuation__step_8h_a9bab02f8b5970ba00ab8fa8e34b5977a} 
+void Actuation\+\_\+\+Step (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}}}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Esegue un singolo passo di attuazione basato sull\textquotesingle{}output del controllo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctrl\+\_\+out} & Struttura contenente i comandi generati dalla legge di controllo.\\
+\hline
+\end{DoxyParams}
+Esegue un singolo passo di attuazione basato sull\textquotesingle{}output del controllo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & Struttura contenente i comandi di tensione calcolati dalla legge di controllo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Invia i segnali saturati e corretti al driver Sabertooth.
+\end{DoxyNote}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a9bab02f8b5970ba00ab8fa8e34b5977a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8h_a9bab02f8b5970ba00ab8fa8e34b5977a_icgraph}
+\end{center}
+\end{figure}

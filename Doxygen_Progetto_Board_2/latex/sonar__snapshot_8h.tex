@@ -1,0 +1,128 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+snapshot/\+sonar\+\_\+snapshot.h File Reference}
+\hypertarget{sonar__snapshot_8h}{}\label{sonar__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/sonar\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/sonar\_snapshot.h}}
+
+
+Definizione dello snapshot sonar e API thread-\/safe.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+Include dependency graph for sonar\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{sonar__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot delle distanze sonar e dati temporali. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{sonar__snapshot_8h_adc780f7d9c5e15a0a20a6d988a4540f4}{Sonar\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Registra il mutex usato per proteggere lo snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sonar__snapshot_8h_a77d8f484eb63bf21ea9e4bf75ec31ee9}{Sonar\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Scrive lo snapshot sonar in sezione critica. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sonar__snapshot_8h_a005a484d7190eac84ee0417a3b562e3c}{Sonar\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Legge lo snapshot sonar in sezione critica. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definizione dello snapshot sonar e API thread-\/safe. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{sonar__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{sonar__snapshot_8h_adc780f7d9c5e15a0a20a6d988a4540f4}\index{sonar\_snapshot.h@{sonar\_snapshot.h}!SonarSnapshot\_MutexInit@{SonarSnapshot\_MutexInit}}
+\index{SonarSnapshot\_MutexInit@{SonarSnapshot\_MutexInit}!sonar\_snapshot.h@{sonar\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{SonarSnapshot\_MutexInit()}{SonarSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{sonar__snapshot_8h_adc780f7d9c5e15a0a20a6d988a4540f4} 
+void Sonar\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Registra il mutex usato per proteggere lo snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato all\textquotesingle{}esterno.\\
+\hline
+\end{DoxyParams}
+Registra il mutex usato per proteggere lo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle mutex creato all\textquotesingle{}esterno. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__snapshot_8h_adc780f7d9c5e15a0a20a6d988a4540f4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__snapshot_8h_a005a484d7190eac84ee0417a3b562e3c}\index{sonar\_snapshot.h@{sonar\_snapshot.h}!SonarSnapshot\_Read@{SonarSnapshot\_Read}}
+\index{SonarSnapshot\_Read@{SonarSnapshot\_Read}!sonar\_snapshot.h@{sonar\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{SonarSnapshot\_Read()}{SonarSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{sonar__snapshot_8h_a005a484d7190eac84ee0417a3b562e3c} 
+void Sonar\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge lo snapshot sonar in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore al buffer di destinazione.\\
+\hline
+{\em dst} & Destinazione in cui copiare il dato. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__snapshot_8h_a005a484d7190eac84ee0417a3b562e3c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__snapshot_8h_a77d8f484eb63bf21ea9e4bf75ec31ee9}\index{sonar\_snapshot.h@{sonar\_snapshot.h}!SonarSnapshot\_Write@{SonarSnapshot\_Write}}
+\index{SonarSnapshot\_Write@{SonarSnapshot\_Write}!sonar\_snapshot.h@{sonar\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{SonarSnapshot\_Write()}{SonarSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{sonar__snapshot_8h_a77d8f484eb63bf21ea9e4bf75ec31ee9} 
+void Sonar\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_sonar_snapshot__t}{Sonar\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive lo snapshot sonar in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore al dato sorgente da copiare.\\
+\hline
+{\em src} & Dato sorgente da copiare. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__snapshot_8h_a77d8f484eb63bf21ea9e4bf75ec31ee9_icgraph}
+\end{center}
+\end{figure}

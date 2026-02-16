@@ -1,0 +1,11 @@
+<map id="Apply_Encoders_Fallback_Actuation" name="Apply_Encoders_Fallback_Actuation">
+<area shape="rect" id="Node000001" title="Applica strategie di compensazione in caso di perdita di feedback encoder." alt="" coords="616,5,788,48"/>
+<area shape="rect" id="Node000002" href="$control__step_8c.html#a0fcef49c9cbce9b244be3d6251d9d445" title="Esegue l&#39;iterazione principale del controllo." alt="" coords="470,13,568,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="597,27,568,29,568,24,603,27"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a8decb0ed70f1b4d12a7abbdbcdf8d18f" title="Task di Controllo Motori e Attuazione." alt="" coords="296,13,422,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="452,27,423,29,422,24,458,27"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,13,248,40"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,27,249,29,248,24,283,27"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,13,55,40"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,28,55,29,54,24,89,26"/>
+</map>

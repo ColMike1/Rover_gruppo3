@@ -1,0 +1,13 @@
+<map id="MPU6050_UpdateYaw" name="MPU6050_UpdateYaw">
+<area shape="rect" id="Node000001" title="Aggiorna la stima di yaw integrando la velocita&#39; angolare Z." alt="" coords="851,5,1004,32"/>
+<area shape="rect" id="Node000002" href="$imu__i2c_8c.html#a28f24e98b47ffa0c54ddf1d2032e4d1d" title="Esegue una lettura bloccante dei registri dati sensore." alt="" coords="641,5,803,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="833,19,804,21,804,16,838,19"/>
+<area shape="rect" id="Node000003" href="$imu__task_8c.html#aba43d99a94c7298c850ed66a454eb6d1" title="Esegue uno step del task IMU." alt="" coords="484,5,593,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="622,19,593,21,593,16,628,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#ab4917357938b0c856c97e082d7c00f45" title="Function implementing the Task_ReadIMU thread." alt="" coords="296,5,436,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="466,19,437,21,437,16,471,19"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

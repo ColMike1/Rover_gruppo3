@@ -1,0 +1,121 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+rx\+\_\+task.c File Reference}
+\hypertarget{comm__rx__task_8c}{}\label{comm__rx__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/comm/comm\_rx\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/comm/comm\_rx\_task.c}}
+
+
+Task RX:\+ acquisizione byte UART, riallineamento frame e unpack.  
+
+
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+rx\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+unpack.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+rx\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+Include dependency graph for comm\+\_\+rx\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__rx__task_8c_a3e9af6b370e370158949ba1f4d064a38}{SYNC\+\_\+\+WORD}}~0x\+AA55U
+\begin{DoxyCompactList}\small\item\em Word di sincronizzazione del protocollo frame. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{comm__rx__task_8c_afbc5269f48d97291e12a97045fdecbff}{RX\+\_\+\+FRAME\+\_\+\+LEN}}~(sizeof(Comm\+Frame\+B1\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza fissa del frame ricevuto da board 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb}{Rx\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task RX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357}{Rx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step RX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task RX:\+ acquisizione byte UART, riallineamento frame e unpack. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{comm__rx__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__rx__task_8c_afbc5269f48d97291e12a97045fdecbff}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!RX\_FRAME\_LEN@{RX\_FRAME\_LEN}}
+\index{RX\_FRAME\_LEN@{RX\_FRAME\_LEN}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{RX\_FRAME\_LEN}{RX\_FRAME\_LEN}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_afbc5269f48d97291e12a97045fdecbff} 
+\+\#define RX\+\_\+\+FRAME\+\_\+\+LEN~(sizeof(Comm\+Frame\+B1\+\_\+t))}
+
+
+
+Lunghezza fissa del frame ricevuto da board 1. 
+
+\Hypertarget{comm__rx__task_8c_a3e9af6b370e370158949ba1f4d064a38}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!SYNC\_WORD@{SYNC\_WORD}}
+\index{SYNC\_WORD@{SYNC\_WORD}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{SYNC\_WORD}{SYNC\_WORD}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_a3e9af6b370e370158949ba1f4d064a38} 
+\+\#define SYNC\+\_\+\+WORD~0x\+AA55U}
+
+
+
+Word di sincronizzazione del protocollo frame. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__rx__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!Rx\_TaskInit@{Rx\_TaskInit}}
+\index{Rx\_TaskInit@{Rx\_TaskInit}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Rx\_TaskInit()}{Rx\_TaskInit()}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb} 
+void Rx\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task RX. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_afb0f081d74dae335aa4554d7c2a0b9fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357}\index{comm\_rx\_task.c@{comm\_rx\_task.c}!Rx\_TaskStep@{Rx\_TaskStep}}
+\index{Rx\_TaskStep@{Rx\_TaskStep}!comm\_rx\_task.c@{comm\_rx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Rx\_TaskStep()}{Rx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357} 
+void Rx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step RX. 
+
+Esegue uno step del task RX.
+
+Attende dati UART, ricostruisce un frame completo, valida CRC e aggiorna lo snapshot con l\textquotesingle{}ultimo payload valido. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8c_abf9927a637b1876b563ab33f41de5357_icgraph}
+\end{center}
+\end{figure}

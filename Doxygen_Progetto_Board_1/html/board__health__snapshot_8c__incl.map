@@ -1,0 +1,16 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/snapshot/board_health_snapshot.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/snapshot/board_health_snapshot.c">
+<area shape="rect" id="Node000001" title="Gestione thread&#45;safe dello snapshot dei parametri vitali della scheda." alt="" coords="60,5,311,80"/>
+<area shape="rect" id="Node000002" href="$wcet__monitor_8h.html" title="Monitoraggio del &quot;Worst Case Execution Time&quot; (WCET) per task e ISR." alt="" coords="120,136,251,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,78,188,122,183,120,184,83"/>
+<area shape="rect" id="Node000004" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="35,136,96,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="142,83,93,128,89,124,145,79"/>
+<area shape="rect" id="Node000006" href="$board__health__snapshot_8h.html" title="Buffer protetto per lo scambio dati dello stato hardware." alt="" coords="275,128,427,171"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="244,78,308,119,303,120,243,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="185,219,250,245"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="192,161,210,205,204,204,189,165"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,219,126,245"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="67,161,68,204,63,203,64,165"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="319,171,252,213,250,208,314,172"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="307,219,395,245"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="353,169,353,204,349,201,349,173"/>
+</map>

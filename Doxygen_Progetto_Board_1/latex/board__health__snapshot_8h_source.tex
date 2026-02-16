@@ -1,0 +1,36 @@
+\doxysection{board\+\_\+health\+\_\+snapshot.\+h}
+\hypertarget{board__health__snapshot_8h_source}{}\label{board__health__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/board\_health\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/board\_health\_snapshot.h}}
+\doxymbox{\hyperlink{board__health__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_BOARD\_HEALTH\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_BOARD\_HEALTH\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_board_health_snapshot__t_a446540a84e3b7a60e364e9d9d309232d}{temperature\_degC}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_board_health_snapshot__t_abc951569dc37ae5f93ef0bbb744b58bc}{battery\_pct}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_board_health_snapshot__t_aa2fe46d40fe05f7009fd6f1bf988cf73}{task\_last\_run\_ms}};\ \ \ \ \ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_board_health_snapshot__t_ae3ddcec9cee2b8118e81b99f3cd79457}{temp\_last\_valid\_ms}};\ \ }
+\DoxyCodeLine{00026\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_board_health_snapshot__t_a1b5b835ba52db2d5a87d751d2faa398f}{batt\_last\_valid\_ms}};\ \ }
+\DoxyCodeLine{00027\ \}\ \doxymbox{\hyperlink{struct_board_health_snapshot__t}{BoardHealthSnapshot\_t}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{board__health__snapshot_8h_afebf176f2f3feabd6348148a29a77682}{BoardHealthSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{board__health__snapshot_8h_a12e61a19b32027442e181c3a68446ff0}{BoardHealthSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_board_health_snapshot__t}{BoardHealthSnapshot\_t}}\ *src);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{board__health__snapshot_8h_aa514a14af3b9094239dc168e1f3341c3}{BoardHealthSnapshot\_Read}}(\doxymbox{\hyperlink{struct_board_health_snapshot__t}{BoardHealthSnapshot\_t}}\ *dst);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_BOARD\_HEALTH\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

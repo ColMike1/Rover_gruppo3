@@ -1,0 +1,36 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/actuation/actuation_step.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/actuation/actuation_step.c">
+<area shape="rect" id="Node000001" title="Implementazione del task di attuazione per il controllo motori." alt="" coords="322,5,525,80"/>
+<area shape="rect" id="Node000002" href="$actuation_8h.html" title="Header principale per il modulo di attuazione." alt="" coords="159,136,301,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,83,268,130,265,126,357,79"/>
+<area shape="rect" id="Node000004" href="$control__law_8h.html" title="Implementazione dell&#39;algoritmo della legge di controllo (PID, logica di sterzata)." alt="" coords="12,317,152,344"/>
+<area shape="poly" id="edge19_Node000001_Node000004" title=" " alt="" coords="319,59,278,71,233,86,189,105,149,130,126,150,111,168,90,219,82,262,82,302,77,301,77,262,85,218,106,166,122,146,146,126,187,100,231,81,277,66,323,56"/>
+<area shape="rect" id="Node000008" href="$supervisor__snapshot_8h.html" title="Buffer protetto per le decisioni prese dal Supervisore di Board 1." alt="" coords="545,128,683,171"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="491,78,566,120,560,121,491,83"/>
+<area shape="rect" id="Node000013" href="$encoder__snapshot_8h.html" title="Buffer protetto per i dati letti dagli encoder." alt="" coords="326,136,521,163"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="424,78,426,122,421,120,422,83"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="707,136,769,163"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="525,69,610,95,696,126,701,129,696,129,694,130,608,100,526,74"/>
+<area shape="rect" id="Node000003" href="$actuation__step_8h.html" title="Gestione del singolo step di attuazione del sistema." alt="" coords="99,219,230,261"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="219,165,191,208,186,205,222,161"/>
+<area shape="rect" id="Node000007" href="$sabertooth__driver_8h.html" title="Driver per i controller motori Sabertooth." alt="" coords="176,309,316,352"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="234,161,245,218,249,294,243,293,239,219,232,166"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="144,264,106,308,102,304,147,259"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="215,475,280,501"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="101,342,173,398,231,462,226,463,170,402,100,347"/>
+<area shape="rect" id="Node000006" href="$control__types_8h.html" title="Definizioni delle strutture dati per l&#39;input e l&#39;output del controllo." alt="" coords="5,400,159,427"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="83,342,85,385,79,384,81,347"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="111,425,207,467,202,469,110,430"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="248,351,250,460,245,458,244,354"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="615,169,610,216,603,240,591,263,560,302,523,337,484,369,443,397,362,442,295,472,293,467,360,437,440,392,481,364,520,333,556,298,586,260,598,238,605,214,612,173"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="502,227,576,253"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="599,169,561,217,558,213,595,173"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="652,219,808,261"/>
+<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="641,168,693,209,688,209,640,174"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="832,219,1009,261"/>
+<area shape="poly" id="edge13_Node000008_Node000011" title=" " alt="" coords="684,168,837,213,832,214,684,173"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="390,227,478,253"/>
+<area shape="poly" id="edge14_Node000008_Node000012" title=" " alt="" coords="569,173,475,222,472,217,574,170"/>
+<area shape="poly" id="edge16_Node000013_Node000005" title=" " alt="" coords="416,161,380,220,364,256,355,286,345,316,330,353,297,413,266,464,262,460,293,410,325,351,340,314,350,284,359,254,376,217,412,165"/>
+<area shape="poly" id="edge17_Node000013_Node000009" title=" " alt="" coords="440,161,513,217,508,217,440,166"/>
+<area shape="poly" id="edge18_Node000013_Node000012" title=" " alt="" coords="426,161,433,212,428,210,424,166"/>
+</map>

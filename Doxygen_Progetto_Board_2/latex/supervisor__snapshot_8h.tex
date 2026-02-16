@@ -1,0 +1,130 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+snapshot/\+supervisor\+\_\+snapshot.h File Reference}
+\hypertarget{supervisor__snapshot_8h}{}\label{supervisor__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/supervisor\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/supervisor\_snapshot.h}}
+
+
+Definizione dello snapshot supervisore e API thread-\/safe.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+supervisor\+\_\+command.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+Include dependency graph for supervisor\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot dello stato prodotto dal supervisore Board 2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{supervisor__snapshot_8h_ac1ef54ef5bfc41a4a97c0f1145ccf81a}{Supervisor\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Registra il mutex usato per proteggere lo snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__snapshot_8h_ac191454fce2ffb5f2c8a3d57229fffc0}{Supervisor\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Scrive lo snapshot supervisore in sezione critica. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__snapshot_8h_a86490218ec807bc7b449e09eb268b4e4}{Supervisor\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Legge lo snapshot supervisore in sezione critica. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definizione dello snapshot supervisore e API thread-\/safe. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{supervisor__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{supervisor__snapshot_8h_ac1ef54ef5bfc41a4a97c0f1145ccf81a}\index{supervisor\_snapshot.h@{supervisor\_snapshot.h}!SupervisorSnapshot\_MutexInit@{SupervisorSnapshot\_MutexInit}}
+\index{SupervisorSnapshot\_MutexInit@{SupervisorSnapshot\_MutexInit}!supervisor\_snapshot.h@{supervisor\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{SupervisorSnapshot\_MutexInit()}{SupervisorSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8h_ac1ef54ef5bfc41a4a97c0f1145ccf81a} 
+void Supervisor\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Registra il mutex usato per proteggere lo snapshot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato all\textquotesingle{}esterno.\\
+\hline
+\end{DoxyParams}
+Registra il mutex usato per proteggere lo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle mutex creato all\textquotesingle{}esterno. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8h_ac1ef54ef5bfc41a4a97c0f1145ccf81a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__snapshot_8h_a86490218ec807bc7b449e09eb268b4e4}\index{supervisor\_snapshot.h@{supervisor\_snapshot.h}!SupervisorSnapshot\_Read@{SupervisorSnapshot\_Read}}
+\index{SupervisorSnapshot\_Read@{SupervisorSnapshot\_Read}!supervisor\_snapshot.h@{supervisor\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{SupervisorSnapshot\_Read()}{SupervisorSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8h_a86490218ec807bc7b449e09eb268b4e4} 
+void Supervisor\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge lo snapshot supervisore in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore al buffer di destinazione.\\
+\hline
+{\em dst} & Destinazione in cui copiare il dato. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8h_a86490218ec807bc7b449e09eb268b4e4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__snapshot_8h_ac191454fce2ffb5f2c8a3d57229fffc0}\index{supervisor\_snapshot.h@{supervisor\_snapshot.h}!SupervisorSnapshot\_Write@{SupervisorSnapshot\_Write}}
+\index{SupervisorSnapshot\_Write@{SupervisorSnapshot\_Write}!supervisor\_snapshot.h@{supervisor\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{SupervisorSnapshot\_Write()}{SupervisorSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8h_ac191454fce2ffb5f2c8a3d57229fffc0} 
+void Supervisor\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive lo snapshot supervisore in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore al dato sorgente da copiare.\\
+\hline
+{\em src} & Dato sorgente da copiare. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8h_ac191454fce2ffb5f2c8a3d57229fffc0_icgraph}
+\end{center}
+\end{figure}

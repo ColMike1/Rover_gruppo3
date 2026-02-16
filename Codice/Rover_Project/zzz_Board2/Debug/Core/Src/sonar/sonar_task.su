@@ -1,3 +1,0 @@
-../Core/Src/sonar/sonar_task.c:31:6:Sonar_TaskInit	8	static
-../Core/Src/sonar/sonar_task.c:36:6:Sonar_TaskStep	8	static
-../Core/Src/sonar/sonar_task.c:50:6:HAL_TIM_IC_CaptureCallback	32	static,ignoring_inline_asm

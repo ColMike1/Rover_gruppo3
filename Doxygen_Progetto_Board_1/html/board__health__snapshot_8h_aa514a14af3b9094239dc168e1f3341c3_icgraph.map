@@ -1,0 +1,16 @@
+<map id="BoardHealthSnapshot_Read" name="BoardHealthSnapshot_Read">
+<area shape="rect" id="Node000001" title="Legge i dati correnti dallo snapshot (API per i consumatori)." alt="" coords="684,31,870,57"/>
+<area shape="rect" id="Node000002" href="$log__task_8c.html#a60fce6a6a39cff4742e6f9b4b56ab7fb" title="Raccoglie i dati dagli snapshot e li invia al supporto di memorizzazione." alt="" coords="511,5,615,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,31,615,27,616,22,671,31"/>
+<area shape="rect" id="Node000006" href="$supervisor__task_8c.html#a1e5a23016dfdc674b16635ad0e62848a" title="Esegue un ciclo della logica di supervisione." alt="" coords="490,56,636,83"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="671,57,636,63,635,58,666,57"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a67cb454dfa430f2f1087bd4a6e89e5a4" title="Task di Debug e Logging." alt="" coords="308,5,430,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="493,19,431,21,431,16,498,18"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,31,248,57"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="290,29,249,37,248,32,295,28"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,45,55,47,54,41,89,43"/>
+<area shape="rect" id="Node000007" href="$app__freertos_8c.html#a3f7778cdf1274eaffeab60f470433691" title="Task del Supervisore di sistema." alt="" coords="296,56,442,83"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="472,69,443,72,443,67,478,69"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="278,58,248,56,248,51,283,58"/>
+</map>

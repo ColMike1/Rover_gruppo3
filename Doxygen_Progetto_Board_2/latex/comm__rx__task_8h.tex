@@ -1,0 +1,82 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+rx\+\_\+task.h File Reference}
+\hypertarget{comm__rx__task_8h}{}\label{comm__rx__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_rx\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_rx\_task.h}}
+
+
+Task di ricezione UART e parsing frame da board 1.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__rx__task_8h_afb0f081d74dae335aa4554d7c2a0b9fb}{Rx\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task RX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__rx__task_8h_abf9927a637b1876b563ab33f41de5357}{Rx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task RX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di ricezione UART e parsing frame da board 1. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__rx__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__rx__task_8h_afb0f081d74dae335aa4554d7c2a0b9fb}\index{comm\_rx\_task.h@{comm\_rx\_task.h}!Rx\_TaskInit@{Rx\_TaskInit}}
+\index{Rx\_TaskInit@{Rx\_TaskInit}!comm\_rx\_task.h@{comm\_rx\_task.h}}
+\doxysubsubsection{\texorpdfstring{Rx\_TaskInit()}{Rx\_TaskInit()}}
+{\footnotesize\ttfamily \label{comm__rx__task_8h_afb0f081d74dae335aa4554d7c2a0b9fb} 
+void Rx\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task RX. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8h_afb0f081d74dae335aa4554d7c2a0b9fb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8h_afb0f081d74dae335aa4554d7c2a0b9fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{comm__rx__task_8h_abf9927a637b1876b563ab33f41de5357}\index{comm\_rx\_task.h@{comm\_rx\_task.h}!Rx\_TaskStep@{Rx\_TaskStep}}
+\index{Rx\_TaskStep@{Rx\_TaskStep}!comm\_rx\_task.h@{comm\_rx\_task.h}}
+\doxysubsubsection{\texorpdfstring{Rx\_TaskStep()}{Rx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__rx__task_8h_abf9927a637b1876b563ab33f41de5357} 
+void Rx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task RX. 
+
+Esegue uno step del task RX.
+
+Attende dati UART, ricostruisce un frame completo, valida CRC e aggiorna lo snapshot con l\textquotesingle{}ultimo payload valido. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{comm__rx__task_8h_abf9927a637b1876b563ab33f41de5357_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__rx__task_8h_abf9927a637b1876b563ab33f41de5357_icgraph}
+\end{center}
+\end{figure}

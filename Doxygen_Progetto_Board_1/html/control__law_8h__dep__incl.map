@@ -1,0 +1,20 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control_law.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control_law.h">
+<area shape="rect" id="Node000001" title="Implementazione dell&#39;algoritmo della legge di controllo (PID, logica di sterzata)." alt="" coords="193,5,396,80"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8h.html" title="Gestione del singolo step di attuazione del sistema." alt="" coords="264,128,467,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="324,91,347,128,341,127,323,96"/>
+<area shape="rect" id="Node000004" href="$actuation__step_8c.html" title="Implementazione del task di attuazione per il controllo motori." alt="" coords="194,373,398,448"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="197,90,120,136,82,163,49,193,25,225,11,257,10,290,16,307,26,324,60,357,102,380,148,395,197,406,191,407,147,400,100,385,57,361,22,327,11,309,5,291,6,256,20,222,45,190,79,159,117,131,200,85"/>
+<area shape="rect" id="Node000006" href="$control__law_8c.html" title="Implementazione degli algoritmi di controllo (PI) per la dinamica del rover." alt="" coords="36,251,239,325"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="265,91,163,252,159,249,261,95"/>
+<area shape="rect" id="Node000008" href="$control_8h.html" title="Header aggregatore del modulo di controllo." alt="" coords="605,128,808,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="411,75,607,133,602,135,411,81"/>
+<area shape="rect" id="Node000003" href="$actuation_8h.html" title="Header principale per il modulo di attuazione." alt="" coords="492,251,695,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="449,208,526,250,521,250,448,213"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="264,251,467,325"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="367,216,368,251,363,249,364,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="280,212,208,252,206,248,284,209"/>
+<area shape="rect" id="Node000007" href="$control__step_8c.html" title="Orchestrazione del task di controllo e gestione delle strategie di fallback." alt="" coords="720,251,923,325"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="482,191,707,248,722,254,717,254,706,253,482,196"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="491,331,388,375,386,370,486,332"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="753,212,789,251,784,250,751,217"/>
+</map>

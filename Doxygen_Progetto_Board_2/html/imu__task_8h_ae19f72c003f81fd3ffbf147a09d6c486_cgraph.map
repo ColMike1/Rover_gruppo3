@@ -1,0 +1,9 @@
+<map id="IMU_TaskInit" name="IMU_TaskInit">
+<area shape="rect" id="Node000001" title="Inizializza il task IMU." alt="" coords="5,31,105,57"/>
+<area shape="rect" id="Node000002" href="$imu__i2c_8c.html#aae92541f8d3fe17d6cdec8f6a8a92659" title="Inizializza e configura il sensore MPU6050." alt="" coords="153,31,252,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,41,139,43,134,45,106,47"/>
+<area shape="rect" id="Node000003" href="$imu__i2c_8c.html#a29534446f80f01bca1c459b26aae504f" title="Scrive un registro MPU6050 con gestione stato HAL." alt="" coords="316,5,451,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="252,34,303,30,298,31,253,40"/>
+<area shape="rect" id="Node000004" href="$imu__i2c_8c.html#a2ba6e43005f9e84d85c1a49c23d540af" title="Stima il bias del giroscopio Z mediando campioni a riposo." alt="" coords="300,56,467,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="253,48,287,55,282,55,252,54"/>
+</map>

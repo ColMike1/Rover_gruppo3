@@ -1,0 +1,7 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/comm/comm_uart.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/comm/comm_uart.h">
+<area shape="rect" id="Node000001" title="Driver UART con buffer circolare per comunicazione inter&#45;board." alt="" coords="5,5,209,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="23,128,98,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,79,75,115,71,112,87,82"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="122,128,186,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="126,78,144,114,138,113,123,83"/>
+</map>

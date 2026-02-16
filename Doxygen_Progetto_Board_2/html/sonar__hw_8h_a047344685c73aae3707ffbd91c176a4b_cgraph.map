@@ -1,0 +1,5 @@
+<map id="scan" name="scan">
+<area shape="rect" id="Node000001" title="Esegue una scansione sonar completa su 3 canali." alt="" coords="5,5,55,32"/>
+<area shape="rect" id="Node000002" href="$sonar__hw_8c.html#a11cf6bc24c69ac889efe5ee0e8e62df0" title="Converte la larghezza impulso catturata in distanza [cm]." alt="" coords="103,5,205,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,16,89,18,84,19,55,21"/>
+</map>

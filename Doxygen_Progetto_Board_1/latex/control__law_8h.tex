@@ -1,0 +1,112 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+control/\+control\+\_\+law.h File Reference}
+\hypertarget{control__law_8h}{}\label{control__law_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/control/control\_law.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/control/control\_law.h}}
+
+
+Implementazione dell\textquotesingle{}algoritmo della legge di controllo (PID, logica di sterzata).  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}control/\+control\+\_\+types.\+h"{}}\newline
+Include dependency graph for control\+\_\+law.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{control__law_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{control__law_8h_a24d78a9e11c48b002a0fb8907b2411e8}{Control\+Law\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializzazione della legge di controllo. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{control__law_8h_a0b7b43ee7184a757ae6ff1919310a960}{Control\+Law\+\_\+\+Step}} (const \doxymbox{\hyperlink{struct_control_input__t}{Control\+Input\+\_\+t}} \texorpdfstring{$\ast$}{*}in, \doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \texorpdfstring{$\ast$}{*}out)
+\begin{DoxyCompactList}\small\item\em Esegue il calcolo della legge di controllo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione dell\textquotesingle{}algoritmo della legge di controllo (PID, logica di sterzata). 
+
+
+
+\label{doc-func-members}
+\Hypertarget{control__law_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{control__law_8h_a24d78a9e11c48b002a0fb8907b2411e8}\index{control\_law.h@{control\_law.h}!ControlLaw\_Init@{ControlLaw\_Init}}
+\index{ControlLaw\_Init@{ControlLaw\_Init}!control\_law.h@{control\_law.h}}
+\doxysubsubsection{\texorpdfstring{ControlLaw\_Init()}{ControlLaw\_Init()}}
+{\footnotesize\ttfamily \label{control__law_8h_a24d78a9e11c48b002a0fb8907b2411e8} 
+void Control\+Law\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializzazione della legge di controllo. 
+
+
+\begin{DoxyItemize}
+\item Esegue il reset dei regolatori PID, degli stati interni e dei filtri.
+\end{DoxyItemize}
+
+Inizializzazione della legge di controllo. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8h_a24d78a9e11c48b002a0fb8907b2411e8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{control__law_8h_a0b7b43ee7184a757ae6ff1919310a960}\index{control\_law.h@{control\_law.h}!ControlLaw\_Step@{ControlLaw\_Step}}
+\index{ControlLaw\_Step@{ControlLaw\_Step}!control\_law.h@{control\_law.h}}
+\doxysubsubsection{\texorpdfstring{ControlLaw\_Step()}{ControlLaw\_Step()}}
+{\footnotesize\ttfamily \label{control__law_8h_a0b7b43ee7184a757ae6ff1919310a960} 
+void Control\+Law\+\_\+\+Step (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_control_input__t}{Control\+Input\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{in}{, }\item[{\doxymbox{\hyperlink{struct_control_output__t}{Control\+Output\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Esegue il calcolo della legge di controllo. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em in} & Puntatore alla struttura con gli input (riferimenti e feedback). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out} & Puntatore alla struttura dove verranno scritti i comandi calcolati.\\
+\hline
+\end{DoxyParams}
+Esegue il calcolo della legge di controllo.
+
+
+\begin{DoxyEnumerate}
+\item Calcola la velocità media globale e l\textquotesingle{}errore rispetto al riferimento.
+\item Bilancia la trazione tra asse anteriore e posteriore.
+\item Applica la correzione differenziale per soddisfare il comando di sterzata (steering\+\_\+cmd). 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em in} & Struttura con i feedback dagli encoder e i setpoint. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out} & Struttura popolata con i comandi di tensione per i 4 motori. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyEnumerate}Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{control__law_8h_a0b7b43ee7184a757ae6ff1919310a960_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{control__law_8h_a0b7b43ee7184a757ae6ff1919310a960_icgraph}
+\end{center}
+\end{figure}

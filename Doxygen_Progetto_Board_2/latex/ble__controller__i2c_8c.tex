@@ -1,0 +1,110 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+\+BLE\+\_\+\+Controller/\+ble\+\_\+controller\+\_\+i2c.c File Reference}
+\hypertarget{ble__controller__i2c_8c}{}\label{ble__controller__i2c_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/BLE\_Controller/ble\_controller\_i2c.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/BLE\_Controller/ble\_controller\_i2c.c}}
+
+
+Implementazione accesso I2C al controller BLE.  
+
+
+{\ttfamily \+\#include "{}ble\+\_\+controller/\+ble\+\_\+controller\+\_\+i2c.\+h"{}}\newline
+Include dependency graph for ble\+\_\+controller\+\_\+i2c.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{ble__controller__i2c_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{ble__controller__i2c_8c_a5c42e4f6ef4929f1cfc809ed9db8a263}{BLE\+\_\+\+I2\+C\+\_\+\+TIMEOUT\+\_\+\+MS}}~5
+\begin{DoxyCompactList}\small\item\em Timeout massimo della transazione I2C \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{ble__controller__i2c_8c_a2a57144d732b7ee1f0d51e981319d8ec}{BLE\+\_\+\+I2\+C\+\_\+\+ADDRESS}}~(0x55 $<$$<$ 1)
+\begin{DoxyCompactList}\small\item\em Indirizzo I2C del controller BLE (formato HAL, 7 bit shiftato). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{Ble\+I2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{ble__controller__i2c_8c_ac3cafc261590edc62dcd9f1017ca80e1}{Ble\+Controller\+\_\+\+I2\+C\+\_\+\+Read\+Frame}} (\doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{Ble\+Raw\+Frame\+\_\+t}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Legge in polling un frame completo dal controller BLE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+I2\+C\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{ble__controller__i2c_8c_af7b2c26e44dadaaa798a5c3d82914ba7}{hi2c1}}
+\begin{DoxyCompactList}\small\item\em Handle I2\+C1 generato da Cube\+MX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementazione accesso I2C al controller BLE. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{ble__controller__i2c_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ble__controller__i2c_8c_a2a57144d732b7ee1f0d51e981319d8ec}\index{ble\_controller\_i2c.c@{ble\_controller\_i2c.c}!BLE\_I2C\_ADDRESS@{BLE\_I2C\_ADDRESS}}
+\index{BLE\_I2C\_ADDRESS@{BLE\_I2C\_ADDRESS}!ble\_controller\_i2c.c@{ble\_controller\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{BLE\_I2C\_ADDRESS}{BLE\_I2C\_ADDRESS}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8c_a2a57144d732b7ee1f0d51e981319d8ec} 
+\+\#define BLE\+\_\+\+I2\+C\+\_\+\+ADDRESS~(0x55 $<$$<$ 1)}
+
+
+
+Indirizzo I2C del controller BLE (formato HAL, 7 bit shiftato). 
+
+\Hypertarget{ble__controller__i2c_8c_a5c42e4f6ef4929f1cfc809ed9db8a263}\index{ble\_controller\_i2c.c@{ble\_controller\_i2c.c}!BLE\_I2C\_TIMEOUT\_MS@{BLE\_I2C\_TIMEOUT\_MS}}
+\index{BLE\_I2C\_TIMEOUT\_MS@{BLE\_I2C\_TIMEOUT\_MS}!ble\_controller\_i2c.c@{ble\_controller\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{BLE\_I2C\_TIMEOUT\_MS}{BLE\_I2C\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8c_a5c42e4f6ef4929f1cfc809ed9db8a263} 
+\+\#define BLE\+\_\+\+I2\+C\+\_\+\+TIMEOUT\+\_\+\+MS~5}
+
+
+
+Timeout massimo della transazione I2C \+[ms]\+. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{ble__controller__i2c_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ble__controller__i2c_8c_ac3cafc261590edc62dcd9f1017ca80e1}\index{ble\_controller\_i2c.c@{ble\_controller\_i2c.c}!BleController\_I2C\_ReadFrame@{BleController\_I2C\_ReadFrame}}
+\index{BleController\_I2C\_ReadFrame@{BleController\_I2C\_ReadFrame}!ble\_controller\_i2c.c@{ble\_controller\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{BleController\_I2C\_ReadFrame()}{BleController\_I2C\_ReadFrame()}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8c_ac3cafc261590edc62dcd9f1017ca80e1} 
+\doxymbox{\hyperlink{ble__controller__i2c_8h_a47041ff33729317952391b11673f3a06}{Ble\+I2\+CStatus\+\_\+t}} Ble\+Controller\+\_\+\+I2\+C\+\_\+\+Read\+Frame (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{ble__controller__i2c_8h_a55927953c7e20f480ad74d2eb91e0641}{Ble\+Raw\+Frame\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Legge in polling un frame completo dal controller BLE. 
+
+Legge un frame completo dal controller BLE.
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & Puntatore al frame di output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}operazione I2C. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__i2c_8c_ac3cafc261590edc62dcd9f1017ca80e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{ble__controller__i2c_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{ble__controller__i2c_8c_af7b2c26e44dadaaa798a5c3d82914ba7}\index{ble\_controller\_i2c.c@{ble\_controller\_i2c.c}!hi2c1@{hi2c1}}
+\index{hi2c1@{hi2c1}!ble\_controller\_i2c.c@{ble\_controller\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{hi2c1}{hi2c1}}
+{\footnotesize\ttfamily \label{ble__controller__i2c_8c_af7b2c26e44dadaaa798a5c3d82914ba7} 
+I2\+C\+\_\+\+Handle\+Type\+Def hi2c1\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Handle I2\+C1 generato da Cube\+MX. 
+

@@ -18,9 +18,6 @@
  * @param[in]  sup Puntatore allo snapshot del supervisore da includere.
  * @return Lunghezza del frame in byte (0 in caso di errore).
  */
-uint16_t CommPack_BuildB1Tx(uint8_t *buf,
-                                uint16_t max_len,
-                                const EncoderSnapshot_t *enc,
-                                const SupervisorSnapshot_t *sup);
+uint16_t CommPack_BuildB1Tx(uint8_t *buf, uint16_t max_len, const EncoderSnapshot_t *enc, const SupervisorSnapshot_t *sup);
 
 #endif /* INC_COMM_COMM_PACK_H_ */

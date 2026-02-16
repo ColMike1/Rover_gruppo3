@@ -1,0 +1,11 @@
+<map id="BleController_I2C_ReadFrame" name="BleController_I2C_ReadFrame">
+<area shape="rect" id="Node000001" title="Legge in polling un frame completo dal controller BLE." alt="" coords="691,5,890,32"/>
+<area shape="rect" id="Node000002" href="$ble__controller__task_8c.html#aba0f01ab46b8c308281d05541001d02d" title="Esegue uno step del task BLE." alt="" coords="484,5,643,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="672,19,643,21,643,16,678,19"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#af657df7e3e2fe90f43a2de18975001a0" title="Function implementing the Task_ReadBLE thread." alt="" coords="296,5,436,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="466,19,437,21,437,16,472,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

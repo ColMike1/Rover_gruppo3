@@ -1,0 +1,150 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+sonar/\+sonar\+\_\+hw.h File Reference}
+\hypertarget{sonar__hw_8h}{}\label{sonar__hw_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/sonar/sonar\_hw.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/sonar/sonar\_hw.h}}
+
+
+API hardware sonar e strutture di supporto.  
+
+
+{\ttfamily \+\#include "{}main.\+h"{}}\newline
+{\ttfamily \+\#include "{}string.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdio.\+h"{}}\newline
+{\ttfamily \+\#include "{}usart.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+Include dependency graph for sonar\+\_\+hw.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structbuffer__sonars__t}{buffer\+\_\+sonars\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Buffer DMA dei canali sonar usati per il calcolo distanza. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structdistances__t}{distances\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Distanze sonar espresse in centimetri. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structsonars__flag__t}{sonars\+\_\+flag\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Flag di validita\textquotesingle{} acquisizione per ciascun sonar. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{sonar__hw_8h_ae663cf3990c25dee931f7a428950f817}{Sonar\+HW\+\_\+\+Get\+Distances}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}d1, uint16\+\_\+t \texorpdfstring{$\ast$}{*}d2, uint16\+\_\+t \texorpdfstring{$\ast$}{*}d3)
+\begin{DoxyCompactList}\small\item\em Restituisce le ultime distanze sonar disponibili. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sonar__hw_8h_a594c2ae8458bbdef1aaadb3a30e8317d}{scan}} (void)
+\begin{DoxyCompactList}\small\item\em Avvia una scansione sonar. \end{DoxyCompactList}\item 
+uint32\+\_\+t \doxymbox{\hyperlink{sonar__hw_8h_a11cf6bc24c69ac889efe5ee0e8e62df0}{read\+\_\+distance}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}buf)
+\begin{DoxyCompactList}\small\item\em Converte un buffer di cattura timer in distanza. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API hardware sonar e strutture di supporto. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{sonar__hw_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{sonar__hw_8h_a11cf6bc24c69ac889efe5ee0e8e62df0}\index{sonar\_hw.h@{sonar\_hw.h}!read\_distance@{read\_distance}}
+\index{read\_distance@{read\_distance}!sonar\_hw.h@{sonar\_hw.h}}
+\doxysubsubsection{\texorpdfstring{read\_distance()}{read\_distance()}}
+{\footnotesize\ttfamily \label{sonar__hw_8h_a11cf6bc24c69ac889efe5ee0e8e62df0} 
+uint32\+\_\+t read\+\_\+distance (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{}\end{DoxyParamCaption})}
+
+
+
+Converte un buffer di cattura timer in distanza. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Buffer campioni della cattura input. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distanza convertita in unita\textquotesingle{} interne.
+\end{DoxyReturn}
+Converte un buffer di cattura timer in distanza.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Buffer con due capture consecutive (start/\+end). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distanza in centimetri. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8h_a11cf6bc24c69ac889efe5ee0e8e62df0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__hw_8h_a594c2ae8458bbdef1aaadb3a30e8317d}\index{sonar\_hw.h@{sonar\_hw.h}!scan@{scan}}
+\index{scan@{scan}!sonar\_hw.h@{sonar\_hw.h}}
+\doxysubsubsection{\texorpdfstring{scan()}{scan()}}
+{\footnotesize\ttfamily \label{sonar__hw_8h_a594c2ae8458bbdef1aaadb3a30e8317d} 
+void scan (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Avvia una scansione sonar. 
+
+Avvia una scansione sonar. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{sonar__hw_8h_a594c2ae8458bbdef1aaadb3a30e8317d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8h_a594c2ae8458bbdef1aaadb3a30e8317d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__hw_8h_ae663cf3990c25dee931f7a428950f817}\index{sonar\_hw.h@{sonar\_hw.h}!SonarHW\_GetDistances@{SonarHW\_GetDistances}}
+\index{SonarHW\_GetDistances@{SonarHW\_GetDistances}!sonar\_hw.h@{sonar\_hw.h}}
+\doxysubsubsection{\texorpdfstring{SonarHW\_GetDistances()}{SonarHW\_GetDistances()}}
+{\footnotesize\ttfamily \label{sonar__hw_8h_ae663cf3990c25dee931f7a428950f817} 
+void Sonar\+HW\+\_\+\+Get\+Distances (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{d1}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{d2}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{d3}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce le ultime distanze sonar disponibili. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & Puntatore alla distanza sonar 1. \\
+\hline
+{\em d2} & Puntatore alla distanza sonar 2. \\
+\hline
+{\em d3} & Puntatore alla distanza sonar 3.\\
+\hline
+{\em d1} & Distanza canale 1. \\
+\hline
+{\em d2} & Distanza canale 2. \\
+\hline
+{\em d3} & Distanza canale 3. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8h_ae663cf3990c25dee931f7a428950f817_icgraph}
+\end{center}
+\end{figure}

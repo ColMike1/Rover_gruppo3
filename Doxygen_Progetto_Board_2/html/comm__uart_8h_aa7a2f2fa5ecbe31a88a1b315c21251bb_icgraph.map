@@ -1,0 +1,11 @@
+<map id="CommUart_GetByte" name="CommUart_GetByte">
+<area shape="rect" id="Node000001" title="Estrae un byte dal buffer RX." alt="" coords="594,5,734,32"/>
+<area shape="rect" id="Node000002" href="$comm__rx__task_8c.html#abf9927a637b1876b563ab33f41de5357" title="Esegue uno step del task RX." alt="" coords="445,5,546,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="575,19,546,21,546,16,581,19"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a79e59fed7352310066bb0919d8ad999d" title="Function implementing the Task_Rx thread." alt="" coords="296,5,397,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="427,19,398,21,398,16,432,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,19,249,21,248,16,283,19"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="SupervisorSnapshot_Write" name="SupervisorSnapshot_Write">
+<area shape="rect" id="Node000001" title="Scrive le decisioni del supervisore (solo task Supervisione)." alt="" coords="684,5,822,48"/>
+<area shape="rect" id="Node000002" href="$supervisor__task_8c.html#a1e5a23016dfdc674b16635ad0e62848a" title="Esegue un ciclo della logica di supervisione." alt="" coords="490,13,636,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,27,636,29,636,24,671,27"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a3f7778cdf1274eaffeab60f470433691" title="Task del Supervisore di sistema." alt="" coords="296,13,442,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="472,27,443,29,443,24,478,27"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,13,248,40"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,27,248,29,248,24,283,27"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,13,55,40"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,28,55,29,54,24,89,26"/>
+</map>

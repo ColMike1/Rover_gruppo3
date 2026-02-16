@@ -1,0 +1,5 @@
+<map id="BoardHealth_ReadTemperature" name="BoardHealth_ReadTemperature">
+<area shape="rect" id="Node000001" title="Legge ed elabora la temperatura interna del microcontrollore." alt="" coords="5,5,209,32"/>
+<area shape="rect" id="Node000002" href="$board__health__adc_8c.html#a9cf6404847167cea46c41b3a4aca731f" title="Calcola l&#39;aggiornamento della media mobile per un dato buffer." alt="" coords="257,5,417,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,16,244,19,238,19,209,21"/>
+</map>

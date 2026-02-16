@@ -1,0 +1,13 @@
+<map id="Sabertooth_Init" name="Sabertooth_Init">
+<area shape="rect" id="Node000001" title="Invia un breve comando di inizializzazione ai due Sabertooth." alt="" coords="833,5,942,32"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8c.html#a0991cd6500749efc61a1a5f6dde7eee5" title="Inizializza il modulo di attuazione." alt="" coords="684,5,785,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="815,19,785,21,785,16,820,19"/>
+<area shape="rect" id="Node000003" href="$supervisor__task_8c.html#a1e5a23016dfdc674b16635ad0e62848a" title="Esegue uno step del task supervisore." alt="" coords="490,5,636,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="666,19,636,21,636,16,671,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#a3f7778cdf1274eaffeab60f470433691" title="Function implementing the Task_Supervisor thread." alt="" coords="296,5,442,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="472,19,443,21,443,16,478,19"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

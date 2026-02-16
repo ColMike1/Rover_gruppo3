@@ -5,9 +5,7 @@
  * @details Questo file contiene l'inizializzazione del kernel FreeRTOS, la creazione
  * di mutex, thread e la definizione della logica di esecuzione dei task per il
  * controllo, la comunicazione e la diagnostica del sistema.
- * * @author Sterm / OEM
- * @date 2026
- * * @copyright Copyright (c) 2026 STMicroelectronics. All rights reserved.
+ * @copyright Copyright (c) 2026 STMicroelectronics. All rights reserved.
  */
 /* USER CODE END Header */
 
@@ -326,6 +324,7 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+    (void)argument;
   /* Infinite loop */
   for(;;)
   {
@@ -344,6 +343,7 @@ void StartDefaultTask(void *argument)
 void StartTask_BattTemp(void *argument)
 {
   /* USER CODE BEGIN StartTask_BattTemp */
+    (void)argument;
   /* Infinite loop */
 
   BoardHealth_TaskInit();
@@ -369,6 +369,7 @@ void StartTask_BattTemp(void *argument)
 void StartTask_TX(void *argument)
 {
   /* USER CODE BEGIN StartTask_TX */
+    (void)argument;
 	  TickType_t lastWakeTime = osKernelGetTickCount();
 
 	  for (;;)
@@ -391,6 +392,7 @@ void StartTask_TX(void *argument)
 void StartTask_RX(void *argument)
 {
   /* USER CODE BEGIN StartTask_RX */
+    (void)argument;
 	Rx_TaskInit();
 
   /* Infinite loop */
@@ -411,6 +413,7 @@ void StartTask_RX(void *argument)
 void StartTask_Supervisor(void *argument)
 {
   /* USER CODE BEGIN StartTask_Supervisor */
+    (void)argument;
   Supervisor_TaskInit();
 	TickType_t lastWakeTime = osKernelGetTickCount();
 
@@ -493,6 +496,7 @@ void StartTask_Control(void *argument)
 void StartTask_Debug(void *argument)
 {
   /* USER CODE BEGIN StartTask_Debug */
+    (void)argument;
   /* Infinite loop */
 	  TickType_t lastWakeTime = osKernelGetTickCount();
 	  for(;;)
@@ -514,6 +518,7 @@ void StartTask_Debug(void *argument)
 void StartTask_Led(void *argument)
 {
   /* USER CODE BEGIN StartTask_Led */
+    (void)argument;
   Led_TaskInit();
 	TickType_t lastWakeTime = osKernelGetTickCount();
   /* Infinite loop */

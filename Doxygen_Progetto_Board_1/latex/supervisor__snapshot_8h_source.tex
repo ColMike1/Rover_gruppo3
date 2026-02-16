@@ -1,0 +1,43 @@
+\doxysection{supervisor\+\_\+snapshot.\+h}
+\hypertarget{supervisor__snapshot_8h_source}{}\label{supervisor__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/supervisor\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/supervisor\_snapshot.h}}
+\doxymbox{\hyperlink{supervisor__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_SUPERVISOR\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_SUPERVISOR\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/board1\_faults.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/supervisor\_command.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a}{task\_last\_run\_ms}};\ \ \ }
+\DoxyCodeLine{00024\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4}{degraded\_mask}};\ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7}{critical\_mask}};\ \ \ \ \ \ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a49ee0a645fa96bad25e898d26db1c4a4}{speed\_ref\_rpm}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a5baa1f2637ce1040199c689028b67776}{steering\_cmd}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ SupervisorCommand\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a2e700d140562bfa9ced2ee735c2de7ae}{current\_action}};\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a8e103db159ae168d270a787325edfc1a}{isBoardActuating}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a1643eb668078644561ef97023929214f}{alive\_counter}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{SupervisorSnapshot\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#ifndef\ MATLAB\_MEX\_FILE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{supervisor__snapshot_8h_ac1ef54ef5bfc41a4a97c0f1145ccf81a}{SupervisorSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{supervisor__snapshot_8h_ac191454fce2ffb5f2c8a3d57229fffc0}{SupervisorSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{SupervisorSnapshot\_t}}\ *src);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{supervisor__snapshot_8h_a86490218ec807bc7b449e09eb268b4e4}{SupervisorSnapshot\_Read}}(\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{SupervisorSnapshot\_t}}\ *dst);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_SUPERVISOR\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

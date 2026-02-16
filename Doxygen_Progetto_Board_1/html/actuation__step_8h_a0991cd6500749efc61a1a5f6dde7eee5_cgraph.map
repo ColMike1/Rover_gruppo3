@@ -1,0 +1,9 @@
+<map id="Actuation_Init" name="Actuation_Init">
+<area shape="rect" id="Node000001" title="Inizializza il modulo di attuazione." alt="" coords="5,5,107,32"/>
+<area shape="rect" id="Node000002" href="$sabertooth__driver_8c.html#ad8e3995889ea345e17e66905d67d0703" title="Inizializza la periferica di comunicazione per i controller Sabertooth." alt="" coords="155,5,264,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,16,142,18,136,19,107,21"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8c.html#aff60a261fda72eadf539c1a86a000313" title="Prepara un singolo pacchetto da 4 byte per il protocollo Sabertooth." alt="" coords="312,5,467,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="264,16,299,19,294,19,265,21"/>
+<area shape="rect" id="Node000004" href="$sabertooth__driver_8c.html#afe3092cef7667a37789c3d6a189336e2" title="Calcola il checksum a 7&#45;bit richiesto dal protocollo Sabertooth." alt="" coords="515,5,641,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="468,16,502,19,497,19,468,21"/>
+</map>

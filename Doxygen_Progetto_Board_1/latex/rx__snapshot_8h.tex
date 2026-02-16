@@ -1,0 +1,128 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+snapshot/\+rx\+\_\+snapshot.h File Reference}
+\hypertarget{rx__snapshot_8h}{}\label{rx__snapshot_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/rx\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/snapshot/rx\_snapshot.h}}
+
+
+Buffer protetto per i dati ricevuti dall\textquotesingle{}altra board.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+status.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+wcet\+\_\+monitor.\+h"{}}\newline
+{\ttfamily \+\#include "{}main.\+h"{}}\newline
+Include dependency graph for rx\+\_\+snapshot.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rx__snapshot_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rx__snapshot_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Snapshot dei dati ricevuti via comunicazione. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{rx__snapshot_8h_aeaab1f75c7c734c6683d2a7e9342c5b8}{Rx\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot RX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{rx__snapshot_8h_a642405a74aba520b9a133c82c2800f71}{Rx\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Aggiorna lo snapshot con i nuovi dati ricevuti (solo task RX). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{rx__snapshot_8h_ae785580883a2c19871811977522d68fc}{Rx\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Recupera i dati ricevuti per l\textquotesingle{}elaborazione (es. da parte del Supervisore). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Buffer protetto per i dati ricevuti dall\textquotesingle{}altra board. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{rx__snapshot_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{rx__snapshot_8h_aeaab1f75c7c734c6683d2a7e9342c5b8}\index{rx\_snapshot.h@{rx\_snapshot.h}!RxSnapshot\_MutexInit@{RxSnapshot\_MutexInit}}
+\index{RxSnapshot\_MutexInit@{RxSnapshot\_MutexInit}!rx\_snapshot.h@{rx\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{RxSnapshot\_MutexInit()}{RxSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{rx__snapshot_8h_aeaab1f75c7c734c6683d2a7e9342c5b8} 
+void Rx\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot RX. 
+
+Inizializza il mutex per l\textquotesingle{}accesso thread-\/safe allo snapshot RX.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle del mutex creato dal kernel CMSIS-\/\+RTOS. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rx__snapshot_8h_aeaab1f75c7c734c6683d2a7e9342c5b8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{rx__snapshot_8h_ae785580883a2c19871811977522d68fc}\index{rx\_snapshot.h@{rx\_snapshot.h}!RxSnapshot\_Read@{RxSnapshot\_Read}}
+\index{RxSnapshot\_Read@{RxSnapshot\_Read}!rx\_snapshot.h@{rx\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{RxSnapshot\_Read()}{RxSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{rx__snapshot_8h_ae785580883a2c19871811977522d68fc} 
+void Rx\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Recupera i dati ricevuti per l\textquotesingle{}elaborazione (es. da parte del Supervisore). 
+
+Recupera i dati ricevuti per l\textquotesingle{}elaborazione (es. da parte del Supervisore).
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Puntatore alla struttura di destinazione (tipicamente nel task Log o Supervisore). \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rx__snapshot_8h_ae785580883a2c19871811977522d68fc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{rx__snapshot_8h_a642405a74aba520b9a133c82c2800f71}\index{rx\_snapshot.h@{rx\_snapshot.h}!RxSnapshot\_Write@{RxSnapshot\_Write}}
+\index{RxSnapshot\_Write@{RxSnapshot\_Write}!rx\_snapshot.h@{rx\_snapshot.h}}
+\doxysubsubsection{\texorpdfstring{RxSnapshot\_Write()}{RxSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{rx__snapshot_8h_a642405a74aba520b9a133c82c2800f71} 
+void Rx\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_rx_snapshot__t}{Rx\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Aggiorna lo snapshot con i nuovi dati ricevuti (solo task RX). 
+
+Aggiorna lo snapshot con i nuovi dati ricevuti (solo task RX).
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Puntatore alla struttura dati aggiornata dal task di ricezione. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rx__snapshot_8h_a642405a74aba520b9a133c82c2800f71_icgraph}
+\end{center}
+\end{figure}

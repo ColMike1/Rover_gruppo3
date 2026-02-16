@@ -1,8 +1,6 @@
-/*
- * imu_snapshot.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file imu_snapshot.h
+ * @brief Definizione dello snapshot IMU e API thread-safe.
  */
 
 #ifndef INC_SNAPSHOT_IMU_SNAPSHOT_H_
@@ -12,8 +10,7 @@
 #include "IMU/imu_i2c.h"
 #include "cmsis_os.h"
 
-/* ================= SNAPSHOT ================= */
-
+/** @brief Snapshot delle misure IMU e dati temporali. */
 typedef struct
 {
 
@@ -21,17 +18,17 @@ typedef struct
     uint32_t data_last_valid_ms;  /* ultimo istante in cui i dati sono validi */
 
 
-    /* Accelerometer (g) */
+    /* Accellerometro (g) */
     float ax_g;
     float ay_g;
     float az_g;
 
-    /* Gyroscope (deg/s) */
+    /* Giroscopio (deg/s) */
     float gx_dps;
     float gy_dps;
     float gz_dps;
 
-    /* Temperature (°C) */
+    /* Temperatura (°C) */
     float temperature_degC;
 
     float yaw;
@@ -39,9 +36,22 @@ typedef struct
 } IMUSnapshot_t;
 
 
-/* ================= API ================= */
+/**
+ * @brief Registra il mutex usato per proteggere lo snapshot.
+ * @param mutex_handle Handle del mutex creato all'esterno.
+ */
 void IMUSnapshot_MutexInit(osMutexId_t mutex_handle);
+
+/**
+ * @brief Scrive lo snapshot IMU in sezione critica.
+ * @param snap Puntatore al dato sorgente da copiare.
+ */
 void IMUSnapshot_Write(const IMUSnapshot_t *snap);
+
+/**
+ * @brief Legge lo snapshot IMU in sezione critica.
+ * @param snap Puntatore al buffer di destinazione.
+ */
 void IMUSnapshot_Read(IMUSnapshot_t *snap);
 
 #endif /* INC_SNAPSHOT_IMU_SNAPSHOT_H_ */

@@ -1,0 +1,68 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+pack.c File Reference}
+\hypertarget{comm__pack_8c}{}\label{comm__pack_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_pack.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/comm/comm\_pack.c}}
+
+
+Funzioni per il packaging dei messaggi di comunicazione (Serializzazione).  
+
+
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+pack.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+crc.\+h"{}}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+Include dependency graph for comm\+\_\+pack.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{comm__pack_8c_ae30a38144a410e9d1d2b80b8377f82cf}{Comm\+Pack\+\_\+\+Build\+B1\+Tx}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t max\+\_\+len, const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}enc, const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}sup)
+\begin{DoxyCompactList}\small\item\em Costruisce il pacchetto di telemetria B1 (Trasmissione verso PC/\+\+Base). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Funzioni per il packaging dei messaggi di comunicazione (Serializzazione). 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__pack_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__pack_8c_ae30a38144a410e9d1d2b80b8377f82cf}\index{comm\_pack.c@{comm\_pack.c}!CommPack\_BuildB1Tx@{CommPack\_BuildB1Tx}}
+\index{CommPack\_BuildB1Tx@{CommPack\_BuildB1Tx}!comm\_pack.c@{comm\_pack.c}}
+\doxysubsubsection{\texorpdfstring{CommPack\_BuildB1Tx()}{CommPack\_BuildB1Tx()}}
+{\footnotesize\ttfamily \label{comm__pack_8c_ae30a38144a410e9d1d2b80b8377f82cf} 
+uint16\+\_\+t Comm\+Pack\+\_\+\+Build\+B1\+Tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{max\+\_\+len}{, }\item[{const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{enc}{, }\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{sup}{}\end{DoxyParamCaption})}
+
+
+
+Costruisce il pacchetto di telemetria B1 (Trasmissione verso PC/\+\+Base). 
+
+Costruisce il frame di stato per la comunicazione da Board1 a Board2.
+
+Include dati degli encoder e stato del supervisore, aggiungendo header e CRC16-\/\+CCITT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer di destinazione per il pacchetto serializzato. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+\_\+len} & Lunghezza massima del buffer fornito. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em enc} & Snapshot degli encoder da includere nel payload. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot del supervisore da includere nel payload. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t Numero di byte scritti nel buffer (0 in caso di errore). 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8c_ae30a38144a410e9d1d2b80b8377f82cf_icgraph}
+\end{center}
+\end{figure}

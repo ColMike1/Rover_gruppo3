@@ -1,0 +1,95 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+pack.h File Reference}
+\hypertarget{comm__pack_8h}{}\label{comm__pack_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_pack.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_pack.h}}
+
+
+API di serializzazione frame in uscita da board 2.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+ble\+\_\+controller\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+imu\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for comm\+\_\+pack.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{comm__pack_8h_a90e240ea0c70b52d9d424ee90ed384f3}{Comm\+Pack\+\_\+\+Build\+B2\+Tx}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t max\+\_\+len, const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}ble, const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}sup, const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}imu)
+\begin{DoxyCompactList}\small\item\em Costruisce un frame Board2 -\/\texorpdfstring{$>$}{>} Board1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API di serializzazione frame in uscita da board 2. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__pack_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__pack_8h_a90e240ea0c70b52d9d424ee90ed384f3}\index{comm\_pack.h@{comm\_pack.h}!CommPack\_BuildB2Tx@{CommPack\_BuildB2Tx}}
+\index{CommPack\_BuildB2Tx@{CommPack\_BuildB2Tx}!comm\_pack.h@{comm\_pack.h}}
+\doxysubsubsection{\texorpdfstring{CommPack\_BuildB2Tx()}{CommPack\_BuildB2Tx()}}
+{\footnotesize\ttfamily \label{comm__pack_8h_a90e240ea0c70b52d9d424ee90ed384f3} 
+uint16\+\_\+t Comm\+Pack\+\_\+\+Build\+B2\+Tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{max\+\_\+len}{, }\item[{const \doxymbox{\hyperlink{struct_ble_controller_snapshot__t}{Ble\+Controller\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ble}{, }\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{sup}{, }\item[{const \doxymbox{\hyperlink{struct_i_m_u_snapshot__t}{IMUSnapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{imu}{}\end{DoxyParamCaption})}
+
+
+
+Costruisce un frame Board2 -\/\texorpdfstring{$>$}{>} Board1. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer di uscita. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+\_\+len} & Dimensione del buffer di uscita. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ble} & Snapshot BLE. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot supervisore. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em imu} & Snapshot IMU. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lunghezza frame in byte (0 in caso di errore).
+\end{DoxyReturn}
+Costruisce un frame Board2 -\/\texorpdfstring{$>$}{>} Board1.
+
+Il frame e\textquotesingle{} composto da header, payload e CRC16-\/\+CCITT.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer di output. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+\_\+len} & Dimensione massima del buffer. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ble} & Snapshot BLE. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot supervisore. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em imu} & Snapshot IMU. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lunghezza del frame costruito, oppure 0 in caso di errore. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8h_a90e240ea0c70b52d9d424ee90ed384f3_icgraph}
+\end{center}
+\end{figure}

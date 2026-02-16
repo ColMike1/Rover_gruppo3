@@ -1,0 +1,18 @@
+<map id="Prepare_Saber_Packet" name="Prepare_Saber_Packet">
+<area shape="rect" id="Node000001" title="Prepara un singolo pacchetto da 4 byte per il protocollo Sabertooth." alt="" coords="847,31,1002,57"/>
+<area shape="rect" id="Node000002" href="$sabertooth__driver_8c.html#a9611fcff8d2ff2c3ca24725024f02647" title="Invia i comandi di velocità ai 4 motori." alt="" coords="629,5,799,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="829,33,799,32,800,26,834,33"/>
+<area shape="rect" id="Node000007" href="$sabertooth__driver_8c.html#ad8e3995889ea345e17e66905d67d0703" title="Inizializza la periferica di comunicazione per i controller Sabertooth." alt="" coords="659,56,768,83"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="834,55,769,65,769,60,829,55"/>
+<area shape="rect" id="Node000003" href="$actuation__step_8c.html#adf98702f2e24c4b18f54c774350214db" title="Esegue un singolo passo di attuazione basato sull&#39;output del controllo." alt="" coords="470,5,581,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="611,19,581,21,581,16,616,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#a8decb0ed70f1b4d12a7abbdbcdf8d18f" title="Task di Controllo Motori e Attuazione." alt="" coords="296,31,422,57"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="457,29,423,37,422,32,452,30"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,31,248,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,44,249,47,248,41,283,44"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="85,45,55,47,54,41,89,43"/>
+<area shape="rect" id="Node000008" href="$actuation__step_8c.html#a0991cd6500749efc61a1a5f6dde7eee5" title="Inizializza il modulo di attuazione." alt="" coords="475,56,576,83"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="641,69,577,72,577,67,646,69"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="457,59,423,56,423,51,462,59"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="Sonar_TaskStep" name="Sonar_TaskStep">
+<area shape="rect" id="Node000001" title="Esegue uno step del task sonar." alt="" coords="500,5,618,32"/>
+<area shape="rect" id="Node000002" href="$app__freertos_8c.html#a36b9e6d4432bac97c11daece6a8d8fac" title="Function implementing the Task_ReadSonars thread." alt="" coords="296,5,452,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="482,19,453,21,453,16,488,19"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="278,19,248,21,248,16,283,19"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="StartTask_ReadBLE" name="StartTask_ReadBLE">
+<area shape="rect" id="Node000001" title="Function implementing the Task_ReadBLE thread." alt="" coords="5,64,146,91"/>
+<area shape="rect" id="Node000002" href="$ble__controller__task_8c.html#aba0f01ab46b8c308281d05541001d02d" title="Esegue uno step del task BLE." alt="" coords="194,64,352,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,75,181,77,176,78,146,80"/>
+<area shape="rect" id="Node000003" href="$ble__controller__i2c_8c.html#ac3cafc261590edc62dcd9f1017ca80e1" title="Legge un frame completo dal controller BLE." alt="" coords="400,5,599,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="326,61,399,41,432,36,427,37,401,47,327,66"/>
+<area shape="rect" id="Node000004" href="$ble__controller__snapshot_8c.html#a356961c1ea7bcc7ed2d47d04d36ed618" title="Scrive lo snapshot BLE in sezione critica." alt="" coords="424,56,575,99"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="352,75,411,77,406,78,353,80"/>
+<area shape="rect" id="Node000005" href="$ble__controller__task_8c.html#a9f5f90351d1d9bc76b73309f8b55654b" title="Normalizza un asse joystick da raw a intervallo [&#45;1, 1]." alt="" coords="446,123,553,149"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="326,89,401,108,434,119,429,119,399,113,326,94"/>
+</map>

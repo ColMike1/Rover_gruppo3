@@ -1,0 +1,115 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+encoder/\+encoder\+\_\+hw.h File Reference}
+\hypertarget{encoder__hw_8h}{}\label{encoder__hw_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/encoder/encoder\_hw.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/encoder/encoder\_hw.h}}
+
+
+Driver di basso livello per l\textquotesingle{}interfacciamento con gli encoder hardware.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+Include dependency graph for encoder\+\_\+hw.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{encoder__hw_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__hw_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t}} \{ \doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987a9755fb5a4aab5d0847fdcfddad282cc5}{ENCODER\+\_\+\+OK}} = 0
+, \doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987a5a2e59c1f541aabd91d226e1ce78ae4b}{ENCODER\+\_\+\+OVERFLOW}}
+ \}
+\begin{DoxyCompactList}\small\item\em Stati di ritorno per le operazioni sugli encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t}} \doxymbox{\hyperlink{encoder__hw_8h_ae734ba8b992135e178c9347f230763cb}{Encoder\+\_\+\+Read\+Delta}} (uint8\+\_\+t encoder\+\_\+id, int \texorpdfstring{$\ast$}{*}delta\+\_\+ticks)
+\begin{DoxyCompactList}\small\item\em Legge la variazione di tick (delta) con gestione dell\textquotesingle{}overflow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver di basso livello per l\textquotesingle{}interfacciamento con gli encoder hardware. 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{encoder__hw_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}\index{encoder\_hw.h@{encoder\_hw.h}!EncoderStatus\_t@{EncoderStatus\_t}}
+\index{EncoderStatus\_t@{EncoderStatus\_t}!encoder\_hw.h@{encoder\_hw.h}}
+\doxysubsubsection{\texorpdfstring{EncoderStatus\_t}{EncoderStatus\_t}}
+{\footnotesize\ttfamily \label{encoder__hw_8h_aec382a01a008a58028aef12cc54de987} 
+enum \doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t}}}
+
+
+
+Stati di ritorno per le operazioni sugli encoder. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ENCODER\_OK@{ENCODER\_OK}!encoder\_hw.h@{encoder\_hw.h}}
+\index{encoder\_hw.h@{encoder\_hw.h}!ENCODER\_OK@{ENCODER\_OK}}
+}\Hypertarget{encoder__hw_8h_aec382a01a008a58028aef12cc54de987a9755fb5a4aab5d0847fdcfddad282cc5}\label{encoder__hw_8h_aec382a01a008a58028aef12cc54de987a9755fb5a4aab5d0847fdcfddad282cc5} 
+ENCODER\+\_\+\+OK&Lettura eseguita correttamente \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ENCODER\_OVERFLOW@{ENCODER\_OVERFLOW}!encoder\_hw.h@{encoder\_hw.h}}
+\index{encoder\_hw.h@{encoder\_hw.h}!ENCODER\_OVERFLOW@{ENCODER\_OVERFLOW}}
+}\Hypertarget{encoder__hw_8h_aec382a01a008a58028aef12cc54de987a5a2e59c1f541aabd91d226e1ce78ae4b}\label{encoder__hw_8h_aec382a01a008a58028aef12cc54de987a5a2e59c1f541aabd91d226e1ce78ae4b} 
+ENCODER\+\_\+\+OVERFLOW&Rilevato overflow del contatore hardware \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{encoder__hw_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__hw_8h_ae734ba8b992135e178c9347f230763cb}\index{encoder\_hw.h@{encoder\_hw.h}!Encoder\_ReadDelta@{Encoder\_ReadDelta}}
+\index{Encoder\_ReadDelta@{Encoder\_ReadDelta}!encoder\_hw.h@{encoder\_hw.h}}
+\doxysubsubsection{\texorpdfstring{Encoder\_ReadDelta()}{Encoder\_ReadDelta()}}
+{\footnotesize\ttfamily \label{encoder__hw_8h_ae734ba8b992135e178c9347f230763cb} 
+\doxymbox{\hyperlink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t}} Encoder\+\_\+\+Read\+Delta (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{encoder\+\_\+id}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{delta\+\_\+ticks}{}\end{DoxyParamCaption})}
+
+
+
+Legge la variazione di tick (delta) con gestione dell\textquotesingle{}overflow. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em encoder\+\_\+id} & Identificativo dell\textquotesingle{}encoder hardware. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em delta\+\_\+ticks} & Puntatore alla variabile che conterrà i tick accumulati (con segno). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t} Esito della lettura.
+\end{DoxyReturn}
+Legge la variazione di tick (delta) con gestione dell\textquotesingle{}overflow.
+
+Calcola la differenza gestendo l\textquotesingle{}overflow del timer circolare e verifica che il movimento non superi i limiti fisici definiti da MAX\+\_\+\+DELTA\+\_\+\+TICKS. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em encoder\+\_\+id} & Indice dell\textquotesingle{}encoder (0 a 3). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em delta\+\_\+ticks} & Puntatore alla variabile dove scrivere il delta calcolato. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{encoder__hw_8h_aec382a01a008a58028aef12cc54de987}{Encoder\+Status\+\_\+t} OK se la lettura è valida, OVERFLOW se supera i limiti fisici. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__hw_8h_ae734ba8b992135e178c9347f230763cb_icgraph}
+\end{center}
+\end{figure}

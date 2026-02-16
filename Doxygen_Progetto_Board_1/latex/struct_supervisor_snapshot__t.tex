@@ -1,0 +1,101 @@
+\doxysection{Supervisor\+Snapshot\+\_\+t Struct Reference}
+\hypertarget{struct_supervisor_snapshot__t}{}\label{struct_supervisor_snapshot__t}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+
+
+Snapshot delle decisioni, dei fault e dei comandi autorizzati.  
+
+
+
+
+{\ttfamily \+\#include $<$supervisor\+\_\+snapshot.\+h$>$}
+
+
+
+Collaboration diagram for Supervisor\+Snapshot\+\_\+t:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{struct_supervisor_snapshot__t__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a}{task\+\_\+last\+\_\+run\+\_\+ms}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4}{degraded\+\_\+mask}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7}{critical\+\_\+mask}}
+\item 
+float \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a49ee0a645fa96bad25e898d26db1c4a4}{speed\+\_\+ref\+\_\+rpm}}
+\item 
+float \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a5baa1f2637ce1040199c689028b67776}{steering\+\_\+cmd}}
+\item 
+Supervisor\+Command\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a2e700d140562bfa9ced2ee735c2de7ae}{current\+\_\+action}}
+\item 
+bool \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a8e103db159ae168d270a787325edfc1a}{is\+Board\+Actuating}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a1643eb668078644561ef97023929214f}{alive\+\_\+counter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Snapshot delle decisioni, dei fault e dei comandi autorizzati. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_supervisor_snapshot__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_supervisor_snapshot__t_a1643eb668078644561ef97023929214f}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!alive\_counter@{alive\_counter}}
+\index{alive\_counter@{alive\_counter}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{alive\_counter}{alive\_counter}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a1643eb668078644561ef97023929214f} 
+uint8\+\_\+t Supervisor\+Snapshot\+\_\+t::\+alive\+\_\+counter}
+
+Counter incrementale per heartbeat \Hypertarget{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!critical\_mask@{critical\_mask}}
+\index{critical\_mask@{critical\_mask}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{critical\_mask}{critical\_mask}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+critical\+\_\+mask}
+
+Maschera dei fault che causano stato di emergenza \Hypertarget{struct_supervisor_snapshot__t_a2e700d140562bfa9ced2ee735c2de7ae}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!current\_action@{current\_action}}
+\index{current\_action@{current\_action}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{current\_action}{current\_action}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a2e700d140562bfa9ced2ee735c2de7ae} 
+Supervisor\+Command\+\_\+t Supervisor\+Snapshot\+\_\+t::\+current\+\_\+action}
+
+Azione corrente decisa dal supervisore \Hypertarget{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!degraded\_mask@{degraded\_mask}}
+\index{degraded\_mask@{degraded\_mask}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{degraded\_mask}{degraded\_mask}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+degraded\+\_\+mask}
+
+Maschera dei fault che causano stato degradato \Hypertarget{struct_supervisor_snapshot__t_a8e103db159ae168d270a787325edfc1a}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!isBoardActuating@{isBoardActuating}}
+\index{isBoardActuating@{isBoardActuating}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{isBoardActuating}{isBoardActuating}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a8e103db159ae168d270a787325edfc1a} 
+bool Supervisor\+Snapshot\+\_\+t::\+is\+Board\+Actuating}
+
+Stato di attivazione delle uscite di potenza \Hypertarget{struct_supervisor_snapshot__t_a49ee0a645fa96bad25e898d26db1c4a4}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!speed\_ref\_rpm@{speed\_ref\_rpm}}
+\index{speed\_ref\_rpm@{speed\_ref\_rpm}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{speed\_ref\_rpm}{speed\_ref\_rpm}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a49ee0a645fa96bad25e898d26db1c4a4} 
+float Supervisor\+Snapshot\+\_\+t::\+speed\+\_\+ref\+\_\+rpm}
+
+Velocità longitudinale autorizzata \+[RPM]\+ \Hypertarget{struct_supervisor_snapshot__t_a5baa1f2637ce1040199c689028b67776}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!steering\_cmd@{steering\_cmd}}
+\index{steering\_cmd@{steering\_cmd}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{steering\_cmd}{steering\_cmd}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a5baa1f2637ce1040199c689028b67776} 
+float Supervisor\+Snapshot\+\_\+t::\+steering\+\_\+cmd}
+
+Comando sterzata autorizzato \Hypertarget{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a}\index{SupervisorSnapshot\_t@{SupervisorSnapshot\_t}!task\_last\_run\_ms@{task\_last\_run\_ms}}
+\index{task\_last\_run\_ms@{task\_last\_run\_ms}!SupervisorSnapshot\_t@{SupervisorSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{task\_last\_run\_ms}{task\_last\_run\_ms}}
+{\footnotesize\ttfamily \label{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a} 
+uint32\+\_\+t Supervisor\+Snapshot\+\_\+t::\+task\+\_\+last\+\_\+run\+\_\+ms}
+
+Timestamp dell\textquotesingle{}ultima decisione presa \+[ms]\+ 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+snapshot/\+\doxymbox{\hyperlink{supervisor__snapshot_8h}{supervisor\+\_\+snapshot.\+h}}\end{DoxyCompactItemize}

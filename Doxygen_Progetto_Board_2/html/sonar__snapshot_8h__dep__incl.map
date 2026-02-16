@@ -1,0 +1,20 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/sonar_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/sonar_snapshot.h">
+<area shape="rect" id="Node000001" title="Definizione dello snapshot sonar e API thread&#45;safe." alt="" coords="529,5,736,80"/>
+<area shape="rect" id="Node000002" href="$log__format_8h.html" title="API di formattazione degli snapshot diagnostici." alt="" coords="139,128,342,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="512,82,343,135,342,130,516,79"/>
+<area shape="rect" id="Node000004" href="$log__task_8c.html" title="Task di logging periodico su UART debug." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="512,69,457,94,430,110,406,130,383,157,366,189,344,252,340,248,361,187,379,154,402,126,427,106,455,89,517,67"/>
+<area shape="rect" id="Node000005" href="$snapshot_8h.html" title="Header aggregatore degli snapshot Board 2." alt="" coords="416,128,619,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="589,90,554,130,551,125,585,93"/>
+<area shape="rect" id="Node000007" href="$sonar__snapshot_8c.html" title="Storage thread&#45;safe dello snapshot sonar." alt="" coords="644,128,853,203"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="679,89,716,128,711,127,677,94"/>
+<area shape="rect" id="Node000008" href="$sonar__task_8c.html" title="Task sonar e callback ISR di acquisizione capture." alt="" coords="877,128,1081,203"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="751,82,880,129,874,129,750,88"/>
+<area shape="rect" id="Node000009" href="$supervisor__task_8c.html" title="Task supervisore board 2: controllo stato rover e gestione comando/attuazione." alt="" coords="1104,128,1320,203"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="751,59,914,88,1093,125,1107,131,1101,131,1092,131,913,93,751,65"/>
+<area shape="rect" id="Node000003" href="$log__format_8c.html" title="Formattazione testuale degli snapshot di diagnostica." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="191,212,149,252,146,248,186,215"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="280,213,309,251,304,250,278,218"/>
+<area shape="rect" id="Node000006" href="$app__freertos_8c.html" title=" " alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="538,215,552,251,547,249,535,220"/>
+</map>

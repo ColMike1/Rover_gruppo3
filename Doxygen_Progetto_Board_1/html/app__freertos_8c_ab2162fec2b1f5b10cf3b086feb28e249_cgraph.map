@@ -1,0 +1,19 @@
+<map id="StartTask_RX" name="StartTask_RX">
+<area shape="rect" id="Node000001" title="Task per la ricezione e il parsing dei dati in ingresso." alt="" coords="5,56,109,83"/>
+<area shape="rect" id="Node000002" href="$comm__rx__task_8c.html#afb0f081d74dae335aa4554d7c2a0b9fb" title="Inizializza le risorse necessarie per il task di ricezione (code, semafori, etc.)." alt="" coords="161,19,252,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,54,148,45,144,49,110,59"/>
+<area shape="rect" id="Node000005" href="$comm__rx__task_8c.html#abf9927a637b1876b563ab33f41de5357" title="Esegue un passo del task di ricezione, elaborando i dati in ingresso dalla UART." alt="" coords="157,81,257,108"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="109,75,144,83,139,85,109,81"/>
+<area shape="rect" id="Node000003" href="$comm__uart_8c.html#ad8213afef04db7813169c63f63f05f53" title="Inizializzazione completa della periferica UART e degli interrupt/DMA." alt="" coords="337,5,447,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="252,26,324,23,319,25,253,31"/>
+<area shape="rect" id="Node000004" href="$comm__uart_8c.html#a1fa5f2e3248e19bea05ca2c1006972a9" title="Registra il task che deve ricevere le notifiche di ricezione byte." alt="" coords="527,5,714,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="447,16,514,18,509,19,448,21"/>
+<area shape="rect" id="Node000006" href="$comm__uart_8c.html#aa7a2f2fa5ecbe31a88a1b315c21251bb" title="Tenta di prelevare un singolo byte dal buffer di ricezione." alt="" coords="322,56,462,83"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="257,85,309,80,304,82,258,90"/>
+<area shape="rect" id="Node000008" href="$comm__unpack_8c.html#ac7d99e4b67965f12145921b28a60334b" title="Decodifica un frame ricevuto da Board2 destinato a Board1." alt="" coords="305,107,479,133"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="257,99,292,106,287,106,258,104"/>
+<area shape="rect" id="Node000009" href="$rx__snapshot_8c.html#a642405a74aba520b9a133c82c2800f71" title="Aggiorna lo snapshot con i nuovi dati ricevuti (solo task RX)." alt="" coords="327,157,457,184"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="232,106,306,143,326,152,321,152,304,148,231,111"/>
+<area shape="rect" id="Node000007" href="$comm__uart_8c.html#a349d4db57138c454acefda569ed3909c" title="Incrementa l&#39;indice del buffer circolare gestendo il wrapping." alt="" coords="583,56,658,83"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="462,67,570,69,565,70,463,72"/>
+</map>

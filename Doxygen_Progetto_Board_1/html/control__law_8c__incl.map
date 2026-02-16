@@ -1,0 +1,15 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/control/control_law.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/control/control_law.c">
+<area shape="rect" id="Node000001" title="Implementazione degli algoritmi di controllo (PI) per la dinamica del rover." alt="" coords="72,5,275,80"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8h.html" title="Gestione del singolo step di attuazione del sistema." alt="" coords="5,128,137,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,83,104,119,99,115,139,78"/>
+<area shape="rect" id="Node000003" href="$control__law_8h.html" title="Implementazione dell&#39;algoritmo della legge di controllo (PID, logica di sterzata)." alt="" coords="52,219,192,245"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="170,78,163,125,151,171,137,206,132,203,146,170,158,123,168,83"/>
+<area shape="rect" id="Node000006" href="$encoder__step_8h.html" title="Gestione dell&#39;elaborazione periodica dei dati encoder." alt="" coords="211,136,371,163"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="215,78,268,125,263,126,215,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,169,108,205,103,206,84,174"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="90,368,154,395"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="114,244,102,269,92,294,91,309,94,325,106,355,101,354,88,326,86,310,87,293,97,266,111,248"/>
+<area shape="rect" id="Node000005" href="$control__types_8h.html" title="Definizioni delle strutture dati per l&#39;input e l&#39;output del controllo." alt="" coords="102,293,256,320"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="132,243,162,281,157,281,131,248"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="171,319,143,358,139,354,167,322"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="abs_f32" name="abs_f32">
+<area shape="rect" id="Node000001" title="Calcola il valore assoluto di un float." alt="" coords="841,5,908,32"/>
+<area shape="rect" id="Node000002" href="$encoder__step_8c.html#ae00e575d81dcde5b0d92b0d4cdee7255" title="Diagnostica la presenza di feedback dall&#39;encoder." alt="" coords="622,5,793,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="823,19,793,21,793,16,828,19"/>
+<area shape="rect" id="Node000003" href="$encoder__step_8c.html#a620bc6b8cb569dc4ffbb6980aad07821" title="Esegue il campionamento degli encoder e converte i tick in unità fisiche." alt="" coords="470,5,574,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="603,19,574,21,574,16,609,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#a8decb0ed70f1b4d12a7abbdbcdf8d18f" title="Task di Controllo Motori e Attuazione." alt="" coords="296,5,422,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="452,19,423,21,423,16,457,19"/>
+<area shape="rect" id="Node000005" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,19,249,21,248,16,283,19"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

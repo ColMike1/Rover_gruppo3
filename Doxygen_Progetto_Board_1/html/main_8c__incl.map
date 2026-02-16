@@ -1,0 +1,32 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/main.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/main.c">
+<area shape="rect" id="Node000001" title=": Main program body" alt="" coords="230,5,433,80"/>
+<area shape="rect" id="Node000002" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="260,203,320,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,59,166,72,103,88,50,107,31,118,19,130,11,143,8,154,10,164,16,173,39,187,74,198,162,210,247,214,242,217,161,215,73,203,37,192,12,176,5,166,3,154,6,141,15,126,28,114,48,102,101,83,165,67,231,56"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="28,128,117,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,83,122,125,119,120,234,78"/>
+<area shape="rect" id="Node000005" href="$adc_8h.html" title="This file contains all the function prototypes for the adc.c file." alt="" coords="141,128,194,155"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="267,82,203,122,200,118,271,79"/>
+<area shape="rect" id="Node000006" href="$dma_8h.html" title="This file contains all the function prototypes for the dma.c file." alt="" coords="219,128,276,155"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="302,79,270,118,267,114,298,82"/>
+<area shape="rect" id="Node000007" href="$usart_8h.html" title="This file contains all the function prototypes for the usart.c file." alt="" coords="301,128,362,155"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="333,78,334,113,329,111,330,83"/>
+<area shape="rect" id="Node000008" href="$tim_8h.html" title="This file contains all the function prototypes for the tim.c file." alt="" coords="386,128,436,155"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="362,78,394,116,389,116,361,83"/>
+<area shape="rect" id="Node000009" href="$gpio_8h.html" title="This file contains all the function prototypes for the gpio.c file." alt="" coords="460,128,517,155"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="392,78,458,119,452,120,391,83"/>
+<area shape="rect" id="Node000010" href="$comm__uart_8h.html" title="Driver di basso livello per l&#39;interfaccia UART di comunicazione." alt="" coords="541,128,679,155"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="434,77,562,122,557,123,433,82"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="703,128,792,155"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="434,65,690,125,685,127,433,70"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="230,277,350,304"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="292,228,292,263,288,260,288,232"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="189,153,258,194,253,195,188,158"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="256,153,278,190,272,189,254,158"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="326,154,306,191,303,187,322,157"/>
+<area shape="poly" id="edge11_Node000008_Node000002" title=" " alt="" coords="393,154,325,197,323,192,388,156"/>
+<area shape="poly" id="edge13_Node000009_Node000002" title=" " alt="" coords="463,152,336,201,334,196,458,154"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="531,203,595,229"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="604,154,581,192,578,188,600,157"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="619,203,694,229"/>
+<area shape="poly" id="edge16_Node000010_Node000012" title=" " alt="" coords="619,153,643,191,638,189,617,158"/>
+</map>

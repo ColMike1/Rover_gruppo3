@@ -1,0 +1,49 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/supervisor/supervisor_task.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/supervisor/supervisor_task.c">
+<area shape="rect" id="Node000001" title="Implementazione del Task Supervisore di Board 1." alt="" coords="953,5,1170,80"/>
+<area shape="rect" id="Node000002" href="$supervisor__task_8h.html" title="Gestione del task supervisore di sistema." alt="" coords="246,128,392,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="950,55,707,85,559,106,407,130,406,125,558,100,707,80,955,54"/>
+<area shape="rect" id="Node000003" href="$board__health__snapshot_8h.html" title="Buffer protetto per lo scambio dati dello stato hardware." alt="" coords="600,128,752,171"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="951,74,768,126,766,121,956,73"/>
+<area shape="rect" id="Node000006" href="$encoder__snapshot_8h.html" title="Buffer protetto per i dati letti dagli encoder." alt="" coords="776,136,971,163"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="998,80,911,131,909,126,993,82"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="899,227,973,253"/>
+<area shape="poly" id="edge27_Node000001_Node000007" title=" " alt="" coords="1042,79,985,172,955,216,952,212,981,169,1037,82"/>
+<area shape="rect" id="Node000008" href="$rx__snapshot_8h.html" title="Buffer protetto per i dati ricevuti dall&#39;altra board." alt="" coords="416,136,576,163"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="950,63,589,131,568,135,566,130,588,125,955,61"/>
+<area shape="rect" id="Node000014" href="$supervisor__snapshot_8h.html" title="Buffer protetto per le decisioni prese dal Supervisore di Board 1." alt="" coords="1046,128,1184,171"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="1081,78,1100,116,1095,113,1079,83"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1229,219,1406,261"/>
+<area shape="poly" id="edge24_Node000001_Node000016" title=" " alt="" coords="1126,78,1198,126,1288,209,1283,207,1195,130,1125,83"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1259,136,1368,163"/>
+<area shape="poly" id="edge25_Node000001_Node000017" title=" " alt="" coords="1151,78,1271,130,1266,129,1150,83"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="1392,136,1475,163"/>
+<area shape="poly" id="edge26_Node000001_Node000018" title=" " alt="" coords="1170,67,1273,94,1381,125,1390,131,1384,130,1379,131,1272,99,1170,72"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1499,136,1594,163"/>
+<area shape="poly" id="edge28_Node000001_Node000019" title=" " alt="" coords="1170,59,1322,87,1487,125,1500,131,1495,131,1486,131,1321,92,1170,64"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="667,309,731,336"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="681,169,697,295,693,292,677,173"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="736,227,824,253"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="701,169,757,217,751,216,699,174"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="875,161,866,211,855,238,838,263,818,281,795,295,747,314,746,308,792,290,815,277,834,260,850,236,861,209,871,165"/>
+<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="863,162,805,218,803,214,858,164"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="884,161,921,215,916,213,881,166"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="529,161,576,184,625,217,660,256,687,297,682,295,656,259,621,221,574,188,528,166"/>
+<area shape="poly" id="edge11_Node000008_Node000005" title=" " alt="" coords="537,161,728,221,723,222,537,166"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="120,219,278,261"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="451,164,284,216,282,211,456,162"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="302,219,456,261"/>
+<area shape="poly" id="edge13_Node000008_Node000010" title=" " alt="" coords="482,162,419,212,416,207,477,164"/>
+<area shape="rect" id="Node000011" href="$wcet__monitor_8h.html" title="Monitoraggio del &quot;Worst Case Execution Time&quot; (WCET) per task e ISR." alt="" coords="480,227,611,253"/>
+<area shape="poly" id="edge14_Node000008_Node000011" title=" " alt="" coords="504,161,534,214,529,212,502,166"/>
+<area shape="rect" id="Node000012" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="35,227,96,253"/>
+<area shape="poly" id="edge16_Node000008_Node000012" title=" " alt="" coords="438,164,405,173,321,186,255,192,190,201,109,221,105,222,102,218,107,216,189,195,255,187,320,180,404,168,443,163"/>
+<area shape="poly" id="edge15_Node000011_Node000004" title=" " alt="" coords="570,251,664,302,659,302,569,256"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="5,309,126,336"/>
+<area shape="poly" id="edge17_Node000012_Node000013" title=" " alt="" coords="67,252,68,295,63,294,64,256"/>
+<area shape="poly" id="edge19_Node000014_Node000004" title=" " alt="" coords="1094,170,987,264,924,288,859,305,798,316,747,321,746,316,797,310,858,300,923,283,984,259,1089,172"/>
+<area shape="poly" id="edge23_Node000014_Node000005" title=" " alt="" coords="1048,169,840,226,839,220,1042,169"/>
+<area shape="poly" id="edge20_Node000014_Node000007" title=" " alt="" coords="1076,171,976,222,975,217,1070,172"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1049,219,1205,261"/>
+<area shape="poly" id="edge21_Node000014_Node000015" title=" " alt="" coords="1119,169,1124,205,1120,202,1116,173"/>
+<area shape="poly" id="edge22_Node000014_Node000016" title=" " alt="" coords="1163,169,1259,212,1253,212,1162,174"/>
+</map>

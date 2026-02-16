@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;zzz_Board1/Core/Inc/snapshot/actuation_snapshot.h&apos;" deleteContents="false" description="Delete resource &apos;zzz_Board1/Core/Inc/snapshot/actuation_snapshot.h&apos;" element1="/zzz_Board1/Core/Inc/snapshot/actuation_snapshot.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1769891537047"/>
-</session>

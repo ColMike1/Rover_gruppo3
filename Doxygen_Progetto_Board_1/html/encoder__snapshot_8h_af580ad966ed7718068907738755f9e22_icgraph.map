@@ -1,0 +1,29 @@
+<map id="EncoderSnapshot_Read" name="EncoderSnapshot_Read">
+<area shape="rect" id="Node000001" title="Legge l&#39;ultimo snapshot encoder disponibile." alt="" coords="684,107,846,133"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8c.html#adf98702f2e24c4b18f54c774350214db" title="Esegue un singolo passo di attuazione basato sull&#39;output del controllo." alt="" coords="508,5,618,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="727,97,685,73,635,46,608,35,608,30,637,42,687,68,733,98"/>
+<area shape="rect" id="Node000006" href="$control__step_8c.html#a0fcef49c9cbce9b244be3d6251d9d445" title="Esegue l&#39;iterazione principale del controllo." alt="" coords="514,56,612,83"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="691,102,612,84,612,79,697,102"/>
+<area shape="rect" id="Node000007" href="$log__task_8c.html#a60fce6a6a39cff4742e6f9b4b56ab7fb" title="Raccoglie i dati dagli snapshot e li invia al supporto di memorizzazione." alt="" coords="511,107,615,133"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="665,120,615,123,615,117,671,120"/>
+<area shape="rect" id="Node000009" href="$supervisor__task_8c.html#a1e5a23016dfdc674b16635ad0e62848a" title="Esegue un ciclo della logica di supervisione." alt="" coords="490,157,636,184"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="696,137,620,159,619,154,691,138"/>
+<area shape="rect" id="Node000011" href="$comm__tx__task_8c.html#add320c948d8694068895e9744195957e" title="Esegue un passo del task di trasmissione, inviando i pacchetti pronti." alt="" coords="514,208,612,235"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="733,142,687,172,637,198,608,210,607,205,635,194,685,167,728,143"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a8decb0ed70f1b4d12a7abbdbcdf8d18f" title="Task di Controllo Motori e Attuazione." alt="" coords="306,56,432,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="492,37,424,58,422,53,497,36"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,132,248,159"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="310,89,297,97,209,134,207,129,295,92,315,87"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,132,55,159"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,147,56,148,54,143,89,144"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="496,70,433,72,432,67,502,69"/>
+<area shape="rect" id="Node000008" href="$app__freertos_8c.html#a67cb454dfa430f2f1087bd4a6e89e5a4" title="Task di Debug e Logging." alt="" coords="308,107,430,133"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="493,120,431,123,430,117,498,120"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="290,131,249,138,248,133,295,129"/>
+<area shape="rect" id="Node000010" href="$app__freertos_8c.html#a3f7778cdf1274eaffeab60f470433691" title="Task del Supervisore di sistema." alt="" coords="296,157,442,184"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="472,171,443,173,442,168,478,170"/>
+<area shape="poly" id="edge12_Node000010_Node000004" title=" " alt="" coords="278,159,249,158,248,152,283,159"/>
+<area shape="rect" id="Node000012" href="$app__freertos_8c.html#adbf0342f734137d459a69a9981339b84" title="Task per la trasmissione dei dati via UART/Bus." alt="" coords="318,208,420,235"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="496,221,420,224,420,219,501,221"/>
+<area shape="poly" id="edge15_Node000012_Node000004" title=" " alt="" coords="310,202,295,198,207,162,208,157,297,194,316,203"/>
+</map>

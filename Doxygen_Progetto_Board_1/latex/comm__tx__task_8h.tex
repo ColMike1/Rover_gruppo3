@@ -1,0 +1,58 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+tx\+\_\+task.h File Reference}
+\hypertarget{comm__tx__task_8h}{}\label{comm__tx__task_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/comm/comm\_tx\_task.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/comm/comm\_tx\_task.h}}
+
+
+Gestione del task di trasmissione dei messaggi.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__tx__task_8h_add320c948d8694068895e9744195957e}{Tx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue un passo del task di trasmissione, inviando i pacchetti pronti. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione del task di trasmissione dei messaggi. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__tx__task_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__tx__task_8h_add320c948d8694068895e9744195957e}\index{comm\_tx\_task.h@{comm\_tx\_task.h}!Tx\_TaskStep@{Tx\_TaskStep}}
+\index{Tx\_TaskStep@{Tx\_TaskStep}!comm\_tx\_task.h@{comm\_tx\_task.h}}
+\doxysubsubsection{\texorpdfstring{Tx\_TaskStep()}{Tx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__tx__task_8h_add320c948d8694068895e9744195957e} 
+void Tx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue un passo del task di trasmissione, inviando i pacchetti pronti. 
+
+Esegue un passo del task di trasmissione, inviando i pacchetti pronti.
+
+Legge gli snapshot correnti dal sistema, impacchetta i dati e invia il buffer tramite il driver UART se non occupato. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{comm__tx__task_8h_add320c948d8694068895e9744195957e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8h_add320c948d8694068895e9744195957e_icgraph}
+\end{center}
+\end{figure}

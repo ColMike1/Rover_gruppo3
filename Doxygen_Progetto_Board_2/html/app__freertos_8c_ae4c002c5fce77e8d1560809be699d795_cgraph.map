@@ -1,0 +1,25 @@
+<map id="StartTask_Log" name="StartTask_Log">
+<area shape="rect" id="Node000001" title="Function implementing the Task_Log thread." alt="" coords="5,132,111,159"/>
+<area shape="rect" id="Node000002" href="$log__task_8c.html#a60fce6a6a39cff4742e6f9b4b56ab7fb" title="Esegue uno step del task di logging." alt="" coords="159,132,263,159"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,143,146,144,141,147,112,148"/>
+<area shape="rect" id="Node000003" href="$ble__controller__snapshot_8c.html#a538eaadcbe25b4a53e29c8f64bc54719" title="Legge lo snapshot BLE in sezione critica." alt="" coords="311,5,500,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="220,130,256,86,281,62,310,42,324,37,320,40,312,46,284,66,260,90,224,133"/>
+<area shape="rect" id="Node000004" href="$imu__snapshot_8c.html#ada36856513ef28b5490a6e76a10b2d20" title="Legge lo snapshot IMU in sezione critica." alt="" coords="336,56,475,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="235,129,310,92,334,86,329,89,312,97,237,134"/>
+<area shape="rect" id="Node000005" href="$log__format_8c.html#a7d16f9ede7c655ed1b3ad8ef0fcc925f" title="Costruisce una stringa di log completa a partire dagli snapshot." alt="" coords="333,107,478,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="263,136,320,130,315,132,264,141"/>
+<area shape="rect" id="Node000010" href="$rx__snapshot_8c.html#ae785580883a2c19871811977522d68fc" title="Legge lo snapshot RX in sezione critica." alt="" coords="340,157,471,184"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="263,149,327,160,322,161,264,155"/>
+<area shape="rect" id="Node000011" href="$sonar__snapshot_8c.html#a005a484d7190eac84ee0417a3b562e3c" title="Legge lo snapshot sonar in sezione critica." alt="" coords="332,208,480,235"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="236,157,312,194,334,203,329,203,310,198,235,162"/>
+<area shape="rect" id="Node000012" href="$wcet__monitor_8c.html#abc79b8a411a3607c9798350ce5615759" title="Formatta il report WCET in un buffer testuale." alt="" coords="351,259,460,285"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="223,157,260,201,284,224,312,244,339,258,333,258,310,249,281,228,256,204,221,162"/>
+<area shape="rect" id="Node000006" href="$log__format_8c.html#ac26f666e2246cf7ae3180d73211893f2" title="Converte la fault mask di board 1 in stringa." alt="" coords="572,31,701,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="465,104,499,92,547,67,570,61,565,63,549,72,501,97,467,109"/>
+<area shape="rect" id="Node000007" href="$log__format_8c.html#a57e59eb329379ff113c77719d65af966" title="Converte la fault mask di board 2 in stringa." alt="" coords="572,81,701,108"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="478,109,559,103,554,104,479,115"/>
+<area shape="rect" id="Node000008" href="$log__format_8c.html#a791488077acf5654b1ed4f984251cc48" title="Converte lo stato di unpack in stringa breve." alt="" coords="549,132,724,159"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="478,125,537,134,532,134,479,131"/>
+<area shape="rect" id="Node000009" href="$supervisor__snapshot_8c.html#a86490218ec807bc7b449e09eb268b4e4" title="Legge lo snapshot supervisore in sezione critica." alt="" coords="548,183,725,209"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="466,131,501,143,549,168,570,178,565,177,547,173,499,148,466,137"/>
+</map>

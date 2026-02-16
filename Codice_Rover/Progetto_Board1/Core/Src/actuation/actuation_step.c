@@ -1,8 +1,6 @@
 /**
  * @file actuation_step.c
  * @brief Implementazione del task di attuazione per il controllo motori.
- * @date Jan 12, 2026
- * @author Sterm
  */
 
 #include "actuation/actuation.h"

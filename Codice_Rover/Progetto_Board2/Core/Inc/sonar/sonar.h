@@ -1,8 +1,6 @@
-/*
- * sonar.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file sonar.h
+ * @brief Header aggregatore del modulo sonar.
  */
 
 #ifndef INC_SONAR_SONAR_H_

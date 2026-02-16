@@ -1,0 +1,243 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+sonar/\+sonar\+\_\+hw.c File Reference}
+\hypertarget{sonar__hw_8c}{}\label{sonar__hw_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/sonar/sonar\_hw.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/sonar/sonar\_hw.c}}
+
+
+Gestione hardware sonar con cattura input tramite timer/\+\+DMA.  
+
+
+{\ttfamily \+\#include "{}sonar/\+sonar\+\_\+hw.\+h"{}}\newline
+{\ttfamily \+\#include "{}tim.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+Include dependency graph for sonar\+\_\+hw.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{sonar__hw_8c_aab1f1f947d09da11aef305b310a4a913}{SONAR\+\_\+\+TIMEOUT\+\_\+\+MS}}~20U
+\begin{DoxyCompactList}\small\item\em Timeout massimo per una scansione sonar \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sonar__hw_8c_ae140903d6e0ff54fb37412b93b875448}{SONAR\+\_\+\+MAX\+\_\+\+CM}}~301U
+\begin{DoxyCompactList}\small\item\em Distanza saturata quando la misura non e\textquotesingle{} valida \+[cm]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sonar__hw_8c_ad9cffbd75a9ac794349ff1bd0d4cb680}{SONAR\+\_\+\+DMA\+\_\+\+CAPTURE\+\_\+\+SAMPLES}}~2U
+\begin{DoxyCompactList}\small\item\em Numero di campioni di cattura per canale (rising/\+falling). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sonar__hw_8c_a868b8fc23a48623cda91aafa4ec10759}{SONAR\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+TICK}}~0x\+FFFFU
+\begin{DoxyCompactList}\small\item\em Valore massimo contatore timer a 16 bit. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sonar__hw_8c_a3f594b7bf025afc760d01592629c9640}{SONAR\+\_\+\+US\+\_\+\+TO\+\_\+\+CM\+\_\+\+DIV}}~58U
+\begin{DoxyCompactList}\small\item\em Conversione da microsecondi a centimetri. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{sonar__hw_8c_a594c2ae8458bbdef1aaadb3a30e8317d}{scan}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue una scansione sonar completa su 3 canali. \end{DoxyCompactList}\item 
+uint32\+\_\+t \doxymbox{\hyperlink{sonar__hw_8c_a11cf6bc24c69ac889efe5ee0e8e62df0}{read\+\_\+distance}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}buf)
+\begin{DoxyCompactList}\small\item\em Converte la larghezza impulso catturata in distanza \+[cm]\+. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sonar__hw_8c_ae663cf3990c25dee931f7a428950f817}{Sonar\+HW\+\_\+\+Get\+Distances}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}d1, uint16\+\_\+t \texorpdfstring{$\ast$}{*}d2, uint16\+\_\+t \texorpdfstring{$\ast$}{*}d3)
+\begin{DoxyCompactList}\small\item\em Restituisce le ultime distanze sonar disponibili. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structsonars__flag__t}{sonars\+\_\+flag\+\_\+t}} \doxymbox{\hyperlink{sonar__hw_8c_a234f40d1173c73675153c40387e37d6f}{flag}}
+\begin{DoxyCompactList}\small\item\em Stato di validita\textquotesingle{} delle tre misure sonar. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structdistances__t}{distances\+\_\+t}} \doxymbox{\hyperlink{sonar__hw_8c_a483c75740a2152c0f3e266c93baf6430}{distances}}
+\begin{DoxyCompactList}\small\item\em Ultime distanze calcolate. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structbuffer__sonars__t}{buffer\+\_\+sonars\+\_\+t}} \doxymbox{\hyperlink{sonar__hw_8c_a3830fb3bb563aa27f5a2cf5cdc82e134}{buffers}}
+\begin{DoxyCompactList}\small\item\em Buffer DMA di cattura per i tre canali sonar. \end{DoxyCompactList}\item 
+uint8\+\_\+t \doxymbox{\hyperlink{sonar__hw_8c_aa2985cd07ded076cc18d130908aabc75}{sonar\+\_\+count}} = 0U
+\begin{DoxyCompactList}\small\item\em Contatore dei sonar che hanno completato la misura corrente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione hardware sonar con cattura input tramite timer/\+\+DMA. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{sonar__hw_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sonar__hw_8c_ad9cffbd75a9ac794349ff1bd0d4cb680}\index{sonar\_hw.c@{sonar\_hw.c}!SONAR\_DMA\_CAPTURE\_SAMPLES@{SONAR\_DMA\_CAPTURE\_SAMPLES}}
+\index{SONAR\_DMA\_CAPTURE\_SAMPLES@{SONAR\_DMA\_CAPTURE\_SAMPLES}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{SONAR\_DMA\_CAPTURE\_SAMPLES}{SONAR\_DMA\_CAPTURE\_SAMPLES}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_ad9cffbd75a9ac794349ff1bd0d4cb680} 
+\+\#define SONAR\+\_\+\+DMA\+\_\+\+CAPTURE\+\_\+\+SAMPLES~2U}
+
+
+
+Numero di campioni di cattura per canale (rising/\+falling). 
+
+\Hypertarget{sonar__hw_8c_ae140903d6e0ff54fb37412b93b875448}\index{sonar\_hw.c@{sonar\_hw.c}!SONAR\_MAX\_CM@{SONAR\_MAX\_CM}}
+\index{SONAR\_MAX\_CM@{SONAR\_MAX\_CM}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{SONAR\_MAX\_CM}{SONAR\_MAX\_CM}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_ae140903d6e0ff54fb37412b93b875448} 
+\+\#define SONAR\+\_\+\+MAX\+\_\+\+CM~301U}
+
+
+
+Distanza saturata quando la misura non e\textquotesingle{} valida \+[cm]\+. 
+
+\Hypertarget{sonar__hw_8c_aab1f1f947d09da11aef305b310a4a913}\index{sonar\_hw.c@{sonar\_hw.c}!SONAR\_TIMEOUT\_MS@{SONAR\_TIMEOUT\_MS}}
+\index{SONAR\_TIMEOUT\_MS@{SONAR\_TIMEOUT\_MS}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{SONAR\_TIMEOUT\_MS}{SONAR\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_aab1f1f947d09da11aef305b310a4a913} 
+\+\#define SONAR\+\_\+\+TIMEOUT\+\_\+\+MS~20U}
+
+
+
+Timeout massimo per una scansione sonar \+[ms]\+. 
+
+\Hypertarget{sonar__hw_8c_a868b8fc23a48623cda91aafa4ec10759}\index{sonar\_hw.c@{sonar\_hw.c}!SONAR\_TIMER\_MAX\_TICK@{SONAR\_TIMER\_MAX\_TICK}}
+\index{SONAR\_TIMER\_MAX\_TICK@{SONAR\_TIMER\_MAX\_TICK}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{SONAR\_TIMER\_MAX\_TICK}{SONAR\_TIMER\_MAX\_TICK}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a868b8fc23a48623cda91aafa4ec10759} 
+\+\#define SONAR\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+TICK~0x\+FFFFU}
+
+
+
+Valore massimo contatore timer a 16 bit. 
+
+\Hypertarget{sonar__hw_8c_a3f594b7bf025afc760d01592629c9640}\index{sonar\_hw.c@{sonar\_hw.c}!SONAR\_US\_TO\_CM\_DIV@{SONAR\_US\_TO\_CM\_DIV}}
+\index{SONAR\_US\_TO\_CM\_DIV@{SONAR\_US\_TO\_CM\_DIV}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{SONAR\_US\_TO\_CM\_DIV}{SONAR\_US\_TO\_CM\_DIV}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a3f594b7bf025afc760d01592629c9640} 
+\+\#define SONAR\+\_\+\+US\+\_\+\+TO\+\_\+\+CM\+\_\+\+DIV~58U}
+
+
+
+Conversione da microsecondi a centimetri. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{sonar__hw_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{sonar__hw_8c_a11cf6bc24c69ac889efe5ee0e8e62df0}\index{sonar\_hw.c@{sonar\_hw.c}!read\_distance@{read\_distance}}
+\index{read\_distance@{read\_distance}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{read\_distance()}{read\_distance()}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a11cf6bc24c69ac889efe5ee0e8e62df0} 
+uint32\+\_\+t read\+\_\+distance (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{}\end{DoxyParamCaption})}
+
+
+
+Converte la larghezza impulso catturata in distanza \+[cm]\+. 
+
+Converte un buffer di cattura timer in distanza.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Buffer con due capture consecutive (start/\+end). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distanza in centimetri. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8c_a11cf6bc24c69ac889efe5ee0e8e62df0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__hw_8c_a594c2ae8458bbdef1aaadb3a30e8317d}\index{sonar\_hw.c@{sonar\_hw.c}!scan@{scan}}
+\index{scan@{scan}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{scan()}{scan()}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a594c2ae8458bbdef1aaadb3a30e8317d} 
+void scan (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue una scansione sonar completa su 3 canali. 
+
+Avvia una scansione sonar. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{sonar__hw_8c_a594c2ae8458bbdef1aaadb3a30e8317d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8c_a594c2ae8458bbdef1aaadb3a30e8317d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__hw_8c_ae663cf3990c25dee931f7a428950f817}\index{sonar\_hw.c@{sonar\_hw.c}!SonarHW\_GetDistances@{SonarHW\_GetDistances}}
+\index{SonarHW\_GetDistances@{SonarHW\_GetDistances}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{SonarHW\_GetDistances()}{SonarHW\_GetDistances()}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_ae663cf3990c25dee931f7a428950f817} 
+void Sonar\+HW\+\_\+\+Get\+Distances (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{d1}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{d2}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{d3}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce le ultime distanze sonar disponibili. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & Distanza canale 1. \\
+\hline
+{\em d2} & Distanza canale 2. \\
+\hline
+{\em d3} & Distanza canale 3. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__hw_8c_ae663cf3990c25dee931f7a428950f817_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{sonar__hw_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{sonar__hw_8c_a3830fb3bb563aa27f5a2cf5cdc82e134}\index{sonar\_hw.c@{sonar\_hw.c}!buffers@{buffers}}
+\index{buffers@{buffers}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{buffers}{buffers}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a3830fb3bb563aa27f5a2cf5cdc82e134} 
+\doxymbox{\hyperlink{structbuffer__sonars__t}{buffer\+\_\+sonars\+\_\+t}} buffers}
+
+
+
+Buffer DMA di cattura per i tre canali sonar. 
+
+\Hypertarget{sonar__hw_8c_a483c75740a2152c0f3e266c93baf6430}\index{sonar\_hw.c@{sonar\_hw.c}!distances@{distances}}
+\index{distances@{distances}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{distances}{distances}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a483c75740a2152c0f3e266c93baf6430} 
+\doxymbox{\hyperlink{structdistances__t}{distances\+\_\+t}} distances}
+
+
+
+Ultime distanze calcolate. 
+
+\Hypertarget{sonar__hw_8c_a234f40d1173c73675153c40387e37d6f}\index{sonar\_hw.c@{sonar\_hw.c}!flag@{flag}}
+\index{flag@{flag}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{flag}{flag}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_a234f40d1173c73675153c40387e37d6f} 
+\doxymbox{\hyperlink{structsonars__flag__t}{sonars\+\_\+flag\+\_\+t}} flag}
+
+
+
+Stato di validita\textquotesingle{} delle tre misure sonar. 
+
+Stato validita\textquotesingle{} canali aggiornato da ISR capture. \Hypertarget{sonar__hw_8c_aa2985cd07ded076cc18d130908aabc75}\index{sonar\_hw.c@{sonar\_hw.c}!sonar\_count@{sonar\_count}}
+\index{sonar\_count@{sonar\_count}!sonar\_hw.c@{sonar\_hw.c}}
+\doxysubsubsection{\texorpdfstring{sonar\_count}{sonar\_count}}
+{\footnotesize\ttfamily \label{sonar__hw_8c_aa2985cd07ded076cc18d130908aabc75} 
+uint8\+\_\+t sonar\+\_\+count = 0U}
+
+
+
+Contatore dei sonar che hanno completato la misura corrente. 
+
+Numero di canali che hanno completato la misura corrente. 

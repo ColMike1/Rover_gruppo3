@@ -1,0 +1,22 @@
+<map id="Saber_Checksum" name="Saber_Checksum">
+<area shape="rect" id="Node000001" title="Calcola il checksum Sabertooth su 3 byte." alt="" coords="1264,31,1389,57"/>
+<area shape="rect" id="Node000002" href="$sabertooth__driver_8c.html#aff60a261fda72eadf539c1a86a000313" title="Compone un pacchetto Sabertooth da 4 byte." alt="" coords="1060,31,1216,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1245,44,1216,47,1216,41,1251,44"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8c.html#ac82b7c928f19e7382d0804515771c21e" title="Invia i comandi ai quattro motori." alt="" coords="842,5,1012,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1042,33,1013,32,1013,26,1048,33"/>
+<area shape="rect" id="Node000009" href="$sabertooth__driver_8c.html#ad8e3995889ea345e17e66905d67d0703" title="Procedura di inizializzazione dei driver Sabertooth." alt="" coords="872,56,982,83"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="1048,55,983,65,982,60,1042,55"/>
+<area shape="rect" id="Node000004" href="$actuation__step_8c.html#a57cd4874f1f08d0e8f2ae018f4ea5bdc" title="Esegue uno step di attuazione open&#45;loop." alt="" coords="684,5,794,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="824,19,794,21,794,16,829,19"/>
+<area shape="rect" id="Node000005" href="$supervisor__task_8c.html#a1e5a23016dfdc674b16635ad0e62848a" title="Esegue uno step del task supervisore." alt="" coords="490,31,636,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="671,29,637,36,636,31,665,29"/>
+<area shape="rect" id="Node000006" href="$app__freertos_8c.html#a3f7778cdf1274eaffeab60f470433691" title="Function implementing the Task_Supervisor thread." alt="" coords="296,31,442,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="472,44,443,47,443,41,478,44"/>
+<area shape="rect" id="Node000007" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="FreeRTOS initialization." alt="" coords="103,31,248,57"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="278,44,249,47,248,41,283,44"/>
+<area shape="rect" id="Node000008" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="85,45,55,47,54,41,89,43"/>
+<area shape="rect" id="Node000010" href="$actuation__step_8c.html#a0991cd6500749efc61a1a5f6dde7eee5" title="Inizializza il modulo di attuazione." alt="" coords="688,56,790,83"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="854,69,790,72,790,67,860,69"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="670,60,636,57,636,52,676,60"/>
+</map>

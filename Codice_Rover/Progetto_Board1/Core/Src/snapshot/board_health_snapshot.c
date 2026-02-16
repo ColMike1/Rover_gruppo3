@@ -3,8 +3,6 @@
  * @brief Gestione thread-safe dello snapshot dei parametri vitali della scheda.
  * @details Fornisce un'interfaccia protetta da Mutex per leggere e scrivere i dati
  * relativi a temperatura e tensione batteria.
- * @date Jan 8, 2026
- * @author Sterm
  */
 
 #include "log/wcet_monitor.h"

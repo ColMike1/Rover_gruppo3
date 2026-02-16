@@ -1,0 +1,13 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/rx_snapshot.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/rx_snapshot.c">
+<area shape="rect" id="Node000001" title="Storage thread&#45;safe dello snapshot RX." alt="" coords="158,5,362,80"/>
+<area shape="rect" id="Node000002" href="$rx__snapshot_8h.html" title="Definizione dello snapshot RX e API thread&#45;safe." alt="" coords="180,128,340,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,78,263,113,258,111,259,82"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,211,70,237"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="219,158,82,205,79,207,77,202,81,200,218,153"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="94,203,248,245"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="249,154,206,194,203,190,244,156"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="272,203,430,245"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="275,153,319,193,314,192,273,158"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="453,211,542,237"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="300,153,442,200,451,205,446,205,441,205,299,158"/>
+</map>

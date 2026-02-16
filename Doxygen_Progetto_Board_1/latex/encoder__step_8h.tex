@@ -1,0 +1,95 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+encoder/\+encoder\+\_\+step.h File Reference}
+\hypertarget{encoder__step_8h}{}\label{encoder__step_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/encoder/encoder\_step.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/encoder/encoder\_step.h}}
+
+
+Gestione dell\textquotesingle{}elaborazione periodica dei dati encoder.  
+
+
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{encoder__step_8h_a1c8318d644fc2e61cc1ef9cb0710feb6}{Encoder\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza i timer e le periferiche dedicate agli encoder. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{encoder__step_8h_a16ca7c2a2af8ea3a2902fcabb4a58d7f}{Encoder\+\_\+\+Step}} (float speeds\+[4]\+)
+\begin{DoxyCompactList}\small\item\em Esegue il campionamento degli encoder e converte i tick in unità fisiche. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione dell\textquotesingle{}elaborazione periodica dei dati encoder. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{encoder__step_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{encoder__step_8h_a1c8318d644fc2e61cc1ef9cb0710feb6}\index{encoder\_step.h@{encoder\_step.h}!Encoder\_Init@{Encoder\_Init}}
+\index{Encoder\_Init@{Encoder\_Init}!encoder\_step.h@{encoder\_step.h}}
+\doxysubsubsection{\texorpdfstring{Encoder\_Init()}{Encoder\_Init()}}
+{\footnotesize\ttfamily \label{encoder__step_8h_a1c8318d644fc2e61cc1ef9cb0710feb6} 
+void Encoder\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza i timer e le periferiche dedicate agli encoder. 
+
+Inizializza i timer e le periferiche dedicate agli encoder. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8h_a1c8318d644fc2e61cc1ef9cb0710feb6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{encoder__step_8h_a16ca7c2a2af8ea3a2902fcabb4a58d7f}\index{encoder\_step.h@{encoder\_step.h}!Encoder\_Step@{Encoder\_Step}}
+\index{Encoder\_Step@{Encoder\_Step}!encoder\_step.h@{encoder\_step.h}}
+\doxysubsubsection{\texorpdfstring{Encoder\_Step()}{Encoder\_Step()}}
+{\footnotesize\ttfamily \label{encoder__step_8h_a16ca7c2a2af8ea3a2902fcabb4a58d7f} 
+void Encoder\+\_\+\+Step (\begin{DoxyParamCaption}\item[{float}]{last\+\_\+cycle\+\_\+cmd}{\+[4]\+}\end{DoxyParamCaption})}
+
+
+
+Esegue il campionamento degli encoder e converte i tick in unità fisiche. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em speeds} & Array di 4 float dove verranno scritte le velocità calcolate.\\
+\hline
+\end{DoxyParams}
+Esegue il campionamento degli encoder e converte i tick in unità fisiche.
+
+
+\begin{DoxyEnumerate}
+\item Legge i delta ticks hardware per i 4 motori.
+\item Converte i dati in RPM e aggiorna i timestamp.
+\item Esegue la diagnostica dello stallo basata sul comando del ciclo precedente.
+\item Se necessario, applica le correzioni di fallback.
+\item Scrive lo snapshot finale per gli altri task. 
+\begin{DoxyParams}{Parameters}
+{\em last\+\_\+cycle\+\_\+cmd} & Array dei comandi di tensione \+[V]\+ applicati nell\textquotesingle{}ultima iterazione. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyEnumerate}Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8h_a16ca7c2a2af8ea3a2902fcabb4a58d7f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{encoder__step_8h_a16ca7c2a2af8ea3a2902fcabb4a58d7f_icgraph}
+\end{center}
+\end{figure}

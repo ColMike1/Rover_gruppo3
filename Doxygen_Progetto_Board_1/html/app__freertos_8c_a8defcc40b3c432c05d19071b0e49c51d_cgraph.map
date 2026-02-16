@@ -1,0 +1,22 @@
+<map id="StartTask_BattTemp" name="StartTask_BattTemp">
+<area shape="rect" id="Node000001" title="Task per il monitoraggio dello stato batteria e temperatura." alt="" coords="5,56,146,83"/>
+<area shape="rect" id="Node000002" href="$board__health__task_8c.html#a214ef105dc57cc7f220590660e4d6d69" title="Inizializza il task o le risorse per il monitoraggio board health." alt="" coords="198,19,344,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,54,185,47,181,50,147,58"/>
+<area shape="rect" id="Node000005" href="$board__health__task_8c.html#a398e7c9f02fe63bb5bd8c939c14bbb0a" title="Esegue ciclicamente il monitoraggio dei parametri vitali." alt="" coords="194,81,349,108"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="146,76,181,82,176,84,147,81"/>
+<area shape="rect" id="Node000003" href="$board__health__adc_8c.html#a108165b5d41101fa07468cebada6609f" title="Inizializza l&#39;ADC e i canali dedicati al monitoraggio della scheda." alt="" coords="425,5,572,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,25,412,23,407,25,346,30"/>
+<area shape="rect" id="Node000004" href="$board__health__adc_8c.html#a0097552fbc41c90ef2e1e11a409491fd" title="Carica i valori di calibrazione di fabbrica dai registri di sistema STM32." alt="" coords="648,5,826,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="572,16,635,18,630,19,573,21"/>
+<area shape="rect" id="Node000006" href="$board__health__adc_8c.html#a6b51bda7bc1b0759dcc5cca821d3f03a" title="Legge il livello di tensione della batteria." alt="" coords="412,56,585,83"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="349,83,399,80,394,81,350,89"/>
+<area shape="rect" id="Node000009" href="$board__health__adc_8c.html#aff8a17cd230bd0dc31d24650a70b831d" title="Legge il sensore di temperatura interno della MCU." alt="" coords="397,107,600,133"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="349,101,384,107,378,107,349,106"/>
+<area shape="rect" id="Node000010" href="$board__health__snapshot_8c.html#a12e61a19b32027442e181c3a68446ff0" title="Scrive i nuovi dati nello snapshot (API per il produttore)." alt="" coords="424,157,573,200"/>
+<area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="306,106,398,143,418,152,412,152,396,148,305,111"/>
+<area shape="rect" id="Node000007" href="$board__health__adc_8c.html#a1ae2de8a6d0a24f56c2514b5bb70fe36" title="Converte la tensione della batteria in percentuale tramite interpolazione lineare su LUT." alt="" coords="651,56,823,83"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="585,67,638,69,633,70,586,72"/>
+<area shape="rect" id="Node000008" href="$board__health__adc_8c.html#a9cf6404847167cea46c41b3a4aca731f" title="Calcola l&#39;aggiornamento della media mobile per un dato buffer." alt="" coords="657,107,817,133"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="565,81,659,103,654,103,565,86"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="601,117,644,120,638,120,601,123"/>
+</map>

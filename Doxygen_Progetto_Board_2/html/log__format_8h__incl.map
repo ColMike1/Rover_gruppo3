@@ -1,0 +1,40 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/log/log_format.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/log/log_format.h">
+<area shape="rect" id="Node000001" title="API di formattazione degli snapshot diagnostici." alt="" coords="301,5,504,80"/>
+<area shape="rect" id="Node000002" href="$ble__controller__snapshot_8h.html" title="Definizione dello snapshot BLE controller e API thread&#45;safe." alt="" coords="38,128,193,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,83,188,124,185,120,303,79"/>
+<area shape="rect" id="Node000010" href="$imu__snapshot_8h.html" title="Definizione dello snapshot IMU e API thread&#45;safe." alt="" coords="217,136,388,163"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="366,82,327,126,323,123,369,78"/>
+<area shape="rect" id="Node000012" href="$sonar__snapshot_8h.html" title="Definizione dello snapshot sonar e API thread&#45;safe." alt="" coords="412,136,593,163"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="438,78,483,125,477,125,437,83"/>
+<area shape="rect" id="Node000013" href="$rx__snapshot_8h.html" title="Definizione dello snapshot RX e API thread&#45;safe." alt="" coords="617,136,777,163"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="505,77,650,130,645,131,505,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="266,309,330,336"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="125,169,152,214,170,238,189,259,220,282,255,302,250,303,218,287,186,263,165,241,148,217,125,174"/>
+<area shape="rect" id="Node000004" href="$ble__controller__i2c_8h.html" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="5,219,125,261"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="103,174,87,206,82,204,105,169"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="381,227,469,253"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="188,169,369,220,364,224,188,174"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="125,259,254,304,249,307,125,265"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="28,309,102,336"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="65,259,68,294,62,293,65,265"/>
+<area shape="rect" id="Node000006" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="182,309,231,336"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="101,259,174,300,169,303,101,265"/>
+<area shape="rect" id="Node000007" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="176,384,236,411"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="208,334,209,369,204,367,205,339"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="146,459,266,485"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="208,409,209,444,204,442,204,413"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="307,160,320,206,323,234,321,262,312,296,307,293,316,261,317,234,314,207,306,165"/>
+<area shape="poly" id="edge15_Node000010_Node000009" title=" " alt="" coords="320,161,398,217,393,218,320,166"/>
+<area shape="rect" id="Node000011" href="$imu__i2c_8h.html" title="API I2C per inizializzazione e lettura sensore MPU6050." alt="" coords="200,227,306,253"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="297,161,270,215,265,212,294,165"/>
+<area shape="poly" id="edge13_Node000011_Node000003" title=" " alt="" coords="261,251,287,296,281,296,259,256"/>
+<area shape="poly" id="edge14_Node000011_Node000006" title=" " alt="" coords="247,252,223,298,219,295,244,256"/>
+<area shape="poly" id="edge17_Node000012_Node000003" title=" " alt="" coords="505,161,505,210,498,238,483,263,453,288,417,305,381,316,347,321,345,316,380,310,416,300,450,284,479,260,493,236,500,210,502,165"/>
+<area shape="poly" id="edge18_Node000012_Node000009" title=" " alt="" coords="493,162,448,217,444,213,489,165"/>
+<area shape="poly" id="edge20_Node000013_Node000003" title=" " alt="" coords="681,162,608,212,560,240,510,264,424,294,347,314,345,309,423,289,508,259,558,235,605,208,677,165"/>
+<area shape="poly" id="edge23_Node000013_Node000009" title=" " alt="" coords="656,164,479,224,477,219,660,162"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="616,219,770,261"/>
+<area shape="poly" id="edge21_Node000013_Node000014" title=" " alt="" coords="698,161,697,205,692,202,695,165"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="794,219,952,261"/>
+<area shape="poly" id="edge22_Node000013_Node000015" title=" " alt="" coords="723,161,821,211,815,211,722,166"/>
+</map>

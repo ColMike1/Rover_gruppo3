@@ -1,0 +1,142 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+\+BLE\+\_\+\+Controller/\+ble\+\_\+controller\+\_\+task.c File Reference}
+\hypertarget{ble__controller__task_8c}{}\label{ble__controller__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/BLE\_Controller/ble\_controller\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/BLE\_Controller/ble\_controller\_task.c}}
+
+
+Task di acquisizione e normalizzazione dati del controller BLE.  
+
+
+{\ttfamily \+\#include "{}ble\+\_\+controller/\+ble\+\_\+controller\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}ble\+\_\+controller/\+ble\+\_\+controller\+\_\+i2c.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+ble\+\_\+controller\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+Include dependency graph for ble\+\_\+controller\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{ble__controller__task_8c_adcee13f65e0335e8730c2556c1a703bf}{JOY\+\_\+\+CENTER}}~255.\+0f
+\begin{DoxyCompactList}\small\item\em Centro joystick in unita\textquotesingle{} raw. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{ble__controller__task_8c_a25bad49024c78cc36e32a0fddb9dd02e}{JOY\+\_\+\+SCALE}}~255.\+0f
+\begin{DoxyCompactList}\small\item\em Fattore di scala raw -\/\texorpdfstring{$>$}{>} valore normalizzato. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{ble__controller__task_8c_a4513e5b9a795876588f04d33ed338af6}{JOY\+\_\+\+DEADZONE}}~0.\+1f
+\begin{DoxyCompactList}\small\item\em Deadzone applicata ai joystick normalizzati. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \doxymbox{\hyperlink{ble__controller__task_8c_a9f5f90351d1d9bc76b73309f8b55654b}{Normalize\+Axis}} (uint16\+\_\+t raw)
+\begin{DoxyCompactList}\small\item\em Normalizza un asse joystick da raw a intervallo \+[-\/1, 1]\+. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{ble__controller__task_8c_a55331bd6cb5dd976aee67969de7028a8}{Ble\+Controller\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task BLE. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{ble__controller__task_8c_aba0f01ab46b8c308281d05541001d02d}{Ble\+Controller\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task BLE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di acquisizione e normalizzazione dati del controller BLE. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{ble__controller__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ble__controller__task_8c_adcee13f65e0335e8730c2556c1a703bf}\index{ble\_controller\_task.c@{ble\_controller\_task.c}!JOY\_CENTER@{JOY\_CENTER}}
+\index{JOY\_CENTER@{JOY\_CENTER}!ble\_controller\_task.c@{ble\_controller\_task.c}}
+\doxysubsubsection{\texorpdfstring{JOY\_CENTER}{JOY\_CENTER}}
+{\footnotesize\ttfamily \label{ble__controller__task_8c_adcee13f65e0335e8730c2556c1a703bf} 
+\+\#define JOY\+\_\+\+CENTER~255.\+0f}
+
+
+
+Centro joystick in unita\textquotesingle{} raw. 
+
+\Hypertarget{ble__controller__task_8c_a4513e5b9a795876588f04d33ed338af6}\index{ble\_controller\_task.c@{ble\_controller\_task.c}!JOY\_DEADZONE@{JOY\_DEADZONE}}
+\index{JOY\_DEADZONE@{JOY\_DEADZONE}!ble\_controller\_task.c@{ble\_controller\_task.c}}
+\doxysubsubsection{\texorpdfstring{JOY\_DEADZONE}{JOY\_DEADZONE}}
+{\footnotesize\ttfamily \label{ble__controller__task_8c_a4513e5b9a795876588f04d33ed338af6} 
+\+\#define JOY\+\_\+\+DEADZONE~0.\+1f}
+
+
+
+Deadzone applicata ai joystick normalizzati. 
+
+\Hypertarget{ble__controller__task_8c_a25bad49024c78cc36e32a0fddb9dd02e}\index{ble\_controller\_task.c@{ble\_controller\_task.c}!JOY\_SCALE@{JOY\_SCALE}}
+\index{JOY\_SCALE@{JOY\_SCALE}!ble\_controller\_task.c@{ble\_controller\_task.c}}
+\doxysubsubsection{\texorpdfstring{JOY\_SCALE}{JOY\_SCALE}}
+{\footnotesize\ttfamily \label{ble__controller__task_8c_a25bad49024c78cc36e32a0fddb9dd02e} 
+\+\#define JOY\+\_\+\+SCALE~255.\+0f}
+
+
+
+Fattore di scala raw -\/\texorpdfstring{$>$}{>} valore normalizzato. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{ble__controller__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ble__controller__task_8c_a55331bd6cb5dd976aee67969de7028a8}\index{ble\_controller\_task.c@{ble\_controller\_task.c}!BleController\_TaskInit@{BleController\_TaskInit}}
+\index{BleController\_TaskInit@{BleController\_TaskInit}!ble\_controller\_task.c@{ble\_controller\_task.c}}
+\doxysubsubsection{\texorpdfstring{BleController\_TaskInit()}{BleController\_TaskInit()}}
+{\footnotesize\ttfamily \label{ble__controller__task_8c_a55331bd6cb5dd976aee67969de7028a8} 
+void Ble\+Controller\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task BLE. 
+
+In questa implementazione non e\textquotesingle{} richiesta inizializzazione specifica. \Hypertarget{ble__controller__task_8c_aba0f01ab46b8c308281d05541001d02d}\index{ble\_controller\_task.c@{ble\_controller\_task.c}!BleController\_TaskStep@{BleController\_TaskStep}}
+\index{BleController\_TaskStep@{BleController\_TaskStep}!ble\_controller\_task.c@{ble\_controller\_task.c}}
+\doxysubsubsection{\texorpdfstring{BleController\_TaskStep()}{BleController\_TaskStep()}}
+{\footnotesize\ttfamily \label{ble__controller__task_8c_aba0f01ab46b8c308281d05541001d02d} 
+void Ble\+Controller\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task BLE. 
+
+Se la lettura I2C va a buon fine, aggiorna gli assi normalizzati e i pulsanti nello snapshot condiviso. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8c_aba0f01ab46b8c308281d05541001d02d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8c_aba0f01ab46b8c308281d05541001d02d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{ble__controller__task_8c_a9f5f90351d1d9bc76b73309f8b55654b}\index{ble\_controller\_task.c@{ble\_controller\_task.c}!NormalizeAxis@{NormalizeAxis}}
+\index{NormalizeAxis@{NormalizeAxis}!ble\_controller\_task.c@{ble\_controller\_task.c}}
+\doxysubsubsection{\texorpdfstring{NormalizeAxis()}{NormalizeAxis()}}
+{\footnotesize\ttfamily \label{ble__controller__task_8c_a9f5f90351d1d9bc76b73309f8b55654b} 
+float Normalize\+Axis (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{raw}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Normalizza un asse joystick da raw a intervallo \+[-\/1, 1]\+. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw} & Valore raw letto dal frame BLE. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Valore normalizzato con deadzone applicata. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ble__controller__task_8c_a9f5f90351d1d9bc76b73309f8b55654b_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,180 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+actuation/\+sabertooth\+\_\+driver.h File Reference}
+\hypertarget{sabertooth__driver_8h}{}\label{sabertooth__driver_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/actuation/sabertooth\_driver.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/actuation/sabertooth\_driver.h}}
+
+
+Driver Sabertooth:\+ composizione pacchetti e invio comandi motore.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+Include dependency graph for sabertooth\+\_\+driver.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{sabertooth__driver_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8h_ab0b4ea6ccb94647819c751ba067f73a8}{SABER\+\_\+\+MAX\+\_\+\+SPEED}}~127
+\begin{DoxyCompactList}\small\item\em Valore massimo del comando velocita\textquotesingle{} accettato dal Sabertooth. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8h_a2b937530efae868ed8e3226bcd898a13}{SABER\+\_\+\+FRONT\+\_\+\+ADDR}}~135
+\begin{DoxyCompactList}\small\item\em Indirizzo seriale del Sabertooth anteriore. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{sabertooth__driver_8h_a1176f3512d5f18cbe7831314672d3887}{SABER\+\_\+\+BACK\+\_\+\+ADDR}}~134
+\begin{DoxyCompactList}\small\item\em Indirizzo seriale del Sabertooth posteriore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{sabertooth__driver_8h_ad8e3995889ea345e17e66905d67d0703}{Sabertooth\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Procedura di inizializzazione dei driver Sabertooth. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sabertooth__driver_8h_ac82b7c928f19e7382d0804515771c21e}{Sabertooth\+\_\+\+Apply\+Outputs}} (float usx\+\_\+p, float udx\+\_\+p, float usx\+\_\+a, float udx\+\_\+a)
+\begin{DoxyCompactList}\small\item\em Invia i comandi ai quattro motori. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sabertooth__driver_8h_aaef7a985f0971dfd3c0cf707928b6e12}{Sabertooth\+Callback}} (void)
+\begin{DoxyCompactList}\small\item\em Callback chiamata al completamento della TX UART verso Sabertooth. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver Sabertooth:\+ composizione pacchetti e invio comandi motore. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{sabertooth__driver_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sabertooth__driver_8h_a1176f3512d5f18cbe7831314672d3887}\index{sabertooth\_driver.h@{sabertooth\_driver.h}!SABER\_BACK\_ADDR@{SABER\_BACK\_ADDR}}
+\index{SABER\_BACK\_ADDR@{SABER\_BACK\_ADDR}!sabertooth\_driver.h@{sabertooth\_driver.h}}
+\doxysubsubsection{\texorpdfstring{SABER\_BACK\_ADDR}{SABER\_BACK\_ADDR}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8h_a1176f3512d5f18cbe7831314672d3887} 
+\+\#define SABER\+\_\+\+BACK\+\_\+\+ADDR~134}
+
+
+
+Indirizzo seriale del Sabertooth posteriore. 
+
+\Hypertarget{sabertooth__driver_8h_a2b937530efae868ed8e3226bcd898a13}\index{sabertooth\_driver.h@{sabertooth\_driver.h}!SABER\_FRONT\_ADDR@{SABER\_FRONT\_ADDR}}
+\index{SABER\_FRONT\_ADDR@{SABER\_FRONT\_ADDR}!sabertooth\_driver.h@{sabertooth\_driver.h}}
+\doxysubsubsection{\texorpdfstring{SABER\_FRONT\_ADDR}{SABER\_FRONT\_ADDR}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8h_a2b937530efae868ed8e3226bcd898a13} 
+\+\#define SABER\+\_\+\+FRONT\+\_\+\+ADDR~135}
+
+
+
+Indirizzo seriale del Sabertooth anteriore. 
+
+\Hypertarget{sabertooth__driver_8h_ab0b4ea6ccb94647819c751ba067f73a8}\index{sabertooth\_driver.h@{sabertooth\_driver.h}!SABER\_MAX\_SPEED@{SABER\_MAX\_SPEED}}
+\index{SABER\_MAX\_SPEED@{SABER\_MAX\_SPEED}!sabertooth\_driver.h@{sabertooth\_driver.h}}
+\doxysubsubsection{\texorpdfstring{SABER\_MAX\_SPEED}{SABER\_MAX\_SPEED}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8h_ab0b4ea6ccb94647819c751ba067f73a8} 
+\+\#define SABER\+\_\+\+MAX\+\_\+\+SPEED~127}
+
+
+
+Valore massimo del comando velocita\textquotesingle{} accettato dal Sabertooth. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{sabertooth__driver_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{sabertooth__driver_8h_ac82b7c928f19e7382d0804515771c21e}\index{sabertooth\_driver.h@{sabertooth\_driver.h}!Sabertooth\_ApplyOutputs@{Sabertooth\_ApplyOutputs}}
+\index{Sabertooth\_ApplyOutputs@{Sabertooth\_ApplyOutputs}!sabertooth\_driver.h@{sabertooth\_driver.h}}
+\doxysubsubsection{\texorpdfstring{Sabertooth\_ApplyOutputs()}{Sabertooth\_ApplyOutputs()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8h_ac82b7c928f19e7382d0804515771c21e} 
+void Sabertooth\+\_\+\+Apply\+Outputs (\begin{DoxyParamCaption}\item[{float}]{usx\+\_\+p}{, }\item[{float}]{udx\+\_\+p}{, }\item[{float}]{usx\+\_\+a}{, }\item[{float}]{udx\+\_\+a}{}\end{DoxyParamCaption})}
+
+
+
+Invia i comandi ai quattro motori. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em usx\+\_\+p} & Comando ruota sinistra posteriore. \\
+\hline
+{\em udx\+\_\+p} & Comando ruota destra posteriore. \\
+\hline
+{\em usx\+\_\+a} & Comando ruota sinistra anteriore. \\
+\hline
+{\em udx\+\_\+a} & Comando ruota destra anteriore.\\
+\hline
+\end{DoxyParams}
+Invia i comandi ai quattro motori.
+
+I valori in volt vengono convertiti in scala 0..127 usando 12 V come riferimento.
+
+
+\begin{DoxyParams}{Parameters}
+{\em usx\+\_\+p} & Comando ruota sinistra posteriore. \\
+\hline
+{\em udx\+\_\+p} & Comando ruota destra posteriore. \\
+\hline
+{\em usx\+\_\+a} & Comando ruota sinistra anteriore. \\
+\hline
+{\em udx\+\_\+a} & Comando ruota destra anteriore. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8h_ac82b7c928f19e7382d0804515771c21e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8h_ac82b7c928f19e7382d0804515771c21e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sabertooth__driver_8h_ad8e3995889ea345e17e66905d67d0703}\index{sabertooth\_driver.h@{sabertooth\_driver.h}!Sabertooth\_Init@{Sabertooth\_Init}}
+\index{Sabertooth\_Init@{Sabertooth\_Init}!sabertooth\_driver.h@{sabertooth\_driver.h}}
+\doxysubsubsection{\texorpdfstring{Sabertooth\_Init()}{Sabertooth\_Init()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8h_ad8e3995889ea345e17e66905d67d0703} 
+void Sabertooth\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Procedura di inizializzazione dei driver Sabertooth. 
+
+Procedura di inizializzazione dei driver Sabertooth. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8h_ad8e3995889ea345e17e66905d67d0703_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8h_ad8e3995889ea345e17e66905d67d0703_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sabertooth__driver_8h_aaef7a985f0971dfd3c0cf707928b6e12}\index{sabertooth\_driver.h@{sabertooth\_driver.h}!SabertoothCallback@{SabertoothCallback}}
+\index{SabertoothCallback@{SabertoothCallback}!sabertooth\_driver.h@{sabertooth\_driver.h}}
+\doxysubsubsection{\texorpdfstring{SabertoothCallback()}{SabertoothCallback()}}
+{\footnotesize\ttfamily \label{sabertooth__driver_8h_aaef7a985f0971dfd3c0cf707928b6e12} 
+void Sabertooth\+Callback (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Callback chiamata al completamento della TX UART verso Sabertooth. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sabertooth__driver_8h_aaef7a985f0971dfd3c0cf707928b6e12_icgraph}
+\end{center}
+\end{figure}

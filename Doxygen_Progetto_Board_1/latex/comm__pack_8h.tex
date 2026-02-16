@@ -1,0 +1,89 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+pack.h File Reference}
+\hypertarget{comm__pack_8h}{}\label{comm__pack_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/comm/comm\_pack.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/comm/comm\_pack.h}}
+
+
+Funzioni per il pacchettizzamento dei dati di telemetria e stato.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+encoder\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for comm\+\_\+pack.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{comm__pack_8h_ae30a38144a410e9d1d2b80b8377f82cf}{Comm\+Pack\+\_\+\+Build\+B1\+Tx}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t max\+\_\+len, const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}enc, const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}sup)
+\begin{DoxyCompactList}\small\item\em Costruisce il frame di stato per la comunicazione da Board1 a Board2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Funzioni per il pacchettizzamento dei dati di telemetria e stato. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__pack_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__pack_8h_ae30a38144a410e9d1d2b80b8377f82cf}\index{comm\_pack.h@{comm\_pack.h}!CommPack\_BuildB1Tx@{CommPack\_BuildB1Tx}}
+\index{CommPack\_BuildB1Tx@{CommPack\_BuildB1Tx}!comm\_pack.h@{comm\_pack.h}}
+\doxysubsubsection{\texorpdfstring{CommPack\_BuildB1Tx()}{CommPack\_BuildB1Tx()}}
+{\footnotesize\ttfamily \label{comm__pack_8h_ae30a38144a410e9d1d2b80b8377f82cf} 
+uint16\+\_\+t Comm\+Pack\+\_\+\+Build\+B1\+Tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{max\+\_\+len}{, }\item[{const \doxymbox{\hyperlink{struct_encoder_snapshot__t}{Encoder\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{enc}{, }\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{sup}{}\end{DoxyParamCaption})}
+
+
+
+Costruisce il frame di stato per la comunicazione da Board1 a Board2. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer di uscita dove verrà scritto il frame. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+\_\+len} & Dimensione massima del buffer. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em enc} & Puntatore allo snapshot degli encoder da includere. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Puntatore allo snapshot del supervisore da includere. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lunghezza del frame in byte (0 in caso di errore).
+\end{DoxyReturn}
+Costruisce il frame di stato per la comunicazione da Board1 a Board2.
+
+Include dati degli encoder e stato del supervisore, aggiungendo header e CRC16-\/\+CCITT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em buf} & Buffer di destinazione per il pacchetto serializzato. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+\_\+len} & Lunghezza massima del buffer fornito. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em enc} & Snapshot degli encoder da includere nel payload. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em sup} & Snapshot del supervisore da includere nel payload. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t Numero di byte scritti nel buffer (0 in caso di errore). 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__pack_8h_ae30a38144a410e9d1d2b80b8377f82cf_icgraph}
+\end{center}
+\end{figure}

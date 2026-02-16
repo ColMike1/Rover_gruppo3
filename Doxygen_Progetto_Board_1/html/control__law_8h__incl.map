@@ -1,0 +1,8 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control_law.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control_law.h">
+<area shape="rect" id="Node000001" title="Implementazione dell&#39;algoritmo della legge di controllo (PID, logica di sterzata)." alt="" coords="5,5,209,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="75,203,139,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,78,77,117,75,135,78,154,92,189,87,189,72,155,70,136,72,116,85,83"/>
+<area shape="rect" id="Node000003" href="$control__types_8h.html" title="Definizioni delle strutture dati per l&#39;input e l&#39;output del controllo." alt="" coords="88,128,241,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,78,152,114,146,115,128,83"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="157,154,128,192,124,188,152,156"/>
+</map>

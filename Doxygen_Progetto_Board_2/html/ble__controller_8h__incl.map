@@ -1,0 +1,17 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/BLE_Controller/ble_controller.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/BLE_Controller/ble_controller.h">
+<area shape="rect" id="Node000001" title="Header di aggregazione del modulo BLE controller." alt="" coords="89,5,316,80"/>
+<area shape="rect" id="Node000002" href="$ble__controller__i2c_8h.html" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="71,128,190,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,83,156,117,151,114,179,78"/>
+<area shape="rect" id="Node000008" href="$ble__controller__task_8h.html" title="Task di acquisizione e normalizzazione dati del controller BLE." alt="" coords="214,128,338,171"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="229,78,256,115,251,116,228,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,219,70,245"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,174,66,210,62,207,108,169"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="94,219,168,245"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="132,169,133,203,128,202,130,174"/>
+<area shape="rect" id="Node000005" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="192,219,241,245"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="153,169,195,207,189,209,153,174"/>
+<area shape="rect" id="Node000006" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="186,293,246,320"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="218,244,219,279,214,277,215,248"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="156,368,276,395"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="218,319,218,354,214,351,214,322"/>
+</map>

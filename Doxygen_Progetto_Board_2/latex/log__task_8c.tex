@@ -1,0 +1,119 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+log/\+log\+\_\+task.c File Reference}
+\hypertarget{log__task_8c}{}\label{log__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/log/log\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/log/log\_task.c}}
+
+
+Task di logging periodico su UART debug.  
+
+
+{\ttfamily \+\#include "{}log/\+log\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+log\+\_\+format.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+ble\+\_\+controller\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+imu\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+sonar\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}usart.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+wcet\+\_\+monitor.\+h"{}}\newline
+Include dependency graph for log\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{log__task_8c_a2b09af7103ab5880e3611fe8e4e45c0a}{LOG\+\_\+\+BUF\+\_\+\+LEN}}~512U
+\begin{DoxyCompactList}\small\item\em Dimensione del buffer locale usato per il log formattato. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{log__task_8c_a24464ddf6aa3f881aef4aba4f6b7931a}{WCET\+\_\+\+BUF\+\_\+\+LEN}}~512U
+\begin{DoxyCompactList}\small\item\em Dimensione del buffer locale usato per il report WCET. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{log__task_8c_aa025a12d45f60c7d0eae249e61f0c7f9}{\+\_\+write}} (int file, char \texorpdfstring{$\ast$}{*}ptr, int len)
+\begin{DoxyCompactList}\small\item\em Retarget di \textquotesingle{}write\textquotesingle{} della libreria \textquotesingle{}stdio.\+h\textquotesingle{} verso UART debug. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb}{Log\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task di logging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di logging periodico su UART debug. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{log__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{log__task_8c_a2b09af7103ab5880e3611fe8e4e45c0a}\index{log\_task.c@{log\_task.c}!LOG\_BUF\_LEN@{LOG\_BUF\_LEN}}
+\index{LOG\_BUF\_LEN@{LOG\_BUF\_LEN}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_BUF\_LEN}{LOG\_BUF\_LEN}}
+{\footnotesize\ttfamily \label{log__task_8c_a2b09af7103ab5880e3611fe8e4e45c0a} 
+\+\#define LOG\+\_\+\+BUF\+\_\+\+LEN~512U}
+
+
+
+Dimensione del buffer locale usato per il log formattato. 
+
+\Hypertarget{log__task_8c_a24464ddf6aa3f881aef4aba4f6b7931a}\index{log\_task.c@{log\_task.c}!WCET\_BUF\_LEN@{WCET\_BUF\_LEN}}
+\index{WCET\_BUF\_LEN@{WCET\_BUF\_LEN}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{WCET\_BUF\_LEN}{WCET\_BUF\_LEN}}
+{\footnotesize\ttfamily \label{log__task_8c_a24464ddf6aa3f881aef4aba4f6b7931a} 
+\+\#define WCET\+\_\+\+BUF\+\_\+\+LEN~512U}
+
+
+
+Dimensione del buffer locale usato per il report WCET. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{log__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{log__task_8c_aa025a12d45f60c7d0eae249e61f0c7f9}\index{log\_task.c@{log\_task.c}!\_write@{\_write}}
+\index{\_write@{\_write}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{\_write()}{\_write()}}
+{\footnotesize\ttfamily \label{log__task_8c_aa025a12d45f60c7d0eae249e61f0c7f9} 
+int \+\_\+write (\begin{DoxyParamCaption}\item[{int}]{file}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{int}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Retarget di \textquotesingle{}write\textquotesingle{} della libreria \textquotesingle{}stdio.\+h\textquotesingle{} verso UART debug. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & Descriptor file (non usato). \\
+\hline
+{\em ptr} & Buffer da trasmettere. \\
+\hline
+{\em len} & Numero di byte da trasmettere. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Numero di byte trasmessi. 
+\end{DoxyReturn}
+\Hypertarget{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb}\index{log\_task.c@{log\_task.c}!Log\_TaskStep@{Log\_TaskStep}}
+\index{Log\_TaskStep@{Log\_TaskStep}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{Log\_TaskStep()}{Log\_TaskStep()}}
+{\footnotesize\ttfamily \label{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb} 
+void Log\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task di logging. 
+
+Legge gli snapshot correnti, costruisce le stringhe diagnostiche e le invia su UART debug. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb_icgraph}
+\end{center}
+\end{figure}

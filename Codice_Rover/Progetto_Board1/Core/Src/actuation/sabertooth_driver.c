@@ -1,8 +1,6 @@
 /**
  * @file sabertooth_driver.c
  * @brief Driver per la gestione dei motori tramite controller Sabertooth in modalità seriale a pacchetti.
- * @date Jan 12, 2026
- * @author Sterm
  */
 
 #include "actuation/sabertooth_driver.h"

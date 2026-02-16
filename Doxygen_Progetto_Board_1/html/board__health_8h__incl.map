@@ -1,0 +1,9 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/board_health/board_health.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/board_health/board_health.h">
+<area shape="rect" id="Node000001" title="Header principale per il monitoraggio dello stato della scheda." alt="" coords="43,5,254,80"/>
+<area shape="rect" id="Node000002" href="$board__health__adc_8h.html" title="Gestione dei parametri vitali della scheda tramite ADC." alt="" coords="5,128,137,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,83,97,117,93,114,123,78"/>
+<area shape="rect" id="Node000004" href="$board__health__task_8h.html" title="Interfaccia per il task di monitoraggio di sistema." alt="" coords="161,128,293,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,78,205,116,200,116,175,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="39,219,103,245"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,169,74,204,68,202,69,173"/>
+</map>

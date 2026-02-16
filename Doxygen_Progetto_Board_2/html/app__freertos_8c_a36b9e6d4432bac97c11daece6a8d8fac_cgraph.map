@@ -1,0 +1,15 @@
+<map id="StartTask_ReadSonars" name="StartTask_ReadSonars">
+<area shape="rect" id="Node000001" title="Function implementing the Task_ReadSonars thread." alt="" coords="5,31,162,57"/>
+<area shape="rect" id="Node000002" href="$sonar__task_8c.html#a9265f13d651706a0d83eed9f5f2c6b2d" title="Inizializza il task sonar." alt="" coords="214,5,322,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,31,201,27,197,29,163,36"/>
+<area shape="rect" id="Node000003" href="$sonar__task_8c.html#a0b04c57f427b4795b6c84d1624e44ab0" title="Esegue uno step del task sonar." alt="" coords="210,56,327,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,52,197,59,192,60,162,57"/>
+<area shape="rect" id="Node000004" href="$sonar__hw_8c.html#a594c2ae8458bbdef1aaadb3a30e8317d" title="Avvia una scansione sonar." alt="" coords="433,5,482,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="320,53,415,30,421,28,322,58"/>
+<area shape="rect" id="Node000006" href="$sonar__hw_8c.html#ae663cf3990c25dee931f7a428950f817" title="Restituisce le ultime distanze sonar disponibili." alt="" coords="375,56,540,83"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="327,67,362,69,357,70,327,72"/>
+<area shape="rect" id="Node000007" href="$sonar__snapshot_8c.html#a77d8f484eb63bf21ea9e4bf75ec31ee9" title="Scrive lo snapshot sonar in sezione critica." alt="" coords="384,107,531,133"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="321,81,393,102,388,102,321,86"/>
+<area shape="rect" id="Node000005" href="$sonar__hw_8c.html#a11cf6bc24c69ac889efe5ee0e8e62df0" title="Converte la larghezza impulso catturata in distanza [cm]." alt="" coords="588,5,691,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="483,16,575,18,570,19,483,21"/>
+</map>

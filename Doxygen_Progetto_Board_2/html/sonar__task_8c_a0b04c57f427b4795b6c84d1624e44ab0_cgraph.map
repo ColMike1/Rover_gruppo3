@@ -1,0 +1,11 @@
+<map id="Sonar_TaskStep" name="Sonar_TaskStep">
+<area shape="rect" id="Node000001" title="Esegue uno step del task sonar." alt="" coords="5,56,123,83"/>
+<area shape="rect" id="Node000002" href="$sonar__hw_8c.html#a594c2ae8458bbdef1aaadb3a30e8317d" title="Avvia una scansione sonar." alt="" coords="229,5,278,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,53,216,27,212,31,118,58"/>
+<area shape="rect" id="Node000004" href="$sonar__hw_8c.html#ae663cf3990c25dee931f7a428950f817" title="Restituisce le ultime distanze sonar disponibili." alt="" coords="171,56,336,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="122,67,158,68,153,70,123,72"/>
+<area shape="rect" id="Node000005" href="$sonar__snapshot_8c.html#a77d8f484eb63bf21ea9e4bf75ec31ee9" title="Scrive lo snapshot sonar in sezione critica." alt="" coords="180,107,327,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="117,81,189,101,184,103,117,86"/>
+<area shape="rect" id="Node000003" href="$sonar__hw_8c.html#a11cf6bc24c69ac889efe5ee0e8e62df0" title="Converte la larghezza impulso catturata in distanza [cm]." alt="" coords="384,5,486,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="278,16,371,18,366,19,279,21"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/ble_controller_snapshot.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/snapshot/ble_controller_snapshot.c">
+<area shape="rect" id="Node000001" title="Storage thread&#45;safe dello snapshot BLE controller." alt="" coords="32,5,235,96"/>
+<area shape="rect" id="Node000002" href="$ble__controller__snapshot_8h.html" title="Definizione dello snapshot BLE controller e API thread&#45;safe." alt="" coords="56,144,211,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,94,136,129,131,128,133,99"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,325,70,352"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,190,83,210,64,236,49,274,42,310,37,309,44,272,59,233,79,207,106,185"/>
+<area shape="rect" id="Node000004" href="$ble__controller__i2c_8h.html" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="74,235,193,277"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="134,184,136,220,131,219,133,190"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="217,243,306,269"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="163,184,233,233,229,235,163,190"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="108,280,66,317,62,313,110,276"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="95,325,169,352"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="134,275,135,310,130,309,132,280"/>
+<area shape="rect" id="Node000006" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="193,325,242,352"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="155,275,196,314,191,315,155,281"/>
+<area shape="rect" id="Node000007" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="187,400,248,427"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="219,350,220,385,215,383,216,355"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="157,475,278,501"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="219,425,220,460,215,458,216,429"/>
+</map>

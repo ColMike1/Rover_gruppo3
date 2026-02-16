@@ -1,0 +1,219 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+log/\+wcet\+\_\+monitor.h File Reference}
+\hypertarget{wcet__monitor_8h}{}\label{wcet__monitor_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/log/wcet\_monitor.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Inc/log/wcet\_monitor.h}}
+
+
+Monitoraggio del "{}\+Worst Case Execution Time"{} (WCET) per task e ISR.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+Include dependency graph for wcet\+\_\+monitor.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{wcet__monitor_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wcet__monitor_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\+\_\+id\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab4c87bdf3327583e315f637c2e2f2fc1}{WCET\+\_\+\+TASK\+\_\+\+ENCODER}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a430e29157015a36b5d03af50768cf553}{WCET\+\_\+\+TASK\+\_\+\+BOARD\+\_\+\+HEALTH}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a06bb3490e8b335f24642db4d3ed43600}{WCET\+\_\+\+TASK\+\_\+\+TX}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8af819808a5d54d729ebbb204a0111c54d}{WCET\+\_\+\+TASK\+\_\+\+RX}}
+, \newline
+\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a7d58a78057c0919c480aa3b6ec3d8f8c}{WCET\+\_\+\+TASK\+\_\+\+SUPERVISOR}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a0e7d59a37ebdea9a4dd863f09422e974}{WCET\+\_\+\+TASK\+\_\+\+CONTROL}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8acf6b7b5994409fb98dab4256c0b4c020}{WCET\+\_\+\+TASK\+\_\+\+ACTUATION}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8aff12a6de29af74b7f4bfccabff776808}{WCET\+\_\+\+MUTEX}}
+, \newline
+\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a9b55307dd4ce0eeb0ac7ee32e4417408}{WCET\+\_\+\+ISR\+\_\+\+UART\+\_\+4}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8afbb29f2746d094ae2f671984bbceed35}{WCET\+\_\+\+ISR\+\_\+\+UART\+\_\+5}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a64d6b807582a8283e3e8b47c3edde5ab}{WCET\+\_\+\+ISR\+\_\+\+DMA\+\_\+1}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab05942c6d188d46212b5e3be619b7ccd}{WCET\+\_\+\+ISR\+\_\+\+DMA\+\_\+2}}
+, \newline
+\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab406a7302686c509276381551082c48b}{WCET\+\_\+\+ISR\+\_\+\+DMA\+\_\+3}}
+, \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8adb98d3d045f9c7de485578fef3572791}{WCET\+\_\+\+ID\+\_\+\+MAX}}
+ \}
+\begin{DoxyCompactList}\small\item\em Identificativi univoci per i task e le ISR monitorati. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{wcet__monitor_8h_a97bca39385325a1e370291f3e7c81cec}{WCET\+\_\+\+Update}} (\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\+\_\+id\+\_\+t}} id, uint32\+\_\+t cycles)
+\begin{DoxyCompactList}\small\item\em Aggiorna il tempo di esecuzione registrato per un determinato ID. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{wcet__monitor_8h_ae9a460ef8d6b3d0a40feed0ade2cf128}{WCET\+\_\+\+Print}} (void)
+\begin{DoxyCompactList}\small\item\em Stampa o logga i risultati del monitoraggio WCET. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Monitoraggio del "{}\+Worst Case Execution Time"{} (WCET) per task e ISR. 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{wcet__monitor_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}\index{wcet\_monitor.h@{wcet\_monitor.h}!wcet\_id\_t@{wcet\_id\_t}}
+\index{wcet\_id\_t@{wcet\_id\_t}!wcet\_monitor.h@{wcet\_monitor.h}}
+\doxysubsubsection{\texorpdfstring{wcet\_id\_t}{wcet\_id\_t}}
+{\footnotesize\ttfamily \label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8} 
+enum \doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\+\_\+id\+\_\+t}}}
+
+
+
+Identificativi univoci per i task e le ISR monitorati. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_ENCODER@{WCET\_TASK\_ENCODER}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_ENCODER@{WCET\_TASK\_ENCODER}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab4c87bdf3327583e315f637c2e2f2fc1}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab4c87bdf3327583e315f637c2e2f2fc1} 
+WCET\+\_\+\+TASK\+\_\+\+ENCODER&Task gestione encoder \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_BOARD\_HEALTH@{WCET\_TASK\_BOARD\_HEALTH}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_BOARD\_HEALTH@{WCET\_TASK\_BOARD\_HEALTH}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a430e29157015a36b5d03af50768cf553}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a430e29157015a36b5d03af50768cf553} 
+WCET\+\_\+\+TASK\+\_\+\+BOARD\+\_\+\+HEALTH&Task monitoraggio hardware \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_TX@{WCET\_TASK\_TX}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_TX@{WCET\_TASK\_TX}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a06bb3490e8b335f24642db4d3ed43600}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a06bb3490e8b335f24642db4d3ed43600} 
+WCET\+\_\+\+TASK\+\_\+\+TX&Task trasmissione \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_RX@{WCET\_TASK\_RX}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_RX@{WCET\_TASK\_RX}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8af819808a5d54d729ebbb204a0111c54d}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8af819808a5d54d729ebbb204a0111c54d} 
+WCET\+\_\+\+TASK\+\_\+\+RX&Task ricezione \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_SUPERVISOR@{WCET\_TASK\_SUPERVISOR}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_SUPERVISOR@{WCET\_TASK\_SUPERVISOR}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a7d58a78057c0919c480aa3b6ec3d8f8c}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a7d58a78057c0919c480aa3b6ec3d8f8c} 
+WCET\+\_\+\+TASK\+\_\+\+SUPERVISOR&Task supervisore di sistema \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_CONTROL@{WCET\_TASK\_CONTROL}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_CONTROL@{WCET\_TASK\_CONTROL}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a0e7d59a37ebdea9a4dd863f09422e974}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a0e7d59a37ebdea9a4dd863f09422e974} 
+WCET\+\_\+\+TASK\+\_\+\+CONTROL&Task legge di controllo \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_TASK\_ACTUATION@{WCET\_TASK\_ACTUATION}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_TASK\_ACTUATION@{WCET\_TASK\_ACTUATION}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8acf6b7b5994409fb98dab4256c0b4c020}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8acf6b7b5994409fb98dab4256c0b4c020} 
+WCET\+\_\+\+TASK\+\_\+\+ACTUATION&Task attuazione motori \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_MUTEX@{WCET\_MUTEX}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_MUTEX@{WCET\_MUTEX}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8aff12a6de29af74b7f4bfccabff776808}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8aff12a6de29af74b7f4bfccabff776808} 
+WCET\+\_\+\+MUTEX&Monitoraggio tempi di attesa Mutex \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_ISR\_UART\_4@{WCET\_ISR\_UART\_4}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_ISR\_UART\_4@{WCET\_ISR\_UART\_4}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a9b55307dd4ce0eeb0ac7ee32e4417408}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a9b55307dd4ce0eeb0ac7ee32e4417408} 
+WCET\+\_\+\+ISR\+\_\+\+UART\+\_\+4&Interrupt Service Routine UART 4 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_ISR\_UART\_5@{WCET\_ISR\_UART\_5}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_ISR\_UART\_5@{WCET\_ISR\_UART\_5}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8afbb29f2746d094ae2f671984bbceed35}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8afbb29f2746d094ae2f671984bbceed35} 
+WCET\+\_\+\+ISR\+\_\+\+UART\+\_\+5&Interrupt Service Routine UART 5 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_ISR\_DMA\_1@{WCET\_ISR\_DMA\_1}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_ISR\_DMA\_1@{WCET\_ISR\_DMA\_1}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a64d6b807582a8283e3e8b47c3edde5ab}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8a64d6b807582a8283e3e8b47c3edde5ab} 
+WCET\+\_\+\+ISR\+\_\+\+DMA\+\_\+1&Interrupt Service Routine DMA 1 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_ISR\_DMA\_2@{WCET\_ISR\_DMA\_2}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_ISR\_DMA\_2@{WCET\_ISR\_DMA\_2}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab05942c6d188d46212b5e3be619b7ccd}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab05942c6d188d46212b5e3be619b7ccd} 
+WCET\+\_\+\+ISR\+\_\+\+DMA\+\_\+2&Interrupt Service Routine DMA 2 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_ISR\_DMA\_3@{WCET\_ISR\_DMA\_3}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_ISR\_DMA\_3@{WCET\_ISR\_DMA\_3}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab406a7302686c509276381551082c48b}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8ab406a7302686c509276381551082c48b} 
+WCET\+\_\+\+ISR\+\_\+\+DMA\+\_\+3&Interrupt Service Routine DMA 3 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WCET\_ID\_MAX@{WCET\_ID\_MAX}!wcet\_monitor.h@{wcet\_monitor.h}}
+\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_ID\_MAX@{WCET\_ID\_MAX}}
+}\Hypertarget{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8adb98d3d045f9c7de485578fef3572791}\label{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8adb98d3d045f9c7de485578fef3572791} 
+WCET\+\_\+\+ID\+\_\+\+MAX&Limite superiore per l\textquotesingle{}array di monitoraggio \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{wcet__monitor_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{wcet__monitor_8h_ae9a460ef8d6b3d0a40feed0ade2cf128}\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_Print@{WCET\_Print}}
+\index{WCET\_Print@{WCET\_Print}!wcet\_monitor.h@{wcet\_monitor.h}}
+\doxysubsubsection{\texorpdfstring{WCET\_Print()}{WCET\_Print()}}
+{\footnotesize\ttfamily \label{wcet__monitor_8h_ae9a460ef8d6b3d0a40feed0ade2cf128} 
+void WCET\+\_\+\+Print (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Stampa o logga i risultati del monitoraggio WCET. 
+
+Stampa o logga i risultati del monitoraggio WCET.
+
+Converte i cicli in microsecondi utilizzando la frequenza di clock di sistema. Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{wcet__monitor_8h_ae9a460ef8d6b3d0a40feed0ade2cf128_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{wcet__monitor_8h_a97bca39385325a1e370291f3e7c81cec}\index{wcet\_monitor.h@{wcet\_monitor.h}!WCET\_Update@{WCET\_Update}}
+\index{WCET\_Update@{WCET\_Update}!wcet\_monitor.h@{wcet\_monitor.h}}
+\doxysubsubsection{\texorpdfstring{WCET\_Update()}{WCET\_Update()}}
+{\footnotesize\ttfamily \label{wcet__monitor_8h_a97bca39385325a1e370291f3e7c81cec} 
+void WCET\+\_\+\+Update (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{wcet__monitor_8h_a1399fd15b6181acf8067f46ab97a38a8}{wcet\+\_\+id\+\_\+t}}}]{id}{, }\item[{uint32\+\_\+t}]{cycles}{}\end{DoxyParamCaption})}
+
+
+
+Aggiorna il tempo di esecuzione registrato per un determinato ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identificativo della risorsa. \\
+\hline
+{\em cycles} & Numero di cicli di clock impiegati.\\
+\hline
+\end{DoxyParams}
+Aggiorna il tempo di esecuzione registrato per un determinato ID.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identificativo del task o dell\textquotesingle{}ISR. \\
+\hline
+{\em cycles} & Cicli CPU misurati. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{wcet__monitor_8h_a97bca39385325a1e370291f3e7c81cec_icgraph}
+\end{center}
+\end{figure}

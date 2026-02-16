@@ -1,0 +1,180 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+actuation/\+actuation\+\_\+step.c File Reference}
+\hypertarget{actuation__step_8c}{}\label{actuation__step_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/actuation/actuation\_step.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/actuation/actuation\_step.c}}
+
+
+Step di attuazione open-\/loop per board 2.  
+
+
+{\ttfamily \+\#include "{}actuation/\+actuation.\+h"{}}\newline
+Include dependency graph for actuation\+\_\+step.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{actuation__step_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{actuation__step_8c_a5e274ea3b104f383bb5e203ed2653549}{MAX\+\_\+\+SPEED\+\_\+\+RPM}}~160.\+0f
+\begin{DoxyCompactList}\small\item\em Velocita\textquotesingle{} nominale massima usata per scalare i riferimenti \+[rpm]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{actuation__step_8c_a27383c0d3da3347e239a131f4bd679f4}{MAX\+\_\+\+SPEED\+\_\+\+DEGRADED\+\_\+\+RPM}}~80.\+0f
+\begin{DoxyCompactList}\small\item\em Limite di velocita\textquotesingle{} effettivo applicato in questa board \+[rpm]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{actuation__step_8c_a646c2a5d48eaa2f79404cd9cbe05e21b}{MAX\+\_\+\+DELTA\+\_\+\+RPM}}~4.\+0f
+\begin{DoxyCompactList}\small\item\em Variazione massima ammessa a ogni step \+[rpm/\+step]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{actuation__step_8c_a0637861f9419cef73e2e7e6210280e4e}{MAX\+\_\+\+VOLTAGE}}~12.\+0f
+\begin{DoxyCompactList}\small\item\em Tensione massima di riferimento inviata al driver motori \+[V]\+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \doxymbox{\hyperlink{actuation__step_8c_a2c20bfa1a064971b0fdf73213d02ab58}{rate\+\_\+limit}} (float target, float prev, float max\+\_\+delta)
+\begin{DoxyCompactList}\small\item\em Limita la variazione tra due comandi consecutivi. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{actuation__step_8c_a0991cd6500749efc61a1a5f6dde7eee5}{Actuation\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il modulo di attuazione. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{actuation__step_8c_a57cd4874f1f08d0e8f2ae018f4ea5bdc}{Actuation\+\_\+\+Step}} (float v\+\_\+ref, float omega\+\_\+ref)
+\begin{DoxyCompactList}\small\item\em Esegue uno step di attuazione open-\/loop per la board 2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Step di attuazione open-\/loop per board 2. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{actuation__step_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{actuation__step_8c_a646c2a5d48eaa2f79404cd9cbe05e21b}\index{actuation\_step.c@{actuation\_step.c}!MAX\_DELTA\_RPM@{MAX\_DELTA\_RPM}}
+\index{MAX\_DELTA\_RPM@{MAX\_DELTA\_RPM}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_DELTA\_RPM}{MAX\_DELTA\_RPM}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a646c2a5d48eaa2f79404cd9cbe05e21b} 
+\+\#define MAX\+\_\+\+DELTA\+\_\+\+RPM~4.\+0f}
+
+
+
+Variazione massima ammessa a ogni step \+[rpm/\+step]\+. 
+
+\Hypertarget{actuation__step_8c_a27383c0d3da3347e239a131f4bd679f4}\index{actuation\_step.c@{actuation\_step.c}!MAX\_SPEED\_DEGRADED\_RPM@{MAX\_SPEED\_DEGRADED\_RPM}}
+\index{MAX\_SPEED\_DEGRADED\_RPM@{MAX\_SPEED\_DEGRADED\_RPM}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_SPEED\_DEGRADED\_RPM}{MAX\_SPEED\_DEGRADED\_RPM}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a27383c0d3da3347e239a131f4bd679f4} 
+\+\#define MAX\+\_\+\+SPEED\+\_\+\+DEGRADED\+\_\+\+RPM~80.\+0f}
+
+
+
+Limite di velocita\textquotesingle{} effettivo applicato in questa board \+[rpm]\+. 
+
+\Hypertarget{actuation__step_8c_a5e274ea3b104f383bb5e203ed2653549}\index{actuation\_step.c@{actuation\_step.c}!MAX\_SPEED\_RPM@{MAX\_SPEED\_RPM}}
+\index{MAX\_SPEED\_RPM@{MAX\_SPEED\_RPM}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_SPEED\_RPM}{MAX\_SPEED\_RPM}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a5e274ea3b104f383bb5e203ed2653549} 
+\+\#define MAX\+\_\+\+SPEED\+\_\+\+RPM~160.\+0f}
+
+
+
+Velocita\textquotesingle{} nominale massima usata per scalare i riferimenti \+[rpm]\+. 
+
+\Hypertarget{actuation__step_8c_a0637861f9419cef73e2e7e6210280e4e}\index{actuation\_step.c@{actuation\_step.c}!MAX\_VOLTAGE@{MAX\_VOLTAGE}}
+\index{MAX\_VOLTAGE@{MAX\_VOLTAGE}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_VOLTAGE}{MAX\_VOLTAGE}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a0637861f9419cef73e2e7e6210280e4e} 
+\+\#define MAX\+\_\+\+VOLTAGE~12.\+0f}
+
+
+
+Tensione massima di riferimento inviata al driver motori \+[V]\+. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{actuation__step_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{actuation__step_8c_a0991cd6500749efc61a1a5f6dde7eee5}\index{actuation\_step.c@{actuation\_step.c}!Actuation\_Init@{Actuation\_Init}}
+\index{Actuation\_Init@{Actuation\_Init}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{Actuation\_Init()}{Actuation\_Init()}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a0991cd6500749efc61a1a5f6dde7eee5} 
+void Actuation\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il modulo di attuazione. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8c_a0991cd6500749efc61a1a5f6dde7eee5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8c_a0991cd6500749efc61a1a5f6dde7eee5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{actuation__step_8c_a57cd4874f1f08d0e8f2ae018f4ea5bdc}\index{actuation\_step.c@{actuation\_step.c}!Actuation\_Step@{Actuation\_Step}}
+\index{Actuation\_Step@{Actuation\_Step}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{Actuation\_Step()}{Actuation\_Step()}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a57cd4874f1f08d0e8f2ae018f4ea5bdc} 
+void Actuation\+\_\+\+Step (\begin{DoxyParamCaption}\item[{float}]{v\+\_\+ref}{, }\item[{float}]{omega\+\_\+ref}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step di attuazione open-\/loop per la board 2. 
+
+Esegue uno step di attuazione open-\/loop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+\_\+ref} & Riferimento di velocita\textquotesingle{} lineare normalizzato (in \+[-\/1, 1]\+). \\
+\hline
+{\em omega\+\_\+ref} & Riferimento di velocita\textquotesingle{} angolare normalizzato (in \+[-\/1, 1]\+). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8c_a57cd4874f1f08d0e8f2ae018f4ea5bdc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8c_a57cd4874f1f08d0e8f2ae018f4ea5bdc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{actuation__step_8c_a2c20bfa1a064971b0fdf73213d02ab58}\index{actuation\_step.c@{actuation\_step.c}!rate\_limit@{rate\_limit}}
+\index{rate\_limit@{rate\_limit}!actuation\_step.c@{actuation\_step.c}}
+\doxysubsubsection{\texorpdfstring{rate\_limit()}{rate\_limit()}}
+{\footnotesize\ttfamily \label{actuation__step_8c_a2c20bfa1a064971b0fdf73213d02ab58} 
+float rate\+\_\+limit (\begin{DoxyParamCaption}\item[{float}]{target}{, }\item[{float}]{prev}{, }\item[{float}]{max\+\_\+delta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Limita la variazione tra due comandi consecutivi. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Nuovo valore desiderato. \\
+\hline
+{\em prev} & Ultimo valore applicato. \\
+\hline
+{\em max\+\_\+delta} & Incremento/\+decremento massimo consentito per step. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Valore limitato da applicare in questo step. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuation__step_8c_a2c20bfa1a064971b0fdf73213d02ab58_icgraph}
+\end{center}
+\end{figure}

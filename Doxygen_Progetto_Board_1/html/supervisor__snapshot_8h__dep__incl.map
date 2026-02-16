@@ -1,0 +1,30 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/supervisor_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/supervisor_snapshot.h">
+<area shape="rect" id="Node000001" title="Buffer protetto per le decisioni prese dal Supervisore di Board 1." alt="" coords="1153,5,1389,80"/>
+<area shape="rect" id="Node000002" href="$comm__pack_8h.html" title="Funzioni per il pacchettizzamento dei dati di telemetria e stato." alt="" coords="279,128,482,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1135,56,864,86,704,107,545,131,483,143,482,137,544,125,703,101,863,81,1140,55"/>
+<area shape="rect" id="Node000005" href="$comm__tx__task_8c.html" title="Implementazione del task di trasmissione periodica della telemetria." alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="1135,52,979,66,808,83,665,105,616,117,590,130,572,156,562,188,559,220,560,252,555,249,554,220,557,187,567,154,587,126,614,112,664,99,807,78,978,61,1141,51"/>
+<area shape="rect" id="Node000006" href="$snapshot_8h.html" title="Header aggregatore per tutti i tipi di snapshot di sistema." alt="" coords="600,128,803,203"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1135,65,984,94,817,131,804,134,803,129,816,125,983,89,1141,64"/>
+<area shape="rect" id="Node000008" href="$actuation__step_8c.html" title="Implementazione del task di attuazione per il controllo motori." alt="" coords="828,128,1031,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1155,85,1032,131,1031,126,1150,86"/>
+<area shape="rect" id="Node000009" href="$control__step_8c.html" title="Orchestrazione del task di controllo e gestione delle strategie di fallback." alt="" coords="1056,128,1259,203"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="1228,91,1193,130,1191,125,1223,93"/>
+<area shape="rect" id="Node000010" href="$encoder__step_8c.html" title=" " alt="" coords="1284,128,1487,203"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="1317,89,1353,128,1348,127,1315,94"/>
+<area shape="rect" id="Node000011" href="$led__task_8c.html" title="Gestione della segnalazione visiva tramite LED di stato." alt="" coords="1512,128,1715,203"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="1390,83,1514,128,1509,128,1390,88"/>
+<area shape="rect" id="Node000012" href="$log__format_8c.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="1740,128,1943,203"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="1404,61,1560,89,1728,125,1743,132,1737,131,1726,131,1559,94,1404,67"/>
+<area shape="rect" id="Node000013" href="$supervisor__snapshot_8c.html" title="Container per lo stato del supervisore di sistema." alt="" coords="1967,128,2204,203"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="1404,52,1661,79,1809,100,1956,125,1969,131,1964,130,1954,131,1808,105,1660,84,1404,57"/>
+<area shape="rect" id="Node000014" href="$supervisor__task_8c.html" title="Implementazione del Task Supervisore di Board 1." alt="" coords="2228,128,2444,203"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="1404,45,1569,52,1772,67,1995,90,2217,125,2231,131,2225,130,2216,131,1994,96,1772,72,1569,58,1405,50"/>
+<area shape="rect" id="Node000003" href="$comm_8h.html" title="Header principale del modulo di comunicazione." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="286,208,192,252,189,248,281,210"/>
+<area shape="rect" id="Node000004" href="$comm__pack_8c.html" title="Funzioni per il packaging dei messaggi di comunicazione (Serializzazione)." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="363,216,351,252,347,248,359,219"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="449,209,510,251,505,250,448,214"/>
+<area shape="rect" id="Node000007" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="689,251,893,325"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="739,213,766,251,761,249,737,218"/>
+</map>

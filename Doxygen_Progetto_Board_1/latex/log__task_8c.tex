@@ -1,0 +1,96 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+log/\+log\+\_\+task.c File Reference}
+\hypertarget{log__task_8c}{}\label{log__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/log/log\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/log/log\_task.c}}
+
+
+Task di logging periodico.  
+
+
+{\ttfamily \+\#include "{}log/\+log\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+log\+\_\+format.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+encoder\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+board\+\_\+health\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}usart.\+h"{}}\newline
+{\ttfamily \+\#include "{}log/\+wcet\+\_\+monitor.\+h"{}}\newline
+Include dependency graph for log\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{log__task_8c_a2b09af7103ab5880e3611fe8e4e45c0a}{LOG\+\_\+\+BUF\+\_\+\+LEN}}~512
+\begin{DoxyCompactList}\small\item\em Dimensione del buffer locale per la riga di log. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{log__task_8c_aa025a12d45f60c7d0eae249e61f0c7f9}{\+\_\+write}} (int file, char \texorpdfstring{$\ast$}{*}ptr, int len)
+\begin{DoxyCompactList}\small\item\em Override della funzione \+\_\+write per reindirizzare printf su UART. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb}{Log\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue la raccolta dati e la stampa del report di sistema e dei tempi WCET. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task di logging periodico. 
+
+Estrae gli snapshot dai vari moduli e li invia sulla LPUART per il monitoraggio esterno. 
+
+\label{doc-define-members}
+\Hypertarget{log__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{log__task_8c_a2b09af7103ab5880e3611fe8e4e45c0a}\index{log\_task.c@{log\_task.c}!LOG\_BUF\_LEN@{LOG\_BUF\_LEN}}
+\index{LOG\_BUF\_LEN@{LOG\_BUF\_LEN}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_BUF\_LEN}{LOG\_BUF\_LEN}}
+{\footnotesize\ttfamily \label{log__task_8c_a2b09af7103ab5880e3611fe8e4e45c0a} 
+\+\#define LOG\+\_\+\+BUF\+\_\+\+LEN~512}
+
+
+
+Dimensione del buffer locale per la riga di log. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{log__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{log__task_8c_aa025a12d45f60c7d0eae249e61f0c7f9}\index{log\_task.c@{log\_task.c}!\_write@{\_write}}
+\index{\_write@{\_write}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{\_write()}{\_write()}}
+{\footnotesize\ttfamily \label{log__task_8c_aa025a12d45f60c7d0eae249e61f0c7f9} 
+int \+\_\+write (\begin{DoxyParamCaption}\item[{int}]{file}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{int}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Override della funzione \+\_\+write per reindirizzare printf su UART. 
+
+\Hypertarget{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb}\index{log\_task.c@{log\_task.c}!Log\_TaskStep@{Log\_TaskStep}}
+\index{Log\_TaskStep@{Log\_TaskStep}!log\_task.c@{log\_task.c}}
+\doxysubsubsection{\texorpdfstring{Log\_TaskStep()}{Log\_TaskStep()}}
+{\footnotesize\ttfamily \label{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb} 
+void Log\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue la raccolta dati e la stampa del report di sistema e dei tempi WCET. 
+
+Raccoglie i dati dagli snapshot e li invia al supporto di memorizzazione. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log__task_8c_a60fce6a6a39cff4742e6f9b4b56ab7fb_icgraph}
+\end{center}
+\end{figure}

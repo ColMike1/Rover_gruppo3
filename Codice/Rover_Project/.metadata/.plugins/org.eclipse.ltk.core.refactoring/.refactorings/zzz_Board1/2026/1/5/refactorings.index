@@ -1,7 +1,0 @@
-1769891384297	Rename resource 'actuation_task.h'
-1769891438301	Rename resource 'control_task.h'
-1769891483138	Rename resource 'encoder_task.h'
-1769891667354	Rename resource 'encoder_snapshot.h'
-1769896616671	Rename resource 'control_cycle_snapshot.h'
-1769896646642	Rename resource 'actuation_task.c'
-1769902107390	Rename resource 'control_task.c'

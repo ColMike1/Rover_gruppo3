@@ -1,0 +1,14 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/control/control.h">
+<area shape="rect" id="Node000001" title="Header aggregatore del modulo di controllo." alt="" coords="88,5,291,80"/>
+<area shape="rect" id="Node000002" href="$control__step_8h.html" title="Interfaccia per il loop di controllo di alto livello." alt="" coords="5,128,152,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,82,106,119,102,116,149,78"/>
+<area shape="rect" id="Node000003" href="$control__types_8h.html" title="Definizioni delle strutture dati per l&#39;input e l&#39;output del controllo." alt="" coords="108,203,262,229"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="190,79,188,188,183,186,186,83"/>
+<area shape="rect" id="Node000005" href="$control__law_8h.html" title="Implementazione dell&#39;algoritmo della legge di controllo (PID, logica di sterzata)." alt="" coords="227,128,367,155"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="230,78,274,117,269,118,230,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,153,156,193,151,195,97,158"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="210,277,275,304"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="196,227,226,266,221,265,194,232"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="280,154,219,196,216,192,275,156"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="297,153,290,190,277,230,260,266,256,262,272,228,285,188,293,157"/>
+</map>

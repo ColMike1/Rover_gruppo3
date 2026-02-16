@@ -1,0 +1,20 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/board_health_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/board_health_snapshot.h">
+<area shape="rect" id="Node000001" title="Buffer protetto per lo scambio dati dello stato hardware." alt="" coords="518,5,768,80"/>
+<area shape="rect" id="Node000002" href="$log__format_8h.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="139,128,342,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="503,86,361,131,343,136,341,131,360,125,508,84"/>
+<area shape="rect" id="Node000004" href="$log__task_8c.html" title="Task di logging periodico." alt="" coords="233,251,437,325"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="501,73,452,97,406,130,383,157,366,189,344,252,340,249,361,187,379,154,403,126,450,93,506,71"/>
+<area shape="rect" id="Node000005" href="$snapshot_8h.html" title="Header aggregatore per tutti i tipi di snapshot di sistema." alt="" coords="416,128,619,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="596,90,557,130,554,125,592,92"/>
+<area shape="rect" id="Node000007" href="$board__health__task_8c.html" title="Implementazione del task periodico per il monitoraggio dei parametri vitali della board." alt="" coords="644,128,893,203"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="693,89,733,128,728,127,691,94"/>
+<area shape="rect" id="Node000008" href="$board__health__snapshot_8c.html" title="Gestione thread&#45;safe dello snapshot dei parametri vitali della scheda." alt="" coords="917,128,1169,203"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="780,82,924,127,918,128,780,88"/>
+<area shape="rect" id="Node000009" href="$supervisor__task_8c.html" title="Implementazione del Task Supervisore di Board 1." alt="" coords="1192,128,1408,203"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="783,58,973,86,1181,125,1195,131,1189,131,1180,131,972,91,783,63"/>
+<area shape="rect" id="Node000003" href="$log__format_8c.html" title="Utility per la formattazione delle stringhe di log." alt="" coords="5,251,209,325"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="191,212,149,252,146,248,186,215"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="280,213,309,251,304,250,278,218"/>
+<area shape="rect" id="Node000006" href="$app__freertos_8c.html" title="Codice per le applicazioni FreeRTOS e la gestione dei task di sistema." alt="" coords="461,251,665,325"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="538,215,552,251,547,249,535,220"/>
+</map>

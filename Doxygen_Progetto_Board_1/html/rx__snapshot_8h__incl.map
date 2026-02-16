@@ -1,0 +1,18 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/rx_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Inc/snapshot/rx_snapshot.h">
+<area shape="rect" id="Node000001" title="Buffer protetto per i dati ricevuti dall&#39;altra board." alt="" coords="207,5,410,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="247,219,311,245"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,62,149,75,93,90,47,109,30,119,19,130,11,143,8,154,10,164,15,173,37,190,69,203,152,219,234,228,229,229,151,224,68,208,34,194,11,177,5,166,3,154,6,141,14,126,27,115,44,104,91,85,148,70,208,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="28,136,117,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,83,116,132,114,127,227,78"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="140,128,298,171"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="279,79,248,118,245,114,275,82"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="322,128,476,171"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="341,78,374,117,369,116,339,83"/>
+<area shape="rect" id="Node000006" href="$wcet__monitor_8h.html" title="Monitoraggio del &quot;Worst Case Execution Time&quot; (WCET) per task e ISR." alt="" coords="500,136,631,163"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="400,78,523,129,518,130,399,83"/>
+<area shape="rect" id="Node000007" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="656,136,716,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="411,62,524,89,644,125,650,130,644,129,642,131,523,94,411,67"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="524,163,327,220,326,215,518,163"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="626,219,746,245"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="688,161,688,205,684,202,684,165"/>
+</map>

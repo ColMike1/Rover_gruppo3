@@ -1,8 +1,6 @@
-/*
- * ble_controller_snapshot.h
- *
- *  Created on: Jan 14, 2026
- *      Author: Sterm
+/**
+ * @file ble_controller_snapshot.h
+ * @brief Definizione dello snapshot BLE controller e API thread-safe.
  */
 
 #ifndef INC_SNAPSHOT_BLE_CONTROLLER_SNAPSHOT_H_
@@ -12,8 +10,7 @@
 #include "ble_controller/ble_controller_i2c.h"
 
 #include "cmsis_os.h"
-/* ================= SNAPSHOT ================= */
-
+/** @brief Snapshot dei dati acquisiti dal controller BLE. */
 typedef struct
 {
     uint32_t task_last_run_ms;     /* ultima esecuzione del task */
@@ -37,9 +34,22 @@ typedef struct
 } BleControllerSnapshot_t;
 
 
-/* ================= API ================= */
+/**
+ * @brief Registra il mutex usato per proteggere lo snapshot.
+ * @param mutex_handle Handle del mutex creato all'esterno.
+ */
 void BleControllerSnapshot_MutexInit(osMutexId_t mutex_handle);
+
+/**
+ * @brief Scrive lo snapshot BLE in sezione critica.
+ * @param snap Puntatore al dato sorgente da copiare.
+ */
 void BleControllerSnapshot_Write(const BleControllerSnapshot_t *snap);
+
+/**
+ * @brief Legge lo snapshot BLE in sezione critica.
+ * @param snap Puntatore al buffer di destinazione.
+ */
 void BleControllerSnapshot_Read(BleControllerSnapshot_t *snap);
 
 #endif /* INC_SNAPSHOT_BLE_CONTROLLER_SNAPSHOT_H_ */

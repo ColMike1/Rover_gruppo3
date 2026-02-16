@@ -1,0 +1,90 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Inc/\+comm/\+comm\+\_\+unpack.h File Reference}
+\hypertarget{comm__unpack_8h}{}\label{comm__unpack_8h}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_unpack.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/comm/comm\_unpack.h}}
+
+
+API di deserializzazione frame ricevuti da board 1.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+status.\+h"{}}\newline
+Include dependency graph for comm\+\_\+unpack.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Comm\+Unpack\+Status\+\_\+t \doxymbox{\hyperlink{comm__unpack_8h_ac9dd2b4cb118f9b7ef7f56d16f86814f}{Comm\+Unpack\+\_\+\+B2\+From\+B1}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint16\+\_\+t len, Comm\+Frame\+Header\+\_\+t \texorpdfstring{$\ast$}{*}header, Comm\+Payload\+B1\+\_\+t \texorpdfstring{$\ast$}{*}payload)
+\begin{DoxyCompactList}\small\item\em Effettua unpack e validazione di un frame Board1 -\/\texorpdfstring{$>$}{>} Board2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API di deserializzazione frame ricevuti da board 1. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__unpack_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__unpack_8h_ac9dd2b4cb118f9b7ef7f56d16f86814f}\index{comm\_unpack.h@{comm\_unpack.h}!CommUnpack\_B2FromB1@{CommUnpack\_B2FromB1}}
+\index{CommUnpack\_B2FromB1@{CommUnpack\_B2FromB1}!comm\_unpack.h@{comm\_unpack.h}}
+\doxysubsubsection{\texorpdfstring{CommUnpack\_B2FromB1()}{CommUnpack\_B2FromB1()}}
+{\footnotesize\ttfamily \label{comm__unpack_8h_ac9dd2b4cb118f9b7ef7f56d16f86814f} 
+Comm\+Unpack\+Status\+\_\+t Comm\+Unpack\+\_\+\+B2\+From\+B1 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint16\+\_\+t}]{len}{, }\item[{Comm\+Frame\+Header\+\_\+t \texorpdfstring{$\ast$}{*}}]{header}{, }\item[{Comm\+Payload\+B1\+\_\+t \texorpdfstring{$\ast$}{*}}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Effettua unpack e validazione di un frame Board1 -\/\texorpdfstring{$>$}{>} Board2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Buffer RX. \\
+\hline
+{\em len} & Lunghezza RX. \\
+\hline
+{\em header} & Header di output. \\
+\hline
+{\em payload} & Payload di output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}unpack.
+\end{DoxyReturn}
+Effettua unpack e validazione di un frame Board1 -\/\texorpdfstring{$>$}{>} Board2.
+
+Verifica prima la coerenza dei puntatori, poi la lunghezza minima e infine il CRC16-\/\+CCITT del frame completo.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em buf} & Buffer ricevuto. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em len} & Lunghezza del buffer. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em header} & Header estratto dal frame. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em payload} & Payload estratto dal frame. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}operazione di unpack. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__unpack_8h_ac9dd2b4cb118f9b7ef7f56d16f86814f_icgraph}
+\end{center}
+\end{figure}

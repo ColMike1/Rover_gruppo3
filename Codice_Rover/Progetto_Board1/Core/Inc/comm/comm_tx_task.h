@@ -1,5 +1,5 @@
 /**
- * @file tx_task.h
+ * @file comm_tx_task.h
  * @brief Gestione del task di trasmissione dei messaggi.
  */
 

@@ -1,0 +1,47 @@
+\doxysection{supervisor\+\_\+snapshot.\+h}
+\hypertarget{supervisor__snapshot_8h_source}{}\label{supervisor__snapshot_8h_source}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/supervisor\_snapshot.h@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Inc/snapshot/supervisor\_snapshot.h}}
+\doxymbox{\hyperlink{supervisor__snapshot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ INC\_SNAPSHOT\_SUPERVISOR\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ INC\_SNAPSHOT\_SUPERVISOR\_SNAPSHOT\_H\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}shared\_headers/supervisor\_command.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}cmsis\_os.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{/*\ Timestamp\ decisione\ */}}
+\DoxyCodeLine{00018\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a637dce249329a8beefcab8027633806a}{task\_last\_run\_ms}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \textcolor{comment}{/*\ Fault\ di\ board\ 2\ presenti\ derivanti\ da\ stato\ degradato\ delle\ periferiche.\ */}}
+\DoxyCodeLine{00021\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_a5e4f3385ebdd376c70bab322c3c53ec4}{degraded\_mask}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{comment}{/*\ Fault\ di\ board\ 2\ presenti\ derivanti\ da\ stato\ critico\ delle\ periferiche.\ */}}
+\DoxyCodeLine{00024\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_aee044de09cd7f76e54695de3b6d84ae7}{critical\_mask}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{comment}{/*\ Comando\ deciso\ da\ board\ 2\ */}}
+\DoxyCodeLine{00027\ \ \ SupervisorCommand\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_ac49af5f58d34733270f9bba724800c73}{command}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{/*\ Coerenza\ dei\ dati\ ricevuti\ da\ imu,\ utile\ a\ rilevare\ motor\ fault\ */}}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_aaa03f8ad7d4072be447713d9b1e59d87}{isMotionConsistent}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{/*\ Heartbeat\ /\ alive\ counter\ */}}
+\DoxyCodeLine{00033\ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t_ae1ae44c63049f5edeb612df180025a00}{alive\_counter}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{SupervisorSnapshot\_t}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{supervisor__snapshot_8h_ac1ef54ef5bfc41a4a97c0f1145ccf81a}{SupervisorSnapshot\_MutexInit}}(osMutexId\_t\ mutex\_handle);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{supervisor__snapshot_8h_ac191454fce2ffb5f2c8a3d57229fffc0}{SupervisorSnapshot\_Write}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{SupervisorSnapshot\_t}}\ *src);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{supervisor__snapshot_8h_a86490218ec807bc7b449e09eb268b4e4}{SupervisorSnapshot\_Read}}(\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{SupervisorSnapshot\_t}}\ *dst);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_SNAPSHOT\_SUPERVISOR\_SNAPSHOT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

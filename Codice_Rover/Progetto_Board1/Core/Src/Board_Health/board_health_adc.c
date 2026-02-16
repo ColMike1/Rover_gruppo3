@@ -1,8 +1,6 @@
 /**
  * @file board_health_adc.c
  * @brief Gestione dei canali ADC per il monitoraggio dello stato della scheda (Temperatura e Batteria).
- * @date Jan 8, 2026
- * @author Sterm
  */
 
 #include "board_health/board_health_adc.h"

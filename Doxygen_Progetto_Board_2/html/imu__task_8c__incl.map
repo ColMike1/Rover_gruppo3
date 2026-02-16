@@ -1,0 +1,25 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/IMU/imu_task.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Src/IMU/imu_task.c">
+<area shape="rect" id="Node000001" title="Task di acquisizione IMU e pubblicazione snapshot." alt="" coords="186,5,390,80"/>
+<area shape="rect" id="Node000002" href="$imu_8h.html" title="Header di aggregazione del modulo IMU." alt="" coords="96,128,178,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,83,171,121,168,118,232,78"/>
+<area shape="rect" id="Node000009" href="$imu__snapshot_8h.html" title="Definizione dello snapshot IMU e API thread&#45;safe." alt="" coords="203,128,373,155"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="289,78,290,113,285,112,287,83"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="398,128,493,155"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="348,78,414,119,409,120,348,83"/>
+<area shape="rect" id="Node000003" href="$imu__i2c_8h.html" title="API I2C per inizializzazione e lettura sensore MPU6050." alt="" coords="144,203,250,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="148,153,180,190,175,191,148,158"/>
+<area shape="rect" id="Node000008" href="$imu__task_8h.html" title="API del task periodico IMU." alt="" coords="5,203,120,229"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="123,158,88,194,84,190,125,153"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="250,277,315,304"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="212,227,259,267,254,268,212,233"/>
+<area shape="rect" id="Node000005" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="172,277,222,304"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="198,227,200,263,195,261,196,232"/>
+<area shape="rect" id="Node000006" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="167,352,227,379"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="199,302,200,337,195,335,196,307"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="137,427,257,453"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="199,377,199,412,195,410,195,381"/>
+<area shape="poly" id="edge10_Node000009_Node000003" title=" " alt="" coords="270,157,226,195,223,191,274,153"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="289,153,286,263,281,261,286,157"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="325,203,413,229"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="302,153,347,192,341,193,302,158"/>
+</map>

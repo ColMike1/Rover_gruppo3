@@ -1,8 +1,6 @@
 /**
  * @file board_health_task.c
  * @brief Implementazione del task periodico per il monitoraggio dei parametri vitali della board.
- * @date Jan 8, 2026
- * @author Sterm
  */
 
 #include "board_health/board_health.h"

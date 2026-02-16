@@ -3,8 +3,6 @@
  * @brief Implementazione degli algoritmi di controllo (PI) per la dinamica del rover.
  * @details Gestisce il controllo della velocità globale, il bilanciamento tra assi e
  * la logica differenziale per la sterzata.
- * @date Jan 12, 2026
- * @author Sterm
  */
 
 #include <actuation/actuation_step.h>
@@ -28,7 +26,7 @@ typedef struct {
 static const float Ts = 0.010f;   /* 10 ms */
 
 /* ===== Controllori ===== */
-/** * @brief Controllore Master per la velocità media del rover.
+/** @brief Controllore Master per la velocità media del rover.
  * @note Tuning finale per un tempo di risposta di circa 1 secondo.
  */
 /*

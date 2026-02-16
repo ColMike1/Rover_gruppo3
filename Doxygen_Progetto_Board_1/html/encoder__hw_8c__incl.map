@@ -1,0 +1,13 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/encoder/encoder_hw.c" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Core/Src/encoder/encoder_hw.c">
+<area shape="rect" id="Node000001" title="Interfaccia di basso livello per la lettura degli encoder hardware via timer." alt="" coords="42,5,245,80"/>
+<area shape="rect" id="Node000002" href="$encoder__hw_8h.html" title="Driver di basso livello per l&#39;interfacciamento con gli encoder hardware." alt="" coords="5,128,157,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,83,100,116,95,113,121,78"/>
+<area shape="rect" id="Node000004" href="$tim_8h.html" title="This file contains all the function prototypes for the tim.c file." alt="" coords="181,128,232,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="168,78,193,115,187,115,167,83"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="49,203,113,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="82,153,84,188,78,187,80,158"/>
+<area shape="rect" id="Node000005" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="176,203,236,229"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="208,153,209,188,204,186,205,157"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="146,277,266,304"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="208,228,209,263,204,260,204,232"/>
+</map>

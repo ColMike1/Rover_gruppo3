@@ -1,0 +1,17 @@
+<map id="StartTask_Rx" name="StartTask_Rx">
+<area shape="rect" id="Node000001" title="Function implementing the Task_Rx thread." alt="" coords="5,56,107,83"/>
+<area shape="rect" id="Node000002" href="$comm__rx__task_8c.html#afb0f081d74dae335aa4554d7c2a0b9fb" title="Inizializza il task RX." alt="" coords="159,19,250,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,54,146,46,142,49,108,59"/>
+<area shape="rect" id="Node000005" href="$comm__rx__task_8c.html#abf9927a637b1876b563ab33f41de5357" title="Esegue uno step del task RX." alt="" coords="155,81,255,108"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="107,75,142,82,137,85,108,81"/>
+<area shape="rect" id="Node000003" href="$comm__uart_8c.html#ad8213afef04db7813169c63f63f05f53" title="Inizializza il modulo UART nel contesto del task chiamante." alt="" coords="335,5,445,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="250,26,322,23,317,25,251,31"/>
+<area shape="rect" id="Node000004" href="$comm__uart_8c.html#a7b4ba1eaabd45fdae1cd82c22e3b5e0a" title="Registra il task da notificare quando arrivano dati RX." alt="" coords="525,5,712,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="445,16,512,18,507,19,446,21"/>
+<area shape="rect" id="Node000006" href="$comm__uart_8c.html#aa7a2f2fa5ecbe31a88a1b315c21251bb" title="Estrae un byte dal buffer RX." alt="" coords="320,56,460,83"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="255,85,307,80,302,82,256,90"/>
+<area shape="rect" id="Node000007" href="$comm__unpack_8c.html#ac9dd2b4cb118f9b7ef7f56d16f86814f" title="Effettua unpack e validazione di un frame Board1 &#45;&gt; Board2." alt="" coords="303,107,477,133"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="255,99,290,106,285,106,256,104"/>
+<area shape="rect" id="Node000008" href="$rx__snapshot_8c.html#a642405a74aba520b9a133c82c2800f71" title="Scrive lo snapshot RX in sezione critica." alt="" coords="325,157,455,184"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="230,106,304,143,324,152,319,152,302,148,229,111"/>
+</map>

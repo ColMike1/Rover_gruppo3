@@ -1,0 +1,557 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Src/\+\+Board\+\_\+\+Health/\+board\+\_\+health\+\_\+adc.c File Reference}
+\hypertarget{board__health__adc_8c}{}\label{board__health__adc_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/Board\_Health/board\_health\_adc.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board1/Core/Src/Board\_Health/board\_health\_adc.c}}
+
+
+Gestione dei canali ADC per il monitoraggio dello stato della scheda (Temperatura e Batteria).  
+
+
+{\ttfamily \+\#include "{}board\+\_\+health/\+board\+\_\+health\+\_\+adc.\+h"{}}\newline
+{\ttfamily \+\#include "{}stm32g4xx\+\_\+hal.\+h"{}}\newline
+{\ttfamily \+\#include $<$stddef.\+h$>$}\newline
+Include dependency graph for board\+\_\+health\+\_\+adc.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_af5a42501db201b00595d67bdeb096fcc}{ADC\+\_\+\+MAX\+\_\+\+COUNTS}}~(4095.\+0f)
+\begin{DoxyCompactList}\small\item\em Risoluzione massima ADC (12-\/bit). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a3b0b4c0b769c6b4a59ba8649d5ec9be4}{TEMP\+\_\+\+MIN\+\_\+\+DEGC}}~(-\/40.\+0f)
+\begin{DoxyCompactList}\small\item\em Limite inferiore temperatura operativa \+[°C]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a103784579a5ee0a7509571374ef33b37}{TEMP\+\_\+\+MAX\+\_\+\+DEGC}}~(125.\+0f)
+\begin{DoxyCompactList}\small\item\em Limite superiore temperatura operativa \+[°C]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_ab7991331b7c5667346dbbd9d08615c7c}{BATT\+\_\+\+MIN\+\_\+V}}~(7.\+0f)
+\begin{DoxyCompactList}\small\item\em Soglia minima tensione batteria per validità lettura \+[V]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_af9384dc68f8559c04ab3ce820939a364}{BATT\+\_\+\+MAX\+\_\+V}}~(15.\+0f)
+\begin{DoxyCompactList}\small\item\em Soglia massima tensione batteria ammessa \+[V]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a517852f1b2374aa34b670a2bb12ca916}{BATT\+\_\+\+DIVIDER\+\_\+\+GAIN}}~((14700.\+0f + 4700.\+0f) /\+ 4700.\+0f)
+\begin{DoxyCompactList}\small\item\em Guadagno del partitore di tensione esterno. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a153461b6ac3565edacfcb5a11ca0c60b}{VREFINT\+\_\+\+CAL\+\_\+\+ADDR\+\_\+\+VAL}}~((uint16\+\_\+t \texorpdfstring{$\ast$}{*})((uint32\+\_\+t)0x1\+FFF75\+AAU))
+\begin{DoxyCompactList}\small\item\em Indirizzo di memoria del valore di calibrazione VREFINT. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a0c252da1509624275b4555b03396f098}{TSENSE\+\_\+\+CAL1\+\_\+\+ADDR\+\_\+\+VAL}}~((uint16\+\_\+t \texorpdfstring{$\ast$}{*})((uint32\+\_\+t)0x1\+FFF75\+A8U))
+\begin{DoxyCompactList}\small\item\em Indirizzo di calibrazione sensore temperatura a 30°C. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_aeca175204c2cfb40d02505df633e15cc}{TSENSE\+\_\+\+CAL2\+\_\+\+ADDR\+\_\+\+VAL}}~((uint16\+\_\+t \texorpdfstring{$\ast$}{*})((uint32\+\_\+t)0x1\+FFF75\+CAU))
+\begin{DoxyCompactList}\small\item\em Indirizzo di calibrazione sensore temperatura a 110°C. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_adf368057df0322a962ea7a483cf20568}{TEMP\+\_\+\+MA\+\_\+\+WINDOW}}~10U
+\begin{DoxyCompactList}\small\item\em Dimensione della finestra per la media mobile della temperatura. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a5c3b250f549d76eda891354bb5fec5c1}{BATT\+\_\+\+MA\+\_\+\+WINDOW}}~10U
+\begin{DoxyCompactList}\small\item\em Dimensione della finestra per la media mobile della batteria. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a52b294fbd333bcf5de321c77c8c45e8f}{ADC\+\_\+\+RAW\+\_\+\+VREF}}~0U
+\begin{DoxyCompactList}\small\item\em Indice del canale VREF interno nel buffer DMA. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_ab100684ac7bedb9d1c30a3a8d096865a}{ADC\+\_\+\+RAW\+\_\+\+TEMP}}~1U
+\begin{DoxyCompactList}\small\item\em Indice del canale Sensore di Temperatura nel buffer DMA. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_aa4698073eb5dce15e0f74a6cdcf84e18}{ADC\+\_\+\+RAW\+\_\+\+BATT}}~2U
+\begin{DoxyCompactList}\small\item\em Indice del canale Tensione Batteria nel buffer DMA. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{board__health__adc_8c_a9b37a456fd8450ed873b1cf03befc124}{BATT\+\_\+\+LUT\+\_\+\+SIZE}}~(sizeof(\doxymbox{\hyperlink{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88}{batt\+\_\+pct\+\_\+lut}})/\+sizeof(\doxymbox{\hyperlink{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88}{batt\+\_\+pct\+\_\+lut}}\+[0]\+))
+\begin{DoxyCompactList}\small\item\em Macro per ottenere la dimensione della LUT batteria. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{board__health__adc_8c_a0097552fbc41c90ef2e1e11a409491fd}{Board\+Health\+ADC\+\_\+\+Load\+Cal}} (void)
+\begin{DoxyCompactList}\small\item\em Carica i valori di calibrazione di fabbrica dai registri di sistema STM32. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{board__health__adc_8c_a108165b5d41101fa07468cebada6609f}{Board\+Health\+ADC\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il sottosistema ADC per il monitoraggio board. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{board__health__adc_8c_a9cf6404847167cea46c41b3a4aca731f}{Moving\+Average\+\_\+\+Update}} (float \texorpdfstring{$\ast$}{*}const buf, uint8\+\_\+t size, uint8\+\_\+t \texorpdfstring{$\ast$}{*}const idx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}const count, float sample)
+\begin{DoxyCompactList}\small\item\em Calcola l\textquotesingle{}aggiornamento della media mobile per un dato buffer. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{board__health__adc_8c_a1ae2de8a6d0a24f56c2514b5bb70fe36}{Battery\+\_\+\+Voltage\+To\+Percent}} (float v)
+\begin{DoxyCompactList}\small\item\em Converte la tensione della batteria in percentuale tramite interpolazione lineare su LUT. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} \doxymbox{\hyperlink{board__health__adc_8c_aff8a17cd230bd0dc31d24650a70b831d}{Board\+Health\+\_\+\+Read\+Temperature}} (float \texorpdfstring{$\ast$}{*}const temp\+\_\+degC)
+\begin{DoxyCompactList}\small\item\em Legge ed elabora la temperatura interna del microcontrollore. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} \doxymbox{\hyperlink{board__health__adc_8c_a6b51bda7bc1b0759dcc5cca821d3f03a}{Board\+Health\+\_\+\+Read\+Battery}} (float \texorpdfstring{$\ast$}{*}const battery\+\_\+pct)
+\begin{DoxyCompactList}\small\item\em Legge ed elabora la tensione della batteria convertendola in percentuale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+ADC\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{board__health__adc_8c_a22b804736f5648d52f639b2647d4ed13}{hadc1}}
+\begin{DoxyCompactList}\small\item\em Handle dell\textquotesingle{}ADC1 generato da Cube\+MX per la scansione dei canali. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{board__health__adc_8c_aa378e59884753f2907f7ed7b6743b39a}{temp\+\_\+ma\+\_\+buf}} \+[\doxymbox{\hyperlink{board__health__adc_8c_adf368057df0322a962ea7a483cf20568}{TEMP\+\_\+\+MA\+\_\+\+WINDOW}}]\+
+\begin{DoxyCompactList}\small\item\em Buffer per la media mobile della temperatura. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{board__health__adc_8c_a567c27d187b6074190d650a027822af2}{batt\+\_\+ma\+\_\+buf}} \+[\doxymbox{\hyperlink{board__health__adc_8c_a5c3b250f549d76eda891354bb5fec5c1}{BATT\+\_\+\+MA\+\_\+\+WINDOW}}]\+
+\begin{DoxyCompactList}\small\item\em Buffer per la media mobile della tensione batteria. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_a2d7560cb17edc2b7e423548c6fb034be}{temp\+\_\+ma\+\_\+idx}} = 0U
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_af3eca8cec23c783c80b0536d7d33cdd0}{temp\+\_\+ma\+\_\+cnt}} = 0U
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_a5c0eda5742ee36bdc7c59c7bab1acd60}{batt\+\_\+ma\+\_\+idx}} = 0U
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_a6ac907af9981c791f1fda3754ac48d35}{batt\+\_\+ma\+\_\+cnt}} = 0U
+\item 
+static const float \doxymbox{\hyperlink{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88}{batt\+\_\+pct\+\_\+lut}} \+[$\,$]\+ = \{ 0.\+0f, 10.\+0f, 20.\+0f, 30.\+0f, 45.\+0f, 65.\+0f, 80.\+0f, 90.\+0f, 100.\+0f \}
+\begin{DoxyCompactList}\small\item\em Lookup table per le percentuali della batteria. \end{DoxyCompactList}\item 
+static const float \doxymbox{\hyperlink{board__health__adc_8c_a808b2043de2f2020e9c636dc0918d2ad}{batt\+\_\+volt\+\_\+lut}} \+[$\,$]\+ = \{ 9.\+9f, 10.\+5f, 10.\+8f, 11.\+1f, 11.\+4f, 11.\+7f, 12.\+0f, 12.\+3f, 12.\+6f \}
+\begin{DoxyCompactList}\small\item\em Lookup table per le tensioni corrispondenti alle percentuali \+[V]\+. \end{DoxyCompactList}\item 
+static uint16\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_aa8f61c27ef3ca85f55a1e53bbd3fdf08}{adc\+\_\+raw}} \+[3]\+ = \{0U, 0U, 0U\}
+\begin{DoxyCompactList}\small\item\em Array contenente i valori grezzi letti dall\textquotesingle{}ADC tramite DMA. \end{DoxyCompactList}\item 
+static uint16\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_accd3645ccc4d062bd9b5c3184095e632}{vrefint\+\_\+cal}} = 0U
+\item 
+static uint16\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_a91060c91f2abea874ac85ce982997179}{tcal1}} = 0U
+\item 
+static uint16\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_aa9116c10ce994cc4b2d7ed4635062b36}{tcal2}} = 0U
+\item 
+volatile uint8\+\_\+t \doxymbox{\hyperlink{board__health__adc_8c_a44ec22dcb04cf9b7ceb4b29a3bef6a74}{adc\+\_\+ready}} = 0U
+\begin{DoxyCompactList}\small\item\em Flag indicante la disponibilità di nuovi dati ADC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione dei canali ADC per il monitoraggio dello stato della scheda (Temperatura e Batteria). 
+
+
+
+\label{doc-define-members}
+\Hypertarget{board__health__adc_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{board__health__adc_8c_af5a42501db201b00595d67bdeb096fcc}\index{board\_health\_adc.c@{board\_health\_adc.c}!ADC\_MAX\_COUNTS@{ADC\_MAX\_COUNTS}}
+\index{ADC\_MAX\_COUNTS@{ADC\_MAX\_COUNTS}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{ADC\_MAX\_COUNTS}{ADC\_MAX\_COUNTS}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_af5a42501db201b00595d67bdeb096fcc} 
+\+\#define ADC\+\_\+\+MAX\+\_\+\+COUNTS~(4095.\+0f)}
+
+
+
+Risoluzione massima ADC (12-\/bit). 
+
+\Hypertarget{board__health__adc_8c_aa4698073eb5dce15e0f74a6cdcf84e18}\index{board\_health\_adc.c@{board\_health\_adc.c}!ADC\_RAW\_BATT@{ADC\_RAW\_BATT}}
+\index{ADC\_RAW\_BATT@{ADC\_RAW\_BATT}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{ADC\_RAW\_BATT}{ADC\_RAW\_BATT}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_aa4698073eb5dce15e0f74a6cdcf84e18} 
+\+\#define ADC\+\_\+\+RAW\+\_\+\+BATT~2U}
+
+
+
+Indice del canale Tensione Batteria nel buffer DMA. 
+
+\Hypertarget{board__health__adc_8c_ab100684ac7bedb9d1c30a3a8d096865a}\index{board\_health\_adc.c@{board\_health\_adc.c}!ADC\_RAW\_TEMP@{ADC\_RAW\_TEMP}}
+\index{ADC\_RAW\_TEMP@{ADC\_RAW\_TEMP}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{ADC\_RAW\_TEMP}{ADC\_RAW\_TEMP}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_ab100684ac7bedb9d1c30a3a8d096865a} 
+\+\#define ADC\+\_\+\+RAW\+\_\+\+TEMP~1U}
+
+
+
+Indice del canale Sensore di Temperatura nel buffer DMA. 
+
+\Hypertarget{board__health__adc_8c_a52b294fbd333bcf5de321c77c8c45e8f}\index{board\_health\_adc.c@{board\_health\_adc.c}!ADC\_RAW\_VREF@{ADC\_RAW\_VREF}}
+\index{ADC\_RAW\_VREF@{ADC\_RAW\_VREF}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{ADC\_RAW\_VREF}{ADC\_RAW\_VREF}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a52b294fbd333bcf5de321c77c8c45e8f} 
+\+\#define ADC\+\_\+\+RAW\+\_\+\+VREF~0U}
+
+
+
+Indice del canale VREF interno nel buffer DMA. 
+
+\Hypertarget{board__health__adc_8c_a517852f1b2374aa34b670a2bb12ca916}\index{board\_health\_adc.c@{board\_health\_adc.c}!BATT\_DIVIDER\_GAIN@{BATT\_DIVIDER\_GAIN}}
+\index{BATT\_DIVIDER\_GAIN@{BATT\_DIVIDER\_GAIN}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BATT\_DIVIDER\_GAIN}{BATT\_DIVIDER\_GAIN}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a517852f1b2374aa34b670a2bb12ca916} 
+\+\#define BATT\+\_\+\+DIVIDER\+\_\+\+GAIN~((14700.\+0f + 4700.\+0f) /\+ 4700.\+0f)}
+
+
+
+Guadagno del partitore di tensione esterno. 
+
+\Hypertarget{board__health__adc_8c_a9b37a456fd8450ed873b1cf03befc124}\index{board\_health\_adc.c@{board\_health\_adc.c}!BATT\_LUT\_SIZE@{BATT\_LUT\_SIZE}}
+\index{BATT\_LUT\_SIZE@{BATT\_LUT\_SIZE}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BATT\_LUT\_SIZE}{BATT\_LUT\_SIZE}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a9b37a456fd8450ed873b1cf03befc124} 
+\+\#define BATT\+\_\+\+LUT\+\_\+\+SIZE~(sizeof(\doxymbox{\hyperlink{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88}{batt\+\_\+pct\+\_\+lut}})/\+sizeof(\doxymbox{\hyperlink{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88}{batt\+\_\+pct\+\_\+lut}}\+[0]\+))}
+
+
+
+Macro per ottenere la dimensione della LUT batteria. 
+
+\Hypertarget{board__health__adc_8c_a5c3b250f549d76eda891354bb5fec5c1}\index{board\_health\_adc.c@{board\_health\_adc.c}!BATT\_MA\_WINDOW@{BATT\_MA\_WINDOW}}
+\index{BATT\_MA\_WINDOW@{BATT\_MA\_WINDOW}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BATT\_MA\_WINDOW}{BATT\_MA\_WINDOW}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a5c3b250f549d76eda891354bb5fec5c1} 
+\+\#define BATT\+\_\+\+MA\+\_\+\+WINDOW~10U}
+
+
+
+Dimensione della finestra per la media mobile della batteria. 
+
+\Hypertarget{board__health__adc_8c_af9384dc68f8559c04ab3ce820939a364}\index{board\_health\_adc.c@{board\_health\_adc.c}!BATT\_MAX\_V@{BATT\_MAX\_V}}
+\index{BATT\_MAX\_V@{BATT\_MAX\_V}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BATT\_MAX\_V}{BATT\_MAX\_V}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_af9384dc68f8559c04ab3ce820939a364} 
+\+\#define BATT\+\_\+\+MAX\+\_\+V~(15.\+0f)}
+
+
+
+Soglia massima tensione batteria ammessa \+[V]\+. 
+
+\Hypertarget{board__health__adc_8c_ab7991331b7c5667346dbbd9d08615c7c}\index{board\_health\_adc.c@{board\_health\_adc.c}!BATT\_MIN\_V@{BATT\_MIN\_V}}
+\index{BATT\_MIN\_V@{BATT\_MIN\_V}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BATT\_MIN\_V}{BATT\_MIN\_V}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_ab7991331b7c5667346dbbd9d08615c7c} 
+\+\#define BATT\+\_\+\+MIN\+\_\+V~(7.\+0f)}
+
+
+
+Soglia minima tensione batteria per validità lettura \+[V]\+. 
+
+\Hypertarget{board__health__adc_8c_adf368057df0322a962ea7a483cf20568}\index{board\_health\_adc.c@{board\_health\_adc.c}!TEMP\_MA\_WINDOW@{TEMP\_MA\_WINDOW}}
+\index{TEMP\_MA\_WINDOW@{TEMP\_MA\_WINDOW}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{TEMP\_MA\_WINDOW}{TEMP\_MA\_WINDOW}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_adf368057df0322a962ea7a483cf20568} 
+\+\#define TEMP\+\_\+\+MA\+\_\+\+WINDOW~10U}
+
+
+
+Dimensione della finestra per la media mobile della temperatura. 
+
+\Hypertarget{board__health__adc_8c_a103784579a5ee0a7509571374ef33b37}\index{board\_health\_adc.c@{board\_health\_adc.c}!TEMP\_MAX\_DEGC@{TEMP\_MAX\_DEGC}}
+\index{TEMP\_MAX\_DEGC@{TEMP\_MAX\_DEGC}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{TEMP\_MAX\_DEGC}{TEMP\_MAX\_DEGC}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a103784579a5ee0a7509571374ef33b37} 
+\+\#define TEMP\+\_\+\+MAX\+\_\+\+DEGC~(125.\+0f)}
+
+
+
+Limite superiore temperatura operativa \+[°C]\+. 
+
+\Hypertarget{board__health__adc_8c_a3b0b4c0b769c6b4a59ba8649d5ec9be4}\index{board\_health\_adc.c@{board\_health\_adc.c}!TEMP\_MIN\_DEGC@{TEMP\_MIN\_DEGC}}
+\index{TEMP\_MIN\_DEGC@{TEMP\_MIN\_DEGC}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{TEMP\_MIN\_DEGC}{TEMP\_MIN\_DEGC}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a3b0b4c0b769c6b4a59ba8649d5ec9be4} 
+\+\#define TEMP\+\_\+\+MIN\+\_\+\+DEGC~(-\/40.\+0f)}
+
+
+
+Limite inferiore temperatura operativa \+[°C]\+. 
+
+\Hypertarget{board__health__adc_8c_a0c252da1509624275b4555b03396f098}\index{board\_health\_adc.c@{board\_health\_adc.c}!TSENSE\_CAL1\_ADDR\_VAL@{TSENSE\_CAL1\_ADDR\_VAL}}
+\index{TSENSE\_CAL1\_ADDR\_VAL@{TSENSE\_CAL1\_ADDR\_VAL}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{TSENSE\_CAL1\_ADDR\_VAL}{TSENSE\_CAL1\_ADDR\_VAL}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a0c252da1509624275b4555b03396f098} 
+\+\#define TSENSE\+\_\+\+CAL1\+\_\+\+ADDR\+\_\+\+VAL~((uint16\+\_\+t \texorpdfstring{$\ast$}{*})((uint32\+\_\+t)0x1\+FFF75\+A8U))}
+
+
+
+Indirizzo di calibrazione sensore temperatura a 30°C. 
+
+\Hypertarget{board__health__adc_8c_aeca175204c2cfb40d02505df633e15cc}\index{board\_health\_adc.c@{board\_health\_adc.c}!TSENSE\_CAL2\_ADDR\_VAL@{TSENSE\_CAL2\_ADDR\_VAL}}
+\index{TSENSE\_CAL2\_ADDR\_VAL@{TSENSE\_CAL2\_ADDR\_VAL}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{TSENSE\_CAL2\_ADDR\_VAL}{TSENSE\_CAL2\_ADDR\_VAL}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_aeca175204c2cfb40d02505df633e15cc} 
+\+\#define TSENSE\+\_\+\+CAL2\+\_\+\+ADDR\+\_\+\+VAL~((uint16\+\_\+t \texorpdfstring{$\ast$}{*})((uint32\+\_\+t)0x1\+FFF75\+CAU))}
+
+
+
+Indirizzo di calibrazione sensore temperatura a 110°C. 
+
+\Hypertarget{board__health__adc_8c_a153461b6ac3565edacfcb5a11ca0c60b}\index{board\_health\_adc.c@{board\_health\_adc.c}!VREFINT\_CAL\_ADDR\_VAL@{VREFINT\_CAL\_ADDR\_VAL}}
+\index{VREFINT\_CAL\_ADDR\_VAL@{VREFINT\_CAL\_ADDR\_VAL}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{VREFINT\_CAL\_ADDR\_VAL}{VREFINT\_CAL\_ADDR\_VAL}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a153461b6ac3565edacfcb5a11ca0c60b} 
+\+\#define VREFINT\+\_\+\+CAL\+\_\+\+ADDR\+\_\+\+VAL~((uint16\+\_\+t \texorpdfstring{$\ast$}{*})((uint32\+\_\+t)0x1\+FFF75\+AAU))}
+
+
+
+Indirizzo di memoria del valore di calibrazione VREFINT. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{board__health__adc_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board__health__adc_8c_a1ae2de8a6d0a24f56c2514b5bb70fe36}\index{board\_health\_adc.c@{board\_health\_adc.c}!Battery\_VoltageToPercent@{Battery\_VoltageToPercent}}
+\index{Battery\_VoltageToPercent@{Battery\_VoltageToPercent}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{Battery\_VoltageToPercent()}{Battery\_VoltageToPercent()}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a1ae2de8a6d0a24f56c2514b5bb70fe36} 
+float Battery\+\_\+\+Voltage\+To\+Percent (\begin{DoxyParamCaption}\item[{float}]{v}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converte la tensione della batteria in percentuale tramite interpolazione lineare su LUT. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Tensione misurata \+[V]\+. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float Percentuale di carica residua (0.\+0 -\/ 100.\+0). 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a1ae2de8a6d0a24f56c2514b5bb70fe36_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8c_a6b51bda7bc1b0759dcc5cca821d3f03a}\index{board\_health\_adc.c@{board\_health\_adc.c}!BoardHealth\_ReadBattery@{BoardHealth\_ReadBattery}}
+\index{BoardHealth\_ReadBattery@{BoardHealth\_ReadBattery}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_ReadBattery()}{BoardHealth\_ReadBattery()}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a6b51bda7bc1b0759dcc5cca821d3f03a} 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} Board\+Health\+\_\+\+Read\+Battery (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}const}]{battery\+\_\+pct}{}\end{DoxyParamCaption})}
+
+
+
+Legge ed elabora la tensione della batteria convertendola in percentuale. 
+
+Legge il livello di tensione della batteria.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em battery\+\_\+pct} & Puntatore dove scrivere la percentuale calcolata. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t} OK se la lettura è valida, errore altrimenti. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a6b51bda7bc1b0759dcc5cca821d3f03a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a6b51bda7bc1b0759dcc5cca821d3f03a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8c_aff8a17cd230bd0dc31d24650a70b831d}\index{board\_health\_adc.c@{board\_health\_adc.c}!BoardHealth\_ReadTemperature@{BoardHealth\_ReadTemperature}}
+\index{BoardHealth\_ReadTemperature@{BoardHealth\_ReadTemperature}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealth\_ReadTemperature()}{BoardHealth\_ReadTemperature()}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_aff8a17cd230bd0dc31d24650a70b831d} 
+\doxymbox{\hyperlink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t}} Board\+Health\+\_\+\+Read\+Temperature (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}const}]{temp\+\_\+degC}{}\end{DoxyParamCaption})}
+
+
+
+Legge ed elabora la temperatura interna del microcontrollore. 
+
+Legge il sensore di temperatura interno della MCU.
+
+Utilizza VREFINT per compensare fluttuazioni di VDDA e applica i parametri di calibrazione. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em temp\+\_\+degC} & Puntatore dove scrivere il valore di temperatura calcolato. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{board__health__adc_8h_a80c8d8b56784f9bfaa7c55332eae9889}{Board\+Health\+Status\+\_\+t} OK se la lettura è valida, errore altrimenti. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_aff8a17cd230bd0dc31d24650a70b831d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_aff8a17cd230bd0dc31d24650a70b831d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8c_a108165b5d41101fa07468cebada6609f}\index{board\_health\_adc.c@{board\_health\_adc.c}!BoardHealthADC\_Init@{BoardHealthADC\_Init}}
+\index{BoardHealthADC\_Init@{BoardHealthADC\_Init}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealthADC\_Init()}{BoardHealthADC\_Init()}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a108165b5d41101fa07468cebada6609f} 
+void Board\+Health\+ADC\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il sottosistema ADC per il monitoraggio board. 
+
+Inizializza l\textquotesingle{}ADC e i canali dedicati al monitoraggio della scheda.
+
+Carica i valori di calibrazione e avvia la scansione circolare in DMA. Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a108165b5d41101fa07468cebada6609f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a108165b5d41101fa07468cebada6609f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8c_a0097552fbc41c90ef2e1e11a409491fd}\index{board\_health\_adc.c@{board\_health\_adc.c}!BoardHealthADC\_LoadCal@{BoardHealthADC\_LoadCal}}
+\index{BoardHealthADC\_LoadCal@{BoardHealthADC\_LoadCal}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{BoardHealthADC\_LoadCal()}{BoardHealthADC\_LoadCal()}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a0097552fbc41c90ef2e1e11a409491fd} 
+void Board\+Health\+ADC\+\_\+\+Load\+Cal (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Carica i valori di calibrazione di fabbrica dai registri di sistema STM32. 
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a0097552fbc41c90ef2e1e11a409491fd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{board__health__adc_8c_a9cf6404847167cea46c41b3a4aca731f}\index{board\_health\_adc.c@{board\_health\_adc.c}!MovingAverage\_Update@{MovingAverage\_Update}}
+\index{MovingAverage\_Update@{MovingAverage\_Update}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{MovingAverage\_Update()}{MovingAverage\_Update()}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a9cf6404847167cea46c41b3a4aca731f} 
+float Moving\+Average\+\_\+\+Update (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}const}]{buf}{, }\item[{uint8\+\_\+t}]{size}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}const}]{idx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}const}]{count}{, }\item[{float}]{sample}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calcola l\textquotesingle{}aggiornamento della media mobile per un dato buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & Puntatore al buffer della media. \\
+\hline
+{\em size} & Dimensione massima del buffer. \\
+\hline
+{\em idx} & Puntatore all\textquotesingle{}indice corrente del buffer. \\
+\hline
+{\em count} & Puntatore al conteggio degli elementi validi. \\
+\hline
+{\em sample} & Nuovo campione da inserire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float Valore medio calcolato. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{board__health__adc_8c_a9cf6404847167cea46c41b3a4aca731f_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{board__health__adc_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{board__health__adc_8c_aa8f61c27ef3ca85f55a1e53bbd3fdf08}\index{board\_health\_adc.c@{board\_health\_adc.c}!adc\_raw@{adc\_raw}}
+\index{adc\_raw@{adc\_raw}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{adc\_raw}{adc\_raw}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_aa8f61c27ef3ca85f55a1e53bbd3fdf08} 
+uint16\+\_\+t adc\+\_\+raw\+[3]\+ = \{0U, 0U, 0U\}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Array contenente i valori grezzi letti dall\textquotesingle{}ADC tramite DMA. 
+
+\Hypertarget{board__health__adc_8c_a44ec22dcb04cf9b7ceb4b29a3bef6a74}\index{board\_health\_adc.c@{board\_health\_adc.c}!adc\_ready@{adc\_ready}}
+\index{adc\_ready@{adc\_ready}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{adc\_ready}{adc\_ready}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a44ec22dcb04cf9b7ceb4b29a3bef6a74} 
+volatile uint8\+\_\+t adc\+\_\+ready = 0U}
+
+
+
+Flag indicante la disponibilità di nuovi dati ADC. 
+
+\Hypertarget{board__health__adc_8c_a567c27d187b6074190d650a027822af2}\index{board\_health\_adc.c@{board\_health\_adc.c}!batt\_ma\_buf@{batt\_ma\_buf}}
+\index{batt\_ma\_buf@{batt\_ma\_buf}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{batt\_ma\_buf}{batt\_ma\_buf}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a567c27d187b6074190d650a027822af2} 
+float batt\+\_\+ma\+\_\+buf\+[\doxymbox{\hyperlink{board__health__adc_8c_a5c3b250f549d76eda891354bb5fec5c1}{BATT\+\_\+\+MA\+\_\+\+WINDOW}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Buffer per la media mobile della tensione batteria. 
+
+\Hypertarget{board__health__adc_8c_a6ac907af9981c791f1fda3754ac48d35}\index{board\_health\_adc.c@{board\_health\_adc.c}!batt\_ma\_cnt@{batt\_ma\_cnt}}
+\index{batt\_ma\_cnt@{batt\_ma\_cnt}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{batt\_ma\_cnt}{batt\_ma\_cnt}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a6ac907af9981c791f1fda3754ac48d35} 
+uint8\+\_\+t batt\+\_\+ma\+\_\+cnt = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{board__health__adc_8c_a5c0eda5742ee36bdc7c59c7bab1acd60}\index{board\_health\_adc.c@{board\_health\_adc.c}!batt\_ma\_idx@{batt\_ma\_idx}}
+\index{batt\_ma\_idx@{batt\_ma\_idx}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{batt\_ma\_idx}{batt\_ma\_idx}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a5c0eda5742ee36bdc7c59c7bab1acd60} 
+uint8\+\_\+t batt\+\_\+ma\+\_\+idx = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88}\index{board\_health\_adc.c@{board\_health\_adc.c}!batt\_pct\_lut@{batt\_pct\_lut}}
+\index{batt\_pct\_lut@{batt\_pct\_lut}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{batt\_pct\_lut}{batt\_pct\_lut}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_ad1b59e6eb3b1189edff720923bda0e88} 
+const float batt\+\_\+pct\+\_\+lut\+[$\,$]\+ = \{ 0.\+0f, 10.\+0f, 20.\+0f, 30.\+0f, 45.\+0f, 65.\+0f, 80.\+0f, 90.\+0f, 100.\+0f \}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Lookup table per le percentuali della batteria. 
+
+\Hypertarget{board__health__adc_8c_a808b2043de2f2020e9c636dc0918d2ad}\index{board\_health\_adc.c@{board\_health\_adc.c}!batt\_volt\_lut@{batt\_volt\_lut}}
+\index{batt\_volt\_lut@{batt\_volt\_lut}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{batt\_volt\_lut}{batt\_volt\_lut}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a808b2043de2f2020e9c636dc0918d2ad} 
+const float batt\+\_\+volt\+\_\+lut\+[$\,$]\+ = \{ 9.\+9f, 10.\+5f, 10.\+8f, 11.\+1f, 11.\+4f, 11.\+7f, 12.\+0f, 12.\+3f, 12.\+6f \}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Lookup table per le tensioni corrispondenti alle percentuali \+[V]\+. 
+
+\Hypertarget{board__health__adc_8c_a22b804736f5648d52f639b2647d4ed13}\index{board\_health\_adc.c@{board\_health\_adc.c}!hadc1@{hadc1}}
+\index{hadc1@{hadc1}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{hadc1}{hadc1}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a22b804736f5648d52f639b2647d4ed13} 
+ADC\+\_\+\+Handle\+Type\+Def hadc1\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Handle dell\textquotesingle{}ADC1 generato da Cube\+MX per la scansione dei canali. 
+
+\Hypertarget{board__health__adc_8c_a91060c91f2abea874ac85ce982997179}\index{board\_health\_adc.c@{board\_health\_adc.c}!tcal1@{tcal1}}
+\index{tcal1@{tcal1}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{tcal1}{tcal1}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a91060c91f2abea874ac85ce982997179} 
+uint16\+\_\+t tcal1 = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{board__health__adc_8c_aa9116c10ce994cc4b2d7ed4635062b36}\index{board\_health\_adc.c@{board\_health\_adc.c}!tcal2@{tcal2}}
+\index{tcal2@{tcal2}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{tcal2}{tcal2}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_aa9116c10ce994cc4b2d7ed4635062b36} 
+uint16\+\_\+t tcal2 = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{board__health__adc_8c_aa378e59884753f2907f7ed7b6743b39a}\index{board\_health\_adc.c@{board\_health\_adc.c}!temp\_ma\_buf@{temp\_ma\_buf}}
+\index{temp\_ma\_buf@{temp\_ma\_buf}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{temp\_ma\_buf}{temp\_ma\_buf}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_aa378e59884753f2907f7ed7b6743b39a} 
+float temp\+\_\+ma\+\_\+buf\+[\doxymbox{\hyperlink{board__health__adc_8c_adf368057df0322a962ea7a483cf20568}{TEMP\+\_\+\+MA\+\_\+\+WINDOW}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Buffer per la media mobile della temperatura. 
+
+\Hypertarget{board__health__adc_8c_af3eca8cec23c783c80b0536d7d33cdd0}\index{board\_health\_adc.c@{board\_health\_adc.c}!temp\_ma\_cnt@{temp\_ma\_cnt}}
+\index{temp\_ma\_cnt@{temp\_ma\_cnt}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{temp\_ma\_cnt}{temp\_ma\_cnt}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_af3eca8cec23c783c80b0536d7d33cdd0} 
+uint8\+\_\+t temp\+\_\+ma\+\_\+cnt = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{board__health__adc_8c_a2d7560cb17edc2b7e423548c6fb034be}\index{board\_health\_adc.c@{board\_health\_adc.c}!temp\_ma\_idx@{temp\_ma\_idx}}
+\index{temp\_ma\_idx@{temp\_ma\_idx}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{temp\_ma\_idx}{temp\_ma\_idx}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_a2d7560cb17edc2b7e423548c6fb034be} 
+uint8\+\_\+t temp\+\_\+ma\+\_\+idx = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{board__health__adc_8c_accd3645ccc4d062bd9b5c3184095e632}\index{board\_health\_adc.c@{board\_health\_adc.c}!vrefint\_cal@{vrefint\_cal}}
+\index{vrefint\_cal@{vrefint\_cal}!board\_health\_adc.c@{board\_health\_adc.c}}
+\doxysubsubsection{\texorpdfstring{vrefint\_cal}{vrefint\_cal}}
+{\footnotesize\ttfamily \label{board__health__adc_8c_accd3645ccc4d062bd9b5c3184095e632} 
+uint16\+\_\+t vrefint\+\_\+cal = 0U\hspace{0.3cm}{\ttfamily [static]}}
+

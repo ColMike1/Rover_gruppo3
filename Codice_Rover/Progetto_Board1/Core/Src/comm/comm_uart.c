@@ -1,8 +1,6 @@
 /**
  * @file comm_uart.c
  * @brief Driver di basso livello per la comunicazione UART con gestione interrupt.
- * @date Jan 11, 2026
- * @author Sterm
  */
 
 #include "comm/comm_uart.h"

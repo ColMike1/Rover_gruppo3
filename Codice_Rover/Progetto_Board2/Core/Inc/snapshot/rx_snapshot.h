@@ -1,21 +1,19 @@
-/*
- * rx_snapshot.h
- *
- *  Created on: Jan 18, 2026
- *      Author: Sterm
+/**
+ * @file rx_snapshot.h
+ * @brief Definizione dello snapshot RX e API thread-safe.
  */
 
-#ifndef SRC_SNAPSHOT_RX_SNAPSHOT_H_
-#define SRC_SNAPSHOT_RX_SNAPSHOT_H_
+#ifndef INC_SNAPSHOT_RX_SNAPSHOT_H_
+#define INC_SNAPSHOT_RX_SNAPSHOT_H_
 
 #include <stdint.h>
 #include "shared_headers/comm_status.h"
 #include "shared_headers/comm_message_structures.h"
 #include "cmsis_os.h"
-/* ===== Snapshot ===== */
+/** @brief Snapshot dei dati ricevuti dal canale di comunicazione. */
 typedef struct
 {
-    /* Payload ricevuto (raw, applicativo) */
+    /* Payload ricevuto */
     CommPayloadB1_t payload;
 
     /* Status dell'ultimo evento RX osservato */
@@ -26,12 +24,22 @@ typedef struct
 
 } RxSnapshot_t;
 
+/**
+ * @brief Registra il mutex usato per proteggere lo snapshot.
+ * @param mutex_handle Handle del mutex creato all'esterno.
+ */
 void RxSnapshot_MutexInit(osMutexId_t mutex_handle);
 
-/* ===== Writer (RX task only) ===== */
+/**
+ * @brief Scrive lo snapshot RX in sezione critica.
+ * @param src Puntatore al dato sorgente da copiare.
+ */
 void RxSnapshot_Write(const RxSnapshot_t *src);
 
-/* ===== Reader (Supervisor / others) ===== */
+/**
+ * @brief Legge lo snapshot RX in sezione critica.
+ * @param dst Puntatore al buffer di destinazione.
+ */
 void RxSnapshot_Read(RxSnapshot_t *dst);
 
-#endif /* SRC_SNAPSHOT_RX_SNAPSHOT_H_ */
+#endif /* INC_SNAPSHOT_RX_SNAPSHOT_H_ */

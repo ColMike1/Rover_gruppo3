@@ -1,0 +1,7 @@
+<map id="Sabertooth_Init" name="Sabertooth_Init">
+<area shape="rect" id="Node000001" title="Inizializza la periferica di comunicazione per i controller Sabertooth." alt="" coords="5,5,115,32"/>
+<area shape="rect" id="Node000002" href="$sabertooth__driver_8c.html#aff60a261fda72eadf539c1a86a000313" title="Prepara un singolo pacchetto da 4 byte per il protocollo Sabertooth." alt="" coords="163,5,318,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,16,150,18,145,19,115,21"/>
+<area shape="rect" id="Node000003" href="$sabertooth__driver_8c.html#afe3092cef7667a37789c3d6a189336e2" title="Calcola il checksum a 7&#45;bit richiesto dal protocollo Sabertooth." alt="" coords="366,5,491,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="318,16,353,19,348,19,318,21"/>
+</map>

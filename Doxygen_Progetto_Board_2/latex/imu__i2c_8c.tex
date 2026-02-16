@@ -1,0 +1,576 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+\+IMU/\+imu\+\_\+i2c.c File Reference}
+\hypertarget{imu__i2c_8c}{}\label{imu__i2c_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/IMU/imu\_i2c.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/IMU/imu\_i2c.c}}
+
+
+Driver I2C per acquisizione dati da MPU6050.  
+
+
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+{\ttfamily \+\#include "{}IMU/\+imu\+\_\+i2c.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+Include dependency graph for imu\+\_\+i2c.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{imu__i2c_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a7f616160a5acb4d9854caaa5e45fda14}{IMU\+\_\+\+BURST\+\_\+\+LEN\+\_\+\+BYTES}}~14U
+\begin{DoxyCompactList}\small\item\em Numero di byte letti dal burst dati MPU6050. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_ad143c4e38b91c7af14629ddfc1aa55aa}{IMU\+\_\+\+I2\+C\+\_\+\+TIMEOUT\+\_\+\+MS}}~5U
+\begin{DoxyCompactList}\small\item\em Timeout standard per transazioni I2C \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_aeab2c43e4aa4520af69327754419e560}{IMU\+\_\+\+GYRO\+\_\+\+BIAS\+\_\+\+SAMPLES}}~500U
+\begin{DoxyCompactList}\small\item\em Campioni usati per stimare il bias del gyro Z. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_ac1d4c560e94d60aa054ae4a9e9917ed9}{IMU\+\_\+\+GYRO\+\_\+\+BIAS\+\_\+\+DELAY\+\_\+\+MS}}~2U
+\begin{DoxyCompactList}\small\item\em Delay tra campioni durante la stima bias \+[ms]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_adb6ab4eb961c930fd314b25e675863ab}{IMU\+\_\+\+YAW\+\_\+\+DEADBAND\+\_\+\+DPS}}~0.\+3f
+\begin{DoxyCompactList}\small\item\em Deadband su gyro Z \+[dps]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a3269e58e1f13653e8ce9dfdeb6ec4c5b}{IMU\+\_\+\+YAW\+\_\+\+PERIOD\+\_\+S}}~0.\+02f
+\begin{DoxyCompactList}\small\item\em Periodo di aggiornamento yaw \+[s]\+. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_afdfc90a41522a61a4e5270dc4feda3c5}{IMU\+\_\+\+GYRO\+\_\+\+Z\+\_\+\+SIGN}}~(-\/1.\+0f)
+\begin{DoxyCompactList}\small\item\em Convenzione segno gyro Z:\+ yaw oraria positiva. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a505e6d375061d1a5d210d805b7575f57}{IMU\+\_\+\+WHO\+\_\+\+AM\+\_\+\+I\+\_\+\+EXPECTED}}~0x70U
+\begin{DoxyCompactList}\small\item\em Valore atteso del registro WHO\+\_\+\+AM\+\_\+I. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a5c732b338a9c8f0f4828f73068f9f8f5}{IMU\+\_\+\+PWR\+\_\+\+MGMT\+\_\+1\+\_\+\+WAKE\+\_\+\+VAL}}~0x00U
+\begin{DoxyCompactList}\small\item\em Valore registro PWR\+\_\+\+MGMT\+\_\+1 per wake-\/up MPU6050. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a93c238459480dcfd2270add7669de889}{IMU\+\_\+\+SMPLRT\+\_\+\+DIV\+\_\+\+VAL}}~0x07U
+\begin{DoxyCompactList}\small\item\em Valore SMPLRT\+\_\+\+DIV per sample rate target. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a704022edf256034758537b6dd90fb9f7}{IMU\+\_\+\+ACCEL\+\_\+\+CONFIG\+\_\+2\+G\+\_\+\+VAL}}~0x00U
+\begin{DoxyCompactList}\small\item\em Valore ACCEL\+\_\+\+CONFIG per range +/\+-\/2g. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a93a7abaf872638e85cee4d3784705a62}{IMU\+\_\+\+GYRO\+\_\+\+CONFIG\+\_\+250\+\_\+\+VAL}}~0x00U
+\begin{DoxyCompactList}\small\item\em Valore GYRO\+\_\+\+CONFIG per range +/\+-\/250 dps. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{imu__i2c_8c_a7284bbcfac173bd4885c19994bc90146}{IMU\+\_\+\+I2\+C\+\_\+\+MEMADD\+\_\+\+SIZE}}~1U
+\begin{DoxyCompactList}\small\item\em Dimensione indirizzo registro per HAL I2C Mem API. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{imu__i2c_8c_a29534446f80f01bca1c459b26aae504f}{IMU\+\_\+\+I2\+C\+\_\+\+Write\+Reg}} (uint16\+\_\+t reg, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Scrive un registro MPU6050 con gestione stato HAL. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{imu__i2c_8c_a2ba6e43005f9e84d85c1a49c23d540af}{MPU6050\+\_\+\+Calc\+Gyro\+Bias}} (void)
+\begin{DoxyCompactList}\small\item\em Stima il bias del giroscopio Z mediando campioni a riposo. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{imu__i2c_8c_a27296103bc71ce022b7f68a3bc5e1759}{MPU6050\+\_\+\+Update\+Yaw}} (float Ts)
+\begin{DoxyCompactList}\small\item\em Aggiorna la stima di yaw integrando la velocita\textquotesingle{} angolare Z. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{imu__i2c_8c_ac9443f549c13d4d99a7f63290bb66a74}{IMU\+\_\+\+I2\+C\+\_\+\+Parse}} (void)
+\begin{DoxyCompactList}\small\item\em Converte il buffer raw MPU6050 in grandezze fisiche. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{imu__i2c_8c_a28f24e98b47ffa0c54ddf1d2032e4d1d}{IMU\+\_\+\+I2\+C\+\_\+\+Read\+Blocking}} (void)
+\begin{DoxyCompactList}\small\item\em Legge in polling i registri misura e aggiorna i dati interni. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} \doxymbox{\hyperlink{imu__i2c_8c_aae92541f8d3fe17d6cdec8f6a8a92659}{IMU\+\_\+\+I2\+C\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza e configura l\textquotesingle{}MPU6050. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__i2c_8c_ac50dd1dc63db339bdd8605a1597f69e7}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Accel}} (float \texorpdfstring{$\ast$}{*}ax\+\_\+g, float \texorpdfstring{$\ast$}{*}ay\+\_\+g, float \texorpdfstring{$\ast$}{*}az\+\_\+g)
+\begin{DoxyCompactList}\small\item\em Restituisce le accelerazioni correnti. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{imu__i2c_8c_a8b2cd060aa99805b55848d1d030b27df}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Gyro}} (float \texorpdfstring{$\ast$}{*}gx\+\_\+dps, float \texorpdfstring{$\ast$}{*}gy\+\_\+dps, float \texorpdfstring{$\ast$}{*}gz\+\_\+dps)
+\begin{DoxyCompactList}\small\item\em Restituisce le velocita\textquotesingle{} angolari correnti. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{imu__i2c_8c_a8bc9cd8fc41b618d26be203c09096b46}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Temperature}} (void)
+\begin{DoxyCompactList}\small\item\em Restituisce la temperatura corrente del sensore. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{imu__i2c_8c_aa51b751a7d1cfc299c953be5cd022f48}{IMU\+\_\+\+I2\+C\+\_\+\+Get\+Yaw}} (void)
+\begin{DoxyCompactList}\small\item\em Restituisce la stima di yaw corrente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+I2\+C\+\_\+\+Handle\+Type\+Def \doxymbox{\hyperlink{imu__i2c_8c_a5ccf4a01a8d7f08d3190181f843f7515}{hi2c3}}
+\begin{DoxyCompactList}\small\item\em Handle I2\+C3 generato da Cube\+MX. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{imu__i2c_8c_a30a81adbdf396db8b10fd56a7918b363}{imu\+\_\+rx\+\_\+buf}} \+[\doxymbox{\hyperlink{imu__i2c_8c_a7f616160a5acb4d9854caaa5e45fda14}{IMU\+\_\+\+BURST\+\_\+\+LEN\+\_\+\+BYTES}}]\+
+\begin{DoxyCompactList}\small\item\em Buffer raw di lettura MPU6050 (14 byte consecutivi). \end{DoxyCompactList}\item 
+static int16\+\_\+t \doxymbox{\hyperlink{imu__i2c_8c_a50bc369d54e473935ecbd35c4dc7ebdd}{accel\+\_\+raw}} \+[3U]\+
+\begin{DoxyCompactList}\small\item\em Misure raw accelerometro. \end{DoxyCompactList}\item 
+static int16\+\_\+t \doxymbox{\hyperlink{imu__i2c_8c_a2fc9184c75df8e87e73e4f237394bed2}{gyro\+\_\+raw}} \+[3U]\+
+\begin{DoxyCompactList}\small\item\em Misure raw giroscopio. \end{DoxyCompactList}\item 
+static int16\+\_\+t \doxymbox{\hyperlink{imu__i2c_8c_aeaa9daad86205932138457dcb5b66fe7}{temp\+\_\+raw}}
+\begin{DoxyCompactList}\small\item\em Misura raw temperatura. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{imu__i2c_8c_ad577568bc1ef1b4825e8f8428270b67a}{accel\+\_\+g}} \+[3U]\+
+\begin{DoxyCompactList}\small\item\em Accelerazioni scalate in g. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{imu__i2c_8c_ac4318c1f75c6312cc0d311daa4e96297}{gyro\+\_\+dps}} \+[3U]\+
+\begin{DoxyCompactList}\small\item\em Velocita\textquotesingle{} angolari scalate in dps. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{imu__i2c_8c_a74e814a4cbf431acf0036f8da3ba0aaa}{temperature\+\_\+degC}}
+\begin{DoxyCompactList}\small\item\em Temperatura scalata in gradi Celsius. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{imu__i2c_8c_ae40d925a13cfaee48258b4f80ec9d1a5}{gz\+\_\+bias}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Bias asse Z del giroscopio stimato in fase di init. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{imu__i2c_8c_afe57d6704ee17096beae957232ca2d09}{yaw\+\_\+deg}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Yaw integrata in gradi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver I2C per acquisizione dati da MPU6050. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{imu__i2c_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{imu__i2c_8c_a704022edf256034758537b6dd90fb9f7}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_ACCEL\_CONFIG\_2G\_VAL@{IMU\_ACCEL\_CONFIG\_2G\_VAL}}
+\index{IMU\_ACCEL\_CONFIG\_2G\_VAL@{IMU\_ACCEL\_CONFIG\_2G\_VAL}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_ACCEL\_CONFIG\_2G\_VAL}{IMU\_ACCEL\_CONFIG\_2G\_VAL}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a704022edf256034758537b6dd90fb9f7} 
+\+\#define IMU\+\_\+\+ACCEL\+\_\+\+CONFIG\+\_\+2\+G\+\_\+\+VAL~0x00U}
+
+
+
+Valore ACCEL\+\_\+\+CONFIG per range +/\+-\/2g. 
+
+\Hypertarget{imu__i2c_8c_a7f616160a5acb4d9854caaa5e45fda14}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_BURST\_LEN\_BYTES@{IMU\_BURST\_LEN\_BYTES}}
+\index{IMU\_BURST\_LEN\_BYTES@{IMU\_BURST\_LEN\_BYTES}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_BURST\_LEN\_BYTES}{IMU\_BURST\_LEN\_BYTES}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a7f616160a5acb4d9854caaa5e45fda14} 
+\+\#define IMU\+\_\+\+BURST\+\_\+\+LEN\+\_\+\+BYTES~14U}
+
+
+
+Numero di byte letti dal burst dati MPU6050. 
+
+\Hypertarget{imu__i2c_8c_ac1d4c560e94d60aa054ae4a9e9917ed9}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_GYRO\_BIAS\_DELAY\_MS@{IMU\_GYRO\_BIAS\_DELAY\_MS}}
+\index{IMU\_GYRO\_BIAS\_DELAY\_MS@{IMU\_GYRO\_BIAS\_DELAY\_MS}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_GYRO\_BIAS\_DELAY\_MS}{IMU\_GYRO\_BIAS\_DELAY\_MS}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ac1d4c560e94d60aa054ae4a9e9917ed9} 
+\+\#define IMU\+\_\+\+GYRO\+\_\+\+BIAS\+\_\+\+DELAY\+\_\+\+MS~2U}
+
+
+
+Delay tra campioni durante la stima bias \+[ms]\+. 
+
+\Hypertarget{imu__i2c_8c_aeab2c43e4aa4520af69327754419e560}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_GYRO\_BIAS\_SAMPLES@{IMU\_GYRO\_BIAS\_SAMPLES}}
+\index{IMU\_GYRO\_BIAS\_SAMPLES@{IMU\_GYRO\_BIAS\_SAMPLES}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_GYRO\_BIAS\_SAMPLES}{IMU\_GYRO\_BIAS\_SAMPLES}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_aeab2c43e4aa4520af69327754419e560} 
+\+\#define IMU\+\_\+\+GYRO\+\_\+\+BIAS\+\_\+\+SAMPLES~500U}
+
+
+
+Campioni usati per stimare il bias del gyro Z. 
+
+\Hypertarget{imu__i2c_8c_a93a7abaf872638e85cee4d3784705a62}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_GYRO\_CONFIG\_250\_VAL@{IMU\_GYRO\_CONFIG\_250\_VAL}}
+\index{IMU\_GYRO\_CONFIG\_250\_VAL@{IMU\_GYRO\_CONFIG\_250\_VAL}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_GYRO\_CONFIG\_250\_VAL}{IMU\_GYRO\_CONFIG\_250\_VAL}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a93a7abaf872638e85cee4d3784705a62} 
+\+\#define IMU\+\_\+\+GYRO\+\_\+\+CONFIG\+\_\+250\+\_\+\+VAL~0x00U}
+
+
+
+Valore GYRO\+\_\+\+CONFIG per range +/\+-\/250 dps. 
+
+\Hypertarget{imu__i2c_8c_afdfc90a41522a61a4e5270dc4feda3c5}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_GYRO\_Z\_SIGN@{IMU\_GYRO\_Z\_SIGN}}
+\index{IMU\_GYRO\_Z\_SIGN@{IMU\_GYRO\_Z\_SIGN}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_GYRO\_Z\_SIGN}{IMU\_GYRO\_Z\_SIGN}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_afdfc90a41522a61a4e5270dc4feda3c5} 
+\+\#define IMU\+\_\+\+GYRO\+\_\+\+Z\+\_\+\+SIGN~(-\/1.\+0f)}
+
+
+
+Convenzione segno gyro Z:\+ yaw oraria positiva. 
+
+\Hypertarget{imu__i2c_8c_a7284bbcfac173bd4885c19994bc90146}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_MEMADD\_SIZE@{IMU\_I2C\_MEMADD\_SIZE}}
+\index{IMU\_I2C\_MEMADD\_SIZE@{IMU\_I2C\_MEMADD\_SIZE}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_MEMADD\_SIZE}{IMU\_I2C\_MEMADD\_SIZE}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a7284bbcfac173bd4885c19994bc90146} 
+\+\#define IMU\+\_\+\+I2\+C\+\_\+\+MEMADD\+\_\+\+SIZE~1U}
+
+
+
+Dimensione indirizzo registro per HAL I2C Mem API. 
+
+\Hypertarget{imu__i2c_8c_ad143c4e38b91c7af14629ddfc1aa55aa}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_TIMEOUT\_MS@{IMU\_I2C\_TIMEOUT\_MS}}
+\index{IMU\_I2C\_TIMEOUT\_MS@{IMU\_I2C\_TIMEOUT\_MS}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_TIMEOUT\_MS}{IMU\_I2C\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ad143c4e38b91c7af14629ddfc1aa55aa} 
+\+\#define IMU\+\_\+\+I2\+C\+\_\+\+TIMEOUT\+\_\+\+MS~5U}
+
+
+
+Timeout standard per transazioni I2C \+[ms]\+. 
+
+\Hypertarget{imu__i2c_8c_a5c732b338a9c8f0f4828f73068f9f8f5}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_PWR\_MGMT\_1\_WAKE\_VAL@{IMU\_PWR\_MGMT\_1\_WAKE\_VAL}}
+\index{IMU\_PWR\_MGMT\_1\_WAKE\_VAL@{IMU\_PWR\_MGMT\_1\_WAKE\_VAL}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_PWR\_MGMT\_1\_WAKE\_VAL}{IMU\_PWR\_MGMT\_1\_WAKE\_VAL}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a5c732b338a9c8f0f4828f73068f9f8f5} 
+\+\#define IMU\+\_\+\+PWR\+\_\+\+MGMT\+\_\+1\+\_\+\+WAKE\+\_\+\+VAL~0x00U}
+
+
+
+Valore registro PWR\+\_\+\+MGMT\+\_\+1 per wake-\/up MPU6050. 
+
+\Hypertarget{imu__i2c_8c_a93c238459480dcfd2270add7669de889}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_SMPLRT\_DIV\_VAL@{IMU\_SMPLRT\_DIV\_VAL}}
+\index{IMU\_SMPLRT\_DIV\_VAL@{IMU\_SMPLRT\_DIV\_VAL}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_SMPLRT\_DIV\_VAL}{IMU\_SMPLRT\_DIV\_VAL}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a93c238459480dcfd2270add7669de889} 
+\+\#define IMU\+\_\+\+SMPLRT\+\_\+\+DIV\+\_\+\+VAL~0x07U}
+
+
+
+Valore SMPLRT\+\_\+\+DIV per sample rate target. 
+
+\Hypertarget{imu__i2c_8c_a505e6d375061d1a5d210d805b7575f57}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_WHO\_AM\_I\_EXPECTED@{IMU\_WHO\_AM\_I\_EXPECTED}}
+\index{IMU\_WHO\_AM\_I\_EXPECTED@{IMU\_WHO\_AM\_I\_EXPECTED}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_WHO\_AM\_I\_EXPECTED}{IMU\_WHO\_AM\_I\_EXPECTED}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a505e6d375061d1a5d210d805b7575f57} 
+\+\#define IMU\+\_\+\+WHO\+\_\+\+AM\+\_\+\+I\+\_\+\+EXPECTED~0x70U}
+
+
+
+Valore atteso del registro WHO\+\_\+\+AM\+\_\+I. 
+
+\Hypertarget{imu__i2c_8c_adb6ab4eb961c930fd314b25e675863ab}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_YAW\_DEADBAND\_DPS@{IMU\_YAW\_DEADBAND\_DPS}}
+\index{IMU\_YAW\_DEADBAND\_DPS@{IMU\_YAW\_DEADBAND\_DPS}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_YAW\_DEADBAND\_DPS}{IMU\_YAW\_DEADBAND\_DPS}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_adb6ab4eb961c930fd314b25e675863ab} 
+\+\#define IMU\+\_\+\+YAW\+\_\+\+DEADBAND\+\_\+\+DPS~0.\+3f}
+
+
+
+Deadband su gyro Z \+[dps]\+. 
+
+\Hypertarget{imu__i2c_8c_a3269e58e1f13653e8ce9dfdeb6ec4c5b}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_YAW\_PERIOD\_S@{IMU\_YAW\_PERIOD\_S}}
+\index{IMU\_YAW\_PERIOD\_S@{IMU\_YAW\_PERIOD\_S}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_YAW\_PERIOD\_S}{IMU\_YAW\_PERIOD\_S}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a3269e58e1f13653e8ce9dfdeb6ec4c5b} 
+\+\#define IMU\+\_\+\+YAW\+\_\+\+PERIOD\+\_\+S~0.\+02f}
+
+
+
+Periodo di aggiornamento yaw \+[s]\+. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{imu__i2c_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{imu__i2c_8c_ac50dd1dc63db339bdd8605a1597f69e7}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_GetAccel@{IMU\_I2C\_GetAccel}}
+\index{IMU\_I2C\_GetAccel@{IMU\_I2C\_GetAccel}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetAccel()}{IMU\_I2C\_GetAccel()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ac50dd1dc63db339bdd8605a1597f69e7} 
+void IMU\+\_\+\+I2\+C\+\_\+\+Get\+Accel (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{ax\+\_\+g}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{ay\+\_\+g}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{az\+\_\+g}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce le accelerazioni correnti. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ax\+\_\+g} & Uscita asse X in g. \\
+\hline
+{\em ay\+\_\+g} & Uscita asse Y in g. \\
+\hline
+{\em az\+\_\+g} & Uscita asse Z in g. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_ac50dd1dc63db339bdd8605a1597f69e7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_a8b2cd060aa99805b55848d1d030b27df}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_GetGyro@{IMU\_I2C\_GetGyro}}
+\index{IMU\_I2C\_GetGyro@{IMU\_I2C\_GetGyro}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetGyro()}{IMU\_I2C\_GetGyro()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a8b2cd060aa99805b55848d1d030b27df} 
+void IMU\+\_\+\+I2\+C\+\_\+\+Get\+Gyro (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{gx\+\_\+dps}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{gy\+\_\+dps}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{gz\+\_\+dps}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce le velocita\textquotesingle{} angolari correnti. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gx\+\_\+dps} & Uscita asse X in dps. \\
+\hline
+{\em gy\+\_\+dps} & Uscita asse Y in dps. \\
+\hline
+{\em gz\+\_\+dps} & Uscita asse Z in dps. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a8b2cd060aa99805b55848d1d030b27df_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_a8bc9cd8fc41b618d26be203c09096b46}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_GetTemperature@{IMU\_I2C\_GetTemperature}}
+\index{IMU\_I2C\_GetTemperature@{IMU\_I2C\_GetTemperature}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetTemperature()}{IMU\_I2C\_GetTemperature()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a8bc9cd8fc41b618d26be203c09096b46} 
+float IMU\+\_\+\+I2\+C\+\_\+\+Get\+Temperature (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce la temperatura corrente del sensore. 
+
+\begin{DoxyReturn}{Returns}
+Temperatura in gradi Celsius. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a8bc9cd8fc41b618d26be203c09096b46_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_aa51b751a7d1cfc299c953be5cd022f48}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_GetYaw@{IMU\_I2C\_GetYaw}}
+\index{IMU\_I2C\_GetYaw@{IMU\_I2C\_GetYaw}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_GetYaw()}{IMU\_I2C\_GetYaw()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_aa51b751a7d1cfc299c953be5cd022f48} 
+float IMU\+\_\+\+I2\+C\+\_\+\+Get\+Yaw (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Restituisce la stima di yaw corrente. 
+
+\begin{DoxyReturn}{Returns}
+Yaw in gradi \+[0, 360]\+. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_aa51b751a7d1cfc299c953be5cd022f48_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_aae92541f8d3fe17d6cdec8f6a8a92659}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_Init@{IMU\_I2C\_Init}}
+\index{IMU\_I2C\_Init@{IMU\_I2C\_Init}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_Init()}{IMU\_I2C\_Init()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_aae92541f8d3fe17d6cdec8f6a8a92659} 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} IMU\+\_\+\+I2\+C\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza e configura l\textquotesingle{}MPU6050. 
+
+Inizializza e configura il sensore MPU6050.
+
+\begin{DoxyReturn}{Returns}
+Stato dell\textquotesingle{}inizializzazione. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{imu__i2c_8c_aae92541f8d3fe17d6cdec8f6a8a92659_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_aae92541f8d3fe17d6cdec8f6a8a92659_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_ac9443f549c13d4d99a7f63290bb66a74}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_Parse@{IMU\_I2C\_Parse}}
+\index{IMU\_I2C\_Parse@{IMU\_I2C\_Parse}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_Parse()}{IMU\_I2C\_Parse()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ac9443f549c13d4d99a7f63290bb66a74} 
+void IMU\+\_\+\+I2\+C\+\_\+\+Parse (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converte il buffer raw MPU6050 in grandezze fisiche. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_ac9443f549c13d4d99a7f63290bb66a74_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_a28f24e98b47ffa0c54ddf1d2032e4d1d}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_ReadBlocking@{IMU\_I2C\_ReadBlocking}}
+\index{IMU\_I2C\_ReadBlocking@{IMU\_I2C\_ReadBlocking}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_ReadBlocking()}{IMU\_I2C\_ReadBlocking()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a28f24e98b47ffa0c54ddf1d2032e4d1d} 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} IMU\+\_\+\+I2\+C\+\_\+\+Read\+Blocking (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Legge in polling i registri misura e aggiorna i dati interni. 
+
+Esegue una lettura bloccante dei registri dati sensore.
+
+\begin{DoxyReturn}{Returns}
+Stato della transazione I2C. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a28f24e98b47ffa0c54ddf1d2032e4d1d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a28f24e98b47ffa0c54ddf1d2032e4d1d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_a29534446f80f01bca1c459b26aae504f}\index{imu\_i2c.c@{imu\_i2c.c}!IMU\_I2C\_WriteReg@{IMU\_I2C\_WriteReg}}
+\index{IMU\_I2C\_WriteReg@{IMU\_I2C\_WriteReg}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{IMU\_I2C\_WriteReg()}{IMU\_I2C\_WriteReg()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a29534446f80f01bca1c459b26aae504f} 
+\doxymbox{\hyperlink{imu__i2c_8h_a6ad4fb62c950c4d10f981a0566750a9b}{IMUI2\+CStatus\+\_\+t}} IMU\+\_\+\+I2\+C\+\_\+\+Write\+Reg (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{reg}{, }\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Scrive un registro MPU6050 con gestione stato HAL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & Indirizzo registro. \\
+\hline
+{\em value} & Valore da scrivere. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stato IMU dell\textquotesingle{}operazione. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a29534446f80f01bca1c459b26aae504f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_a2ba6e43005f9e84d85c1a49c23d540af}\index{imu\_i2c.c@{imu\_i2c.c}!MPU6050\_CalcGyroBias@{MPU6050\_CalcGyroBias}}
+\index{MPU6050\_CalcGyroBias@{MPU6050\_CalcGyroBias}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_CalcGyroBias()}{MPU6050\_CalcGyroBias()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a2ba6e43005f9e84d85c1a49c23d540af} 
+void MPU6050\+\_\+\+Calc\+Gyro\+Bias (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Stima il bias del giroscopio Z mediando campioni a riposo. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a2ba6e43005f9e84d85c1a49c23d540af_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{imu__i2c_8c_a27296103bc71ce022b7f68a3bc5e1759}\index{imu\_i2c.c@{imu\_i2c.c}!MPU6050\_UpdateYaw@{MPU6050\_UpdateYaw}}
+\index{MPU6050\_UpdateYaw@{MPU6050\_UpdateYaw}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{MPU6050\_UpdateYaw()}{MPU6050\_UpdateYaw()}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a27296103bc71ce022b7f68a3bc5e1759} 
+void MPU6050\+\_\+\+Update\+Yaw (\begin{DoxyParamCaption}\item[{float}]{Ts}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Aggiorna la stima di yaw integrando la velocita\textquotesingle{} angolare Z. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Ts} & Tempo di campionamento in secondi. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{imu__i2c_8c_a27296103bc71ce022b7f68a3bc5e1759_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{imu__i2c_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{imu__i2c_8c_ad577568bc1ef1b4825e8f8428270b67a}\index{imu\_i2c.c@{imu\_i2c.c}!accel\_g@{accel\_g}}
+\index{accel\_g@{accel\_g}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{accel\_g}{accel\_g}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ad577568bc1ef1b4825e8f8428270b67a} 
+float accel\+\_\+g\+[3U]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Accelerazioni scalate in g. 
+
+\Hypertarget{imu__i2c_8c_a50bc369d54e473935ecbd35c4dc7ebdd}\index{imu\_i2c.c@{imu\_i2c.c}!accel\_raw@{accel\_raw}}
+\index{accel\_raw@{accel\_raw}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{accel\_raw}{accel\_raw}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a50bc369d54e473935ecbd35c4dc7ebdd} 
+int16\+\_\+t accel\+\_\+raw\+[3U]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Misure raw accelerometro. 
+
+\Hypertarget{imu__i2c_8c_ac4318c1f75c6312cc0d311daa4e96297}\index{imu\_i2c.c@{imu\_i2c.c}!gyro\_dps@{gyro\_dps}}
+\index{gyro\_dps@{gyro\_dps}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{gyro\_dps}{gyro\_dps}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ac4318c1f75c6312cc0d311daa4e96297} 
+float gyro\+\_\+dps\+[3U]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Velocita\textquotesingle{} angolari scalate in dps. 
+
+\Hypertarget{imu__i2c_8c_a2fc9184c75df8e87e73e4f237394bed2}\index{imu\_i2c.c@{imu\_i2c.c}!gyro\_raw@{gyro\_raw}}
+\index{gyro\_raw@{gyro\_raw}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{gyro\_raw}{gyro\_raw}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a2fc9184c75df8e87e73e4f237394bed2} 
+int16\+\_\+t gyro\+\_\+raw\+[3U]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Misure raw giroscopio. 
+
+\Hypertarget{imu__i2c_8c_ae40d925a13cfaee48258b4f80ec9d1a5}\index{imu\_i2c.c@{imu\_i2c.c}!gz\_bias@{gz\_bias}}
+\index{gz\_bias@{gz\_bias}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{gz\_bias}{gz\_bias}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_ae40d925a13cfaee48258b4f80ec9d1a5} 
+float gz\+\_\+bias = 0.\+0f\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Bias asse Z del giroscopio stimato in fase di init. 
+
+\Hypertarget{imu__i2c_8c_a5ccf4a01a8d7f08d3190181f843f7515}\index{imu\_i2c.c@{imu\_i2c.c}!hi2c3@{hi2c3}}
+\index{hi2c3@{hi2c3}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{hi2c3}{hi2c3}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a5ccf4a01a8d7f08d3190181f843f7515} 
+I2\+C\+\_\+\+Handle\+Type\+Def hi2c3\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Handle I2\+C3 generato da Cube\+MX. 
+
+\Hypertarget{imu__i2c_8c_a30a81adbdf396db8b10fd56a7918b363}\index{imu\_i2c.c@{imu\_i2c.c}!imu\_rx\_buf@{imu\_rx\_buf}}
+\index{imu\_rx\_buf@{imu\_rx\_buf}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{imu\_rx\_buf}{imu\_rx\_buf}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a30a81adbdf396db8b10fd56a7918b363} 
+uint8\+\_\+t imu\+\_\+rx\+\_\+buf\+[\doxymbox{\hyperlink{imu__i2c_8c_a7f616160a5acb4d9854caaa5e45fda14}{IMU\+\_\+\+BURST\+\_\+\+LEN\+\_\+\+BYTES}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Buffer raw di lettura MPU6050 (14 byte consecutivi). 
+
+\Hypertarget{imu__i2c_8c_aeaa9daad86205932138457dcb5b66fe7}\index{imu\_i2c.c@{imu\_i2c.c}!temp\_raw@{temp\_raw}}
+\index{temp\_raw@{temp\_raw}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{temp\_raw}{temp\_raw}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_aeaa9daad86205932138457dcb5b66fe7} 
+int16\+\_\+t temp\+\_\+raw\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Misura raw temperatura. 
+
+\Hypertarget{imu__i2c_8c_a74e814a4cbf431acf0036f8da3ba0aaa}\index{imu\_i2c.c@{imu\_i2c.c}!temperature\_degC@{temperature\_degC}}
+\index{temperature\_degC@{temperature\_degC}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{temperature\_degC}{temperature\_degC}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_a74e814a4cbf431acf0036f8da3ba0aaa} 
+float temperature\+\_\+degC\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Temperatura scalata in gradi Celsius. 
+
+\Hypertarget{imu__i2c_8c_afe57d6704ee17096beae957232ca2d09}\index{imu\_i2c.c@{imu\_i2c.c}!yaw\_deg@{yaw\_deg}}
+\index{yaw\_deg@{yaw\_deg}!imu\_i2c.c@{imu\_i2c.c}}
+\doxysubsubsection{\texorpdfstring{yaw\_deg}{yaw\_deg}}
+{\footnotesize\ttfamily \label{imu__i2c_8c_afe57d6704ee17096beae957232ca2d09} 
+float yaw\+\_\+deg = 0.\+0f\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Yaw integrata in gradi. 
+

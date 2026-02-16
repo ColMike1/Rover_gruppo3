@@ -1,0 +1,11 @@
+<map id="Sabertooth_ApplyOutputs" name="Sabertooth_ApplyOutputs">
+<area shape="rect" id="Node000001" title="Invia i comandi di velocità ai 4 motori." alt="" coords="629,5,799,32"/>
+<area shape="rect" id="Node000002" href="$actuation__step_8c.html#adf98702f2e24c4b18f54c774350214db" title="Esegue un singolo passo di attuazione basato sull&#39;output del controllo." alt="" coords="470,5,581,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="611,19,581,21,581,16,616,19"/>
+<area shape="rect" id="Node000003" href="$app__freertos_8c.html#a8decb0ed70f1b4d12a7abbdbcdf8d18f" title="Task di Controllo Motori e Attuazione." alt="" coords="296,5,422,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="452,19,423,21,423,16,457,19"/>
+<area shape="rect" id="Node000004" href="$app__freertos_8c.html#abade755e13d07c10889ae83143656158" title="Inizializzazione di FreeRTOS." alt="" coords="103,5,248,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,19,249,21,248,16,283,19"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="85,20,55,21,55,16,90,18"/>
+</map>

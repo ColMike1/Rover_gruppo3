@@ -1,0 +1,136 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+snapshot/\+supervisor\+\_\+snapshot.c File Reference}
+\hypertarget{supervisor__snapshot_8c}{}\label{supervisor__snapshot_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/snapshot/supervisor\_snapshot.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/snapshot/supervisor\_snapshot.c}}
+
+
+Storage thread-\/safe dello snapshot supervisore.  
+
+
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for supervisor\+\_\+snapshot.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{supervisor__snapshot_8c_ac1ef54ef5bfc41a4a97c0f1145ccf81a}{Supervisor\+Snapshot\+\_\+\+Mutex\+Init}} (os\+Mutex\+Id\+\_\+t mutex\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em Registra il mutex da usare per l\textquotesingle{}accesso allo snapshot. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__snapshot_8c_ac191454fce2ffb5f2c8a3d57229fffc0}{Supervisor\+Snapshot\+\_\+\+Write}} (const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}src)
+\begin{DoxyCompactList}\small\item\em Scrive lo snapshot supervisore in sezione critica. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{supervisor__snapshot_8c_a86490218ec807bc7b449e09eb268b4e4}{Supervisor\+Snapshot\+\_\+\+Read}} (\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}dst)
+\begin{DoxyCompactList}\small\item\em Legge lo snapshot supervisore in sezione critica. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \doxymbox{\hyperlink{supervisor__snapshot_8c_ab6dfb1f8f297ec47d3745e87c3ee8e19}{snapshot}}
+\begin{DoxyCompactList}\small\item\em Copia condivisa dello snapshot supervisore. \end{DoxyCompactList}\item 
+static os\+Mutex\+Id\+\_\+t \doxymbox{\hyperlink{supervisor__snapshot_8c_a5d6c4d40d28bdb35b409841e0991d290}{snapshot\+\_\+mutex}}
+\begin{DoxyCompactList}\small\item\em Mutex associato allo snapshot supervisore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Storage thread-\/safe dello snapshot supervisore. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{supervisor__snapshot_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{supervisor__snapshot_8c_ac1ef54ef5bfc41a4a97c0f1145ccf81a}\index{supervisor\_snapshot.c@{supervisor\_snapshot.c}!SupervisorSnapshot\_MutexInit@{SupervisorSnapshot\_MutexInit}}
+\index{SupervisorSnapshot\_MutexInit@{SupervisorSnapshot\_MutexInit}!supervisor\_snapshot.c@{supervisor\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{SupervisorSnapshot\_MutexInit()}{SupervisorSnapshot\_MutexInit()}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8c_ac1ef54ef5bfc41a4a97c0f1145ccf81a} 
+void Supervisor\+Snapshot\+\_\+\+Mutex\+Init (\begin{DoxyParamCaption}\item[{os\+Mutex\+Id\+\_\+t}]{mutex\+\_\+handle}{}\end{DoxyParamCaption})}
+
+
+
+Registra il mutex da usare per l\textquotesingle{}accesso allo snapshot. 
+
+Registra il mutex usato per proteggere lo snapshot.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+handle} & Handle mutex creato all\textquotesingle{}esterno. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8c_ac1ef54ef5bfc41a4a97c0f1145ccf81a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__snapshot_8c_a86490218ec807bc7b449e09eb268b4e4}\index{supervisor\_snapshot.c@{supervisor\_snapshot.c}!SupervisorSnapshot\_Read@{SupervisorSnapshot\_Read}}
+\index{SupervisorSnapshot\_Read@{SupervisorSnapshot\_Read}!supervisor\_snapshot.c@{supervisor\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{SupervisorSnapshot\_Read()}{SupervisorSnapshot\_Read()}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8c_a86490218ec807bc7b449e09eb268b4e4} 
+void Supervisor\+Snapshot\+\_\+\+Read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Legge lo snapshot supervisore in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Destinazione in cui copiare il dato. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8c_a86490218ec807bc7b449e09eb268b4e4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{supervisor__snapshot_8c_ac191454fce2ffb5f2c8a3d57229fffc0}\index{supervisor\_snapshot.c@{supervisor\_snapshot.c}!SupervisorSnapshot\_Write@{SupervisorSnapshot\_Write}}
+\index{SupervisorSnapshot\_Write@{SupervisorSnapshot\_Write}!supervisor\_snapshot.c@{supervisor\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{SupervisorSnapshot\_Write()}{SupervisorSnapshot\_Write()}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8c_ac191454fce2ffb5f2c8a3d57229fffc0} 
+void Supervisor\+Snapshot\+\_\+\+Write (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Scrive lo snapshot supervisore in sezione critica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Dato sorgente da copiare. \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{supervisor__snapshot_8c_ac191454fce2ffb5f2c8a3d57229fffc0_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{supervisor__snapshot_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{supervisor__snapshot_8c_ab6dfb1f8f297ec47d3745e87c3ee8e19}\index{supervisor\_snapshot.c@{supervisor\_snapshot.c}!snapshot@{snapshot}}
+\index{snapshot@{snapshot}!supervisor\_snapshot.c@{supervisor\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{snapshot}{snapshot}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8c_ab6dfb1f8f297ec47d3745e87c3ee8e19} 
+\doxymbox{\hyperlink{struct_supervisor_snapshot__t}{Supervisor\+Snapshot\+\_\+t}} snapshot\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Copia condivisa dello snapshot supervisore. 
+
+\Hypertarget{supervisor__snapshot_8c_a5d6c4d40d28bdb35b409841e0991d290}\index{supervisor\_snapshot.c@{supervisor\_snapshot.c}!snapshot\_mutex@{snapshot\_mutex}}
+\index{snapshot\_mutex@{snapshot\_mutex}!supervisor\_snapshot.c@{supervisor\_snapshot.c}}
+\doxysubsubsection{\texorpdfstring{snapshot\_mutex}{snapshot\_mutex}}
+{\footnotesize\ttfamily \label{supervisor__snapshot_8c_a5d6c4d40d28bdb35b409841e0991d290} 
+os\+Mutex\+Id\+\_\+t snapshot\+\_\+mutex\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Mutex associato allo snapshot supervisore. 
+

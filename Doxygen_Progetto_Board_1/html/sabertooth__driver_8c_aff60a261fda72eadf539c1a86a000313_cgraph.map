@@ -1,0 +1,5 @@
+<map id="Prepare_Saber_Packet" name="Prepare_Saber_Packet">
+<area shape="rect" id="Node000001" title="Prepara un singolo pacchetto da 4 byte per il protocollo Sabertooth." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="Node000002" href="$sabertooth__driver_8c.html#afe3092cef7667a37789c3d6a189336e2" title="Calcola il checksum a 7&#45;bit richiesto dal protocollo Sabertooth." alt="" coords="209,5,334,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,16,196,19,190,19,161,21"/>
+</map>

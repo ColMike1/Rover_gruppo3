@@ -1,0 +1,77 @@
+\doxysection{Board\+Health\+Snapshot\+\_\+t Struct Reference}
+\hypertarget{struct_board_health_snapshot__t}{}\label{struct_board_health_snapshot__t}\index{BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}}
+
+
+Snapshot dei parametri vitali della scheda.  
+
+
+
+
+{\ttfamily \+\#include $<$board\+\_\+health\+\_\+snapshot.\+h$>$}
+
+
+
+Collaboration diagram for Board\+Health\+Snapshot\+\_\+t:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{struct_board_health_snapshot__t__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{struct_board_health_snapshot__t_a446540a84e3b7a60e364e9d9d309232d}{temperature\+\_\+degC}}
+\item 
+float \doxymbox{\hyperlink{struct_board_health_snapshot__t_abc951569dc37ae5f93ef0bbb744b58bc}{battery\+\_\+pct}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_board_health_snapshot__t_aa2fe46d40fe05f7009fd6f1bf988cf73}{task\+\_\+last\+\_\+run\+\_\+ms}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_board_health_snapshot__t_ae3ddcec9cee2b8118e81b99f3cd79457}{temp\+\_\+last\+\_\+valid\+\_\+ms}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_board_health_snapshot__t_a1b5b835ba52db2d5a87d751d2faa398f}{batt\+\_\+last\+\_\+valid\+\_\+ms}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Snapshot dei parametri vitali della scheda. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_board_health_snapshot__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_board_health_snapshot__t_a1b5b835ba52db2d5a87d751d2faa398f}\index{BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}!batt\_last\_valid\_ms@{batt\_last\_valid\_ms}}
+\index{batt\_last\_valid\_ms@{batt\_last\_valid\_ms}!BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{batt\_last\_valid\_ms}{batt\_last\_valid\_ms}}
+{\footnotesize\ttfamily \label{struct_board_health_snapshot__t_a1b5b835ba52db2d5a87d751d2faa398f} 
+uint32\+\_\+t Board\+Health\+Snapshot\+\_\+t::\+batt\+\_\+last\+\_\+valid\+\_\+ms}
+
+Timestamp dell\textquotesingle{}ultima rilevazione batteria valida \Hypertarget{struct_board_health_snapshot__t_abc951569dc37ae5f93ef0bbb744b58bc}\index{BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}!battery\_pct@{battery\_pct}}
+\index{battery\_pct@{battery\_pct}!BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{battery\_pct}{battery\_pct}}
+{\footnotesize\ttfamily \label{struct_board_health_snapshot__t_abc951569dc37ae5f93ef0bbb744b58bc} 
+float Board\+Health\+Snapshot\+\_\+t::\+battery\+\_\+pct}
+
+Ultima lettura valida della batteria in percentuale \Hypertarget{struct_board_health_snapshot__t_aa2fe46d40fe05f7009fd6f1bf988cf73}\index{BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}!task\_last\_run\_ms@{task\_last\_run\_ms}}
+\index{task\_last\_run\_ms@{task\_last\_run\_ms}!BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{task\_last\_run\_ms}{task\_last\_run\_ms}}
+{\footnotesize\ttfamily \label{struct_board_health_snapshot__t_aa2fe46d40fe05f7009fd6f1bf988cf73} 
+uint32\+\_\+t Board\+Health\+Snapshot\+\_\+t::\+task\+\_\+last\+\_\+run\+\_\+ms}
+
+Timestamp dell\textquotesingle{}ultima esecuzione del task \+[ms]\+ \Hypertarget{struct_board_health_snapshot__t_ae3ddcec9cee2b8118e81b99f3cd79457}\index{BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}!temp\_last\_valid\_ms@{temp\_last\_valid\_ms}}
+\index{temp\_last\_valid\_ms@{temp\_last\_valid\_ms}!BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{temp\_last\_valid\_ms}{temp\_last\_valid\_ms}}
+{\footnotesize\ttfamily \label{struct_board_health_snapshot__t_ae3ddcec9cee2b8118e81b99f3cd79457} 
+uint32\+\_\+t Board\+Health\+Snapshot\+\_\+t::\+temp\+\_\+last\+\_\+valid\+\_\+ms}
+
+Timestamp dell\textquotesingle{}ultima rilevazione temperatura valida \Hypertarget{struct_board_health_snapshot__t_a446540a84e3b7a60e364e9d9d309232d}\index{BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}!temperature\_degC@{temperature\_degC}}
+\index{temperature\_degC@{temperature\_degC}!BoardHealthSnapshot\_t@{BoardHealthSnapshot\_t}}
+\doxysubsubsection{\texorpdfstring{temperature\_degC}{temperature\_degC}}
+{\footnotesize\ttfamily \label{struct_board_health_snapshot__t_a446540a84e3b7a60e364e9d9d309232d} 
+float Board\+Health\+Snapshot\+\_\+t::\+temperature\+\_\+degC}
+
+Ultima lettura valida della temperatura 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board1/\+\+Core/\+\+Inc/\+snapshot/\+\doxymbox{\hyperlink{board__health__snapshot_8h}{board\+\_\+health\+\_\+snapshot.\+h}}\end{DoxyCompactItemize}

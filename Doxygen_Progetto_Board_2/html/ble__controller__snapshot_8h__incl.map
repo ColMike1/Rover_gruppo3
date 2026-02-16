@@ -1,0 +1,18 @@
+<map id="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/ble_controller_snapshot.h" name="C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board2/Core/Inc/snapshot/ble_controller_snapshot.h">
+<area shape="rect" id="Node000001" title="Definizione dello snapshot BLE controller e API thread&#45;safe." alt="" coords="32,5,235,96"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,235,70,261"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,99,64,145,51,183,43,220,38,219,45,182,59,143,93,94"/>
+<area shape="rect" id="Node000003" href="$ble__controller__i2c_8h.html" title="Interfaccia I2C per lettura frame dal controller BLE." alt="" coords="74,144,193,187"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,94,136,129,131,128,133,99"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="217,152,306,179"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="185,94,238,141,233,142,184,99"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="108,190,66,226,62,223,110,185"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="95,235,169,261"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="134,185,135,219,130,218,132,190"/>
+<area shape="rect" id="Node000005" href="$i2c_8h.html" title="This file contains all the function prototypes for the i2c.c file." alt="" coords="193,235,242,261"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="155,185,196,223,191,224,155,190"/>
+<area shape="rect" id="Node000006" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="187,309,248,336"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="219,260,220,295,215,293,216,264"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="157,384,278,411"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="219,335,220,370,215,367,216,338"/>
+</map>

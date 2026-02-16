@@ -1,0 +1,162 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+sonar/\+sonar\+\_\+task.c File Reference}
+\hypertarget{sonar__task_8c}{}\label{sonar__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/sonar/sonar\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/sonar/sonar\_task.c}}
+
+
+Task sonar e callback ISR di acquisizione capture.  
+
+
+{\ttfamily \+\#include "{}sonar/\+sonar\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}sonar/\+sonar\+\_\+hw.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+sonar\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}cmsis\+\_\+os2.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+{\ttfamily \+\#include "{}tim.\+h"{}}\newline
+Include dependency graph for sonar\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{sonar__task_8c_af086ec14ced9dddefaaee23006d1e035}{SONAR\+\_\+\+CHANNEL\+\_\+\+COUNT}}~3U
+\begin{DoxyCompactList}\small\item\em Numero di canali sonar gestiti (uno per sonar). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{sonar__task_8c_a9265f13d651706a0d83eed9f5f2c6b2d}{Sonar\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task sonar. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sonar__task_8c_a0b04c57f427b4795b6c84d1624e44ab0}{Sonar\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task sonar. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{sonar__task_8c_a77a2401a35ddd9bd0b8fc28331b81381}{HAL\+\_\+\+TIM\+\_\+\+IC\+\_\+\+Capture\+Callback}} (TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}htim)
+\begin{DoxyCompactList}\small\item\em Callback HAL su evento input-\/capture timer sonar. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static Task\+Handle\+\_\+t \doxymbox{\hyperlink{sonar__task_8c_a50140ead9284fe71ea2119573d1fb5d7}{sonar\+Task\+Handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle del task sonar, usato per la notifica da ISR. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structsonars__flag__t}{sonars\+\_\+flag\+\_\+t}} \doxymbox{\hyperlink{sonar__task_8c_a234f40d1173c73675153c40387e37d6f}{flag}}
+\begin{DoxyCompactList}\small\item\em Stato validita\textquotesingle{} canali aggiornato da ISR capture. \end{DoxyCompactList}\item 
+uint8\+\_\+t \doxymbox{\hyperlink{sonar__task_8c_aa2985cd07ded076cc18d130908aabc75}{sonar\+\_\+count}}
+\begin{DoxyCompactList}\small\item\em Numero di canali che hanno completato la misura corrente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task sonar e callback ISR di acquisizione capture. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{sonar__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sonar__task_8c_af086ec14ced9dddefaaee23006d1e035}\index{sonar\_task.c@{sonar\_task.c}!SONAR\_CHANNEL\_COUNT@{SONAR\_CHANNEL\_COUNT}}
+\index{SONAR\_CHANNEL\_COUNT@{SONAR\_CHANNEL\_COUNT}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{SONAR\_CHANNEL\_COUNT}{SONAR\_CHANNEL\_COUNT}}
+{\footnotesize\ttfamily \label{sonar__task_8c_af086ec14ced9dddefaaee23006d1e035} 
+\+\#define SONAR\+\_\+\+CHANNEL\+\_\+\+COUNT~3U}
+
+
+
+Numero di canali sonar gestiti (uno per sonar). 
+
+
+
+\label{doc-func-members}
+\Hypertarget{sonar__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{sonar__task_8c_a77a2401a35ddd9bd0b8fc28331b81381}\index{sonar\_task.c@{sonar\_task.c}!HAL\_TIM\_IC\_CaptureCallback@{HAL\_TIM\_IC\_CaptureCallback}}
+\index{HAL\_TIM\_IC\_CaptureCallback@{HAL\_TIM\_IC\_CaptureCallback}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_TIM\_IC\_CaptureCallback()}{HAL\_TIM\_IC\_CaptureCallback()}}
+{\footnotesize\ttfamily \label{sonar__task_8c_a77a2401a35ddd9bd0b8fc28331b81381} 
+void HAL\+\_\+\+TIM\+\_\+\+IC\+\_\+\+Capture\+Callback (\begin{DoxyParamCaption}\item[{TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{htim}{}\end{DoxyParamCaption})}
+
+
+
+Callback HAL su evento input-\/capture timer sonar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em htim} & Handle del timer che ha generato l\textquotesingle{}evento. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{sonar__task_8c_a9265f13d651706a0d83eed9f5f2c6b2d}\index{sonar\_task.c@{sonar\_task.c}!Sonar\_TaskInit@{Sonar\_TaskInit}}
+\index{Sonar\_TaskInit@{Sonar\_TaskInit}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{Sonar\_TaskInit()}{Sonar\_TaskInit()}}
+{\footnotesize\ttfamily \label{sonar__task_8c_a9265f13d651706a0d83eed9f5f2c6b2d} 
+void Sonar\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task sonar. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__task_8c_a9265f13d651706a0d83eed9f5f2c6b2d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{sonar__task_8c_a0b04c57f427b4795b6c84d1624e44ab0}\index{sonar\_task.c@{sonar\_task.c}!Sonar\_TaskStep@{Sonar\_TaskStep}}
+\index{Sonar\_TaskStep@{Sonar\_TaskStep}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{Sonar\_TaskStep()}{Sonar\_TaskStep()}}
+{\footnotesize\ttfamily \label{sonar__task_8c_a0b04c57f427b4795b6c84d1624e44ab0} 
+void Sonar\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task sonar. 
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__task_8c_a0b04c57f427b4795b6c84d1624e44ab0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sonar__task_8c_a0b04c57f427b4795b6c84d1624e44ab0_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{sonar__task_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{sonar__task_8c_a234f40d1173c73675153c40387e37d6f}\index{sonar\_task.c@{sonar\_task.c}!flag@{flag}}
+\index{flag@{flag}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{flag}{flag}}
+{\footnotesize\ttfamily \label{sonar__task_8c_a234f40d1173c73675153c40387e37d6f} 
+\doxymbox{\hyperlink{structsonars__flag__t}{sonars\+\_\+flag\+\_\+t}} flag\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Stato validita\textquotesingle{} canali aggiornato da ISR capture. 
+
+Stato validita\textquotesingle{} canali aggiornato da ISR capture. \Hypertarget{sonar__task_8c_aa2985cd07ded076cc18d130908aabc75}\index{sonar\_task.c@{sonar\_task.c}!sonar\_count@{sonar\_count}}
+\index{sonar\_count@{sonar\_count}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{sonar\_count}{sonar\_count}}
+{\footnotesize\ttfamily \label{sonar__task_8c_aa2985cd07ded076cc18d130908aabc75} 
+uint8\+\_\+t sonar\+\_\+count\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Numero di canali che hanno completato la misura corrente. 
+
+Numero di canali che hanno completato la misura corrente. \Hypertarget{sonar__task_8c_a50140ead9284fe71ea2119573d1fb5d7}\index{sonar\_task.c@{sonar\_task.c}!sonarTaskHandle@{sonarTaskHandle}}
+\index{sonarTaskHandle@{sonarTaskHandle}!sonar\_task.c@{sonar\_task.c}}
+\doxysubsubsection{\texorpdfstring{sonarTaskHandle}{sonarTaskHandle}}
+{\footnotesize\ttfamily \label{sonar__task_8c_a50140ead9284fe71ea2119573d1fb5d7} 
+Task\+Handle\+\_\+t sonar\+Task\+Handle = NULL\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handle del task sonar, usato per la notifica da ISR. 
+

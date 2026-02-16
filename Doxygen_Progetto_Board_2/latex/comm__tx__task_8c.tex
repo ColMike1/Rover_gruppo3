@@ -1,0 +1,93 @@
+\doxysection{C:\+/\+\+Users/\+\+Sterm/\+\+Documents/\+\+Git\+Hub/\+\+Rover\+\_\+gruppo3/\+\+Codice\+\_\+\+Rover/\+\+Progetto\+\_\+\+Board2/\+\+Core/\+\+Src/\+comm/\+comm\+\_\+tx\+\_\+task.c File Reference}
+\hypertarget{comm__tx__task_8c}{}\label{comm__tx__task_8c}\index{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/comm/comm\_tx\_task.c@{C:/Users/Sterm/Documents/GitHub/Rover\_gruppo3/Codice\_Rover/Progetto\_Board2/Core/Src/comm/comm\_tx\_task.c}}
+
+
+Task TX:\+ composizione e invio frame board2 -\/\texorpdfstring{$>$}{>} board1.  
+
+
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+tx\+\_\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+pack.\+h"{}}\newline
+{\ttfamily \+\#include "{}comm/\+comm\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}shared\+\_\+headers/\+comm\+\_\+message\+\_\+structures.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+ble\+\_\+controller\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+supervisor\+\_\+snapshot.\+h"{}}\newline
+{\ttfamily \+\#include "{}snapshot/\+imu\+\_\+snapshot.\+h"{}}\newline
+Include dependency graph for comm\+\_\+tx\+\_\+task.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{comm__tx__task_8c_a728eacf351476835afcb4230592c3593}{TX\+\_\+\+FRAME\+\_\+\+LEN}}~(sizeof(Comm\+Frame\+B2\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Lunghezza fissa del frame trasmesso verso board 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{comm__tx__task_8c_a151a544e02c1d1ebb6d8082966fdcebc}{Tx\+\_\+\+Task\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inizializza il task TX. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{comm__tx__task_8c_add320c948d8694068895e9744195957e}{Tx\+\_\+\+Task\+Step}} (void)
+\begin{DoxyCompactList}\small\item\em Esegue uno step del task TX. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Task TX:\+ composizione e invio frame board2 -\/\texorpdfstring{$>$}{>} board1. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{comm__tx__task_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{comm__tx__task_8c_a728eacf351476835afcb4230592c3593}\index{comm\_tx\_task.c@{comm\_tx\_task.c}!TX\_FRAME\_LEN@{TX\_FRAME\_LEN}}
+\index{TX\_FRAME\_LEN@{TX\_FRAME\_LEN}!comm\_tx\_task.c@{comm\_tx\_task.c}}
+\doxysubsubsection{\texorpdfstring{TX\_FRAME\_LEN}{TX\_FRAME\_LEN}}
+{\footnotesize\ttfamily \label{comm__tx__task_8c_a728eacf351476835afcb4230592c3593} 
+\+\#define TX\+\_\+\+FRAME\+\_\+\+LEN~(sizeof(Comm\+Frame\+B2\+\_\+t))}
+
+
+
+Lunghezza fissa del frame trasmesso verso board 1. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{comm__tx__task_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{comm__tx__task_8c_a151a544e02c1d1ebb6d8082966fdcebc}\index{comm\_tx\_task.c@{comm\_tx\_task.c}!Tx\_TaskInit@{Tx\_TaskInit}}
+\index{Tx\_TaskInit@{Tx\_TaskInit}!comm\_tx\_task.c@{comm\_tx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Tx\_TaskInit()}{Tx\_TaskInit()}}
+{\footnotesize\ttfamily \label{comm__tx__task_8c_a151a544e02c1d1ebb6d8082966fdcebc} 
+void Tx\+\_\+\+Task\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inizializza il task TX. 
+
+In questa implementazione non e\textquotesingle{} richiesta inizializzazione specifica. \Hypertarget{comm__tx__task_8c_add320c948d8694068895e9744195957e}\index{comm\_tx\_task.c@{comm\_tx\_task.c}!Tx\_TaskStep@{Tx\_TaskStep}}
+\index{Tx\_TaskStep@{Tx\_TaskStep}!comm\_tx\_task.c@{comm\_tx\_task.c}}
+\doxysubsubsection{\texorpdfstring{Tx\_TaskStep()}{Tx\_TaskStep()}}
+{\footnotesize\ttfamily \label{comm__tx__task_8c_add320c948d8694068895e9744195957e} 
+void Tx\+\_\+\+Task\+Step (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esegue uno step del task TX. 
+
+Legge gli snapshot condivisi, costruisce il frame di trasmissione e lo invia su UART solo se la lunghezza e\textquotesingle{} quella attesa. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{comm__tx__task_8c_add320c948d8694068895e9744195957e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comm__tx__task_8c_add320c948d8694068895e9744195957e_icgraph}
+\end{center}
+\end{figure}
