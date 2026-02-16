@@ -50,11 +50,32 @@ La Board 2 quindi invia i comandi utente ricevuti alla Board 1, che si occupa di
 \paragraph{Rilevamento ostacoli}
 I riferimenti di velocità sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento.
 Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $75$ e $150$ cm, il supervisore di Board 2 attiva delle procedure 
-di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essendo che in condizioni nominali Board 2 non attua, questi comandi vengono inviati, tramite la comunicazione UART, alla Board 1 che si occupa di eseguirli.
+di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essendo che in condizioni nominali Board 2 non attua, questi comandi vengono inviati dalla Board 2, tramite la comunicazione UART, alla Board 1 che si occupa di eseguirli.
 
 
 
-\subsection{Encoder non funzionanti}
+\subsection{Condizioni di funzionamento critico o degradato}
+
+Il ciclo di vita delle due board prevede la gestione di stati operativi non nominali:
+\begin{itemize}
+    \item \textbf{Modalità degradata}: il sistema mantiene la funzionalità ma con prestazioni o capacità ridotte.
+    \item \textbf{Modalità critica}: il sistema si blocca, interrompendo l'esecuzione dei comandi utente per motivi di sicurezza o impossibilità tecnica.
+\end{itemize}
+\paragraph{Meccanismo di rilevazione dei guasti}
+Il passaggio a queste modalità avviene monitorando l'intervallo di tempo tra due letture \textit{corrette} da sensori o periferiche. Ogni Board legge i propri sensori e considera la lettura "corretta" quando la funzione software dedicata 
+restituisce uno stato di successo. Ogni volta che viene convalidata una lettura, il sistema aggiorna un timestamp di riferimento.
+
+Ogni Board reagisce in base al superamento di soglie temporali predefinite:
+\begin{itemize}
+    \item \textbf{Soglia di allerta}: se l'intervallo tra due letture valide supera un primo limite temporale, il sistema entra in modalità degradata.
+     \item \textbf{Soglia massima}: se l'intervallo supera un secondo limite temporale più elevato, il guasto è considerato irreversibile e il sistema passa in modalità critica.
+\end{itemize}
+
+Per alcune periferiche specifiche, come gli encoder, la sola analisi temporale non è sufficiente;
+in questi casi viene applicata una logica di diagnostica più avanzata per verificare la validità del segnale.
+
+
+\paragraph{Encoder non funzionanti}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Encoder_faults}
@@ -67,6 +88,10 @@ Il rover è progettato per continuare a funzionare anche in presenza di guasti a
     \item \textit{2 Fallimenti}: Se si rompe un intero lato, copia i valori dall'altro lato.
     \item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
 \end{itemize}
+La rilevazione di un encoder non funzionante avviene attraverso una logica che monitora la potenza erogata al motore e la velocità rilevata dagli encoder. Se si alimenta un motore ma gli encoder non 
+rilevano movimenti (velocità calcolata è nulla) per 20 cicli di esecuzione, si imposta la variabile $has\_no\_feedback(i)$ associata al motore di riferimento a $1$, indicando che l'encoder è considerato non funzionante
+e attivando la logica di sostituzione descritta sopra. In questo caso viene segnalato un guasto di tipo $Degraded$ al supervisore di Board 1, che decide di limitare la potenza erogata ai motori. In particolare
+si applica il $50\%$ di potenza massima alle ruote, in modo da ridurre il rischio di slittamento o perdita di controllo dovuto alla mancanza di feedback dagli encoder.
 
 
 
