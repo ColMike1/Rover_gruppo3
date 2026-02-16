@@ -9,19 +9,44 @@
 \usepackage{tabularx} % Per colonne auto-adattanti
 \usepackage{multirow}
 \usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{siunitx}
 \graphicspath{ {./images/} }
 \setcounter{tocdepth}{4}    % Permette a \paragraph di apparire nell'indice
 %\setcounter{secnumdepth}{4} % Opzionale: numera anche i paragrafi (es. 1.1.1.1)
 
-\title{Supervisori}
-\date{Febbraio 2026}
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\maketitle
+		\begin{center}
+			{\Large UNIVERSITÀ DEGLI STUDI DI SALERNO\par}
+			\vspace{16pt}
+			{\normalsize DIPARTIMENTO DI INGEGNERIA INFORMATICA ED ELETTRICA E MATEMATICA APPLICATA}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\linewidth]{images/logo_unisa.png} 
+			\end{figure}
+			{\large Laurea Magistrale in Ingegneria Informatica\par}
+			\vspace{12pt}
+			Gruppo 3: Documentazione Embedded System Design
+			\vspace{30pt}
+			
+			
+			\begin{table}[h]
+				\centering
+				\begin{tabular}{|l|l|c|l|}
+					\hline
+					\textbf{Nome} & \textbf{Cognome} & \textbf{Matricola} & \multicolumn{1}{c|}{\textbf{Email}} \\ \hline
+					Alessandro & Pentangelo & 0622702632 & a.pentangelo18@studenti.unisa.it \\ \hline
+					Mirko & Campanella & 0622702588 & m.campanella1@studenti.unisa.it \\ \hline
+					Michele & Colombo & 0622702472 & m.colombo1@studenti.unisa.it \\ \hline
+					Alessio & Bottiglieri & 0622702583 & a.bottiglieri16@studenti.unisa.it \\ \hline
+				\end{tabular}
+			\end{table}
+		\end{center}
+
 \newpage
 \tableofcontents
 % \listoffigures
@@ -336,16 +361,7 @@ in cui sono presenti i comandi utente normalizzati ($x\_norm$ e $y\_norm$).
 \end{figure}
 
 
-
-
-\subsubsection{Task: lettura giroscopio}
-La Board 2 è equipaggiata con un sensore IMU \textbf{MPU-6050}, che integra un accelerometro e un giroscopio a 3 assi. Poiché il sensore non fornisce direttamente l'orientamento assoluto, l'angolo di yaw
-(la rotazione del rover attorno al suo asse verticale) viene calcolato nel firmware integrando nel tempo i dati della velocità angolare provenienti dal giroscopio.
-All'accensione, il sistema esegue una calibrazione per impostare lo zero relativo alla direzione di avvio. La comunicazione con l'IMU avviene tramite protocollo I2C, e i dati elaborati aggiornano
-ciclicamente lo snapshot IMUSnapshot (Figura~\ref{imu_snapshot}).
-\clearpage
-
-\subsubsection{Interfacciamento DualSense PS5 tramite ESP32}
+\paragraph{Interfacciamento DualSense PS5 tramite ESP32}
 Per la generazione dei comandi remoti è stato utilizzato un controller \textbf{Sony DualSense (PS5)}, interfacciato a una scheda \textbf{ESP32} che funge da bridge tra il protocollo Bluetooth e il bus I2C del rover.
 L'implementazione sul lato ESP32 è stata realizzata in ambiente Arduino IDE sfruttando la libreria \textbf{Bluepad32}.
 I dati del joystick sono stati rappresentati tramite la struct presente nell'immagine \ref{fig:rapp_tasti}.
@@ -401,6 +417,14 @@ Una volta rappresentati i dati e individuato i valori di stanby, il flusso di el
 \end{enumerate}
 Questa architettura permette di delegare il carico computazionale della gestione Bluetooth alla ESP32, garantendo che la Board 2 (STM32) rimanga focalizzata esclusivamente sui task real-time di supervisione e sicurezza.
 \clearpage
+
+
+
+\subsubsection{Task: lettura giroscopio}
+La Board 2 è equipaggiata con un sensore IMU \textbf{MPU-6050}, che integra un accelerometro e un giroscopio a 3 assi. Poiché il sensore non fornisce direttamente l'orientamento assoluto, l'angolo di yaw
+(la rotazione del rover attorno al suo asse verticale) viene calcolato nel firmware integrando nel tempo i dati della velocità angolare provenienti dal giroscopio.
+All'accensione, il sistema esegue una calibrazione per impostare lo zero relativo alla direzione di avvio. La comunicazione con l'IMU avviene tramite protocollo I2C, e i dati elaborati aggiornano
+ciclicamente lo snapshot IMUSnapshot (Figura~\ref{imu_snapshot}).
 
 \begin{figure}[H]
     \centering
@@ -480,13 +504,13 @@ acquisisce gli snapshot:
     \item \textbf{IMUSnapshot}
 \end{itemize}
 e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
-Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+Lo step del task è mostrato in Figura~\ref{fig:log_task_b2}, in cui vengono evidenziati i dati acquisiti e stampati su console.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
     \caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
-    \label{fig:log_task}
+    \label{fig:log_task_b2}
 \end{figure}
 
 
@@ -590,6 +614,168 @@ Il codice applica una sostituzione simmetrica:
     \item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
 \end{itemize}
 
+\paragraph{Struttura del PI gerarchico del Rover}
+Il controllo del rover si basa su un PI gerarchico creato a partire da quattro controllori PI distinti associati a ogni ruota del rover. Tra i controllori creati viene scelto, come base della legge di controllo, il PI associato al motore della ruota destra posteriore, questo perchè dalle analisi effettuate si evince essere la ruota con la dinamica più lenta tra le quattro. Una volta scelto il controllore di base, dunque, si procede ad implementare la legge di controllo gerarchica, che consente di controllare contemporaneamente tutti e quattro i motori del rover garantendo che questi raggiungano insieme la velocità desiderata, dettata dall’utente tramite il joystick.
+\newline
+
+La legge di controllo è organizzata secondo una struttura a quattro livelli principali, ciascuno basato su un regolatore PI dedicato:
+\begin{enumerate}
+	\item controllo globale della velocità del rover;
+	\item sincronizzazione tra asse anteriore e asse posteriore;
+	\item controllo differenziale dell’asse posteriore;
+	\item controllo differenziale dell’asse anteriore.
+\end{enumerate}
+Questa organizzazione consente di separare chiaramente:
+\begin{itemize}
+	\item il controllo della velocità longitudinale;
+	\item la sincronizzazione tra gli assi;
+	\item la gestione della rotazione del rover.
+\end{itemize}
+
+
+\paragraph{Controllo globale della velocità}
+Il livello più alto della gerarchia è rappresentato dal PI globale, che ha il compito di regolare la velocità media complessiva del rover. La velocità globale viene calcolata come media delle velocità delle quattro ruote.
+\newline
+
+Il regolatore PI globale calcola l’errore di velocità come differenza tra il riferimento richiesto dall’utente e la velocità globale misurata, e utilizza tale errore per generare un comando di base comune a tutti i motori:
+\[
+u_{base} =PI(\omega_{ref} - \omega_{global} )
+\]
+Il PI globale è rappresentato dal PI che è stato scelto come base del controllo gerarchico, identificato dal controllore progettato in precedenza ed associato alla ruota destra posteriore.
+
+
+
+\paragraph{Sincronizzazione tra asse anteriore e asse posteriore}
+Una volta generata l’uscita da parte del PI globale essa non viene direttamente applicata a tutti i motori, questo perché i motori, essendo diversi, presentano una risposta al gradino diversa, hanno tempi di salita e assestamento differenti nonchè velocità massime raggiungibili differenti. Se usassimo direttamente l’uscita del PI globale su tutti i motori essi non sarebbero sincronizzati.
+Per questo motivo si utilizza un secondo livello di controllo, dedicato alla sincronizzazione tra asse anteriore e asse posteriore.
+\newline
+
+Tale livello consiste nell’utilizzare un regolatore PI dedicato che agisce sull’errore definito come differenza tra la velocità media dell’asse anteriore e quella dell’asse posteriore:
+\[
+e_{asse} =\omega_{anteriore} -\omega_{posteriore} 
+\]
+
+Il termine di correzione generato dal PI punta a portare a zero l’errore così rappresentato. Tale termine viene:
+\begin{itemize}
+	\item sommato al comando dell’asse posteriore, in modo da aumentare la velocità delle ruote posteriori quando l’asse anteriore risulta più veloce (errore positivo) e ridurla nel caso opposto (errore negativo);
+	\item sottratto al comando dell’asse anteriore, in modo da ridurre la velocità delle ruote anteriori quando esse risultano più veloci e aumentarla nel caso opposto.
+\end{itemize}
+
+
+In questo modo:
+\begin{itemize}
+	\item entrambi gli assi tendono a mantenere la stessa velocità media;
+	\item vengono compensate eventuali differenze di carico o attrito;
+	\item si garantisce un moto rettilineo stabile del rover.
+\end{itemize}
+
+\paragraph{Controllo differenziale e gestione della rotazione}
+Una volta ottenuta l’uscita per ruote posteriori e anteriori è necessario utilizzare un ulteriore livello di controllo. In particolare la gerarchia prevede  due livelli inferiori di controllo, uno dedicato alle ruote posteriori ed uno per quelle anteriori, responsabili del controllo differenziale.
+
+Il controllo differenziale ha il compito di:
+\begin{itemize}
+	\item bilanciare la velocità tra ruota destra e sinistra su ogni asse;
+	\item generare la rotazione del rover attorno al proprio baricentro in risposta ai comandi di sterzo.
+\end{itemize}
+
+Tramite questi livelli di controllo il rover può girare su sé stesso, effettuare sterzate e mantenere un traiettoria rettilinea durante la marcia, compensano eventuali differenza di velocità tra il lato sinistro e quello destro.
+\newline
+
+L’errore differenziale viene definito come:
+\[
+e_{diff} =(\omega_{dx} - \omega_{sx} ) - 2 \cdot \omega_{target} 
+\]
+dove $\omega_{target}$ è proporzionale al comando di sterzo fornito dall’utente.
+\newline
+
+I regolatori PI differenziali generano una correzione del tutto analoga a quella introdotta dal PI sugli assi, basata sull’errore di velocità tra i due lati, che viene:
+\begin{itemize}
+	\item sottratta al comando della ruota destra;
+	\item aggiunta al comando della ruota sinistra.
+\end{itemize}
+
+Tramite questo approccio è possibile aggiungere dei termini a destra o sinistra per realizzare una rotazione controllata del rover senza alterare la velocità media imposta dal livello globale.
+
+\paragraph{Sistema di attuazione}
+Il sistema di attuazione dei motori è realizzato mediante driver di potenza Sabertooth 2x12, impiegati per il pilotaggio dei motori DC del rover.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Controllore/screenshot003}
+	\caption{Driver di potenza Sabertooth 2x12}
+	\label{fig:screenshot003}
+\end{figure}
+
+
+Nel sistema sono impiegati due driver Sabertooth, ciascuno responsabile del controllo di una coppia di motori:
+\begin{itemize}
+	\item un driver dedicato alle ruote anteriori del rover;
+	\item un driver dedicato alle ruote posteriori del rover.
+\end{itemize}
+
+\paragraph{Modalità di controllo dei driver}
+I driver Sabertooth supportano diverse modalità di comando, tra cui il controllo analogico tramite PWM filtrato, la modalità \textit{Simplified Serial}, la modalità con \textit{Slave Select} e la modalità \textit{Serial Packetized}.  
+Tra queste, è stata scelta la modalità \textit{Serial Packetized}.
+
+La scelta di tale modalità, al posto di un controllo PWM diretto, è motivata da diversi fattori progettuali:
+\begin{itemize}
+	\item maggiore affidabilità del comando, grazie alla trasmissione digitale dei setpoint;
+	\item gestione interna delle protezioni da parte del driver (sovracorrente, sovratensione, fault);
+	\item riduzione della sensibilità ai disturbi elettrici;
+	\item semplificazione del software di basso livello sul microcontrollore;
+	\item riduzione del numero di linee di controllo necessarie tra microcontrollore e driver.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Controllore/screenshot005}
+	\caption{Collegamento MCU-Sabertooth in modalità Packetized serial}
+	\label{fig:screenshot005}
+\end{figure}
+
+
+Tale modalità permette di inviare comandi strutturati come pacchetti da 4 byte contenenti indirizzo del driver, numero del motore, valore del setpoint di velocità e checksum, riducendo la probabilità di comandi errati dovuti a disturbi elettrici o rumore sulla linea.
+\newline
+
+Ogni Sabertooth è stata configurata con un indirizzo seriale distinto, impostato tramite i DIP switch hardware presenti sul driver:
+\begin{itemize}
+	\item Sabertooth che controlla le ruote anteriori configurata con indirizzo 135;
+	\item Sabertooth che controlla le ruote posteriori configurata con indirizzo 134.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Controllore/screenshot004}
+	\caption{Impostazione dell'indirizzo del driver Sabertooth tramite DIP switch 4-5-6}
+	\label{fig:screenshot004}
+\end{figure}
+
+
+L’assegnazione di indirizzi differenti permette di collegare entrambi i driver sulla stessa linea seriale. In questo modo, il microcontrollore può inviare, usando la stessa linea seriale, comandi selettivi ai motori anteriori o posteriori semplicemente variando l’indirizzo del pacchetto trasmesso.
+\newline
+
+Per quanto riguarda l’alimentazione, è stato abbassato lo switch 3 di ciascun driver, attivando la modalità \textit{Lithium Cutoff}.
+In questa configurazione il driver Sabertooth rileva automaticamente il numero di celle della batteria al momento dell’accensione e imposta una soglia di spegnimento pari a $3.0 V$ per cella, prevenendo la scarica eccessiva del pacco batterie e proteggendo l’hardware da condizioni di sotto tensione.
+
+\paragraph{Struttura del pacchetto seriale}
+Il protocollo Packetized Serial dei driver Sabertooth definisce un formato di pacchetto composto da quattro byte, utilizzato per la codifica dei comandi di controllo dei motori. La struttura del pacchetto è la seguente:
+\begin{itemize}
+	\item Address byte: identifica il driver destinatario;
+	\item Command byte: specifica il motore (1 o 2) e la direzione di rotazione;
+	\item Data byte: rappresenta il setpoint di velocità nel range 0–127;
+	\item Checksum: calcolato come somma dei tre byte precedenti mascherata a 7 bit.
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\fbox{\includegraphics[width=0.25\linewidth]{images/Controllore/screenshot009}}
+	\caption{Esempio di pacchetto Packetized serial letto dal driver Sabertooth con indirizzo 135, relativo al comando del motore M1 con setpoint di velocità del 50\% in direzione positiva}
+	\label{fig:screenshot007}
+\end{figure}
+
+\clearpage
+
 
 \subsubsection{Task: log dei dati per il debug}
 La Board 1 integra un task dedicato alla stampa dei dati per scopi di debug. Questo task, eseguito a cadenza regolare,
@@ -600,13 +786,13 @@ acquisisce gli snapshot:
     \item \textbf{BoardHealthSnapshot}
 \end{itemize}
 e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
-Lo step del task è mostrato in Figura~\ref{fig:log_task}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+Lo step del task è mostrato in Figura~\ref{fig:log_task_b1}, in cui vengono evidenziati i dati acquisiti e stampati su console.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
     \caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
-    \label{fig:log_task}
+    \label{fig:log_task_b1}
 \end{figure}
 
 
@@ -655,58 +841,226 @@ Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono tr
 \end{figure}
 
 
+\section{Algoritmo di schedulazione dei task}
+Per la gestione dei task su entrambe le board, è stato adottato l'algoritmo di scheduling \textbf{Rate Monotonic (RM)}. 
+RM è un algoritmo di scheduling a priorità fissa di tipo preventivo (preemptive).
+La scelta è motivata dal fatto che RM è l'algoritmo \textbf{ottimo} tra quelli a priorità statica: se un set di task non è schedulabile con RM, non lo sarà con nessun altro algoritmo a priorità fissa. 
+Secondo la logica RM, la priorità di un task è inversamente proporzionale al suo periodo:
+\begin{itemize}
+	\item Task con periodi più brevi (alta frequenza) $\rightarrow$ Priorità più alta.
+	\item Task con periodi più lunghi (bassa frequenza) $\rightarrow$ Priorità più bassa.
+\end{itemize}
+
+\subsection{Calcolo del Fattore di Utilizzo}
+Il primo passo per validare il sistema consiste nel calcolare il fattore di utilizzo della CPU ($U$) per ogni board. 
+Questo valore rappresenta la frazione di tempo in cui il processore è occupato nell'esecuzione dei task applicativi ed è definito come:
+
+\begin{equation}
+	U = \sum_{i=1}^{n} \frac{C_i}{T_i}
+\end{equation}
+
+dove $C_i$ è il WCET misurato e $T_i$ è il periodo del task $i$-esimo.
+
+\subsection{Criterio di Schedulabilità: Limite di Liu-Layland}
+Per garantire che tutti i task rispettino le proprie scadenze (deadline), è stato applicato il \textbf{test di condizione sufficiente} di Liu-Layland. Un set di $n$ task è sicuramente schedulabile, se il fattore di utilizzo totale $U$ è inferiore o uguale a un limite superiore $U_{lub}$ (Least Upper Bound), calcolato come:
+
+\begin{equation}
+	U \leq n(2^{1/n} - 1)
+\end{equation}
+
+Per il nostro sistema, dove sono presenti 7 task in esecuzione su entrambe le board, i limiti teorici sono:
+\begin{equation}
+	U_{lub} \leq 7(2^{1/7} - 1) \approx 0.72 (72.0\%).
+\end{equation}
+Se l'utilizzo calcolato $U$ risulta inferiore a questi valori, il sistema è sicuramente schedulabile utilizzando RM.
+
+\subsection{Verifica Numerica dei task su Board 1}Sulla base dei WCET acquisiti tramite il registro DWT, i parametri risultanti per i task di Board 1 sono:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lcccc}
+		\toprule
+		\textbf{Task (Board 1)} & \textbf{Periodo ($T_i$)} & \textbf{WCET ($C_i$)} & \textbf{Utilizzo ($U_i$)} \\ 
+		\midrule
+		Task\_Control    & 10 ms  & 148.71 \unit{\micro\second} & 1.487 \% \\
+		Task\_Supervisor & 20 ms  & 137.55 \unit{\micro\second} & 0.688 \% \\
+		Task\_TX         & 20 ms  & 128.82 \unit{\micro\second} & 0.644 \% \\
+		Task\_BattTemp   & 100 ms & 32.88 \unit{\micro\second}  & 0.033 \% \\ 
+		Task\_RX         & 20 ms  & 90.54 \unit{\micro\second}  & 0.453 \% \\ 
+		Task\_Led        & 100 ms & 41 \unit{\micro\second}     & 0.041 \% \\ 
+		Task\_Log        & 1000 ms & 4989.35 \unit{\micro\second} & 0.499 \% \\ 
+		\midrule
+		\textbf{Totale Board 1} & & \boldmath$U_{B1}$ & \textbf{3.845 \%} \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Analisi di schedulabilità per la Board 1.}
+\end{table}
+
+\subsection{Verifica Numerica dei task su Board 2}
+Sulla base dei WCET acquisiti tramite il registro DWT, i parametri risultanti per i task di Board 2 sono:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lcccc}
+		\toprule
+		\textbf{Task (Board 2)} & \textbf{Periodo ($T_i$)} & \textbf{WCET ($C_i$)} & \textbf{Utilizzo ($U_i$)} \\ 
+		\midrule
+		Task\_ReadBLE    & 20 ms  & 5022.88 \unit{\micro\second} & 25.11 \% \\
+		Task\_Supervisor & 20 ms  & 332.66 \unit{\micro\second}  & 1.66 \% \\
+		Task\_ReadSonars & 60 ms  & 56.47 \unit{\micro\second}   & 0.09 \% \\
+		Task\_ReadIMU    & 20 ms & 5013.58 \unit{\micro\second} & 25.07 \% \\ 
+		Task\_TX         & 20 ms & 120.01 \unit{\micro\second}    & 0.60 \% \\ 
+		Task\_RX         & 20 ms & 69.14 \unit{\micro\second}   & 0.35 \% \\ 
+		Task\_Log        & 1000 ms & 5129.35 \unit{\micro\second} & 0.51 \% \\ 
+		\midrule
+		\textbf{Totale Board 2} & & \boldmath$U_{B2}$ & \textbf{53.39 \%} \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Analisi di schedulabilità per la Board 2.}
+\end{table}
+\clearpage
+
+\subsection{Assegnazione delle priorità}
+Una volta appurato che il set di task fosse schedulabile secondo l'algoritmo Rate Monotonic, in base ai periodi di ogni task sono state assegnate le seguenti priorità:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/priorita_board1.png}
+	\caption{Priorità assegnate ai task di Board 1 tramite FREERTOS}
+	\label{fig:priorità_board1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/priorita_board2.png}
+	\caption{Priorità assegnate ai task di Board 2 tramite FREERTOS}
+	\label{fig:priorità_board2}
+\end{figure}
+
+
+\section{Gestione della concorrenza e sincronizzazione: i Mutex}
+In un sistema real-time basato su task concorrenti che condividono risorse hardware o strutture dati, la sola gestione delle priorità tramite politiche di scheduling come il Rate Monotonic non è sufficiente a garantire il corretto funzionamento del sistema.  
+Quando più task accedono in modo concorrente alle stesse risorse, è infatti necessario introdurre meccanismi di sincronizzazione per prevenire il fenomeno delle \textit{race condition} e garantire la consistenza dei dati.
+
+Nel progetto del rover, la sincronizzazione tra i task è stata realizzata principalmente mediante l’utilizzo di mutex forniti da FreeRTOS, usati per proteggere l’accesso alle risorse condivise.
+
+\paragraph{Perché utilizzare i Mutex}
+L'uso dei mutex (Mutual Exclusion) è stato preferito all'uso dei semplici semafori binari per la gestione delle sezioni critiche per tre motivi tecnici fondamentali:
+\begin{enumerate}
+	\item Ownership: Un mutex può essere rilasciato esclusivamente dal task che lo ha acquisito. Questo garantisce che l’accesso a una risorsa condivisa sia strettamente controllato e non possa essere rilasciato accidentalmente da task non coinvolti nella sezione critica.
+	
+	\item Priority inheritance: I mutex di FreeRTOS implementano il meccanismo di priority inheritance, che consente di evitare il fenomeno della priority inversion. In particolare, se un task ad alta priorità tenta di accedere a una risorsa occupata da un task a priorità inferiore, quest’ultimo eredita temporaneamente una priorità più alta, così da completare rapidamente la sezione critica e rilasciare il mutex.
+	
+	\item Robustezza: I mutex sono progettati per essere robusti: nel caso in cui un task termini mentre detiene un mutex, la risorsa viene comunque rilasciata, evitando situazioni di blocco permanente del sistema.
+\end{enumerate}
+
+
+\subsection{Snapshot come struttura condivisa}
+Nel progetto del rover, la comunicazione tra task concorrenti non avviene tramite lo scambio diretto di messaggi, ma mediante l’utilizzo di strutture dati condivise denominate \textit{snapshot}.  
+
+Uno snapshot rappresenta una fotografia consistente dello stato di un determinato sottosistema e racchiude tutte le informazioni che un task desidera rendere disponibili al resto del sistema. A seconda del task che lo produce, uno snapshot può contenere:
+\begin{itemize}
+	\item dati acquisiti da sensori (ad esempio IMU, encoder, sonar);
+	\item informazioni di validità temporale dei dati, come l’istante dell’ultima acquisizione valida;
+	\item dati ricevuti da periferiche esterne o da altre board (ad esempio tramite UART);
+	\item variabili di stato o grandezze calcolate che devono essere esposte ad altri task, come parametri di controllo o informazioni per il supervisore.
+\end{itemize}
+
+In questo modo, ogni task produttore aggiorna periodicamente il proprio snapshot, mentre i task che necessitano di tali informazioni leggono sempre l’ultima versione completa dei dati tramite un’API dedicata, senza interagire direttamente con il meccanismo di sincronizzazione.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{images/Scheduling/EsempioMutex1.png}
+	\caption{Struttura dello snapshot Board\_Health}
+	\label{fig:esempiomuex1}
+\end{figure}
+
+
+
+\subsubsection{Protezione degli snapshot tramite mutex}
+Poiché gli snapshot sono strutture dati condivise tra più task, il loro accesso deve essere opportunamente sincronizzato per garantire la coerenza delle informazioni lette.  
+Per questo motivo, ad ogni snapshot è associato un mutex dedicato, utilizzato per proteggere le operazioni di lettura e scrittura.
+\newline 
+
+I mutex associati agli snapshot sono stati definiti staticamente tramite l'interfaccia CubeMX.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/EsempioMutex}
+	\caption{Configurazione CubeMX del mutex relativo allo snapshot Board\_Health}
+	\label{fig:esempiomutexrifatto}
+\end{figure}
+
+Durante la fase di inizializzazione di FreeRTOS, gli handle dei mutex vengono passati ai moduli dei relativi snapshot, da cui viene poi utilizzato per sincronizzare l’accesso ai dati contenuti nello snapshot.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Scheduling/EsempioMutex2}
+	\caption{Definizione statica del mutex e dei relativi attributi generata da CubeMX}
+	\label{fig:esempiomutex2rifatto}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Scheduling/EsempioMutex3.png}
+	\caption{Inizializzazione del mutex in \texttt{MX\_FREERTOS\_Init} e passaggio dell’handle al modulo dello snapshot Board\_Health}
+	\label{fig:esempiomuex3}
+\end{figure}
+
+
+
+La scrittura di uno snapshot avviene in modo atomico: il task produttore acquisisce il mutex, aggiorna l’intera struttura e rilascia il mutex al termine dell’operazione. Analogamente, un task consumatore acquisisce il mutex prima di copiare localmente lo snapshot e lo rilascia subito dopo. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/EsempioMutex4.png}
+	\caption{Implementazione dello snapshot Board Health}
+	\label{fig:esempiomuex4}
+\end{figure}
+
+
+Questo schema, basato sull’uso congiunto di snapshot e mutex dedicati, permette di condividere i dati tra i task in modo semplice e controllato.   
+L’adozione dello stesso approccio per tutti i sottosistemi del rover rende il codice più ordinato e facilita l’aggiunta di nuovi task o nuove funzionalità senza modificare l’architettura preesistente.
 
 
 
 
 
+\subsubsection{Mutex e snapshot implementati su Board 1}
+Gli snapshot gestiti su Board 1 contengono dati rilevanti per il funzionamento e la sicurezza del rover, come informazioni sullo stato della batteria e della temperatura, riferimenti utilizzati dal ciclo di controllo e segnalazioni di sicurezza generate dal supervisore, tra cui eventuali condizioni di arresto di emergenza. Per questo motivo dobbiamo assicurarci che i dati disponibili siano sempre coerenti.
+\newline
+
+Di seguito sono riportati i mutex utilizzati, descrivendo per ciascuno i task coinvolti e il ruolo dei dati protetti:
+
+\begin{itemize}
+	\item \texttt{mutex\_Encoders}: Protegge lo snapshot contenente i dati degli encoder. I dati vengono scritti dal task di controllo durante la fase di acquisizione delle velocità delle ruote, mentre vengono letti dal task supervisore per verificare lo stato delle ruote e l’eventuale presenza di anomalie, inoltre, vengono letti anche dal task di trasmissione per inviare gli RPM alla Board~2, dove vengono utilizzati per diagnosi incrociate con i dati dell’IMU.
+	
+	\item \texttt{mutex\_BoardHealth}: Protegge i dati relativi allo stato della board, come tensione della batteria e temperatura. Lo snapshot è scritto dal task di Board Health ed è letto dal task supervisore per il controllo dei limiti operativi e la gestione di eventuali condizioni critiche.
+	
+	\item \texttt{mutex\_UartRx}: Protegge i dati ricevuti via UART dalla Board 2. Lo snapshot è scritto dal task di ricezione UART e letto dal task supervisore, che utilizza tali informazioni per valutare lo stato globale del rover e per determinare eventuali limitazioni sulla velocità o strategie di schivata ostacoli.
+	
+	\item \texttt{mutex\_Supervisor}: Protegge lo snapshot del supervisore. I dati sono scritti dal task supervisore e letti dal task di controllo, che utilizza i riferimenti di velocità forniti e reagisce immediatamente a eventuali segnali di fault, arrestando o modificando il comportamento del sistema di attuazione.
+\end{itemize}
 
 
+\subsection{Mutex e snapshot implementati su Board 2}
+Gli snapshot gestiti su Board 2 contengono i comandi provenienti dall'utente e dati acquisiti dall’ambiente esterno, come misure inerziali ed informazioni provenienti dai sensori a ultrasuoni, utilizzate per la gestione delle manovre di schivata e della frenata di emergenza. Per questo motivo dobbiamo assicurarci che i dati letti siano sempre coerenti tra task concorrenti.
+\newline
+
+Di seguito sono riportati i mutex utilizzati, descrivendo per ciascuno i task coinvolti e il ruolo dei dati protetti:
+\begin{itemize}
+	\item \texttt{mutex\_Ble}: Protegge lo snapshot contenente i comandi utente provenienti dal controller remoto. I dati vengono scritti dal task che legge l’interfaccia $I^2C$ collegata alla scheda ESP32; mentre è letto dal task supervisore per verificare la freschezza dei dati e il corretto funzionamento della comunicazione, e dal task di trasmissione per inoltrare i setpoint alla Board 1, che aggiorna di conseguenza i riferimenti di controllo.
+	
+	\item \texttt{mutex\_Imu}: Protegge lo snapshot dei dati inerziali acquisiti dall’IMU. I dati vengono scritti periodicamente dal task di lettura dell’IMU e sono letti dal task supervisore per verificare la correttezza dell’acquisizione, per effettuare controlli di coerenza con gli RPM ricevuti e per gestire le manovre di schivata o rotazione del rover. Lo snapshot è inoltre letto dal task di trasmissione per inviare lo yaw alla Board 1, che gestisce l’attuazione principale del sistema.
+	
+	\item \texttt{mutex\_UartRx}: Protegge i dati ricevuti dalla Board 1 tramite UART. Lo snapshot è scritto dal task di ricezione UART e letto dal task supervisore, che utilizza tali informazioni per valutare lo stato globale del rover e determinare eventuali azioni correttive o di sicurezza da attuare anche su Board 2.
+	
+	\item \texttt{mutex\_Sonar}: Protegge lo snapshot contenente le misure dei sensori a ultrasuoni. I dati sono scritti dal task di acquisizione dei sonar e letti dal task supervisore per la gestione delle manovre di schivata degli ostacoli o per l’attivazione della frenata di emergenza.
+	
+	\item \texttt{mutex\_Supervisor}: Protegge lo snapshot del supervisore di Board 2. I dati sono scritti dal task supervisore e letti dal task di trasmissione, che invia alla Board 1 lo stato delle periferiche e le informazioni diagnostiche relative alla Board 2, nonchè indicazioni di controllo per preservare la sicurezza del rover.
+\end{itemize}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Supervisore Board 1}
 \subsection{Panoramica generale}
