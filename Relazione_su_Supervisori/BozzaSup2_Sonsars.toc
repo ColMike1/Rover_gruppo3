@@ -1,37 +1,39 @@
-\contentsline {section}{\numberline {1}Specifiche}{3}{}%
-\contentsline {subsection}{\numberline {1.1}Condizioni di funzionamento nominale}{3}{}%
+\contentsline {section}{\numberline {1}Specifiche}{4}{}%
+\contentsline {subsection}{\numberline {1.1}Condizioni di funzionamento nominale}{4}{}%
 \contentsline {paragraph}{Rilevamento ostacoli}{4}{}%
-\contentsline {subsection}{\numberline {1.2}Condizioni di funzionamento critico o degradato}{4}{}%
-\contentsline {paragraph}{Meccanismo di rilevazione dei guasti}{4}{}%
-\contentsline {paragraph}{Encoder non funzionanti}{5}{}%
-\contentsline {section}{\numberline {2}Funzionamento generale del software di ciascuna board}{6}{}%
-\contentsline {subsection}{\numberline {2.1}Interazione tra Task e Meccanismo di Snapshot}{6}{}%
-\contentsline {subsection}{\numberline {2.2}Funzionamento task di Board 2}{8}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}Task: acquisizione distanza dagli ostacoli}{8}{}%
-\contentsline {paragraph}{Utilizzo DMA per la lettura dei segnali}{9}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Task: lettura comandi utente}{11}{}%
-\contentsline {subsubsection}{\numberline {2.2.3}Task: lettura giroscopio}{13}{}%
-\contentsline {subsubsection}{\numberline {2.2.4}Task: supervisore Board 2}{14}{}%
-\contentsline {subsubsection}{\numberline {2.2.5}Task: log dei dati per il debug}{18}{}%
-\contentsline {subsection}{\numberline {2.3}Funzionamento task di Board 1}{19}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}Task: lettura batteria e temperatura}{19}{}%
-\contentsline {subsubsection}{\numberline {2.3.2}Task: supervisore Board 1}{21}{}%
-\contentsline {subsubsection}{\numberline {2.3.3}Task: controllo motori}{24}{}%
-\contentsline {subsubsection}{\numberline {2.3.4}Task: log dei dati per il debug}{24}{}%
-\contentsline {subsubsection}{\numberline {2.3.5}Task: led}{25}{}%
-\contentsline {subsection}{\numberline {2.4}Task di trasmissione e ricezione tra le due Board}{26}{}%
-\contentsline {section}{\numberline {3}Supervisore Board 1}{28}{}%
-\contentsline {subsection}{\numberline {3.1}Panoramica generale}{28}{}%
-\contentsline {subsection}{\numberline {3.2}Input}{29}{}%
-\contentsline {subsection}{\numberline {3.3}Output}{30}{}%
-\contentsline {subsection}{\numberline {3.4}Rilevazione Faults}{31}{}%
-\contentsline {subsection}{\numberline {3.5}Decidere di far comandare la Board2}{35}{}%
-\contentsline {subsection}{\numberline {3.6}Costruzione maschere degradate e critiche}{37}{}%
-\contentsline {subsection}{\numberline {3.7}Calcolo riferimenti}{38}{}%
-\contentsline {section}{\numberline {4}Supervisore Board 2}{41}{}%
-\contentsline {subsection}{\numberline {4.1}Panoramica generale}{41}{}%
-\contentsline {subsection}{\numberline {4.2}Input}{42}{}%
-\contentsline {subsection}{\numberline {4.3}Output}{42}{}%
-\contentsline {subsection}{\numberline {4.4}Rilevamento ostacoli}{42}{}%
-\contentsline {subsubsection}{\numberline {4.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{43}{}%
-\contentsline {subsubsection}{\numberline {4.4.2}Gestione ostacoli con sistema in stato $degradato$}{46}{}%
+\contentsline {subsection}{\numberline {1.2}Condizioni di funzionamento critico o degradato}{5}{}%
+\contentsline {paragraph}{Meccanismo di rilevazione dei guasti}{5}{}%
+\contentsline {paragraph}{Encoder non funzionanti}{6}{}%
+\contentsline {subparagraph}{Coerenza del movimento del rover}{7}{}%
+\contentsline {paragraph}{Board 2 non riceve}{7}{}%
+\contentsline {section}{\numberline {2}Funzionamento generale del software di ciascuna board}{9}{}%
+\contentsline {subsection}{\numberline {2.1}Interazione tra Task e Meccanismo di Snapshot}{9}{}%
+\contentsline {subsection}{\numberline {2.2}Funzionamento task di Board 2}{11}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}Task: acquisizione distanza dagli ostacoli}{11}{}%
+\contentsline {paragraph}{Utilizzo DMA per la lettura dei segnali}{12}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Task: lettura comandi utente}{14}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}Task: lettura giroscopio}{16}{}%
+\contentsline {subsubsection}{\numberline {2.2.4}Task: supervisore Board 2}{17}{}%
+\contentsline {subsubsection}{\numberline {2.2.5}Task: log dei dati per il debug}{21}{}%
+\contentsline {subsection}{\numberline {2.3}Funzionamento task di Board 1}{22}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Task: lettura batteria e temperatura}{22}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}Task: supervisore Board 1}{24}{}%
+\contentsline {subsubsection}{\numberline {2.3.3}Task: controllo motori}{27}{}%
+\contentsline {subsubsection}{\numberline {2.3.4}Task: log dei dati per il debug}{27}{}%
+\contentsline {subsubsection}{\numberline {2.3.5}Task: led}{28}{}%
+\contentsline {subsection}{\numberline {2.4}Task di trasmissione e ricezione tra le due Board}{29}{}%
+\contentsline {section}{\numberline {3}Supervisore Board 1}{31}{}%
+\contentsline {subsection}{\numberline {3.1}Panoramica generale}{31}{}%
+\contentsline {subsection}{\numberline {3.2}Input}{32}{}%
+\contentsline {subsection}{\numberline {3.3}Output}{33}{}%
+\contentsline {subsection}{\numberline {3.4}Rilevazione Faults}{34}{}%
+\contentsline {subsection}{\numberline {3.5}Decidere di far comandare la Board2}{38}{}%
+\contentsline {subsection}{\numberline {3.6}Costruzione maschere degradate e critiche}{40}{}%
+\contentsline {subsection}{\numberline {3.7}Calcolo riferimenti}{41}{}%
+\contentsline {section}{\numberline {4}Supervisore Board 2}{44}{}%
+\contentsline {subsection}{\numberline {4.1}Panoramica generale}{44}{}%
+\contentsline {subsection}{\numberline {4.2}Input}{45}{}%
+\contentsline {subsection}{\numberline {4.3}Output}{45}{}%
+\contentsline {subsection}{\numberline {4.4}Rilevamento ostacoli}{45}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{46}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}Gestione ostacoli con sistema in stato $degradato$}{49}{}%

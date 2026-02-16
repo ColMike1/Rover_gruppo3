@@ -30,7 +30,7 @@
 
 
 
-
+\newpage
 \section{Specifiche}
 
 Il rover è dotato di due schede di controllo, denominate Board 1 e Board 2, che collaborano per garantire il funzionamento del sistema. In Figura~\ref{fig:architettura} è mostrata l'architettura generale del sistema.
@@ -56,13 +56,15 @@ di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essen
 
 \subsection{Condizioni di funzionamento critico o degradato}
 
-Il ciclo di vita delle due board prevede la gestione di stati operativi non nominali:
+Il ciclo di vita delle due board prevede la gestione di stati operativi $non$ nominali:
 \begin{itemize}
-    \item \textbf{Modalità degradata}: il sistema mantiene la funzionalità ma con prestazioni o capacità ridotte.
-    \item \textbf{Modalità critica}: il sistema si blocca, interrompendo l'esecuzione dei comandi utente per motivi di sicurezza o impossibilità tecnica.
+    \item \textbf{Modalità degradata}: il sistema mantiene la funzionalità ma con velocità ridotte del $50\%$.
+    \item \textbf{Modalità critica}: il sistema si ferma, interrompendo l'esecuzione dei comandi utente per motivi di sicurezza.
 \end{itemize}
+
+
 \paragraph{Meccanismo di rilevazione dei guasti}
-Il passaggio a queste modalità avviene monitorando l'intervallo di tempo tra due letture \textit{corrette} da sensori o periferiche. Ogni Board legge i propri sensori e considera la lettura "corretta" quando la funzione software dedicata 
+Il passaggio a queste modalità avviene monitorando l'intervallo di tempo tra due letture \textit{corrette} di sensori o periferiche. Ogni Board legge i propri sensori e considera la lettura "corretta" quando la funzione software dedicata 
 restituisce uno stato di successo. Ogni volta che viene convalidata una lettura, il sistema aggiorna un timestamp di riferimento.
 
 Ogni Board reagisce in base al superamento di soglie temporali predefinite:
@@ -93,6 +95,30 @@ rilevano movimenti (velocità calcolata è nulla) per 20 cicli di esecuzione, si
 e attivando la logica di sostituzione descritta sopra. In questo caso viene segnalato un guasto di tipo $Degraded$ al supervisore di Board 1, che decide di limitare la potenza erogata ai motori. In particolare
 si applica il $50\%$ di potenza massima alle ruote, in modo da ridurre il rischio di slittamento o perdita di controllo dovuto alla mancanza di feedback dagli encoder.
 
+\subparagraph{Coerenza del movimento del rover}
+La Board 2 monitora uno stato di coerenza tra la rotazione stimata dalla lettura della velocità dei motori (calcolata dagli encoder) e quella misurata dall'IMU. Se ci sono incoerenze, il supervisore di Board 2 imposta un flag $isMotionConsistent$ a 0,
+indicando che il movimento del rover non è affidabile.
+Nel caso in cui ci si trovi nella condizione di degrado di uno o più encoder e si riceva anche un segnale di incoerenza da parte dell'IMU, il supervisore di Board 1 decide di fermare il rover.
+
+\paragraph{Board 2 non riceve}
+
+Se la Board 2 non riceve dati dalla Board 1 per un periodo di tempo superiore a 120 ms, la Board 2 decide di inviare il comando di attuazione al rele.
+Tuttavia, dato che Board 1 continua a riceve da Board 2, non cede i privilegi di attuazione, quindi Board 2 si limita ad inviare comandi di attuazione in open loop, basandosi esclusivamente sui comandi utente ricevuti 
+e sui dati dei sensori, ma senza effettivamente attuare.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Board2_non_riceve}
+    \caption{Board 2 non riceve dati dalla Board 1.}
+    \label{fig:board2_non_riceve}
+\end{figure}
+
+Un aspetto da notare è che la Board 2, come descritto nel paragrafo \textit{Coerenza del movimento del rover}, continua a verificare che l'angolo di rotazione stimato dalla velocità delle ruote sia coerente con quello misurato dall'IMU.
+Questa coerenza, nel caso di mancata ricezione dalla Board 1, viene meno in quanto
+la stima dell'angolo di rotazione è basata sull'ultimo dato di velocità delle ruote che ovviamente cambia in quanto l'utente può ancora comandare il rover. Essendo che la rotazione del rover può essere possibile Board 2 imposterà il flag 
+$isMotionConsistent$ a 0, indicando che il movimento del rover non è affidabile. 
+
+A differenza di come descritto nel paragrafo \textit{Encoder non funzionanti}, nel caso in cui uno o più encoder si rompano, la Board 1 deciderà di attuare uno stop di emergenza, perchè avrà uno stato di degrado di uno o più encoder 
+in aggiunta ad un segnale di incoerenza del movimento del rover segnalato da Board 2. 
 
 
 
@@ -119,9 +145,7 @@ si applica il $50\%$ di potenza massima alle ruote, in modo da ridurre il rischi
 
 
 
-
-
-
+\newpage
 \section{Funzionamento generale del software di ciascuna board}
 \subsection{Interazione tra Task e Meccanismo di Snapshot}
 Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
