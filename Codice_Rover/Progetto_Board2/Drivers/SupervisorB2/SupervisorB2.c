@@ -285,7 +285,7 @@ static uint8_T Supervis_check_emergency_stop_k(const uint16_T sonars[3])
 /* Function for Chart: '<S14>/SuperB2_DEGB1_0' */
 static uint8_T SupervisorB2_closeRange(uint16_T sonar)
 {
-  return (uint8_T)((sonar > 75) && (sonar < 150));
+  return (uint8_T)((sonar > 100) && (sonar < 300));
 }
 
 /* Function for Chart: '<S14>/SuperB2_DEGB1_0' */

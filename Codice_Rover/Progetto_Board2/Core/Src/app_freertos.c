@@ -94,7 +94,7 @@ const osThreadAttr_t Task_ReadBLE_attributes = {
 };
 /* Definitions for Task_ReadIMU */
 osThreadId_t Task_ReadIMUHandle;
-uint32_t Task_ReadIMUBuffer[ 128 ];
+uint32_t Task_ReadIMUBuffer[ 256 ];
 osStaticThreadDef_t Task_ReadIMUControlBlock;
 const osThreadAttr_t Task_ReadIMU_attributes = {
   .name = "Task_ReadIMU",
@@ -142,7 +142,7 @@ const osThreadAttr_t Task_Tx_attributes = {
 };
 /* Definitions for Task_Supervisor */
 osThreadId_t Task_SupervisorHandle;
-uint32_t Task_SupervisorBuffer[ 512 ];
+uint32_t Task_SupervisorBuffer[ 256 ];
 osStaticThreadDef_t Task_SupervisorControlBlock;
 const osThreadAttr_t Task_Supervisor_attributes = {
   .name = "Task_Supervisor",

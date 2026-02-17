@@ -87,7 +87,7 @@ const osThreadAttr_t defaultTask_attributes = {
 };
 /* Definitions for Task_BattTemp */
 osThreadId_t Task_BattTempHandle;
-uint32_t Task_BattTempBuffer[ 512 ];
+uint32_t Task_BattTempBuffer[ 256 ];
 osStaticThreadDef_t Task_BattTempControlBlock;
 const osThreadAttr_t Task_BattTemp_attributes = {
   .name = "Task_BattTemp",
@@ -99,7 +99,7 @@ const osThreadAttr_t Task_BattTemp_attributes = {
 };
 /* Definitions for Task_TX */
 osThreadId_t Task_TXHandle;
-uint32_t Task_TXBuffer[ 512 ];
+uint32_t Task_TXBuffer[ 256 ];
 osStaticThreadDef_t Task_TXControlBlock;
 const osThreadAttr_t Task_TX_attributes = {
   .name = "Task_TX",
@@ -111,7 +111,7 @@ const osThreadAttr_t Task_TX_attributes = {
 };
 /* Definitions for Task_RX */
 osThreadId_t Task_RXHandle;
-uint32_t Task_RXBuffer[ 768 ];
+uint32_t Task_RXBuffer[ 256 ];
 osStaticThreadDef_t Task_RXControlBlock;
 const osThreadAttr_t Task_RX_attributes = {
   .name = "Task_RX",
@@ -123,7 +123,7 @@ const osThreadAttr_t Task_RX_attributes = {
 };
 /* Definitions for Task_Supervisor */
 osThreadId_t Task_SupervisorHandle;
-uint32_t Task_SupervisorBuffer[ 512 ];
+uint32_t Task_SupervisorBuffer[ 256 ];
 osStaticThreadDef_t Task_SupervisorControlBlock;
 const osThreadAttr_t Task_Supervisor_attributes = {
   .name = "Task_Supervisor",
@@ -135,7 +135,7 @@ const osThreadAttr_t Task_Supervisor_attributes = {
 };
 /* Definitions for Task_Control */
 osThreadId_t Task_ControlHandle;
-uint32_t Task_ControlBuffer[ 512 ];
+uint32_t Task_ControlBuffer[ 256 ];
 osStaticThreadDef_t Task_ControlControlBlock;
 const osThreadAttr_t Task_Control_attributes = {
   .name = "Task_Control",
@@ -159,7 +159,7 @@ const osThreadAttr_t Task_Debug_attributes = {
 };
 /* Definitions for Task_Led */
 osThreadId_t Task_LedHandle;
-uint32_t ledTaskBuffer[ 128 ];
+uint32_t ledTaskBuffer[ 256 ];
 osStaticThreadDef_t ledTaskControlBlock;
 const osThreadAttr_t Task_Led_attributes = {
   .name = "Task_Led",
@@ -216,18 +216,11 @@ void StartTask_Control(void *argument);
 void StartTask_Debug(void *argument);
 void StartTask_Led(void *argument);
 
-/**
- * @brief Inizializzazione di FreeRTOS.
- * @note Questa funzione viene chiamata nel main.
- */
-void MX_FREERTOS_Init(void);
+void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
-/**
- * @brief Hook per la gestione dello Stack Overflow.
- * @param xTask Handle del task che ha causato l'overflow.
- * @param pcTaskName Nome del task che ha causato l'overflow.
- */
+/* Hook prototypes */
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+
 /* USER CODE BEGIN 4 */
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
 {
@@ -242,7 +235,9 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
 /* USER CODE END 4 */
 
 /**
-  * @brief  Inizializzazione di Mutex, Thread e Snapshot.
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */

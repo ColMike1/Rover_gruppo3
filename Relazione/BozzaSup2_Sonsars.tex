@@ -13,10 +13,12 @@
 \usepackage{bookmark}
 \usepackage{booktabs}
 \usepackage{siunitx}
+\captionsetup{justification=centering}
+\captionsetup{font=small}
 \graphicspath{ {./images/} }
 \setcounter{tocdepth}{4}    % Permette a \paragraph di apparire nell'indice
 %\setcounter{secnumdepth}{4} % Opzionale: numera anche i paragrafi (es. 1.1.1.1)
-
+\setlength{\parindent}{0pt}
 
 
 \begin{document}
@@ -138,7 +140,7 @@ Il riferimento di velocità lineare o di rotazione è calcolato in base ai coman
 La Board 2 quindi invia i comandi utente ricevuti alla Board 1, che si occupa di eseguirli. 
 \paragraph{Rilevamento ostacoli}
 I riferimenti di velocità sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento.
-Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $75$ e $150$ cm, il supervisore di Board 2, che si occupa 
+Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $150$ e $300$ cm, il supervisore di Board 2, che si occupa 
 di rilevare ostacoli, attiva delle procedure di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essendo che in condizioni nominali Board 2 non attua, questi comandi vengono inviati dalla Board 2, tramite la comunicazione UART, alla Board 1 che si occupa di eseguirli.
 
 
@@ -1071,338 +1073,476 @@ Il supervisore della Board 1 è implementato come un modulo Simulink denominato 
     \caption{Schema a blocchi del modulo SupervisorB1.}
     \label{fig:supervisorB1_block} 
 \end{figure}
-Il suo compito è quello di decidere il riferimento di velocita (\textit{v\_ref}) e di direzione (\textit{omega\_ref}) del rover, in funzione dell'elaborazione dei dati di input.
+Il suo compito è quello di determinare i riferimenti di velocità lineare (\textit{v\_ref}) e angolare (\textit{omega\_ref}) del rover, oppure di demandare l'attuazione alla Board 2, in funzione dell'elaborazione dei dati di input e delle condizioni di fault rilevate.
+\newline
+
 In particolare, esso è composto da quattro parti principali:
 \begin{itemize}
-    \item \textbf{Rilevazione Faults}: si occupa di rilevare anomalie nella ricezione dei dati da Board2, dagli encoder delle ruote, dai sensori di temperatura e batteria.
-    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di $rilevazione faults$ e le codifica in due maschere di errore (critica e degradata).
-    \item \textbf{Decidere di far comandare la Board2}: decide se autorizzare o meno la Board2 a muovere il rover in base alle condizioni di fault rilevate.
-    \item \textbf{Calcolo Riferimenti}: se Board1 attua, calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dalla Board2 e alle condizioni di fault rilevate.
+	\item \textbf{Rilevazione Faults locali}: si occupa di rilevare anomalie relative alla ricezione dei dati da Board2, agli encoder delle ruote ed ai sensori di temperatura e batteria, classificando lo stato di ciascuna periferica come \texttt{OK}, \texttt{DEGRADED} o \texttt{CRITICAL}.
+	
+	\item \textbf{Costruzione delle fault mask}: a partire dagli stati delle singole periferiche, costruisce le fault mask locali che rappresentano lo stato complessivo della Board 1. Queste vengono usate dalla Board 1, in combinazione con le fault mask ricevute dalla Board 2, per ricostruire lo stato globale del rover; inoltre vengono inviate alla Board 2, così che essa possa effettuare la stessa operazione.
+
+	
+	\item \textbf{Selezione della board attuante}: decide se la Board 1 deve continuare ad attuare o se il controllo deve essere passato alla Board 2, in funzione dello stato della comunicazione e delle condizioni di fault rilevate, garantendo che una sola board alla volta sia responsabile dell'attuazione.
+	
+	\item \textbf{Ricostruzione dello stato globale e calcolo dei riferimenti}: quando la Board 1 è responsabile dell'attuazione, combina le informazioni locali con quelle ricevute dalla Board 2 per determinare lo stato operativo del rover (ad esempio funzionamento normale, modalità degradata o arresto di emergenza) e calcolare i riferimenti di velocità lineare e angolare.
 \end{itemize}
+
 Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le quattro parti principali del supervisore descritte sopra.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Input}
-I segnali in input che riceve sono:
-
+\subsection{Ingressi del supervisore}
+I segnali in input al supervisore sono i seguenti:
 
 \begin{itemize}  
-    \item \textbf{Board2\_Data}: è l'ultimo snapshot di ricezione ($RxSnapshot$) aggiornato dal task di ricezione di Board1. I segnali utilizzati dal supervisore di Board 1 sono:
-    \begin{itemize}
-        \item \textit{command}: rappresenta il comando in uscita dal supervisore della Board2, che può assumere i seguenti valori:
-            \begin{figure}[H] 
-                \centering
-                \includegraphics[width=0.3\textwidth]{images/SupervisoreB1/CMD\_BOARD2}
-                \caption{Comandi in uscita dal supervisore della Board2.}
-                \label{fig:comandi_b2}
-            \end{figure}
-        \item \textit{x\_norm \emph{\&} y\_norm}: rappresenta il comando utente proveniente dal joistick. Così se il comando $command$ proveniente da Board 2 è $CMD\_NORMAL$ e la il supervisore di Board 1 non 
-                                                  non rileva anomalie, i riferimenti di velocità lineare e angolare del rover vengono rispettivamente utilizzando 
-                                                  $x\_norm$ e $y\_norm$ ($ speed\_ref = y\_norm \cdot MAX\_SPEED$ e $steering\_cmd = x\_norm \cdot MAX\_TURN$).
-        \item \textit{btn1 e btn2}: segnalano la pressione di due pulsanti presenti sul joystick, che possono essere utilizzati per attivare la rotazione a 180 gradi.
-        \item \textit{yaw}: rappresenta l'angolo di orientamento del rover.
-        \item \textit{isMotionConsistent}: Verifica la coerenza tra la rotazione misurata dalla IMU e quella stimata dai motori, per rilevare guasti meccanici o slittamenti .
-        \item \textit{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit calcolate da Board 2, in cui ogni bit indica la presenza 
-                    di un'anomalia \textit{critica} (da cui critical\_mask) o \textit{degradata} (da cui degraded\_mask) specifica.
-        \item \textit{data\_last\_valid\_ms}: rappresenta il tempo in millisecondi dell'ultimo dato valido ricevuto da Board 2, utilizzato per rilevare eventuali timeout nella ricezione.
-    \end{itemize}
-    \item \textbf{Board\_Health}: è l'ultimo snapshot di salute del sistema ($BoardHealthSnapshot$), in cui sono presenti i valori di temperatura e batteria. La struttura dati è la seguente:
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.7\textwidth]{images/SupervisoreB1/BoardHealthSnapshot}
-            \caption{Struttura dati Board\_Health.}
-            \label{fig:board_health_struct}
-        \end{figure}
-    \item \textbf{Encoder}: è l'ultimo snapshot delle velocità delle ruote ($wheel\_speed\_rpm$) e di eventuali anomalie riscontrate in uno dei motori ($has\_no\_feedback$). La struttura dati è la seguente:
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.7\textwidth]{images/SupervisoreB1/Encoder\_snapshot}
-            \caption{Struttura dati Encoder.}
-            \label{fig:encoder_struct}
-        \end{figure}
-    \item \textbf{now\_ms}: Rappresenta il tempo corrente in millisecondi.
-    \item \textbf{last\_valid\_b2\_ms}: Rappresenta il tempo in millisecondi dell'ultimo volta che si è rilevato che il supervisore di Board 2 sia funzionante.
+	\item \textbf{Board2\_Data}: è l'ultimo snapshot di ricezione ($RxSnapshot$), aggiornato dal task di ricezione della Board 1. I segnali utilizzati dal supervisore sono:
+	\begin{itemize}
+		\item \textit{command}: rappresenta il comando generato dal supervisore della Board 2, che può assumere i seguenti valori:
+		\begin{figure}[H] 
+			\centering
+			\includegraphics[width=0.3\textwidth]{images/SupervisoreB1/CMD\_BOARD2}
+			\caption{Comandi in uscita dal supervisore della Board 2.}
+			\label{fig:comandi_b2}
+		\end{figure}
+		
+		\item \textit{x\_norm} e \textit{y\_norm}: rappresentano i comandi normalizzati provenienti dal controller BLE e trasmessi dalla Board 2.  I riferimenti di velocità lineare e angolare vengono calcolati a partire da questi valori, in funzione dello stato del rover e del comando ricevuto.
+		
+		
+		\item \textit{btn1} e \textit{btn2}: segnalano la pressione dei pulsanti presenti sul joystick e vengono utilizzati per attivare specifiche manovre, come la commutazione tra retromarcia e la rotazione di 180 gradi.
+		
+		\item \textit{yaw}: rappresenta l'angolo di orientamento del rover, utilizzato dal supervisore per effettuare la rotazione di 180 gradi.
+		
+		\item \textit{isMotionConsistent}: indica se il moto del rover è coerente con i comandi applicati, sulla base di una verifica effettuata dalla Board 2 utilizzando la IMU e gli encoder. Questo segnale viene utilizzato dalla Board 1 per effettuare un controllo incrociato: se un encoder non fornisce feedback e contemporaneamente il moto risulta non coerente, il supervisore può attribuire il fault al motore piuttosto che al sensore.
+
+		
+		\item \textit{critical\_mask} e \textit{degraded\_mask}: sono due maschere di errore calcolate dalla Board 2, in cui ogni bit rappresenta la presenza di una specifica anomalia critica o degradata. Queste informazioni vengono utilizzate per ricostruire lo stato globale del rover.
+		
+		\item \textit{data\_last\_valid\_ms}: rappresenta il tempo, in millisecondi, dell'ultimo dato valido ricevuto dalla Board 2, ed è utilizzato per rilevare eventuali timeout di comunicazione.
+		
+	\end{itemize}
+	
+	\item \textbf{Board\_Health}: è l'ultimo snapshot dello stato di salute della Board 1 ($BoardHealthSnapshot$), contenente informazioni quali temperatura e livello della batteria. La struttura dati è illustrata in Figura~\ref{fig:board_health_struct}:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{images/SupervisoreB1/BoardHealthSnapshot}
+		\caption{Struttura dati Board\_Health.}
+		\label{fig:board_health_struct}
+	\end{figure}
+	
+	\item \textbf{Encoder}: è l'ultimo snapshot degli encoder delle ruote, contenente le velocità angolari delle ruote ($wheel\_speed\_rpm$) e un indicatore di eventuale assenza di feedback da uno dei motori ($has\_no\_feedback$). La struttura dati è illustrata in Figura~\ref{fig:encoder_struct}:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{images/SupervisoreB1/Encoder\_snapshot}
+		\caption{Struttura dati Encoder.}
+		\label{fig:encoder_struct}
+	\end{figure}
+	
+	\item \textbf{now\_ms}: rappresenta il tempo corrente in millisecondi, utilizzato per la gestione delle temporizzazioni e il rilevamento di timeout.
+
+	\item \textbf{last\_valid\_b2\_ms}: rappresenta il tempo, in millisecondi, dell'ultimo istante in cui la comunicazione con la Board 2 è stata considerata valida. Questo valore viene aggiornato quando vengono ricevuti nuovi dati coerenti dalla Board 2 ed è utilizzato dal supervisore per rilevare eventuali fault o relativi alla comunicazione.
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Output}
+\subsection{Uscite del supervisore}
 I segnali in output che fornisce sono:
 \begin{itemize}
-    \item \textbf{v\_ref}: rappresenta il riferimento di velocità lineare del rover, in m/s.
-    \item \textbf{omega\_ref}: rappresenta il riferimento di velocità angolare del rover, in rad/s.
-    
-    \item \textbf{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit, in cui ogni bit indica la presenza 
-    di un'anomalia \textit{critica} (da cui critical\_mask) o \textit{degradata} (da cui degraded\_mask) specifica, come descritto 
-    nella Tabella~\ref{tab:fault_mapping_B1}. Nella sezione di $Rilevazione Faults$ viene descritto nello specifico cosa indicano i singoli bit di queste maschere di errore.
-        \begin{table}[H]
-            \centering
-            \begin{tabular}{lll}
-            \hline
-            \textbf{Bit} & \textbf{ID Segnale} & \textbf{Descrizione dell'Anomalia} \\ \hline
-            0 & TEMP\_CRI/DEG & Temperatura fuori range o Timeout dall'ultima lettura corretta\\
-            1 & BATT\_CRI/DEG & Tensione batteria fuori range o Timeout dall'ultima lettura corretta\\
-            2 & RX\_CRI/DEG & Comunicazione con Board 2 lenta o assente \\
-            3-6 & WHEEL\_CRI/DEG & Encoder non funzionanti o incoerenza totale sul movimento\\
-            7 & SUP\_CRI/DEG  & Supervisore B2 lento o assente \\ \hline
-            \end{tabular}
-            \caption{Mappatura della maschera di errore a 8 bit}
-            \label{tab:fault_mapping_B1}
-        \end{table}
-    \item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se la Board2 deve essere autorizzata a muovere il rover.
-    \item \textbf{actuate\_emergency\_stop}: rappresenta un segnale booleano che indica se il rover deve essere fermato immediatamente per evitare collisioni.
-    \item \textbf{current\_action}: rappresenta un segnale che indica l'azione attualmente intrapresa dal supervisore.
-        
-
+	\item \textbf{v\_ref}: rappresenta il riferimento normalizzato di velocità lineare del rover, compreso nell'intervallo [-1, 1].
+	
+	\item \textbf{omega\_ref}: rappresenta il riferimento normalizzato di velocità angolare del rover, compreso nell'intervallo [-1, 1].
+	
+	\item \textbf{critical\_mask \& degraded\_mask}: sono due mask di errore che rappresentano le anomalie critiche e degradate rilevate dalla Board 1. Queste informazioni vengono utilizzate sia localmente sia trasmesse alla Board 2 per la ricostruzione dello stato globale del rover.
+	
+	\item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se il controllo dell'attuazione deve essere passato alla Board 2.
+	
+	\item \textbf{actuate\_emergency\_stop}: rappresenta un segnale booleano che indica se deve essere attivato l'arresto di emergenza del rover.
+	
+	\item \textbf{current\_action}: rappresenta l'azione attualmente eseguita dal supervisore.
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+La corrispondenza tra le fault mask e le anomalie rilevate è riportata in Tabella~\ref{tab:fault_mapping_B1}.
 
-
-\subsection{Rilevazione Faults}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/Rilevamento_Faults}
-    \caption{Chart di gestione dei faults.}
-    \label{fig:gestione_faults}
-\end{figure}
-
-L'output di questo sottosistema è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} o
-\textit{degradata} specifica proveniente dalla lettura dei segnali degli encoder, batteria, temperatura e comunicazione con la Board2. Di seguito si
- descrivono i valori che questi segnali possono assumere e le condizioni che portano a tali valori.
-
-
-\begin{longtable}{ll p{5cm}} 
-    \caption{Stati degradato e critico per Board 1} \label{tab:fault_table} \\
-    \hline
-    \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
-    \hline
-    \endfirsthead % Cosa appare nella prima pagina
-
-    \hline
-    \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
-    \hline
-    \endhead % Cosa appare in cima alle pagine successive (opzionale)
-
-    
-    \endfoot % Cosa appare in fondo a ogni pagina (opzionale)
-
-    % --- Inizio dati tabella ---
-    \textbf{temp\_status}       & TEMP\_HEALTH\_DEGRADED    & Quando la temperatura è nel range \newline $ ]-15; -5] \cup [55; +60[ $ \\
-                                & TEMP\_HEALTH\_CRITICAL    & \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
-                                                                \item Quando la temperatura è per almeno $4$s nel range $ ]-\infty; -15] \cup [60; +\infty[ $
-                                                                \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della temperatura è di $0.5$s, si ipotizza che la temperatura aumenti di
-                                                                $1\,^\circ\mathrm{C}/\mathrm{s}$. Se questa sale raggiungendo un valore superiore a $65\,^\circ\mathrm{C}/\mathrm{s}$ si ha questo valore.
-                                                                \end{itemize} \\\\\\
-                                & TEMP\_HEALTH\_OK          & Quando la temperatura è nel range $ ]-5; 55[ $ \\ \hline 
+\begin{table}[H]
+	\centering
+	\begin{tabularx}{\textwidth}{c l X}
+		\hline
+		\textbf{Bit} & \textbf{Mask} & \textbf{Descrizione dell'Anomalia} \\ \hline
+		0 & CRI/DEG & Temperatura fuori range o timeout dall'ultima lettura valida \\
+		1 & CRI/DEG & Livello batteria fuori range o timeout dall'ultima lettura valida \\
+		2 & CRI/DEG & Comunicazione con Board 2 lenta o in timeout \\
+		3 & CRI/DEG & Fault della ruota front left: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		4 & CRI/DEG & Fault della ruota front right: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		5 & CRI/DEG & Fault della ruota rear left: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		6 & CRI/DEG & Fault della ruota rear right: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		7 & CRI/DEG & Supervisore della Board 2 aggiornato lentamente o non aggiornato \\ \hline
+	\end{tabularx}
+	\caption{Mappatura delle fault mask generate dalla Board 1}
+	\label{tab:fault_mapping_B1}
+\end{table}
 
 
 
-
-    \textbf{batt\_status}       & BATT\_HEALTH\_DEGRADED    & Quando la percentuale di batteria è minore del $23\%$ \\\\
-                                & BATT\_HEALTH\_CRITICAL    & \begin{itemize}[nosep, leftmargin=*, after=\vspace{-\baselineskip}, before=\vspace{-0.1\baselineskip}]
-                                                                \item Quando la temperatura è per almeno $5\,\mathrm{s}$ nel range $ [0\%; 15\%] $
-                                                                \item Nel caso in cui l'intervallo di tempo dall'ultimo aggiornamento della percentuale batteria è di $0.5\,\mathrm{s}$,
-                                                                        si ipotizza che la percentuale diminuisca di $0.42\%/\mathrm{s}$. Se questa diminuisce raggiungendo un valore minore a $15\%$ si ha questo valore.
-                                                                        \end{itemize} \\\\
-                                & BATT\_HEALTH\_OK          & Quando la percentuale è $> 25\%$ \\ \hline
-    
-
-
-
-    \textbf{wheel\_status(i)}   & WHEEL\_DEGRADED\_ENCODER  & Viene attivato dalla funzione $has\_no\_feedback(i)$ quando si rileva un'assenza di impulsi dall'encoder nonostante
-                                                              il motore sia alimentato. Questa condizione indica un guasto al sensore o un blocco 
-                                                              meccanico parziale. Questa condizione permette l'attivazione di una logica di recupero (\textit{fallback}) che ricostruisce
-                                                              la velocità della ruota guasta basandosi sulla lettura dei sensori integri degli altri motori.\\\\
-                                & WHEEL\_CRITICAL\_MOTOR    & Questo stato viene attivato quando alla perdita del feedback dell'encoder si somma un'incoerenza tra il dato del
-                                                              sensore IMU e la rotazione stimata tramite l'odometria delle ruote.
-                                                              Tale discrepanza, rilevata dal controllo globale $isMotionConsistent$, indica che il sistema di fallback non è più in
-                                                              grado di garantire una stima affidabile del moto. \\\\
-                                & WHEEL\_OK                 & Rappresenta la condizione di pieno funzionamento del sottosistema. In questo stato, il sistema opera in assenza di 
-                                                              anomalie sia a livello locale, dove la velocità calcolata dagli encoder risulta coerente con il comando impartito 
-                                                              (verificato tramite $has\_no\_feedback$), , sia a livello globale, dove i dati del sensore IMU confermano la rotazione 
-                                                             stimata in base agli RPM delle ruote (verificato tramite $isMotionConsistent$)\\ \hline
-    
-
-
-
-    \textbf{b2\_sup\_status}    & SUP\_DEGRADED             & Questo valore indica una discontinuità operativa della Board 2. Il supervisore della Board 1 monitora l'heartbeat (una variabile) del supervisore remoto, 
-                                                              il quale incrementa il valore ogni volta che viene eseguito. Se la media degli ultimi 10 intervalli di aggiornamento superi i 40 ms, il sistema
-                                                              segnala uno stato di degrado del supervisore di Board 2. \\\\
-                                & SUP\_CRITICAL             & Se l'intervallo di tempo dall'ultimo aggiornamento dell'heartbeat del supervisore di Board2 supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
-                                & SUP\_OK                   & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\\\ \hline
-    
-
-
-
-    \textbf{rx\_status}         & RX\_DEGRADED              & Questo valore identifica una comunicazione instabile. Sebbene il collegamento fisico sia attivo, fattori quali errori di checksum (CRC) 
-                                                                o anomalie nella lunghezza dei pacchetti impediscono l'aggiornamento della variabile data\_last\_valid\_ms. Il sistema monitora la qualità
-                                                                del link calcolando la media mobile degli ultimi 10 intervalli di ricezione valida; se tale media supera la soglia critica di $40$ ms, viene
-                                                                segnalato il degrado della ricezione.\\\\
-                                & RX\_CRITICAL              & Se l'intervallo di tempo dall'ultima ricezione corretta supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
-                                & RX\_OK                    & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\ \hline
-
-
-
-\end{longtable}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Decidere di far comandare la Board2}
-
-Il sottosistema per decidere se autorizzare o meno la Board2 a muovere il rover è mostrato in Figura~\ref{fig:decidere_b2}.
+\subsection{Rilevazione Faults locali}
+La rilevazione dei faults locali è implementata dal Chart \textbf{Monitor Board Local Status}. Questo blocco riceve in ingresso gli snapshot aggiornati delle diverse periferiche e produce in uscita lo stato di ciascun componente monitorato.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/B1\_to\_B2\_command}
-    \caption{\small{Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}}
-    \label{fig:decidere_b2}
+	\centering
+	\includegraphics[width=0.8\linewidth]{"images/SupervisoreB1/Chart fault locali"}
+	\caption{Chart per rilevazione fault locali}
+	\label{fig:chart-fault-locali}
 \end{figure}
 
-L'autorizzazione a Board 2 per il controllo del rover è regolata dalla variabile $give\_b2\_actuation$ secondo la seguente logica:
+Il sottosistema è composto da più sottoblocchi, ciascuno dedicato al monitoraggio di una specifica periferica o funzionalità:
 
 \begin{itemize}
-    \item \textbf{give\_b2\_actuation = 1}:  Il relè è aperto e il movimento viene gestito da Board 2. Questa condizione si ha quando sono riscontrate anomalie $critiche$ in
-                                                ricezione (textt\it{rx\_status = RX\_CRITICAL}), supervisore (textit{b2\_sup\_status = SUP\_CRITICAL}).
-    \item \textbf{give\_b2\_actuation = 0}:  Il relè è chiuso e il movimento viene gestito da Board 1. Questa condizione si ha quando non sono riscontrate anomalie $critiche$ in
-                                                ricezione (textit{rx\_status = RX\_OK}), supervisore (textit{b2\_sup\_status = SUP\_OK}).
+	\item \textbf{MonitorTemperature}: verifica che la temperatura sia all'interno del range operativo e che le misure siano aggiornate correttamente;
+	
+	\item \textbf{MonitorBattery}: verifica che il livello della batteria sia compatibile con il funzionamento del sistema;
+	
+	\item \textbf{MonitorRx}: verifica la correttezza e la frequenza di ricezione dei messaggi dalla Board 2;
+	
+	\item \textbf{MonitorBoard2Supervisor}: verifica che il supervisore della Board 2 sia attivo e aggiornato correttamente;
+	
+	\item \textbf{MonitorWheels}: verifica lo stato delle singole ruote, utilizzando il feedback degli encoder e le informazioni di coerenza del moto.
 \end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"images/SupervisoreB1/Chart fault locali stati"}
+	\caption{Stati paralleli del chart Monitor Board Local Status.}
+	\label{fig:chart-fault-locali-stati}
+\end{figure}
+
+
+Ciascun sottoblocco implementa uno Stateflow chart che classifica lo stato della periferica associata in tre possibili condizioni:
+
+\begin{itemize}
+	\item \textbf{OK}: funzionamento nominale;
+	\item \textbf{DEGRADED}: funzionamento degradato, ma ancora operativo;
+	\item \textbf{CRITICAL}: fault critico che compromette il funzionamento corretto o sicuro.
+\end{itemize}
+
+Questi sottoblocchi operano in modo indipendente e in parallelo, permettendo al supervisore di valutare contemporaneamente lo stato di tutte le periferiche monitorate.
+
+
+
+\subsubsection{Esempio: monitoraggio della ricezione dalla Board 2}
+
+Il sottoblocco \textit{MonitorRx}, ha il compito di verificare la frequenza di ricezione di messaggi validi provenienti dalla Board 2.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"images/SupervisoreB1/Chart fault locali esempio ricezione"}
+	\caption{}
+	\label{fig:chart-fault-locali-esempio-ricezione}
+\end{figure}
+
+Il blocco implementa uno Stateflow chart con tre possibili stati: \textbf{RX\_OK}, \textbf{RX\_DEGRADED} e \textbf{RX\_CRITICAL}. La transizione tra questi stati avviene in funzione del tempo dell'ultimo aggiornamento valido ricevuto (\textit{Rx\_data\_last\_valid\_ms}) e del tempo corrente (\textit{now\_ms}).
+\newline
+
+In particolare:
+\begin{itemize}
+	\item il sistema si trova nello stato \textbf{RX\_OK} quando i messaggi vengono ricevuti con la frequenza attesa;
+	
+	\item lo stato passa a \textbf{RX\_DEGRADED} quando la frequenza di ricezione risulta inferiore ad una certa soglia (in questo caso 1 messaggio ogni 40ms). Questa condizione viene rilevata tramite la funzione:
+	\newline
+	\texttt{isCommDegradedByMeanPeriod(Rx\_data\_last\_valid\_ms, threshold)}
+	che verifica se il periodo medio di aggiornamento supera la soglia prevista;
+	
+	\item lo stato passa a \textbf{RX\_CRITICAL} quando non vengono ricevuti aggiornamenti per un intervallo di tempo superiore alla soglia di timeout, ovvero quando: \texttt{now\_ms - Rx\_data\_last\_valid\_ms > TIMEOUT}
+\end{itemize}
+
+Quando la comunicazione riprende con una frequenza adeguata, il sistema ritorna automaticamente allo stato \textbf{RX\_OK}.
+
+Questa logica consente di distinguere tra una comunicazione semplicemente rallentata (stato degradato) e una completa perdita della comunicazione (stato critico), permettendo al supervisore di reagire in modo appropriato nelle successive fasi di decisione e attuazione, nonché di ritornare automaticamente a uno stato nominale quando la comunicazione viene ripristinata.
+
+
+
+\subsubsection{Output del monitoraggio}
+
+Gli stati calcolati dai diversi Subcharts vengono forniti in uscita come segnali distinti che verranno successivamente utilizzati per la costruzione delle fault mask e la determinazione dello stato globale del rover.
+\\
+
+\textbf{temp\_status.}  Il segnale \textit{temp\_status} indica lo stato della temperatura della board e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item TEMP\_HEALTH\_OK: quando la temperatura è nel range $]-5; 55[$;
+	
+	\item TEMP\_HEALTH\_DEGRADED: quando la temperatura è nel range \newline $]-15; -5] \cup [55; 60[$;
+	
+	\item TEMP\_HEALTH\_CRITICAL:
+	\begin{itemize}
+		\item quando la temperatura permane per almeno $4\,\mathrm{s}$ nel range \newline$]-\infty; -15] \cup [60; +\infty[$;
+		\item oppure quando non vengono ricevuti aggiornamenti per almeno $0.5\,\mathrm{s}$ e la temperatura stimata, assumendo nel caso peggiore un aumento di $1\,^\circ\mathrm{C}/\mathrm{s}$, supera i $65\,^\circ\mathrm{C}$.
+	\end{itemize}
+\end{itemize}
+\vspace{12pt}
+
+\textbf{batt\_status.}  Il segnale \textit{batt\_status} indica lo stato della batteria e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item BATT\_HEALTH\_OK: quando la percentuale di batteria è maggiore del $25\%$;
+	
+	\item BATT\_HEALTH\_DEGRADED: quando la percentuale di batteria è minore del $23\%$;
+	
+	\item BATT\_HEALTH\_CRITICAL:
+	\begin{itemize}
+		\item quando la percentuale permane per almeno $5\,\mathrm{s}$ nel range $[0\%; 15\%]$;
+		\item oppure quando non vengono ricevuti aggiornamenti per almeno $0.5\,\mathrm{s}$ e la percentuale stimata, assumendo una diminuzione nel caso peggiore di $0.42\%/\mathrm{s}$, scende sotto il $15\%$.
+	\end{itemize}
+\end{itemize}
+\vspace{12pt}
+
+\textbf{wheel\_status.}  Il segnale \textit{wheel\_status(i)} indica lo stato della ruota $i$ e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item WHEEL\_OK: rappresenta la condizione di funzionamento nominale. In questo stato, l'encoder della ruota fornisce feedback valido (ovvero \textit{has\_no\_feedback(i)} è falso) e il moto del rover risulta coerente, come verificato dal segnale \textit{isMotionConsistent};
+	
+	\item WHEEL\_DEGRADED\_ENCODER: quando il segnale booleano \textit{has\_no\_feedback(i)}, fornito dallo snapshot degli encoder, indica assenza di rotazione misurata per la ruota $i$ nonostante il motore sia attivo. Questa condizione indica una perdita del feedback dell'encoder, ma il sistema può continuare a operare utilizzando una logica di fallback che stima la velocità della ruota a partire dalle altre ruote funzionanti;
+	
+	\item WHEEL\_CRITICAL\_MOTOR: quando alla condizione \textit{has\_no\_feedback(i)} si aggiunge un'incoerenza globale del moto, rilevata tramite il segnale \textit{isMotionConsistent}. Questa combinazione indica che l'assenza di feedback non è dovuta a un guasto dell'encoder, ma al fatto che il motore della ruota $i$ non risponde correttamente al comando.
+
+\end{itemize}
+\vspace{12pt}
+
+\textbf{b2\_sup\_status.}  Il segnale \textit{b2\_sup\_status} indica lo stato del supervisore della Board 2 e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item SUP\_OK: quando il supervisore della Board 2 risulta aggiornato regolarmente;
+	
+	\item SUP\_DEGRADED: quando il periodo medio di aggiornamento del supervisore della Board 2 supera il valore nominale, indicando un rallentamento nell'esecuzione;
+	
+	\item SUP\_CRITICAL: quando l'intervallo di tempo dall'ultimo aggiornamento valido supera i $120\,\mathrm{ms}$, indicando che il supervisore della Board 2 non è più attivo o non comunica correttamente.
+\end{itemize}
+\vspace{12pt}
+
+\textbf{rx\_status.}  Il segnale \textit{rx\_status} indica lo stato della comunicazione con la Board 2 e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item RX\_OK: quando i messaggi vengono ricevuti con la frequenza prevista e la variabile \textit{data\_last\_valid\_ms} viene aggiornata regolarmente dal task di ricezione;
+	
+	\item RX\_DEGRADED: quando la comunicazione risulta instabile e la frequenza media di ricezione dei messaggi validi diminuisce. Questa condizione viene rilevata monitorando la media degli intervalli tra aggiornamenti successivi e verificando se essa supera la soglia di $40\,\mathrm{ms}$;
+	
+	\item RX\_CRITICAL: quando l'intervallo di tempo dall'ultimo aggiornamento valido supera i $120\,\mathrm{ms}$, indicando una perdita della comunicazione con la Board 2.
+\end{itemize}
+
+
+\paragraph{Costruzione delle maschere critiche e degradate}
+A partire dagli stati critici e degradati rilevati durante la fase di monitoraggio, vengono costruite due maschere di errore (\textit{bitmask}), una per le anomalie critiche e una per quelle degradate.
+\newline
+
+Questa rappresentazione è stata preferita ad altre perché consente una gestione efficiente dei fault lato firmware e permette di trasmettere facilmente lo stato della Board 1 alla Board 2 tramite il canale di comunicazione.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{"images/SupervisoreB1/maschere pt2"}
+	\caption{Costruzione delle maschere di errore critiche e degradate nel supervisore.}
+	\label{fig:maschere-pt2}
+\end{figure}
+
+
+Il significato dei singoli bit è descritto nella Tabella~\ref{tab:fault_mapping_B1}.
+
+
+
+\subsection{Selezione della board attuante}
+
+Il chart \textit{Decide actuation privileges} mostrato in figura decide quale board è responsabile dell'attuazione.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"images/SupervisoreB1/decide actuation"}
+	\caption{Stateflow chart per la selezione della board attuante.}
+	\label{fig:decide-actuation}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{"images/SupervisoreB1/Selezione board attuante"}
+	\caption{Stati interni del chart Decide actuation privileges.}
+	\label{fig:selezione-board-attuante}
+\end{figure}
+
+
+La selezione è regolata dalla variabile \textit{give\_b2\_actuation}, secondo la seguente logica:
+
+\begin{itemize}
+	\item \textit{give\_b2\_actuation = 1}: il controllo dell'attuazione viene passato alla Board 2. Questa condizione si verifica quando viene rilevata una condizione critica nella comunicazione (\textit{rx\_status = RX\_CRITICAL}) oppure nello stato del supervisore della Board 2 (\textit{b2\_sup\_status = SUP\_CRITICAL}).
+	
+	\item \textit{give\_b2\_actuation = 0}: il controllo dell'attuazione rimane alla Board 1. Questa condizione viene mantenuta finché non sono presenti condizioni critiche; inoltre, se il controllo è stato precedentemente ceduto alla Board 2, la Board 1 riprende l'attuazione solo quando entrambe le condizioni critiche non sono più presenti e tale situazione permane stabilmente per almeno $3\,\mathrm{s}$.
+\end{itemize}
+
 
 Tale meccanismo agisce come un dispositivo di sicurezza hardware basato sullo stato del supervisore, come mostrato nelle Figure~\ref{fig:rele_b2} e ~\ref{fig:rele_b1}.
 
 \begin{figure}[H]
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board1}
-        \caption{\small{Il comando di Board1 chiude il rele impedendo a Board2 di muovere il rover.}}
+        \caption{\small{Il comando di Board1 chiude il rele impedendo a Board2 di comandare il rover.}}
         \label{fig:rele_b1}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board2}
-        \caption{\small{Board1 permette alla Board2 di muovere il rover.}}
+        \caption{\small{Board1 permette alla Board2 di comandare il rover.}}
         \label{fig:rele_b2}
     \end{subfigure}
 \end{figure}
 
-%\newpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Costruzione maschere degradate e critiche}
 
+
+\subsection{Stato del rover e calcolo dei riferimenti (solo quando attua Board 1)}
+
+Quando la Board 1 è responsabile dell'attuazione (ovvero \textit{give\_b2\_actuation = 0}), viene abilitato il sottosistema \textit{Rover state and Actuation decisions}.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/costruzione\_maschere}
-    \caption{\small Chart per la costruzione delle maschere di errore critiche e degradate.}
-    \label{fig:costruzione_maschere}
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/rover state and actuation subsystem"}
+	\caption{Enabled subsystem Rover state and Actuation decisions}
+	\label{fig:rover-state-and-actuation-subsystem}
 \end{figure}
 
-Dagli stati critici e degradati rilevati nella parte di rilevamento dei faults, si costruiscono due maschere di errore a 8 bit, una per le anomalie critiche e una per quelle degradate.
+Questo sottosistema ha il compito di ricostruire lo stato operativo globale del rover a partire dai fault locali e remoti e di produrre in uscita i riferimenti \textit{v\_ref} e \textit{omega\_ref}, oltre ai segnali \textit{emergency\_stop} e \textit{current\_action}.
+\\
 
-Il bit di ogni maschera rappresenta un'anomalia specifica, come descritto nella Tabella~\ref{tab:fault_mapping}.
+\textbf{Pre-processamento delle fault mask di Board 2}  Le fault mask ricevute dalla Board 2 prima di essere usate vengono pre-processate tramite la funzione \texttt{preprocessB2MaskInB1}. L'obiettivo è distinguere i fault remoti che richiedono un arresto immediato del rover da quelli che, pur essendo critici, possono essere gestiti senza emergency stop (ad esempio fault legati alla comunicazione).
 
-\begin{table}[H]
-    \centering
-    
-    \begin{tabular}{|c|l|l|l|}
-        \hline
-        \textbf{Bit} & \textbf{Componente} & \textbf{critical\_mask} & \textbf{degraded\_mask} \\
-        \hline
-        0 & Temperatura & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
-        \hline
-        1 & Batteria    & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
-        \hline
-        2 & Ricevitore (RX) & \textbf{1} se \textbf{RX\_CRITICAL} & \textbf{1} se \textbf{RX\_DEGRADED}\\
-        \hline
-        3 & Ruota FL & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
-        \hline
-        4 & Ruota FR & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG}\\
-        \hline
-        5 & Ruota RL & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG} \\
-        \hline
-        6 & Ruota RR & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG} \\
-        \hline
-        7 & B2 Supervisor & \textbf{1} se \textbf{TEMP\_HEALT\_CRITIC} & \textbf{1} se \textbf{TEMP\_HEALT\_DEG} \\
-        \hline
-    \end{tabular}
-    \caption{\small{Mappatura dei Bit nelle Fault Masks}}
-\end{table}
+In particolare, viene generato:
+\begin{itemize}
+	\item \textit{stop\_required}: viene posto a 1 quando la Board 2 segnala fault critici su sottosistemi essenziali per il controllo del rover (ESP o IMU), senza i quali non è possibile garantire un funzionamento sicuro;
 
+	\item \textit{degraded\_required}: viene posto a 1 se è presente almeno un fault degradato remoto, oppure se la Board 2 segnala fault critici legati a ricezione o lettura dei dati prodotti dal supervisore di Board 1 (fault RX o SUP).
+\end{itemize}
 
-\subsection{Calcolo riferimenti}
-Il sottomodello per il calcolo dei riferimenti di velocità lineare e angolare del rover è mostrato in Figura~\ref{fig:calcolo_riferimenti}.
+Questa distinzione permette alla Board 1 di continuare ad attuare in sicurezza anche quando la Board 2 presenta problemi di ricezione da Board 1, attivando in tal caso la modalità degradata invece dell'arresto di emergenza.
+
+\subsubsection{Struttura interna del sottosistema di decisione}
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/SupervisoreB1/decisione\_vel\_rot}
-    \caption{\small Chart per il calcolo dei riferimenti di velocità lineare e angolare del rover.}
-    \label{fig:calcolo_riferimenti}
+	\centering
+	\includegraphics[width=0.85\linewidth]{"images/SupervisoreB1/rover state and actuation subsystem1"}
+	\caption{Struttura interna del sottosistema Rover state and Actuation decisions}
+	\label{fig:rover-state-and-actuation-subsystem1}
 \end{figure}
 
-In particolare i riferimenti di velocità lineare e angolare del rover vengono calcolati in funzione dei comandi ricevuti dalla Board2 e delle condizioni di fault rilevate.
-In assenza di anomalie, i riferimenti vengono calcolati direttamente a partire dai comandi ricevuti dalla Board2, in particolare, il riferimento di velocità lineare è calcolato 
-a partire dal comando $y\_norm$ e il riferimento di velocità angolare è calcolato a partire dal comando $x\_norm$. Nel caso in cui siano rilevate anomalie, i riferimenti vengono
-calcolati in modo da ridurre la velocità del rover o addirittura fermarlo, a seconda della gravità dell'anomalia rilevata. I riferimenti venogno scalati come mostrato 
-in Figura~\ref{fig:scaling_riferimenti}.
+Il sottosistema è composto da due Stateflow chart principali, organizzati in cascata. Il primo chart, denominato \textit{Check rover safety state}, ha il compito di integrare le informazioni di fault locali e remoti per determinare lo stato globale di sicurezza del rover. Il secondo chart, \textit{Rover motion state}, utilizza questo stato globale insieme ai comandi ricevuti per determinare l'azione corrente del rover e calcolare i riferimenti di velocità.
+
+\paragraph{Check rover safety state}
+
+Il chart \textit{Check rover safety state} determina lo stato di sicurezza globale del rover (\textit{rover\_safety\_state}) combinando le condizioni di fault rilevate dalla Board 1 e dalla Board 2.
+
+In ingresso riceve quattro segnali booleani: \textit{b1\_critical} e \textit{b1\_degraded}, derivati dalle fault mask locali, e \textit{b2\_critical} e \textit{b2\_degraded}, ottenuti dal pre-processamento delle mask ricevute dalla Board 2.
+
+Il chart può assumere tre stati mutuamente esclusivi:
+
+\begin{itemize}
+	\item \textit{SAFETY\_OK}: attivo quando non sono presenti fault critici né degradati;
+	
+	\item \textit{SAFETY\_DEGRADED}: attivo quando è presente almeno una condizione degradata su una delle due board, in assenza di fault critici;
+	
+	\item \textit{SAFETY\_CRITICAL}: attivo quando è presente almeno un fault critico su una delle due board.
+\end{itemize}
+
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/scaling\_Riferimenti}
-    \caption{\small Scaling dei riferimenti in base alla gravità dell'anomalia rilevata.}
-    \label{fig:scaling_riferimenti}
+	\centering
+	\includegraphics[width=0.95\linewidth]{"images/SupervisoreB1/check rover safety"}
+	\caption{Struttura del chart Check rover safety state}
+	\label{fig:check-rover-safety}
 \end{figure}
-Nella figura~\ref{fig:scaling_riferimenti} è mostrato come i riferimenti di velocità lineare e angolare vengono scalati in base alla gravità dell'anomalia rilevata, in 
-particolare utilizzando la variabile $safety\_status$ che viene calcolata a partire dalle maschere di errore critiche e degradate di entrambe le Board, come mostrato in figura ~\ref{fig:calcolo_safety_status}.
+
+\paragraph{Rover motion state}
+
+Il chart \textit{Rover motion state} ha il compito di determinare l'azione corrente del rover e calcolare i riferimenti di velocità \textit{v\_ref} e \textit{omega\_ref}, a partire dai comandi ricevuti e dallo stato di sicurezza globale \textit{rover\_safety\_state} calcolato dal blocco precedente.
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/calcolo\_safety\_status}
-    \caption{\small Calcolo della variabile safety\_status a partire dalle maschere di errore critiche e degradate di entrambe le Board.}
-    \label{fig:calcolo_safety_status}
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/rover motion chart"}
+	\caption{Struttura del chart Rover motion state.}
+	\label{fig:rover-motion-chart}
+\end{figure}
+
+Il chart è composto da due stati paralleli. Il primo stato, denominato \textit{Backward\_mode\_toggle}, gestisce la commutazione tra retromarcia normale e rotazione a 180 gradi quando il comando utente richiede un movimento all'indietro. Il secondo stato, \textit{Motion\_Supervision}, implementa la macchina a stati principale che determina il tipo di movimento del rover e calcola i riferimenti di velocità.
+
+\paragraph{Backward\_mode\_toggle}
+
+Lo stato \textit{Backward\_mode\_toggle} gestisce la variabile interna \textit{backward\_enabled}, che determina il comportamento del rover quando il comando di velocità longitudinale è negativo.
+
+In particolare, quando l'utente spinge il joystick all'indietro (\textit{y\_norm < 0}), il rover può operare in due modalità:
+\begin{itemize}
+	\item \textit{retromarcia}, in cui il rover si muove direttamente all'indietro;
+	\item \textit{rotazione a 180 gradi}, in cui il rover ruota sul posto fino a invertire la propria direzione e successivamente riprende il moto in avanti.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/SupervisoreB1/backward_toggle}
+	\caption{Struttura interna del subchart Backward mode toggle}
+	\label{fig:backwardtoggle}
 \end{figure}
 
 
+La selezione tra queste due modalità avviene tramite una combinazione specifica di input (gestita dal chart), che consente di abilitare o disabilitare la retromarcia diretta. In questo modo si evita che il rover entri accidentalmente in retromarcia, permettendo invece una manovra controllata di inversione di direzione quando necessario.
+
+La variabile \textit{backward\_enabled} viene quindi utilizzata dal blocco \textit{Motion\_Supervision} per determinare se interpretare un comando negativo come retromarcia oppure come richiesta di rotazione a 180 gradi.
+
+\paragraph{Rover motion state}
+
+Il chart \textit{Rover motion state} implementa la logica principale di movimento del rover. Esso è organizzato in due macro-stati mutuamente esclusivi: uno dedicato alla marcia normale e uno dedicato alla gestione dell'arresto di emergenza. La transizione tra questi stati dipende sia dai comandi ricevuti dalla Board 2 sia dallo stato di sicurezza globale del rover.
+
+\subparagraph{Stato di marcia normale}
+
+Lo stato \textit{Stato\_marcia\_rover} rappresenta il funzionamento nominale del rover e contiene al suo interno i diversi stati operativi associati al movimento, tra cui:
+\begin{itemize}
+	\item marcia normale, in cui i riferimenti sono direttamente derivati dall'input utente (\textit{x\_norm}, \textit{y\_norm});
+	\item manovre automatiche, come schivata verso sinistra o destra;
+	\item rotazione a 180 gradi, utilizzata per invertire la direzione del rover;
+	\item altre manovre controllate, in funzione del comando di sicurezza ricevuto da Board 2 \textit{command}.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/normale marcia esempio"}
+	\caption{Esempio dei sotto-stati e transizioni che compongono lo stato di marcia rover}
+	\label{fig:normale-marcia-esempio}
+\end{figure}
+
+All'interno di questo stato, i riferimenti \textit{v\_ref} e \textit{omega\_ref} vengono calcolati a partire dagli ingressi utente e limitati in base allo stato di sicurezza \textit{rover\_status}.
+
+La transizione fuori da questo stato avviene quando viene richiesto un arresto di emergenza, che può essere causato da:
+\begin{itemize}
+	\item la ricezione del comando \textit{CMD\_ESTOP} dalla Board 2 (a seguito del rilevamento di un ostacolo tramite sonar) mentre il rover sta procedendo in avanti;
+	\item il passaggio dello stato globale del rover a \textit{SAFETY\_CRITICAL}.
+\end{itemize}
+
+\subparagraph{Stato di arresto di emergenza}
+
+Quando viene attivata una condizione di arresto di emergenza, il chart entra nello stato \textit{Procedura\_emergency\_stop}. In questo stato:
+\begin{itemize}
+	\item i riferimenti \textit{v\_ref} e \textit{omega\_ref} vengono forzati a zero;
+	\item il segnale \textit{emergency\_stop} viene posto a vero;
+	\item viene monitorata la velocità delle ruote per verificare l'effettivo arresto del rover.
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/chart frenata di emergenza"}
+	\caption{Stato frenata di emergenza e transizioni di attivazione (provenienti dallo stato normale marcia)}
+	\label{fig:chart-frenata-di-emergenza}
+\end{figure}
 
 
+Una volta rilevato che le ruote sono ferme, il sistema rimane nello stato di frenata di emergenza finché la condizione di arresto, verificata tramite gli encoder, permane per almeno $1\,\mathrm{s}$ consecutivo. Questa verifica temporale garantisce che l'arresto sia effettivo e stabile. Solo quando tale condizione è soddisfatta, il sistema transita nello stato \textit{Motori\_fermi}, che rappresenta la condizione di arresto completo del rover.
+\newline
+
+Una volta raggiunto lo stato \textit{Motori\_fermi}, il sistema può uscire da questa condizione non appena non sono più presenti fault critici. In questa situazione, il rover ritorna nello stato di marcia normale, anche se il comando \textit{CMD\_ESTOP} è ancora attivo, poiché il rover è già fermo e tale condizione non rappresenta un rischio immediato.
+
+Questo consente al rover di eseguire manovre sicure come rotazioni sul posto o retromarcia. Tuttavia, se il comando \textit{CMD\_ESTOP} persiste e viene richiesto un movimento in avanti, il sistema transita nuovamente nello stato di frenata di emergenza, impedendo l'avanzamento verso l'ostacolo.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Supervisore Board 2}
 
