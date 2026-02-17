@@ -1,2 +1,2 @@
-../Core/Src/log/wcet_monitor.c:19:6:WCET_Update	2
-../Core/Src/log/wcet_monitor.c:31:6:WCET_Print	1
+../Core/Src/log/wcet_monitor.c:21:6:WCET_Update	3
+../Core/Src/log/wcet_monitor.c:33:6:WCET_Print	1

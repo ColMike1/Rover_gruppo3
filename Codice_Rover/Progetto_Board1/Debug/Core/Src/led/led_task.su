@@ -1,2 +1,2 @@
-../Core/Src/led/led_task.c:17:6:Led_TaskInit	8	static
-../Core/Src/led/led_task.c:28:6:Led_TaskStep	8	static
+../Core/Src/led/led_task.c:21:6:Led_TaskInit	8	static
+../Core/Src/led/led_task.c:33:6:Led_TaskStep	8	static

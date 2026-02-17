@@ -1,2 +1,2 @@
-../Core/Src/log/wcet_monitor.c:19:6:WCET_Update	16	static
-../Core/Src/log/wcet_monitor.c:31:6:WCET_Print	168	static
+../Core/Src/log/wcet_monitor.c:21:6:WCET_Update	16	static
+../Core/Src/log/wcet_monitor.c:33:6:WCET_Print	168	static

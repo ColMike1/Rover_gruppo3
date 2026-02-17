@@ -13,13 +13,28 @@
 \usepackage{bookmark}
 \usepackage{booktabs}
 \usepackage{siunitx}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{50pt}{10pt}
+\titlespacing*{\subsection}{0pt}{35pt}{8pt}
+\titlespacing*{\subsubsection}{0pt}{30pt}{5pt}
 \captionsetup{justification=centering}
 \captionsetup{font=small}
 \graphicspath{ {./images/} }
 \setcounter{tocdepth}{4}    % Permette a \paragraph di apparire nell'indice
 %\setcounter{secnumdepth}{4} % Opzionale: numera anche i paragrafi (es. 1.1.1.1)
+\let\oldbackslash\\
+\renewcommand{\\}{\oldbackslash[12pt]}
 \setlength{\parindent}{0pt}
+\newcommand{\req}[2]{
+	\subsubsection*{#1}
+	\textbf{Requisito:} #2
+}
 
+\newcommand{\fault}[2]{
+	\subsubsection*{#1}
+	\textbf{Condizione di malfunzionamento:}
+	#2
+}
 
 \begin{document}
 		\begin{center}
@@ -122,7 +137,658 @@ I componenti e i sensori gestiti da questa board sono:
 \end{itemize}
 \clearpage
 
-\newpage
+
+\section{Elicitazione ed Analisi dei requisiti}
+
+Questa sezione descrive il processo di elicitazione e analisi dei requisiti del sistema, a partire dal documento di specifica fornito per il Work Project. I requisiti rappresentano le funzionalità attese, i vincoli operativi e i criteri di sicurezza che il rover deve soddisfare.
+
+L'attività di analisi ha lo scopo di tradurre le specifiche di alto livello in requisiti chiari, verificabili e utilizzabili come base per la progettazione del sistema embedded, della logica di supervisione e del controllo del rover. Quando necessario, sono state effettuate scelte progettuali per definire in modo preciso il comportamento del sistema, nel rispetto delle specifiche fornite.
+\newline
+
+I requisiti sono organizzati nelle seguenti categorie:
+\begin{itemize}
+	\item requisiti funzionali di alto livello, che descrivono le principali funzionalità del sistema;
+	
+	\item requisiti su malfunzionamenti e soglie di allarme, che definiscono la condizione di malfunzionamento ed il comportamento che il sistema deve adottare in tali condizioni
+	
+	\item requisiti di modellazione e progettazione del controllo, che definiscono la rappresentazione dello stato del sistema, la logica di supervisione e i criteri adottati per la generazione e gestione dei riferimenti di controllo;
+
+	\item requisiti di schedulazione, che descrivono i vincoli temporali e l'organizzazione dei task software;
+
+	
+	\item parametri scelti in fase di progettazione, che raccolgono i valori numerici e le configurazioni definite per l'implementazione del sistema.
+\end{itemize}
+
+Per ogni requisito funzionale vengono inoltre riportate una User Story e i relativi Acceptance Criteria, che ne chiariscono lo scopo e permettono di verificarne la corretta implementazione.
+
+\subsection{Requisiti funzionali di alto livello}
+
+\req{R1. Comandi esterni BLE}{Il Rover deve accettare comandi esterni da un controller remoto wireless tramite protocollo BLE.}
+\newline
+
+\textbf{User Story:} come operatore, voglio comandare il rover da controller BLE, così da guidarlo da remoto.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il rover acceso, quando il controller BLE invia un comando valido, allora il comando viene acquisito e reso disponibile al controllo.
+	\item Dato un pacchetto BLE non valido/corrotto, quando viene ricevuto, allora non modifica il setpoint di controllo e viene segnalato come errore di comunicazione.
+\end{itemize}
+
+\req{R2. Modalità di invio comandi (SCELTA PROGETTUALE)}{I comandi sono inviati dal controller in modalità analogica, tra le alternative previste dalla specifica.}
+\newline
+
+\textbf{User Story:} come progettista software, voglio utilizzare input analogici dalle levette del controller, così da ottenere un comando continuo e proporzionale alla posizione della levetta.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il controller configurato in modalità analogica, quando viene inviato un input valido, allora il rover interpreta il comando in modo continuo e proporzionale.
+	\item Dato un input non valido o fuori dal range previsto, quando viene ricevuto, allora il sistema non lo utilizza per aggiornare il setpoint.
+\end{itemize}
+
+
+\req{R3. Interpretazione levette (SCELTA PROGETTUALE)}{La posizione della levetta è interpretata con semantica diretta proporzionale, ovvero l'inclinazione determina direttamente il setpoint istantaneo di velocità.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che la posizione della levetta determini direttamente la velocità del rover, così da avere un controllo immediato e intuitivo del movimento.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un asse levetta normalizzato $u \in [-1,1]$, quando il comando viene letto, allora il setpoint soddisfa
+	\[
+	v_{\mathrm{set}} = u \cdot v_{\max}
+	\]
+	con eventuale saturazione ai limiti ammessi.
+	
+	\item Dato un valore costante della levetta, quando il comando viene mantenuto nel tempo, allora il setpoint resta costante.
+	
+\end{itemize}
+
+
+\req{R4. Uso combinazioni pulsanti (SCELTA PROGETTUALE)}{Le combinazioni di pulsanti del controller sono utilizzate per attivare funzioni operative e di sicurezza definite dal sistema.}
+\newline
+
+\textbf{User Story:} come operatore, voglio utilizzare combinazioni di pulsanti per attivare funzioni specifiche, così da poter controllare rapidamente modalità operative e funzioni di sicurezza.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un insieme definito di combinazioni di pulsanti e delle rispettive funzioni associate, quando l'operatore esegue una combinazione valida, allora il sistema attiva la funzione corrispondente.
+	
+	\item Dato una combinazione di pulsanti non associata ad alcuna funzione, quando viene ricevuta, allora il sistema non modifica lo stato operativo.
+	
+	\item Dato una funzione associata a una combinazione di pulsanti, quando viene attivata, allora il sistema entra nello stato operativo previsto.
+\end{itemize}
+
+
+\req{R5. Marcia rettilinea}{Il rover deve muoversi in linea retta avanti/indietro alla velocità predefinita, sincronizzando i 4 motori.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che il rover proceda dritto sia in avanti che indietro, così da avere traiettorie stabili in entrambi i versi di marcia.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un riferimento rettilineo in avanti o indietro, quando il rover marcia, allora i quattro motori restano sincronizzati entro la tolleranza definita e la traiettoria resta rettilinea.
+\end{itemize}
+
+\req{R6. Controllo dinamico velocità}{La velocità richiesta deve essere controllata da PID software per definire dinamica di accelerazione e frenata.}
+\newline
+
+\textbf{User Story:} come progettista controllo, voglio regolare la dinamica con PID, così da ottenere una risposta piu' smooth, prevedibile e stabile sia in accelerazione sia in frenata.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un gradino di riferimento velocità, quando il controllo PID è attivo, allora la velocità converge al setpoint con dinamica coerente al tuning e senza variazioni brusche non previste.
+	\item Dato un comando di riduzione velocità o arresto, quando il controllo PID è attivo, allora la frenata risulta progressiva.
+\end{itemize}
+
+\req{R7. Rotazione su baricentro}{Il rover deve ruotare attorno al proprio baricentro sincronizzando i 4 motori.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che il rover giri su se stesso quando do solo input laterale sul joystick (senza input in avanti), così da orientarlo sul posto.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato input joystick solo laterale e input avanti nullo, quando il rover esegue la manovra, allora ruota su se stesso con coordinamento dei quattro motori.
+\end{itemize}
+
+\req{R8. Acquisizione sensori}{Il rover deve leggere i dati dai sensori definiti e interfacciati con i relativi protocolli.}
+\newline
+
+\textbf{User Story:} come supervisore di sistema, voglio acquisire i sensori periodicamente, così da stimare lo stato corrente del rover.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il ciclo di task attivo, quando scatta il periodo di acquisizione, allora gli snapshot sensore vengono aggiornati.
+\end{itemize}
+
+\req{R9. Rilevamento ostacoli fino a 3 m}{Uso sensori ultrasound per ostacoli almeno a 3 m davanti, 45$^\circ$ sinistra e 45$^\circ$ destra anteriori.}
+\newline
+
+\textbf{User Story:} come operatore, voglio rilevare ostacoli in anticipo frontalmente, così da prevenire collisioni.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un ostacolo nel campo di vista dei tre sensori, quando entra nella fascia misurabile, allora viene segnalato al supervisore.
+\end{itemize}
+
+\req{R10. Stato sicuro con ostacolo fermo}{Con ostacolo fermo nella direzione di marcia anteriore, il rover deve entrare in "Motori Fermi" prima dell'impatto.}
+\newline
+
+\textbf{User Story:} come responsabile sicurezza, voglio fermata preventiva su ostacolo fermo, così da evitare urti.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un ostacolo fermo rilevato frontalmente, quando la distanza scende sotto la soglia di sicurezza, allora il rover arresta i motori in tempo utile.
+\end{itemize}
+
+\req{R11. Frenata smooth (OPZIONALE)}{La frenata del requisito R10 puo' essere realizzata con dinamica smooth a risposta al gradino predefinita.}
+\newline
+
+\textbf{User Story:} come progettista controllo, voglio una frenata morbida, così da ridurre stress meccanico.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il profilo smooth attivo, quando si genera comando di stop per ostacolo fermo, allora la velocità segue il profilo di frenata definito.
+\end{itemize}
+
+\req{R12. Emergenza sotto 70 cm}{Con ostacolo improvviso sotto 70 cm in una delle 3 direzioni, il rover deve frenare di emergenza e, se possibile, ruotare verso lato libero.}
+\newline
+
+\textbf{User Story:} come sistema safety, voglio reagire immediatamente a ostacolo improvviso vicino, così da massimizzare la probabilità di evitare impatto.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato ostacolo sotto 70 cm, quando viene confermato dai sensori, allora viene attivata frenata di emergenza.
+	\item Se almeno un lato è libero, viene comandata rotazione verso un lato libero (casuale se entrambi liberi).
+\end{itemize}
+
+\req{R13. Blocco partenza con ostacolo frontale}{Il rover non deve avanzare da fermo se è presente ostacolo nella direzione di marcia.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che la partenza in avanti sia inibita con ostacolo davanti, così da prevenire collisioni immediate.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato rover fermo e ostacolo frontale rilevato, quando viene richiesto avanzamento, allora il comando viene bloccato.
+	\item Dato rover fermo e ostacolo frontale rilevato, quando viene richiesto di ruotare sul posto o di arretrare, allora tali comandi restano consentiti nel rispetto delle regole di sicurezza.
+\end{itemize}
+
+\req{R14. Retromarcia con rotazione 180$^\circ$ (OPZIONALE)}{Quando è attiva la modalità di retromarcia assistita, il comando di retromarcia da fermo viene realizzato con rotazione di 180$^\circ$ e successiva marcia in avanti se il percorso è libero.}
+\newline
+
+\textbf{User Story:} come operatore, voglio una procedura assistita di retromarcia sicura, così da evitare manovre rischiose.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato che la modalità "retromarcia assistita 180$^\circ$" è attiva, quando l'operatore richiede la retromarcia da fermo, allora il rover esegue una rotazione di 180$^\circ$ e procede solo se la direzione risultante è libera da ostacoli.
+	
+	\item Durante l'esecuzione della manovra assistita, i comandi dell'operatore non hanno effetto fino al completamento della rotazione.
+	
+	\item La presenza di ostacoli nelle direzioni non coinvolte nella traiettoria prevista non interrompe la manovra, mentre eventuali ostacoli nella direzione di marcia impediscono l'avanzamento.
+	
+	\item La manovra dovrà essere interrotta al verificarsi di una condizione critica.
+\end{itemize}
+
+
+\req{R15. Commutazione modalità retromarcia con combo (OPZIONALE)}{La selezione della modalità di retromarcia deve avvenire tramite combo dedicata.}
+\newline
+
+\textbf{User Story:} come progettista safety, voglio una combo esplicita per commutare la modalità di retromarcia, così da evitare attivazioni involontarie e ambiguità operative.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il sistema in stato iniziale, quando non è stata eseguita alcuna combo di commutazione, allora la modalità attiva è la retromarcia assistita 180$^\circ$.
+	\item Dato che è attiva la modalità assistita 180$^\circ$, quando viene eseguita la combo di commutazione, allora si attiva la retromarcia normale e si disattiva la modalità assistita.
+	\item Dato che è attiva la retromarcia normale, quando viene rieseguita la combo di commutazione, allora si riattiva la modalità assistita 180$^\circ$ e si disattiva la retromarcia normale.
+\end{itemize}
+
+\req{R16. Gestione fault critici}{Il rover deve gestire i fault critici garantendo il raggiungimento di uno stato sicuro.}
+\newline
+
+\textbf{User Story:} come sistema safety, voglio distinguere i fault critici per applicare la reazione più sicura (arresto o trasferimento dell'attuazione), così da portare il rover in uno stato sicuro anche in presenza di malfunzionamenti.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un fault critico relativo a periferiche o allo stato di salute del rover, quando viene rilevato dal supervisore, allora il sistema porta il rover in uno stato sicuro con motori fermi.
+	
+	\item Dato un fault critico relativo alla comunicazione tra board, quando il trasferimento è possibile, allora l'attuazione viene demandata all'altra board, mantenendo il rover in uno stato sicuro secondo la logica di alta affidabilità.
+\end{itemize}
+
+
+\req{R17. Marcia degradata su fault specifici (OPZIONALE)}{Determinate combinazioni di malfunzionamento consentono al rover di operare in modalità degradata con limitazione della velocità massima.}
+\newline
+
+\textbf{User Story:} come operatore, voglio mantenere una funzionalità ridotta in presenza di fault non critici, così da poter completare manovre essenziali in condizioni di sicurezza.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un fault o una combinazione di fault appartenente all'insieme definito per la modalità degradata, quando il rover resta operativo, allora il sistema entra in modalità degradata e applica una limitazione alla velocità massima.
+	
+	\item Dato che il rover opera in modalità degradata, quando vengono impartiti comandi di movimento, allora la velocità del rover è limitata al valore massimo consentito per tale modalità.
+\end{itemize}
+
+\req{R18. Evitamento ostacolo in movimento (1.5--3 m)}{Il rover deve evitare un ostacolo in movimento rilevato tra 1.5 m e 3 m mediante sterzata nella direzione del primo sensore che lo ha rilevato, dopo conferma da parte di un secondo sensore, senza interrompere la marcia. Se la distanza scende sotto 75 cm, il rover deve fermarsi.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che il rover eviti automaticamente ostacoli in movimento quando rilevati tra 1.5 m e 3 m, così da ridurre il rischio di collisione e mantenere la continuità di marcia, fermandosi comunque se la distanza scende sotto 70 cm.
+
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un ostacolo rilevato sequenzialmente da due sensori entro una finestra temporale definita e a distanza compresa tra 1.5 m e 3 m, quando il secondo sensore conferma la rilevazione, allora il rover comanda una sterzata evasiva nella direzione del primo sensore che ha rilevato l'ostacolo, senza interrompere la marcia.
+	
+	\item Dato che il primo sensore che ha rilevato l'ostacolo smette di rilevarlo mentre il secondo lo rileva ancora, quando questa condizione viene verificata, allora la sterzata evasiva viene attivata.
+	
+	\item Dato un ostacolo rilevato a distanza minore o uguale a 70 cm, quando questa condizione viene verificata, allora il rover comanda l'arresto indipendentemente dallo stato della manovra evasiva.
+\end{itemize}
+
+
+\req{R19. Alta affidabilità livello 2}{La supervisione e il controllo devono essere realizzati in configurazione ad alta affidabilità con ridondanza e diversità a livello 2, mediante due board diverse che eseguono algoritmi distinti e condividono le informazioni di stato e fault necessarie alla decisione.}
+\newline
+
+\textbf{User Story:} come progettista di affidabilità, voglio che due board indipendenti eseguano supervisione e controllo e condividano le informazioni di stato e fault, così da garantire il mantenimento di un comportamento sicuro anche in presenza di guasti o perdita di comunicazione.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il sistema completo, quando si analizza l'architettura, allora risultano presenti due board diverse che eseguono funzioni di supervisione e controllo in modo ridondante e con logiche autonome.
+	
+	\item Dato che le due board sono operative, quando viene rilevato un fault o un cambiamento di stato, allora tale informazione viene condivisa tra le board per consentire una decisione coerente.
+	
+	\item Dato un fault o una perdita di comunicazione su una board, quando l'altra board resta operativa, allora il sistema mantiene una supervisione coerente e porta il rover in uno stato sicuro o degradato secondo le politiche definite.
+\end{itemize}
+
+
+\req{R20. Affidabilità nel trasferimento informazione}{Il sistema deve includere controllo (ed eventualmente correzione) dei trasferimenti informativi tra board.}
+\newline
+
+\textbf{User Story:} come progettista comunicazione, voglio un protocollo robusto con validazione, riallineamento e controllo di freschezza, così da mantenere coerente lo stato condiviso anche con disturbi o perdita di fase.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un dato ricevuto tra board, quando non supera i controlli di validità del protocollo, allora viene scartato e non usato per il controllo.
+	\item Dato un disallineamento tra trasmettitore e ricevitore (fuori fase), quando viene rilevato, allora il canale RX deve riallinearsi automaticamente per riprendere l'acquisizione corretta dei messaggi.
+	\item Dato che i dati scambiati includono indicatori di freschezza, quando l'aggiornamento non rispetta la finestra temporale attesa, allora il supervisore applica la politica di fault (degradato o critico) definita.
+\end{itemize}
+
+\req{R21. Modalità degradata con singola board attuatrice}{In caso di malfunzionamento di una delle due board, il rover deve entrare in modalità degradata in cui una sola board mantiene il controllo dei motori, la board guasta viene isolata e viene applicato un limite di velocità per garantire la sicurezza.}
+\newline
+
+\textbf{User Story:} come supervisore del sistema, voglio garantire continuità minima di controllo anche in presenza di fault di una board, così da mantenere il rover in uno stato sicuro e controllato.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un fault confermato su una delle due board, quando il supervisore rileva la condizione, allora il sistema entra in modalità degradata e la board guasta viene isolata.
+	
+	\item Dato che il sistema opera in modalità degradata, quando i motori sono controllati, allora l'attuazione è effettuata da una sola board operativa.
+	
+	\item Dato che il rover è in modalità degradata, quando vengono impartiti comandi di movimento, allora la velocità è limitata al valore massimo previsto per tale modalità.
+	
+	\item Dato che il rover è in modalità degradata, quando viene rilevato un ostacolo in qualsiasi direzione, allora il sistema comanda direttamente lo stop di emergenza.
+\end{itemize}
+
+\req{R22. Protezione temperatura e batteria}{Il rover deve applicare le stesse limitazioni della modalità degradata quando temperatura o livello di batteria raggiungono le soglie di allarme, e arrestarsi al raggiungimento delle soglie critiche.}
+\newline
+
+\textbf{User Story:} come supervisore del sistema, voglio prevenire condizioni pericolose dovute a temperatura elevata o batteria scarica, così da proteggere i componenti e mantenere la sicurezza operativa.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato che temperatura o livello di batteria raggiungono la soglia di allarme, quando il supervisore aggiorna lo stato, allora il sistema entra in modalità degradata applicando lo stesso limite di velocità definito per i fault di board.
+	
+	\item Dato che temperatura o livello di batteria raggiungono la soglia critica, quando la condizione viene confermata, allora il sistema arresta il rover e lo porta in uno stato sicuro.
+	
+	\item Le soglie di allarme e critiche sono definite con margine rispetto ai limiti fisici dei componenti, per garantire l'attivazione preventiva delle protezioni.
+\end{itemize}
+
+
+\subsection{Requisiti su malfunzionamenti e soglie di allarme}
+
+\fault{M1. Una board in failure}{Una delle due board è in failure.}
+\newline
+
+\textbf{User Story:} come progettista del supervisore, voglio gestire il fault di una sola board, così da mantenere un controllo sicuro in modalità degradata.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato fault confermato su una board, quando il supervisore aggiorna lo stato, allora il sistema passa in modalità degradata secondo R21.
+	\item Dato ingresso in degradata per fault di board, quando il rover continua a operare, allora vengono applicati i limiti di sicurezza previsti.
+\end{itemize}
+
+\fault{M2. Entrambe le board in failure}{Tutte e due le board sono in failure.}
+\newline
+
+\textbf{User Story:} come responsabile sicurezza, voglio che il rover si arresti quando falliscono entrambe le board, così da evitare perdita totale di controllo.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato fault confermato su entrambe le board, quando il supervisore valuta lo stato globale, allora viene imposto stato critico con stop di emergenza.
+	\item Dato stato critico per failure doppia, quando il rover è fermo, allora resta in stato sicuro fino a reset/ripristino.
+\end{itemize}
+
+\fault{M3. Un motor controller non risponde}{Uno dei due motor controller non risponde ai comandi.}
+\newline
+
+\textbf{User Story:} come responsabile sicurezza, voglio che un guasto di attuazione venga trattato come fault critico, così da portare subito il rover in stato sicuro.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato mancato riscontro di un motor controller, quando il fault è confermato, allora il supervisore imposta stato critico.
+	\item Dato stato critico per guasto di attuazione, quando il sistema reagisce, allora il rover esegue stop di emergenza e segnala il fault.
+\end{itemize}
+
+\fault{M4. Entrambi i motor controller non rispondono}{Entrambi i motor controller non rispondono ai comandi.}
+\newline
+
+\textbf{User Story:} come responsabile sicurezza, voglio che un guasto di attuazione venga trattato come fault critico, così da portare subito il rover in stato sicuro.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato mancato riscontro di entrambi i motor controller, quando il fault è confermato, allora il supervisore imposta stato critico.
+	\item Dato stato critico per guasto di attuazione, quando il sistema reagisce, allora il rover esegue stop di emergenza e segnala il fault.
+\end{itemize}
+
+\fault{M5. Guasto encoder}{Uno (almeno) degli encoder non funziona.}
+\newline
+
+\textbf{User Story:} come progettista del controllo, voglio gestire il guasto encoder con fallback sicuro, così da evitare instabilità di controllo.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato guasto confermato di almeno un encoder, quando il supervisore aggiorna lo stato, allora il sistema applica la strategia prevista (fallback degradato o stop).
+	\item Dato fallback attivo, quando l'attuazione prosegue, allora vengono rispettati i limiti di sicurezza della modalità degradata.
+\end{itemize}
+
+\fault{M6. Guasto accelerometro}{L'accelerometro non funziona.}
+\newline
+
+\textbf{User Story:} come progettista del supervisore, voglio classificare la perdita dati accelerometro in modo progressivo, così da distinguere condizioni degradate da condizioni critiche.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato ricezione accelerometro ridotta ma non assente, quando la condizione supera la soglia prevista, allora il supervisore imposta stato degradato.
+	\item Dato timeout accelerometro (assenza totale dati), quando il fault è confermato, allora il supervisore imposta stato critico con stop di emergenza.
+\end{itemize}
+
+\fault{M7. Sistema non accetta comandi}{Il sistema non accetta comandi.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che la perdita dei comandi porti il rover a fermarsi in sicurezza, così da evitare movimenti non controllati.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato assenza o invalidità persistente dei comandi in ingresso, quando la condizione è confermata, allora viene generato fault comunicazione/input.
+	\item Dato fault comunicazione/input attivo, quando il supervisore aggiorna lo stato, allora il rover passa a stato critico con arresto sicuro.
+\end{itemize}
+
+\fault{M8. Disconnessione controller remoto}{Il controller remoto si disconnette durante l'uso.}
+\newline
+
+\textbf{User Story:} come operatore, voglio che una disconnessione improvvisa del controller porti il rover a comando neutro, così da ottenere un arresto ordinato e sicuro.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato perdita della connessione controller, quando il sistema rileva l'evento, allora i riferimenti comando vengono riportati a stato neutro.
+	\item Dato comandi in stato neutro per disconnessione, quando il rover è in marcia, allora il sistema applica una fermata regolare fino a velocità nulla.
+\end{itemize}
+
+\fault{M9. Motori non rispondono ai comandi}{I motori non rispondono ai comandi.}
+\newline
+
+\textbf{User Story:} come responsabile sicurezza, voglio che un guasto di attuazione venga trattato come fault critico, così da portare subito il rover in stato sicuro.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato mancato riscontro dei motori ai comandi inviati, quando il fault è confermato, allora il supervisore imposta stato critico.
+	\item Dato accelerometro ed encoder disponibili, quando la risposta dei motori risulta incoerente con i comandi, allora il supervisore usa il controllo incrociato per rafforzare la diagnosi del guasto di attuazione.
+	\item Dato stato critico per guasto di attuazione, quando il sistema reagisce, allora il rover esegue stop di emergenza e segnala il fault.
+\end{itemize}
+
+\fault{M10. Allarme temperatura}{Temperatura interna sopra soglia "DA DEFINIRE" per intervallo "DA DEFINIRE".}
+\newline
+
+\textbf{User Story:} come progettista del supervisore, voglio gestire progressivamente l'aumento di temperatura, così da evitare danni termici ai componenti.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato temperatura oltre soglia di allarme per il tempo definito, quando il supervisore conferma l'evento, allora viene applicata limitazione di velocità (degradata) o stato critico secondo livello soglia.
+	\item Dato evento termico confermato, quando il sistema aggiorna la diagnostica, allora l'allarme viene registrato nei log.
+\end{itemize}
+
+\fault{M11. Batteria sotto 23\%}{La batteria scende sotto al 23\% di carica.}
+\newline
+
+\textbf{User Story:} come progettista del supervisore, voglio reagire a batteria bassa con politiche conservative, così da proteggere la batteria e mantenere sicurezza operativa.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato livello batteria in avvicinamento alla soglia del 23\%, quando la condizione supera la soglia di preallarme, allora il supervisore imposta stato degradato.
+	\item Dato livello batteria sotto al 23\%, quando la condizione è confermata, allora il supervisore imposta stato critico con arresto del rover.
+	\item Dato evento di batteria bassa, quando il supervisore aggiorna la diagnostica, allora la condizione viene tracciata nei log.
+\end{itemize}
+
+\subsection{Requisiti di modellazione e progettazione del controllo}
+
+\req{D1. Definizione stato globale}{Definire una rappresentazione dello stato globale del sistema.}
+\newline
+
+\textbf{User Story:} come progettista del sistema, voglio rappresentare lo stato globale in forma sintetica e condivisibile, così da coordinare le decisioni tra le due board.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il modello di supervisione, quando viene definito lo stato globale, allora include almeno classe di severità fault e validità delle informazioni condivise.
+	\item Dato lo stato globale definito, quando viene usato per il controllo, allora evita dipendenza da dati ridondanti o non necessari alla decisione operativa.
+\end{itemize}
+
+\req{D2. Ricostruzione stato globale}{Definire le fonti dati usate per ricostruire lo stato globale.}
+\newline
+
+\textbf{User Story:} come progettista del sistema, voglio tracciare le sorgenti informative minime necessarie, così da costruire lo stato globale con soli dati utili.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il set di segnali di progetto, quando si selezionano le fonti per stato globale, allora vengono incluse solo le informazioni necessarie a supervisione e attuazione.
+	\item Dato ogni fonte selezionata, quando si verifica la tracciabilità, allora esiste un legame esplicito tra dato acquisito e decisione che abilita.
+\end{itemize}
+
+\req{D3. Partizioni delle variabili di stato}{Definire due partizioni delle variabili di stato acquisite direttamente da ciascuna board.}
+\newline
+
+\textbf{User Story:} come architetto del controllo distribuito, voglio partizionare le variabili tra le board in base all'osservabilità locale, così da avere responsabilità chiare.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il modello a due board, quando si definiscono le partizioni, allora ogni variabile appartiene alla board che la misura o la produce direttamente.
+	\item Dato la partizione definita, quando una board necessita di una variabile remota, allora tale variabile è acquisita tramite scambio esplicito.
+\end{itemize}
+
+\req{D4. Protocollo scambio messaggi}{Definire protocollo di scambio informazioni tra partizioni per ricostruire stato globale.}
+\newline
+
+\textbf{User Story:} come progettista comunicazione, voglio uno scambio robusto con controllo di validità e freschezza, così da evitare decisioni su dati stantii.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato lo scambio tra board, quando un dato remoto arriva, allora viene validato prima di essere usato nella ricostruzione dello stato globale.
+	\item Dato un dato condiviso, quando manca evidenza di freschezza entro la finestra prevista, allora il dato viene considerato degradato o invalido secondo policy.
+	\item Dato il canale di supervisione, quando si verifica la coerenza periodica, allora ogni board puo' confermare la vitalità logica dell'altra tramite indicatori dedicati.
+\end{itemize}
+
+\req{D5. Automa stateflow per stati interni e globale}{Definire automa Stateflow per task, stati interni e stato globale.}
+\newline
+
+\textbf{User Story:} come progettista del comportamento, voglio modellare in Stateflow lo stato operativo del rover e la logica di supervisione, così da avere decisioni coerenti tra guida, safety e fault handling.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il modello Stateflow, quando si analizzano gli stati operativi del rover, allora sono presenti gli stati necessari alle manovre nominali e alle manovre di sicurezza.
+	\item Dato i contributi di stato locale delle due board, quando il supervisore aggiorna lo stato globale, allora lo stato globale riflette in modo deterministico la combinazione delle due viste locali.
+	\item Dato una condizione anomala rilevata da logiche di confronto tra segnali disponibili, quando la condizione è confermata, allora il risultato viene propagato alla decisione di stato del rover.
+\end{itemize}
+
+\req{D7. Ciclo acquisizione-elaborazione-attuazione}{Modellare il ciclo acquisizione-elaborazione-attuazione in funzione dello stato corrente e dello stato obiettivo.}
+\newline
+
+\textbf{User Story:} come progettista controllo, voglio che il ciclo acquisizione-elaborazione-attuazione usi come stato corrente lo stato globale del rover e come stato obiettivo il comando utente da joystick, così da avere riferimenti coerenti con la situazione reale.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato stato globale aggiornato del rover e comando joystick valido, quando il ciclo viene eseguito, allora i riferimenti di attuazione risultano coerenti sia con l'obiettivo utente sia con i vincoli di sicurezza.
+	\item Dato variazione dello stato globale del rover, quando il ciclo viene aggiornato, allora i riferimenti vengono ricalcolati in modo coerente con il nuovo stato operativo.
+	\item Dato comando utente valido, quando i sonar rilevano una condizione di sicurezza, allora il riferimento di attuazione viene corretto secondo la logica di sterzata/schivata prevista.
+\end{itemize}
+
+\req{D8. Definizione del comportamento di errore}{Definire error handlers (trasmissione, deadline, raggiungibilità stati critici, altri errori).}
+\newline
+
+\textbf{User Story:} come progettista safety, voglio error handler espliciti per timeout, comunicazione e superamento soglie operative, così da garantire reazioni coerenti tra stato degradato e stato critico.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato assenza dati o timeout su periferiche/comunicazione, quando la soglia di diagnosi è superata, allora l'handler imposta la classe di fault prevista e la relativa reazione.
+	\item Dato degrado progressivo (es. dati meno freschi del previsto o avvicinamento a soglie operative), quando la condizione viene confermata, allora l'handler attiva modalità degradata.
+	\item Dato violazione deadline o errore logico, quando l'handler corrispondente è attivato, allora il sistema applica la reazione di sicurezza prevista (degradata o critico con stop) e registra l'evento nei log.
+\end{itemize}
+
+\req{D9. Definizione e gestione degli stati di funzionamento degradato e di stop di emergenza}{Definire, progettare e codificare le condizioni di ingresso e la gestione degli stati di funzionamento degradato e di stop di emergenza.}
+\newline
+
+\textbf{User Story:} come progettista software, voglio definire e implementare in codice le condizioni di ingresso e la gestione degli stati di funzionamento degradato e di stop di emergenza, così da garantire un comportamento sicuro e coerente con la specifica del sistema.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato un insieme di condizioni critiche o di funzionamento degradato definite a specifica, quando tali condizioni si verificano, allora il sistema entra nello stato corrispondente.
+	\item Dato lo stato di funzionamento degradato o di stop di emergenza, quando il sistema si trova in tale stato, allora il comportamento operativo risulta coerente con quanto previsto dalla specifica.
+	\item Dato un evento che richiede la transizione verso uno stato degradato o di stop di emergenza, quando viene rilevato dal software, allora la transizione viene eseguita correttamente.
+\end{itemize}
+
+
+
+\subsection{Requisiti di schedulazione}
+
+\req{S1. Progettare Task real time per il ciclo attuazione-elaborazione-acquisizione}{Progettare insieme task real-time per acquisizione/elaborazione/attuazione e politica di scheduling.}
+\newline
+
+\textbf{User Story:} come progettista real-time, voglio una schedulazione coerente tra acquisizione, elaborazione e attuazione, così da mantenere controllo stabile e tempi prevedibili.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato il set di task principali, quando viene definita la schedulazione, allora ogni task ha periodo e priorità compatibili con la funzione che svolge.
+	\item Dato l'algoritmo di scheduling adottato, quando si verifica il set di task, allora risultano rispettati i bound di schedulabilità previsti.
+	\item Dato una finestra temporale di osservazione, quando il sistema opera in nominale, allora acquisizione, elaborazione e attuazione rispettano l'ordine previsto senza perdita di coerenza.
+\end{itemize}
+
+\req{S2. Progettare task per funzionamento in stato degradato e critico}{Progettare task per stato degradato e stop emergenza, incluse interazioni con task ordinari.}
+\newline
+
+\textbf{User Story:} come responsabile safety, voglio che i task restino coerenti con la modalità operativa (nominale, degradata, critica) definita dal supervisore, così da avere una reazione uniforme del rover.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato ingresso in stato degradato, quando il supervisore aggiorna la modalità operativa, allora i task applicano riferimenti coerenti con i limiti di sicurezza attivi.
+	\item Dato ingresso in stato critico, quando viene richiesto stop di emergenza, allora i task di attuazione ricevono riferimenti di fermo sicuro.
+	\item Dato una board non attiva per l'attuazione, quando i task elaborano i riferimenti, allora non viene prodotto comando motore attivo verso l'hardware.
+\end{itemize}
+
+\req{S3. Progettare le dipendenze tra precedenze di task}{Progettare un meccanismo per gestire dipendenze di precedenza tra task con schedulatori noti.}
+\newline
+
+\textbf{User Story:} come progettista software, voglio vincoli di precedenza espliciti tra task dipendenti e una politica di lettura coerente dei dati condivisi, così da mantenere continuità operativa.
+\newline
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+	\item Dato una catena funzionale tra task dipendenti, quando viene configurata la schedulazione, allora le precedenze sono definite in modo esplicito.
+	\item Dato una dipendenza di precedenza, quando il task a monte non produce un nuovo campione, allora il task a valle usa l'ultimo dato prodotto e valido.
+\end{itemize}
+
+\subsection{Parametri scelti in fase di progettazione}
+Nel seguito sono riportati i parametri fissati durante la fase di progettazione, richiesti dalle specifiche di progetto.
+
+\paragraph*{Soglie Temperatura}
+Le soglie di temperatura sono state ricavate in modo conservativo considerando tutti i componenti presenti sul rover e i relativi limiti di funzionamento da datasheet. Come riferimento di sistema è stata usata l'intersezione dei range ammissibili, ottenendo una finestra nominale circa $[-20,+70]\,^\circ$C.
+\newline
+
+Per la diagnostica operativa è stato introdotto un margine rispetto ai limiti nominali: soglia critica a temperatura maggiore di 65$^\circ$C o minore di -15$^\circ$C, e soglia degradata a temperatura maggiore di 55$^\circ$C o minore di -5$^\circ$C. Per confermare la condizione termica si richiede permanenza oltre soglia per almeno 4 secondi, così da ridurre falsi allarmi dovuti a picchi rapidi o a imprecisione della misura ADC.
+
+
+
+\paragraph*{Finestra temporale per ostacolo In movimento}
+La logica di gestione dell'ostacolo in movimento viene applicata nella fascia operativa dei sonar compresa tra circa $1.5$ m e $3$ m. Oltre i $3$ m la presenza dell'ostacolo non è garantita, mentre sotto circa $0.7$ m è previsto uno stop di emergenza. La fascia $1.5$--$3$ m rappresenta quindi l'intervallo in cui viene presa la decisione di schivata.
+\newline
+
+La logica è definita tra coppie di sonar adiacenti (sinistro-centrale oppure centrale-destro). Quando uno dei due sonar della coppia (indicato come $S_1$) smette di rilevare un ostacolo precedentemente presente, il sistema entra in uno stato di attesa. Se il sonar adiacente ($S_2$) rileva immediatamente la presenza, viene avviata la manovra di schivata. In caso contrario, il sistema attende per un tempo massimo pari a $T_{win} = 3 \; s$. Se durante questo intervallo il sonar adiacente non rileva alcun ostacolo, il sistema considera concluso l'evento senza eseguire manovre, assumendo che la perdita di rilevazione fosse dovuta a un transitorio o a un ostacolo non rilevante per la traiettoria.
+\newline
+La scelta di $T_{win} = 3 \; s$ è basata sulla fascia operativa dei sonar compresa tra 1.5 m e 3 m, ovvero l'intervallo in cui viene presa la decisione di schivata. La larghezza di tale fascia è pari a
+\[
+\Delta d = 3 - 1.5 = 1.5~\mathrm{m}.
+\]
+
+Assumendo una velocità di riferimento pari a circa metà della velocità massima del rover,
+\[
+v_{\mathrm{ref}} \approx 0.65~\mathrm{m/s},
+\]
+il tempo caratteristico associato all'attraversamento di questa fascia risulta:
+\[
+t = \frac{1.5~\mathrm{m}}{0.65~\mathrm{m/s}} \approx 2.3~\mathrm{s}.
+\]
+
+La scelta di una finestra temporale pari a 3 s risulta quindi coerente con questo tempo caratteristico e introduce un margine di sicurezza per compensare eventuali ritardi di rilevazione o perdite temporanee di misura. In questo modo la finestra consente di distinguere in modo robusto tra la continuità della stessa rilevazione e la comparsa di un nuovo ostacolo.
+
+
+\paragraph*{Limite Velocità in Modalità Degradata}
+In modalità degradata viene applicata uno scaling del riferimento pari a 0.5, questo dimezza il comando di velocità e, di conseguenza, riduce implicitamente la velocità massima effettiva del rover alla metà di quella nominale.
+Il valore 0.5 è stato scelto come compromesso tra sicurezza e usabilità. Da un lato il rover resta ancora comandabile con buona reattività e senza diventare eccessivamente lento, dall'altro la riduzione di velocità evita manovre troppo aggressive in condizioni di funzionamento degradato del rover.
+\newline
+
+Questa scelta è coerente con le condizioni che determinano l'ingresso in modalità degradata: come la riduzione della frequenza dei dati validi disponibili oppure avvicinamento a soglie di temperatura o batteria. Operando a velocità ridotta, la dinamica del rover risulta meno aggressiva e il tempo disponibile per la reazione aumenta, migliorando la robustezza complessiva del sistema rispetto alla modalità nominale.
+
+\paragraph*{Combo Retromarcia/180}
+La commutazione tra retromarcia normale e modalità 180 è definita tramite la sequenza comandi utente \texttt{btn1 btn1 btn2 btn2}. Tra un evento di pressione e il successivo non deve trascorrere piu' di 1 s. Il riconoscimento avviene sul fronte di rilascio (falling) del pulsante, così da evitare ripetizioni involontarie dovute al mantenimento in pressione.
+
+
+
+\clearpage
 \section{Funzionamento generale del software di ciascuna board}
 \subsection{Interazione tra Task e Meccanismo di Snapshot}
 Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
@@ -141,14 +807,14 @@ Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio te
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{images/funzionamento_generale/funzGener_B1}
+	\includegraphics[width=0.85\textwidth]{images/funzionamento_generale/funzGener_B1}
 	\caption{Funzionamento generale del software di Board 1.}
 	\label{fig:funzionamento_generale}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{images/funzionamento_generale/funzGener_B2}
+	\includegraphics[width=0.85\textwidth]{images/funzionamento_generale/funzGener_B2}
 	\caption{Funzionamento generale del software di Board 2.}
 	\label{fig:funzionamento_generale_b2}
 \end{figure}
@@ -207,9 +873,6 @@ Alla fine della lettura, il task aggiorna lo snapshot \textbf{SonarsSnapshot} co
 	\caption{Struttura dati dello snapshot SonarsSnapshot.}
 	\label{fig:sonars_snapshot}
 \end{figure}
-\clearpage
-
-
 
 
 \subsubsection{Task: lettura comandi utente}
@@ -249,8 +912,8 @@ I dati del joystick sono stati rappresentati tramite la struct presente nell'imm
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{images/Joystick/RappresentazioneTasti.png}
-	\caption{Rappresentazione tasti del joystick.}
+	\includegraphics[width=0.7\textwidth]{images/Joystick/RappresentazioneTasti.png}
+	\caption{Rappresentazione tasti del controller}
 	\label{fig:rapp_tasti}
 \end{figure}
 Una volta rappresentati i dati e individuato i valori di stanby, il flusso di elaborazione sull'ESP32 segue i seguenti passaggi:
@@ -260,12 +923,11 @@ Una volta rappresentati i dati e individuato i valori di stanby, il flusso di el
 	\item \textbf{Parsing dei dati:} Tramite le callback della libreria (\texttt{onConnectedGamepad}), vengono eseguiti alcuni controlli per garantire che si possa connettere solo il joystick autorizzato alla scheda.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{images/Joystick/OnConnect.png}
+		\includegraphics[width=0.89\textwidth]{images/Joystick/OnConnect.png}
 		\caption{Implementazione della funzione di callback per l'inizializzazione del controller DualSense all'atto della connessione Bluetooth.}
 		\label{}
 	\end{figure}
-	\clearpage
-	
+
 	\item \textbf{Normalizzazione:} Viene continuamente monitorato lo stato del BLuetooth e, se il joystick è connesso, i valori provenienti da esso vengono mappati in un range normalizzato a seconda delle necessità del supervisore. Una volta mappati, tali valori vengono utilizzati per aggiornare i dati presenti in controller\_data.
 	\begin{figure}[H]
 		\centering
@@ -273,7 +935,6 @@ Una volta rappresentati i dati e individuato i valori di stanby, il flusso di el
 		\caption{Normalizzazione dei dati inviati alla ESP32 tramite joystick}
 		\label{}
 	\end{figure}
-	\clearpage
 	
 	\item \textbf{Trasmissione I2C:} L'ESP32 è configurata come \textbf{I2C Slave}. Quando la Board 2 interroga l'ESP32 (tramite la funzione \texttt{BleController\_I2C\_ReadFrame} citata precedentemente), l'ESP32 trasmette un pacchetto dati strutturato contenente lo stato dei pulsanti e la posizione degli analogici.
 	\begin{figure}[H]
@@ -292,8 +953,6 @@ Una volta rappresentati i dati e individuato i valori di stanby, il flusso di el
 	\end{figure}
 \end{enumerate}
 Questa architettura permette di delegare il carico computazionale della gestione Bluetooth alla ESP32, garantendo che la Board 2 (STM32) rimanga focalizzata esclusivamente sui task real-time di supervisione e sicurezza.
-\clearpage
-
 
 
 \subsubsection{Task: lettura giroscopio}
@@ -356,7 +1015,7 @@ In Figura~\ref{fig:b2_actuation} è mostrata la $actuation\_step$ di Board 2 in 
 
 Data l'assenza degli encoder, l'attuazione di Board 2 dovrà essere in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
 La funzione di attuazione trasforma i riferimenti di velocità del supervisore in segnali di potenza per i motori. Il sistema opera in anello aperto (open-loop), convertendo i giri al minuto (RPM) desiderati in tensione elettrica
-Infine, i comandi vengono inviati al driver di potenza Sabertooth tramite una scalatura lineare del voltaggio in uscita, con un range di $[-12V; +12V]$ corrispondente a $[-MAX\_RPM; +MAX\_RPM]$.
+Infine, i comandi vengono inviati al driver di potenza Sabertooth tramite una scalatura lineare del voltaggio in uscita, con un range di $[-6V; +6V]$ corrispondente a $[-MAX\_RPM\_DEGRADED; +MAX\_RPM\_DEGRADED]$.
 
 Lo snapshot del supervisore di Board 2 è mostrato in Figura~\ref{fig:b2_snapshot}:
 
@@ -650,7 +1309,6 @@ Il protocollo Packetized Serial dei driver Sabertooth definisce un formato di pa
 	\label{fig:screenshot007}
 \end{figure}
 
-\clearpage
 
 
 \subsubsection{Task: log dei dati per il debug}
@@ -693,29 +1351,108 @@ monitora le maschere di errore e le azioni correnti decise dai supervisori di en
 Questa implementazione risulta fondamentale durante i test sul campo, poiché permette di distinguere istantaneamente tra un normale comportamento di evitamento ostacoli (LED Giallo) e un arresto dovuto a un'anomalia hardware o software (LED Rosso).
 
 
-\subsection{Task di trasmissione e ricezione tra le due Board}
-Le due board comunicano tra loro tramite un collegamento seriale, con presenza di task di trasmissione e ricezione su entrambe le board. Il task di trasmissione su entrambe le board ha periodo di 20 ms,
-mentre il task di ricezione è di tipo event-driven, attivato dall'arrivo di nuovi dati sulla seriale. In Figura~\ref{fig:comunicazione_board21} è mostrata l'interazione tra i task di trasmissione della 
-Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono trasmessi e ricevuti tra le due board. In particolare vengono inviati gli snapshot \textbf{SupervisorSnapshot}, 
-\textbf{BleControllerSnapshot} e \textbf{IMUSnapshot}. Il contenuto di questi snapshot è descritto in dettaglio nelle sezioni dedicate ai task di Board 2.
+\subsection{Task di trasmissione, ricezione e protocollo di comunicazione tra le due board}
+
+Le due board comunicano tra loro tramite un collegamento seriale UART. Su entrambe le board sono presenti due task distinti:
+
+\begin{itemize}
+	\item un task di trasmissione, eseguito periodicamente con periodo di $20\,\mathrm{ms}$;
+	\item un task di ricezione di tipo event-driven, attivato dall'arrivo di nuovi dati sulla UART tramite interrupt.
+\end{itemize}
+
+Il task di trasmissione invia periodicamente un insieme di informazioni rappresentative dello stato locale della board, mentre il task di ricezione ricostruisce lo stato remoto a partire dai dati ricevuti.
+
+
+\subsubsection{Scelta di comunicazione asincrona}
+La comunicazione tra le due board è di tipo asincrono. In particolare, ciascuna board trasmette i propri dati in modo indipendente, in base alla propria temporizzazione locale, senza richiedere una sincronizzazione esplicita con l'altra board. Questo significa che non esiste un istante preciso in cui entrambe le board trasmettono simultaneamente, ma ciascuna invia i propri dati quando viene eseguito il rispettivo task periodico di trasmissione.
+\newline
+
+Questa scelta progettuale consente di evitare meccanismi di sincronizzazione bloccanti tra le due board. In particolare, una board non deve attendere che l'altra sia pronta a trasmettere o ricevere, né è necessario interrompere l'esecuzione dei task dell'altra board per forzare una comunicazione. In questo modo, la comunicazione non introduce ritardi o blocchi nell'esecuzione delle altre funzionalità del sistema.
+\newline
+
+L'approccio asincrono introduce un ritardo limitato tra la generazione delle informazioni su una board e la loro ricezione da parte dell'altra. Tuttavia, questo ritardo è trascurabile rispetto alle dinamiche del sistema, in particolare rispetto alla velocità di movimento del rover e alla frequenza con cui vengono prese le decisioni di controllo. La frequenza di trasmissione adottata è quindi sufficiente a garantire una visione aggiornata dello stato remoto e un comportamento corretto del sistema.
+\newline
+
+Infine, evitare meccanismi di comunicazione bloccanti contribuisce a migliorare la sicurezza complessiva del sistema, evitando che la comunicazione ritardi l'eventuale esecuzione di funzionalità critiche sulle board. L'approccio adottato consente invece a ciascuna board di continuare a operare in modo autonomo e reattivo, garantendo che le funzioni di supervisione e controllo vengano eseguite nei tempi previsti.
+
+
+\subsubsection{Ricostruzione dello stato globale tramite lo scambio dati}
+Lo scopo della comunicazione tra le due board è permettere a ciascuna di ricostruire una visione coerente dello stato complessivo del sistema, utilizzando le informazioni ricevute dalla board remota. A tal fine, ogni board trasmette periodicamente un insieme selezionato di informazioni rappresentative del proprio stato locale.
+\newline
+
+Le informazioni trasmesse non corrispondono necessariamente ai dati grezzi acquisiti dai sensori, ma consistono principalmente in una rappresentazione sintetica e già elaborata dal supervisore. In particolare, vengono trasmesse informazioni di stato e indicatori di fault che permettono alla board ricevente di determinare se i sottosistemi remoti stanno operando correttamente, in modalità degradata o in condizioni critiche. Questo consente di ridurre la quantità di dati trasmessi e semplificare l'integrazione delle informazioni remote nel processo decisionale locale.
+
+I dati grezzi vengono invece trasmessi solo quando sono necessari per il funzionamento del sistema o per la corretta interpretazione dei comandi. In questo modo, ciascuna board riceve tutte le informazioni essenziali per prendere decisioni corrette, senza richiedere l'accesso diretto a tutti i dettagli interni della board remota.
+\newline
+
+In Figura~\ref{fig:comunicazione_board21} è mostrata l'interazione tra il task di trasmissione della Board 2 e il task di ricezione della Board 1. In particolare, la Board 2 trasmette:
+
+\begin{itemize}
+	\item Informazioni sullo stato del supervisore, che includono sia gli indicatori di fault sia il comando di sicurezza corrente. Questo permette alla board ricevente di conoscere se la board remota si trova in condizioni normali, degradate o critiche, e quale azione di sicurezza è stata eventualmente richiesta, come arresto di emergenza o manovre di evitamento ostacolo (Supervisor snapshot);
+	
+	\item Informazioni relative ai comandi utente, necessarie a determinare il comportamento richiesto del rover, come velocità, direzione e attivazione di comandi specifici (Ble snapshot);
+	
+	\item Informazioni sull'orientamento del rover, utilizzate per monitorare e verificare il completamento di manovre controllate, come l'inversione di direzione (Imu snapshot).
+\end{itemize}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b2b1}
-	\caption{Interazione tra i task di trasmissione della Board 2 e ricezione della Board 1.}
+	\caption{Interazione tra il task di trasmissione della Board 2 e il task di ricezione della Board 1.}
 	\label{fig:comunicazione_board21}
 \end{figure}
 
-Allo stesso modo, nella Figura~\ref{fig:comunicazione_board12} è mostrata l'interazione tra i task di trasmissione della Board 1 e ricezione della Board 2. In particolare, la Board 1 invia alla Board 2 lo
-snapshot \textbf{EncoderSnapshot} e \textbf{SupervisorSnapshot}. Il contenuto di questi snapshot è descritto in dettaglio nelle sezioni dedicate ai task di Board 1.
+Allo stesso modo, nella Figura~\ref{fig:comunicazione_board12} è mostrata l'interazione tra il task di trasmissione della Board 1 e il task di ricezione della Board 2. In questo caso, la Board 1 trasmette le informazioni locali relative ai sottosistemi di cui è responsabile, permettendo alla Board 2 di ricostruire una visione coerente dello stato globale del rover.
+\newline
+
+Vengono trasmesse le informazioni sullo stato del supervisore locale tramite indicatori di fault che permettono di valutare lo stato operativo della Board 1 e integrarlo nella determinazione dello stato globale (Supervisor snapshot). Inoltre, vengono trasmesse le velocità delle ruote misurate dagli encoder (Encoder snapshot), che permettono alla Board 2 di verificare il comportamento del rover e di controllare il corretto arresto dei motori durante condizioni di sicurezza come la frenata di emergenza.
+\newline
+
+Come nel caso della Board 2, vengono trasmesse solo le informazioni strettamente necessarie alla supervisione distribuita, utilizzando una rappresentazione sintetica dello stato per ridurre il carico di comunicazione e garantire un coordinamento efficace tra le due board.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b1b2}
-	\caption{Interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.}
+	\centering \includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b1b2} \caption{Interazione tra il task di trasmissione della Board 1 e il task di ricezione della Board 2.}
 	\label{fig:comunicazione_board12}
 \end{figure}
 
+
+\subsubsection{Struttura del protocollo di comunicazione}
+
+La comunicazione tra le due board utilizza un protocollo basato su frame di lunghezza fissa, progettato per garantire sincronizzazione, integrità dei dati e robustezza rispetto a errori di trasmissione.
+
+Ogni frame è composto da tre sezioni principali:
+
+\begin{itemize}
+	\item un header, che contiene le informazioni di controllo del frame e un identificatore utilizzato per la sincronizzazione;
+	
+	\item un payload, che include le informazioni rappresentative dello stato della board trasmittente;
+	
+	\item un campo CRC (\textit{Cyclic Redundancy Check}), utilizzato per verificare l'integrità dei dati ricevuti.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"images/funzionamento_generale/Esempio protocollo di comunicazione"}
+	\caption{Pacchetto inviato da board 1.}
+	\label{fig:esempio-protocollo-di-comunicazione}
+\end{figure}
+
+
+\paragraph{Sincronizzazione del flusso dati}
+
+L'identificatore presente nell'header \texttt{msg\_id} consente al ricevitore di riconoscere l'inizio di un nuovo frame valido all'interno del flusso continuo di byte ricevuti sulla UART. Il task di ricezione analizza il flusso dati e ricerca questo valore per allinearsi correttamente con la struttura del frame.
+
+Questo meccanismo consente di ristabilire automaticamente la sincronizzazione anche in presenza di errori di trasmissione, perdita di byte o disallineamenti del flusso dati (comunicazione fuori fase). In tali situazioni, il ricevitore continua a scorrere i dati fino a individuare un nuovo identificatore valido, permettendo la ripresa corretta della comunicazione senza richiedere un reset del sistema.
+\newline
+
+Una volta individuato l'inizio del frame, il ricevitore acquisisce l'intero messaggio e ne verifica l'integrità tramite il CRC. Quando un frame valido viene ricevuto, il payload viene salvato come nuovo stato della board remota e viene registrato il timestamp di ricezione, che permette al supervisore di rilevare eventuali problemi relativi alla comunicazione.
+
+\paragraph{Gestione dei fault di comunicazione}
+
+La gestione di eventuali anomalie di comunicazione è affidata al supervisore, che monitora la frequenza di ricezione dei frame validi confrontandola con quella attesa.
+
+Se i frame continuano ad arrivare ma con una frequenza inferiore a quella nominale, la comunicazione viene considerata degradata, se invece non viene ricevuto alcun frame valido per un intervallo di tempo superiore a un timeout prestabilito, la comunicazione viene dichiarata in stato critico.
+\clearpage
 
 \section{Algoritmo di schedulazione dei task}
 Per la gestione dei task su entrambe le board, è stato adottato l'algoritmo di scheduling \textbf{Rate Monotonic (RM)}. 
@@ -949,42 +1686,42 @@ Il rover è dotato di due schede di controllo, denominate Board 1 e Board 2, che
 \end{figure}
 
 \subsection{Condizioni di funzionamento nominale}
-In condizioni di funzionamento nominale la Board 1 è considerata il $Master$, occupandosi dell'attuazione dei motori, inviando tramite UART l'ingresso di controllo. La Board 2 è considerata $Slave$ in quanto in condizioni nominali
-non comanda i motori. Questi ultimi possono raggiungere una velocità massima di $160 RPM$.
-Il riferimento di velocità lineare o di rotazione è calcolato in base ai comandi utente inviati attraverso un joistick tramite protocollo \textit{Bluethooth} ad un $ESP32$ e ricevuti dalla Board 2 tramite protocollo $I2C$.
-La Board 2 quindi invia i comandi utente ricevuti alla Board 1, che si occupa di eseguirli. 
+In condizioni di funzionamento nominale la Board 1 è considerata il \textit{Master}, in quanto si occupa dell'attuazione dei motori e della generazione dei riferimenti finali, inviando tramite UART i comandi di controllo agli attuatori. La Board 2 è invece considerata \textit{Slave}, poiché non attua direttamente i motori ma fornisce informazioni di supporto al sistema di controllo.
+\newline
+
+Il riferimento di velocità lineare o angolare è calcolato a partire dai comandi utente inviati tramite un controller BLE ad una scheda \textit{ESP32} e successivamente ricevuti dalla Board 2 tramite protocollo \textit{I2C}. La Board 2 trasmette quindi tali informazioni alla Board 1, che provvede ad applicare le opportune limitazioni di sicurezza e a generare il comando finale per l'attuazione.
+
 \paragraph{Rilevamento ostacoli}
-I riferimenti di velocità sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento.
-Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $150$ e $300$ cm, il supervisore di Board 2, che si occupa 
-di rilevare ostacoli, attiva delle procedure di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essendo che in condizioni nominali Board 2 non attua, questi comandi vengono inviati dalla Board 2, tramite la comunicazione UART, alla Board 1 che si occupa di eseguirli.
+I riferimenti di velocità sono inoltre influenzati dalle condizioni ambientali rilevate dai sensori. In particolare, la Board 2, direttamente interfacciata con i sensori sonar, elabora le misure di distanza e genera opportuni comandi di sicurezza, come ad esempio \texttt{CMD\_ESTOP}, \texttt{CMD\_AVOID\_LEFT} o \texttt{CMD\_GO\_LEFT}. Tali comandi vengono trasmessi alla Board 1 tramite comunicazione UART, dove il supervisore valuta lo stato corrente del sistema e, se necessario, modifica i riferimenti di moto garantendo il rispetto delle condizioni di sicurezza.
+
+
+\subsection{Modalità operative non nominali}
+
+Oltre alla modalità nominale, il sistema prevede due modalità degradate e una modalità critica, attivate dal supervisore in funzione dello stato delle periferiche, della qualità della comunicazione e della disponibilità delle due Board. Queste modalità garantiscono la sicurezza del rover anche in presenza di guasti o condizioni operative non ideali.
+
+\paragraph{Modalità degradata con entrambe le Board operative}
+
+Questa modalità si verifica quando una o più periferiche risultano operative ma con prestazioni ridotte, oppure quando parametri critici, come la qualità della comunicazione, la temperatura o il livello della batteria, si avvicinano a soglie di sicurezza.
+\newline
+
+In questa configurazione entrambe le Board restano attive e il sistema mantiene tutte le funzionalità di controllo e supervisione. Tuttavia, al fine di ridurre il rischio di instabilità o perdita di controllo, la velocità massima del rover viene limitata al $50\%$ del valore nominale. Il sistema continua a utilizzare tutte le informazioni disponibili dai sensori e mantiene attive le normali strategie di sicurezza e supervisione del movimento.
+
+\paragraph{Modalità degradata con Board isolata}
+Questa modalità si verifica quando la Board 1 non riceve più aggiornamenti dalla Board 2 per un intervallo di tempo superiore alla soglia di sicurezza prevista. In questa condizione, la Board 1 cede i privilegi di attuazione alla Board 2, che assume il controllo diretto del rover.
+\newline
+
+Poiché in questa configurazione non è disponibile il normale livello di supervisione e coordinamento tra le due Board, il sistema opera con funzionalità di sicurezza conservative. In particolare, la velocità massima viene ridotta e, alla rilevazione di un ostacolo, viene eseguito un arresto immediato del rover, senza effettuare manovre evasive. Questa modalità garantisce un comportamento fail-safe anche in assenza della piena cooperazione tra le due unità di controllo.
+
+\paragraph{Modalità critica}
+
+La modalità critica viene attivata quando il supervisore rileva un guasto che compromette la disponibilità di una funzionalità essenziale per il funzionamento sicuro del rover.
+
+In questa condizione il sistema esegue un arresto di emergenza e disabilita l'attuazione dei motori, impedendo qualsiasi movimento. Il rover rimane in questo stato fino a quando la condizione di guasto non viene risolta e il sistema torna in uno stato operativo sicuro.
 
 
 
-\subsection{Condizioni di funzionamento critico o degradato}
+\subsubsection{Esempio di funzionamento in modalità non nominale: fault e fallback encoder}
 
-Il ciclo di vita delle due board prevede la gestione di stati operativi $non$ nominali:
-\begin{itemize}
-    \item \textbf{Modalità degradata}: il sistema mantiene la funzionalità ma con velocità ridotte del $50\%$.
-    \item \textbf{Modalità critica}: il sistema si ferma, interrompendo l'esecuzione dei comandi utente per motivi di sicurezza.
-\end{itemize}
-
-
-\paragraph{Meccanismo di rilevazione dei guasti}
-Il passaggio a queste modalità avviene monitorando la frequenza di aggiornamento dei dati provenienti da sensori e periferiche. Ogni Board interroga i propri componenti e considera la lettura "corretta" solo quando la funzione software dedicata restituisce uno stato di successo.
-Ogni volta che viene convalidata una lettura, il sistema aggiorna un timestamp di riferimento, che rappresenta l'ultimo momento in cui i dati sono stati considerati affidabili.
-Invece di basarsi su un singolo ritardo isolato, il sistema calcola il periodo medio di ricezione tramite una media mobile degli ultimi 10 intervalli temporali. Questo approccio evita che piccoli ritardi casuali o singole letture perse causino inutili cambi di modalità.
-
-Ogni Board agisce quindi in base al valore medio calcolato:
-\begin{itemize}
-\item \textbf{Soglia di allerta}: se il periodo medio di aggiornamento supera i $40\,\mathrm{ms}$, il sistema passa in modalità degradata, segnalando un rallentamento eccessivo dei dati.
-\item \textbf{Soglia massima}: se la media degli intervalli supera i $120\,\mathrm{ms}$, il guasto è considerato critico; il sistema viene bloccato per garantire la sicurezza del rover e dell'utente.
-\end{itemize}
-
-Per alcune periferiche specifiche, come gli encoder, la sola analisi temporale non è sufficiente;
-in questi casi viene applicata una logica di diagnostica più avanzata per verificare la validità del segnale.
-
-
-\paragraph{Encoder non funzionanti}
 Il rover è progettato per continuare a funzionare anche in presenza di guasti agli encoder delle ruote.
 \begin{figure}[H]
     \centering
@@ -992,59 +1729,35 @@ Il rover è progettato per continuare a funzionare anche in presenza di guasti a
     \caption{Logica di sostituzione in presenza di encoder non funzionanti.}
     \label{fig:encoder_fault}
 \end{figure}
-Se uno o più encoder si rompono, il sistema stima la velocità mancante usando quella delle ruote sane. La logica di sostituzione è la seguente:
+Se uno o più encoder risultano non funzionanti, il sistema, quando è disponibile almeno un encoder valido, stima la velocità mancante utilizzando quella delle ruote sane. Questa strategia consente di mantenere, quando possibile, il controllo in retroazione della velocità e quindi garantire accelerazioni e decelerazioni controllate. La logica di sostituzione è la seguente:
+
 \begin{itemize}
-    \item \textit{1 Fallimento}: Se si rompe l'encoder anteriore sinistro, il sistema "copia" il valore di quello posteriore sinistro.
-    \item \textit{2 Fallimenti}: Se si rompe un intero lato, copia i valori dall'altro lato.
-    \item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
+	\item \textit{Un solo encoder guasto}: la velocità della ruota mancante viene sostituita con quella della ruota sullo stesso lato (anteriore o posteriore). In questa configurazione è ancora possibile sterzare.
+	
+	\item \textit{Due encoder guasti}: il comportamento dipende dalla loro disposizione. 
+	\begin{itemize}
+		\item Se i due guasti interessano lo stesso lato del rover, le velocità del lato sano vengono replicate su quello guasto (per asse). Data la struttura del PI gerarchico risulta impossibile applicare la sterzata, in quanto, essendo le velocità di un lato copiate dall'altro, non è possibile dare velocità opposte ai due lati del rover. In questa configurazione è quindi disabilitata esplicitamente la sterzata.
+		
+		\item Se invece i guasti sono distribuiti in modo da lasciare almeno un encoder funzionante per ciascun lato, la sterzata è ancora possibile.
+		
+	\end{itemize} 
+	
+	\item \textit{Tre encoder guasti}: tutte le ruote assumono la velocità misurata dall’unico encoder superstite. In questo caso il rover può muoversi solo in modo approssimativamente rettilineo e la sterzata non è più realizzabile.
+	
+	\item \textit{Quattro encoder guasti}: non essendo disponibile alcun feedback di velocità, il controllo in retroazione non è più applicabile e il sistema può operare esclusivamente in modalità open-loop.
 \end{itemize}
-La rilevazione di un encoder non funzionante avviene attraverso una logica che monitora la potenza erogata al motore e la velocità rilevata dagli encoder. Se si alimenta un motore ma gli encoder non 
-rilevano movimenti (velocità calcolata è nulla) per 20 cicli di esecuzione, si imposta la variabile $has\_no\_feedback(i)$ associata al motore di riferimento a $1$, indicando che l'encoder è considerato non funzionante
-e attivando la logica di sostituzione descritta sopra. In questo caso viene segnalato un guasto di tipo $Degraded$ al supervisore di Board 1, che decide di limitare la potenza erogata ai motori. In particolare
-si applica il $50\%$ di potenza massima alle ruote, in modo da ridurre il rischio di slittamento o perdita di controllo dovuto alla mancanza di feedback dagli encoder.
 
-\paragraph{Coerenza di movimento del rover}
-La Board 2 monitora uno stato di coerenza tra la rotazione stimata dalla lettura della velocità dei motori (calcolata dagli encoder) e quella misurata dall'IMU. Se ci sono incoerenze, il supervisore di Board 2 
-imposta un flag $isMotionConsistent$ a 0, indicando che il movimento del rover non è affidabile.
-Nel caso in cui, oltre a questa condizione di incoerenza, ci si trovi anche nella condizione di degrado di uno o più encoder e si riceva anche un segnale di incoerenza da parte dell'IMU, il supervisore di Board 1 decide di fermare il rover.
+La rilevazione di un encoder non funzionante avviene attraverso una logica che monitora la potenza erogata al motore e la velocità rilevata dagli encoder. Se si alimenta un motore ma gli encoder non rilevano movimenti (velocità calcolata è nulla) per un determinato numero di cicli di esecuzione, allora si imposta la variabile booleana $has\_no\_feedback(i)$ associata al motore $i$ a true, indicando che l'encoder è considerato non funzionante e attivando la logica di sostituzione descritta precedentemente.
+\newline
 
-\paragraph{Board 2 non riceve}
+Il supervisore della Board 1, rilevando questa condizione, porta la ruota associata nello stato \textit{ENCODER\_DEGRADED} e, di conseguenza, il rover entra in modalità degradata con entrambe le Board operative.
+\newline
 
-Se la Board 2 non riceve dati dalla Board 1 per un periodo di tempo superiore a 120 ms, la Board 2 decide di inviare il comando di attuazione al rele.
-Tuttavia, dato che Board 1 continua a riceve da Board 2, non cede i privilegi di attuazione, quindi Board 2 si limita ad inviare comandi di attuazione in open loop, basandosi esclusivamente sui comandi utente ricevuti 
-e sui dati dei sensori, ma senza effettivamente attuare.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Board2_non_riceve}
-    \caption{Board 2 non riceve dati dalla Board 1.}
-    \label{fig:board2_non_riceve}
-\end{figure}
-
-Un aspetto da notare è che la Board 2, come descritto nel paragrafo \textit{Coerenza del movimento del rover}, continua a verificare che l'angolo di rotazione stimato dalla velocità delle ruote sia coerente con quello misurato dall'IMU.
-Questa coerenza, nel caso di mancata ricezione dalla Board 1, viene meno in quanto
-la stima dell'angolo di rotazione è basata sull'ultimo dato di velocità delle ruote che ovviamente cambia in quanto l'utente può ancora comandare il rover. Essendo che la rotazione del rover può essere possibile Board 2 imposterà il flag 
-$isMotionConsistent$ a 0, indicando che il movimento del rover non è affidabile. 
-
-A differenza di come descritto nel paragrafo \textit{Encoder non funzionanti}, nel caso in cui uno o più encoder si rompano, la Board 1 deciderà di attuare uno stop di emergenza, perchè avrà uno stato di degrado di uno o più encoder 
-in aggiunta ad un segnale di incoerenza del movimento del rover segnalato da Board 2. 
+Se la Board 1 riceve dalla Board 2 una segnalazione di incoerenza del moto, indicata dal flag booleano $isMotionConsistent = \textit{false}$, mentre uno o più encoder risultano degradati, il supervisore considera la stima della velocità non più affidabile, assumendo un possibile guasto dell’attuatore associato. In questa condizione il sistema entra in modalità critica ed esegue un arresto di emergenza, disabilitando l'attuazione dei motori.
 
 
-\paragraph{Board 1 non riceve}
+\clearpage
 
-Se la Board 1 non riceve dati dalla Board 2 per un periodo di tempo superiore a 120 ms, la Board 1 decide di cedere i privilegi di attuazione alla Board 2, quindi aprendo il rele e lasciando che Board 2 possa attuare i comandi di
-movimento. 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Board1_non_riceve}
-    \caption{Board 1 non riceve dati dalla Board 2.}
-    \label{fig:board1_non_riceve}
-\end{figure}
-Il controllo di Board 2 avviene in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
-Essendo questa una modalità di funzionamento degradata, la velocità del rover viene dimezzata.
-
-
-
-\newpage
 \section{Supervisore Board 1}
 \subsection{Panoramica generale}
 Il supervisore della Board 1 è implementato come un modulo Simulink denominato \textbf{SupervisorB1}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB1_block}.
@@ -1133,7 +1846,7 @@ I segnali in output che fornisce sono:
 	
 	\item \textbf{omega\_ref}: rappresenta il riferimento normalizzato di velocità angolare del rover, compreso nell'intervallo [-1, 1].
 	
-	\item \textbf{critical\_mask \& degraded\_mask}: sono due mask di errore che rappresentano le anomalie critiche e degradate rilevate dalla Board 1. Queste informazioni vengono utilizzate sia localmente sia trasmesse alla Board 2 per la ricostruzione dello stato globale del rover.
+	\item \textbf{critical\_mask} e \textbf{degraded\_mask}: sono due mask di errore che rappresentano le anomalie critiche e degradate rilevate dalla Board 1. Queste informazioni vengono utilizzate sia localmente sia trasmesse alla Board 2 per la ricostruzione dello stato globale del rover.
 	
 	\item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se il controllo dell'attuazione deve essere passato alla Board 2.
 	
@@ -1452,7 +2165,7 @@ Il chart è composto da due stati paralleli. Il primo stato, denominato \textit{
 
 Lo stato \textit{Backward\_mode\_toggle} gestisce la variabile interna \textit{backward\_enabled}, che determina il comportamento del rover quando il comando di velocità longitudinale è negativo.
 
-In particolare, quando l'utente spinge il joystick all'indietro (\textit{y\_norm < 0}), il rover può operare in due modalità:
+In particolare, quando l'utente spinge il joystick all'indietro (\textit{y\_norm $<$ 0}), il rover può operare in due modalità:
 \begin{itemize}
 	\item \textit{retromarcia}, in cui il rover si muove direttamente all'indietro;
 	\item \textit{rotazione a 180 gradi}, in cui il rover ruota sul posto fino a invertire la propria direzione e successivamente riprende il moto in avanti.

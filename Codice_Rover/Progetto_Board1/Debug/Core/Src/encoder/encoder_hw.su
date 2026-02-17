@@ -1,1 +1,1 @@
-../Core/Src/encoder/encoder_hw.c:35:17:Encoder_ReadDelta	32	static
+../Core/Src/encoder/encoder_hw.c:50:17:Encoder_ReadDelta	40	static

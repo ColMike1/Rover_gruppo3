@@ -1,4 +1,4 @@
-../Core/Src/log/log_format.c:17:20:CommUnpackStatusToStr	5
-../Core/Src/log/log_format.c:29:6:B1FaultFlagsToStr	13
-../Core/Src/log/log_format.c:53:6:B2FaultFlagsToStr	9
-../Core/Src/log/log_format.c:74:6:Log_FormatSnapshot	5
+../Core/Src/log/log_format.c:19:20:CommUnpackStatusToStr	5
+../Core/Src/log/log_format.c:39:6:B1FaultFlagsToStr	13
+../Core/Src/log/log_format.c:70:6:B2FaultFlagsToStr	9
+../Core/Src/log/log_format.c:102:6:Log_FormatSnapshot	5

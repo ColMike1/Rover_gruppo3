@@ -1,6 +1,6 @@
-../Core/Src/Board_Health/board_health_adc.c:60:13:BoardHealthADC_LoadCal	1
-../Core/Src/Board_Health/board_health_adc.c:68:6:BoardHealthADC_Init	1
-../Core/Src/Board_Health/board_health_adc.c:77:14:MovingAverage_Update	3
-../Core/Src/Board_Health/board_health_adc.c:95:14:Battery_VoltageToPercent	8
-../Core/Src/Board_Health/board_health_adc.c:135:21:BoardHealth_ReadTemperature	5
-../Core/Src/Board_Health/board_health_adc.c:180:21:BoardHealth_ReadBattery	5
+../Core/Src/Board_Health/board_health_adc.c:79:13:BoardHealthADC_LoadCal	1
+../Core/Src/Board_Health/board_health_adc.c:91:6:BoardHealthADC_Init	1
+../Core/Src/Board_Health/board_health_adc.c:107:14:MovingAverage_Update	3
+../Core/Src/Board_Health/board_health_adc.c:133:14:Battery_VoltageToPercent	8
+../Core/Src/Board_Health/board_health_adc.c:177:21:BoardHealth_ReadTemperature	5
+../Core/Src/Board_Health/board_health_adc.c:224:21:BoardHealth_ReadBattery	5
