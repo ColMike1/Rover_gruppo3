@@ -223,7 +223,7 @@ void Encoder_Step(float last_cycle_cmd[4])
   uint8_t i;
 
   snap.task_last_run_ms = now;
-
+  SupervisorSnapshot_Read(&sup);
   for (i = 0U; i < NUM_ENCODERS; i++)
   {
     int delta = 0;
@@ -233,7 +233,9 @@ void Encoder_Step(float last_cycle_cmd[4])
     {
       snap.wheel_speed_rpm[i] = DeltaTicks_ToRPM(delta);
       snap.data_last_valid_ms[i] = now;
-      snap.hasNoFeedback[i] = Encoder_hasNoFeedback(i, last_cycle_cmd[i], snap.wheel_speed_rpm[i]);
+      if(sup.current_action != CMD_ESTOP){
+    	  snap.hasNoFeedback[i] = Encoder_hasNoFeedback(i, last_cycle_cmd[i], snap.wheel_speed_rpm[i]);
+      }
     }
     else
     {
@@ -241,7 +243,7 @@ void Encoder_Step(float last_cycle_cmd[4])
     }
   }
 
-  SupervisorSnapshot_Read(&sup);
+
 
   if (((sup.degraded_mask & 0x0000000FU) != 0U) || ((sup.critical_mask & 0x0000000FU) != 0U))
   {

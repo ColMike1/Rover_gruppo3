@@ -30,6 +30,23 @@ static volatile uint16_t rx_rd = 0U;
 /** @brief Handle del task da notificare alla ricezione di nuovi byte. */
 static TaskHandle_t rx_task_handle = NULL;
 
+
+/**
+ * @brief Incrementa l'indice del buffer circolare gestendo il wrapping.
+ * @param idx Indice corrente.
+ * @return uint16_t Prossimo indice.
+ */
+static uint16_t ring_next(uint16_t idx)
+{
+    uint16_t next = idx + 1U;
+    if (next >= UART_RX_BUF_SIZE)
+    {
+        next = 0U;
+    }
+    return next;
+}
+
+
 /**
  * @brief Registra il task da notificare quando arrivano dati RX.
  * @param h Handle task RX.
@@ -110,9 +127,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart == &huart4)
     {
-        uint16_t next = (rx_wr + 1U) % UART_RX_BUF_SIZE;
+        uint16_t next = ring_next(rx_wr);
 
-        /* Scrive il byte solo se il buffer non e' pieno. */
+        /* Inserisce il byte nel buffer se non pieno */
         if (next != rx_rd)
         {
             rx_buf[rx_wr] = rx_byte;
@@ -120,21 +137,25 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         }
 
         BaseType_t hpw = pdFALSE;
+
         if (rx_task_handle)
         {
             vTaskNotifyGiveFromISR(rx_task_handle, &hpw);
         }
 
-        HAL_UART_Receive_IT(&huart4, &rx_byte, 1);
-
+        /* Context switch se necessario */
         portYIELD_FROM_ISR(hpw);
+
+        /* Riarmo ricezione */
+        (void)HAL_UART_Receive_IT(&huart4, &rx_byte, 1U);
     }
 }
+
 
 /**
  * @brief Legge un byte dal buffer RX se disponibile.
  * @param b Puntatore al byte di output.
- * @return `true` se e' stato letto un byte, `false` se il buffer e' vuoto.
+ * @return 'true' se e' stato letto un byte, 'false' se il buffer e' vuoto.
  */
 bool CommUart_GetByte(uint8_t *b)
 {
@@ -149,6 +170,6 @@ bool CommUart_GetByte(uint8_t *b)
     }
 
     *b = rx_buf[rx_rd];
-    rx_rd = (rx_rd + 1U) % UART_RX_BUF_SIZE;
+    rx_rd = ring_next(rx_rd);
     return true;
 }

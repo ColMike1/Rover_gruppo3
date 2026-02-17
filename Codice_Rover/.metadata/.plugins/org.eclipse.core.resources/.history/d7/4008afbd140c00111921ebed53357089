@@ -1,0 +1,95 @@
+/**
+ * @file comm_rx_task.c
+ * @brief Gestione del task di ricezione messaggi UART.
+ * @details Implementa una macchina a stati per la sincronizzazione tramite SYNC_WORD.
+ */
+
+#include "comm/comm_rx_task.h"
+#include "comm/comm_unpack.h"
+#include "comm/comm_uart.h"
+#include "snapshot/rx_snapshot.h"
+#include <stdio.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os2.h"
+
+/** @brief Lunghezza attesa del pacchetto in ingresso (Frame B2). */
+#define RX_FRAME_LEN ((uint16_t)sizeof(CommFrameB2_t))
+/** @brief Parola di sincronizzazione per identificare l'inizio del frame. */
+#define SYNC_WORD    0xAA56U
+
+/**
+ * @brief Inizializza il driver UART per la ricezione.
+ */
+void Rx_TaskInit(void)
+{
+    CommUart_Init();
+}
+
+/**
+ * @brief Step principale del task di ricezione.
+ * @details Attende la notifica dell'ISR UART, processa il buffer circolare cercando
+ * la sincronizzazione e valida il pacchetto ricevuto tramite CRC.
+ */
+void Rx_TaskStep(void)
+{
+    static RxSnapshot_t snap;
+    static uint8_t acc_buf[sizeof(CommFrameB2_t)];
+    static uint16_t acc_len = 0U;
+    uint8_t byte = 0U;
+
+    (void)ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
+    while (CommUart_GetByte(&byte))
+    {
+        if (acc_len < 2U)
+        {
+            acc_buf[acc_len] = byte;
+            acc_len++;
+
+            if (acc_len == 2U)
+            {
+                uint16_t sync = (uint16_t)((uint16_t)acc_buf[0U] | (uint16_t)((uint16_t)acc_buf[1U] << 8U));
+                if (sync != SYNC_WORD)
+                {
+                    acc_buf[0] = acc_buf[1];
+                    acc_len = 1U;
+                }
+            }
+            continue;
+        }
+
+        acc_buf[acc_len] = byte;
+        uint16_t w = (uint16_t)((uint16_t)acc_buf[acc_len-1U] | (uint16_t)((uint16_t)acc_buf[acc_len] << 8U));
+
+        if (w == SYNC_WORD)
+        {
+            acc_buf[0U] = acc_buf[acc_len-1U];
+            acc_buf[1U] = acc_buf[acc_len];
+            acc_len = 2U;
+            continue;
+        }
+
+        acc_len++;
+        if (acc_len < RX_FRAME_LEN)
+        {
+            continue;
+        }
+
+        uint32_t now = osKernelGetTickCount();
+        snap.task_last_run_ms = now;
+
+        CommFrameHeader_t hdr;
+        CommPayloadB2_t   pl;
+        CommUnpackStatus_t st = CommUnpack_B1FromB2(acc_buf, RX_FRAME_LEN, &hdr, &pl);
+
+        snap.last_event = st;
+        if (st == COMM_UNPACK_OK)
+        {
+            snap.payload = pl;
+            snap.data_last_valid_ms = now;
+        }
+        acc_len = 0U;
+        RxSnapshot_Write(&snap);
+    }
+}

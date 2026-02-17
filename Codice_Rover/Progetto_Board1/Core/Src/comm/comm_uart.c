@@ -152,3 +152,35 @@ bool CommUart_GetByte(uint8_t *b)
 
     return has_data;
 }
+
+/**
+ * @brief Callback HAL chiamata alla ricezione di un byte su UART4.
+ * @param huart Handle della periferica UART che ha generato l'interrupt.
+ */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart == &huart4)
+    {
+        uint16_t next = ring_next(rx_wr);
+
+        /* Inserisce il byte nel buffer se non pieno */
+        if (next != rx_rd)
+        {
+            rx_buf[rx_wr] = rx_byte;
+            rx_wr = next;
+        }
+
+        /* Notifica il task RX */
+        if (rx_task_handle != NULL)
+        {
+            BaseType_t hpw = pdFALSE;
+            vTaskNotifyGiveFromISR(rx_task_handle, &hpw);
+            portYIELD_FROM_ISR(hpw);
+        }
+
+        /* Riarmo ricezione */
+        (void)HAL_UART_Receive_IT(&huart4, &rx_byte, 1U);
+    }
+}
+
+

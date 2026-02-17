@@ -80,12 +80,16 @@
 \contentsline {subparagraph}{Stato di arresto di emergenza}{99}{figure.caption.64}%
 \contentsline {section}{\numberline {9}Supervisore Board 2}{101}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Panoramica generale}{101}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Input}{102}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Output}{103}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.2}Ingressi del supervisore}{102}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Uscite del supervisore}{103}{subsection.9.3}%
 \contentsline {subsection}{\numberline {9.4}Rilevazione Faults}{105}{subsection.9.4}%
+\contentsline {paragraph}{MonitorBLE}{106}{figure.caption.72}%
+\contentsline {paragraph}{MonitorBoard1Supervisor}{106}{figure.caption.72}%
+\contentsline {paragraph}{MonitorIMU}{107}{figure.caption.72}%
+\contentsline {paragraph}{MonitorRx}{107}{figure.caption.72}%
 \contentsline {subsection}{\numberline {9.5}Costruzione maschere degradate e critiche}{108}{subsection.9.5}%
-\contentsline {subsection}{\numberline {9.6}Decidere se attuare}{109}{subsection.9.6}%
-\contentsline {subsection}{\numberline {9.7}Rilevamento ostacoli}{110}{subsection.9.7}%
-\contentsline {subsubsection}{\numberline {9.7.1}Gestione ostacoli con sistema in stato \textit {non degradato}}{110}{subsubsection.9.7.1}%
-\contentsline {subsubsection}{\numberline {9.7.2}Gestione ostacoli con sistema in stato $degradato$}{114}{subsubsection.9.7.2}%
-\contentsline {subsection}{\numberline {9.8}Attuazione}{114}{subsection.9.8}%
+\contentsline {subsection}{\numberline {9.6}Logica che consente a Board 2 di attuare}{109}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.7}Rilevamento ostacoli}{111}{subsection.9.7}%
+\contentsline {subsubsection}{\numberline {9.7.1}Gestione ostacoli con Board 1 attuatrice}{112}{subsubsection.9.7.1}%
+\contentsline {subsubsection}{\numberline {9.7.2}Gestione ostacoli con Board 2 attuatrice}{115}{subsubsection.9.7.2}%
+\contentsline {subsection}{\numberline {9.8}Attuazione}{116}{subsection.9.8}%

@@ -6,5 +6,5 @@
 ../Core/Src/app_freertos.c:387:6:StartTask_RX	16	static
 ../Core/Src/app_freertos.c:408:6:StartTask_Supervisor	24	static
 ../Core/Src/app_freertos.c:434:6:StartTask_Control	40	static
-../Core/Src/app_freertos.c:491:6:StartTask_Debug	24	static
-../Core/Src/app_freertos.c:513:6:StartTask_Led	24	static
+../Core/Src/app_freertos.c:495:6:StartTask_Debug	24	static
+../Core/Src/app_freertos.c:517:6:StartTask_Led	24	static

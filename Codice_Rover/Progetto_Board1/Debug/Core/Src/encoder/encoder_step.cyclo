@@ -3,4 +3,4 @@
 ../Core/Src/encoder/encoder_step.c:49:6:Encoder_Init	1
 ../Core/Src/encoder/encoder_step.c:67:13:Encoder_hasNoFeedback	7
 ../Core/Src/encoder/encoder_step.c:106:13:Apply_Encoders_Fallback	36
-../Core/Src/encoder/encoder_step.c:218:6:Encoder_Step	5
+../Core/Src/encoder/encoder_step.c:218:6:Encoder_Step	6

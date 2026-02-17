@@ -1036,3 +1036,60 @@ Finished building: default.size.stdout
  
 Finished building: Progetto_Board1.list
  
+16:24:29 **** Incremental Build of configuration Debug for project Progetto_Board1 ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/comm/comm_rx_task.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/.." -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Drivers/SupervisorB1" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/comm/comm_rx_task.d" -MT"Core/Src/comm/comm_rx_task.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/comm/comm_rx_task.o"
+arm-none-eabi-gcc -o "Progetto_Board1.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover\Progetto_Board1\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Progetto_Board1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Progetto_Board1.elf
+ 
+arm-none-eabi-size  Progetto_Board1.elf 
+arm-none-eabi-objdump -h -S Progetto_Board1.elf  > "Progetto_Board1.list"
+   text	   data	    bss	    dec	    hex	filename
+  92720	    572	  19632	 112924	  1b91c	Progetto_Board1.elf
+Finished building: default.size.stdout
+ 
+Finished building: Progetto_Board1.list
+ 
+16:27:26 **** Incremental Build of configuration Debug for project Progetto_Board1 ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/comm/comm_rx_task.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/.." -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Drivers/SupervisorB1" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/comm/comm_rx_task.d" -MT"Core/Src/comm/comm_rx_task.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/comm/comm_rx_task.o"
+arm-none-eabi-gcc "../Core/Src/comm/comm_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/.." -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Drivers/SupervisorB1" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/comm/comm_uart.d" -MT"Core/Src/comm/comm_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/comm/comm_uart.o"
+arm-none-eabi-gcc -o "Progetto_Board1.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover\Progetto_Board1\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Progetto_Board1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Progetto_Board1.elf
+ 
+arm-none-eabi-size  Progetto_Board1.elf 
+arm-none-eabi-objdump -h -S Progetto_Board1.elf  > "Progetto_Board1.list"
+   text	   data	    bss	    dec	    hex	filename
+  93144	    572	  19632	 113348	  1bac4	Progetto_Board1.elf
+Finished building: default.size.stdout
+ 
+Finished building: Progetto_Board1.list
+ 
+16:32:05 **** Incremental Build of configuration Debug for project Progetto_Board1 ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/encoder/encoder_step.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/.." -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Drivers/SupervisorB1" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/encoder/encoder_step.d" -MT"Core/Src/encoder/encoder_step.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/encoder/encoder_step.o"
+arm-none-eabi-gcc -o "Progetto_Board1.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover\Progetto_Board1\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Progetto_Board1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Progetto_Board1.elf
+ 
+arm-none-eabi-size  Progetto_Board1.elf 
+arm-none-eabi-objdump -h -S Progetto_Board1.elf  > "Progetto_Board1.list"
+   text	   data	    bss	    dec	    hex	filename
+  93144	    572	  19632	 113348	  1bac4	Progetto_Board1.elf
+Finished building: default.size.stdout
+ 
+Finished building: Progetto_Board1.list
+ 
+16:43:26 **** Incremental Build of configuration Debug for project Progetto_Board1 ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/app_freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/.." -I"C:/Users/Sterm/Documents/GitHub/Rover_gruppo3/Codice_Rover/Progetto_Board1/Drivers/SupervisorB1" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/app_freertos.d" -MT"Core/Src/app_freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/app_freertos.o"
+arm-none-eabi-gcc -o "Progetto_Board1.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sterm\Documents\GitHub\Rover_gruppo3\Codice_Rover\Progetto_Board1\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Progetto_Board1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Progetto_Board1.elf
+ 
+arm-none-eabi-size  Progetto_Board1.elf 
+arm-none-eabi-objdump -h -S Progetto_Board1.elf  > "Progetto_Board1.list"
+   text	   data	    bss	    dec	    hex	filename
+  93160	    572	  19632	 113364	  1bad4	Progetto_Board1.elf
+Finished building: default.size.stdout
+ 
+Finished building: Progetto_Board1.list
+ 

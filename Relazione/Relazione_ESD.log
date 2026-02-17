@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.2.7)  17 FEB 2026 16:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.2.7)  17 FEB 2026 18:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -467,6 +467,9 @@ LaTeX Warning: Label `fig:board_health_struct' multiply defined.
 
 LaTeX Warning: Label `fig:encoder_struct' multiply defined.
 
+
+LaTeX Warning: Label `fig:gestione_faults_b2' multiply defined.
+
 )
 \openout1 = `Relazione_ESD.aux'.
 
@@ -557,7 +560,7 @@ o_unisa.png>] (Relazione_ESD.toc
 
 
 [4]
-<images/Introduzione/architettura_rover.png, id=200, 425.79076pt x 295.70474pt>
+<images/Introduzione/architettura_rover.png, id=203, 425.79076pt x 295.70474pt>
 
 File: images/Introduzione/architettura_rover.png Graphic file (type png)
 <use images/Introduzione/architettura_rover.png>
@@ -1150,7 +1153,7 @@ Overfull \hbox (2.6188pt too wide) in paragraph at lines 803--804
 -po-rale dell'ultimo ag-gior-na-mento
  []
 
-<images/funzionamento_generale/funzGener_B1.png, id=329, 755.07094pt x 568.3734
+<images/funzionamento_generale/funzGener_B1.png, id=333, 755.07094pt x 568.3734
 4pt>
 File: images/funzionamento_generale/funzGener_B1.png Graphic file (type png)
 <use images/funzionamento_generale/funzGener_B1.png>
@@ -1162,7 +1165,7 @@ n input line 810.
 [33
 
 ]
-<images/funzionamento_generale/funzGener_B2.png, id=336, 754.31813pt x 569.1262
+<images/funzionamento_generale/funzGener_B2.png, id=341, 754.31813pt x 569.1262
 5pt>
 File: images/funzionamento_generale/funzGener_B2.png Graphic file (type png)
 <use images/funzionamento_generale/funzGener_B2.png>
@@ -1173,7 +1176,7 @@ n input line 817.
 
 [34 <./images/funzionamento_generale/funzGener_B1.png> <./images/funzionamento_
 generale/funzGener_B2.png>]
-<images/funzionamento_generale/Sonars/disposizioneSonar.png, id=344, 647.41875p
+<images/funzionamento_generale/Sonars/disposizioneSonar.png, id=349, 647.41875p
 t x 562.35094pt>
 File: images/funzionamento_generale/Sonars/disposizioneSonar.png Graphic file (
 type png)
@@ -1181,7 +1184,7 @@ type png)
 Package pdftex.def Info: images/funzionamento_generale/Sonars/disposizioneSonar
 .png  used on input line 833.
 (pdftex.def)             Requested size: 234.00238pt x 203.25278pt.
-<images/funzionamento_generale/Sonars/segnale_sonar_3m.png, id=345, 517.18219pt
+<images/funzionamento_generale/Sonars/segnale_sonar_3m.png, id=350, 517.18219pt
  x 304.88907pt>
 File: images/funzionamento_generale/Sonars/segnale_sonar_3m.png Graphic file (t
 ype png)
@@ -1195,7 +1198,7 @@ png  used on input line 841.
 
  <./images/funzionamento_generale/Sonars/disposizioneSonar.png> <./images/funzi
 onamento_generale/Sonars/segnale_sonar_3m.png>]
-<images/funzionamento_generale/Sonars/configurazione_timIC_sonar.png, id=353, 7
+<images/funzionamento_generale/Sonars/configurazione_timIC_sonar.png, id=358, 7
 49.04843pt x 486.31688pt>
 File: images/funzionamento_generale/Sonars/configurazione_timIC_sonar.png Graph
 ic file (type png)
@@ -1203,7 +1206,7 @@ ic file (type png)
 Package pdftex.def Info: images/funzionamento_generale/Sonars/configurazione_ti
 mIC_sonar.png  used on input line 854.
 (pdftex.def)             Requested size: 272.99881pt x 177.24075pt.
-<images/funzionamento_generale/Sonars/callback_sonar.png, id=355, 579.66562pt x
+<images/funzionamento_generale/Sonars/callback_sonar.png, id=360, 579.66562pt x
  544.28343pt>
 File: images/funzionamento_generale/Sonars/callback_sonar.png Graphic file (typ
 e png)
@@ -1214,7 +1217,7 @@ g  used on input line 864.
 
 
 [36 <./images/funzionamento_generale/Sonars/configurazione_timIC_sonar.png>]
-<images/funzionamento_generale/Sonars/sonars_snapshot.png, id=364, 564.60938pt 
+<images/funzionamento_generale/Sonars/sonars_snapshot.png, id=369, 564.60938pt 
 x 120.45pt>
 File: images/funzionamento_generale/Sonars/sonars_snapshot.png Graphic file (ty
 pe png)
@@ -1222,7 +1225,7 @@ pe png)
 Package pdftex.def Info: images/funzionamento_generale/Sonars/sonars_snapshot.p
 ng  used on input line 872.
 (pdftex.def)             Requested size: 272.99881pt x 58.23988pt.
-<images/funzionamento_generale/user_command/task_step_BLE.png, id=366, 417.0581
+<images/funzionamento_generale/user_command/task_step_BLE.png, id=371, 417.0581
 2pt x 475.7775pt>
 File: images/funzionamento_generale/user_command/task_step_BLE.png Graphic file
  (type png)
@@ -1240,7 +1243,7 @@ Overfull \hbox (1.16913pt too wide) in paragraph at lines 890--891
  prove-
  []
 
-<images/funzionamento_generale/user_command/BLE_snapshot.png, id=377, 547.2947p
+<images/funzionamento_generale/user_command/BLE_snapshot.png, id=382, 547.2947p
 t x 322.20375pt>
 File: images/funzionamento_generale/user_command/BLE_snapshot.png Graphic file 
 (type png)
@@ -1251,12 +1254,12 @@ t.png  used on input line 897.
 
 
 [38 <./images/funzionamento_generale/user_command/task_step_BLE.png>]
-<images/Joystick/joystick.jpg, id=384, 1027.84pt x 587.19376pt>
+<images/Joystick/joystick.jpg, id=389, 1027.84pt x 587.19376pt>
 File: images/Joystick/joystick.jpg Graphic file (type jpg)
 <use images/Joystick/joystick.jpg>
 Package pdftex.def Info: images/Joystick/joystick.jpg  used on input line 909.
 (pdftex.def)             Requested size: 350.99762pt x 200.5213pt.
-<images/Joystick/RappresentazioneTasti.png, id=385, 354.123pt x 163.20975pt>
+<images/Joystick/RappresentazioneTasti.png, id=390, 354.123pt x 163.20975pt>
 File: images/Joystick/RappresentazioneTasti.png Graphic file (type png)
 <use images/Joystick/RappresentazioneTasti.png>
 Package pdftex.def Info: images/Joystick/RappresentazioneTasti.png  used on inp
@@ -1266,7 +1269,7 @@ ut line 915.
 
 [39 <./images/funzionamento_generale/user_command/BLE_snapshot.png> <./images/J
 oystick/joystick.jpg>]
-<images/Joystick/OnConnect.png, id=393, 425.79076pt x 308.352pt>
+<images/Joystick/OnConnect.png, id=398, 425.79076pt x 308.352pt>
 File: images/Joystick/OnConnect.png Graphic file (type png)
 <use images/Joystick/OnConnect.png>
 Package pdftex.def Info: images/Joystick/OnConnect.png  used on input line 926.
@@ -1278,7 +1281,7 @@ Overfull \hbox (26.13956pt too wide) in paragraph at lines 923--929
  li-bre-ria (\OT1/cmtt/m/n/12 onConnectedGamepad\OT1/cmr/m/n/12 ),
  []
 
-<images/Joystick/Loop.png, id=394, 311.36325pt x 241.50224pt>
+<images/Joystick/Loop.png, id=399, 311.36325pt x 241.50224pt>
 File: images/Joystick/Loop.png Graphic file (type png)
 <use images/Joystick/Loop.png>
 Package pdftex.def Info: images/Joystick/Loop.png  used on input line 934.
@@ -1293,7 +1296,7 @@ Overfull \hbox (1.79701pt too wide) in paragraph at lines 931--937
 
 [40 <./images/Joystick/RappresentazioneTasti.png> <./images/Joystick/OnConnect.
 png>]
-<images/Joystick/OnRequest.png, id=404, 254.1495pt x 58.41824pt>
+<images/Joystick/OnRequest.png, id=409, 254.1495pt x 58.41824pt>
 File: images/Joystick/OnRequest.png Graphic file (type png)
 <use images/Joystick/OnRequest.png>
 Package pdftex.def Info: images/Joystick/OnRequest.png  used on input line 942.
@@ -1308,7 +1311,7 @@ m/n/12 BleController[]I2C[]ReadFrame
 
 
 [41 <./images/Joystick/Loop.png>]
-<images/Joystick/OnDIsconnect.png, id=413, 248.72925pt x 76.48575pt>
+<images/Joystick/OnDIsconnect.png, id=418, 248.72925pt x 76.48575pt>
 File: images/Joystick/OnDIsconnect.png Graphic file (type png)
 <use images/Joystick/OnDIsconnect.png>
 Package pdftex.def Info: images/Joystick/OnDIsconnect.png  used on input line 9
@@ -1317,7 +1320,7 @@ Package pdftex.def Info: images/Joystick/OnDIsconnect.png  used on input line 9
 
 
 [42 <./images/Joystick/OnRequest.png> <./images/Joystick/OnDIsconnect.png>]
-<images/funzionamento_generale/IMU/IMU_snapshot.png, id=424, 548.0475pt x 348.5
+<images/funzionamento_generale/IMU/IMU_snapshot.png, id=429, 548.0475pt x 348.5
 5219pt>
 File: images/funzionamento_generale/IMU/IMU_snapshot.png Graphic file (type png
 )
@@ -1326,7 +1329,7 @@ Package pdftex.def Info: images/funzionamento_generale/IMU/IMU_snapshot.png  us
 ed on input line 966.
 (pdftex.def)             Requested size: 272.99881pt x 173.6268pt.
 <images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2.png, id
-=426, 439.6425pt x 612.03656pt>
+=431, 439.6425pt x 612.03656pt>
 File: images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2.pn
 g Graphic file (type png)
 <use images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2.png
@@ -1340,7 +1343,7 @@ tep_supervisorB2.png  used on input line 981.
 
 [44 <./images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2.p
 ng>]
-<images/funzionamento_generale/TaskSupervisoreB2/B2Actuation.png, id=441, 567.6
+<images/funzionamento_generale/TaskSupervisoreB2/B2Actuation.png, id=446, 567.6
 2062pt x 444.15938pt>
 File: images/funzionamento_generale/TaskSupervisoreB2/B2Actuation.png Graphic f
 ile (type png)
@@ -1352,7 +1355,7 @@ ation.png  used on input line 1011.
 
 [45]
 <images/funzionamento_generale/TaskSupervisoreB2/snapshot_supervisoreB2.png, id
-=448, 496.10344pt x 339.51843pt>
+=453, 496.10344pt x 339.51843pt>
 File: images/funzionamento_generale/TaskSupervisoreB2/snapshot_supervisoreB2.pn
 g Graphic file (type png)
 <use images/funzionamento_generale/TaskSupervisoreB2/snapshot_supervisoreB2.png
@@ -1363,7 +1366,7 @@ ot_supervisoreB2.png  used on input line 1024.
 
 
 [46 <./images/funzionamento_generale/TaskSupervisoreB2/B2Actuation.png>]
-<images/funzionamento_generale/LogBoard2/LogTask.png, id=456, 342.5297pt x 295.
+<images/funzionamento_generale/LogBoard2/LogTask.png, id=461, 342.5297pt x 295.
 1025pt>
 File: images/funzionamento_generale/LogBoard2/LogTask.png Graphic file (type pn
 g)
@@ -1375,7 +1378,7 @@ sed on input line 1046.
 
 [47 <./images/funzionamento_generale/TaskSupervisoreB2/snapshot_supervisoreB2.p
 ng>]
-<images/funzionamento_generale/BatTemp/BoardHelathTask.png, id=464, 359.09157pt
+<images/funzionamento_generale/BatTemp/BoardHelathTask.png, id=469, 359.09157pt
  x 503.63156pt>
 File: images/funzionamento_generale/BatTemp/BoardHelathTask.png Graphic file (t
 ype png)
@@ -1389,7 +1392,7 @@ png  used on input line 1073.
 
 [49 <./images/funzionamento_generale/BatTemp/BoardHelathTask.png>]
 <images/funzionamento_generale/TaskSupervisoreB1/task_step_supervisorB1.png, id
-=478, 425.33907pt x 613.54219pt>
+=483, 425.33907pt x 613.54219pt>
 File: images/funzionamento_generale/TaskSupervisoreB1/task_step_supervisorB1.pn
 g Graphic file (type png)
 <use images/funzionamento_generale/TaskSupervisoreB1/task_step_supervisorB1.png
@@ -1409,7 +1412,7 @@ ilevi un'instabilit^^Ra
  []
 
 <images/funzionamento_generale/TaskSupervisoreB1/snapshot_supervisoreB1.png, id
-=490, 496.85625pt x 373.395pt>
+=495, 496.85625pt x 373.395pt>
 File: images/funzionamento_generale/TaskSupervisoreB1/snapshot_supervisoreB1.pn
 g Graphic file (type png)
 <use images/funzionamento_generale/TaskSupervisoreB1/snapshot_supervisoreB1.png
@@ -1458,7 +1461,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1222--1225
 
 
 [55]
-<images/Controllore/screenshot003.png, id=513, 714.41907pt x 566.86781pt>
+<images/Controllore/screenshot003.png, id=518, 714.41907pt x 566.86781pt>
 File: images/Controllore/screenshot003.png Graphic file (type png)
 <use images/Controllore/screenshot003.png>
 Package pdftex.def Info: images/Controllore/screenshot003.png  used on input li
@@ -1467,7 +1470,7 @@ ne 1239.
 
 
 [56 <./images/Controllore/screenshot003.png>]
-<images/Controllore/screenshot005.png, id=519, 465.23813pt x 305.64188pt>
+<images/Controllore/screenshot005.png, id=524, 465.23813pt x 305.64188pt>
 File: images/Controllore/screenshot005.png Graphic file (type png)
 <use images/Controllore/screenshot005.png>
 Package pdftex.def Info: images/Controllore/screenshot005.png  used on input li
@@ -1478,7 +1481,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1272--1274
 
  []
 
-<images/Controllore/screenshot004.png, id=520, 726.46407pt x 237.13594pt>
+<images/Controllore/screenshot004.png, id=525, 726.46407pt x 237.13594pt>
 File: images/Controllore/screenshot004.png Graphic file (type png)
 <use images/Controllore/screenshot004.png>
 Package pdftex.def Info: images/Controllore/screenshot004.png  used on input li
@@ -1491,7 +1494,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1289--1291
 
  []
 
-<images/Controllore/screenshot009.png, id=527, 176.15813pt x 167.12437pt>
+<images/Controllore/screenshot009.png, id=532, 176.15813pt x 167.12437pt>
 File: images/Controllore/screenshot009.png Graphic file (type png)
 <use images/Controllore/screenshot009.png>
 Package pdftex.def Info: images/Controllore/screenshot009.png  used on input li
@@ -1551,7 +1554,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1385--1387
 
 
 [62]
-<images/funzionamento_generale/comm_b2b1.png, id=557, 1412.27625pt x 540.51938p
+<images/funzionamento_generale/comm_b2b1.png, id=562, 1412.27625pt x 540.51938p
 t>
 File: images/funzionamento_generale/comm_b2b1.png Graphic file (type png)
 <use images/funzionamento_generale/comm_b2b1.png>
@@ -1568,7 +1571,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1408--1410
 
  []
 
-<images/funzionamento_generale/comm_b1b2.png, id=559, 1413.78188pt x 526.96875p
+<images/funzionamento_generale/comm_b1b2.png, id=564, 1413.78188pt x 526.96875p
 t>
 File: images/funzionamento_generale/comm_b1b2.png Graphic file (type png)
 <use images/funzionamento_generale/comm_b1b2.png>
@@ -1578,7 +1581,7 @@ nput line 1414.
 
 
 [63 <./images/funzionamento_generale/comm_b2b1.png>]
-<images/funzionamento_generale/Esempio protocollo di comunicazione.png, id=566,
+<images/funzionamento_generale/Esempio protocollo di comunicazione.png, id=571,
  301.8778pt x 365.11406pt>
 File: images/funzionamento_generale/Esempio protocollo di comunicazione.png Gra
 phic file (type png)
@@ -1606,13 +1609,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 1445--1447
 [68
 
 ]
-<images/Scheduling/priorita_board1.png, id=599, 227.6505pt x 177.66376pt>
+<images/Scheduling/priorita_board1.png, id=604, 227.6505pt x 177.66376pt>
 File: images/Scheduling/priorita_board1.png Graphic file (type png)
 <use images/Scheduling/priorita_board1.png>
 Package pdftex.def Info: images/Scheduling/priorita_board1.png  used on input l
 ine 1542.
 (pdftex.def)             Requested size: 272.99881pt x 213.07614pt.
-<images/Scheduling/priorita_board2.png, id=600, 221.02576pt x 181.8795pt>
+<images/Scheduling/priorita_board2.png, id=605, 221.02576pt x 181.8795pt>
 File: images/Scheduling/priorita_board2.png Graphic file (type png)
 <use images/Scheduling/priorita_board2.png>
 Package pdftex.def Info: images/Scheduling/priorita_board2.png  used on input l
@@ -1631,7 +1634,7 @@ Overfull \hbox (22.48578pt too wide) in paragraph at lines 1555--1555
 .png>]
 
 [70]
-<images/Scheduling/EsempioMutex1.png, id=616, 561.59813pt x 319.94531pt>
+<images/Scheduling/EsempioMutex1.png, id=621, 561.59813pt x 319.94531pt>
 File: images/Scheduling/EsempioMutex1.png Graphic file (type png)
 <use images/Scheduling/EsempioMutex1.png>
 Package pdftex.def Info: images/Scheduling/EsempioMutex1.png  used on input lin
@@ -1645,7 +1648,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1596--1599
 
 
 [71 <./images/Scheduling/EsempioMutex1.png>]
-<images/Scheduling/EsempioMutex.png, id=623, 404.26031pt x 483.30562pt>
+<images/Scheduling/EsempioMutex.png, id=628, 404.26031pt x 483.30562pt>
 File: images/Scheduling/EsempioMutex.png Graphic file (type png)
 <use images/Scheduling/EsempioMutex.png>
 Package pdftex.def Info: images/Scheduling/EsempioMutex.png  used on input line
@@ -1657,7 +1660,7 @@ Overfull \hbox (23.32913pt too wide) in paragraph at lines 1600--1606
 -ca-mente tramite l'interfaccia
  []
 
-<images/Scheduling/EsempioMutex2.png, id=624, 376.40625pt x 121.20282pt>
+<images/Scheduling/EsempioMutex2.png, id=629, 376.40625pt x 121.20282pt>
 File: images/Scheduling/EsempioMutex2.png Graphic file (type png)
 <use images/Scheduling/EsempioMutex2.png>
 Package pdftex.def Info: images/Scheduling/EsempioMutex2.png  used on input lin
@@ -1666,13 +1669,13 @@ e 1612.
 
 
 [72 <./images/Scheduling/EsempioMutex.png>]
-<images/Scheduling/EsempioMutex3.png, id=631, 484.81125pt x 184.43906pt>
+<images/Scheduling/EsempioMutex3.png, id=636, 484.81125pt x 184.43906pt>
 File: images/Scheduling/EsempioMutex3.png Graphic file (type png)
 <use images/Scheduling/EsempioMutex3.png>
 Package pdftex.def Info: images/Scheduling/EsempioMutex3.png  used on input lin
 e 1619.
 (pdftex.def)             Requested size: 272.99881pt x 103.86209pt.
-<images/Scheduling/EsempioMutex4.png, id=632, 465.23813pt x 437.38406pt>
+<images/Scheduling/EsempioMutex4.png, id=637, 465.23813pt x 437.38406pt>
 File: images/Scheduling/EsempioMutex4.png Graphic file (type png)
 <use images/Scheduling/EsempioMutex4.png>
 Package pdftex.def Info: images/Scheduling/EsempioMutex4.png  used on input lin
@@ -1698,7 +1701,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1661--1663
 [75]
 
 [76]
-<images/funzionamento_generale/specifiche/architettura.png, id=658, 965.85844pt
+<images/funzionamento_generale/specifiche/architettura.png, id=663, 965.85844pt
  x 645.91313pt>
 File: images/funzionamento_generale/specifiche/architettura.png Graphic file (t
 ype png)
@@ -1738,7 +1741,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1710--1712
 
 
 [78]
-<images/funzionamento_generale/specifiche/Encoder_faults.png, id=669, 971.12813
+<images/funzionamento_generale/specifiche/Encoder_faults.png, id=674, 971.12813
 pt x 643.6547pt>
 File: images/funzionamento_generale/specifiche/Encoder_faults.png Graphic file 
 (type png)
@@ -1775,7 +1778,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1753--1755
 [80]
 
 [81]
-<images/SupervisoreB1/SupervisoreB1_simulink.png, id=686, 776.9025pt x 514.1709
+<images/SupervisoreB1/SupervisoreB1_simulink.png, id=691, 776.9025pt x 514.1709
 4pt>
 File: images/SupervisoreB1/SupervisoreB1_simulink.png Graphic file (type png)
 <use images/SupervisoreB1/SupervisoreB1_simulink.png>
@@ -1797,7 +1800,7 @@ Overfull \hbox (9.80896pt too wide) in paragraph at lines 1782--1783
 nti\OT1/cmr/m/n/12 : quando
  []
 
-<images/SupervisoreB1/CMD_BOARD2.png, id=693, 171.64125pt x 179.92218pt>
+<images/SupervisoreB1/CMD_BOARD2.png, id=698, 171.64125pt x 179.92218pt>
 File: images/SupervisoreB1/CMD_BOARD2.png Graphic file (type png)
 <use images/SupervisoreB1/CMD_BOARD2.png>
 Package pdftex.def Info: images/SupervisoreB1/CMD_BOARD2.png  used on input lin
@@ -1811,14 +1814,14 @@ Overfull \hbox (8.4937pt too wide) in paragraph at lines 1814--1815
 po, in mil-lisec-ondi, dell'ultimo
  []
 
-<images/SupervisoreB1/BoardHealthSnapshot.png, id=701, 560.0925pt x 152.06813pt
+<images/SupervisoreB1/BoardHealthSnapshot.png, id=706, 560.0925pt x 152.06813pt
 >
 File: images/SupervisoreB1/BoardHealthSnapshot.png Graphic file (type png)
 <use images/SupervisoreB1/BoardHealthSnapshot.png>
 Package pdftex.def Info: images/SupervisoreB1/BoardHealthSnapshot.png  used on 
 input line 1821.
 (pdftex.def)             Requested size: 272.99881pt x 74.1242pt.
-<images/SupervisoreB1/Encoder_snapshot.png, id=703, 678.28406pt x 182.18062pt>
+<images/SupervisoreB1/Encoder_snapshot.png, id=708, 678.28406pt x 182.18062pt>
 File: images/SupervisoreB1/Encoder_snapshot.png Graphic file (type png)
 <use images/SupervisoreB1/Encoder_snapshot.png>
 Package pdftex.def Info: images/SupervisoreB1/Encoder_snapshot.png  used on inp
@@ -1829,7 +1832,7 @@ ut line 1829.
 [84 <./images/SupervisoreB1/BoardHealthSnapshot.png>]
 
 [85 <./images/SupervisoreB1/Encoder_snapshot.png>]
-<images/SupervisoreB1/Chart fault locali.png, id=720, 747.54282pt x 338.76563pt
+<images/SupervisoreB1/Chart fault locali.png, id=725, 747.54282pt x 338.76563pt
 >
 File: images/SupervisoreB1/Chart fault locali.png Graphic file (type png)
 <use images/SupervisoreB1/Chart fault locali.png>
@@ -1839,7 +1842,7 @@ nput line 1885.
 
 
 [86]
-<images/SupervisoreB1/Chart fault locali stati.png, id=726, 843.15pt x 529.98pt
+<images/SupervisoreB1/Chart fault locali stati.png, id=731, 843.15pt x 529.98pt
 >
 File: images/SupervisoreB1/Chart fault locali stati.png Graphic file (type png)
 
@@ -1850,7 +1853,7 @@ d on input line 1907.
 
 
 [87 <./images/SupervisoreB1/Chart fault locali.png>]
-<images/SupervisoreB1/Chart fault locali esempio ricezione.png, id=733, 927.465
+<images/SupervisoreB1/Chart fault locali esempio ricezione.png, id=738, 927.465
 pt x 432.11438pt>
 File: images/SupervisoreB1/Chart fault locali esempio ricezione.png Graphic fil
 e (type png)
@@ -1917,13 +1920,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 2027--2029
 
  []
 
-<images/SupervisoreB1/maschere pt2.png, id=755, 712.91344pt x 276.28218pt>
+<images/SupervisoreB1/maschere pt2.png, id=760, 712.91344pt x 276.28218pt>
 File: images/SupervisoreB1/maschere pt2.png Graphic file (type png)
 <use images/SupervisoreB1/maschere pt2.png>
 Package pdftex.def Info: images/SupervisoreB1/maschere pt2.png  used on input l
 ine 2034.
 (pdftex.def)             Requested size: 331.50238pt x 128.46988pt.
-<images/SupervisoreB1/decide actuation.png, id=757, 487.06969pt x 164.86594pt>
+<images/SupervisoreB1/decide actuation.png, id=762, 487.06969pt x 164.86594pt>
 File: images/SupervisoreB1/decide actuation.png Graphic file (type png)
 <use images/SupervisoreB1/decide actuation.png>
 Package pdftex.def Info: images/SupervisoreB1/decide actuation.png  used on inp
@@ -1932,7 +1935,7 @@ ut line 2050.
 
 
 [92 <./images/SupervisoreB1/maschere pt2.png>]
-<images/SupervisoreB1/Selezione board attuante.png, id=764, 666.23906pt x 251.4
+<images/SupervisoreB1/Selezione board attuante.png, id=769, 666.23906pt x 251.4
 3938pt>
 File: images/SupervisoreB1/Selezione board attuante.png Graphic file (type png)
 
@@ -1946,13 +1949,13 @@ Overfull \hbox (47.30614pt too wide) in paragraph at lines 2067--2068
 t/12 b2[]sup[]status = SUP[]CRITICAL\OT1/cmr/m/n/12 ). 
  []
 
-<images/SupervisoreB1/rele_board1.png, id=767, 1284.8pt x 842.14626pt>
+<images/SupervisoreB1/rele_board1.png, id=772, 1284.8pt x 842.14626pt>
 File: images/SupervisoreB1/rele_board1.png Graphic file (type png)
 <use images/SupervisoreB1/rele_board1.png>
 Package pdftex.def Info: images/SupervisoreB1/rele_board1.png  used on input li
 ne 2077.
 (pdftex.def)             Requested size: 175.49881pt x 115.02124pt.
-<images/SupervisoreB1/rele_board2.png, id=768, 1284.8pt x 869.2475pt>
+<images/SupervisoreB1/rele_board2.png, id=773, 1284.8pt x 869.2475pt>
 File: images/SupervisoreB1/rele_board2.png Graphic file (type png)
 <use images/SupervisoreB1/rele_board2.png>
 Package pdftex.def Info: images/SupervisoreB1/rele_board2.png  used on input li
@@ -1967,7 +1970,7 @@ Overfull \hbox (6.03119pt too wide) in paragraph at lines 2092--2092
 
  []
 
-<images/SupervisoreB1/rover state and actuation subsystem.png, id=778, 931.9818
+<images/SupervisoreB1/rover state and actuation subsystem.png, id=783, 931.9818
 7pt x 539.01375pt>
 File: images/SupervisoreB1/rover state and actuation subsystem.png Graphic file
  (type png)
@@ -1990,7 +1993,7 @@ Overfull \hbox (9.43008pt too wide) in paragraph at lines 2111--2112
 pre-sente al-meno un fault degradato
  []
 
-<images/SupervisoreB1/rover state and actuation subsystem1.png, id=785, 724.958
+<images/SupervisoreB1/rover state and actuation subsystem1.png, id=790, 724.958
 44pt x 283.81032pt>
 File: images/SupervisoreB1/rover state and actuation subsystem1.png Graphic fil
 e (type png)
@@ -2007,13 +2010,13 @@ cmr/m/n/12 e \OT1/cmr/m/it/12 b2[]degraded\OT1/cmr/m/n/12 , ot-tenuti dal pre-p
 rocessamento
  []
 
-<images/SupervisoreB1/check rover safety.png, id=791, 847.66687pt x 349.305pt>
+<images/SupervisoreB1/check rover safety.png, id=796, 847.66687pt x 349.305pt>
 File: images/SupervisoreB1/check rover safety.png Graphic file (type png)
 <use images/SupervisoreB1/check rover safety.png>
 Package pdftex.def Info: images/SupervisoreB1/check rover safety.png  used on i
 nput line 2146.
 (pdftex.def)             Requested size: 370.49881pt x 152.67131pt.
-<images/SupervisoreB1/rover motion chart.png, id=792, 666.23906pt x 475.02469pt
+<images/SupervisoreB1/rover motion chart.png, id=797, 666.23906pt x 475.02469pt
 >
 File: images/SupervisoreB1/rover motion chart.png Graphic file (type png)
 <use images/SupervisoreB1/rover motion chart.png>
@@ -2028,7 +2031,7 @@ Overfull \hbox (14.71802pt too wide) in paragraph at lines 2162--2163
 mento all'indietro.
  []
 
-<images/SupervisoreB1/backward_toggle.png, id=798, 777.65532pt x 304.13625pt>
+<images/SupervisoreB1/backward_toggle.png, id=803, 777.65532pt x 304.13625pt>
 File: images/SupervisoreB1/backward_toggle.png Graphic file (type png)
 <use images/SupervisoreB1/backward_toggle.png>
 Package pdftex.def Info: images/SupervisoreB1/backward_toggle.png  used on inpu
@@ -2049,7 +2052,7 @@ Overfull \hbox (0.68344pt too wide) in paragraph at lines 2194--2195
 derivati dall'input
  []
 
-<images/SupervisoreB1/normale marcia esempio.png, id=805, 889.07156pt x 532.238
+<images/SupervisoreB1/normale marcia esempio.png, id=810, 889.07156pt x 532.238
 43pt>
 File: images/SupervisoreB1/normale marcia esempio.png Graphic file (type png)
 <use images/SupervisoreB1/normale marcia esempio.png>
@@ -2059,7 +2062,7 @@ on input line 2202.
 
 
 [98 <./images/SupervisoreB1/backward_toggle.png>]
-<images/SupervisoreB1/chart frenata di emergenza.png, id=811, 914.66719pt x 515
+<images/SupervisoreB1/chart frenata di emergenza.png, id=816, 914.66719pt x 515
 .67656pt>
 File: images/SupervisoreB1/chart frenata di emergenza.png Graphic file (type pn
 g)
@@ -2077,24 +2080,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 2232--2234
 [99 <./images/SupervisoreB1/normale marcia esempio.png>]
 
 [100 <./images/SupervisoreB1/chart frenata di emergenza.png>]
-<images/SupervisoreB2/SupervisoreBoard2_InputOutput.png, id=825, 748.29562pt x 
+<images/SupervisoreB2/SupervisoreBoard2_InputOutput.png, id=830, 748.29562pt x 
 626.34pt>
 File: images/SupervisoreB2/SupervisoreBoard2_InputOutput.png Graphic file (type
  png)
 <use images/SupervisoreB2/SupervisoreBoard2_InputOutput.png>
 Package pdftex.def Info: images/SupervisoreB2/SupervisoreBoard2_InputOutput.png
-  used on input line 2247.
+  used on input line 2246.
 (pdftex.def)             Requested size: 312.00119pt x 261.14957pt.
 
-Overfull \hbox (10.03586pt too wide) in paragraph at lines 2256--2257
-[]\OT1/cmr/bx/n/12 Rilevazione Faults\OT1/cmr/m/n/12 : si oc-cupa di ril-e-vare
- even-tu-ali anoma-lie nell'ESP32,
- []
-
-
-Overfull \hbox (62.03563pt too wide) in paragraph at lines 2257--2258
-[]\OT1/cmr/bx/n/12 Aggregazione Fualt\OT1/cmr/m/n/12 : ag-grega le anoma-lie ri
-l-e-vate nella parte di $\OML/cmm/m/it/12 rilevazionefaults$
+Overfull \hbox (15.36526pt too wide) in paragraph at lines 2255--2256
+\OT1/cmr/m/n/12 con ESP32, IMU e Board 1, clas-si-f-i-can-dola come \OT1/cmtt/m
+/n/12 OK\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 DEGRADED \OT1/cmr/m/n/12 o \OT1/cmtt
+/m/n/12 CRITICAL\OT1/cmr/m/n/12 . 
  []
 
 
@@ -2105,294 +2103,232 @@ Overfull \hbox (1.44377pt too wide) in paragraph at lines 2278--2279
 po in mil-lisec-ondi dell'ultimo
  []
 
-<images/SupervisoreB2/IMU_snapshot.png, id=832, 551.81157pt x 353.82187pt>
+<images/SupervisoreB2/IMU_snapshot.png, id=837, 551.81157pt x 353.82187pt>
 File: images/SupervisoreB2/IMU_snapshot.png Graphic file (type png)
 <use images/SupervisoreB2/IMU_snapshot.png>
 Package pdftex.def Info: images/SupervisoreB2/IMU_snapshot.png  used on input l
-ine 2285.
+ine 2284.
 (pdftex.def)             Requested size: 272.99881pt x 175.05328pt.
 
 
 [102]
-<images/SupervisoreB2/Sonars_snapshot.png, id=837, 552.56438pt x 126.4725pt>
+<images/SupervisoreB2/Sonars_snapshot.png, id=842, 552.56438pt x 126.4725pt>
 File: images/SupervisoreB2/Sonars_snapshot.png Graphic file (type png)
 <use images/SupervisoreB2/Sonars_snapshot.png>
 Package pdftex.def Info: images/SupervisoreB2/Sonars_snapshot.png  used on inpu
-t line 2292.
+t line 2291.
 (pdftex.def)             Requested size: 272.99881pt x 62.48346pt.
-
-Overfull \hbox (6.07098pt too wide) in paragraph at lines 2289--2295
-[]\OT1/cmr/bx/n/12 Sonars\OT1/cmr/m/n/12 : ^^Re l'ultimo snap-shot delle ve-loc
-it^^Ra delle ruote ($\OML/cmm/m/it/12 wheel[]speed[]rpm$\OT1/cmr/m/n/12 )
- []
-
-
-Overfull \hbox (0.64967pt too wide) in paragraph at lines 2289--2295
-\OT1/cmr/m/n/12 e di even-tu-ali anoma-lie riscon-trate in uno dei mo-tori ($\O
-ML/cmm/m/it/12 has[]no[]feedback$\OT1/cmr/m/n/12 ).
- []
-
-
-Overfull \hbox (14.14674pt too wide) in paragraph at lines 2321--2330
- [][] 
- []
-
+File: images/SupervisoreB1/CMD_BOARD2.png Graphic file (type png)
+<use images/SupervisoreB1/CMD_BOARD2.png>
+Package pdftex.def Info: images/SupervisoreB1/CMD_BOARD2.png  used on input lin
+e 2320.
+(pdftex.def)             Requested size: 117.00119pt x 122.6447pt.
 
 
 [103 <./images/SupervisoreB2/IMU_snapshot.png> <./images/SupervisoreB2/Sonars_s
 napshot.png>]
-Overfull \hbox (3.00433pt too wide) in paragraph at lines 2340--2342
+Overfull \hbox (3.00433pt too wide) in paragraph at lines 2332--2334
 []\OT1/cmr/bx/n/12 v[]ref[]actuation\OT1/cmr/m/n/12 : rap-p-re-senta il rifer-i
 -mento di ve-locit^^Ra lin-eare del rover,
  []
 
-<images/SupervisoreB2/Rilevamento_Faults.png, id=846, 813.0375pt x 602.25pt>
-File: images/SupervisoreB2/Rilevamento_Faults.png Graphic file (type png)
-<use images/SupervisoreB2/Rilevamento_Faults.png>
-Package pdftex.def Info: images/SupervisoreB2/Rilevamento_Faults.png  used on i
-nput line 2369.
-(pdftex.def)             Requested size: 312.00119pt x 231.10883pt.
 
-
-[104]
-Underfull \hbox (badness 1005) in paragraph at lines 2395--2396
-[]|\OT1/cmr/m/n/12 Se la me-dia mo-bile degli
- []
-
-
-Underfull \hbox (badness 1005) in paragraph at lines 2396--2397
-[]|\OT1/cmr/m/n/12 Se la me-dia mo-bile degli
- []
-
-
-Underfull \hbox (badness 1082) in paragraph at lines 2397--2397
-[]|\OT1/cmr/m/n/12 Quando la fre-quenza me-
- []
-
-
-Underfull \hbox (badness 1005) in paragraph at lines 2399--2400
-[]|\OT1/cmr/m/n/12 Se la me-dia mo-bile degli
- []
-
-
-Underfull \hbox (badness 1005) in paragraph at lines 2400--2401
-[]|\OT1/cmr/m/n/12 Se la me-dia mo-bile degli
- []
-
-
-Underfull \hbox (badness 1527) in paragraph at lines 2403--2405
-[]|\OT1/cmr/m/n/12 Questo val-ore in-dica una
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2403--2405
-\OT1/cmr/m/n/12 dis-con-ti-nuit^^Ra op-er-a-tiva
- []
-
-
-Underfull \hbox (badness 1117) in paragraph at lines 2403--2405
-\OT1/cmr/m/n/12 ogni volta che viene es-e-
- []
-
-
-Underfull \hbox (badness 5592) in paragraph at lines 2406--2406
-[]|\OT1/cmr/m/n/12 Se l'intervallo di tempo
- []
-
-
-Underfull \hbox (badness 5533) in paragraph at lines 2406--2406
-\OT1/cmr/m/n/12 dall'ultimo ag-gior-na-mento
- []
-
-
-Underfull \hbox (badness 2368) in paragraph at lines 2406--2406
-\OT1/cmr/m/n/12 sore di Board1 su-pera i
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2409--2412
-\OT1/cmr/m/n/12 co-mu-ni-cazione in-sta-bile.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2409--2412
-\OT1/cmr/m/n/12 Sebbene il col-lega-mento
- []
-
-
-Underfull \hbox (badness 1509) in paragraph at lines 2409--2412
-\OT1/cmr/m/n/12 dei pac-chetti im-pedis-cono
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2409--2412
-\OT1/cmr/m/n/12 abile data[]last[]valid[]ms.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2409--2412
-\OT1/cmr/m/n/12 Il sis-tema mon-i-tora la
- []
-
-
-Underfull \hbox (badness 3668) in paragraph at lines 2409--2412
-\OT1/cmr/m/n/12 10 in-ter-valli di ricezione
- []
-
-
-Underfull \hbox (badness 5592) in paragraph at lines 2413--2413
-[]|\OT1/cmr/m/n/12 Se l'intervallo di tempo
- []
-
-
-Underfull \hbox (badness 5578) in paragraph at lines 2413--2413
-\OT1/cmr/m/n/12 dall'ultima ricezione cor-
- []
-
-
-Underfull \hbox (badness 4229) in paragraph at lines 2416--2417
-[]|\OT1/cmr/m/n/12 Indica che c'^^Re una dis-
- []
-
-
-Underfull \hbox (badness 4492) in paragraph at lines 2416--2417
-\OT1/cmr/m/n/12 crepanza sig-ni-fica-tiva tra
- []
-
-
-Underfull \hbox (badness 2197) in paragraph at lines 2416--2417
-\OT1/cmr/m/n/12 ve-locit^^Ra dei mo-tori, sug-
- []
-
-[105 <./images/SupervisoreB2/Rilevamento_Faults.png>] [106] [107]
-<images/SupervisoreB2/costruzione_maschere.png, id=867, 475.7775pt x 419.31656p
-t>
-File: images/SupervisoreB2/costruzione_maschere.png Graphic file (type png)
-<use images/SupervisoreB2/costruzione_maschere.png>
-Package pdftex.def Info: images/SupervisoreB2/costruzione_maschere.png  used on
- input line 2426.
-(pdftex.def)             Requested size: 312.00119pt x 274.99025pt.
-
-Overfull \hbox (134.94116pt too wide) in paragraph at lines 2439--2454
+Overfull \hbox (31.26157pt too wide) in paragraph at lines 2344--2353
  [][] 
  []
 
 
 
+[104]
+<images/SupervisoreB2/Rilevamento_Faults.png, id=857, 813.0375pt x 602.25pt>
+File: images/SupervisoreB2/Rilevamento_Faults.png Graphic file (type png)
+<use images/SupervisoreB2/Rilevamento_Faults.png>
+Package pdftex.def Info: images/SupervisoreB2/Rilevamento_Faults.png  used on i
+nput line 2379.
+(pdftex.def)             Requested size: 312.00119pt x 231.10883pt.
+<images/SupervisoreB2/monitorFualtsB2.jpeg, id=858, 1429.34pt x 846.16125pt>
+File: images/SupervisoreB2/monitorFualtsB2.jpeg Graphic file (type jpg)
+<use images/SupervisoreB2/monitorFualtsB2.jpeg>
+Package pdftex.def Info: images/SupervisoreB2/monitorFualtsB2.jpeg  used on inp
+ut line 2392.
+(pdftex.def)             Requested size: 312.00119pt x 184.69707pt.
+
+
+[105 <./images/SupervisoreB2/Rilevamento_Faults.png>]
+Overfull \hbox (24.81055pt too wide) in paragraph at lines 2404--2405
+[]\OT1/cmtt/m/n/12 ESP[]CRITICAL\OT1/cmr/m/n/12 : se la me-dia mo-bile degli in
+-ter-valli di ricezione dati dall'ESP32
+ []
+
+
+Overfull \hbox (43.74376pt too wide) in paragraph at lines 2416--2417
+[]\OT1/cmtt/m/n/12 SUP[]CRITICAL \OT1/cmr/m/n/12 : se l'intervallo di tempo dal
+l'ultimo ag-gior-na-mento dell'heartbeat
+ []
+
+
+
+[106 <./images/SupervisoreB2/monitorFualtsB2.jpeg>]
+Overfull \hbox (20.66475pt too wide) in paragraph at lines 2421--2423
+\OT1/cmr/m/n/12 dei dati rice-vuti dall'IMU. L'output as-so-ci-ato a questo sot
+-to-sis-tema ^^Re \OT1/cmr/bx/n/12 imu[]status
+ []
+
+
+Overfull \hbox (8.26039pt too wide) in paragraph at lines 2425--2426
+[]\OT1/cmtt/m/n/12 IMU[]OK \OT1/cmr/m/n/12 : quando la fre-quenza me-dia dei da
+ti in-erziali ri-en-tra nei parametri
+ []
+
+
+Overfull \hbox (27.34576pt too wide) in paragraph at lines 2431--2432
+\OT1/cmr/m/n/12 (CRC) o anoma-lie nella lunghezza dei pac-chetti im-pedis-cono 
+l'aggiornamento
+ []
+
+
+
+[107]
+<images/SupervisoreB2/costruzione_maschere.png, id=873, 475.7775pt x 419.31656p
+t>
+File: images/SupervisoreB2/costruzione_maschere.png Graphic file (type png)
+<use images/SupervisoreB2/costruzione_maschere.png>
+Package pdftex.def Info: images/SupervisoreB2/costruzione_maschere.png  used on
+ input line 2458.
+(pdftex.def)             Requested size: 312.00119pt x 274.99025pt.
+
+
 [108 <./images/SupervisoreB2/costruzione_maschere.png>]
-<images/SupervisoreB2/decidere_se_attuare.png, id=876, 1187.18532pt x 544.28343
+Overfull \hbox (50.23395pt too wide) in paragraph at lines 2471--2486
+ [][] 
+ []
+
+<images/SupervisoreB2/decidere_se_attuare.png, id=881, 1187.18532pt x 544.28343
 pt>
 File: images/SupervisoreB2/decidere_se_attuare.png Graphic file (type png)
 <use images/SupervisoreB2/decidere_se_attuare.png>
 Package pdftex.def Info: images/SupervisoreB2/decidere_se_attuare.png  used on 
-input line 2464.
+input line 2496.
 (pdftex.def)             Requested size: 312.00119pt x 143.03848pt.
+
+Overfull \hbox (19.53925pt too wide) in paragraph at lines 2502--2504
+\OT1/cmr/m/n/12 Queste con-dizioni abil-i-tano una vari-abile booleana $\OML/cm
+m/m/it/12 authorized[]to[]send[]command$
+ []
+
 
 
 [109 <./images/SupervisoreB2/decidere_se_attuare.png>]
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png, id=88
-4, 941.01563pt x 548.0475pt>
+<images/funzionamento_generale/specifiche/Board1_non_riceve.png, id=891, 916.17
+28pt x 623.32875pt>
+File: images/funzionamento_generale/specifiche/Board1_non_riceve.png Graphic fi
+le (type png)
+<use images/funzionamento_generale/specifiche/Board1_non_riceve.png>
+Package pdftex.def Info: images/funzionamento_generale/specifiche/Board1_non_ri
+ceve.png  used on input line 2525.
+(pdftex.def)             Requested size: 272.99881pt x 185.73508pt.
+<images/funzionamento_generale/specifiche/Board2_non_riceve.png, id=893, 919.93
+687pt x 633.86812pt>
+File: images/funzionamento_generale/specifiche/Board2_non_riceve.png Graphic fi
+le (type png)
+<use images/funzionamento_generale/specifiche/Board2_non_riceve.png>
+Package pdftex.def Info: images/funzionamento_generale/specifiche/Board2_non_ri
+ceve.png  used on input line 2536.
+(pdftex.def)             Requested size: 272.99881pt x 188.10176pt.
+
+Overfull \hbox (12.65971pt too wide) in paragraph at lines 2530--2539
+\OT1/cmr/m/n/12 manda ef-fet-ti-va-mente i mo-tori quando la Board 2 riscon-tra
+ un'interruzione
+ []
+
+
+
+[110 <./images/funzionamento_generale/specifiche/Board1_non_riceve.png>]
+
+[111 <./images/funzionamento_generale/specifiche/Board2_non_riceve.png>]
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png, id=90
+8, 941.01563pt x 548.0475pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png G
 raphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png>
 Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/Gesti
-oneOstacoliB2.png  used on input line 2508.
+oneOstacoliB2.png  used on input line 2569.
 (pdftex.def)             Requested size: 350.99762pt x 204.42181pt.
 <images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegr
-adato.png, id=886, 1321.93875pt x 661.72218pt>
+adato.png, id=910, 1321.93875pt x 661.72218pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNo
 nDegradato.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNon
 Degradato.png>
 Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/Gesti
-oneOstacoli_StatoNonDegradato.png  used on input line 2517.
+oneOstacoli_StatoNonDegradato.png  used on input line 2578.
 (pdftex.def)             Requested size: 350.99762pt x 175.69884pt.
-
-
-[110 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png
->]
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png, id=896, 879.
-285pt x 617.30624pt>
-File: images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png Graphic 
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarState2.png, id=911, 688.
+07062pt x 481.04718pt>
+File: images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarState2.png Graphic 
 file (type png)
-<use images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState.png>
+<use images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarState2.png>
 Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/Sonar
-sState.png  used on input line 2527.
-(pdftex.def)             Requested size: 175.49881pt x 123.20473pt.
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png, id=897, 
-426.84468pt x 374.14781pt>
-File: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png Grap
-hic file (type png)
-<use images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2Dec
-isionState.png  used on input line 2533.
-(pdftex.def)             Requested size: 175.49881pt x 153.83546pt.
+State2.png  used on input line 2591.
+(pdftex.def)             Requested size: 191.10214pt x 133.5986pt.
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/B2 decision state 2.png, id=9
+12, 648.92438pt x 449.42906pt>
+File: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2 decision state 2.png 
+Graphic file (type png)
+<use images/SupervisoreB2/GestioneRilevamentoOstacoli/B2 decision state 2.png>
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/B2 de
+cision state 2.png  used on input line 2597.
+(pdftex.def)             Requested size: 191.10214pt x 132.34724pt.
 
 
-[111 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_Stato
-NonDegradato.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsSta
-te.png> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState.png
->]
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png, id=908, 11
+[112 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2.png
+> <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNon
+Degradato.png>]
+<images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png, id=921, 11
 47.28625pt x 208.52907pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png Graphi
 c file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png>
 Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/dista
-nceLt_70.png  used on input line 2556.
+nceLt_70.png  used on input line 2620.
 (pdftex.def)             Requested size: 350.99762pt x 63.79376pt.
-<images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.png,
- id=909, 1205.2528pt x 654.19406pt>
-File: images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers
-.png Graphic file (type png)
-<use images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers.
-png>
-Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/dista
-ncegt_70_and_timers.png  used on input line 2576.
-(pdftex.def)             Requested size: 350.99762pt x 190.51997pt.
 
 
-[112 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png>]
+[113 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarState2.png> <./im
+ages/SupervisoreB2/GestioneRilevamentoOstacoli/B2 decision state 2.png> <./imag
+es/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70.png>]
+File: images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarState2.png Graphic 
+file (type png)
+<use images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarState2.png>
+Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/Sonar
+State2.png  used on input line 2640.
+(pdftex.def)             Requested size: 390.0pt x 272.6583pt.
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2597.
 
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2597.
-
-
-Overfull \hbox (5.99728pt too wide) in paragraph at lines 2599--2600
-\OT1/cmr/m/n/12 Il chart per la ges-tione degli os-ta-coli in stato degradato ^
-^Re mostrato in Figura []71[]. 
- []
-
+[114]
 <images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegrada
-to.png, id=920, 1373.88281pt x 382.42876pt>
+to.png, id=943, 1373.88281pt x 382.42876pt>
 File: images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDe
 gradato.png Graphic file (type png)
 <use images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDeg
 radato.png>
 Package pdftex.def Info: images/SupervisoreB2/GestioneRilevamentoOstacoli/Gesti
-oneOstacoli_StatoDegradato.png  used on input line 2603.
+oneOstacoli_StatoDegradato.png  used on input line 2672.
 (pdftex.def)             Requested size: 350.99762pt x 97.70184pt.
 
 
-[113 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_time
-rs.png>]
-<images/SupervisoreB2/attuazione_Board2.png, id=931, 1101.36469pt x 428.35031pt
+[115 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_Stato
+Degradato.png>]
+<images/SupervisoreB2/attuazione_Board2.png, id=954, 1101.36469pt x 428.35031pt
 >
 File: images/SupervisoreB2/attuazione_Board2.png Graphic file (type png)
 <use images/SupervisoreB2/attuazione_Board2.png>
 Package pdftex.def Info: images/SupervisoreB2/attuazione_Board2.png  used on in
-put line 2623.
+put line 2706.
 (pdftex.def)             Requested size: 312.00119pt x 121.34251pt.
 
 
-[114 <./images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_Stato
-Degradato.png>]
-
-[115 <./images/SupervisoreB2/attuazione_Board2.png>] (Relazione_ESD.aux)
+[116 <./images/SupervisoreB2/attuazione_Board2.png>] (Relazione_ESD.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
@@ -2403,13 +2339,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 17291 strings out of 473682
- 366005 string characters out of 5719217
- 691811 words of memory out of 5000000
- 39918 multiletter control sequences out of 15000+600000
+ 17326 strings out of 473682
+ 367541 string characters out of 5719217
+ 689983 words of memory out of 5000000
+ 39949 multiletter control sequences out of 15000+600000
  569357 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,79p,987b,1260s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,987b,1262s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Sterm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Users/Sterm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb><C:/Users/Sterm/AppData/Local/Programs/MiKTeX/fonts/type1/publ
@@ -2432,9 +2368,9 @@ ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Sterm/AppData
 ers/Sterm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.p
 fb><C:/Users/Sterm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmtt12.pfb>
-Output written on Relazione_ESD.pdf (115 pages, 5793707 bytes).
+Output written on Relazione_ESD.pdf (116 pages, 5685697 bytes).
 PDF statistics:
- 1359 PDF objects out of 1440 (max. 8388607)
- 289 named destinations out of 1000 (max. 500000)
- 1083 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1387 PDF objects out of 1440 (max. 8388607)
+ 293 named destinations out of 1000 (max. 500000)
+ 1125 words of extra memory for PDF output out of 10000 (max. 10000000)
 
