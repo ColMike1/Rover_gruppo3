@@ -1,0 +1,1921 @@
+\documentclass[12pt, a4paper]{article} 
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{makecell}
+\usepackage{enumitem} 
+\usepackage{array} % Per definire meglio le colonne
+\usepackage{longtable} % Per tabelle che si estendono su più pagine
+\usepackage{tabularx} % Per colonne auto-adattanti
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\captionsetup{justification=centering}
+\captionsetup{font=small}
+\graphicspath{ {./images/} }
+\setcounter{tocdepth}{4}    % Permette a \paragraph di apparire nell'indice
+%\setcounter{secnumdepth}{4} % Opzionale: numera anche i paragrafi (es. 1.1.1.1)
+\setlength{\parindent}{0pt}
+
+
+\begin{document}
+		\begin{center}
+			{\Large UNIVERSITÀ DEGLI STUDI DI SALERNO\par}
+			\vspace{16pt}
+			{\normalsize DIPARTIMENTO DI INGEGNERIA INFORMATICA ED ELETTRICA E MATEMATICA APPLICATA}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\linewidth]{images/logo_unisa.png} 
+			\end{figure}
+			{\large Laurea Magistrale in Ingegneria Informatica\par}
+			\vspace{12pt}
+			Gruppo 3: Documentazione Embedded System Design
+			\vspace{30pt}
+			
+			
+			\begin{table}[h]
+				\centering
+				\begin{tabular}{|l|l|c|l|}
+					\hline
+					\textbf{Nome} & \textbf{Cognome} & \textbf{Matricola} & \multicolumn{1}{c|}{\textbf{Email}} \\ \hline
+					Alessandro & Pentangelo & 0622702632 & a.pentangelo18@studenti.unisa.it \\ \hline
+					Mirko & Campanella & 0622702588 & m.campanella1@studenti.unisa.it \\ \hline
+					Michele & Colombo & 0622702472 & m.colombo1@studenti.unisa.it \\ \hline
+					Alessio & Bottiglieri & 0622702583 & a.bottiglieri16@studenti.unisa.it \\ \hline
+				\end{tabular}
+			\end{table}
+		\end{center}
+
+\newpage
+\tableofcontents
+% \listoffigures
+
+
+
+
+
+
+
+
+\newpage
+
+\section{Introduzione work-project}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{images/Introduzione/architettura_rover.png}
+	\caption{Architettura generale del rover distribuita su doppia board}
+	\label{fig:architettura_rover}
+\end{figure}
+
+Il presente progetto riguarda la progettazione e l'implementazione di un \textbf{sistema di controllo e supervisione distribuito} per un rover caratterizzato da un'architettura ad alta affidabilità. L'obiettivo principale è lo sviluppo di un veicolo capace di muoversi in modo coordinato, reagire prontamente agli stimoli ambientali rilevati tramite sensoristica avanzata e gestire scenari di guasto attraverso logiche di ridondanza e modalità di funzionamento degradate.
+
+\subsection{Architettura Hardware e Comunicazione}
+Il cuore del sistema è costituito da un'architettura a \textbf{doppia scheda} (Board 1 e Board 2), basata su microcontrollori STM32. Questa configurazione implementa il concetto di \textbf{diversità di livello 2}, dove le due board collaborano per la ricostruzione dello stato globale del sistema pur operando su partizioni di dati e algoritmi distinti.
+\begin{itemize}
+	\item La Board 1 gestisce l'interfacciamento con i driver dei motori (Front e Back), gli encoder di posizione e i LED di segnalazione.
+	\item La Board 2 è dedicata alla sensoristica ambientale, interfacciandosi con tre sensori Sonar, un accelerometro tramite protocollo $I^2C$ e il sistema di controllo remoto, che avviene tramite l'utilizzo di un joystick che invia dati a una scheda ESP32 tramite protocollo BLE.
+\end{itemize}
+
+\subsection{Dinamica di Movimento e Controllo}
+Il rover deve garantire una movimentazione precisa sincronizzando i quattro motori per procedere in linea retta o ruotare attorno al proprio baricentro.
+\begin{itemize}
+	\item \textbf{Controllo PID:} La velocità richiesta dal controller viene gestita tramite un algoritmo PID software per definire le dinamiche di raggiungimento del target e di frenata.
+	
+	\item \textbf{Attuazione: } Una volta calcolata l'uscita di controllo tramite il PID, questa viene mandata in attuazione ai motori tramite il driver sabertooth configurato in modalità Serial Packetized.
+\end{itemize}
+
+\subsection{Sicurezza e Gestione degli Ostacoli}
+Il sistema di supervisione utilizza i dati provenienti dai sensori ad ultrasuoni per garantire l'integrità del veicolo:
+\begin{itemize}
+	\item \textbf{Rilevamento Preventivo:} Identificazione di ostacoli fino a 3 metri di distanza con un angolo di copertura di $45^{\circ}$.
+	\item \textbf{Manovre di Emergenza:} In caso di ostacoli improvvisi a meno di 70 cm, il rover esegue una frenata d'emergenza seguita da una rotazione verso un lato libero.
+	\item \textbf{Evitamento Dinamico:} Capacità di evitare ostacoli in movimento tra 1,5 e 3 metri sterzando senza interrompere la marcia.
+\end{itemize}
+
+\subsection{Resilienza e Modalità Degradata}
+Una specifica fondamentale del progetto è la capacità di operare in presenza di malfunzionamenti. Il sistema monitora costantemente lo stato delle board, dei motori, della batteria e della temperatura interna. 
+In caso di determinati fallimenti, il rover entra in \textbf{Modalità Degradata} o in \textbf{Emergency Stop}.
+\clearpage
+
+\section{Sensoristica del sistema}
+\subsection{Sensori Board 1}
+La Board 1 è responsabile del loop di controllo dei motori, della gestione dei led presenti sul rover e del monitoraggio della batteria e della temperatura interna del rover (Board Health).
+I sensori e gli attuatori gestiti direttamente da questa board includono:
+\begin{itemize}
+	\item \textbf{Encoder incrementali}: Quattro encoder (Front/Back, SX/DX) per il feedback sulla velocità reale delle ruote.
+	\item \textbf{Driver Motori}: Due driver sabertooth 2x12, uno che si occupa di controllare le ruote anteriori e un altro che si occupa del controllo delle ruote posteriori. Entrambi i driver sono configurati in modalità Serial Packetized.
+	\item \textbf{Sensore di Tensione e Temperatura}: Sensori per il monitoraggio dello stato della batteria e della temperatura.
+	\item \textbf{LED di stato}: Due indicatori luminosi (LED A e LED B) per il feedback visivo immediato (es. stato di emergenza).
+\end{itemize}
+
+\subsection{Sensori Board 2}
+La Board 2 funge da interfaccia di input del Rover. Il suo compito principale è raccogliere i dati dall'ambiente esterno e dai comandi dell'operatore, elaborarli e trasmetterli alla Board 1 per l'attuazione fisica. 
+I componenti e i sensori gestiti da questa board sono:
+\begin{itemize}
+	\item \textbf{Modulo BLE (Bluetooth Low Energy)}: Per la ricezione dei pacchetti dati dal controller remoto (Direzione, Velocità, Modalità).
+	\item \textbf{IMU (Inertial Measurement Unit)}: Accelerometro e giroscopio per il monitoraggio dell'assetto e della stabilità del Rover.
+	\item \textbf{Sonar (Ultrasuoni)}: Tre sensori posizionati strategicamente per la navigazione ed il superamento degli ostacoli fino a 3 metri di distanza.
+\end{itemize}
+\clearpage
+
+\newpage
+\section{Funzionamento generale del software di ciascuna board}
+\subsection{Interazione tra Task e Meccanismo di Snapshot}
+Ciascuna board gestisce sette task, ognuno dei quali attinge, secondo necessità, alle informazioni richieste dalla propria logica di controllo tramite gli snapshot, ovvero 
+variabili globali condivise. Si consideri, ad esempio, la Figura~\ref{fig:funzionamento_generale} che illustra il funzionamento dei task \textit{SupervisorB1} e \textit{Transmit} che vengono eseguiti sulla Board 1. 
+Al termine della propria esecuzione, ogni task può aggiornare tali snapshot, rendendo i nuovi dati disponibili agli altri task. Nell'esempio, il task \textit{SupervisorB1} 
+aggiorna lo snapshot \textbf{supervisor\_snapshot}, che viene poi utilizzato dal task \textit{Transmit} per l'invio dei dati verso la Board2. Allo stesso modo, la Board 2 tiene legge
+i scrive i propri snapshot, come illustrato nella Figura~\ref{fig:funzionamento_generale_b2}.
+
+Ogni snapshot integra, oltre ai dati specifici, due variabili di monitoraggio temporale:
+
+\begin{itemize} 
+	\item \textit{data\_last\_valid\_ms}: indica l'istante temporale dell'ultimo aggiornamento dei dati ritenuto valido (ad esempio, l'ultima lettura coerente ricevuta dagli encoder). 
+	\item \textit{task\_last\_run\_ms}: riporta l'ultimo istante in cui il task è stato effettivamente eseguito. 
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/funzionamento_generale/funzGener_B1}
+	\caption{Funzionamento generale del software di Board 1.}
+	\label{fig:funzionamento_generale}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/funzionamento_generale/funzGener_B2}
+	\caption{Funzionamento generale del software di Board 2.}
+	\label{fig:funzionamento_generale_b2}
+\end{figure}
+\clearpage
+
+
+
+\subsection{Funzionamento task di Board 2}
+\subsubsection{Task: acquisizione distanza dagli ostacoli}
+La Board 2 è equipaggiata con tre sensori ad ultrasuoni \textbf{HC-SR04} per il rilevamento di ostacoli. 
+Questi sono disposti a 45° l'uno dall'altro, come mostrato in Figura~\ref{fig:sensori}.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/funzionamento_generale/Sonars/disposizioneSonar} 
+	\caption{Disposizione dei sensori sulla Board 2.}
+	\label{fig:sensori}
+\end{figure}
+
+Ogni sensore emette onde sonore ad alta frequenza e produce segnali di tipo onda quadra la cui durata è proporzionale all'ostacolo rilevato. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/segnale_sonar_3m}
+	\caption{Segnale generato dal sensore HC-SR04 in presenza di un ostacolo a 3 metri di distanza.}
+	\label{fig:segnale_sonar}
+\end{figure}
+La board2, rilevando i fronti di salita e discesa, può misurare l'intervallo tra i due fronti e utilizzare questa informazione per calcolare
+la distanza dall'ostacolo e prendere decisioni appropriate per evitare collisioni.
+
+\paragraph{Utilizzo DMA per la lettura dei segnali}
+Per ottimizzare la lettura dei segnali dai sensori ad ultrasuoni, la Board 2 utilizza il Direct Memory Access (DMA).
+Il DMA consente di trasferire i dati direttamente tra la periferica (i sensori ad ultrasuoni) e la memoria, senza l'intervento della CPU.
+Il timer utilizzato è il $Timer 1$, con i canali $1$, $2$ e $3$ configurati in modalità \textit{input capture} per catturare i fronti di salita e discesa generati dai tre sensori.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/configurazione_timIC_sonar}
+	\caption{Configurazione del DMA per la lettura dei segnali dai sensori.}
+	\label{fig:dma_sonar}
+\end{figure}
+
+Ogni canale del DMA è configurato in modalità interrupt, permettendo, alla fine della rilevazione dei due fronti (salita e discesa), di eseguire una $Callback$ che imposta dei flag a 1. 
+Questo flag indica che i fronti sono stati rilevati e che la distanza dall'ostacolo può essere calcolata. In totale vengono eseguite solo $3$ callback, attivate solo quando uno specifico 
+canale DMA ha terminato la lettura di entrambi i fronti. La Figura~\ref{fig:callback_sonar} mostra un esempio di callback eseguita al termine della rilevazione dei fronti.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/callback_sonar}
+	\caption{Callback eseguita al termine della rilevazione dei fronti.}
+	\label{fig:callback_sonar}
+\end{figure}
+
+Alla fine della lettura, il task aggiorna lo snapshot \textbf{SonarsSnapshot} con le distanze rilevate dai tre sensori, come mostrato in Figura~\ref{fig:sonars_snapshot}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/funzionamento_generale/Sonars/sonars_snapshot}
+	\caption{Struttura dati dello snapshot SonarsSnapshot.}
+	\label{fig:sonars_snapshot}
+\end{figure}
+\clearpage
+
+
+
+
+\subsubsection{Task: lettura comandi utente}
+La Board 2 riceve i comandi utente provenienti da un joistick che comunica con un'ESP32 tramite Bluetooth. La Board 2, attraverso un task dedicato, riceve i comandi provenienti dalla $ESP32$
+con il protocollo \textbf{I2C}e li integra nello snapshot \textbf{BleControllerSnapshot}. In Figura~\ref{task_step_BLE} è mostrata lo step del task dedicato alla ricezione dei comandi utente, 
+in cui viene eseguita la lettura dei dati provenienti dalla $ESP32$ e l'aggiornamento dello snapshot \textbf{BleControllerSnapshot}. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/user_command/task_step_BLE}
+	\caption{Step del task dedicato alla ricezione dei comandi utente.}
+	\label{task_step_BLE}
+\end{figure}
+
+La funzione $BleController\_I2C\_ReadFrame$ si occupa di leggere i dati provenienti dalla $ESP32$ e di restituirli in una struttura dati, che viene poi utilizzata per aggiornare lo snapshot \textbf{BleControllerSnapshot}.
+
+In Figura~\ref{fig:ble_snapshot} è mostrata la struttura dati dello snapshot \textbf{BleControllerSnapshot},
+in cui sono presenti i comandi utente normalizzati ($x\_norm$ e $y\_norm$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/funzionamento_generale/user_command/BLE_snapshot}
+	\caption{Struttura dati dello snapshot BleControllerSnapshot.}
+	\label{fig:ble_snapshot}
+\end{figure}
+
+
+\paragraph{Interfacciamento DualSense PS5 tramite ESP32}
+Per la generazione dei comandi remoti è stato utilizzato un controller \textbf{Sony DualSense (PS5)}, interfacciato a una scheda \textbf{ESP32} che funge da bridge tra il protocollo Bluetooth e il bus I2C del rover.
+L'implementazione sul lato ESP32 è stata realizzata in ambiente Arduino IDE sfruttando la libreria \textbf{Bluepad32}.
+I dati del joystick sono stati rappresentati tramite la struct presente nell'immagine \ref{fig:rapp_tasti}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Joystick/joystick.jpg}
+	\caption{Tasti presenti sul joystick utilizzato.}
+	\label{}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/Joystick/RappresentazioneTasti.png}
+	\caption{Rappresentazione tasti del joystick.}
+	\label{fig:rapp_tasti}
+\end{figure}
+Una volta rappresentati i dati e individuato i valori di stanby, il flusso di elaborazione sull'ESP32 segue i seguenti passaggi:
+\begin{enumerate}
+	\item \textbf{Pairing e Connessione:} All'avvio, l'ESP32 scansiona i dispositivi Bluetooth. Una volta messo il DualSense in modalità pairing, la libreria stabilisce una connessione sicura.
+	
+	\item \textbf{Parsing dei dati:} Tramite le callback della libreria (\texttt{onConnectedGamepad}), vengono eseguiti alcuni controlli per garantire che si possa connettere solo il joystick autorizzato alla scheda.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/OnConnect.png}
+		\caption{Implementazione della funzione di callback per l'inizializzazione del controller DualSense all'atto della connessione Bluetooth.}
+		\label{}
+	\end{figure}
+	\clearpage
+	
+	\item \textbf{Normalizzazione:} Viene continuamente monitorato lo stato del BLuetooth e, se il joystick è connesso, i valori provenienti da esso vengono mappati in un range normalizzato a seconda delle necessità del supervisore. Una volta mappati, tali valori vengono utilizzati per aggiornare i dati presenti in controller\_data.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/Loop.png}
+		\caption{Normalizzazione dei dati inviati alla ESP32 tramite joystick}
+		\label{}
+	\end{figure}
+	\clearpage
+	
+	\item \textbf{Trasmissione I2C:} L'ESP32 è configurata come \textbf{I2C Slave}. Quando la Board 2 interroga l'ESP32 (tramite la funzione \texttt{BleController\_I2C\_ReadFrame} citata precedentemente), l'ESP32 trasmette un pacchetto dati strutturato contenente lo stato dei pulsanti e la posizione degli analogici.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/OnRequest.png}
+		\caption{Trasmissione dei dati del joystick della ESP32 al Master tramite callback}
+		\label{}
+	\end{figure}
+	
+	\item \textbf{Disconnesione:} Nel momento in cui viene rilevata la disconnesione del joystick dalla scheda, vengono impostati, tramite callback, i dati di default, che indicano al rover di rimanere fermo(velocità lineare e angolare impostate a zero). Così facendo, se il joystick dovesse disconnettersi per quelche motivo il rover rimane fermo e non vengono svolte azioni indesiderate che possono portarlo a situazioni pericolose.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Joystick/OnDIsconnect.png}
+		\caption{Normalizzazione dei dati inviati alla ESP32 tramite joystick}
+		\label{}
+	\end{figure}
+\end{enumerate}
+Questa architettura permette di delegare il carico computazionale della gestione Bluetooth alla ESP32, garantendo che la Board 2 (STM32) rimanga focalizzata esclusivamente sui task real-time di supervisione e sicurezza.
+\clearpage
+
+
+
+\subsubsection{Task: lettura giroscopio}
+La Board 2 è equipaggiata con un sensore IMU \textbf{MPU-6050}, che integra un accelerometro e un giroscopio a 3 assi. Poiché il sensore non fornisce direttamente l'orientamento assoluto, l'angolo di yaw
+(la rotazione del rover attorno al suo asse verticale) viene calcolato nel firmware integrando nel tempo i dati della velocità angolare provenienti dal giroscopio.
+All'accensione, il sistema esegue una calibrazione per impostare lo zero relativo alla direzione di avvio. La comunicazione con l'IMU avviene tramite protocollo I2C, e i dati elaborati aggiornano
+ciclicamente lo snapshot IMUSnapshot (Figura~\ref{imu_snapshot}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/funzionamento_generale/IMU/IMU_snapshot}
+	\caption{Struttura dati dello snapshot IMUSnapshot.}
+	\label{imu_snapshot}
+\end{figure}
+
+\subsubsection{Task: supervisore Board 2}
+Il cuore logico della Board 2 è rappresentato dal task del supervisore, un processo che implementa una macchina a stati complessa generata tramite Simulink Stateflow. 
+Il task opera come un arbitro di sicurezza tra i comandi utente e l'ambiente circostante, garantendo che il rover si muova nella direzione voluta dall'utente a meno di 
+possibili ostacoli statici o in movimento.
+
+In Figura~\ref{fig:supervisorB2_task} è mostrato lo step del task del supervisore, in cui vengono evidenziati gli input e gli output.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/task_step_supervisorB2}
+	\caption{Step del task del supervisore della Board 2.}
+	\label{fig:supervisorB2_task}  
+\end{figure}
+
+Ad ogni ciclo, il task acquisisce i dati dai sensori locali (\textbf{Sonar}, \textbf{IMU}, \textbf{Comandi utente}) e le informazioni provenienti dalla Board 1 tramite lo snapshot \textbf{RxSnapshot}.
+Il sistema valuta l'integrità dei dati e la persistenza della comunicazione con la Board 1. In base alla latenza dei messaggi e alla coerenza dei sensori, 
+il supervisore può far transitare il rover in stati di operatività $Degraded$ o $Critical$. Utilizzando i dati dei tre sonar frontali, il supervisore implementa algoritmi di protezione, infatti,
+se viene rilevato un ostacolo a distanza critica ($<70$ cm), il sistema forza un comando di $CMD\_ESTOP$.
+In caso di ostacoli in movimento (range $75-150$ cm), il supervisore attiva delle procedure di deviazione ($CMD\_GO\_LEFT$, $CMD\_GO\_RIGHT$) o di aggiramento ($CMD\_AVOID$), calcolando i nuovi target 
+di angolo yaw necessari per direzionare il rover verso l'assenza di ostacoli.
+
+Nel paragrafo "Coerenza di movimento del rover" si è parlato della capacità della Board 2 di monitorare la coerenza del movimento del rover. In effetti, il supervisore esegue un test di coerenza
+tra la rotazione stimata dalla lettura della velocità dei motori e quella misurata dall'IMU. Questa logica permette di rilevare 
+anomalie meccaniche (come lo slittamento di una ruota o il bloccaggio di un motore) o anomalie dei sensori IMU ed encoder. Se ci sono incoerenze, il supervisore di Board 2 imposta un flag $isMotionConsistent$ a 0.
+
+Infine, in condizioni nominali, la Board 2 non invia comandi di attuazione ai motori, lasciando che sia la Board 1 ad attuare. Tuttavia, il supervisore consente alla Board 2 di attuare se si verifica una di queste 
+condizioni:
+\begin{itemize}
+	\item Viene rilevato un timeout critico nella ricezione dei dati dalla Board 1 ($>120$ ms).
+	\item Il supervisore della Board 1 funziona in maniera discontinua.
+	\item Board 1 invia a Board 2 l'autorizzazione ad attuare.
+\end{itemize}
+
+E' da notare che l'attuazione passa attraverso il rele comandato da Board 1, quindi dovrà essere sempre Board 1 ad aprirlo per consentire al segnale UART di Board 2 di arrivare ai driver dei motori.
+
+In Figura~\ref{fig:b2_actuation} è mostrata la $actuation\_step$ di Board 2 in funzione della variabile $autorized\_to\_send\_command$ in uscita dal supervisore.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/B2Actuation}
+	\caption{Step di attuazione di Board 2 in funzione della variabile autorized\_to\_send\_command.}
+	\label{fig:b2_actuation}
+\end{figure}
+
+Data l'assenza degli encoder, l'attuazione di Board 2 dovrà essere in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
+La funzione di attuazione trasforma i riferimenti di velocità del supervisore in segnali di potenza per i motori. Il sistema opera in anello aperto (open-loop), convertendo i giri al minuto (RPM) desiderati in tensione elettrica
+Infine, i comandi vengono inviati al driver di potenza Sabertooth tramite una scalatura lineare del voltaggio in uscita, con un range di $[-12V; +12V]$ corrispondente a $[-MAX\_RPM; +MAX\_RPM]$.
+
+Lo snapshot del supervisore di Board 2 è mostrato in Figura~\ref{fig:b2_snapshot}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB2/snapshot_supervisoreB2}
+	\caption{Snapshot del supervisore di Board 2}
+	\label{fig:b2_snapshot}
+\end{figure}
+
+
+
+
+\subsubsection{Task: log dei dati per il debug}
+La Board 2 integra un task dedicato alla stampa dei dati per scopi di debug. Questo task, eseguito a cadenza regolare,
+acquisisce gli snapshot:
+\begin{itemize}
+	\item \textbf{RxSnapshot}
+	\item \textbf{BleControllerSnapshot}
+	\item \textbf{SonarsSnapshot}
+	\item \textbf{IMUSnapshot}
+\end{itemize}
+e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
+Lo step del task è mostrato in Figura~\ref{fig:log_task_b2}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
+	\caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
+	\label{fig:log_task_b2}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Funzionamento task di Board 1}
+\subsubsection{Task: lettura batteria e temperatura}
+La Board 1 è equipaggiata con sensori per il monitoraggio della temperatura e della batteria. Un task dedicato esegue ciclicamente la lettura di questi sensori, aggiornando lo snapshot \textbf{BoardHealthSnapshot} con i valori rilevati.
+
+In Figura~\ref{fig:health_task} è mostrato lo step del task dedicato alla lettura della batteria e temperatura, in cui vengono evidenziati i dati acquisiti e aggiornati nello snapshot \textbf{BoardHealthSnapshot}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/BatTemp/BoardHelathTask}
+	\caption{Step del task dedicato alla lettura della batteria e temperatura.}
+	\label{fig:health_task}
+\end{figure}
+
+Per garantire l'affidabilità a lungo termine, il sistema integra un modulo di diagnostica basato su convertitori Analogico-Digitali (ADC) che monitorano costantemente i parametri vitali della scheda. Questo modulo si occupa di due aspetti critici:
+
+\begin{itemize}
+	\item \textbf{Gestione della Batteria:} Il sistema legge la tensione della batteria attraverso un partitore resistivo. Poiché la scarica di una batteria non è lineare, il software utilizza una \textit{Look-Up Table} (LUT) e un'interpolazione
+	lineare per convertire i Volt in una percentuale di carica residua (0-100\%). Ciò fornisce all'utente un'indicazione realistica dell'autonomia residua.
+	\item \textbf{Monitoraggio Termico:}    Utilizzando il sensore di temperatura interno al microcontrollore STM32G4, il sistema calcola la temperatura operativa della logica di controllo. Il calcolo sfrutta i dati di calibrazione salvati in fabbrica
+	dal produttore per garantire la massima precisione.
+\end{itemize}
+
+Per evitare letture errate dovute a disturbi elettrici o picchi temporanei, i dati non vengono usati così come sono, ma vengono processati attraverso una media mobile. 
+Questo filtro "ammorbidisce" le letture su una finestra di 10 campioni, garantendo che i valori visualizzati siano stabili e puliti. 
+Infine, il modulo verifica che i valori rientrino in range di sicurezza (es. 7V - 15V per la batteria), segnalando errori di sistema qualora i parametri diventino critici
+
+\subsubsection{Task: supervisore Board 1}
+Il supervisore della Board 1 è implementato tramite una macchina a stati sviluppata in Simulink Stateflow. Questo task ha il compito di supervisionare l'integrità dell'hardware e di assegnare i riferimenti di velocità lineare e di rotazione.
+
+In Figura~\ref{fig:supervisorB1_task} è illustrato lo step del task del supervisore della Board 1, con il dettaglio delle interfacce di input e output.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB1/task_step_supervisorB1}
+	\caption{Step del task del supervisore della Board 1.}
+	\label{fig:supervisorB1_task}
+	
+\end{figure}
+
+Il task elabora in tempo reale i dati provenienti dalla \textbf{Board Health} (stato di batteria e temperatura), i feedback degli \textbf{Encoder} motori e i pacchetti dati ricevuti dalla Board 2.
+
+
+La logica di controllo è strutturata su tre pilastri fondamentali:
+\begin{itemize}
+	\item \textbf{Diagnostica e Fault Masking:} il sistema valuta l'integrità dei dati e la persistenza della comunicazione con la Board 2. In base alla latenza dei messaggi e alla coerenza dei sensori, può
+	far transitare il rover in stati di operatività $Degraded$ o $Critical$. Questi stati permettono al supervisore di inibire manore o di limitare la potenza alle ruote
+	in caso di anomalie, garantendo maggiore protezione. 
+	
+	\item \textbf{Gestione delle Manovre Complesse:} A differenza della Board 2, focalizzata sull'evitamento ostacoli, la Board 1 gestisce comandi di alto livello come la \textit{Rotazione a 180 gradi} assistita e la procedura di \textit{Emergency Stop}, 
+	monitorando l'arresto effettivo delle ruote tramite i sensori di velocità.
+	\item \textbf{Arbitraggio dell'Attuazione:} Il supervisore valuta costantemente l'affidabilità della comunicazione inter-board. Qualora rilevi un'instabilità nella comunicazione con l'altra scheda, è in grado di cedere i privilegi di attuazione alla Board 2,
+	realizzando una strategia di ridonanza funzionale che aumenta la resilienza del rover. I motivi per cui la Board 1 può decidere di cedere il controllo alla Board 2 quando la comunicazione con quest'ultima si interrompe o si degrada
+	derivano dal fatto che Board 2 ha a disposizione i sonar e sopratutto il comando utente, fondamentali per decider dove andare e se deviare il percorso o addirittura fermarsi.
+\end{itemize}
+
+Lo snapshot del supervisore di Board 1 è mostrato in Figura~\ref{fig:b1_snapshot}.
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/TaskSupervisoreB1/snapshot_supervisoreB1}
+	\caption{Step del task del supervisore della Board 1.}
+	\label{fig:b1_snapshot}
+	
+\end{figure}
+
+\subsubsection{Task: controllo motori}
+Il task di controllo presente nella Board 1 è responsabile dell'attuazione dei comandi di movimento del rover, basandosi sui riferimenti di velocità lineare e angolare forniti dal supervisore.
+Il task quindi:
+\begin{itemize}
+	\item legge i riferimenti di velocità lineare ($v\_ref$) e angolare ($omega\_ref$) calcolati dal supervisore.
+	\item legge le velocità delle ruote attraverso gli encode.
+	\item applica un controllo PID per regolare la potenza erogata ai motori, al fine di raggiungere i riferimenti di velocità desiderati.
+\end{itemize}
+Alla lettura degli encoder per stimare la velocità delle ruote è accompagnata una logica che permette il rilevamento di un'anomalia derivante dal fatto che si sta alimentando il motore ma 
+gli encoder non rilvano movimenti, quindi la velocità calcolata è nulla. In particolare, se si rileva quest'anomalia per $20$ cicli di esecuzione, si imposta la variabile $has\_no\_feedback(i)$ 
+associata al motore di riferimento a $1$.
+
+Se uno o più encoder si rompono, il rover non deve smettere di funzionare, ma deve "stimare" la velocità mancante usando quella delle ruote sane.
+Il codice applica una sostituzione simmetrica:
+
+\begin{itemize}
+	\item \textit{1 Fallimento}:Se si rompe l'encoder anteriore sinistro, il sistema "copia" il valore di quello posteriore sinistro.
+	\item \textit{2 Fallimenti}: Se si rompe un intero lato, copia i valori dall'altro lato.
+	\item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
+\end{itemize}
+
+\paragraph{Struttura del PI gerarchico del Rover}
+Il controllo del rover si basa su un PI gerarchico creato a partire da quattro controllori PI distinti associati a ogni ruota del rover. Tra i controllori creati viene scelto, come base della legge di controllo, il PI associato al motore della ruota destra posteriore, questo perchè dalle analisi effettuate si evince essere la ruota con la dinamica più lenta tra le quattro. Una volta scelto il controllore di base, dunque, si procede ad implementare la legge di controllo gerarchica, che consente di controllare contemporaneamente tutti e quattro i motori del rover garantendo che questi raggiungano insieme la velocità desiderata, dettata dall’utente tramite il joystick.
+\newline
+
+La legge di controllo è organizzata secondo una struttura a quattro livelli principali, ciascuno basato su un regolatore PI dedicato:
+\begin{enumerate}
+	\item controllo globale della velocità del rover;
+	\item sincronizzazione tra asse anteriore e asse posteriore;
+	\item controllo differenziale dell’asse posteriore;
+	\item controllo differenziale dell’asse anteriore.
+\end{enumerate}
+Questa organizzazione consente di separare chiaramente:
+\begin{itemize}
+	\item il controllo della velocità longitudinale;
+	\item la sincronizzazione tra gli assi;
+	\item la gestione della rotazione del rover.
+\end{itemize}
+
+
+\paragraph{Controllo globale della velocità}
+Il livello più alto della gerarchia è rappresentato dal PI globale, che ha il compito di regolare la velocità media complessiva del rover. La velocità globale viene calcolata come media delle velocità delle quattro ruote.
+\newline
+
+Il regolatore PI globale calcola l’errore di velocità come differenza tra il riferimento richiesto dall’utente e la velocità globale misurata, e utilizza tale errore per generare un comando di base comune a tutti i motori:
+\[
+u_{base} =PI(\omega_{ref} - \omega_{global} )
+\]
+Il PI globale è rappresentato dal PI che è stato scelto come base del controllo gerarchico, identificato dal controllore progettato in precedenza ed associato alla ruota destra posteriore.
+
+
+
+\paragraph{Sincronizzazione tra asse anteriore e asse posteriore}
+Una volta generata l’uscita da parte del PI globale essa non viene direttamente applicata a tutti i motori, questo perché i motori, essendo diversi, presentano una risposta al gradino diversa, hanno tempi di salita e assestamento differenti nonchè velocità massime raggiungibili differenti. Se usassimo direttamente l’uscita del PI globale su tutti i motori essi non sarebbero sincronizzati.
+Per questo motivo si utilizza un secondo livello di controllo, dedicato alla sincronizzazione tra asse anteriore e asse posteriore.
+\newline
+
+Tale livello consiste nell’utilizzare un regolatore PI dedicato che agisce sull’errore definito come differenza tra la velocità media dell’asse anteriore e quella dell’asse posteriore:
+\[
+e_{asse} =\omega_{anteriore} -\omega_{posteriore} 
+\]
+
+Il termine di correzione generato dal PI punta a portare a zero l’errore così rappresentato. Tale termine viene:
+\begin{itemize}
+	\item sommato al comando dell’asse posteriore, in modo da aumentare la velocità delle ruote posteriori quando l’asse anteriore risulta più veloce (errore positivo) e ridurla nel caso opposto (errore negativo);
+	\item sottratto al comando dell’asse anteriore, in modo da ridurre la velocità delle ruote anteriori quando esse risultano più veloci e aumentarla nel caso opposto.
+\end{itemize}
+
+
+In questo modo:
+\begin{itemize}
+	\item entrambi gli assi tendono a mantenere la stessa velocità media;
+	\item vengono compensate eventuali differenze di carico o attrito;
+	\item si garantisce un moto rettilineo stabile del rover.
+\end{itemize}
+
+\paragraph{Controllo differenziale e gestione della rotazione}
+Una volta ottenuta l’uscita per ruote posteriori e anteriori è necessario utilizzare un ulteriore livello di controllo. In particolare la gerarchia prevede  due livelli inferiori di controllo, uno dedicato alle ruote posteriori ed uno per quelle anteriori, responsabili del controllo differenziale.
+
+Il controllo differenziale ha il compito di:
+\begin{itemize}
+	\item bilanciare la velocità tra ruota destra e sinistra su ogni asse;
+	\item generare la rotazione del rover attorno al proprio baricentro in risposta ai comandi di sterzo.
+\end{itemize}
+
+Tramite questi livelli di controllo il rover può girare su sé stesso, effettuare sterzate e mantenere un traiettoria rettilinea durante la marcia, compensano eventuali differenza di velocità tra il lato sinistro e quello destro.
+\newline
+
+L’errore differenziale viene definito come:
+\[
+e_{diff} =(\omega_{dx} - \omega_{sx} ) - 2 \cdot \omega_{target} 
+\]
+dove $\omega_{target}$ è proporzionale al comando di sterzo fornito dall’utente.
+\newline
+
+I regolatori PI differenziali generano una correzione del tutto analoga a quella introdotta dal PI sugli assi, basata sull’errore di velocità tra i due lati, che viene:
+\begin{itemize}
+	\item sottratta al comando della ruota destra;
+	\item aggiunta al comando della ruota sinistra.
+\end{itemize}
+
+Tramite questo approccio è possibile aggiungere dei termini a destra o sinistra per realizzare una rotazione controllata del rover senza alterare la velocità media imposta dal livello globale.
+
+\paragraph{Sistema di attuazione}
+Il sistema di attuazione dei motori è realizzato mediante driver di potenza Sabertooth 2x12, impiegati per il pilotaggio dei motori DC del rover.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Controllore/screenshot003}
+	\caption{Driver di potenza Sabertooth 2x12}
+	\label{fig:screenshot003}
+\end{figure}
+
+
+Nel sistema sono impiegati due driver Sabertooth, ciascuno responsabile del controllo di una coppia di motori:
+\begin{itemize}
+	\item un driver dedicato alle ruote anteriori del rover;
+	\item un driver dedicato alle ruote posteriori del rover.
+\end{itemize}
+
+\paragraph{Modalità di controllo dei driver}
+I driver Sabertooth supportano diverse modalità di comando, tra cui il controllo analogico tramite PWM filtrato, la modalità \textit{Simplified Serial}, la modalità con \textit{Slave Select} e la modalità \textit{Serial Packetized}.  
+Tra queste, è stata scelta la modalità \textit{Serial Packetized}.
+
+La scelta di tale modalità, al posto di un controllo PWM diretto, è motivata da diversi fattori progettuali:
+\begin{itemize}
+	\item maggiore affidabilità del comando, grazie alla trasmissione digitale dei setpoint;
+	\item gestione interna delle protezioni da parte del driver (sovracorrente, sovratensione, fault);
+	\item riduzione della sensibilità ai disturbi elettrici;
+	\item semplificazione del software di basso livello sul microcontrollore;
+	\item riduzione del numero di linee di controllo necessarie tra microcontrollore e driver.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Controllore/screenshot005}
+	\caption{Collegamento MCU-Sabertooth in modalità Packetized serial}
+	\label{fig:screenshot005}
+\end{figure}
+
+
+Tale modalità permette di inviare comandi strutturati come pacchetti da 4 byte contenenti indirizzo del driver, numero del motore, valore del setpoint di velocità e checksum, riducendo la probabilità di comandi errati dovuti a disturbi elettrici o rumore sulla linea.
+\newline
+
+Ogni Sabertooth è stata configurata con un indirizzo seriale distinto, impostato tramite i DIP switch hardware presenti sul driver:
+\begin{itemize}
+	\item Sabertooth che controlla le ruote anteriori configurata con indirizzo 135;
+	\item Sabertooth che controlla le ruote posteriori configurata con indirizzo 134.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Controllore/screenshot004}
+	\caption{Impostazione dell'indirizzo del driver Sabertooth tramite DIP switch 4-5-6}
+	\label{fig:screenshot004}
+\end{figure}
+
+
+L’assegnazione di indirizzi differenti permette di collegare entrambi i driver sulla stessa linea seriale. In questo modo, il microcontrollore può inviare, usando la stessa linea seriale, comandi selettivi ai motori anteriori o posteriori semplicemente variando l’indirizzo del pacchetto trasmesso.
+\newline
+
+Per quanto riguarda l’alimentazione, è stato abbassato lo switch 3 di ciascun driver, attivando la modalità \textit{Lithium Cutoff}.
+In questa configurazione il driver Sabertooth rileva automaticamente il numero di celle della batteria al momento dell’accensione e imposta una soglia di spegnimento pari a $3.0 V$ per cella, prevenendo la scarica eccessiva del pacco batterie e proteggendo l’hardware da condizioni di sotto tensione.
+
+\paragraph{Struttura del pacchetto seriale}
+Il protocollo Packetized Serial dei driver Sabertooth definisce un formato di pacchetto composto da quattro byte, utilizzato per la codifica dei comandi di controllo dei motori. La struttura del pacchetto è la seguente:
+\begin{itemize}
+	\item Address byte: identifica il driver destinatario;
+	\item Command byte: specifica il motore (1 o 2) e la direzione di rotazione;
+	\item Data byte: rappresenta il setpoint di velocità nel range 0–127;
+	\item Checksum: calcolato come somma dei tre byte precedenti mascherata a 7 bit.
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\fbox{\includegraphics[width=0.25\linewidth]{images/Controllore/screenshot009}}
+	\caption{Esempio di pacchetto Packetized serial letto dal driver Sabertooth con indirizzo 135, relativo al comando del motore M1 con setpoint di velocità del 50\% in direzione positiva}
+	\label{fig:screenshot007}
+\end{figure}
+
+\clearpage
+
+
+\subsubsection{Task: log dei dati per il debug}
+La Board 1 integra un task dedicato alla stampa dei dati per scopi di debug. Questo task, eseguito a cadenza regolare,
+acquisisce gli snapshot:
+\begin{itemize}
+	\item \textbf{RxSnapshot}
+	\item \textbf{EncoderSnapshot}
+	\item \textbf{BoardHealthSnapshot}
+\end{itemize}
+e stampa i dati più rilevanti su console. Questa funzionalità è fondamentale per monitorare lo stato del sistema durante le fasi di sviluppo e test, permettendo di identificare rapidamente eventuali anomalie o comportamenti imprevisti.
+Lo step del task è mostrato in Figura~\ref{fig:log_task_b1}, in cui vengono evidenziati i dati acquisiti e stampati su console.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/funzionamento_generale/LogBoard2/LogTask}
+	\caption{Step del task dedicato alla stampa dei dati per scopi di debug.}
+	\label{fig:log_task_b1}
+\end{figure}
+
+
+\subsubsection{Task: led}
+Per fornire un feedback immediato sullo stato operativo del sistema senza l'ausilio di terminali esterni, è stato implementato un task dedicato alla gestione della diagnostica visiva tramite LED. Il modulo \texttt{led\_task.c}
+monitora le maschere di errore e le azioni correnti decise dai supervisori di entrambe le board, traducendole nel seguente protocollo di segnalazione:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Colore LED} & \textbf{Comportamento} & \textbf{Significato Operativo} \\ \hline
+		Rosso & Fisso & Guasto Critico (Sistema bloccato) \\ \hline
+		Rosso & Lampeggiante & Guasto Degraded (Prestazioni ridotte) \\ \hline
+		Giallo (L/R) & Fisso & Manovra di schivata o sterzata in corso \\ \hline
+		Blu & Fisso & Emergency Stop attivo (Frenata di emergenza) \\ \hline
+	\end{tabular}
+	\caption{Protocollo di segnalazione visiva del rover.}
+	\label{tab:led_protocol}
+\end{table}
+
+Questa implementazione risulta fondamentale durante i test sul campo, poiché permette di distinguere istantaneamente tra un normale comportamento di evitamento ostacoli (LED Giallo) e un arresto dovuto a un'anomalia hardware o software (LED Rosso).
+
+
+\subsection{Task di trasmissione e ricezione tra le due Board}
+Le due board comunicano tra loro tramite un collegamento seriale, con presenza di task di trasmissione e ricezione su entrambe le board. Il task di trasmissione su entrambe le board ha periodo di 20 ms,
+mentre il task di ricezione è di tipo event-driven, attivato dall'arrivo di nuovi dati sulla seriale. In Figura~\ref{fig:comunicazione_board21} è mostrata l'interazione tra i task di trasmissione della 
+Board 2 e ricezione della Board 1, evidenziando quali sono i dati che vengono trasmessi e ricevuti tra le due board. In particolare vengono inviati gli snapshot \textbf{SupervisorSnapshot}, 
+\textbf{BleControllerSnapshot} e \textbf{IMUSnapshot}. Il contenuto di questi snapshot è descritto in dettaglio nelle sezioni dedicate ai task di Board 2.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b2b1}
+	\caption{Interazione tra i task di trasmissione della Board 2 e ricezione della Board 1.}
+	\label{fig:comunicazione_board21}
+\end{figure}
+
+Allo stesso modo, nella Figura~\ref{fig:comunicazione_board12} è mostrata l'interazione tra i task di trasmissione della Board 1 e ricezione della Board 2. In particolare, la Board 1 invia alla Board 2 lo
+snapshot \textbf{EncoderSnapshot} e \textbf{SupervisorSnapshot}. Il contenuto di questi snapshot è descritto in dettaglio nelle sezioni dedicate ai task di Board 1.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/funzionamento_generale/comm_b1b2}
+	\caption{Interazione tra i task di trasmissione della Board 1 e ricezione della Board 2.}
+	\label{fig:comunicazione_board12}
+\end{figure}
+
+
+\section{Algoritmo di schedulazione dei task}
+Per la gestione dei task su entrambe le board, è stato adottato l'algoritmo di scheduling \textbf{Rate Monotonic (RM)}. 
+RM è un algoritmo di scheduling a priorità fissa di tipo preventivo (preemptive).
+La scelta è motivata dal fatto che RM è l'algoritmo \textbf{ottimo} tra quelli a priorità statica: se un set di task non è schedulabile con RM, non lo sarà con nessun altro algoritmo a priorità fissa. 
+Secondo la logica RM, la priorità di un task è inversamente proporzionale al suo periodo:
+\begin{itemize}
+	\item Task con periodi più brevi (alta frequenza) $\rightarrow$ Priorità più alta.
+	\item Task con periodi più lunghi (bassa frequenza) $\rightarrow$ Priorità più bassa.
+\end{itemize}
+
+\subsection{Calcolo del Fattore di Utilizzo}
+Il primo passo per validare il sistema consiste nel calcolare il fattore di utilizzo della CPU ($U$) per ogni board. 
+Questo valore rappresenta la frazione di tempo in cui il processore è occupato nell'esecuzione dei task applicativi ed è definito come:
+
+\begin{equation}
+	U = \sum_{i=1}^{n} \frac{C_i}{T_i}
+\end{equation}
+
+dove $C_i$ è il WCET misurato e $T_i$ è il periodo del task $i$-esimo.
+
+\subsection{Criterio di Schedulabilità: Limite di Liu-Layland}
+Per garantire che tutti i task rispettino le proprie scadenze (deadline), è stato applicato il \textbf{test di condizione sufficiente} di Liu-Layland. Un set di $n$ task è sicuramente schedulabile, se il fattore di utilizzo totale $U$ è inferiore o uguale a un limite superiore $U_{lub}$ (Least Upper Bound), calcolato come:
+
+\begin{equation}
+	U \leq n(2^{1/n} - 1)
+\end{equation}
+
+Per il nostro sistema, dove sono presenti 7 task in esecuzione su entrambe le board, i limiti teorici sono:
+\begin{equation}
+	U_{lub} \leq 7(2^{1/7} - 1) \approx 0.72 (72.0\%).
+\end{equation}
+Se l'utilizzo calcolato $U$ risulta inferiore a questi valori, il sistema è sicuramente schedulabile utilizzando RM.
+\clearpage
+
+\subsection{Verifica Numerica dei task su Board 1}Sulla base dei WCET acquisiti tramite il registro DWT, i parametri risultanti per i task di Board 1 sono:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lcccc}
+		\toprule
+		\textbf{Task (Board 1)} & \textbf{Periodo ($T_i$)} & \textbf{WCET ($C_i$)} & \textbf{Utilizzo ($U_i$)} \\ 
+		\midrule
+		Task\_Control    & 10 ms  & 148.71 \unit{\micro\second} & 1.487 \% \\
+		Task\_Supervisor & 20 ms  & 137.55 \unit{\micro\second} & 0.688 \% \\
+		Task\_TX         & 20 ms  & 128.82 \unit{\micro\second} & 0.644 \% \\
+		Task\_BattTemp   & 100 ms & 32.88 \unit{\micro\second}  & 0.033 \% \\ 
+		Task\_RX         & 20 ms  & 90.54 \unit{\micro\second}  & 0.453 \% \\ 
+		Task\_Led        & 100 ms & 41 \unit{\micro\second}     & 0.041 \% \\ 
+		Task\_Log        & 1000 ms & 4989.35 \unit{\micro\second} & 0.499 \% \\ 
+		\midrule
+		\textbf{Totale Board 1} & & \boldmath$U_{B1}$ & \textbf{3.845 \%} \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Analisi di schedulabilità per la Board 1.}
+\end{table}
+
+\subsection{Verifica Numerica dei task su Board 2}
+Sulla base dei WCET acquisiti tramite il registro DWT, i parametri risultanti per i task di Board 2 sono:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lcccc}
+		\toprule
+		\textbf{Task (Board 2)} & \textbf{Periodo ($T_i$)} & \textbf{WCET ($C_i$)} & \textbf{Utilizzo ($U_i$)} \\ 
+		\midrule
+		Task\_ReadBLE    & 20 ms  & 5022.88 \unit{\micro\second} & 25.11 \% \\
+		Task\_Supervisor & 20 ms  & 332.66 \unit{\micro\second}  & 1.66 \% \\
+		Task\_ReadSonars & 60 ms  & 56.47 \unit{\micro\second}   & 0.09 \% \\
+		Task\_ReadIMU    & 20 ms & 5013.58 \unit{\micro\second} & 25.07 \% \\ 
+		Task\_TX         & 20 ms & 120.01 \unit{\micro\second}    & 0.60 \% \\ 
+		Task\_RX         & 20 ms & 69.14 \unit{\micro\second}   & 0.35 \% \\ 
+		Task\_Log        & 1000 ms & 5129.35 \unit{\micro\second} & 0.51 \% \\ 
+		\midrule
+		\textbf{Totale Board 2} & & \boldmath$U_{B2}$ & \textbf{53.39 \%} \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Analisi di schedulabilità per la Board 2.}
+\end{table}
+\clearpage
+
+\subsection{Assegnazione delle priorità}
+Una volta appurato che il set di task fosse schedulabile secondo l'algoritmo Rate Monotonic, in base ai periodi di ogni task sono state assegnate le seguenti priorità:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/priorita_board1.png}
+	\caption{Priorità assegnate ai task di Board 1 tramite FREERTOS}
+	\label{fig:priorità_board1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/priorita_board2.png}
+	\caption{Priorità assegnate ai task di Board 2 tramite FREERTOS}
+	\label{fig:priorità_board2}
+\end{figure}
+
+
+\section{Gestione della concorrenza e sincronizzazione: i Mutex}
+In un sistema real-time basato su task concorrenti che condividono risorse hardware o strutture dati, la sola gestione delle priorità tramite politiche di scheduling come il Rate Monotonic non è sufficiente a garantire il corretto funzionamento del sistema.  
+Quando più task accedono in modo concorrente alle stesse risorse, è infatti necessario introdurre meccanismi di sincronizzazione per prevenire il fenomeno delle \textit{race condition} e garantire la consistenza dei dati.
+
+Nel progetto del rover, la sincronizzazione tra i task è stata realizzata principalmente mediante l’utilizzo di mutex forniti da FreeRTOS, usati per proteggere l’accesso alle risorse condivise.
+
+\paragraph{Perché utilizzare i Mutex}
+L'uso dei mutex (Mutual Exclusion) è stato preferito all'uso dei semplici semafori binari per la gestione delle sezioni critiche per tre motivi tecnici fondamentali:
+\begin{enumerate}
+	\item Ownership: Un mutex può essere rilasciato esclusivamente dal task che lo ha acquisito. Questo garantisce che l’accesso a una risorsa condivisa sia strettamente controllato e non possa essere rilasciato accidentalmente da task non coinvolti nella sezione critica.
+	
+	\item Priority inheritance: I mutex di FreeRTOS implementano il meccanismo di priority inheritance, che consente di evitare il fenomeno della priority inversion. In particolare, se un task ad alta priorità tenta di accedere a una risorsa occupata da un task a priorità inferiore, quest’ultimo eredita temporaneamente una priorità più alta, così da completare rapidamente la sezione critica e rilasciare il mutex.
+	
+	\item Robustezza: I mutex sono progettati per essere robusti: nel caso in cui un task termini mentre detiene un mutex, la risorsa viene comunque rilasciata, evitando situazioni di blocco permanente del sistema.
+\end{enumerate}
+
+
+\subsection{Snapshot come struttura condivisa}
+Nel progetto del rover, la comunicazione tra task concorrenti non avviene tramite lo scambio diretto di messaggi, ma mediante l’utilizzo di strutture dati condivise denominate \textit{snapshot}.  
+
+Uno snapshot rappresenta una fotografia consistente dello stato di un determinato sottosistema e racchiude tutte le informazioni che un task desidera rendere disponibili al resto del sistema. A seconda del task che lo produce, uno snapshot può contenere:
+\begin{itemize}
+	\item dati acquisiti da sensori (ad esempio IMU, encoder, sonar);
+	\item informazioni di validità temporale dei dati, come l’istante dell’ultima acquisizione valida;
+	\item dati ricevuti da periferiche esterne o da altre board (ad esempio tramite UART);
+	\item variabili di stato o grandezze calcolate che devono essere esposte ad altri task, come parametri di controllo o informazioni per il supervisore.
+\end{itemize}
+
+In questo modo, ogni task produttore aggiorna periodicamente il proprio snapshot, mentre i task che necessitano di tali informazioni leggono sempre l’ultima versione completa dei dati tramite un’API dedicata, senza interagire direttamente con il meccanismo di sincronizzazione.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{images/Scheduling/EsempioMutex1.png}
+	\caption{Struttura dello snapshot Board\_Health}
+	\label{fig:esempiomuex1}
+\end{figure}
+
+
+
+\subsubsection{Protezione degli snapshot tramite mutex}
+Poiché gli snapshot sono strutture dati condivise tra più task, il loro accesso deve essere opportunamente sincronizzato per garantire la coerenza delle informazioni lette.  
+Per questo motivo, ad ogni snapshot è associato un mutex dedicato, utilizzato per proteggere le operazioni di lettura e scrittura.
+\newline 
+
+I mutex associati agli snapshot sono stati definiti staticamente tramite l'interfaccia CubeMX.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/EsempioMutex}
+	\caption{Configurazione CubeMX del mutex relativo allo snapshot Board\_Health}
+	\label{fig:esempiomutexrifatto}
+\end{figure}
+
+Durante la fase di inizializzazione di FreeRTOS, gli handle dei mutex vengono passati ai moduli dei relativi snapshot, da cui viene poi utilizzato per sincronizzare l’accesso ai dati contenuti nello snapshot.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Scheduling/EsempioMutex2}
+	\caption{Definizione statica del mutex e dei relativi attributi generata da CubeMX}
+	\label{fig:esempiomutex2rifatto}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/Scheduling/EsempioMutex3.png}
+	\caption{Inizializzazione del mutex in \texttt{MX\_FREERTOS\_Init} e passaggio dell’handle al modulo dello snapshot Board\_Health}
+	\label{fig:esempiomuex3}
+\end{figure}
+
+
+
+La scrittura di uno snapshot avviene in modo atomico: il task produttore acquisisce il mutex, aggiorna l’intera struttura e rilascia il mutex al termine dell’operazione. Analogamente, un task consumatore acquisisce il mutex prima di copiare localmente lo snapshot e lo rilascia subito dopo. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Scheduling/EsempioMutex4.png}
+	\caption{Implementazione dello snapshot Board Health}
+	\label{fig:esempiomuex4}
+\end{figure}
+
+
+Questo schema, basato sull’uso congiunto di snapshot e mutex dedicati, permette di condividere i dati tra i task in modo semplice e controllato.   
+L’adozione dello stesso approccio per tutti i sottosistemi del rover rende il codice più ordinato e facilita l’aggiunta di nuovi task o nuove funzionalità senza modificare l’architettura preesistente.
+
+
+
+
+
+\subsubsection{Mutex e snapshot implementati su Board 1}
+Gli snapshot gestiti su Board 1 contengono dati rilevanti per il funzionamento e la sicurezza del rover, come informazioni sullo stato della batteria e della temperatura, riferimenti utilizzati dal ciclo di controllo e segnalazioni di sicurezza generate dal supervisore, tra cui eventuali condizioni di arresto di emergenza. Per questo motivo dobbiamo assicurarci che i dati disponibili siano sempre coerenti.
+\newline
+
+Di seguito sono riportati i mutex utilizzati, descrivendo per ciascuno i task coinvolti e il ruolo dei dati protetti:
+
+\begin{itemize}
+	\item \texttt{mutex\_Encoders}: Protegge lo snapshot contenente i dati degli encoder. I dati vengono scritti dal task di controllo durante la fase di acquisizione delle velocità delle ruote, mentre vengono letti dal task supervisore per verificare lo stato delle ruote e l’eventuale presenza di anomalie, inoltre, vengono letti anche dal task di trasmissione per inviare gli RPM alla Board~2, dove vengono utilizzati per diagnosi incrociate con i dati dell’IMU.
+	
+	\item \texttt{mutex\_BoardHealth}: Protegge i dati relativi allo stato della board, come tensione della batteria e temperatura. Lo snapshot è scritto dal task di Board Health ed è letto dal task supervisore per il controllo dei limiti operativi e la gestione di eventuali condizioni critiche.
+	
+	\item \texttt{mutex\_UartRx}: Protegge i dati ricevuti via UART dalla Board 2. Lo snapshot è scritto dal task di ricezione UART e letto dal task supervisore, che utilizza tali informazioni per valutare lo stato globale del rover e per determinare eventuali limitazioni sulla velocità o strategie di schivata ostacoli.
+	
+	\item \texttt{mutex\_Supervisor}: Protegge lo snapshot del supervisore. I dati sono scritti dal task supervisore e letti dal task di controllo, che utilizza i riferimenti di velocità forniti e reagisce immediatamente a eventuali segnali di fault, arrestando o modificando il comportamento del sistema di attuazione.
+\end{itemize}
+
+
+\subsection{Mutex e snapshot implementati su Board 2}
+Gli snapshot gestiti su Board 2 contengono i comandi provenienti dall'utente e dati acquisiti dall’ambiente esterno, come misure inerziali ed informazioni provenienti dai sensori a ultrasuoni, utilizzate per la gestione delle manovre di schivata e della frenata di emergenza. Per questo motivo dobbiamo assicurarci che i dati letti siano sempre coerenti tra task concorrenti.
+\newline
+
+Di seguito sono riportati i mutex utilizzati, descrivendo per ciascuno i task coinvolti e il ruolo dei dati protetti:
+\begin{itemize}
+	\item \texttt{mutex\_Ble}: Protegge lo snapshot contenente i comandi utente provenienti dal controller remoto. I dati vengono scritti dal task che legge l’interfaccia $I^2C$ collegata alla scheda ESP32; mentre è letto dal task supervisore per verificare la freschezza dei dati e il corretto funzionamento della comunicazione, e dal task di trasmissione per inoltrare i setpoint alla Board 1, che aggiorna di conseguenza i riferimenti di controllo.
+	
+	\item \texttt{mutex\_Imu}: Protegge lo snapshot dei dati inerziali acquisiti dall’IMU. I dati vengono scritti periodicamente dal task di lettura dell’IMU e sono letti dal task supervisore per verificare la correttezza dell’acquisizione, per effettuare controlli di coerenza con gli RPM ricevuti e per gestire le manovre di schivata o rotazione del rover. Lo snapshot è inoltre letto dal task di trasmissione per inviare lo yaw alla Board 1, che gestisce l’attuazione principale del sistema.
+	
+	\item \texttt{mutex\_UartRx}: Protegge i dati ricevuti dalla Board 1 tramite UART. Lo snapshot è scritto dal task di ricezione UART e letto dal task supervisore, che utilizza tali informazioni per valutare lo stato globale del rover e determinare eventuali azioni correttive o di sicurezza da attuare anche su Board 2.
+	
+	\item \texttt{mutex\_Sonar}: Protegge lo snapshot contenente le misure dei sensori a ultrasuoni. I dati sono scritti dal task di acquisizione dei sonar e letti dal task supervisore per la gestione delle manovre di schivata degli ostacoli o per l’attivazione della frenata di emergenza.
+	
+	\item \texttt{mutex\_Supervisor}: Protegge lo snapshot del supervisore di Board 2. I dati sono scritti dal task supervisore e letti dal task di trasmissione, che invia alla Board 1 lo stato delle periferiche e le informazioni diagnostiche relative alla Board 2, nonchè indicazioni di controllo per preservare la sicurezza del rover.
+\end{itemize}
+
+\newpage
+\section{Condizioni di funzionamento}
+Il rover è dotato di due schede di controllo, denominate Board 1 e Board 2, che collaborano per garantire il funzionamento del sistema. In Figura~\ref{fig:architettura} è mostrata l'architettura generale del sistema.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/architettura}
+    \caption{Architettura generale del sistema.}
+    \label{fig:architettura}
+\end{figure}
+
+\subsection{Condizioni di funzionamento nominale}
+In condizioni di funzionamento nominale la Board 1 è considerata il $Master$, occupandosi dell'attuazione dei motori, inviando tramite UART l'ingresso di controllo. La Board 2 è considerata $Slave$ in quanto in condizioni nominali
+non comanda i motori. Questi ultimi possono raggiungere una velocità massima di $160 RPM$.
+Il riferimento di velocità lineare o di rotazione è calcolato in base ai comandi utente inviati attraverso un joistick tramite protocollo \textit{Bluethooth} ad un $ESP32$ e ricevuti dalla Board 2 tramite protocollo $I2C$.
+La Board 2 quindi invia i comandi utente ricevuti alla Board 1, che si occupa di eseguirli. 
+\paragraph{Rilevamento ostacoli}
+I riferimenti di velocità sono influenzati da condizioni di sicurezza quali la presenza di ostacoli statici o in movimento.
+Infatti, in presenza di ostacoli statici a meno di $70$ cm, il supervisore di Board 2 forza un comando di $CMD\_ESTOP$, mentre in presenza di ostacoli in movimento a distanza compresa tra $150$ e $300$ cm, il supervisore di Board 2, che si occupa 
+di rilevare ostacoli, attiva delle procedure di deviazione o di aggiramento, come $CMD\_AVOID\_LEFT$ o $CMD\_GO\_LEFT$. Essendo che in condizioni nominali Board 2 non attua, questi comandi vengono inviati dalla Board 2, tramite la comunicazione UART, alla Board 1 che si occupa di eseguirli.
+
+
+
+\subsection{Condizioni di funzionamento critico o degradato}
+
+Il ciclo di vita delle due board prevede la gestione di stati operativi $non$ nominali:
+\begin{itemize}
+    \item \textbf{Modalità degradata}: il sistema mantiene la funzionalità ma con velocità ridotte del $50\%$.
+    \item \textbf{Modalità critica}: il sistema si ferma, interrompendo l'esecuzione dei comandi utente per motivi di sicurezza.
+\end{itemize}
+
+
+\paragraph{Meccanismo di rilevazione dei guasti}
+Il passaggio a queste modalità avviene monitorando la frequenza di aggiornamento dei dati provenienti da sensori e periferiche. Ogni Board interroga i propri componenti e considera la lettura "corretta" solo quando la funzione software dedicata restituisce uno stato di successo.
+Ogni volta che viene convalidata una lettura, il sistema aggiorna un timestamp di riferimento, che rappresenta l'ultimo momento in cui i dati sono stati considerati affidabili.
+Invece di basarsi su un singolo ritardo isolato, il sistema calcola il periodo medio di ricezione tramite una media mobile degli ultimi 10 intervalli temporali. Questo approccio evita che piccoli ritardi casuali o singole letture perse causino inutili cambi di modalità.
+
+Ogni Board agisce quindi in base al valore medio calcolato:
+\begin{itemize}
+\item \textbf{Soglia di allerta}: se il periodo medio di aggiornamento supera i $40\,\mathrm{ms}$, il sistema passa in modalità degradata, segnalando un rallentamento eccessivo dei dati.
+\item \textbf{Soglia massima}: se la media degli intervalli supera i $120\,\mathrm{ms}$, il guasto è considerato critico; il sistema viene bloccato per garantire la sicurezza del rover e dell'utente.
+\end{itemize}
+
+Per alcune periferiche specifiche, come gli encoder, la sola analisi temporale non è sufficiente;
+in questi casi viene applicata una logica di diagnostica più avanzata per verificare la validità del segnale.
+
+
+\paragraph{Encoder non funzionanti}
+Il rover è progettato per continuare a funzionare anche in presenza di guasti agli encoder delle ruote.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Encoder_faults}
+    \caption{Logica di sostituzione in presenza di encoder non funzionanti.}
+    \label{fig:encoder_fault}
+\end{figure}
+Se uno o più encoder si rompono, il sistema stima la velocità mancante usando quella delle ruote sane. La logica di sostituzione è la seguente:
+\begin{itemize}
+    \item \textit{1 Fallimento}: Se si rompe l'encoder anteriore sinistro, il sistema "copia" il valore di quello posteriore sinistro.
+    \item \textit{2 Fallimenti}: Se si rompe un intero lato, copia i valori dall'altro lato.
+    \item \textit{3 Fallimenti}: Tutte le ruote assumono il valore dell'unica ruota superstite.
+\end{itemize}
+La rilevazione di un encoder non funzionante avviene attraverso una logica che monitora la potenza erogata al motore e la velocità rilevata dagli encoder. Se si alimenta un motore ma gli encoder non 
+rilevano movimenti (velocità calcolata è nulla) per 20 cicli di esecuzione, si imposta la variabile $has\_no\_feedback(i)$ associata al motore di riferimento a $1$, indicando che l'encoder è considerato non funzionante
+e attivando la logica di sostituzione descritta sopra. In questo caso viene segnalato un guasto di tipo $Degraded$ al supervisore di Board 1, che decide di limitare la potenza erogata ai motori. In particolare
+si applica il $50\%$ di potenza massima alle ruote, in modo da ridurre il rischio di slittamento o perdita di controllo dovuto alla mancanza di feedback dagli encoder.
+
+\paragraph{Coerenza di movimento del rover}
+La Board 2 monitora uno stato di coerenza tra la rotazione stimata dalla lettura della velocità dei motori (calcolata dagli encoder) e quella misurata dall'IMU. Se ci sono incoerenze, il supervisore di Board 2 
+imposta un flag $isMotionConsistent$ a 0, indicando che il movimento del rover non è affidabile.
+Nel caso in cui, oltre a questa condizione di incoerenza, ci si trovi anche nella condizione di degrado di uno o più encoder e si riceva anche un segnale di incoerenza da parte dell'IMU, il supervisore di Board 1 decide di fermare il rover.
+
+\paragraph{Board 2 non riceve}
+
+Se la Board 2 non riceve dati dalla Board 1 per un periodo di tempo superiore a 120 ms, la Board 2 decide di inviare il comando di attuazione al rele.
+Tuttavia, dato che Board 1 continua a riceve da Board 2, non cede i privilegi di attuazione, quindi Board 2 si limita ad inviare comandi di attuazione in open loop, basandosi esclusivamente sui comandi utente ricevuti 
+e sui dati dei sensori, ma senza effettivamente attuare.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Board2_non_riceve}
+    \caption{Board 2 non riceve dati dalla Board 1.}
+    \label{fig:board2_non_riceve}
+\end{figure}
+
+Un aspetto da notare è che la Board 2, come descritto nel paragrafo \textit{Coerenza del movimento del rover}, continua a verificare che l'angolo di rotazione stimato dalla velocità delle ruote sia coerente con quello misurato dall'IMU.
+Questa coerenza, nel caso di mancata ricezione dalla Board 1, viene meno in quanto
+la stima dell'angolo di rotazione è basata sull'ultimo dato di velocità delle ruote che ovviamente cambia in quanto l'utente può ancora comandare il rover. Essendo che la rotazione del rover può essere possibile Board 2 imposterà il flag 
+$isMotionConsistent$ a 0, indicando che il movimento del rover non è affidabile. 
+
+A differenza di come descritto nel paragrafo \textit{Encoder non funzionanti}, nel caso in cui uno o più encoder si rompano, la Board 1 deciderà di attuare uno stop di emergenza, perchè avrà uno stato di degrado di uno o più encoder 
+in aggiunta ad un segnale di incoerenza del movimento del rover segnalato da Board 2. 
+
+
+\paragraph{Board 1 non riceve}
+
+Se la Board 1 non riceve dati dalla Board 2 per un periodo di tempo superiore a 120 ms, la Board 1 decide di cedere i privilegi di attuazione alla Board 2, quindi aprendo il rele e lasciando che Board 2 possa attuare i comandi di
+movimento. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/funzionamento_generale/specifiche/Board1_non_riceve}
+    \caption{Board 1 non riceve dati dalla Board 2.}
+    \label{fig:board1_non_riceve}
+\end{figure}
+Il controllo di Board 2 avviene in open loop, basandosi esclusivamente sui comandi utente ricevuti e sui dati dei sensori, senza feedback diretto sulla velocità effettiva del rover.
+Essendo questa una modalità di funzionamento degradata, la velocità del rover viene dimezzata.
+
+
+
+\newpage
+\section{Supervisore Board 1}
+\subsection{Panoramica generale}
+Il supervisore della Board 1 è implementato come un modulo Simulink denominato \textbf{SupervisorB1}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB1_block}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB1/SupervisoreB1_simulink}
+    \caption{Schema a blocchi del modulo SupervisorB1.}
+    \label{fig:supervisorB1_block} 
+\end{figure}
+Il suo compito è quello di determinare i riferimenti di velocità lineare (\textit{v\_ref}) e angolare (\textit{omega\_ref}) del rover, oppure di demandare l'attuazione alla Board 2, in funzione dell'elaborazione dei dati di input e delle condizioni di fault rilevate.
+\newline
+
+In particolare, esso è composto da quattro parti principali:
+\begin{itemize}
+	\item \textbf{Rilevazione Faults locali}: si occupa di rilevare anomalie relative alla ricezione dei dati da Board2, agli encoder delle ruote ed ai sensori di temperatura e batteria, classificando lo stato di ciascuna periferica come \texttt{OK}, \texttt{DEGRADED} o \texttt{CRITICAL}.
+	
+	\item \textbf{Costruzione delle fault mask}: a partire dagli stati delle singole periferiche, costruisce le fault mask locali che rappresentano lo stato complessivo della Board 1. Queste vengono usate dalla Board 1, in combinazione con le fault mask ricevute dalla Board 2, per ricostruire lo stato globale del rover; inoltre vengono inviate alla Board 2, così che essa possa effettuare la stessa operazione.
+
+	
+	\item \textbf{Selezione della board attuante}: decide se la Board 1 deve continuare ad attuare o se il controllo deve essere passato alla Board 2, in funzione dello stato della comunicazione e delle condizioni di fault rilevate, garantendo che una sola board alla volta sia responsabile dell'attuazione.
+	
+	\item \textbf{Ricostruzione dello stato globale e calcolo dei riferimenti}: quando la Board 1 è responsabile dell'attuazione, combina le informazioni locali con quelle ricevute dalla Board 2 per determinare lo stato operativo del rover (ad esempio funzionamento normale, modalità degradata o arresto di emergenza) e calcolare i riferimenti di velocità lineare e angolare.
+\end{itemize}
+
+Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le quattro parti principali del supervisore descritte sopra.
+
+
+\subsection{Ingressi del supervisore}
+I segnali in input al supervisore sono i seguenti:
+
+\begin{itemize}  
+	\item \textbf{Board2\_Data}: è l'ultimo snapshot di ricezione ($RxSnapshot$), aggiornato dal task di ricezione della Board 1. I segnali utilizzati dal supervisore sono:
+	\begin{itemize}
+		\item \textit{command}: rappresenta il comando generato dal supervisore della Board 2, che può assumere i seguenti valori:
+		\begin{figure}[H] 
+			\centering
+			\includegraphics[width=0.3\textwidth]{images/SupervisoreB1/CMD\_BOARD2}
+			\caption{Comandi in uscita dal supervisore della Board 2.}
+			\label{fig:comandi_b2}
+		\end{figure}
+		
+		\item \textit{x\_norm} e \textit{y\_norm}: rappresentano i comandi normalizzati provenienti dal controller BLE e trasmessi dalla Board 2.  I riferimenti di velocità lineare e angolare vengono calcolati a partire da questi valori, in funzione dello stato del rover e del comando ricevuto.
+		
+		
+		\item \textit{btn1} e \textit{btn2}: segnalano la pressione dei pulsanti presenti sul joystick e vengono utilizzati per attivare specifiche manovre, come la commutazione tra retromarcia e la rotazione di 180 gradi.
+		
+		\item \textit{yaw}: rappresenta l'angolo di orientamento del rover, utilizzato dal supervisore per effettuare la rotazione di 180 gradi.
+		
+		\item \textit{isMotionConsistent}: indica se il moto del rover è coerente con i comandi applicati, sulla base di una verifica effettuata dalla Board 2 utilizzando la IMU e gli encoder. Questo segnale viene utilizzato dalla Board 1 per effettuare un controllo incrociato: se un encoder non fornisce feedback e contemporaneamente il moto risulta non coerente, il supervisore può attribuire il fault al motore piuttosto che al sensore.
+
+		
+		\item \textit{critical\_mask} e \textit{degraded\_mask}: sono due maschere di errore calcolate dalla Board 2, in cui ogni bit rappresenta la presenza di una specifica anomalia critica o degradata. Queste informazioni vengono utilizzate per ricostruire lo stato globale del rover.
+		
+		\item \textit{data\_last\_valid\_ms}: rappresenta il tempo, in millisecondi, dell'ultimo dato valido ricevuto dalla Board 2, ed è utilizzato per rilevare eventuali timeout di comunicazione.
+		
+	\end{itemize}
+	
+	\item \textbf{Board\_Health}: è l'ultimo snapshot dello stato di salute della Board 1 ($BoardHealthSnapshot$), contenente informazioni quali temperatura e livello della batteria. La struttura dati è illustrata in Figura~\ref{fig:board_health_struct}:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{images/SupervisoreB1/BoardHealthSnapshot}
+		\caption{Struttura dati Board\_Health.}
+		\label{fig:board_health_struct}
+	\end{figure}
+	
+	\item \textbf{Encoder}: è l'ultimo snapshot degli encoder delle ruote, contenente le velocità angolari delle ruote ($wheel\_speed\_rpm$) e un indicatore di eventuale assenza di feedback da uno dei motori ($has\_no\_feedback$). La struttura dati è illustrata in Figura~\ref{fig:encoder_struct}:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{images/SupervisoreB1/Encoder\_snapshot}
+		\caption{Struttura dati Encoder.}
+		\label{fig:encoder_struct}
+	\end{figure}
+	
+	\item \textbf{now\_ms}: rappresenta il tempo corrente in millisecondi, utilizzato per la gestione delle temporizzazioni e il rilevamento di timeout.
+
+	\item \textbf{last\_valid\_b2\_ms}: rappresenta il tempo, in millisecondi, dell'ultimo istante in cui la comunicazione con la Board 2 è stata considerata valida. Questo valore viene aggiornato quando vengono ricevuti nuovi dati coerenti dalla Board 2 ed è utilizzato dal supervisore per rilevare eventuali fault o relativi alla comunicazione.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Uscite del supervisore}
+I segnali in output che fornisce sono:
+\begin{itemize}
+	\item \textbf{v\_ref}: rappresenta il riferimento normalizzato di velocità lineare del rover, compreso nell'intervallo [-1, 1].
+	
+	\item \textbf{omega\_ref}: rappresenta il riferimento normalizzato di velocità angolare del rover, compreso nell'intervallo [-1, 1].
+	
+	\item \textbf{critical\_mask \& degraded\_mask}: sono due mask di errore che rappresentano le anomalie critiche e degradate rilevate dalla Board 1. Queste informazioni vengono utilizzate sia localmente sia trasmesse alla Board 2 per la ricostruzione dello stato globale del rover.
+	
+	\item \textbf{give\_b2\_actuation}: rappresenta un segnale booleano che indica se il controllo dell'attuazione deve essere passato alla Board 2.
+	
+	\item \textbf{actuate\_emergency\_stop}: rappresenta un segnale booleano che indica se deve essere attivato l'arresto di emergenza del rover.
+	
+	\item \textbf{current\_action}: rappresenta l'azione attualmente eseguita dal supervisore.
+\end{itemize}
+
+La corrispondenza tra le fault mask e le anomalie rilevate è riportata in Tabella~\ref{tab:fault_mapping_B1}.
+
+\begin{table}[H]
+	\centering
+	\begin{tabularx}{\textwidth}{c l X}
+		\hline
+		\textbf{Bit} & \textbf{Mask} & \textbf{Descrizione dell'Anomalia} \\ \hline
+		0 & CRI/DEG & Temperatura fuori range o timeout dall'ultima lettura valida \\
+		1 & CRI/DEG & Livello batteria fuori range o timeout dall'ultima lettura valida \\
+		2 & CRI/DEG & Comunicazione con Board 2 lenta o in timeout \\
+		3 & CRI/DEG & Fault della ruota front left: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		4 & CRI/DEG & Fault della ruota front right: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		5 & CRI/DEG & Fault della ruota rear left: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		6 & CRI/DEG & Fault della ruota rear right: degradato se encoder non fornisce feedback, critico se il motore non risponde al comando \\
+		7 & CRI/DEG & Supervisore della Board 2 aggiornato lentamente o non aggiornato \\ \hline
+	\end{tabularx}
+	\caption{Mappatura delle fault mask generate dalla Board 1}
+	\label{tab:fault_mapping_B1}
+\end{table}
+
+
+
+\subsection{Rilevazione Faults locali}
+La rilevazione dei faults locali è implementata dal Chart \textbf{Monitor Board Local Status}. Questo blocco riceve in ingresso gli snapshot aggiornati delle diverse periferiche e produce in uscita lo stato di ciascun componente monitorato.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"images/SupervisoreB1/Chart fault locali"}
+	\caption{Chart per rilevazione fault locali}
+	\label{fig:chart-fault-locali}
+\end{figure}
+
+Il sottosistema è composto da più sottoblocchi, ciascuno dedicato al monitoraggio di una specifica periferica o funzionalità:
+
+\begin{itemize}
+	\item \textbf{MonitorTemperature}: verifica che la temperatura sia all'interno del range operativo e che le misure siano aggiornate correttamente;
+	
+	\item \textbf{MonitorBattery}: verifica che il livello della batteria sia compatibile con il funzionamento del sistema;
+	
+	\item \textbf{MonitorRx}: verifica la correttezza e la frequenza di ricezione dei messaggi dalla Board 2;
+	
+	\item \textbf{MonitorBoard2Supervisor}: verifica che il supervisore della Board 2 sia attivo e aggiornato correttamente;
+	
+	\item \textbf{MonitorWheels}: verifica lo stato delle singole ruote, utilizzando il feedback degli encoder e le informazioni di coerenza del moto.
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"images/SupervisoreB1/Chart fault locali stati"}
+	\caption{Stati paralleli del chart Monitor Board Local Status.}
+	\label{fig:chart-fault-locali-stati}
+\end{figure}
+
+
+Ciascun sottoblocco implementa uno Stateflow chart che classifica lo stato della periferica associata in tre possibili condizioni:
+
+\begin{itemize}
+	\item \textbf{OK}: funzionamento nominale;
+	\item \textbf{DEGRADED}: funzionamento degradato, ma ancora operativo;
+	\item \textbf{CRITICAL}: fault critico che compromette il funzionamento corretto o sicuro.
+\end{itemize}
+
+Questi sottoblocchi operano in modo indipendente e in parallelo, permettendo al supervisore di valutare contemporaneamente lo stato di tutte le periferiche monitorate.
+
+
+
+\subsubsection{Esempio: monitoraggio della ricezione dalla Board 2}
+
+Il sottoblocco \textit{MonitorRx}, ha il compito di verificare la frequenza di ricezione di messaggi validi provenienti dalla Board 2.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"images/SupervisoreB1/Chart fault locali esempio ricezione"}
+	\caption{}
+	\label{fig:chart-fault-locali-esempio-ricezione}
+\end{figure}
+
+Il blocco implementa uno Stateflow chart con tre possibili stati: \textbf{RX\_OK}, \textbf{RX\_DEGRADED} e \textbf{RX\_CRITICAL}. La transizione tra questi stati avviene in funzione del tempo dell'ultimo aggiornamento valido ricevuto (\textit{Rx\_data\_last\_valid\_ms}) e del tempo corrente (\textit{now\_ms}).
+\newline
+
+In particolare:
+\begin{itemize}
+	\item il sistema si trova nello stato \textbf{RX\_OK} quando i messaggi vengono ricevuti con la frequenza attesa;
+	
+	\item lo stato passa a \textbf{RX\_DEGRADED} quando la frequenza di ricezione risulta inferiore ad una certa soglia (in questo caso 1 messaggio ogni 40ms). Questa condizione viene rilevata tramite la funzione:
+	\newline
+	\texttt{isCommDegradedByMeanPeriod(Rx\_data\_last\_valid\_ms, threshold)}
+	che verifica se il periodo medio di aggiornamento supera la soglia prevista;
+	
+	\item lo stato passa a \textbf{RX\_CRITICAL} quando non vengono ricevuti aggiornamenti per un intervallo di tempo superiore alla soglia di timeout, ovvero quando: \texttt{now\_ms - Rx\_data\_last\_valid\_ms > TIMEOUT}
+\end{itemize}
+
+Quando la comunicazione riprende con una frequenza adeguata, il sistema ritorna automaticamente allo stato \textbf{RX\_OK}.
+
+Questa logica consente di distinguere tra una comunicazione semplicemente rallentata (stato degradato) e una completa perdita della comunicazione (stato critico), permettendo al supervisore di reagire in modo appropriato nelle successive fasi di decisione e attuazione, nonché di ritornare automaticamente a uno stato nominale quando la comunicazione viene ripristinata.
+
+
+
+\subsubsection{Output del monitoraggio}
+
+Gli stati calcolati dai diversi Subcharts vengono forniti in uscita come segnali distinti che verranno successivamente utilizzati per la costruzione delle fault mask e la determinazione dello stato globale del rover.
+\\
+
+\textbf{temp\_status.}  Il segnale \textit{temp\_status} indica lo stato della temperatura della board e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item TEMP\_HEALTH\_OK: quando la temperatura è nel range $]-5; 55[$;
+	
+	\item TEMP\_HEALTH\_DEGRADED: quando la temperatura è nel range \newline $]-15; -5] \cup [55; 60[$;
+	
+	\item TEMP\_HEALTH\_CRITICAL:
+	\begin{itemize}
+		\item quando la temperatura permane per almeno $4\,\mathrm{s}$ nel range \newline$]-\infty; -15] \cup [60; +\infty[$;
+		\item oppure quando non vengono ricevuti aggiornamenti per almeno $0.5\,\mathrm{s}$ e la temperatura stimata, assumendo nel caso peggiore un aumento di $1\,^\circ\mathrm{C}/\mathrm{s}$, supera i $65\,^\circ\mathrm{C}$.
+	\end{itemize}
+\end{itemize}
+\vspace{12pt}
+
+\textbf{batt\_status.}  Il segnale \textit{batt\_status} indica lo stato della batteria e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item BATT\_HEALTH\_OK: quando la percentuale di batteria è maggiore del $25\%$;
+	
+	\item BATT\_HEALTH\_DEGRADED: quando la percentuale di batteria è minore del $23\%$;
+	
+	\item BATT\_HEALTH\_CRITICAL:
+	\begin{itemize}
+		\item quando la percentuale permane per almeno $5\,\mathrm{s}$ nel range $[0\%; 15\%]$;
+		\item oppure quando non vengono ricevuti aggiornamenti per almeno $0.5\,\mathrm{s}$ e la percentuale stimata, assumendo una diminuzione nel caso peggiore di $0.42\%/\mathrm{s}$, scende sotto il $15\%$.
+	\end{itemize}
+\end{itemize}
+\vspace{12pt}
+
+\textbf{wheel\_status.}  Il segnale \textit{wheel\_status(i)} indica lo stato della ruota $i$ e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item WHEEL\_OK: rappresenta la condizione di funzionamento nominale. In questo stato, l'encoder della ruota fornisce feedback valido (ovvero \textit{has\_no\_feedback(i)} è falso) e il moto del rover risulta coerente, come verificato dal segnale \textit{isMotionConsistent};
+	
+	\item WHEEL\_DEGRADED\_ENCODER: quando il segnale booleano \textit{has\_no\_feedback(i)}, fornito dallo snapshot degli encoder, indica assenza di rotazione misurata per la ruota $i$ nonostante il motore sia attivo. Questa condizione indica una perdita del feedback dell'encoder, ma il sistema può continuare a operare utilizzando una logica di fallback che stima la velocità della ruota a partire dalle altre ruote funzionanti;
+	
+	\item WHEEL\_CRITICAL\_MOTOR: quando alla condizione \textit{has\_no\_feedback(i)} si aggiunge un'incoerenza globale del moto, rilevata tramite il segnale \textit{isMotionConsistent}. Questa combinazione indica che l'assenza di feedback non è dovuta a un guasto dell'encoder, ma al fatto che il motore della ruota $i$ non risponde correttamente al comando.
+
+\end{itemize}
+\vspace{12pt}
+
+\textbf{b2\_sup\_status.}  Il segnale \textit{b2\_sup\_status} indica lo stato del supervisore della Board 2 e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item SUP\_OK: quando il supervisore della Board 2 risulta aggiornato regolarmente;
+	
+	\item SUP\_DEGRADED: quando il periodo medio di aggiornamento del supervisore della Board 2 supera il valore nominale, indicando un rallentamento nell'esecuzione;
+	
+	\item SUP\_CRITICAL: quando l'intervallo di tempo dall'ultimo aggiornamento valido supera i $120\,\mathrm{ms}$, indicando che il supervisore della Board 2 non è più attivo o non comunica correttamente.
+\end{itemize}
+\vspace{12pt}
+
+\textbf{rx\_status.}  Il segnale \textit{rx\_status} indica lo stato della comunicazione con la Board 2 e può assumere i seguenti valori:
+
+\begin{itemize}
+	\item RX\_OK: quando i messaggi vengono ricevuti con la frequenza prevista e la variabile \textit{data\_last\_valid\_ms} viene aggiornata regolarmente dal task di ricezione;
+	
+	\item RX\_DEGRADED: quando la comunicazione risulta instabile e la frequenza media di ricezione dei messaggi validi diminuisce. Questa condizione viene rilevata monitorando la media degli intervalli tra aggiornamenti successivi e verificando se essa supera la soglia di $40\,\mathrm{ms}$;
+	
+	\item RX\_CRITICAL: quando l'intervallo di tempo dall'ultimo aggiornamento valido supera i $120\,\mathrm{ms}$, indicando una perdita della comunicazione con la Board 2.
+\end{itemize}
+
+
+\paragraph{Costruzione delle maschere critiche e degradate}
+A partire dagli stati critici e degradati rilevati durante la fase di monitoraggio, vengono costruite due maschere di errore (\textit{bitmask}), una per le anomalie critiche e una per quelle degradate.
+\newline
+
+Questa rappresentazione è stata preferita ad altre perché consente una gestione efficiente dei fault lato firmware e permette di trasmettere facilmente lo stato della Board 1 alla Board 2 tramite il canale di comunicazione.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{"images/SupervisoreB1/maschere pt2"}
+	\caption{Costruzione delle maschere di errore critiche e degradate nel supervisore.}
+	\label{fig:maschere-pt2}
+\end{figure}
+
+
+Il significato dei singoli bit è descritto nella Tabella~\ref{tab:fault_mapping_B1}.
+
+
+
+\subsection{Selezione della board attuante}
+
+Il chart \textit{Decide actuation privileges} mostrato in figura decide quale board è responsabile dell'attuazione.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"images/SupervisoreB1/decide actuation"}
+	\caption{Stateflow chart per la selezione della board attuante.}
+	\label{fig:decide-actuation}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{"images/SupervisoreB1/Selezione board attuante"}
+	\caption{Stati interni del chart Decide actuation privileges.}
+	\label{fig:selezione-board-attuante}
+\end{figure}
+
+
+La selezione è regolata dalla variabile \textit{give\_b2\_actuation}, secondo la seguente logica:
+
+\begin{itemize}
+	\item \textit{give\_b2\_actuation = 1}: il controllo dell'attuazione viene passato alla Board 2. Questa condizione si verifica quando viene rilevata una condizione critica nella comunicazione (\textit{rx\_status = RX\_CRITICAL}) oppure nello stato del supervisore della Board 2 (\textit{b2\_sup\_status = SUP\_CRITICAL}).
+	
+	\item \textit{give\_b2\_actuation = 0}: il controllo dell'attuazione rimane alla Board 1. Questa condizione viene mantenuta finché non sono presenti condizioni critiche; inoltre, se il controllo è stato precedentemente ceduto alla Board 2, la Board 1 riprende l'attuazione solo quando entrambe le condizioni critiche non sono più presenti e tale situazione permane stabilmente per almeno $3\,\mathrm{s}$.
+\end{itemize}
+
+
+Tale meccanismo agisce come un dispositivo di sicurezza hardware basato sullo stato del supervisore, come mostrato nelle Figure~\ref{fig:rele_b2} e ~\ref{fig:rele_b1}.
+
+\begin{figure}[H]
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board1}
+        \caption{\small{Il comando di Board1 chiude il rele impedendo a Board2 di comandare il rover.}}
+        \label{fig:rele_b1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/SupervisoreB1/rele_board2}
+        \caption{\small{Board1 permette alla Board2 di comandare il rover.}}
+        \label{fig:rele_b2}
+    \end{subfigure}
+\end{figure}
+
+
+
+
+\subsection{Stato del rover e calcolo dei riferimenti (solo quando attua Board 1)}
+
+Quando la Board 1 è responsabile dell'attuazione (ovvero \textit{give\_b2\_actuation = 0}), viene abilitato il sottosistema \textit{Rover state and Actuation decisions}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/rover state and actuation subsystem"}
+	\caption{Enabled subsystem Rover state and Actuation decisions}
+	\label{fig:rover-state-and-actuation-subsystem}
+\end{figure}
+
+Questo sottosistema ha il compito di ricostruire lo stato operativo globale del rover a partire dai fault locali e remoti e di produrre in uscita i riferimenti \textit{v\_ref} e \textit{omega\_ref}, oltre ai segnali \textit{emergency\_stop} e \textit{current\_action}.
+\\
+
+\textbf{Pre-processamento delle fault mask di Board 2}  Le fault mask ricevute dalla Board 2 prima di essere usate vengono pre-processate tramite la funzione \texttt{preprocessB2MaskInB1}. L'obiettivo è distinguere i fault remoti che richiedono un arresto immediato del rover da quelli che, pur essendo critici, possono essere gestiti senza emergency stop (ad esempio fault legati alla comunicazione).
+
+In particolare, viene generato:
+\begin{itemize}
+	\item \textit{stop\_required}: viene posto a 1 quando la Board 2 segnala fault critici su sottosistemi essenziali per il controllo del rover (ESP o IMU), senza i quali non è possibile garantire un funzionamento sicuro;
+
+	\item \textit{degraded\_required}: viene posto a 1 se è presente almeno un fault degradato remoto, oppure se la Board 2 segnala fault critici legati a ricezione o lettura dei dati prodotti dal supervisore di Board 1 (fault RX o SUP).
+\end{itemize}
+
+Questa distinzione permette alla Board 1 di continuare ad attuare in sicurezza anche quando la Board 2 presenta problemi di ricezione da Board 1, attivando in tal caso la modalità degradata invece dell'arresto di emergenza.
+
+\subsubsection{Struttura interna del sottosistema di decisione}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{"images/SupervisoreB1/rover state and actuation subsystem1"}
+	\caption{Struttura interna del sottosistema Rover state and Actuation decisions}
+	\label{fig:rover-state-and-actuation-subsystem1}
+\end{figure}
+
+Il sottosistema è composto da due Stateflow chart principali, organizzati in cascata. Il primo chart, denominato \textit{Check rover safety state}, ha il compito di integrare le informazioni di fault locali e remoti per determinare lo stato globale di sicurezza del rover. Il secondo chart, \textit{Rover motion state}, utilizza questo stato globale insieme ai comandi ricevuti per determinare l'azione corrente del rover e calcolare i riferimenti di velocità.
+
+\paragraph{Check rover safety state}
+
+Il chart \textit{Check rover safety state} determina lo stato di sicurezza globale del rover (\textit{rover\_safety\_state}) combinando le condizioni di fault rilevate dalla Board 1 e dalla Board 2.
+
+In ingresso riceve quattro segnali booleani: \textit{b1\_critical} e \textit{b1\_degraded}, derivati dalle fault mask locali, e \textit{b2\_critical} e \textit{b2\_degraded}, ottenuti dal pre-processamento delle mask ricevute dalla Board 2.
+
+Il chart può assumere tre stati mutuamente esclusivi:
+
+\begin{itemize}
+	\item \textit{SAFETY\_OK}: attivo quando non sono presenti fault critici né degradati;
+	
+	\item \textit{SAFETY\_DEGRADED}: attivo quando è presente almeno una condizione degradata su una delle due board, in assenza di fault critici;
+	
+	\item \textit{SAFETY\_CRITICAL}: attivo quando è presente almeno un fault critico su una delle due board.
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\linewidth]{"images/SupervisoreB1/check rover safety"}
+	\caption{Struttura del chart Check rover safety state}
+	\label{fig:check-rover-safety}
+\end{figure}
+
+\paragraph{Rover motion state}
+
+Il chart \textit{Rover motion state} ha il compito di determinare l'azione corrente del rover e calcolare i riferimenti di velocità \textit{v\_ref} e \textit{omega\_ref}, a partire dai comandi ricevuti e dallo stato di sicurezza globale \textit{rover\_safety\_state} calcolato dal blocco precedente.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/rover motion chart"}
+	\caption{Struttura del chart Rover motion state.}
+	\label{fig:rover-motion-chart}
+\end{figure}
+
+Il chart è composto da due stati paralleli. Il primo stato, denominato \textit{Backward\_mode\_toggle}, gestisce la commutazione tra retromarcia normale e rotazione a 180 gradi quando il comando utente richiede un movimento all'indietro. Il secondo stato, \textit{Motion\_Supervision}, implementa la macchina a stati principale che determina il tipo di movimento del rover e calcola i riferimenti di velocità.
+
+\paragraph{Backward\_mode\_toggle}
+
+Lo stato \textit{Backward\_mode\_toggle} gestisce la variabile interna \textit{backward\_enabled}, che determina il comportamento del rover quando il comando di velocità longitudinale è negativo.
+
+In particolare, quando l'utente spinge il joystick all'indietro (\textit{y\_norm < 0}), il rover può operare in due modalità:
+\begin{itemize}
+	\item \textit{retromarcia}, in cui il rover si muove direttamente all'indietro;
+	\item \textit{rotazione a 180 gradi}, in cui il rover ruota sul posto fino a invertire la propria direzione e successivamente riprende il moto in avanti.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/SupervisoreB1/backward_toggle}
+	\caption{Struttura interna del subchart Backward mode toggle}
+	\label{fig:backwardtoggle}
+\end{figure}
+
+
+La selezione tra queste due modalità avviene tramite una combinazione specifica di input (gestita dal chart), che consente di abilitare o disabilitare la retromarcia diretta. In questo modo si evita che il rover entri accidentalmente in retromarcia, permettendo invece una manovra controllata di inversione di direzione quando necessario.
+
+La variabile \textit{backward\_enabled} viene quindi utilizzata dal blocco \textit{Motion\_Supervision} per determinare se interpretare un comando negativo come retromarcia oppure come richiesta di rotazione a 180 gradi.
+
+\paragraph{Rover motion state}
+
+Il chart \textit{Rover motion state} implementa la logica principale di movimento del rover. Esso è organizzato in due macro-stati mutuamente esclusivi: uno dedicato alla marcia normale e uno dedicato alla gestione dell'arresto di emergenza. La transizione tra questi stati dipende sia dai comandi ricevuti dalla Board 2 sia dallo stato di sicurezza globale del rover.
+
+\subparagraph{Stato di marcia normale}
+
+Lo stato \textit{Stato\_marcia\_rover} rappresenta il funzionamento nominale del rover e contiene al suo interno i diversi stati operativi associati al movimento, tra cui:
+\begin{itemize}
+	\item marcia normale, in cui i riferimenti sono direttamente derivati dall'input utente (\textit{x\_norm}, \textit{y\_norm});
+	\item manovre automatiche, come schivata verso sinistra o destra;
+	\item rotazione a 180 gradi, utilizzata per invertire la direzione del rover;
+	\item altre manovre controllate, in funzione del comando di sicurezza ricevuto da Board 2 \textit{command}.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/normale marcia esempio"}
+	\caption{Esempio dei sotto-stati e transizioni che compongono lo stato di marcia rover}
+	\label{fig:normale-marcia-esempio}
+\end{figure}
+
+All'interno di questo stato, i riferimenti \textit{v\_ref} e \textit{omega\_ref} vengono calcolati a partire dagli ingressi utente e limitati in base allo stato di sicurezza \textit{rover\_status}.
+
+La transizione fuori da questo stato avviene quando viene richiesto un arresto di emergenza, che può essere causato da:
+\begin{itemize}
+	\item la ricezione del comando \textit{CMD\_ESTOP} dalla Board 2 (a seguito del rilevamento di un ostacolo tramite sonar) mentre il rover sta procedendo in avanti;
+	\item il passaggio dello stato globale del rover a \textit{SAFETY\_CRITICAL}.
+\end{itemize}
+
+\subparagraph{Stato di arresto di emergenza}
+
+Quando viene attivata una condizione di arresto di emergenza, il chart entra nello stato \textit{Procedura\_emergency\_stop}. In questo stato:
+\begin{itemize}
+	\item i riferimenti \textit{v\_ref} e \textit{omega\_ref} vengono forzati a zero;
+	\item il segnale \textit{emergency\_stop} viene posto a vero;
+	\item viene monitorata la velocità delle ruote per verificare l'effettivo arresto del rover.
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/SupervisoreB1/chart frenata di emergenza"}
+	\caption{Stato frenata di emergenza e transizioni di attivazione (provenienti dallo stato normale marcia)}
+	\label{fig:chart-frenata-di-emergenza}
+\end{figure}
+
+
+Una volta rilevato che le ruote sono ferme, il sistema rimane nello stato di frenata di emergenza finché la condizione di arresto, verificata tramite gli encoder, permane per almeno $1\,\mathrm{s}$ consecutivo. Questa verifica temporale garantisce che l'arresto sia effettivo e stabile. Solo quando tale condizione è soddisfatta, il sistema transita nello stato \textit{Motori\_fermi}, che rappresenta la condizione di arresto completo del rover.
+\newline
+
+Una volta raggiunto lo stato \textit{Motori\_fermi}, il sistema può uscire da questa condizione non appena non sono più presenti fault critici. In questa situazione, il rover ritorna nello stato di marcia normale, anche se il comando \textit{CMD\_ESTOP} è ancora attivo, poiché il rover è già fermo e tale condizione non rappresenta un rischio immediato.
+
+Questo consente al rover di eseguire manovre sicure come rotazioni sul posto o retromarcia. Tuttavia, se il comando \textit{CMD\_ESTOP} persiste e viene richiesto un movimento in avanti, il sistema transita nuovamente nello stato di frenata di emergenza, impedendo l'avanzamento verso l'ostacolo.
+
+
+\newpage
+\section{Supervisore Board 2}
+
+\subsection{Panoramica generale}
+Il supervisore della Board 2 è implementato come un modulo Simulink denominato \textbf{SupervisorB2}, il cui schema a blocchi è illustrato in Figura~\ref{fig:supervisorB2_block}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/SupervisoreBoard2_InputOutput}
+    \caption{Schema a blocchi del modulo SupervisorB2.}
+    \label{fig:supervisorB2_block} 
+\end{figure}
+Il suo compito è quello di decidere il comando di direzione \textit{B2Decision} del rover, verificare se ci sono incoerenze tra l'angolo di direzione stimato dalla velocità 
+delle ruote e l'IMU e, nel caso sia autorizzato, calcolare i riferimenti di velocità lineare e angolare del rover.
+
+In particolare, esso è composto da 4 parti principali:
+\begin{itemize}
+    \item \textbf{Rilevazione Faults}: si occupa di rilevare eventuali anomalie nell'ESP32, nell'IMU, nella ricezione dei dati da Board1.
+    \item \textbf{Aggregazione Fualt}: aggrega le anomalie rilevate nella parte di $rilevazione faults$ e le codifica in due maschere di errore (critica e degradata).
+    \item \textbf{Decidere se attuare}: decide se inviare il segnale di attuazione UART al rele.
+    \item \textbf{Rilvamento ostacoli}: si occupa di rilevare la presenza di ostacoli tramite i sensori sonar e, e influenzare il comando di movimento del rover in caso di ostacoli rilevati.
+    \item \textbf{Calcolo Riferimenti}: se autorizzato, calcola i riferimenti di velocità lineare e angolare del rover in base ai comandi ricevuti dall'utente.
+\end{itemize}
+Nel seguito verranno descritti i segnali di input e output del supervisore, successivamente verranno descritte le quattro parti principali del supervisore descritte sopra.
+
+
+
+
+
+\subsection{Input}
+I segnali in input che riceve sono:
+
+\begin{itemize}  
+    \item \textbf{Board1\_Data}: è l'ultimo snapshot di ricezione ($RxSnapshot$) aggiornato dal task di ricezione di Board2. I segnali utilizzati dal supervisore di Board 2 sono:
+    \begin{itemize}
+        \item \textit{wheel\_speed\_rpm(i)}: è la velocità in RPM di ogni ruota.
+            
+        \item \textit{critical\_mask}: è una maschera di errore a 8 bit calcolata da Board 1, in cui ogni bit indica la presenza di un'anomalia \textit{critica} specifica.
+  
+        \item \textit{data\_last\_valid\_ms}: rappresenta il tempo in millisecondi dell'ultimo dato valido ricevuto da Board 1, utilizzato per rilevare eventuali timeout nella ricezione.
+        
+        
+    \end{itemize}
+    \item \textbf{IMU}: è l'ultimo snapshot ($IMUSnapshot$) di rilevamento dell'angolo yaw. la struttura dati è la seguente:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{images/SupervisoreB2/IMU_snapshot}
+            \caption{Struttura dati IMU\_snapshot.}
+            \label{fig:board_health_struct}
+        \end{figure}
+    \item \textbf{Sonars}: è l'ultimo snapshot delle velocità delle ruote ($wheel\_speed\_rpm$) e di eventuali anomalie riscontrate in uno dei motori ($has\_no\_feedback$). La struttura dati è la seguente:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{images/SupervisoreB2/Sonars_snapshot}
+            \caption{Struttura dati sonar\_snapshot.}
+            \label{fig:encoder_struct}
+        \end{figure}
+    \item \textbf{now\_ms}: Rappresenta il tempo corrente in millisecondi.
+    \item \textbf{last\_valid\_b1\_ms}: Rappresenta il tempo in millisecondi dell'ultimo volta che si è rilevato che il supervisore di Board 1 sia funzionante.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Output}
+I segnali in output che fornisce sono:
+\begin{itemize}
+    \item \textbf{B2Decision}: rappresenta il riferimento di velocità lineare del rover, in m/s.    
+    \item \textbf{critical\_mask \& degraded\_mask}: sono due mashere di errore a 8 bit, in cui ogni bit indica la presenza 
+    di un'anomalia \textit{critica} (da cui critical\_mask) o \textit{degradata} (da cui degraded\_mask) specifica, come descritto 
+    nella Tabella~\ref{tab:fault_mapping_B2}. Nella sezione di $Rilevazione Faults$ viene descritto nello specifico cosa indicano i singoli bit di queste maschere di errore.
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{lll}
+        \hline
+        \textbf{Bit} & \textbf{ID Segnale} & \textbf{Descrizione dell'Anomalia} \\ \hline
+        0 & ESP\_CRI/DEG  & Timeout della comunicazione con ESP32 \\
+        1 & IMU\_CRI/DEG  & Timeout della comunicazione con il sensore IMU \\
+        2 & RX\_CRI/DEG   & Comunicazione con Board 1 lenta o assente\\
+        3 & B1\_SUP\_CRI/DEG & Supervisore Board 1 lento o assente \\ 
+        4-7 & \textit{Reserved} & Bit riservati per espansioni \\ \hline
+        \end{tabular}
+        \caption{Mappatura della maschera di errore della Board 2}
+        \label{tab:fault_mapping_B2}
+    \end{table}
+
+
+
+
+
+    \item \textbf{isMotionConsistent}: rappresnta un segnale booleano che indica se c'è coerenza tra la rotazione misurata dalla IMU e quella stimata dalla velocità dei motori.
+    \item \textbf{autorized\_to\_send\_command}: rappresenta un segnale booleano che indica se la Board2 può inviare comandi di movimento al rover.
+    \item \textbf{v\_ref\_actuation}: rappresenta il riferimento di velocità lineare del rover, in RPM, calcolato dal supervisore di Board 2 in base ai comandi ricevuti dall'utente.
+                                      Tale riferimento viene attuato dalla Board 2 solo se il segnale $authorized\_to\_send\_command$ è attivo.
+    \item \textbf{omega\_ref\_actuation}: rappresenta il riferimento di velocità angolare del rover, in rad/s, calcolato dal supervisore di Board 2 in base ai comandi ricevuti dall'utente.
+                                          Tale riferimento viene attuato dalla Board 2 solo se il segnale $authorized\_to\_send\_command$ è attivo.
+    \item \textbf{actuate\_emergency\_stop}: rappresenta un segnale booleano che indica se il rover deve essere fermato immediatamente.
+                                             Tale segnale viene attivato solo se il segnale $authorized\_to\_send\_command$ è attivo.
+    \item \textbf{current\_action}: rappresenta un segnale che indica l'azione attualmente intrapresa dal supervisore
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Rilevazione Faults}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/Rilevamento_Faults}
+    \caption{Chart di gestione dei faults.}
+    \label{fig:gestione_faults_b2}
+\end{figure}
+
+L'output di questo sottosistema è rappresentato da 5 segnali, ognuno dei quali indica la presenza o meno di un'anomalia \textit{critica} o
+\textit{degradata} specifica proveniente dalla lettura dei segnali dei comandi utente ricevuti dall' ESP32, del sensore IMU e della comunicazione con Board1. Di seguito si
+descrivono i valori che questi segnali possono assumere e le condizioni che portano a tali valori.
+
+\begin{longtable}{ll p{5cm}} 
+    \caption{Stati degradato e critico per Board 2} \label{tab:fault_table_b2} \\
+    \hline
+    \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
+    \hline
+    \endfirsthead % Cosa appare nella prima pagina
+
+    \hline
+    \textbf{OUTPUT} & \textbf{VALORE} & \textbf{SIGNIFICATO} \\
+    \hline
+    \endhead % Cosa appare in cima alle pagine successive (opzionale)
+
+    
+    \endfoot % Cosa appare in fondo a ogni pagina (opzionale)
+
+    
+    % --- Inizio dati tabella ---
+    \textbf{esp\_status}        & ESP\_DEGRADED              & Se la media mobile degli intervalli di ricezione dati dall'ESP32 supera la soglia di $40\,\mathrm{ms}$. \\
+                                & ESP\_CRITICAL              & Se la media mobile degli intervalli di ricezione dati dall'ESP32 supera la soglia di $120\,\mathrm{ms}$. \\
+                                & ESP\_OK                    & Quando la frequenza media di aggiornamento rientra nei limiti nominali di sicurezza stabiliti. \\ \hline
+    
+    \textbf{imu\_status}        & IMU\_DEGRADED             & Se la media mobile degli intervalli di aggiornamento dell'angolo di yaw dell'IMU supera i $40\,\mathrm{ms}$. \\
+                                & IMU\_CRITICAL             & Se la media mobile degli intervalli di aggiornamento dell'angolo di yaw dell'IMU supera i $120\,\mathrm{ms}$. \\
+                                & IMU\_OK                   & Quando la frequenza media dei dati inerziali rientra nei parametri nominali di funzionamento. \\ \hline 
+
+    \textbf{b1\_sup\_status}    & SUP\_DEGRADED             & Questo valore indica una discontinuità operativa della Board 1. Il supervisore della Board 2 monitora l'heartbeat (una variabile) del supervisore remoto, 
+                                                              il quale incrementa il valore ogni volta che viene eseguito. Se la media degli ultimi 10 intervalli di aggiornamento superi i 40 ms, il sistema
+                                                              segnala uno stato di degrado del supervisore di Board 1. \\\\
+                                & SUP\_CRITICAL             & Se l'intervallo di tempo dall'ultimo aggiornamento dell'heartbeat del supervisore di Board1 supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
+                                & SUP\_OK                   & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\\\ \hline
+                                
+    \textbf{rx\_status}         & RX\_DEGRADED              & Questo valore identifica una comunicazione instabile. Sebbene il collegamento fisico sia attivo, fattori quali errori di checksum (CRC) 
+                                                                o anomalie nella lunghezza dei pacchetti impediscono l'aggiornamento della variabile data\_last\_valid\_ms. Il sistema monitora la qualità
+                                                                del link calcolando la media mobile degli ultimi 10 intervalli di ricezione valida; se tale media supera la soglia critica di $40$ ms, viene
+                                                                segnalato il degrado della ricezione.\\\\
+                                & RX\_CRITICAL              & Se l'intervallo di tempo dall'ultima ricezione corretta supera i $120\,\mathrm{ms}$, imposta questo valore. \\\\
+                                & RX\_OK                    & Quando non ci sono ne condizioni critiche ne degradate imposta questo valore. \\ \hline
+    
+    \textbf{isMotionConsistent} & 0                         & Indica che c'è una discrepanza significativa tra la rotazione misurata dalla IMU e quella stimata dalla velocità dei motori, suggerendo un possibile guasto o malfunzionamento. \\
+                                & 1                         & Indica che i dati della IMU e le stime basate sulla velocità dei motori sono coerenti, suggerendo un funzionamento normale del sistema di movimento. \\ \hline
+\end{longtable}
+
+
+
+\subsection{Costruzione maschere degradate e critiche}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/costruzione_maschere}
+    \caption{Chart per l'aggregazione delle faults.}
+    \label{fig:aggregazione_faults_b2}
+\end{figure}
+
+
+Dagli stati critici e degradati rilevati nella parte di gestione faults, si costruiscono due maschere di errore a 8 bit, una per le anomalie critiche e una per quelle degradate.
+
+Il bit di ogni maschera rappresenta un'anomalia specifica, come descritto nella Tabella~\ref{tab:fault_mapping}.
+
+\begin{table}[H]
+    \centering
+    
+    \begin{tabular}{|c|l|l|l|}
+        \hline
+        \textbf{Bit} & \textbf{Componente} & \textbf{critical\_mask} & \textbf{degraded\_mask} \\
+        \hline
+        0 & ESP32 & \textbf{1} se \textbf{ESP\_CRITICAL} & \textbf{1} se \textbf{ESP\_DEGRADED}\\
+        \hline
+        1 & IMU & \textbf{1} se \textbf{IMU\_CRITICAL} & \textbf{1} se \textbf{IMU\_DEGRADED}\\
+        \hline
+        2 & Ricezione da Board 1 & \textbf{1} se \textbf{RX\_CRITICAL} & \textbf{1} se \textbf{RX\_DEGRADED}\\
+        \hline
+        3 & Supervisore Board 1 & \textbf{1} se \textbf{SUP\_CRITICAL} & \textbf{1} se \textbf{SUP\_DEGRADED}\\
+        \hline
+        4-7 & Reserved & Bit riservati per espansioni future & Bit riservati per espansioni future\\
+        \hline
+    \end{tabular}
+    \caption{\small Mappatura dei Bit nelle Fault Masks di Board 2}
+    \label{tab:fault_mapping}
+\end{table}
+
+
+\subsection{Decidere se attuare}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/decidere_se_attuare}
+    \caption{Chart per decidere se autorizzare o meno la Board2 a muovere il rover.}
+    \label{fig:decidere_attuare_b2}
+\end{figure}
+
+L'autorizzazione a Board 2 per il controllo del rover è regolata dalla variabile $authorized\_to\_send\_command$ secondo la seguente logica:
+\begin{itemize}
+    \item \textbf{authorized\_to\_send\_command = 1}:  Board 2 è autorizzata a inviare comandi di movimento al rover. Questa condizione si ha quando sono riscontrate anomalie $critiche$ in
+                                                ricezione (\textit{rx\_status = RX\_CRITICAL}), supervisore (\textit{b2\_sup\_status = SUP\_CRITICAL}), oppure quando è la stessa Board 1 che 
+                                                chiede a Board 2 di prendere il controllo del rover.
+    \item \textbf{authorized\_to\_send\_command = 0}:  Board 2 non è autorizzata a inviare comandi di movimento al rover. Questa condizione si ha quando non sono riscontrate anomalie $critiche$ in
+                                                ricezione (\textit{rx\_status = RX\_OK}), supervisore (\textit{b2\_sup\_status = SUP\_OK}) e quando non è la stessa Board 1 a chiedere a Board 2 
+                                                di prendere il controllo del rover.
+
+\end{itemize}
+
+
+
+
+
+
+
+\subsection{Rilevamento ostacoli}
+Come da specifiche, il comportamento del rover in presenza di ostacoli, deve essere regolato sulla base delle condizioni in cui può trovarsi:
+\begin{enumerate}
+    \item \textit{Stato non degradato}
+    \begin{itemize}
+        \item \textbf{Distanza dell'ostacolo $\le$ 70 cm:} il rover deve fermarsi immediatamente per evitare collisioni.
+        \item \textbf{Ostacolo a distanza $>$ 100 cm in movimento tra due sonar:} il rover deve determinare la direzione dell'ostacolo e deve deviare il 
+        percorso di conseguenza in direzione del sonar che per prima ha rilveato l'ostacolo.
+    \end{itemize}
+    \item \textit{Stato degradato}
+    \begin{itemize}
+        \item \textbf{Distanza dell'ostacolo $\le$ 300 cm:} il rover deve fermarsi immediatamente per evitare collisioni.
+    \end{itemize}
+\end{enumerate}
+
+In seguito verranno mostrati i chart realizzati per la gestione delle due casistiche.
+
+
+\subsubsection{Gestione ostacoli con sistema in stato \textit{non degradato}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoliB2}
+    \caption{Logica di gestione degli ostacoli in stato non degradato.}
+    \label{fig:logica_gestione_ostacoli}
+\end{figure}
+
+Il chart per la gestione degli ostacoli in stato non degradato è mostrato in Figura~\ref{fig:chart_non_degradato}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoNonDegradato}
+    \caption{Chart di gestione ostacoli in stato non degradato.}
+    \label{fig:chart_non_degradato}
+\end{figure}
+
+In particolare, il chart è composto da 2 stati paralleli: \textit{Sonars} e \textit{B2Decisione}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/SonarsState}
+        \caption{Stato parallelo Sonars}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        
+        \includegraphics[width=\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/B2DecisionState}
+        \caption{Stato parallelo B2Decisione}
+    \end{subfigure}
+    
+    \caption{Stati paralleli del chart in stato non degradato.}
+    \label{fig:stati_paralleli}
+\end{figure}
+
+
+
+\begin{enumerate}
+    \item \textbf{\textit{B2Decisions}}: 
+        Lo stato parallelo \textit{B2Decisione} è dipendente dallo stato $Sonars$ in quanto le sue transizioni vengono attivate da segnali provenienti da $Sonars$. In base ai segnali
+        ricevuti, è capace di settare la variabile di output del chart, variabile che indica la decisione presa dal supervisore.
+        Quindi, in questo stato si determina l'output del chart, che è un numero che varia da $0$ a $4$.
+        Le azioni possibili includono l'arresto immediato del rover o la deviazione del percorso in base alla posizione dell'ostacolo. In quest'ultimo caso, la deviazione dura fintanto che il rover non ruota
+        di 45° rispetto alla direzione iniziale, verso la direzione del sonar che per primo ha rilevato l'ostacolo.
+    \item \textbf{\textit{Sonars}}: 
+        All'interno di questo stato parallelo sono presenti altri \textit{3} stati paralleli.
+        \begin{enumerate}
+            \item \textbf{\textit{distance\_70}}: Rappresenta la condizione in cui uno dei sonar rileva un ostacolo a una distanza $\leq 70$ cm.
+                \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/distanceLt_70}
+                \caption{Stato parallelo per la gestione di un ostacolo a distanza $\le$ 70 cm.}
+                \label{fig:sonars_non_degradato}
+                \end{figure}
+        
+        In questo stato quando uno dei sonar rileva un ostacolo a una distanza inferiore o uguale a 70 cm, viene attivata una transizione che porta allo stato di arresto immediato del rover.
+        In particolare, quando un sonar rileva la presenza di un ostacolo a distanza $\leq 70$ cm, viene inviato un segnale \textbf{Emergency} allo stato parallelo \textit{B2Decisione} per fermare il rover. 
+        B2Decision utilizza questo segnale per portarsi nello stato in cui l'output del chart prevede lo stop.
+            
+            \item \textbf{\textit{distance\_gt70 ---- timers}}: 
+                Questi due stati insieme permettono il rilevamento di un ostacolo in movimento tra le coppie di sonar 
+                \begin{itemize}
+                    \item \textit{S1-S2} (tra sonar di sinistra e sonar centrale)
+                    \item \textit{S2-S1} (tra sonar centrale e sonar di sinistra)
+                    \item \textit{S2-S3} (tra sonar centrale e sonar di destra)
+                    \item \textit{S3-S2} (tra sonar di destra e sonar centrale)  
+                \end{itemize}
+                
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/distancegt_70_and_timers}
+                    \caption{Stato parallelo per la gestione di un ostacolo in movimento a distanza $>$ 70 cm.}
+                    \label{fig:stati_gestione_timers}
+                \end{figure}
+                Nello stato \textit{distance\_gt70} sono presenti $3$ stati paralleli, \textit{Waiting\_S1}, \textit{Waiting\_S2}, \textit{Waiting\_S3}, uno per ogni sonar.
+                
+                Di seguito si analizza la dinamica di rilevamento di un ostacolo che si sposta dal sonar $S1$ verso il sonar $S2$.
+                Tale logica è da considerarsi valida per ogni coppia di sensori precedentemente elencata. 
+                
+                Si assume, come condizione necessaria, l'assenza di ostacoli a una distanza inferiore a $70$ cm; in caso contrario, il sistema non procederebbe al rilevamento di oggetti in movimento.
+                
+                \begin{enumerate}
+                    \item \textbf{Attivazione ($S1$)}: Quando il sonar $S1$ rileva un oggetto entro il range $100$–$300$ cm, la variabile $obj1Detected$ viene impostata a $1$ \textbf{(fronte di salita)}.
+                    \item \textbf{Transizione e Timing}: Nel momento in cui l'oggetto esce dal campo d'azione di $S1$, la variabile $obj1Detected$ torna a $0$ \textbf{(fronte di discesa)}.
+                    Contestualmente, lo stato timerSonar12 del modulo timers avvia un conteggio di $3$ secondi.
+                    \item \textbf{Verifica ($S2$)}: Se il sonar $S2$ rileva l'ostacolo (sempre tra $100$ e $300$ cm) entro la finestra temporale dei $3$ secondi, viene inviato il segnale $moveToS1$ allo 
+                    stato parallelo $B2Decision$. Qualora il timer scada senza alcun rilevamento da parte di $S2$, non viene trasmesso alcun segnale.
+                \end{enumerate}
+            \end{enumerate}
+\end{enumerate}
+
+\subsubsection{Gestione ostacoli con sistema in stato $degradato$}
+
+Il chart per la gestione degli ostacoli in stato degradato è mostrato in Figura~\ref{fig:chart_degradato}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/SupervisoreB2/GestioneRilevamentoOstacoli/GestioneOstacoli_StatoDegradato}
+    \caption{Chart di gestione ostacoli in stato degradato.}
+    \label{fig:chart_degradato}
+\end{figure}
+
+
+
+In questo caso, la logica di gestione degli ostacoli è semplificata rispetto allo stato non degradato.
+Infatti, l'unica condizione considerata è la presenza di un ostacolo a una distanza inferiore o uguale a $300$ cm.
+Quando uno dei sonar rileva un ostacolo entro questo range, viene attivata una transizione che porta l'uscita del supervisore all'arresto immediato del rover.
+
+
+\subsection{Attuazione}
+L'attuazione della Board 2 avviene esclusivamente in modalità degradata, coerentemente con il suo ruolo di Slave. Nello specifico, la Board 2 è autorizzata a prendere il
+controllo del rover solo quando si verificano determinate condizioni critiche sulla Board 1: il riscontro di anomalie gravi nella ricezione dei dati (rx\_status = RX\_CRITICAL),
+errori critici nel modulo di supervisione (b2\_sup\_status = SUP\_CRITICAL), oppure nel caso in cui la stessa Board 1 invii una richiesta esplicita di cessione del controllo.
+Ciò indica che, nonostante la Board 2 sia ad attuare, la comunicazione tra le due board potrebbe essere ancora attiva, e in particolare Board 1 invia il proprio payload che include 
+velocità delle ruote e maschere di errore.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/SupervisoreB2/attuazione_Board2}
+    \caption{Chart per la gestione dell'attuazione del comando di movimento del rover}
+    \label{fig:attuazione_b2}
+\end{figure}
+
+Se la comunicazione tra le due board è attiva, il supervisore verifica che la critical mask della Board 1 non indichi anomalie critiche che non siano quelle di ricezione o supervisione,
+
+
+
+
+
+\end{document}
